@@ -1,0 +1,15 @@
+# Data downloads, execution output and generated artifacts. Raw ANM files may
+# contain CPF/CNPJ columns; keep downloaded source data out of version control.
+tmp/
+output/
+
+# Python and notebook artifacts
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Local environments and credentials
+.venv/
+venv/
+.env
+.env.*

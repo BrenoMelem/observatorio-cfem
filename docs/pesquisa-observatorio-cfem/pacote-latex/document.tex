@@ -1,0 +1,141 @@
+\documentclass[12pt]{article}
+\usepackage{sbc-template}
+\usepackage{graphicx,url}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{longtable,booktabs,array}
+\usepackage{hyperref}
+\sloppy
+
+\title{Consumo, Curadoria e Publicação de Dados para um Observatório da CFEM em Canaã dos Carajás e Parauapebas}
+\author{Equipe do projeto}
+\address{Universidade Federal do Pará (UFPA)\\
+  Pará, Brasil}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This technical research report assesses the feasibility of collecting, curating, and publishing public indicators for a CFEM observatory focused on Canaã dos Carajás and Parauapebas, Pará. It maps the requested indicators to primary sources, access modes, update cadence, automation potential, and fallbacks when no documented API exists. It recommends a versioned, source-first data pipeline, with human review for file-based and derived indicators. The report is a feasibility baseline, not an implementation or legal opinion.
+\end{abstract}
+
+\begin{resumo}
+Este relatório avalia a viabilidade de coletar, tratar e publicar indicadores de um observatório da CFEM para Canaã dos Carajás e Parauapebas. Relaciona os indicadores solicitados às fontes primárias, modos de acesso, periodicidade, potencial de automação e alternativas quando não há API documentada. Recomenda um fluxo versionado, com revisão humana para arquivos e indicadores derivados. É uma linha de base de viabilidade, não uma implementação nem parecer jurídico.
+\end{resumo}
+
+\section{Objetivo e limites}
+O objetivo é responder, para cada bloco de indicadores da oficina, (i) de onde obter os dados; (ii) como consumi-los com segurança e eficiência; (iii) o que pode ser automatizado; (iv) como o front-end deve receber dados prontos; e (v) quais lacunas impedem prometer cobertura integral. O escopo considera os municípios de Canaã dos Carajás e Parauapebas e, quando indicado, a Região de Integração Carajás (RI Carajás). A definição oficial da composição e dos limites da RI deve ser congelada em metadados antes de comparar séries.
+
+Não foram implementados conectores, banco, API ou interface. Não foram acessados os três repositórios GitHub fornecidos: as tentativas de consulta não obtiveram conteúdo e a conexão de rede do ambiente não permitiu executar leitura remota. Portanto, nenhuma conclusão abaixo atribui arquitetura ou código a esses repositórios. O portal ODSB foi consultado publicamente. Informações preliminares sobre artigo acadêmico, stack interna, pipeline manual e avaliação SUS não foram confirmadas em fonte primária acessível e não são tratadas como fatos.
+
+\section{Resumo executivo}
+O conjunto é viável como observatório, mas não como painel ``em tempo real''. A maioria das fontes tem cadência anual, mensal com atraso, ou publicação por arquivo/relatório. A ANM disponibiliza arquivos abertos substanciais para arrecadação, distribuição e autuação da CFEM; o portal da ANM distingue arrecadação da distribuição, que pode ocorrer no mês subsequente. Para contextualização municipal, os caminhos mais fortes são APIs documentadas (IBGE, SICONFI), arquivos tabulares oficiais (ANM, MapBiomas, Banco Mundial, MTE), exportações tabulares autorizadas (SEGUP/DATASUS) e publicação estática com curadoria (FAPESPA, IDSC, CLP, IPEA).
+
+A recomendação é construir primeiro um catálogo/metadados e uma camada de dados versionados, não raspar painéis. Cada observação publicada precisa trazer fonte, indicador/definição, localidade, período de referência, data de coleta, unidade, metodologia, estado de revisão e limitações. O site próprio deve consumir uma API do projeto sobre dados já validados; não deve consultar diretamente portais externos no navegador. Começar por CFEM, população, finanças públicas, economia/emprego, ambiente e indicadores sociais com fonte aberta e série reproduzível. CadÚnico, segurança por tipo de arma, licenças de terceiros e indicadores sem definição operacional são gates de validação, não entregas garantidas.
+
+\section{Referência do Observatório de Barcarena}
+O site público do Observatório do Desenvolvimento Sustentável de Barcarena apresenta mapas interativos, dashboards, indicadores por dimensão e relatórios periódicos em nove áreas: economia e mercado de trabalho; meio ambiente e saneamento; educação, cultura e lazer; mobilidade; ordenamento territorial; segurança; saúde; conectividade; e instituições locais \cite{odsb}. A estrutura é uma referência de navegação e comunicação para diferentes públicos, não uma evidência suficiente da arquitetura interna ou da disponibilidade de uma API pública.
+
+Para o observatório CFEM, recomenda-se adaptar a organização temática, mantendo uma entrada transversal para ``CFEM e receitas públicas'', glossário acessível, comparação entre municípios/região, download da série e página de metodologia. A interface deve separar: (a) arrecadação na origem; (b) distribuição/repasses; (c) receitas efetivamente contabilizadas pelo município; e (d) indicadores de contexto. A relação temporal entre esses conceitos não deve ser escondida em um único gráfico. Relatórios em PDF podem servir de produto editorial complementar, não como única forma de acesso aos dados.
+
+\section{Critério de automação e arquitetura de dados}
+\subsection{Níveis de ingestão}
+\begin{enumerate}
+  \item \textbf{A -- automatizável por API documentada:} chamadas programadas, paginação e limites respeitados, parâmetros e resposta bruta preservados.
+  \item \textbf{B -- automatizável por arquivo oficial estável:} baixar CSV/XLSX/ZIP/GeoTIFF, guardar URL, data, checksum e versão; validar esquema antes de substituir uma publicação.
+  \item \textbf{C -- exportação/extração assistida:} usar exportação oficial para CSV/XLSX ou PDF; extrair para área de rascunho e exigir conferência humana, reconciliação e citação de página/tabela.
+  \item \textbf{D -- indisponível ou sob acesso controlado:} não automatizar por raspagem ou contornar autenticação. Solicitar acesso formal, publicação agregada ou cooperação do órgão; sem autorização, registrar a lacuna.
+\end{enumerate}
+
+\subsection{Fluxo recomendado}
+\begin{center}
+Fonte oficial $\rightarrow$ captura imutável $\rightarrow$ validação de esquema e qualidade $\rightarrow$ transformação versionada $\rightarrow$ revisão/publicação $\rightarrow$ API do observatório $\rightarrow$ web, CSV/JSON e relatórios
+\end{center}
+Separar as áreas \emph{raw}, \emph{curated} e \emph{published}. Os arquivos originais devem ser preservados sem edição; cada transformação deve ser reproduzível e acompanhada de código, versão, parâmetros e logs. Para arquivos grandes, usar download incremental quando suportado; caso contrário, download por período, extração seletiva das colunas, armazenamento comprimido/particionado (por fonte/ano/município), checksum e cache. Não carregar centenas de megabytes em uma única chamada da interface. Para arquivos ANM com centenas de MB, importar uma vez, filtrar e agregar no servidor e expor só consultas paginadas/agrupadas.
+
+Usar identificadores IBGE para municípios, nomes de dimensões controlados, unidades padronizadas, datas no formato ISO e valores nulos explicitamente classificados (ausente, não divulgado, não aplicável, suprimido). Distinguir valor zero de ausência. Guardar também o arquivo-fonte ou sua referência imutável. A API deve fornecer, no mínimo, metadados de série, filtros por local/período e exportação CSV/JSON; endpoints e versionamento podem ser decididos após o inventário de consumo.
+
+\subsection{Contrato mínimo para cada indicador}
+Cada valor publicado precisa conter: identificador e nome legível; definição/fórmula; valor e unidade; município/região e código geográfico; período de referência; período coberto; fonte e URL; tabela/arquivo/página/consulta de origem; data de extração; frequência e atraso conhecidos; status de revisão; licença/condições de reutilização; versão do pipeline; notas de qualidade e limitações. Gráficos e respostas de eventual assistente de IA devem citar estes campos, nunca produzir um valor sem apontar a observação consolidada correspondente. Quando não houver observação compatível, responder que não há dado validado disponível, explicar a cobertura e não inferir um número.
+
+\section{Matriz de fontes e indicadores}
+As periodicidades abaixo são cadências observadas ou esperadas da publicação da fonte, não garantias de atualização. ``Automatizável'' indica potencial técnico após validar termos, esquema e estabilidade; não implica que o conector já exista.
+
+\small
+\begin{longtable}{p{0.19\textwidth} p{0.20\textwidth} p{0.21\textwidth} p{0.13\textwidth} p{0.19\textwidth}}
+\caption{Viabilidade preliminar por indicador e fonte}\label{tab:indicadores}\\
+\toprule
+\textbf{Indicador(es)} & \textbf{Fonte preferencial} & \textbf{Consumo/bypass} & \textbf{Cadência / nível} & \textbf{Limite/entrega possível}\\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Indicador(es)} & \textbf{Fonte preferencial} & \textbf{Consumo/bypass} & \textbf{Cadência / nível} & \textbf{Limite/entrega possível}\\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+CFEM: arrecadação, distribuição, autuação; recorte municipal, substância, período & ANM, arquivos abertos e painéis oficiais \cite{anmfiles,anmdiff} & CSV oficial; ingestão batch, checksum, leitura incremental/particionada; reconciliar arrecadação com distribuição & Atualizações por arquivo; verificar data de referência / B & Alta viabilidade. Não confundir recolhimento, distribuição e receita municipal. Dados volumosos; agregar no servidor.\\
+População: Censo, evolução 1980--2022+, RI Carajás & IBGE/SIDRA e API de Agregados/Localidades \cite{ibgeapi} & API documentada; selecionar tabela, variável, período e nível geográfico no SIDRA; armazenar consulta e resposta & Censo decenal e estimativas anuais / A & Alta; checar rupturas metodológicas, estimativa vs Censo e limites da RI.\\
+PIB municipal 2010--2023; PIB per capita e participação na RI & IBGE Contas Regionais/Municipais; FAPESPA como tabela consolidada \cite{fapespa} & API/tabelas IBGE quando disponíveis; PDF FAPESPA como fallback assistido; deflacionar só com metodologia explícita & Anual, com defasagem / A--C & FAPESPA perfil consultado contém PIB municipal apenas até 2021; anos posteriores exigem a edição IBGE apropriada.\\
+Preço minério de ferro 1985--2025; cobre 2000--2026 & World Bank Commodity Markets/Pink Sheet \cite{worldbank} & XLS mensal baixado; identificar série/moeda/unidade; conversão anual documentada, se desejada & Mensal / B & Alta para benchmarks globais; não representa preço realizado local nem preço de venda de empresa.\\
+Emprego formal, setor, gênero, remuneração e escolaridade; CAGED/RAIS & MTE/PDET microdados RAIS e Novo CAGED; FAPESPA para consolidação \cite{mte,fapespa} & Microdados delimitados/baixados e processados em lote; dicionário oficial; agregação municipal antes da publicação & CAGED mensal; RAIS anual / B--C & Alta para agregados. Microdados são grandes, exigem tratamento e cautela; definir estoque (RAIS) vs fluxo (CAGED), denominador e classificação.\\
+Rendimento domiciliar per capita; instrução por sexo & IBGE Censo/PNAD conforme nível geográfico e ano \cite{ibgeapi} & Tabelas SIDRA/arquivos públicos; manter separadas pesquisas, anos e conceitos & Censo/PNAD, varia / A--B & Só publicar séries comparáveis; não interpolar entre Censos sem marcar estimativa.\\
+IDEB 2023; distorção idade-série & INEP resultados/indicadores educacionais \cite{inep} & Baixar planilhas oficiais por edição; parser validado, tabela de referência e auditoria amostral & Por edição, anual/bienal conforme indicador / B & Ideb municipal pode não estar disponível para todos os recortes; ausência/supressão não é zero.\\
+Indicadores de saúde; mortalidade/homicídio por arma de fogo 1989--2022 & DATASUS/SIM/TABNET; FAPESPA para indicadores definidos \cite{datasus} & Exportação TABNET autorizada ou arquivos DBC e conversão; documentar causa, faixa e código CID & Anual, atraso significativo / B--C & Série longa exige harmonização CID-9/CID-10 e definição de arma de fogo; taxa precisa de população denominadora.\\
+Violência 2023 e homicídios no Pará & SEGUP-PA painel/exportação e nota metodológica \cite{segup} & Preferir botão/exportação oficial e arquivos agregados; automação apenas se URL/termos estáveis e permitidos & Painel indica atualização mensal, com janela de fechamento / B--C & Confirmar se exportação discrimina instrumento/arma e série histórica requerida; não pressupor que o total de homicídios responda isso.\\
+Pobreza e famílias pobres, CadÚnico julho/2026 & CECAD 2.0/MDS \cite{cecad} & Consultar painel público agregado/exportação permitida; acesso de gestor quando exigido; não raspar área protegida & Defasagem indicada pelo próprio sistema, em torno de meses / C--D & Bloqueador: confirmar acesso público, definição de pobreza, data-base e exportação reutilizável. Nunca ingerir registros pessoais.\\
+Veículos; infraestrutura, favelas, entorno e domicílio urbano/rural & FAPESPA (veículos); IBGE Censo 2022/SIDRA \cite{fapespa,ibgeapi} & API/tabelas IBGE; FAPESPA PDF como fallback, conferir tabela e nota & Anual para frota; censitário para Censo / A--C & FAPESPA traz frota até 2024; Censo tem data fixa e conceitos próprios.\\
+Uso da terra/área urbana/floresta e mudança 1985--2025 & MapBiomas Collection 11; INPE/TerraBrasilis para desmatamento \cite{mapbiomas,inpe} & Priorizar tabelas municipais CSV/XLSX já agregadas; imagens raster apenas se análise própria necessária; guardar coleção e classe & Anual / B & Alta em tabela publicada. MapBiomas e PRODES medem produtos/conceitos distintos; não combinar como uma série sem explicar.\\
+Emissões de CO$_2$ por município & SEEG inventário municipal \cite{seeg} & Baixar CSV oficial versionado e filtrar município/setor; conservar metodologia e planilha de origem & Anual por edição / B & Estimativa/inventário modelado; mostrar edição, gases, setores e incerteza metodológica, não chamar de medição local direta.\\
+Saneamento (Censo 2022) & IBGE Censo/SIDRA; SNIS/SINISA para dados administrativos posteriores \cite{ibgeapi} & API/tabelas de Censo; outro sistema para série administrativa, mantendo conceito separado & Censo decenal; sistema administrativo periódico / A--B & Evitar colar indicadores censitários e administrativos como série contínua sem quebra metodológica.\\
+Despesas per capita por função 2013--2024; receitas, ICMS, impostos e composição & SICONFI/API Tesouro; FAPESPA para tabelas municipais \cite{siconfi,fapespa} & API oficial documentada; paginação, parâmetros e reconciliação com demonstrativos; exportar consolidados & Entregas fiscais anuais/trimestrais / A & Boa viabilidade; validar função, estágio da despesa, unidade federativa/ente, população denominadora e retificações.\\
+Barômetro da Sustentabilidade 2024 & FAPESPA \cite{barometro} & Relatório/tabelas publicados; transcrição auditada com fórmula e referências aos indicadores componentes & Por edição / C & Índice composto estático; preservar edição e método, não atualizar por conta própria.\\
+IDSC-BR municipal & Instituto Cidades Sustentáveis/IDSC \cite{idsc} & Usar dados/relatórios que o provedor disponibilize expressamente; na ausência de API/documentação, extração manual citada ou pedido formal de dataset & Por edição / C--D & Confirmar licença, download em lote, série histórica e definição; não depender de endpoint interno do site.\\
+Ranking de Competitividade dos Municípios 2025 & CLP, planilha e relatórios técnicos \cite{clp} & Baixar arquivo oficial da edição e dicionário; extrair linha/indicadores e validar município/abrangência & Anual / B--C & Confirmar inclusão dos dois municípios, edição, ranking geral vs pilar e elegibilidade populacional.\\
+Receita per capita versus IDSC; grupos AA, BB, BA, AB & IPEA Texto para Discussão 3146 e dados de origem \cite{ipea} & Capturar publicação/metodologia; reproduzir classificação apenas com valores, ano, cortes e tratamento monetário documentados & Estudo pontual / C & Publicar como análise derivada com fórmula, fonte e ano; não apresentar como indicador oficial recorrente.\\
+Indicadores ou bases dos repositórios ODSB CFEM/Saúde/Escolas & Repositórios GitHub indicados pelo usuário & Leitura local autenticada após acesso autorizado; inventário de arquivos, esquema, licenças e testes de reprodução & A verificar / pendente & Não foi possível inspecionar nesta execução; solicitar ZIP/exportação ou habilitar acesso de leitura em ambiente conectado.\\
+\end{longtable}
+\normalsize
+
+\section{O que é possível entregar e o que fica condicionado}
+\subsection{Entregável tecnicamente sólido no primeiro ciclo}
+\begin{itemize}
+  \item Catálogo de indicadores com definição, unidade, localidade, período, fonte, atualização, licença e status de validação.
+  \item Séries CFEM da ANM (arrecadação, distribuição e autuação, em dimensões existentes no arquivo), população e indicadores selecionados do IBGE.
+  \item Economia/finanças: PIB disponível, preços globais do Banco Mundial, indicadores RAIS/CAGED agregados e relatórios FAPESPA selecionados; receitas/despesas fiscais via SICONFI após validação de códigos e estágio.
+  \item Meio ambiente: agregados municipais do MapBiomas e emissão municipal do SEEG, cada qual com edição, classe/setor e metodologia.
+  \item Um contrato de dados que sirva tanto gráficos quanto CSV/JSON e que permita exibir fonte, período e limitações no front-end.
+\end{itemize}
+
+\subsection{Itens condicionados a acesso, definição ou verificação}
+CadÚnico (permissão/exportação e regra de pobreza); homicídio especificamente por arma de fogo na série longa; disponibilidade de IDEB municipal para todos os anos/localidades; série de preço de cobre até 2026 no arquivo mais recente; conteúdo e licença dos dados IDSC; inclusão municipal e variáveis do ranking CLP; e a composição/limites da RI Carajás. Também deve ser verificada a licença de cada fonte antes da redistribuição. O perfil municipal da FAPESPA permite reprodução com crédito e restringe uso comercial; como o projeto tem financiamento privado, a equipe responsável deve verificar a aplicabilidade dessa condição com a FAPESPA antes de republicar tabelas/derivados. Não é parecer jurídico.
+
+\section{Como o front-end deve consumir os dados}
+Os componentes visuais não devem conhecer as URLs nem formatos originais das fontes. O front-end solicita séries ao backend do observatório e recebe valores normalizados mais metadados. Cada página de indicador deve apresentar: definição simples; visualização apropriada; localidade e período; data da atualização; fonte clicável; unidade; observações e limitações; exportação da mesma série; estado (provisório, validado ou indisponível). Para séries temporais, permitir filtro por localidade, período e unidade comparável; para rankings, exibir ano e universo comparado; para mapas, exibir coleção, resolução e legenda.
+
+Projetar um gráfico depois de confirmar o esquema: linhas para evolução temporal, barras para composição/comparação, mapa para distribuição espacial somente quando há geografia adequada e tabela para observações e auditoria. Dar alternativa textual e tabela acessível, responsividade móvel, cores com contraste e explicação não técnica. Exibir lacunas temporais em branco ou como lacuna qualificada, nunca como zero. Exportações devem incluir metadados e origem, não apenas valores.
+
+\section{Eficiência, qualidade, segurança e governança}
+\begin{itemize}
+  \item \textbf{Eficiência:} agendar por cadência real; usar ETag/Last-Modified se oferecidos; checksum; retries limitados; cache; agregação offline; consultas paginadas; particionar microdados; evitar baixar raster se a tabela municipal basta.
+  \item \textbf{Qualidade:} validar esquema, duplicatas, cobertura temporal/geográfica, unidades, totais e reconciliação com fonte; revisão humana para PDF e indicadores calculados; registrar mudanças de versão/retificação.
+  \item \textbf{LGPD:} projetar para dados agregados e públicos; não coletar CPF, nome, endereço ou registros individuais do CadÚnico/saúde/segurança; avaliar risco de reidentificação em grupos pequenos; controlar acesso a material restrito e documentar base legal/retensão se houver dado pessoal.
+  \item \textbf{Licença:} registrar licença/termos por ativo e regras de atribuição; separar acesso público de direito de redistribuição; solicitar autorização quando a licença estiver ausente ou ambígua.
+  \item \textbf{Governança:} responsável técnico por indicador, revisão/aprovação editorial, calendário, histórico de versão, canal de correção e protocolo para retirar dado incorreto sem apagar trilha de auditoria.
+\end{itemize}
+
+\section{Plano de trabalho recomendado}
+\begin{enumerate}
+  \item \textbf{Fechar o inventário:} estabilizar lista de indicadores, pergunta pública, fórmula, escala geográfica, período, unidade e prioridade; esclarecer divergências (ex.: ``CAGEG''/CAGED; data futura julho de 2026; região de integração).
+  \item \textbf{Validar fontes e direitos:} conferir tabelas/arquivos, dados reais disponíveis, licenças, exportação e acesso; requisitar acesso formal quando necessário; obter os três repositórios por clone autenticado ou pacote.
+  \item \textbf{Prova de ingestão:} selecionar amostras representativas: API IBGE, SICONFI, CSV ANM grande, arquivo municipal MapBiomas, microdados RAIS/CAGED e uma exportação assistida; medir custo, qualidade e manutenção.
+  \item \textbf{Publicação mínima:} implantar um conjunto pequeno de indicadores reconciliados, metadados, histórico de versões e exportação; só então definir dimensões e componentes finais da interface.
+  \item \textbf{Expandir e avaliar:} acrescentar indicadores por lote; teste de compreensão/acessibilidade com cidadãos, gestores, imprensa e pesquisadores; testar uso móvel e clareza não técnica.
+\end{enumerate}
+
+\section{Conclusão}
+Há um caminho realista para automatizar a maior parte do observatório sem exigir API de cada produtor: priorizar API oficial quando existir, arquivos abertos e exportação oficial quando não, e revisão humana onde a fonte é documento ou acesso controlado. O principal risco não é falta absoluta de dados, mas publicar números conceitualmente diferentes como comparáveis, ocultar defasagem/licença, ou construir raspadores frágeis. A entrega inicial deve ser descrita como catálogo e séries selecionadas, não cobertura completa em tempo real. A matriz da Tabela~\ref{tab:indicadores} fornece a base para transformar a oficina em backlog testável.
+
+\bibliographystyle{sbc}
+\bibliography{fontes}
+\end{document}
