@@ -174,4 +174,4 @@ O nível mede a forma de acesso, não a qualidade do dado. Uma fonte B pode ser 
 - **Motivo:** REG, BT, PLN, MAPA, ANA e relatórios divergem em emprego, homicídios, frota, uso do solo e na via Base dos Dados versus arquivo oficial.
 - **Exemplo:** Emprego: IPEADATA (REG, BT) versus microdados do MTE (MAPA, ANA); em 15/10/2026 o filtro do IPEADATA não limitou a resposta, que anunciou 63.685.034 bytes (transcrito do relatório R15, não conferido no JSON).
 - **Fonte:** Conflitos 3, 4, 5, 6 e 9 em [pendencias.md](pendencias.md); REG; BT; ANA; MAPA; R15; L19.
-- **Relacionadas:** RN-FON-02, RN-FNT-07, RN-FNT-08, RN-FNT-12, RN-FNT-13
+- **Relacionadas:** RN-FON-02, RN-FNT-08, RN-FNT-12, RN-FNT-13, RN-FNT-20, RN-FNT-21
