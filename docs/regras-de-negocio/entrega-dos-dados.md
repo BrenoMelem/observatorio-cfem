@@ -75,7 +75,7 @@ As fontes divergem sobre a forma da entrega: o REG e o PLN descrevem uma camada 
 - **Regra:** Os primeiros gráficos devem usar dados homologados de população municipal e de CFEM arrecadada e recebida, em painéis separados.
 - **Motivo:** Começa pelo que já tem rota validada e respeita que arrecadação e distribuição são medidas distintas.
 - **Exemplo:** Painel de população de Canaã e Parauapebas; painéis separados de CFEM arrecadada e CFEM recebida.
-- **Fonte:** R15 §Resposta ao orientador (item 3); BT §Bloco 1 (população como primeiro pipeline).
+- **Fonte:** R15 §Resposta ao orientador (item 3), que é uma recomendação do relatório e não uma decisão do REG ou do BT; BT §Bloco 1 (população como primeiro pipeline).
 - **Relacionadas:** RN-CFE-02, RN-VPU-10
 
 ### RN-ENT-10: Licença de reuso das exportações

@@ -83,7 +83,7 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 
 - Pré-requisitos: o PLN lista 4 pré-requisitos travantes e o REG, 3 (a descoberta do ano mais recente passou a ser regra de execução, RN-TMP-01).
 - Estado de TSE, DETRAN-PA e SEEG: o REG (04/10) registra TSE e DETRAN-PA bloqueados (HTTP 403 e erro de SSL); o R15 (15/10) registra SEEG com 403; o L19 (19/10) registra TSE e SEEG com a página aberta e o DETRAN-PA com HTTP 502. É evolução da evidência, não de regra.
-- O R15 descreve o repositório como em `master` e sem commits; hoje a branch principal é `main`.
+- O R15 descreve o repositório como em `master` e sem commits; em 24/10/2026 a branch principal é `main`.
 - A frota aparece como mensal na agenda do REG enquanto sua fonte está em conflito (conflito 5).
 
 ## 4. Lacunas e premissas desta documentação

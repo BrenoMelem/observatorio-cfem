@@ -33,6 +33,10 @@ Termos e siglas usados nesta documentação. Os termos de domínio vêm do REG (
 | derivado | Indicador calculado pelo observatório a partir de outros |
 | evento | Registro individual guardado com todos os campos (como a autuação), do qual a série é derivada |
 | modalidade de distribuição | Tipo de repasse da CFEM na coluna de tipo de distribuição do arquivo da ANM (por exemplo, `Produtor`) |
+| reconciliação | Comparação de um total do arquivo da fonte com uma publicação independente da mesma fonte oficial |
+| dado bruto | Arquivo baixado da fonte, antes do tratamento |
+| ano fechado | Ano em que todos os períodos esperados (por exemplo, os 12 meses da CFEM) estão presentes na fonte |
+| titular | Empresa ou pessoa a quem a autuação foi lançada (campo `NomeTitular` do arquivo da ANM) |
 | ensaio de custo | Estimativa do processamento de uma consulta ao BigQuery sem executá-la (dry run) |
 | issue | Registro de pendência aberto quando uma validação falha |
 | ano de referência | Ano a que o dado se refere, distinto da data de coleta |

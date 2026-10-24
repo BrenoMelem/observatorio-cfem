@@ -210,7 +210,7 @@ Estado: **EM ABERTO**. Nenhum dos dois conjuntos de nomes é adotado.
 ### RN-MOD-22: Período do fenômeno separado da data de coleta
 - **Status:** DECIDIDA
 - **Regra:** O período a que o dado se refere não deve ser confundido com a data em que ele foi coletado ou atualizado.
-- **Motivo:** Um dado coletado hoje pode se referir a um ano anterior.
+- **Motivo:** Um dado coletado numa data pode se referir a um ano anterior.
 - **Exemplo:** A população de 2025 coletada em out/2026 tem período 2025 e data de coleta out/2026.
 - **Fonte:** REG §Arquitetura e padrões de dados (`ano` e `atualizado_em`); R15 §Marco 1.
 - **Relacionadas:** RN-MOD-21
