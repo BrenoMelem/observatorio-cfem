@@ -10,7 +10,7 @@ O sistema do observatório ainda está em fase de pesquisa e planejamento. Os do
 
 ## Estrutura
 
-- `docs/pesquisa-observatorio-cfem/`: relatório de viabilidade, fontes, bibliografia e pacote LaTeX.
+- `docs/regras-de-negocio/fontes/pesquisa-observatorio-cfem/`: relatório de viabilidade, fontes, bibliografia e pacote LaTeX.
 - `notebooks/`: laboratório exploratório de fontes do observatório.
 - `scripts/`: scripts de validação, reconciliação e consulta exploratória.
 
@@ -22,7 +22,7 @@ Os scripts que consultam serviços externos fazem requisições às fontes indic
 
 ## Fontes e proveniência
 
-As fontes públicas, seus formatos, limitações e referências estão documentados em `docs/pesquisa-observatorio-cfem/`. Dados brutos baixados, resultados de execução e imagens de sessão não são versionados. Gere esses artefatos localmente e confirme a licença e a proveniência antes de redistribuir dados derivados.
+As fontes públicas, seus formatos, limitações e referências estão documentados em `docs/regras-de-negocio/fontes/pesquisa-observatorio-cfem/`. Dados brutos baixados, resultados de execução e imagens de sessão não são versionados. Gere esses artefatos localmente e confirme a licença e a proveniência antes de redistribuir dados derivados.
 
 ## Situação
 

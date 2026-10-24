@@ -54,10 +54,10 @@ Quando duas fontes se contradizem, não se escolhe: as duas versões são regist
 | REG | [`registro-de-decisoes.md`](fontes/registro-de-decisoes.md) | 04/10/2026; última edição 20/10/2026; exportado em 24/10/2026 (revisão 72) | Decisões oficiais do projeto |
 | BT | [`blocos-tematicos.md`](fontes/blocos-tematicos.md) | 04/10/2026; última edição 20/10/2026; exportado em 24/10/2026 (revisão 29) | Decisões: tabelas de indicadores por bloco e o Bloco 3 completo |
 | L19 | [`relatorio-laboratorio-fontes-2026-10-19.md`](fontes/relatorio-laboratorio-fontes-2026-10-19.md) | 19/10/2026 (execução de 17/10/2026; FRED reexecutado em 19/10/2026) | Evidência mais recente dos testes de fontes |
-| R15 | `docs/pesquisa-observatorio-cfem/relatorio-validacao-e-proximos-passos-2026-10-15.md` | 15/10/2026 | Validação com arquivos integrais e sequência do backend |
-| ANA | `docs/pesquisa-observatorio-cfem/analise-consumo-dados-por-topico.md` | consulta de 02/10/2026 | Classificação de acesso A/B/C/D e contrato de dados; referência histórica (gera só PROPOSTA) |
-| MAPA | `docs/pesquisa-observatorio-cfem/mapa-simples-api-por-tema-oficial.md` | consulta de 02/10/2026 | Resumo de qual tema tem API; referência histórica (gera só PROPOSTA) |
-| LEIA | `docs/pesquisa-observatorio-cfem/LEIA-ME.md` | sem data | Relatório de pesquisa e viabilidade; referência histórica (gera só PROPOSTA) |
+| R15 | [`fontes/pesquisa-observatorio-cfem/relatorio-validacao-e-proximos-passos-2026-10-15.md`](fontes/pesquisa-observatorio-cfem/relatorio-validacao-e-proximos-passos-2026-10-15.md) | 15/10/2026 | Validação com arquivos integrais e sequência do backend |
+| ANA | [`fontes/pesquisa-observatorio-cfem/analise-consumo-dados-por-topico.md`](fontes/pesquisa-observatorio-cfem/analise-consumo-dados-por-topico.md) | consulta de 02/10/2026 | Classificação de acesso A/B/C/D e contrato de dados; referência histórica (gera só PROPOSTA) |
+| MAPA | [`fontes/pesquisa-observatorio-cfem/mapa-simples-api-por-tema-oficial.md`](fontes/pesquisa-observatorio-cfem/mapa-simples-api-por-tema-oficial.md) | consulta de 02/10/2026 | Resumo de qual tema tem API; referência histórica (gera só PROPOSTA) |
+| LEIA | [`fontes/pesquisa-observatorio-cfem/LEIA-ME.md`](fontes/pesquisa-observatorio-cfem/LEIA-ME.md) | sem data | Relatório de pesquisa e viabilidade; referência histórica (gera só PROPOSTA) |
 | PLN | [`plano-de-integracao-de-dados.md`](fontes/plano-de-integracao-de-dados.md) | 30/09/2026 | Plano original, referência histórica; várias partes foram atualizadas depois por REG e BT |
 | NB | `notebooks/laboratorio_fontes_observatorio_cfem.ipynb` | out/2026 | Evidência (só gera PROPOSTA) |
 | SC | `scripts/` | out/2026 | Evidência: validadores, reconciliação e importador da CFEM (só gera PROPOSTA) |
@@ -65,7 +65,7 @@ Quando duas fontes se contradizem, não se escolhe: as duas versões são regist
 
 Evidências em `output/` (JSONs e manifestos) não estão no Git por decisão do projeto. Os exemplos que dependem delas estão marcados como "transcrito do relatório, não conferido no JSON". `docs/api/openapi.yaml` e `adr/` não existem no repositório e não são fonte de regra.
 
-Os documentos de decisão e o plano original ficam em [fontes/](fontes/); os demais estão em `docs/pesquisa-observatorio-cfem/`. Nenhuma fonte é apagada: uma fonte obsoleta é marcada como tal, e só pode ser removida quando nenhuma regra a citar.
+Todas as fontes ficam em [fontes/](fontes/): os documentos de decisão e o plano original na raiz da pasta; os demais estão em [fontes/pesquisa-observatorio-cfem/](fontes/pesquisa-observatorio-cfem/). Nenhuma fonte é apagada: uma fonte obsoleta é marcada como tal, e só pode ser removida quando nenhuma regra a citar.
 
 Os títulos de seção nas citações (por exemplo, "REG §Bloco 3") são os títulos dos documentos de origem.
 
