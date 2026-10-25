@@ -2,7 +2,7 @@
 
 **Finalidade:** servir de base para decidir como obter, tratar, versionar e entregar cada indicador do observatório de Canaã dos Carajás e Parauapebas. **Escopo:** somente consumo e publicação de dados; este documento não especifica nem implementa o produto, a hospedagem ou uma stack. **Consulta às fontes:** 2 de outubro de 2026.
 
-Este documento consolida a tabela de disponibilidade de API enviada pelo usuário, a lista de indicadores da oficina e a pesquisa técnica anterior sobre o Observatório CFEM. Usa também como referência de contrato o [modelo OpenAPI genérico](../api/openapi.yaml), sem alterá-lo: ele ainda contém campos de exemplo e não deve ser entendido como API do observatório.
+Este documento consolida a tabela de disponibilidade de API enviada pelo usuário, a lista de indicadores da oficina e a pesquisa técnica anterior sobre o Observatório CFEM. Usa também como referência de contrato o [modelo OpenAPI genérico](../../../api/openapi.yaml), sem alterá-lo: ele ainda contém campos de exemplo e não deve ser entendido como API do observatório.
 
 **Validação complementar de 15/10/2026:** a [rodada registrada no relatório](relatorio-validacao-e-proximos-passos-2026-10-15.md) confirmou valores da estimativa populacional 2025 para 12/12 municípios no IBGE/SIDRA e filtrou os arquivos integrais de arrecadação, distribuição e autuação da ANM. A distribuição de maio de 2025 foi reconciliada em três municípios com PDF da ANM. O CSV de distribuição não contém julho de 2025 em nenhuma linha nacional, apesar de a ANM ter publicado o repasse; por isso, o total anual de 2025 está bloqueado. Ausência de linha municipal não significa valor zero. Esta nota atualiza a evidência de consumo, sem alterar a classificação de meio de acesso A/B/C/D abaixo.
 
@@ -150,5 +150,5 @@ O próximo produto técnico, após aprovação deste mapa, é uma planilha de in
 ## Documentos-base relacionados
 
 - [Relatório de pesquisa e viabilidade do Observatório CFEM](LEIA-ME.md) — síntese anterior de fontes, arquitetura de ingestão, riscos e escopo.
-- [Modelo OpenAPI genérico do workflow](../api/openapi.yaml) — referência estrutural para discutir contrato HTTP; ainda não está adaptado ao CFEM.
-- [ADRs do workflow](../adr/) — registro genérico de decisões; não foram alterados nesta análise.
+- [Modelo OpenAPI genérico do workflow](../../../api/openapi.yaml) — referência estrutural para discutir contrato HTTP; ainda não está adaptado ao CFEM.
+- [ADRs do workflow](../../../adr/) — registro genérico de decisões; não foram alterados nesta análise.

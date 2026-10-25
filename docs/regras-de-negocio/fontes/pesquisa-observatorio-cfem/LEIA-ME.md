@@ -7,7 +7,7 @@ Este diretório contém o relatório técnico preliminar para o observatório da
 - `sbc-template.sty` e `sbc.bst`: dependências copiadas do template fornecido no ZIP.
 - `modelosparapublicaodeartigos/`: cópia dos arquivos-fonte do template SBC recebidos, preservada como referência.
 - `pacote-latex/`: projeto compilável com `document.tex` e todas as dependências; o pacote ZIP correspondente está em `output/pdf/fontes-latex-observatorio-cfem.zip`.
-- `../../output/pdf/relatorio-observatorio-cfem.pdf`: versão pronta para leitura.
+- `../../../../output/pdf/relatorio-observatorio-cfem.pdf`: versão pronta para leitura.
 
 ## Conclusões principais
 
