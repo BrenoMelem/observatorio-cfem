@@ -24,7 +24,7 @@ md("""
 
 **Como usar.** Abra no Colab, execute uma célula de cada vez com o botão ▶ ou `Shift+Enter`, leia a saída e avance. `OK` significa apenas que a prova descrita naquela linha passou. Um portal HTTP 200, um metadado ou um `import` não comprovam série municipal. Não coloque chaves nem JSON de service account no notebook.
 
-**Referências do projeto.** `docs/pesquisa-observatorio-cfem/analise-consumo-dados-por-topico.md` e `tmp/Observatorio-RI-Carajas-Registro-de-Decisoes-Daniel.txt`. Fonte primária e Base dos Dados devem aparecer separadas na proveniência.
+**Referências do projeto.** `docs/regras-de-negocio/fontes/pesquisa-observatorio-cfem/analise-consumo-dados-por-topico.md` e `tmp/Observatorio-RI-Carajas-Registro-de-Decisoes-Daniel.txt`. Fonte primária e Base dos Dados devem aparecer separadas na proveniência.
 """)
 
 md("""## 1. Preparar a bancada
