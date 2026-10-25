@@ -23,7 +23,7 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 | --- | --- | --- | --- |
 | Uso do solo, área urbana | 1983–2024 | 1985–2025 | 1985–2025 |
 | Despesa per capita por função | 2013–2024 | 2013–2025 | 2013–2025 |
-| Preço do minério de ferro | 1985–2025 | 1992–2025 | Início em jan/1980, pelo FRED (RN-TMP-13); recorte de exibição **EM ABERTO** |
+| Preço do minério de ferro | 1985–2025 | 1992–2025 | Início em jan/1980, pelo FRED (RN-TMP-13), mas a consulta de 25/10/2026 só achou valores desde jan/1992 (divergência 17); recorte de exibição **EM ABERTO** |
 | Preço do cobre | 2000–2026 | 2000–2026 | 2000–2026 |
 | PIB municipal | 2010–2023 | 2010–2023 | 2010–2023 |
 | Série populacional | 1980–2022 | 1980–2022 | 1980–2022 |
@@ -132,7 +132,7 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 - **Regra:** A série de preços de ferro e cobre deve vir do FRED, o início da série do ferro é janeiro de 1980, e o Pink Sheet do World Bank só deve ser usado, congelado uma vez com citação, para anos anteriores a 1980.
 - **Motivo:** O laboratório de 19/10/2026 encontrou o ferro no FRED desde jan/1980, mais recente que DECISÕES e BLOCOS, que diziam 1992.
 - **Exemplo:** FRED, ferro (`PIORECRUSDM`) e cobre (`PCOPPUSDM`), mensais, de jan/1980 a jul/2026 (transcrito do relatório LAB-19/10, não conferido no JSON).
-- **Exceções:** O recorte de exibição da série do ferro (desde 1980 ou desde 1985, como pediu a oficina) está **EM ABERTO**.
+- **Exceções:** O recorte de exibição da série do ferro (desde 1980 ou desde 1985, como pediu a oficina) está **EM ABERTO**. Em 25/10/2026, a API do FRED devolveu as duas séries com linhas de jan/1980 a set/2026, mas os valores de jan/1980 a dez/1991 vieram como ausentes (144 meses); o primeiro valor é de jan/1992 (ferro: 14,31 US$/t) e os metadados do FRED dão início em 1992-01-01. Isso contradiz o início em jan/1980 e está registrado como divergência 17 em [pendencias.md](pendencias.md). A decisão de 24/10/2026 foi tomada com base no LAB-19/10 e precisa ser reconfirmada.
 - **Fonte:** DECISÃO-MANTENEDOR de 24/10/2026 (conflito 8); LAB-19/10 §4 (FRED e World Bank Pink Sheet); DECISÕES §Rotas de coleta por fonte (Commodities); BLOCOS §Bloco 2.
 - **Relacionadas:** RN-TMP-16, RN-FNT-05, RN-FNT-06
 

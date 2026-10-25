@@ -43,7 +43,7 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Regra:** Os preços de minério de ferro (`PIORECRUSDM`) e de cobre (`PCOPPUSDM`) devem vir da API do FRED, como séries globais mensais; o ferro tem início em janeiro de 1980 e o período do cobre vigente é 2000–2026.
 - **Motivo:** O FRED espelha a série do IMF por API estável, que é o padrão para pipelines.
 - **Exemplo:** Em 19/10/2026, as duas séries foram consultadas de jan/1980 a jul/2026 (transcrito do relatório LAB-19/10, não conferido no JSON).
-- **Exceções:** A unidade do ferro e o recorte de exibição do ferro estão em aberto (RN-TMP-14, RN-TMP-13).
+- **Exceções:** A unidade do ferro e o recorte de exibição do ferro estão em aberto (RN-TMP-14, RN-TMP-13). Em 25/10/2026, a API do FRED devolveu as duas séries com linhas de jan/1980 a set/2026, mas os valores de jan/1980 a dez/1991 vieram como ausentes (144 meses); o primeiro valor é de jan/1992 (ferro: 14,31 US$/t) e os metadados do FRED dão início em 1992-01-01. Isso contradiz o início em jan/1980 e está registrado como divergência 17 em [pendencias.md](pendencias.md).
 - **Fonte:** DECISÃO-MANTENEDOR de 24/10/2026 (conflito 8); LAB-19/10 §4 (FRED e World Bank Pink Sheet); DECISÕES §Rotas de coleta por fonte; BLOCOS §Bloco 2.
 - **Relacionadas:** RN-FON-10, RN-MOD-19, RN-TMP-13
 
@@ -52,7 +52,7 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Regra:** O Pink Sheet do World Bank só deve ser usado, baixado uma vez e congelado com citação, se for necessário cobrir anos anteriores a 1980.
 - **Motivo:** Como o ferro no FRED começa em 1980, o trecho de 1985–1991 previsto por DECISÕES e por BLOCOS deixou de ser necessário.
 - **Exemplo:** A planilha anual do Pink Sheet tem 2023–2025 e coincide numericamente com o PDF de outubro de 2026.
-- **Exceções:** O rótulo da unidade do ferro diverge entre a planilha e o PDF (RN-TMP-14).
+- **Exceções:** O rótulo da unidade do ferro diverge entre a planilha e o PDF (RN-TMP-14). Se o ferro no FRED só tem valores desde jan/1992 (divergência 17), o Pink Sheet volta a ser necessário para 1985–1991 e a regra acima deve ser reavaliada.
 - **Fonte:** DECISÃO-MANTENEDOR de 24/10/2026 (conflito 8); LAB-19/10 §4; VAL-15/10 §Matriz operacional (Commodities).
 - **Relacionadas:** RN-TMP-13, RN-TMP-14
 
