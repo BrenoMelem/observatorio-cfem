@@ -68,7 +68,7 @@ Canaã dos Carajás e Parauapebas são os municípios de foco do observatório.
 - **Status:** DECIDIDA
 - **Regra:** Quando a fonte identificar o município apenas pelo nome, o registro deve ser ligado ao código IBGE por uma tabela de equivalência, e o registro que não puder ser ligado não deve entrar em nenhuma agregação municipal.
 - **Motivo:** Nome sem código permite homônimos e grafias diferentes; sem a equivalência, o valor pode ser atribuído ao município errado.
-- **Exemplo:** O arquivo de autuações da ANM traz a coluna `Município` por nome. Nos arquivos completos, 9 dos 12 municípios tiveram linhas de autuação; Canaã teve 11 linhas e Parauapebas 35 (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exemplo:** O arquivo de autuações da ANM traz a coluna `Município` por nome. Nos arquivos completos, 9 dos 12 municípios tiveram linhas de autuação; Canaã teve 11 linhas e Parauapebas 35 (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
 - **Fonte:** BLOCOS §Bloco 3 (Autuações); DECISÕES §Autuações da CFEM; VAL-15/10 §Rodada adicional.
 - **Relacionadas:** RN-TER-07, RN-CFE-13
 

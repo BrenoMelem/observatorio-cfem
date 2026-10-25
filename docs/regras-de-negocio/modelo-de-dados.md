@@ -99,7 +99,7 @@ Estado: **EM ABERTO**. Nenhum dos dois conjuntos de nomes é adotado.
 - **Status:** DECIDIDA
 - **Regra:** Um valor ausente não deve ser publicado, somado nem exibido como zero.
 - **Motivo:** Zero afirma um fato; a ausência apenas informa que não se sabe. Esconder a lacuna como zero distorce totais e comparações.
-- **Exemplo:** O arquivo de distribuição da CFEM não tem julho de 2025, embora a ANM tenha publicado repasse de R$ 478.839.591,45 naquele mês aos estados e municípios produtores (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exemplo:** O arquivo de distribuição da CFEM não tem julho de 2025, embora a ANM tenha publicado repasse de R$ 478.839.591,45 naquele mês aos estados e municípios produtores (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivo da ANM e notícia da ANM).
 - **Fonte:** VAL-15/10 §Marco 1, §Resposta 3, §Rodada adicional; CONSUMO §Contrato de dados para o front-end.
 - **Relacionadas:** RN-MOD-06, RN-MOD-10, RN-CFE-05
 
@@ -115,7 +115,7 @@ Estado: **EM ABERTO**. Nenhum dos dois conjuntos de nomes é adotado.
 - **Status:** DECIDIDA
 - **Regra:** Quando um município não tem linha no arquivo da fonte, a observação deve ser "ausente" e não deve ser convertida em zero.
 - **Motivo:** A falta de linha pode ser lacuna da extração, falta de repasse, ou município sem a atividade; só a investigação diz qual.
-- **Exemplo:** São Domingos do Araguaia (1507151) não teve linha no arquivo de arrecadação 2022–2026 nem no de distribuição 2007–2026; 11 dos 12 municípios tiveram linha (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exemplo:** São Domingos do Araguaia (1507151) não teve linha no arquivo de arrecadação 2022–2026 nem no de distribuição 2007–2026; 11 dos 12 municípios tiveram linha (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
 - **Fonte:** VAL-15/10 §Matriz operacional (CFEM autuações), §Rodada adicional; CONSUMO §Validação complementar de 15/10/2026.
 - **Relacionadas:** RN-MOD-06, RN-CFE-09
 
@@ -203,7 +203,7 @@ Estado: **EM ABERTO**. Nenhum dos dois conjuntos de nomes é adotado.
 - **Status:** DECIDIDA
 - **Regra:** Todo dado tratado deve carregar quando foi gerado, de qual fonte e de qual ano-base, e a edição e a data de coleta da fonte.
 - **Motivo:** Permite exibir "atualizado em" e torna evidente quando uma fonte parou.
-- **Exemplo:** O manifesto de qualidade da distribuição da CFEM de 2025 registra o hash da origem, 11/12 municípios presentes e a ausência de julho em todo o arquivo (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exemplo:** O manifesto de qualidade da distribuição da CFEM de 2025 registra o hash da origem, 11/12 municípios presentes e a ausência de julho em todo o arquivo (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026 com arquivos da ANM (o hash é o do arquivo de 24/10/2026).
 - **Fonte:** DECISÕES §Arquitetura e padrões de dados ("Proveniência embutida"); VAL-15/10 §Marco 1, §Marco 2.
 - **Relacionadas:** RN-FON-13, RN-ENT-04
 

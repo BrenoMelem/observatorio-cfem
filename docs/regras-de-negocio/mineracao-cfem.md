@@ -18,7 +18,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Status:** DECIDIDA
 - **Regra:** A CFEM arrecadada, a CFEM recebida e as autuações devem vir exclusivamente da ANM, dos arquivos nacionais de dados abertos, filtrados pelos municípios de interesse.
 - **Motivo:** Uma só fonte evita divergência entre as três medidas e permite comparar com outros municípios mineradores sem fonte nova.
-- **Exemplo:** Para Canaã dos Carajás (1502152), o arquivo de arrecadação 2022–2026 tem 251 linhas, o de distribuição 739 e o de autuação 11 (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exemplo:** Para Canaã dos Carajás (1502152), o arquivo de arrecadação 2022–2026 tem 251 linhas, o de distribuição 739 e o de autuação 11 (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
 - **Fonte:** DECISÕES §Bloco 3; BLOCOS §Bloco 3; VAL-15/10 §Rodada adicional.
 - **Relacionadas:** RN-CFE-02, RN-TER-09
 
@@ -26,7 +26,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Status:** DECIDIDA
 - **Regra:** A CFEM arrecadada, a CFEM recebida e as autuações não devem ser somadas entre si nem exibidas no mesmo eixo sem aviso, e a arrecadada e a recebida devem aparecer como indicadores distintos.
 - **Motivo:** São medidas de natureza diferente: o que a extração gerou, o repasse efetivo e uma cobrança ainda sujeita a recurso.
-- **Exemplo:** Em maio de 2025, o repasse do tipo `Produtor` a Canaã foi R$ 60.776.801,44, e isso não é o que as empresas recolheram em Canaã naquele mês (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exemplo:** Em maio de 2025, o repasse do tipo `Produtor` a Canaã foi R$ 60.776.801,44, e isso não é o que as empresas recolheram em Canaã naquele mês (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
 - **Fonte:** DECISÕES §Bloco 3; BLOCOS §Bloco 3; LAB-19/10 §4 (ANM CFEM); CONSUMO §CFEM e receitas minerais.
 - **Relacionadas:** RN-CFE-03, RN-CFE-17, RN-ENT-09
 
@@ -51,7 +51,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Status:** DECIDIDA
 - **Regra:** O total anual da CFEM não deve ser calculado nem publicado quando algum mês do ano estiver ausente na fonte.
 - **Motivo:** Somar com um mês faltando produz um total que parece completo e não é.
-- **Exemplo:** O CSV de distribuição não tem nenhuma linha de julho de 2025, mas a ANM publicou que repassou R$ 478.839.591,45 em julho de 2025 aos estados e municípios produtores; por isso o total anual de distribuição de 2025 está bloqueado (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exemplo:** O CSV de distribuição não tem nenhuma linha de julho de 2025, mas a ANM publicou que repassou R$ 478.839.591,45 em julho de 2025 aos estados e municípios produtores; por isso o total anual de distribuição de 2025 está bloqueado (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivo da ANM e notícia da ANM).
 - **Fonte:** VAL-15/10 §Resposta ao orientador (item 1), §Marco 2, §Rodada adicional; CONSUMO §Validação complementar de 15/10/2026.
 - **Relacionadas:** RN-CFE-06, RN-CFE-08, RN-VPU-05, RN-MOD-08
 
@@ -84,7 +84,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Status:** EM ABERTO
 - **Regra:** O mantenedor deve investigar por que São Domingos do Araguaia (1507151) não tem linha nos arquivos de arrecadação e de distribuição, e até lá o município deve constar como ausente, nunca como zero.
 - **Motivo:** A causa não foi confirmada: pode ser lacuna da extração, ausência de repasse ou ausência de atividade.
-- **Exemplo:** 11 dos 12 municípios têm linhas em arrecadação (2022–2026) e em distribuição (2007–2026); nas autuações, 9 dos 12 (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exemplo:** 11 dos 12 municípios têm linhas em arrecadação (2022–2026) e em distribuição (2007–2026); nas autuações, 9 dos 12 (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
 - **Fonte:** VAL-15/10 §Matriz operacional, §Rodada adicional, §Issues sugeridas (item 2).
 - **Relacionadas:** RN-MOD-10, RN-CFE-07
 
@@ -92,7 +92,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Status:** EM ABERTO
 - **Regra:** O mantenedor deve definir quais modalidades de distribuição (coluna do tipo de distribuição) compõem a "CFEM recebida", e até lá a modalidade deve ser guardada e exibida separadamente.
 - **Motivo:** A reconciliação cobriu só o tipo `Produtor`; as demais modalidades não foram conferidas.
-- **Exemplo:** A reconciliação de maio de 2025 foi feita com `Ano=2025`, `Mês=5` e tipo `Produtor` (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exemplo:** A reconciliação de maio de 2025 foi feita com `Ano=2025`, `Mês=5` e tipo `Produtor` (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
 - **Fonte:** VAL-15/10 §Rodada adicional (escopo da reconciliação).
 - **Relacionadas:** RN-VPU-07, RN-TER-09, RN-CFE-11
 
@@ -100,7 +100,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Status:** PROPOSTA
 - **Regra:** Os valores devem ser somados em precisão decimal por código IBGE, ano, mês e modalidade de distribuição, e só depois arredondados ao centavo, para cima a partir da metade.
 - **Motivo:** Evita erro de arredondamento acumulado e preserva a modalidade.
-- **Exemplo:** O primeiro importador gerou 75 linhas municipais agregadas de 2025, com código IBGE, município, ano, mês, modalidade, valor e contagem de linhas (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exemplo:** O primeiro importador gerou 75 linhas municipais agregadas de 2025, com código IBGE, município, ano, mês, modalidade, valor e contagem de linhas (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
 - **Fonte:** SCRIPTS (`build_cfem_distribution_municipal`). Deduzida do código.
 - **Relacionadas:** RN-CFE-04, RN-CFE-10
 
@@ -108,7 +108,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Status:** PROPOSTA
 - **Regra:** O total nacional de uma medida deve ser comparado com o total publicado pela ANM como controle de escala, sem substituir a conferência municipal.
 - **Motivo:** Detecta erro grosseiro de leitura do arquivo.
-- **Exemplo:** A soma nacional da arrecadação de 2025 foi R$ 7.910.581.327,56, que arredonda para os R$ 7,91 bilhões do Relatório de Gestão 2025 da ANM (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exemplo:** A soma nacional da arrecadação de 2025 foi R$ 7.910.581.327,56, que arredonda para os R$ 7,91 bilhões do Relatório de Gestão 2025 da ANM (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
 - **Fonte:** VAL-15/10 §Rodada adicional (apresentado como controle, não como regra).
 - **Relacionadas:** RN-VPU-08
 
@@ -116,7 +116,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Status:** DECIDIDA
 - **Regra:** Cada autuação deve ser guardada como um evento (data de publicação, valor, processo, município e titular), e a série do gráfico deve ser derivada dos eventos.
 - **Motivo:** O evento preserva o detalhe; a série é só uma visão.
-- **Exemplo:** O arquivo completo tem 21.029 linhas; 176 estão no recorte dos 12 municípios (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exemplo:** O arquivo completo tem 21.029 linhas; 176 estão no recorte dos 12 municípios (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
 - **Fonte:** DECISÕES §Bloco 3; BLOCOS §Bloco 3 (Autuações).
 - **Relacionadas:** RN-CFE-14, RN-CFE-16, RN-TER-06
 
@@ -140,7 +140,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Status:** EM ABERTO
 - **Regra:** O mantenedor deve definir o tratamento das autuações sem ano de publicação antes de formar a série temporal.
 - **Motivo:** VAL-15/10 aponta que não se deve formar série sem regra para esses registros.
-- **Exemplo:** 88 das 176 linhas do recorte dos 12 municípios não têm ano de publicação (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exemplo:** 88 das 176 linhas do recorte dos 12 municípios não têm ano de publicação (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
 - **Fonte:** VAL-15/10 §Matriz operacional, §Rodada adicional; DECISÃO-MANTENEDOR de 24/10/2026 (resposta à pergunta 6: deixar em aberto).
 - **Relacionadas:** RN-CFE-13, RN-CFE-14, RN-MOD-10
 
@@ -189,6 +189,6 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Status:** EM ABERTO
 - **Regra:** O mantenedor deve confirmar qual arquivo e qual cobertura de anos da arrecadação a ANM publica antes de prometer série longa.
 - **Motivo:** DECISÕES cita `CFEM_Arrecadacao.csv`, mas o validador usou `CFEM_Arrecadacao_2022_2026.csv`, que cobre apenas 2022–2026.
-- **Exemplo:** O arquivo 2022–2026 tem 744.244 linhas, das quais 2.534 são dos 12 municípios (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exemplo:** O arquivo 2022–2026 tinha 744.244 linhas em 15/10/2026 (transcrito do relatório VAL-15/10) e 744.279 em 25/10/2026, depois da atualização da ANM de 24/10/2026; as 2.534 linhas dos 12 municípios não mudaram (reproduzido em 25/10/2026).
 - **Fonte:** DECISÕES §Rotas de coleta por fonte; SCRIPTS (`validate_anm_cfem`); VAL-15/10 §Rodada adicional.
 - **Relacionadas:** RN-CFE-01, RN-FNT-18

@@ -49,7 +49,7 @@ As fontes divergem sobre a forma da entrega: DECISÕES e PLANO descrevem uma cam
 - **Status:** DECIDIDA
 - **Regra:** Os CSVs nacionais da ANM não devem ser entregues integralmente ao navegador nem consumidos diretamente pelos gráficos.
 - **Motivo:** Os arquivos têm centenas de MB e campos identificadores (CPF/CNPJ), e a ausência de municípios ou de meses ficaria escondida.
-- **Exemplo:** O arquivo de distribuição tem 2.238.877 linhas, das quais 11.847 são dos 12 municípios (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exemplo:** O arquivo de distribuição tem 2.238.877 linhas, das quais 11.847 são dos 12 municípios (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
 - **Fonte:** VAL-15/10 §Resposta ao orientador (item 3), §Rodada adicional; CONSUMO §CFEM e receitas minerais, §Bypass seguro quando não houver API; MAPA-TEMAS §Tema central do Observatório: CFEM.
 - **Relacionadas:** RN-ENT-01, RN-PRI-01, RN-VPU-10
 

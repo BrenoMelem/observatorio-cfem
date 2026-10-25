@@ -6,7 +6,7 @@ Regras sobre o que um lote precisa cumprir para ser publicado e sobre o que faze
 - **Status:** DECIDIDA
 - **Regra:** Somente lotes que passaram por todas as validações devem ser publicados, e uma execução cujo lote falhar não deve publicar nenhum dado novo desse indicador.
 - **Motivo:** Publicar dado não validado transmite como certo um número que pode estar errado.
-- **Exemplo:** O arquivo agregado da distribuição da CFEM de 2025 registra "pronto para publicar: não" e serve só a testes mensais, não a um total anual (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exemplo:** O arquivo agregado da distribuição da CFEM de 2025 registra "pronto para publicar: não" e serve só a testes mensais, não a um total anual (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
 - **Fonte:** DECISÕES §Arquitetura e padrões de dados (Validação antes de publicar); VAL-15/10 §Marco 4, §Rodada adicional.
 - **Relacionadas:** RN-VPU-03, RN-VPU-08, RN-VPU-10
 
@@ -39,7 +39,7 @@ Regras sobre o que um lote precisa cumprir para ser publicado e sobre o que faze
 - **Status:** DECIDIDA
 - **Regra:** Quando um mês esperado estiver ausente, o lote não deve fechar o total do período e deve registrar se a falta é da fonte ou se o município realmente não recebeu.
 - **Motivo:** Fechar um total com mês faltante produz um número que parece completo e não é.
-- **Exemplo:** O arquivo de distribuição da CFEM tem linhas nacionais de janeiro a junho e de agosto a dezembro de 2025, e nenhuma em julho (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exemplo:** O arquivo de distribuição da CFEM tem linhas nacionais de janeiro a junho e de agosto a dezembro de 2025, e nenhuma em julho (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
 - **Exceções:** Os meses já presentes podem ser publicados como "provisório" (RN-CFE-06); o que fica bloqueado é o total anual.
 - **Fonte:** VAL-15/10 §Marco 2; DECISÃO-MANTENEDOR de 24/10/2026 (resposta à pergunta 5).
 - **Relacionadas:** RN-CFE-05, RN-CFE-06, RN-CFE-07
@@ -48,7 +48,7 @@ Regras sobre o que um lote precisa cumprir para ser publicado e sobre o que faze
 - **Status:** DECIDIDA
 - **Regra:** Cada execução de coleta deve produzir um relatório de qualidade com linhas lidas, municípios presentes, anos, nulos, duplicatas, faixas de valores e divergência com a fonte primária.
 - **Motivo:** Permite ver, sem abrir o dado, se o lote cobre o que deveria.
-- **Exemplo:** O manifesto da distribuição de 2025 registra o hash da origem, 11 dos 12 municípios presentes e os meses ausentes (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exemplo:** O manifesto da distribuição de 2025 registra o hash da origem, 11 dos 12 municípios presentes e os meses ausentes (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
 - **Fonte:** VAL-15/10 §Marco 3; LAB-19/10 §7 (Próximos passos, item 5).
 - **Relacionadas:** RN-MOD-21, RN-VPU-11
 
@@ -56,7 +56,7 @@ Regras sobre o que um lote precisa cumprir para ser publicado e sobre o que faze
 - **Status:** DECIDIDA
 - **Regra:** Um indicador só deve ser homologado depois de uma reconciliação com publicação independente da fonte oficial; a reconciliação de um mês e de uma modalidade não homologa o ano nem as demais modalidades.
 - **Motivo:** O arquivo oficial pode ter lacunas que só aparecem na comparação com outra publicação.
-- **Exemplo:** A distribuição de maio de 2025, do tipo `Produtor`, bateu com o PDF da remessa 696 da ANM (emitida em 07/05/2025): Canaã R$ 60.776.801,44, Parauapebas R$ 42.951.670,43 e Marabá R$ 17.289.067,88 (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exemplo:** A distribuição de maio de 2025, do tipo `Produtor`, bateu com o PDF da remessa 696 da ANM (emitida em 07/05/2025): Canaã R$ 60.776.801,44, Parauapebas R$ 42.951.670,43 e Marabá R$ 17.289.067,88 (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
 - **Exceções:** A tolerância de diferença aceita está em aberto (RN-VPU-12).
 - **Fonte:** VAL-15/10 §Marco 2, §Rodada adicional; CONSUMO §Ordem recomendada para prova de consumo.
 - **Relacionadas:** RN-VPU-08, RN-VPU-12, RN-CFE-10
@@ -65,7 +65,7 @@ Regras sobre o que um lote precisa cumprir para ser publicado e sobre o que faze
 - **Status:** DECIDIDA
 - **Regra:** Somas calculadas sobre o arquivo bruto devem ser tratadas como provisórias e não homologadas até a reconciliação com a fonte oficial.
 - **Motivo:** O total do arquivo pode divergir do total oficial publicado.
-- **Exemplo:** A soma nacional da arrecadação de 2025 foi R$ 7.910.581.327,56, que arredonda para os R$ 7,91 bilhões do Relatório de Gestão 2025 da ANM; é um controle de escala nacional e arredondado, não uma conferência municipal (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exemplo:** A soma nacional da arrecadação de 2025 foi R$ 7.910.581.327,56, que arredonda para os R$ 7,91 bilhões do Relatório de Gestão 2025 da ANM; é um controle de escala nacional e arredondado, não uma conferência municipal (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
 - **Fonte:** VAL-15/10 §Rodada adicional.
 - **Relacionadas:** RN-VPU-07, RN-CFE-12
 
@@ -89,7 +89,7 @@ Regras sobre o que um lote precisa cumprir para ser publicado e sobre o que faze
 - **Status:** EM ABERTO
 - **Regra:** O mantenedor deve definir como detectar e tratar linhas duplicadas na fonte antes de agregar.
 - **Motivo:** VAL-15/10 aponta duplicidades como ponto a conferir nas autuações, sem fixar a regra.
-- **Exemplo:** Autuações no recorte dos 12 municípios (176 linhas) precisam de conferência de duplicidade (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exemplo:** Autuações no recorte dos 12 municípios (176 linhas) precisam de conferência de duplicidade (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: contagem de linhas; a duplicidade não foi testada).
 - **Fonte:** VAL-15/10 §Matriz operacional (CFEM autuações).
 - **Relacionadas:** RN-VPU-06, RN-CFE-13
 

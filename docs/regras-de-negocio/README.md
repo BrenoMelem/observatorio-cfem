@@ -65,7 +65,7 @@ Quando duas fontes se contradizem, não se escolhe: as duas versões são regist
 | SCRIPTS | `scripts/` | out/2026 | Evidência: validadores, reconciliação e importador da CFEM (só gera PROPOSTA) |
 | DECISÃO-MANTENEDOR | Decisão do mantenedor | 24/10/2026 | Respostas da Fase 1, registradas aqui até DECISÕES e BLOCOS serem atualizados |
 
-Evidências em `output/` (JSONs e manifestos) não estão no Git por decisão do projeto. Os exemplos que dependem delas estão marcados como "transcrito do relatório, não conferido no JSON". `docs/api/openapi.yaml` e `adr/` não existem no repositório e não são fonte de regra.
+Evidências em `output/` (JSONs e manifestos) não estão no Git por decisão do projeto. Os exemplos que dependem delas estão marcados como "transcrito do relatório, não conferido no JSON". Os que foram reproduzidos em 25/10/2026, rodando de novo os scripts do repositório sobre os arquivos da ANM baixados nesse dia e consultando a API do IBGE, estão marcados como "reproduzido em 25/10/2026". Os arquivos da ANM foram atualizados em 24/10/2026, depois da validação de 15/10/2026. `docs/api/openapi.yaml` e `adr/` não existem no repositório e não são fonte de regra.
 
 Todas as fontes ficam em [fontes/](fontes/): os documentos de decisão e o plano original na raiz da pasta; os demais estão em [fontes/pesquisa-observatorio-cfem/](fontes/pesquisa-observatorio-cfem/). Nenhuma fonte é apagada: uma fonte obsoleta é marcada como tal, e só pode ser removida quando nenhuma regra a citar.
 

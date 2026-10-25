@@ -115,7 +115,7 @@ O nível mede a forma de acesso, não a qualidade do dado. Uma fonte B pode ser 
 - **Status:** DECIDIDA
 - **Regra:** Toda captura de dado externo deve registrar a URL da fonte, a edição, o checksum do arquivo, a data de coleta e a versão do tratamento aplicado.
 - **Motivo:** Permite refazer a busca e provar de onde veio cada número.
-- **Exemplo:** Os registros de evidência dos CSVs da ANM preservam URL, data, tamanho e SHA-256 (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exemplo:** Os registros de evidência dos CSVs da ANM preservam URL, data, tamanho e SHA-256 (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
 - **Fonte:** VAL-15/10 §Marco 1, §Marco 2, §Rodada adicional; DECISÕES §Arquitetura e padrões de dados (Proveniência embutida); CONSUMO §Classificação de consumo (nível B).
 - **Relacionadas:** RN-MOD-21, RN-FON-14
 
