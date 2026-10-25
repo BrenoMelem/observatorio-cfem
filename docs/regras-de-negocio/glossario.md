@@ -6,6 +6,7 @@ Termos e siglas usados nesta documentação. Os termos de domínio vêm de DECIS
 
 | Termo | Significado |
 | --- | --- |
+| RN | Regra de Negócio. Prefixo do identificador de cada regra, no formato `RN-<TEMA>-<NN>` (por exemplo, `RN-CFE-06`); o tema é o prefixo de três letras listado no índice do [README](README.md) |
 | status da regra | Situação da regra nesta documentação: DECIDIDA, PROPOSTA ou EM ABERTO. Não se confunde com a natureza do valor nem com o estado de validação |
 | DECIDIDA | Regra que vem de DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10, ou de decisão do mantenedor registrada em 24/10/2026 |
 | PROPOSTA | Regra deduzida, vinda só de CONSUMO, MAPA-TEMAS, PESQUISA, PLANO ou do código, sem decisão registrada |

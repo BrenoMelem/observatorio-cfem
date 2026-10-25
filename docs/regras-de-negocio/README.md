@@ -24,6 +24,8 @@ Comece por este arquivo, passe ao [glossário](glossario.md) e leia o tema que i
 
 ## Formato de cada regra
 
+O identificador de cada regra é `RN-<TEMA>-<NN>`: **RN** é "Regra de Negócio", `<TEMA>` é o prefixo de três letras do tema (tabela do [índice](#índice)) e `<NN>` é o número da regra dentro do tema. Por exemplo, `RN-CFE-06` é a sexta regra do tema CFEM.
+
 ```
 ### RN-<TEMA>-<NN>: título curto
 - Status: DECIDIDA | PROPOSTA | EM ABERTO
