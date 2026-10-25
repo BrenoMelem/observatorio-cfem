@@ -2,22 +2,22 @@
 
 Regras sobre o que o consumidor dos dados (front-end, exportações CSV e assistente de IA) pode receber e como. Legenda de status e siglas das fontes: [README](README.md).
 
-As fontes divergem sobre a forma da entrega: o REG e o PLN descrevem uma camada de arquivos JSON e CSV versionados; o R15 e a ANA preveem uma API própria (conflito 2, **EM ABERTO**). As regras abaixo foram escritas para valer nos dois casos: onde aparece "camada publicada", leia "arquivos publicados" ou "API própria".
+As fontes divergem sobre a forma da entrega: DECISÕES e PLANO descrevem uma camada de arquivos JSON e CSV versionados; VAL-15/10 e CONSUMO preveem uma API própria (conflito 2, **EM ABERTO**). As regras abaixo foram escritas para valer nos dois casos: onde aparece "camada publicada", leia "arquivos publicados" ou "API própria".
 
 ### RN-ENT-01: Camada tratada entre as fontes e o consumo
 - **Status:** DECIDIDA
 - **Regra:** O front-end, as exportações e o assistente de IA devem consumir apenas a camada publicada de dados tratados e nunca devem chamar a fonte externa diretamente.
 - **Motivo:** Uma fonte fora do ar não quebra o consumidor, trocar a origem de um indicador não afeta o gráfico, e cache, licenças, credenciais, versionamento e falhas ficam centralizados.
 - **Exemplo:** O gráfico de população lê a camada publicada e não a API do IBGE; o gráfico de CFEM não lê os CSVs nacionais da ANM.
-- **Fonte:** REG §Arquitetura e padrões de dados; R15 §Resposta ao orientador (item 3); PLN §Arquitetura e fluxo geral; ANA §Contrato de dados para o front-end.
+- **Fonte:** DECISÕES §Arquitetura e padrões de dados; VAL-15/10 §Resposta ao orientador (item 3); PLANO §Arquitetura e fluxo geral; CONSUMO §Contrato de dados para o front-end.
 - **Relacionadas:** RN-ENT-02, RN-ENT-06, RN-VPU-03, RN-VPU-10
 
 ### RN-ENT-02: Forma de entrega da camada publicada
 - **Status:** EM ABERTO
 - **Regra:** O mantenedor deve decidir se a camada publicada é entregue como arquivos versionados, como API própria ou como ambos.
 - **Motivo:** As fontes de decisão divergem; até a decisão, as regras desta documentação valem para qualquer uma das formas.
-- **Exemplo:** O REG descreve uma camada de arquivos tratados em formato único; o R15 §Marco 1 prevê "endpoint de leitura" com metadados.
-- **Fonte:** Versão A: REG §Arquitetura e padrões de dados (04/10/2026, última edição 20/10/2026); PLN §Arquitetura e fluxo geral (30/09/2026). Versão B: R15 §Marco 1, §Marco 4 (15/10/2026); ANA §Contrato de dados para o front-end (02/10/2026).
+- **Exemplo:** DECISÕES descreve uma camada de arquivos tratados em formato único; VAL-15/10 §Marco 1 prevê "endpoint de leitura" com metadados.
+- **Fonte:** Versão A: DECISÕES §Arquitetura e padrões de dados (04/10/2026, última edição 20/10/2026); PLANO §Arquitetura e fluxo geral (30/09/2026). Versão B: VAL-15/10 §Marco 1, §Marco 4 (15/10/2026); CONSUMO §Contrato de dados para o front-end (02/10/2026).
 - **Relacionadas:** RN-MOD-03, RN-ENT-01
 
 ### RN-ENT-03: CSV aberto
@@ -26,7 +26,7 @@ As fontes divergem sobre a forma da entrega: o REG e o PLN descrevem uma camada 
 - **Motivo:** O custo é quase zero, pois o dado já existe nesse formato na camada tratada, e aumenta a credibilidade do observatório como fonte reutilizável e citável.
 - **Exemplo:** A série populacional dos 12 municípios disponível em CSV.
 - **Exceções:** Não devem ser publicados dados cuja licença de redistribuição não esteja confirmada (RN-PRI-05, RN-PRI-06 e RN-ENT-10).
-- **Fonte:** REG §Publicação e extras; R15 §Marco 4.
+- **Fonte:** DECISÕES §Publicação e extras; VAL-15/10 §Marco 4.
 - **Relacionadas:** RN-ENT-05, RN-ENT-10, RN-PRI-05
 
 ### RN-ENT-04: Painel de status por indicador
@@ -34,7 +34,7 @@ As fontes divergem sobre a forma da entrega: o REG e o PLN descrevem uma camada 
 - **Regra:** Deve existir um painel de status que mostre, para cada indicador, quando foi atualizado pela última vez e qual o ano de referência.
 - **Motivo:** Serve de alarme de "fonte em silêncio": o visitante e a equipe percebem quando algo parou de atualizar.
 - **Exemplo:** A população estimada de 2025 aparece com a data da última atualização e o ano de referência 2025.
-- **Fonte:** REG §Publicação e extras; R15 §Marco 4.
+- **Fonte:** DECISÕES §Publicação e extras; VAL-15/10 §Marco 4.
 - **Relacionadas:** RN-MOD-21, RN-MOD-22, RN-TMP-02
 
 ### RN-ENT-05: Exportações levam os metadados junto dos valores
@@ -42,15 +42,15 @@ As fontes divergem sobre a forma da entrega: o REG e o PLN descrevem uma camada 
 - **Regra:** As exportações em CSV ou JSON devem incluir os metadados (fonte, edição, método, limitações) junto dos valores.
 - **Motivo:** Um valor exportado sem contexto perde a rastreabilidade.
 - **Exemplo:** O CSV da CFEM recebida traz fonte ANM e a limitação de que distribuição não equivale a arrecadação.
-- **Fonte:** ANA §Contrato de dados para o front-end. Não consta em REG, BT, L19 ou R15.
+- **Fonte:** CONSUMO §Contrato de dados para o front-end. Não consta em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10.
 - **Relacionadas:** RN-ENT-03, RN-MOD-02
 
 ### RN-ENT-06: Arquivos integrais da ANM não vão ao consumidor
 - **Status:** DECIDIDA
 - **Regra:** Os CSVs nacionais da ANM não devem ser entregues integralmente ao navegador nem consumidos diretamente pelos gráficos.
 - **Motivo:** Os arquivos têm centenas de MB e campos identificadores (CPF/CNPJ), e a ausência de municípios ou de meses ficaria escondida.
-- **Exemplo:** O arquivo de distribuição tem 2.238.877 linhas, das quais 11.847 são dos 12 municípios (transcrito do relatório R15, não conferido no JSON).
-- **Fonte:** R15 §Resposta ao orientador (item 3), §Rodada adicional; ANA §CFEM e receitas minerais, §Bypass seguro quando não houver API; MAPA §Tema central do Observatório: CFEM.
+- **Exemplo:** O arquivo de distribuição tem 2.238.877 linhas, das quais 11.847 são dos 12 municípios (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Fonte:** VAL-15/10 §Resposta ao orientador (item 3), §Rodada adicional; CONSUMO §CFEM e receitas minerais, §Bypass seguro quando não houver API; MAPA-TEMAS §Tema central do Observatório: CFEM.
 - **Relacionadas:** RN-ENT-01, RN-PRI-01, RN-VPU-10
 
 ### RN-ENT-07: O assistente responde só com a camada publicada
@@ -58,7 +58,7 @@ As fontes divergem sobre a forma da entrega: o REG e o PLN descrevem uma camada 
 - **Regra:** O assistente de IA deve responder apenas com dados da camada publicada, sempre com fonte, período e limitações, e quando não houver observação validada compatível deve dizer que não há dado validado e explicar a lacuna.
 - **Motivo:** Evita resposta inventada e mantém a mesma garantia de procedência do restante do observatório.
 - **Exemplo:** Perguntado sobre o total anual de distribuição da CFEM de 2025, o assistente deve informar que o total está bloqueado por falta de julho de 2025, e não somar os meses disponíveis.
-- **Fonte:** ANA §Contrato de dados para o front-end. O R15 §Resposta ao orientador (item 2) lista como critério de avaliação a "recusa de inventar número ausente", sem fixar a regra.
+- **Fonte:** CONSUMO §Contrato de dados para o front-end. VAL-15/10 §Resposta ao orientador (item 2) lista como critério de avaliação a "recusa de inventar número ausente", sem fixar a regra.
 - **Relacionadas:** RN-ENT-01, RN-ENT-08, RN-CFE-05, RN-MOD-08
 
 ### RN-ENT-08: Critérios de avaliação do assistente
@@ -67,7 +67,7 @@ As fontes divergem sobre a forma da entrega: o REG e o PLN descrevem uma camada 
 - **Motivo:** Dá critério objetivo para aceitar o assistente.
 - **Exemplo:** Conjunto de perguntas sobre população e CFEM de Canaã dos Carajás e Parauapebas com respostas verificadas.
 - **Exceções:** As metas numéricas de cada critério estão **EM ABERTO**; não há evidência de que a avaliação tenha sido executada.
-- **Fonte:** R15 §Resposta ao orientador (item 2). O próprio R15 chama os critérios de "propostos".
+- **Fonte:** VAL-15/10 §Resposta ao orientador (item 2). O próprio VAL-15/10 chama os critérios de "propostos".
 - **Relacionadas:** RN-ENT-07
 
 ### RN-ENT-09: Primeiros gráficos
@@ -75,7 +75,7 @@ As fontes divergem sobre a forma da entrega: o REG e o PLN descrevem uma camada 
 - **Regra:** Os primeiros gráficos devem usar dados homologados de população municipal e de CFEM arrecadada e recebida, em painéis separados.
 - **Motivo:** Começa pelo que já tem rota validada e respeita que arrecadação e distribuição são medidas distintas.
 - **Exemplo:** Painel de população de Canaã e Parauapebas; painéis separados de CFEM arrecadada e CFEM recebida.
-- **Fonte:** R15 §Resposta ao orientador (item 3), que é uma recomendação do relatório e não uma decisão do REG ou do BT; BT §Bloco 1 (população como primeiro pipeline).
+- **Fonte:** VAL-15/10 §Resposta ao orientador (item 3), que é uma recomendação do relatório e não uma decisão de DECISÕES ou de BLOCOS; BLOCOS §Bloco 1 (população como primeiro pipeline).
 - **Relacionadas:** RN-CFE-02, RN-VPU-10
 
 ### RN-ENT-10: Licença de reuso das exportações
@@ -83,5 +83,5 @@ As fontes divergem sobre a forma da entrega: o REG e o PLN descrevem uma camada 
 - **Regra:** O mantenedor deve definir a regra de reutilização das exportações, com base na licença confirmada de cada fonte.
 - **Motivo:** Nenhuma licença de redistribuição foi confirmada nas fontes de decisão; o CSV aberto depende dela.
 - **Exemplo:** A licença de FAPESPA e IDSC ainda não foi verificada.
-- **Fonte:** L19 §4 (Portais de apoio); ANA §Contrato de dados para o front-end; LEIA §Conclusões principais (item 4).
+- **Fonte:** LAB-19/10 §4 (Portais de apoio); CONSUMO §Contrato de dados para o front-end; PESQUISA §Conclusões principais (item 4).
 - **Relacionadas:** RN-ENT-03, RN-PRI-05, RN-PRI-06

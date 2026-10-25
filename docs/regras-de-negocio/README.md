@@ -41,8 +41,8 @@ O status da regra descreve a regra nesta documentação. Ele é diferente da nat
 
 | Status | Quando se aplica |
 | --- | --- |
-| **DECIDIDA** | A regra vem de REG, BT, L19 ou R15 com redação explícita, ou de decisão do mantenedor de 24/10/2026 (DM) |
-| **PROPOSTA** | A regra foi deduzida, ou vem só de ANA, MAPA, LEIA, PLN ou do código. Se a mesma regra aparece também em REG, BT, L19 ou R15, ela é DECIDIDA e as duas fontes são citadas |
+| **DECIDIDA** | A regra vem de DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10 com redação explícita, ou de decisão do mantenedor de 24/10/2026 (DECISÃO-MANTENEDOR) |
+| **PROPOSTA** | A regra foi deduzida, ou vem só de CONSUMO, MAPA-TEMAS, PESQUISA, PLANO ou do código. Se a mesma regra aparece também em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10, ela é DECIDIDA e as duas fontes são citadas |
 | **EM ABERTO** | Não há decisão, ou as fontes se contradizem. Cada item consta em [pendencias.md](pendencias.md) |
 
 Quando duas fontes se contradizem, não se escolhe: as duas versões são registradas, com a data de cada uma, e o ponto fica EM ABERTO, salvo decisão do mantenedor.
@@ -51,27 +51,27 @@ Quando duas fontes se contradizem, não se escolhe: as duas versões são regist
 
 | Sigla | Arquivo | Data | Papel |
 | --- | --- | --- | --- |
-| REG | [`registro-de-decisoes.md`](fontes/registro-de-decisoes.md) | 04/10/2026; última edição 20/10/2026; exportado em 24/10/2026 (revisão 72) | Decisões oficiais do projeto |
-| BT | [`blocos-tematicos.md`](fontes/blocos-tematicos.md) | 04/10/2026; última edição 20/10/2026; exportado em 24/10/2026 (revisão 29) | Decisões: tabelas de indicadores por bloco e o Bloco 3 completo |
-| L19 | [`relatorio-laboratorio-fontes-2026-10-19.md`](fontes/relatorio-laboratorio-fontes-2026-10-19.md) | 19/10/2026 (execução de 17/10/2026; FRED reexecutado em 19/10/2026) | Evidência mais recente dos testes de fontes |
-| R15 | [`fontes/pesquisa-observatorio-cfem/relatorio-validacao-e-proximos-passos-2026-10-15.md`](fontes/pesquisa-observatorio-cfem/relatorio-validacao-e-proximos-passos-2026-10-15.md) | 15/10/2026 | Validação com arquivos integrais e sequência do backend |
-| ANA | [`fontes/pesquisa-observatorio-cfem/analise-consumo-dados-por-topico.md`](fontes/pesquisa-observatorio-cfem/analise-consumo-dados-por-topico.md) | consulta de 02/10/2026 | Classificação de acesso A/B/C/D e contrato de dados; referência histórica (gera só PROPOSTA) |
-| MAPA | [`fontes/pesquisa-observatorio-cfem/mapa-simples-api-por-tema-oficial.md`](fontes/pesquisa-observatorio-cfem/mapa-simples-api-por-tema-oficial.md) | consulta de 02/10/2026 | Resumo de qual tema tem API; referência histórica (gera só PROPOSTA) |
-| LEIA | [`fontes/pesquisa-observatorio-cfem/LEIA-ME.md`](fontes/pesquisa-observatorio-cfem/LEIA-ME.md) | sem data | Relatório de pesquisa e viabilidade; referência histórica (gera só PROPOSTA) |
-| PLN | [`plano-de-integracao-de-dados.md`](fontes/plano-de-integracao-de-dados.md) | 30/09/2026 | Plano original, referência histórica; várias partes foram atualizadas depois por REG e BT |
-| NB | `notebooks/laboratorio_fontes_observatorio_cfem.ipynb` | out/2026 | Evidência (só gera PROPOSTA) |
-| SC | `scripts/` | out/2026 | Evidência: validadores, reconciliação e importador da CFEM (só gera PROPOSTA) |
-| DM | Decisão do mantenedor | 24/10/2026 | Respostas da Fase 1, registradas aqui até o REG e o BT serem atualizados |
+| DECISÕES | [`registro-de-decisoes.md`](fontes/registro-de-decisoes.md) | 04/10/2026; última edição 20/10/2026; exportado em 24/10/2026 (revisão 72) | Decisões oficiais do projeto |
+| BLOCOS | [`blocos-tematicos.md`](fontes/blocos-tematicos.md) | 04/10/2026; última edição 20/10/2026; exportado em 24/10/2026 (revisão 29) | Decisões: tabelas de indicadores por bloco e o Bloco 3 completo |
+| LAB-19/10 | [`relatorio-laboratorio-fontes-2026-10-19.md`](fontes/relatorio-laboratorio-fontes-2026-10-19.md) | 19/10/2026 (execução de 17/10/2026; FRED reexecutado em 19/10/2026) | Evidência mais recente dos testes de fontes |
+| VAL-15/10 | [`fontes/pesquisa-observatorio-cfem/relatorio-validacao-e-proximos-passos-2026-10-15.md`](fontes/pesquisa-observatorio-cfem/relatorio-validacao-e-proximos-passos-2026-10-15.md) | 15/10/2026 | Validação com arquivos integrais e sequência do backend |
+| CONSUMO | [`fontes/pesquisa-observatorio-cfem/analise-consumo-dados-por-topico.md`](fontes/pesquisa-observatorio-cfem/analise-consumo-dados-por-topico.md) | consulta de 02/10/2026 | Classificação de acesso A/B/C/D e contrato de dados; referência histórica (gera só PROPOSTA) |
+| MAPA-TEMAS | [`fontes/pesquisa-observatorio-cfem/mapa-simples-api-por-tema-oficial.md`](fontes/pesquisa-observatorio-cfem/mapa-simples-api-por-tema-oficial.md) | consulta de 02/10/2026 | Resumo de qual tema tem API; referência histórica (gera só PROPOSTA) |
+| PESQUISA | [`fontes/pesquisa-observatorio-cfem/LEIA-ME.md`](fontes/pesquisa-observatorio-cfem/LEIA-ME.md) | sem data | Relatório de pesquisa e viabilidade; referência histórica (gera só PROPOSTA) |
+| PLANO | [`plano-de-integracao-de-dados.md`](fontes/plano-de-integracao-de-dados.md) | 30/09/2026 | Plano original, referência histórica; várias partes foram atualizadas depois por DECISÕES e BLOCOS |
+| NOTEBOOK | `notebooks/laboratorio_fontes_observatorio_cfem.ipynb` | out/2026 | Evidência (só gera PROPOSTA) |
+| SCRIPTS | `scripts/` | out/2026 | Evidência: validadores, reconciliação e importador da CFEM (só gera PROPOSTA) |
+| DECISÃO-MANTENEDOR | Decisão do mantenedor | 24/10/2026 | Respostas da Fase 1, registradas aqui até DECISÕES e BLOCOS serem atualizados |
 
 Evidências em `output/` (JSONs e manifestos) não estão no Git por decisão do projeto. Os exemplos que dependem delas estão marcados como "transcrito do relatório, não conferido no JSON". `docs/api/openapi.yaml` e `adr/` não existem no repositório e não são fonte de regra.
 
 Todas as fontes ficam em [fontes/](fontes/): os documentos de decisão e o plano original na raiz da pasta; os demais estão em [fontes/pesquisa-observatorio-cfem/](fontes/pesquisa-observatorio-cfem/). Nenhuma fonte é apagada: uma fonte obsoleta é marcada como tal, e só pode ser removida quando nenhuma regra a citar.
 
-Os títulos de seção nas citações (por exemplo, "REG §Bloco 3") são os títulos dos documentos de origem.
+Os títulos de seção nas citações (por exemplo, "DECISÕES §Bloco 3") são os títulos dos documentos de origem.
 
 ## O que esta documentação não contém
 
-Não há código, pseudocódigo, rotas HTTP, nomes de funções, escolha de bibliotecas nem de stack. Nomes de campos, códigos IBGE e identificadores já citados nas fontes aparecem porque fazem parte da regra. As decisões de arquitetura do REG que dizem respeito a como implementar (adaptadores, agendador, pastas de dados brutos e tratados, nomes de arquivos de configuração) ficaram de fora; entram apenas as garantias que elas protegem.
+Não há código, pseudocódigo, rotas HTTP, nomes de funções, escolha de bibliotecas nem de stack. Nomes de campos, códigos IBGE e identificadores já citados nas fontes aparecem porque fazem parte da regra. As decisões de arquitetura de DECISÕES que dizem respeito a como implementar (adaptadores, agendador, pastas de dados brutos e tratados, nomes de arquivos de configuração) ficaram de fora; entram apenas as garantias que elas protegem.
 
 ## Índice
 

@@ -1,16 +1,16 @@
 # Glossário
 
-Termos e siglas usados nesta documentação. Os termos de domínio vêm do REG (§Glossário) e do BT (§Glossário); os termos próprios da documentação estão na segunda tabela. Legenda de status e siglas das fontes: [README](README.md).
+Termos e siglas usados nesta documentação. Os termos de domínio vêm de DECISÕES (§Glossário) e de BLOCOS (§Glossário); os termos próprios da documentação estão na segunda tabela. Legenda de status e siglas das fontes: [README](README.md).
 
 ## Termos próprios desta documentação
 
 | Termo | Significado |
 | --- | --- |
 | status da regra | Situação da regra nesta documentação: DECIDIDA, PROPOSTA ou EM ABERTO. Não se confunde com a natureza do valor nem com o estado de validação |
-| DECIDIDA | Regra que vem de REG, BT, L19 ou R15, ou de decisão do mantenedor registrada em 24/10/2026 |
-| PROPOSTA | Regra deduzida, vinda só de ANA, MAPA, LEIA, PLN ou do código, sem decisão registrada |
+| DECIDIDA | Regra que vem de DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10, ou de decisão do mantenedor registrada em 24/10/2026 |
+| PROPOSTA | Regra deduzida, vinda só de CONSUMO, MAPA-TEMAS, PESQUISA, PLANO ou do código, sem decisão registrada |
 | EM ABERTO | Ponto sem decisão, ou com fontes em conflito; todos constam em [pendencias.md](pendencias.md) |
-| DM | Decisão do mantenedor, de 24/10/2026, dada nas respostas da Fase 1 |
+| DECISÃO-MANTENEDOR | Decisão do mantenedor, de 24/10/2026, dada nas respostas da Fase 1 |
 | observação | Um valor de um indicador para um município e um período, com unidade, natureza, estado de validação, fonte e proveniência |
 | natureza do valor | O que o valor é: informado, zero real, ausente, não divulgado ou não aplicável (RN-MOD-06) |
 | estado de validação | Se o valor já passou pelas validações e reconciliações: validado ou provisório (RN-MOD-07) |
@@ -84,7 +84,7 @@ Termos e siglas usados nesta documentação. Os termos de domínio vêm do REG (
 | MapBiomas | Mapeamento anual de uso e cobertura do solo do Brasil |
 | N6 | Parâmetro do SIDRA que recorta o resultado a nível municipal |
 | Pink Sheet | Planilha mensal de preços de commodities do World Bank (só download) |
-| PySUS | Biblioteca que baixa e converte microdados do DATASUS, citada pelo REG como rota de saúde |
+| PySUS | Biblioteca que baixa e converte microdados do DATASUS, citada por DECISÕES como rota de saúde |
 | RAIS | Relação Anual de Informações Sociais: vínculos formais (estoque), com quebras por setor, sexo e escolaridade |
 | RI Carajás | Região de Integração Carajás: 12 municípios do Pará |
 | SEEG | Sistema de Estimativas de Emissões de Gases de Efeito Estufa |
