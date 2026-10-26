@@ -20,7 +20,7 @@ O público são pessoas desenvolvedoras e agentes de IA que vão implementar ada
 - nenhuma informação está só em imagem;
 - as tabelas são em Markdown.
 
-Comece por este arquivo, passe ao [glossário](glossario.md) e leia o tema que interessa. Consulte [pendencias.md](pendencias.md) para saber o que ainda não foi decidido antes de implementar qualquer coisa.
+Comece por este arquivo, passe ao [glossário](glossario.md) e leia o tema que interessa. Consulte [pendencias.md](pendencias.md) para saber o que ainda não foi decidido ou confirmado antes de implementar qualquer coisa.
 
 ## Formato de cada regra
 
@@ -44,7 +44,7 @@ O status da regra descreve a regra nesta documentação. Ele é diferente da nat
 | Status | Quando se aplica |
 | --- | --- |
 | **DECIDIDA** | A regra vem de DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10 com redação explícita, ou de decisão do mantenedor de 24/10/2026 (DECISÃO-MANTENEDOR) |
-| **PROPOSTA** | A regra foi deduzida, ou vem só de CONSUMO, MAPA-TEMAS, PESQUISA, PLANO ou do código. Se a mesma regra aparece também em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10, ela é DECIDIDA e as duas fontes são citadas |
+| **PROPOSTA** | Aguarda confirmação e consta em [pendencias.md](pendencias.md). A regra foi deduzida, ou vem só de CONSUMO, MAPA-TEMAS, PESQUISA, PLANO ou do código. Se a mesma regra aparece também em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10, ela é DECIDIDA e as duas fontes são citadas |
 | **EM ABERTO** | Não há decisão, ou as fontes se contradizem. Cada item consta em [pendencias.md](pendencias.md) |
 
 Quando duas fontes se contradizem, não se escolhe: as duas versões são registradas, com a data de cada uma, e o ponto fica EM ABERTO, salvo decisão do mantenedor.
@@ -90,6 +90,6 @@ Não há código, pseudocódigo, rotas HTTP, nomes de funções, escolha de bibl
 | [indicadores-derivados-e-compostos.md](indicadores-derivados-e-compostos.md) | RN-IND | Indicadores derivados e compostos congelados | 12 |
 | [privacidade-e-licencas.md](privacidade-e-licencas.md) | RN-PRI | Dados pessoais, acesso restrito e reuso | 10 |
 | [glossario.md](glossario.md) | | Termos e siglas | |
-| [pendencias.md](pendencias.md) | | Tudo o que está EM ABERTO e as divergências entre fontes | |
+| [pendencias.md](pendencias.md) | | Tudo o que está EM ABERTO, as divergências entre fontes e as regras PROPOSTAS aguardando confirmação | |
 
 Total: 161 regras, sendo 94 DECIDIDAS, 36 PROPOSTAS e 31 EM ABERTO.

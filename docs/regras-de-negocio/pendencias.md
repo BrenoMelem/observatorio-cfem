@@ -1,6 +1,6 @@
 # Pendências
 
-Lista única de tudo o que está EM ABERTO nesta documentação, com links para as regras. Legenda de status e siglas das fontes: [README](README.md).
+Lista única do que ainda precisa de decisão nesta documentação: as regras EM ABERTO, os itens abertos dentro de regras decididas, as divergências entre fontes, as lacunas e as regras PROPOSTAS aguardando confirmação, com links para as regras. Legenda de status e siglas das fontes: [README](README.md).
 
 Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEMAS, consulta de 02/10/2026; DECISÕES e BLOCOS, 04/10/2026, última edição em 20/10/2026 (exportados em 24/10/2026, revisões 72 e 29); VAL-15/10, 15/10/2026; LAB-19/10, 19/10/2026 (execução do notebook em 17/10/2026, com o FRED reexecutado em 19/10/2026).
 
@@ -95,3 +95,88 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 - **Resposta 8 da Fase 1.** A resposta ao item 8 veio sem a opção marcada; foi registrado apenas o que o mantenedor escreveu (EM ABERTO, conferir `AVIOL12_THOMIC` na fonte).
 - **Atualização de DECISÕES e de BLOCOS.** O mantenedor informou que atualizará os dois documentos com as decisões de 24/10/2026. Até lá, as regras citam "DECISÃO-MANTENEDOR de 24/10/2026" como fonte.
 - **Obsoletas.** Nenhuma regra está obsoleta nesta versão.
+
+## 5. Regras PROPOSTAS aguardando confirmação
+
+Estas 36 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook ou dos scripts. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
+
+### Território (4)
+
+| Regra | Título | Origem |
+| --- | --- | --- |
+| [RN-TER-04](territorio.md) | Código tratado como texto | NOTEBOOK (célula 1); SCRIPTS (`build_cfem_distribution_municipal`, `validate_anm_cfem`) |
+| [RN-TER-07](territorio.md) | Comparação de nomes sem acento e sem diferença de caixa, apenas para o Pará | SCRIPTS (`validate_anm_cfem`, rotina de normalização e filtro de UF). Deduzida do código |
+| [RN-TER-11](territorio.md) | Guardar a composição territorial usada | CONSUMO §Contrato de dados para o front-end (campos `geo_id`, `geo_level`) |
+| [RN-TER-12](territorio.md) | Declarar se o indicador usa residência ou ocorrência | VAL-15/10 §Como repetir os testes (item sobre PySUS); CONSUMO §Sociedade (localidade de referência). Dedução: nenhuma das duas fontes fixa a regra |
+
+### Modelo de dados (6)
+
+| Regra | Título | Origem |
+| --- | --- | --- |
+| [RN-MOD-12](modelo-de-dados.md) | Preservar o motivo da não divulgação | CONSUMO §Sociedade (IDEB) |
+| [RN-MOD-14](modelo-de-dados.md) | Não misturar projeção | CONSUMO §Dinâmica populacional |
+| [RN-MOD-15](modelo-de-dados.md) | Não interpolar anos sem dado | MAPA-TEMAS §Economia e mercado de trabalho; CONSUMO §Economia e mercado de trabalho |
+| [RN-MOD-16](modelo-de-dados.md) | Fluxo e estoque não se somam | CONSUMO §Economia e mercado de trabalho; VAL-15/10 §Matriz operacional (RAIS, CAGED, emprego: "validar fluxo versus estoque") |
+| [RN-MOD-17](modelo-de-dados.md) | Razões registram numerador, denominador e ano | CONSUMO §Economia e mercado de trabalho, §Finanças públicas e índices |
+| [RN-MOD-18](modelo-de-dados.md) | Razão regional como soma sobre soma | Dedução, por coerência com DECISÕES §Municípios da RI Carajás e RN-MOD-17. Nenhuma fonte fixa essa fórmula |
+
+### Consumo de fontes (6)
+
+| Regra | Título | Origem |
+| --- | --- | --- |
+| [RN-FON-01](consumo-de-fontes.md) | Níveis de acesso medem a forma, não a qualidade | CONSUMO §Classificação de consumo; MAPA-TEMAS (critério da coluna "Tem API?") |
+| [RN-FON-05](consumo-de-fontes.md) | Não contornar login nem usar endpoints internos de painéis | CONSUMO §Conclusão executiva, §Bypass seguro quando não houver API; MAPA-TEMAS §Resumo para apresentação |
+| [RN-FON-06](consumo-de-fontes.md) | PDF só entra por área de revisão | CONSUMO §Bypass seguro quando não houver API (item 3). Dedução complementar: DECISÕES §Estratégia ("documentar como manual onde só há PDF") trata do mesmo risco, sem prever a revisão |
+| [RN-FON-12](consumo-de-fontes.md) | Teto de bytes por consulta | NOTEBOOK (células 16 e 18); VAL-15/10 §Como repetir os testes (item 7: "O código impõe 100 MiB por consulta"). O valor é do laboratório, não uma decisão para produção |
+| [RN-FON-14](consumo-de-fontes.md) | Filtros usados ficam registrados | CONSUMO §Bypass seguro quando não houver API (item 2); SCRIPTS (`reconcile_anm_distribution`) |
+| [RN-FON-17](consumo-de-fontes.md) | Fontes manuais entram na mesma camada | PLANO §Arquitetura e fluxo geral |
+
+### Regras por fonte (2)
+
+| Regra | Título | Origem |
+| --- | --- | --- |
+| [RN-FNT-17](regras-por-fonte.md) | FAPESPA, IDSC e CLP | PLANO §Riscos e cuidados, §Bloco 6; CONSUMO §Finanças públicas e índices |
+| [RN-FNT-19](regras-por-fonte.md) | Conferir que a resposta identifica o município pedido | SCRIPTS (`probe_ibge_sidra`); VAL-15/10 §Rodada adicional |
+
+### Temporalidade e atualização (6)
+
+| Regra | Título | Origem |
+| --- | --- | --- |
+| [RN-TMP-04](temporalidade-e-atualizacao.md) | Retificações do SICONFI | CONSUMO §Finanças públicas e índices (despesa per capita). VAL-15/10 §Matriz operacional cita "reconciliar totais retificados" como pendência, sem fixar a regra |
+| [RN-TMP-06](temporalidade-e-atualizacao.md) | Congelar a versão a cada coleção do MapBiomas | CONSUMO §Meio ambiente e saneamento |
+| [RN-TMP-08](temporalidade-e-atualizacao.md) | Mudança de nomenclatura entre censos | CONSUMO §Sociedade, serviços e segurança; MAPA-TEMAS §Sociedade |
+| [RN-TMP-09](temporalidade-e-atualizacao.md) | Registros policiais podem ser retificados | CONSUMO §Sociedade, serviços e segurança |
+| [RN-TMP-10](temporalidade-e-atualizacao.md) | Transição CID-9 e CID-10 no SIM | CONSUMO §Sociedade, serviços e segurança |
+| [RN-TMP-11](temporalidade-e-atualizacao.md) | Estimativa por proxy não é medição direta | CONSUMO §Meio ambiente e saneamento |
+
+### Entrega dos dados (4)
+
+| Regra | Título | Origem |
+| --- | --- | --- |
+| [RN-ENT-05](entrega-dos-dados.md) | Exportações levam os metadados junto dos valores | CONSUMO §Contrato de dados para o front-end |
+| [RN-ENT-07](entrega-dos-dados.md) | O assistente responde só com a camada publicada | CONSUMO §Contrato de dados para o front-end. VAL-15/10 §Resposta ao orientador (item 2) lista como critério de avaliação a "recusa de inventar número ausente", sem fixar a regra |
+| [RN-ENT-08](entrega-dos-dados.md) | Critérios de avaliação do assistente | VAL-15/10 §Resposta ao orientador (item 2). O próprio VAL-15/10 chama os critérios de "propostos" |
+| [RN-ENT-09](entrega-dos-dados.md) | Primeiros gráficos | VAL-15/10 §Resposta ao orientador (item 3), que é uma recomendação do relatório e não uma decisão de DECISÕES ou de BLOCOS; BLOCOS §Bloco 1 (população como primeiro pipeline) |
+
+### Mineração (CFEM) (2)
+
+| Regra | Título | Origem |
+| --- | --- | --- |
+| [RN-CFE-11](mineracao-cfem.md) | Agregação por município, ano, mês e modalidade | SCRIPTS (`build_cfem_distribution_municipal`). Deduzida do código |
+| [RN-CFE-12](mineracao-cfem.md) | Controle de escala com o total nacional | VAL-15/10 §Rodada adicional (apresentado como controle, não como regra) |
+
+### Indicadores derivados e compostos (2)
+
+| Regra | Título | Origem |
+| --- | --- | --- |
+| [RN-IND-05](indicadores-derivados-e-compostos.md) | Derivado ou composto é marcado como análise derivada | CONSUMO §Finanças públicas e índices (receita per capita e IDSC) |
+| [RN-IND-08](indicadores-derivados-e-compostos.md) | Não recalcular o Barômetro sem reproduzir o método | CONSUMO §Finanças públicas e índices (Barômetro da Sustentabilidade 2024) |
+
+### Privacidade e licenças (4)
+
+| Regra | Título | Origem |
+| --- | --- | --- |
+| [RN-PRI-02](privacidade-e-licencas.md) | Registros individuais não são coletados nem publicados | CONSUMO §Sociedade, serviços e segurança (Pobreza) |
+| [RN-PRI-03](privacidade-e-licencas.md) | Agregar microdados antes de expor | CONSUMO §Economia e mercado de trabalho |
+| [RN-PRI-04](privacidade-e-licencas.md) | Proteger grupos muito pequenos | CONSUMO §Sociedade, serviços e segurança (Veículos, infraestrutura censitária, favelas, entorno) |
+| [RN-PRI-08](privacidade-e-licencas.md) | Não usar a área restrita do CECAD | CONSUMO §Sociedade, serviços e segurança (Pobreza); MAPA-TEMAS §Sociedade. DECISÕES §Rotas de coleta por fonte registra apenas "sem API; só download manual" |
