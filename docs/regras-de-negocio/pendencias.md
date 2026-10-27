@@ -14,7 +14,6 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 | RN-FON-09 | Como o pipeline se autentica no Google Cloud (conflito 7) | [consumo-de-fontes.md](consumo-de-fontes.md) |
 | RN-FON-20 | Fonte e via de acesso nos indicadores em conflito (conflitos 3, 4, 5, 6 e 9) | [consumo-de-fontes.md](consumo-de-fontes.md) |
 | RN-TMP-12 | Regra para anos parciais fora da CFEM | [temporalidade-e-atualizacao.md](temporalidade-e-atualizacao.md) |
-| RN-TMP-14 | Unidade do minério de ferro (`$/dmtu` ou `$/dmt`) | [temporalidade-e-atualizacao.md](temporalidade-e-atualizacao.md) |
 | RN-TMP-17 | Ano ou edição do IDEB publicada | [temporalidade-e-atualizacao.md](temporalidade-e-atualizacao.md) |
 | RN-VPU-11 | Tratamento de linhas duplicadas na fonte | [validacao-e-publicacao.md](validacao-e-publicacao.md) |
 | RN-ENT-02 | Forma de entrega: arquivos, API própria ou ambos (conflito 2) | [entrega-dos-dados.md](entrega-dos-dados.md) |
@@ -68,7 +67,7 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 | 5 | Frota | PLANO, DECISÕES e BLOCOS: Senatran. MAPA-TEMAS e CONSUMO: DETRAN-PA | EM ABERTO (RN-FNT-12) |
 | 6 | Uso do solo | DECISÕES e BLOCOS: Google Earth Engine. PLANO, MAPA-TEMAS e CONSUMO: download das estatísticas da Coleção 11 | EM ABERTO (RN-FNT-13) |
 | 7 | Credencial do Google Cloud | DECISÕES e PLANO: conta de serviço com chave guardada como segredo; BLOCOS §Bloco 5: o Earth Engine usa a mesma credencial do BigQuery. LAB-19/10 §5.3 e VAL-15/10: não usar chave, autenticar com a conta de quem executa | EM ABERTO (RN-FON-09, RN-PRI-10). Não decidido pelo mantenedor: ainda não domina a plataforma, mas pretende usá-la. LAB-19/10 é mais recente nesse ponto (conflito 14) |
-| 8 | Commodities | DECISÕES e BLOCOS: FRED com ferro desde 1992 e Pink Sheet 1985–1991. PLANO e MAPA-TEMAS: Pink Sheet. LAB-19/10: FRED com ferro desde jan/1980 | DECIDIDO (DECISÃO-MANTENEDOR): FRED é a rota, o ferro começa em jan/1980 e o Pink Sheet só vale antes de 1980 (RN-TMP-13, RN-FNT-05, RN-FNT-06). Em aberto: unidade do ferro e recorte de exibição. Reaberto em 25/10/2026: ver divergência 17 |
+| 8 | Commodities | DECISÕES e BLOCOS: FRED com ferro desde 1992 e Pink Sheet 1985–1991. PLANO e MAPA-TEMAS: Pink Sheet. LAB-19/10: FRED com ferro desde jan/1980 | DECIDIDO (DECISÃO-MANTENEDOR): FRED é a rota, o ferro começa em jan/1980 e o Pink Sheet só vale antes de 1980 (RN-TMP-13, RN-FNT-05, RN-FNT-06). Unidade do ferro decidida em 26/10/2026 (`$/dmt`, RN-TMP-14). Em aberto: recorte de exibição. Reaberto em 25/10/2026: ver divergência 17 |
 | 9 | Base dos Dados × fonte oficial | DECISÕES e BLOCOS: RAIS, IDEB, eleitorado e Censo Escolar via Base dos Dados. CONSUMO e MAPA-TEMAS: arquivos oficiais MTE, INEP e TSE | EM ABERTO (RN-FNT-21) |
 | 10 | Cobertura da arrecadação | DECISÕES: `CFEM_Arrecadacao.csv`. SCRIPTS e VAL-15/10: `CFEM_Arrecadacao_2022_2026.csv`, 744.244 linhas | EM ABERTO (RN-CFE-22) |
 | 11 | Valor nulo × ausente | DECISÕES: validação exige "valor não nulo". CONSUMO: status "ausente" é válido | RESOLVIDO por DECISÃO-MANTENEDOR (RN-MOD-06, RN-MOD-11, RN-VPU-02) |

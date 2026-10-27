@@ -137,11 +137,12 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 - **Relacionadas:** RN-TMP-16, RN-FNT-05, RN-FNT-06
 
 ### RN-TMP-14: Unidade do minério de ferro
-- **Status:** EM ABERTO
-- **Regra:** A unidade exibida para o minério de ferro deve seguir a definição confirmada pela fonte, e o rótulo só deve ser publicado depois dessa confirmação.
-- **Motivo:** A planilha anual do Pink Sheet rotula o ferro como `$/dmtu` e o PDF de outubro de 2026 como `$/dmt`, embora os números coincidam.
-- **Exemplo:** Ferro: 120,6 (2023), 109,4 (2024) e 100,2 (2025) (transcrito do relatório VAL-15/10, não conferido no JSON).
-- **Fonte:** VAL-15/10 §Matriz operacional (Commodities), §Rodada adicional (probe do World Bank).
+- **Status:** DECIDIDA
+- **Regra:** O preço do minério de ferro deve ser exibido em dólares americanos por tonelada métrica (`$/dmt`), a unidade do FRED, e não em `$/dmtu`.
+- **Motivo:** A planilha anual do Pink Sheet rotula o ferro como `$/dmtu` e o PDF de outubro de 2026 como `$/dmt`, embora os números coincidam. O FRED, rota de coleta decidida, informa "U.S. Dollars per Metric Ton" nos metadados de `PIORECRUSDM`.
+- **Exemplo:** Ferro: 120,6 (2023), 109,4 (2024) e 100,2 (2025) (transcrito do relatório VAL-15/10, não conferido no JSON). Em 25/10/2026, os metadados do FRED para `PIORECRUSDM` diziam "U.S. Dollars per Metric Ton" (reproduzido em 25/10/2026).
+- **Exceções:** Se o Pink Sheet for usado para anos que o FRED não cobre (RN-FNT-06), o rótulo `$/dmtu` da planilha não deve ser copiado; a unidade exibida continua sendo `$/dmt`. Que o rótulo `$/dmtu` seja um erro da planilha é dedução (valores perto de 100 não combinam com preço por 1% de ferro contido); o World Bank não confirmou.
+- **Fonte:** DECISÃO-MANTENEDOR de 26/10/2026; VAL-15/10 §Matriz operacional (Commodities), §Rodada adicional (probe do World Bank); consulta à API do FRED em 25/10/2026.
 - **Relacionadas:** RN-TMP-13, RN-FNT-05, RN-FNT-06
 
 ### RN-TMP-15: Finanças a partir de 2013 pelo SICONFI
