@@ -17,7 +17,6 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 | RN-TMP-14 | Unidade do minério de ferro (`$/dmtu` ou `$/dmt`) | [temporalidade-e-atualizacao.md](temporalidade-e-atualizacao.md) |
 | RN-TMP-17 | Ano ou edição do IDEB publicada | [temporalidade-e-atualizacao.md](temporalidade-e-atualizacao.md) |
 | RN-VPU-11 | Tratamento de linhas duplicadas na fonte | [validacao-e-publicacao.md](validacao-e-publicacao.md) |
-| RN-VPU-12 | Tolerância da reconciliação independente | [validacao-e-publicacao.md](validacao-e-publicacao.md) |
 | RN-ENT-02 | Forma de entrega: arquivos, API própria ou ambos (conflito 2) | [entrega-dos-dados.md](entrega-dos-dados.md) |
 | RN-ENT-10 | Regra de reuso das exportações, conforme a licença de cada fonte | [entrega-dos-dados.md](entrega-dos-dados.md) |
 | RN-CFE-07 | Critério para classificar a falta de um município num mês existente no arquivo | [mineracao-cfem.md](mineracao-cfem.md) |
