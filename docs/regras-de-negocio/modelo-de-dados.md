@@ -223,13 +223,13 @@ Estado: **EM ABERTO**. Nenhum dos dois conjuntos de nomes é adotado.
 - **Fonte:** DECISÕES §Número de eleitores; BLOCOS §Bloco 1.
 - **Relacionadas:** RN-MOD-05, RN-TER-08
 
-### RN-MOD-24: Valor nominal ou real
+### RN-MOD-24: Valor real e índice de correção
 - **Status:** EM ABERTO
-- **Regra:** O mantenedor deve decidir se os valores monetários são publicados só em valor nominal ou também em valor real, com índice de correção explícito.
-- **Motivo:** CONSUMO indica a possibilidade ("se necessário"), mas nenhuma fonte de decisão a define.
+- **Regra:** O mantenedor deve decidir como o valor real será publicado: o índice de correção, o ano-base e se entra como indicador derivado, com o índice explícito.
+- **Motivo:** O valor real é um pedido do projeto, mas nenhuma fonte de decisão define o índice nem o ano-base. Até lá, os valores monetários são publicados em valor nominal (RN-MOD-26).
 - **Exemplo:** Despesa per capita por função, 2013–2025, em valor nominal.
-- **Fonte:** CONSUMO §Finanças públicas e índices (despesa per capita).
-- **Relacionadas:** RN-MOD-17
+- **Fonte:** CONSUMO §Finanças públicas e índices (despesa per capita); DECISÃO-MANTENEDOR de 26/10/2026 (o valor real fica para uma etapa futura).
+- **Relacionadas:** RN-MOD-17, RN-MOD-26
 
 ### RN-MOD-25: Manifesto único de indicadores
 - **Status:** DECIDIDA
@@ -239,3 +239,12 @@ Estado: **EM ABERTO**. Nenhum dos dois conjuntos de nomes é adotado.
 - **Exceções:** Nome, formato e local do arquivo ficam fora desta documentação.
 - **Fonte:** DECISÕES §Arquitetura e padrões de dados ("Manifesto"), §Indicadores compostos; LAB-19/10 §7 (Próximos passos, item 5).
 - **Relacionadas:** RN-IND-01, RN-TER-09, RN-TMP-02
+
+### RN-MOD-26: Valores monetários em valor nominal por enquanto
+- **Status:** DECIDIDA
+- **Regra:** Os valores monetários devem ser publicados em valor nominal, como a fonte os informou, sem correção por índice de preços, até a decisão sobre o valor real (RN-MOD-24).
+- **Motivo:** Nenhum indicador atual exige valor real, e escolher índice e ano-base agora ampliaria o escopo sem definição.
+- **Exemplo:** Despesa per capita por função, 2013–2025, em valor nominal.
+- **Exceções:** O valor real é um pedido do projeto e será acrescentado depois, com índice e ano-base explícitos; por isso RN-MOD-24 continua EM ABERTO.
+- **Fonte:** DECISÃO-MANTENEDOR de 26/10/2026; CONSUMO §Finanças públicas e índices (despesa per capita).
+- **Relacionadas:** RN-MOD-24, RN-MOD-17

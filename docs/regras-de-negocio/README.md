@@ -80,7 +80,7 @@ Não há código, pseudocódigo, rotas HTTP, nomes de funções, escolha de bibl
 | Arquivo | Prefixo | Conteúdo | Regras |
 | --- | --- | --- | ---: |
 | [territorio.md](territorio.md) | RN-TER | Os 12 municípios, códigos IBGE, agregação regional, municípios de comparação | 12 |
-| [modelo-de-dados.md](modelo-de-dados.md) | RN-MOD | Observação, natureza do valor, estado de validação, proveniência, comparabilidade | 25 |
+| [modelo-de-dados.md](modelo-de-dados.md) | RN-MOD | Observação, natureza do valor, estado de validação, proveniência, comparabilidade | 26 |
 | [consumo-de-fontes.md](consumo-de-fontes.md) | RN-FON | Níveis A/B/C/D, procedência, acesso permitido e credenciais | 20 |
 | [regras-por-fonte.md](regras-por-fonte.md) | RN-FNT | Ressalvas específicas de cada fonte | 21 |
 | [temporalidade-e-atualizacao.md](temporalidade-e-atualizacao.md) | RN-TMP | Ano de referência, agenda por fonte, períodos, mudanças de método | 17 |
@@ -92,4 +92,4 @@ Não há código, pseudocódigo, rotas HTTP, nomes de funções, escolha de bibl
 | [glossario.md](glossario.md) | | Termos e siglas | |
 | [pendencias.md](pendencias.md) | | Tudo o que está EM ABERTO, as divergências entre fontes e as regras PROPOSTAS aguardando confirmação | |
 
-Total: 161 regras, sendo 96 DECIDIDAS, 36 PROPOSTAS e 29 EM ABERTO.
+Total: 162 regras, sendo 97 DECIDIDAS, 36 PROPOSTAS e 29 EM ABERTO.
