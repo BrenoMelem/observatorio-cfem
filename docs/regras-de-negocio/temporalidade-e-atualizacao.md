@@ -120,12 +120,13 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 - **Relacionadas:** RN-FNT-14
 
 ### RN-TMP-12: Regra para anos parciais
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve definir como tratar anos ainda incompletos (por exemplo, o ano corrente) em séries que não são da CFEM.
-- **Motivo:** VAL-15/10 aponta a necessidade de definir a regra, e ela não foi decidida. Para a CFEM vale RN-CFE-06.
-- **Exemplo:** O cobre vai até 2026 em BLOCOS, e 2026 é um ano parcial.
-- **Fonte:** VAL-15/10 §Matriz operacional (Commodities).
-- **Relacionadas:** RN-CFE-06, RN-TMP-13
+- **Status:** DECIDIDA
+- **Regra:** Nas séries que não são da CFEM, um ano só deve ser considerado fechado quando tiver todos os períodos esperados; os períodos já disponíveis podem ser publicados com o estado de validação "provisório", e qualquer valor anual (média ou soma) deve ficar bloqueado até o ano fechar.
+- **Motivo:** Mantém uma regra única para o projeto, a mesma da CFEM (RN-CFE-06): mostra o que a fonte já tem sem apresentar como completo um ano que não é.
+- **Exemplo:** O cobre e o ferro mensais do FRED têm valores até set/2026 (reproduzido em 25/10/2026); os nove meses de 2026 podem ser exibidos como provisórios, e uma média anual de 2026 fica bloqueada até dez/2026.
+- **Exceções:** O que conta como "período esperado" depende da frequência da série (mensal, anual) e deve constar no manifesto de cada indicador (RN-MOD-25).
+- **Fonte:** DECISÃO-MANTENEDOR de 26/10/2026; VAL-15/10 §Matriz operacional (Commodities); RN-CFE-06 (regra equivalente da CFEM).
+- **Relacionadas:** RN-CFE-06, RN-MOD-07, RN-TMP-13
 
 ### RN-TMP-13: Commodities pelo FRED, com Pink Sheet só antes de 1980
 - **Status:** DECIDIDA

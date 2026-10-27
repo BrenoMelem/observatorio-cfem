@@ -13,7 +13,6 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 | RN-MOD-24 | Valor real: índice de correção, ano-base e forma de publicação (hoje só nominal, RN-MOD-26) | [modelo-de-dados.md](modelo-de-dados.md) |
 | RN-FON-09 | Como o pipeline se autentica no Google Cloud (conflito 7) | [consumo-de-fontes.md](consumo-de-fontes.md) |
 | RN-FON-20 | Fonte e via de acesso nos indicadores em conflito (conflitos 3, 4, 5, 6 e 9) | [consumo-de-fontes.md](consumo-de-fontes.md) |
-| RN-TMP-12 | Regra para anos parciais fora da CFEM | [temporalidade-e-atualizacao.md](temporalidade-e-atualizacao.md) |
 | RN-TMP-17 | Ano ou edição do IDEB publicada | [temporalidade-e-atualizacao.md](temporalidade-e-atualizacao.md) |
 | RN-VPU-11 | Tratamento de linhas duplicadas na fonte | [validacao-e-publicacao.md](validacao-e-publicacao.md) |
 | RN-ENT-02 | Forma de entrega: arquivos, API própria ou ambos (conflito 2) | [entrega-dos-dados.md](entrega-dos-dados.md) |
