@@ -49,6 +49,7 @@ Estas regras estão decididas no essencial, mas um ponto delas continua sem deci
 | [RN-FNT-11](regras-por-fonte.md) | Coluna de município nas tabelas do CAGED e do IDEB; `table_id` do eleitorado (TSE) e do Censo Escolar |
 | [RN-FNT-01](regras-por-fonte.md) | Comparação dos valores da população com a tabela publicada pelo IBGE antes de alimentar um gráfico |
 | [RN-FON-15](consumo-de-fontes.md) e [RN-FNT-14](regras-por-fonte.md) | Se a planilha do SEEG pode ficar no repositório e o que conta como dado bruto "grande" (conflito 16) |
+| [RN-IND-09](indicadores-derivados-e-compostos.md) | Base da participação da RI Carajás no PIB (PIB do Pará, da RI ou outra) e nomes finais dos dois indicadores no manifesto |
 | [RN-ENT-08](entrega-dos-dados.md) | Metas numéricas de cada critério de avaliação do assistente |
 
 ## 3. Divergências entre fontes
