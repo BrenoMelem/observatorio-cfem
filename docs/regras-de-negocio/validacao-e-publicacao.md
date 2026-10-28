@@ -86,11 +86,12 @@ Regras sobre o que um lote precisa cumprir para ser publicado e sobre o que faze
 - **Relacionadas:** RN-ENT-06, RN-VPU-01
 
 ### RN-VPU-11: Tratamento de duplicidades
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve definir como detectar e tratar linhas duplicadas na fonte antes de agregar.
-- **Motivo:** VAL-15/10 aponta duplicidades como ponto a conferir nas autuações, sem fixar a regra.
-- **Exemplo:** Autuações no recorte dos 12 municípios (176 linhas) precisam de conferência de duplicidade (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: contagem de linhas; a duplicidade não foi testada).
-- **Fonte:** VAL-15/10 §Matriz operacional (CFEM autuações).
+- **Status:** DECIDIDA
+- **Regra:** Uma linha duplicada é a que repete todos os campos de outra linha da fonte; quando houver, o lote deve registrar a contagem de repetições no relatório de qualidade e ficar bloqueado até revisão, sem apagar linhas automaticamente.
+- **Motivo:** Descartar sozinho pode eliminar um registro real que por acaso repita valor e data, e publicar sem aviso pode inflar o total. Bloquear não custa nada hoje, porque não há linhas idênticas no arquivo de autuações.
+- **Exemplo:** Em 27/10/2026, o arquivo de autuações tinha 21.029 linhas, nenhuma idêntica a outra, e a combinação número do auto + processo de cobrança era única em todas. O mesmo vale para as 176 linhas do recorte dos 12 municípios (reproduzido em 27/10/2026: arquivo da ANM).
+- **Exceções:** A verificação só foi feita nas autuações; os arquivos de arrecadação e de distribuição não foram testados. Repetir apenas parte dos campos (por exemplo, o mesmo processo de cobrança em duas linhas) não é duplicata e não bloqueia o lote.
+- **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026; VAL-15/10 §Matriz operacional (CFEM autuações).
 - **Relacionadas:** RN-VPU-06, RN-CFE-13
 
 ### RN-VPU-12: Tolerância da reconciliação
