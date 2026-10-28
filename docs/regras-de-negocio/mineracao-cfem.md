@@ -140,7 +140,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Status:** EM ABERTO
 - **Regra:** O mantenedor deve definir o tratamento das autuações sem ano de publicação antes de formar a série temporal.
 - **Motivo:** VAL-15/10 aponta que não se deve formar série sem regra para esses registros.
-- **Exemplo:** 88 das 176 linhas do recorte dos 12 municípios não têm ano de publicação (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
+- **Exemplo:** 88 das 176 linhas do recorte dos 12 municípios não têm ano de publicação (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM). Em 27/10/2026, as 88 linhas sem ano também estão sem mês, todas têm valor e só 35 têm número do auto (as 88 com ano têm), o que sugere que são registros ainda sem publicação completa (hipótese, não confirmada pela ANM).
 - **Fonte:** VAL-15/10 §Matriz operacional, §Rodada adicional; DECISÃO-MANTENEDOR de 24/10/2026 (resposta à pergunta 6: deixar em aberto).
 - **Relacionadas:** RN-CFE-13, RN-CFE-14, RN-MOD-10
 
