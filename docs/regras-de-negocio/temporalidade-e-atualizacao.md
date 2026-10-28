@@ -27,7 +27,7 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 | Preço do cobre | 2000–2026 | 2000–2026 | 2000–2026 |
 | PIB municipal | 2010–2023 | 2010–2023 | 2010–2023 |
 | Série populacional | 1980–2022 | 1980–2022 | 1980–2022 |
-| IDEB | 2023 | sem ano | **EM ABERTO** (RN-TMP-17) |
+| IDEB | 2023 | sem ano | Todas as edições disponíveis, a mais recente descoberta na execução (RN-TMP-17) |
 
 ### RN-TMP-01: Nunca fixar o ano no código
 - **Status:** DECIDIDA
@@ -163,10 +163,10 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 - **Fonte:** DECISÃO-MANTENEDOR de 24/10/2026 (conflito 15); BLOCOS §Bloco 2, §Bloco 5, §Bloco 6; PLANO §Bloco 2, §Bloco 5, §Bloco 6.
 - **Relacionadas:** RN-TMP-07, RN-TMP-13, RN-TMP-17
 
-### RN-TMP-17: Ano do IDEB
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve definir qual edição ou período do IDEB o observatório publica.
-- **Motivo:** PLANO diz 2023, BLOCOS não diz o ano e DECISÕES indica o ano mais recente da Base dos Dados como 2025.
-- **Exemplo:** O INEP não divulga a nota municipal de 2023 em certos casos de participação insuficiente.
-- **Fonte:** PLANO §Bloco 4; BLOCOS §Bloco 4; DECISÕES §Tabelas da Base dos Dados confirmadas; DECISÃO-MANTENEDOR de 24/10/2026 (conflito 15).
-- **Relacionadas:** RN-MOD-09, RN-TMP-16
+### RN-TMP-17: Edições do IDEB
+- **Status:** DECIDIDA
+- **Regra:** O observatório deve publicar todas as edições do IDEB que a fonte tiver, e o pipeline deve descobrir a mais recente em cada execução, sem fixar o ano; cada valor deve mostrar o ano da edição.
+- **Motivo:** O IDEB sai de dois em dois anos, e fixar 2023 (PLANO) ficaria desatualizado e contradiria o 2025 que DECISÕES cita como o mais recente na Base dos Dados. A descoberta em tempo de execução é a regra geral do projeto (RN-TMP-01).
+- **Exemplo:** O INEP não divulga a nota municipal de 2023 em certos casos de participação insuficiente; nesse caso o valor fica como não divulgado, nunca como zero (RN-MOD-12).
+- **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026; PLANO §Bloco 4; BLOCOS §Bloco 4; DECISÕES §Tabelas da Base dos Dados confirmadas.
+- **Relacionadas:** RN-MOD-09, RN-MOD-12, RN-TMP-01, RN-TMP-16
