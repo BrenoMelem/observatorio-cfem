@@ -15,7 +15,6 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 | RN-FON-20 | Fonte e via de acesso nos indicadores em conflito (conflitos 3, 4, 5, 6 e 9) | [consumo-de-fontes.md](consumo-de-fontes.md) |
 | RN-ENT-02 | Forma de entrega: arquivos, API própria ou ambos (conflito 2) | [entrega-dos-dados.md](entrega-dos-dados.md) |
 | RN-ENT-10 | Regra de reuso das exportações, conforme a licença de cada fonte | [entrega-dos-dados.md](entrega-dos-dados.md) |
-| RN-CFE-07 | Critério para classificar a falta de um município num mês existente no arquivo | [mineracao-cfem.md](mineracao-cfem.md) |
 | RN-CFE-08 | Recuperar julho de 2025 e liberar o total anual de 2025 | [mineracao-cfem.md](mineracao-cfem.md) |
 | RN-CFE-09 | Causa da ausência de São Domingos do Araguaia nos arquivos | [mineracao-cfem.md](mineracao-cfem.md) |
 | RN-CFE-10 | Modalidades de distribuição que compõem a CFEM recebida | [mineracao-cfem.md](mineracao-cfem.md) |

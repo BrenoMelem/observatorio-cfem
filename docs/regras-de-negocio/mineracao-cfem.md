@@ -65,12 +65,13 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Relacionadas:** RN-CFE-05, RN-MOD-07, RN-TMP-12, RN-VPU-05
 
 ### RN-CFE-07: Ausência de um município num mês existente no arquivo
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve definir como classificar a falta de linha de um município num mês em que o arquivo nacional tem linhas: lacuna da fonte ou município que não recebeu.
-- **Motivo:** VAL-15/10 pede que cada lote registre qual das duas situações ocorreu, mas nenhuma fonte define o critério operacional.
-- **Exemplo:** A falta de julho de 2025 é da fonte (há repasse publicado pela ANM). A falta de São Domingos do Araguaia em todo o arquivo não tem causa confirmada (RN-CFE-09).
-- **Fonte:** VAL-15/10 §Marco 2.
-- **Relacionadas:** RN-CFE-06, RN-CFE-09, RN-MOD-10
+- **Status:** DECIDIDA
+- **Regra:** Quando um município não tiver linha num mês em que o arquivo nacional tem linhas, o valor deve ficar como "ausente", nunca zero, com a causa marcada como "não confirmada"; a causa só deve passar a "lacuna da fonte" ou "não recebeu" quando uma publicação independente, como o PDF mensal da ANM, a confirmar.
+- **Motivo:** O arquivo não diz por que falta a linha, e presumir uma das causas poderia esconder uma lacuna da extração como se fosse um fato. O relatório de qualidade de cada lote lista os casos (RN-VPU-06).
+- **Exemplo:** A falta de julho de 2025 é da fonte (há repasse publicado pela ANM) e vale RN-CFE-06. A falta de São Domingos do Araguaia em todo o arquivo segue com causa não confirmada (RN-CFE-09).
+- **Exceções:** Quando o mês inteiro está ausente do arquivo nacional, vale RN-CFE-06, e não esta regra.
+- **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026; VAL-15/10 §Marco 2 (cada lote registra qual das duas situações ocorreu).
+- **Relacionadas:** RN-CFE-06, RN-CFE-09, RN-MOD-10, RN-VPU-06
 
 ### RN-CFE-08: Recuperar julho de 2025
 - **Status:** EM ABERTO
