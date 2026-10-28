@@ -77,13 +77,14 @@ Fonte: DECISÕES §Indicadores compostos; BLOCOS §Bloco 6.
 - **Fonte:** CONSUMO §Finanças públicas e índices (Barômetro da Sustentabilidade 2024). Não consta em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10.
 - **Relacionadas:** RN-IND-04
 
-### RN-IND-09: Definição de "% PIB RI-Carajás per capita"
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve definir o que o indicador "% PIB RI-Carajás per capita" mede: a participação da RI no PIB ou o PIB per capita.
-- **Motivo:** O nome mistura porcentagem e per capita; BLOCOS o descreve como "Calculado: PIB ÷ população".
+### RN-IND-09: PIB per capita e participação da RI no PIB são dois indicadores
+- **Status:** DECIDIDA
+- **Regra:** O indicador "% PIB RI-Carajás per capita" do Bloco 2 deve ser separado em dois indicadores derivados: o PIB per capita (PIB municipal ÷ população do mesmo ano) e a participação da RI Carajás no PIB.
+- **Motivo:** O nome original mistura porcentagem e per capita; a fórmula de BLOCOS ("PIB ÷ população") corresponde ao PIB per capita, e CONSUMO lista os dois itens separados.
 - **Exemplo:** CONSUMO lista "PIB per capita e participação da RI Carajás" como dois itens.
-- **Fonte:** BLOCOS §Bloco 2; PLANO §Bloco 2; CONSUMO §Economia e mercado de trabalho; DECISÃO-MANTENEDOR de 24/10/2026 (item IND-09 deixado em aberto).
-- **Relacionadas:** RN-MOD-17, RN-IND-10
+- **Exceções:** A base da participação (PIB do Pará, PIB da RI ou outra) e o nome final de cada indicador no manifesto não foram definidos e constam em [pendencias.md](pendencias.md). O PIB municipal e a população devem ser do mesmo ano, e a série de população está em aberto (RN-IND-12). BLOCOS ainda traz um só indicador no Bloco 2 e precisa ser atualizado.
+- **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026; BLOCOS §Bloco 2; PLANO §Bloco 2; CONSUMO §Economia e mercado de trabalho.
+- **Relacionadas:** RN-MOD-17, RN-IND-10, RN-IND-12
 
 ### RN-IND-10: CFEM per capita e comparação com mineradores são derivados
 - **Status:** DECIDIDA
