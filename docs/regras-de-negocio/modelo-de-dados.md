@@ -16,7 +16,7 @@ As fontes descrevem dois esquemas diferentes (conflito 1 em [pendencias.md](pend
 | Município (código) | `municipio_id` | `geo_id` | Nos dois casos o código IBGE de 7 dígitos |
 | Município (nome) | `municipio_nome` | `geo_name` (CONSUMO) | VAL-15/10 §Marco 1 cita só `geo_id` |
 | Nível territorial | sem campo | `geo_level` (CONSUMO) | Município ou RI |
-| Período do fenômeno | `ano`, `mes` (opcional) | `reference_period`, `frequency` (CONSUMO) | `mes` ainda sem aceite (RN-MOD-04) |
+| Período do fenômeno | `ano`, `mes` (opcional) | `reference_period`, `frequency` (CONSUMO) | O mês entra no esquema comum, vazio nos anuais (RN-MOD-04) |
 | Valor | `valor` | `value` | |
 | Unidade | `unidade` | `unit` | |
 | Natureza e validação do valor | sem campo | `status` (lista única: validado, provisório, não divulgado, ausente, não aplicável) | Decidido nesta documentação em dois eixos (RN-MOD-06, RN-MOD-07) |
@@ -54,12 +54,13 @@ Estado: **EM ABERTO**. Nenhum dos dois conjuntos de nomes é adotado.
 - **Relacionadas:** RN-MOD-02, RN-MOD-04, RN-ENT-02
 
 ### RN-MOD-04: Campo de mês
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve decidir se o mês entra no esquema comum, vazio nos indicadores anuais, ou se fica só na base da mineração.
-- **Motivo:** O mês é necessário para a CFEM (guardar mensal, exibir anual), mas o aceite no esquema comum não foi dado.
-- **Exemplo:** A distribuição da CFEM de maio de 2025 só pode ser reconciliada porque o mês é preservado.
-- **Fonte:** DECISÕES §Arquitetura e padrões de dados, §Pré-requisitos e pendências; VAL-15/10 §Marco 2; LAB-19/10 §7 (Próximos passos, item 2).
-- **Relacionadas:** RN-MOD-05, RN-CFE-04
+- **Status:** DECIDIDA
+- **Regra:** O mês deve fazer parte do esquema comum de todos os indicadores, preenchido quando a fonte é mensal e vazio nos indicadores anuais.
+- **Motivo:** Um esquema único evita dois formatos para consumir, e o mês é necessário para a CFEM (guardar mensal, exibir anual) e para outras séries mensais, como os preços de commodities do FRED.
+- **Exemplo:** A distribuição da CFEM de maio de 2025 só pôde ser reconciliada porque o mês foi preservado. Os preços de ferro e cobre do FRED são mensais, e a população do IBGE é anual, com o mês vazio.
+- **Exceções:** O nome do campo continua em aberto junto com o resto do esquema (RN-MOD-03).
+- **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026; DECISÕES §Arquitetura e padrões de dados, §Pré-requisitos e pendências; VAL-15/10 §Marco 2; LAB-19/10 §7 (Próximos passos, item 2).
+- **Relacionadas:** RN-MOD-03, RN-MOD-05, RN-CFE-04
 
 ### RN-MOD-05: Granularidade mais fina da fonte
 - **Status:** DECIDIDA

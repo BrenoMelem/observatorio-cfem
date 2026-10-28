@@ -43,7 +43,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Regra:** A CFEM deve ser guardada no detalhe mensal, e o gráfico deve agregá-la para o ano.
 - **Motivo:** O arquivo vem por mês, e o detalhe mensal permite reconciliar e detectar mês ausente.
 - **Exemplo:** A distribuição de 2025 é guardada por município, mês e modalidade e somada por ano só na exibição (quando o ano fecha).
-- **Exceções:** O ano só fecha com os 12 meses (RN-CFE-06). O campo de mês no esquema comum está em aberto (RN-MOD-04).
+- **Exceções:** O ano só fecha com os 12 meses (RN-CFE-06). O mês faz parte do esquema comum (RN-MOD-04).
 - **Fonte:** DECISÕES §Bloco 3; BLOCOS §Bloco 3.
 - **Relacionadas:** RN-MOD-04, RN-MOD-05, RN-CFE-06
 
