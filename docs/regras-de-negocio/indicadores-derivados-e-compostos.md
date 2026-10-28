@@ -66,6 +66,7 @@ Fonte: DECISÕES §Indicadores compostos; BLOCOS §Bloco 6.
 - **Regra:** O mantenedor deve definir qual população é o denominador do indicador "emprego formal como % da população" (total, em idade ativa ou força de trabalho) e manter a mesma regra entre territórios.
 - **Motivo:** PLANO e BLOCOS dizem "RAIS ÷ população" sem especificar qual; CONSUMO exige aprovar o denominador.
 - **Exemplo:** A RAIS mede vínculos formais (estoque), e a população total inclui pessoas fora da idade ativa.
+- **Exceções:** Orientação do mantenedor em 27/10/2026, sem decisão final: o denominador deve incluir a população em idade ativa. Falta definir qual recorte (população em idade ativa ou outra) e de qual fonte, já que a faixa etária por município e ano não está entre as fontes definidas.
 - **Fonte:** BLOCOS §Bloco 4 (04/10/2026, última edição 20/10/2026); PLANO §Bloco 2 (30/09/2026); CONSUMO §Economia e mercado de trabalho (02/10/2026).
 - **Relacionadas:** RN-MOD-16, RN-MOD-17
 
