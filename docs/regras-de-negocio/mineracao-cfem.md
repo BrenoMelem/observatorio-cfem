@@ -186,10 +186,11 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Fonte:** DECISÕES §Bloco 3 (Como a CFEM é calculada); BLOCOS §Bloco 3 (Cálculo).
 - **Relacionadas:** RN-CFE-19
 
-### RN-CFE-22: Cobertura histórica da arrecadação
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve confirmar qual arquivo e qual cobertura de anos da arrecadação a ANM publica antes de prometer série longa.
-- **Motivo:** DECISÕES cita `CFEM_Arrecadacao.csv`, mas o validador usou `CFEM_Arrecadacao_2022_2026.csv`, que cobre apenas 2022–2026.
-- **Exemplo:** O arquivo 2022–2026 tinha 744.244 linhas em 15/10/2026 (transcrito do relatório VAL-15/10) e 744.279 em 25/10/2026, depois da atualização da ANM de 24/10/2026; as 2.534 linhas dos 12 municípios não mudaram (reproduzido em 25/10/2026).
-- **Fonte:** DECISÕES §Rotas de coleta por fonte; SCRIPTS (`validate_anm_cfem`); VAL-15/10 §Rodada adicional.
+### RN-CFE-22: Arquivo e cobertura histórica da arrecadação
+- **Status:** DECIDIDA
+- **Regra:** A arrecadação da CFEM deve ser coletada do arquivo completo de arrecadação da ANM (`CFEM_Arrecadacao.csv`), com a série começando em 2003.
+- **Motivo:** O arquivo completo é o citado em DECISÕES e já cobre todos os anos; o de 2022–2026, usado pelo validador, descartaria 20 anos de série. O ano 2002 tem só 10 linhas no país, o que sugere cobertura incompleta (dedução: a ANM não diz isso).
+- **Exemplo:** Em 27/10/2026, o arquivo completo tinha 2.433.916 linhas, de 2002 a 2026; 2003 tem 30.559 linhas. A ANM publica também arquivos por faixa de anos (2002–2006, 2007–2011, 2012–2016, 2017–2021, 2022–2026), e as contagens por ano de 2022 a 2026 são iguais no arquivo completo e no de 2022–2026 (reproduzido em 27/10/2026: arquivos da ANM).
+- **Exceções:** O validador atual usa o arquivo de 2022–2026 e precisa passar a usar o completo. A cobertura municipal dos anos anteriores a 2022 não foi verificada.
+- **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026; DECISÕES §Rotas de coleta por fonte; SCRIPTS (`validate_anm_cfem`); VAL-15/10 §Rodada adicional; consulta ao servidor da ANM em 27/10/2026.
 - **Relacionadas:** RN-CFE-01, RN-FNT-18
