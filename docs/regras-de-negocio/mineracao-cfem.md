@@ -85,7 +85,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Status:** EM ABERTO
 - **Regra:** O mantenedor deve investigar por que São Domingos do Araguaia (1507151) não tem linha nos arquivos de arrecadação e de distribuição, e até lá o município deve constar como ausente, nunca como zero.
 - **Motivo:** A causa não foi confirmada: pode ser lacuna da extração, ausência de repasse ou ausência de atividade.
-- **Exemplo:** 11 dos 12 municípios têm linhas em arrecadação (2022–2026) e em distribuição (2007–2026); nas autuações, 9 dos 12 (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
+- **Exemplo:** 11 dos 12 municípios têm linhas em arrecadação (2022–2026) e em distribuição (2007–2026); nas autuações, 9 dos 12 (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM). Em 27/10/2026, o arquivo completo de arrecadação (2002–2026, 2.433.916 linhas) não tinha nenhuma linha de São Domingos do Araguaia, nem pelo código 1507151 nem pelo nome; só aparece São Domingos do Capim (PA, 1507201), outro município, com 1 linha. Isso afasta uma troca de código ou de nome como causa nesse arquivo, mas não confirma a causa real (reproduzido em 27/10/2026: arquivo da ANM).
 - **Fonte:** VAL-15/10 §Matriz operacional, §Rodada adicional, §Issues sugeridas (item 2).
 - **Relacionadas:** RN-MOD-10, RN-CFE-07
 
