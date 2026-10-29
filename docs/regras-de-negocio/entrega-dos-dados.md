@@ -79,9 +79,9 @@ As fontes divergem sobre a forma da entrega: DECISÕES e PLANO descrevem uma cam
 - **Relacionadas:** RN-CFE-02, RN-VPU-10
 
 ### RN-ENT-10: Licença de reuso das exportações
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve definir a regra de reutilização das exportações, com base na licença confirmada de cada fonte.
-- **Motivo:** Nenhuma licença de redistribuição foi confirmada nas fontes de decisão; o CSV aberto depende dela.
-- **Exemplo:** A licença de FAPESPA e IDSC ainda não foi verificada.
-- **Fonte:** LAB-19/10 §4 (Portais de apoio); CONSUMO §Contrato de dados para o front-end; PESQUISA §Conclusões principais (item 4).
+- **Status:** DECIDIDA
+- **Regra:** O CSV aberto inclui apenas as fontes cuja licença de redistribuição esteja confirmada. As demais ficam fora das exportações até o mantenedor verificar a licença; a licença de cada fonte continua pendente em RN-PRI-06.
+- **Motivo:** Nenhuma licença de redistribuição foi confirmada nas fontes de decisão; publicar sem ela contraria RN-ENT-03.
+- **Exemplo:** Enquanto a licença de FAPESPA e IDSC não for verificada, seus indicadores não entram no CSV aberto.
+- **Fonte:** DECISÃO-MANTENEDOR de 28/10/2026; LAB-19/10 §4 (Portais de apoio); CONSUMO §Contrato de dados para o front-end; PESQUISA §Conclusões principais (item 4).
 - **Relacionadas:** RN-ENT-03, RN-PRI-05, RN-PRI-06
