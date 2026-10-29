@@ -70,6 +70,7 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Regra:** O mantenedor deve confirmar na fonte se `AVIOL12_THOMIC` corresponde à medida pedida pela oficina, "taxa de homicídio por arma de fogo a cada 100 mil habitantes, 1989–2022", e decidir a fonte e o conceito do indicador.
 - **Motivo:** Os documentos divergem na fonte, e BLOCOS chama o indicador apenas de "taxa de homicídio", sem "arma de fogo", sem justificar a mudança.
 - **Exemplo:** DECISÕES indica `AVIOL12_THOMIC` municipal de 1989 a 2022 (IPEADATA e Atlas da Violência).
+- **Evidência de 28/10/2026:** os metadados do IPEADATA para `AVIOL12_THOMIC` dão o nome "Taxa de homicídios (100.000 Habitantes)", fonte MS/SVS/CGIAE (SIM), atualização de 08/07/2026, sem menção a arma de fogo. O comentário da série cita códigos CID de lesões autoprovocadas (X60-X84), o que parece inconsistente com o nome; a causa não foi confirmada. A decisão de fonte e conceito segue em aberto.
 - **Fonte:** Versão A: DECISÕES §Rotas de coleta por fonte, §Estratégia de fontes e acesso; BLOCOS §Bloco 4 (IPEADATA/Atlas, 04/10/2026, última edição 20/10/2026). Versão B: CONSUMO §Sociedade (CODEC/SEGUP principal e SIM alternativa, 02/10/2026). Versão C: PLANO §Bloco 4 (SIM via Base dos Dados, 30/09/2026). A conferência na fonte foi pedida pelo mantenedor em 24/10/2026 (DECISÃO-MANTENEDOR, resposta à pergunta 8).
 - **Relacionadas:** RN-FNT-15, RN-TMP-09, RN-FON-20
 
