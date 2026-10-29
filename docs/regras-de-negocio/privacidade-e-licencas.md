@@ -76,9 +76,9 @@ Regras sobre dados pessoais, registros individuais, acesso restrito e reuso de d
 - **Relacionadas:** RN-FON-09, RN-FNT-13
 
 ### RN-PRI-10: Autorizações de conta com escopo mínimo
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve decidir como autorizar o acesso ao Google Cloud usando o menor escopo possível e, sobre o consentimento observado, se o aceita ou usa um caminho de acesso mais restrito.
-- **Motivo:** VAL-15/10 registra que o consentimento do notebook solicitou acesso amplo de edição e exclusão no Drive e no Google Cloud.
-- **Exemplo:** A célula de autenticação do laboratório abriu um consentimento com esse acesso amplo; a autenticação não foi concluída (transcrito do relatório VAL-15/10, não conferido no JSON).
-- **Fonte:** VAL-15/10 §Pendências externas e limites desta execução; DECISÃO-MANTENEDOR de 24/10/2026 (conflito 7 não decidido).
+- **Status:** DECIDIDA
+- **Regra:** O pipeline só pode usar autorização de escopo mínimo no Google Cloud (leitura e consulta). O acesso amplo de edição e exclusão observado no consentimento do laboratório não é aceito. Como autenticar continua em aberto em RN-FON-09 e deve caber nesse limite.
+- **Motivo:** Uma autorização ampla permitiria alterar ou apagar arquivos do Drive e recursos do Google Cloud em caso de erro ou vazamento da credencial; a consulta de dados públicos não precisa disso.
+- **Exemplo:** A célula de autenticação do laboratório abriu um consentimento com acesso amplo de edição e exclusão no Drive e no Google Cloud; a autenticação não foi concluída (transcrito do relatório VAL-15/10, não conferido no JSON). O notebook é só de testes e não vai para produção, então o consentimento serve de evidência; a regra vale para o pipeline.
+- **Fonte:** DECISÃO-MANTENEDOR de 28/10/2026; VAL-15/10 §Pendências externas e limites desta execução; DECISÃO-MANTENEDOR de 24/10/2026 (conflito 7 não decidido).
 - **Relacionadas:** RN-FON-09

@@ -23,7 +23,6 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 | RN-IND-11 | Classes de floresta, mineração e área urbana, denominador e edição do limite municipal | [indicadores-derivados-e-compostos.md](indicadores-derivados-e-compostos.md) |
 | RN-IND-12 | Qual CFEM e qual população entram na CFEM per capita | [indicadores-derivados-e-compostos.md](indicadores-derivados-e-compostos.md) |
 | RN-PRI-06 | Licença de redistribuição de cada fonte (FAPESPA, IDSC, SEEG) | [privacidade-e-licencas.md](privacidade-e-licencas.md) |
-| RN-PRI-10 | Escopo mínimo de autorização no Google Cloud | [privacidade-e-licencas.md](privacidade-e-licencas.md) |
 | RN-FNT-08 | Se `AVIOL12_THOMIC` mede "homicídio por arma de fogo", e qual fonte e conceito do indicador (conflito 4) | [regras-por-fonte.md](regras-por-fonte.md) |
 | RN-FNT-12 | Fonte da frota de veículos (conflito 5) | [regras-por-fonte.md](regras-por-fonte.md) |
 | RN-FNT-13 | Rota do uso do solo do MapBiomas (conflito 6) | [regras-por-fonte.md](regras-por-fonte.md) |
