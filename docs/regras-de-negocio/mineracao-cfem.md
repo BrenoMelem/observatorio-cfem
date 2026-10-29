@@ -93,7 +93,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Status:** EM ABERTO
 - **Regra:** O mantenedor deve definir quais modalidades de distribuição (coluna do tipo de distribuição) compõem a "CFEM recebida", e até lá a modalidade deve ser guardada e exibida separadamente.
 - **Motivo:** A reconciliação cobriu só o tipo `Produtor`; as demais modalidades não foram conferidas.
-- **Exemplo:** A reconciliação de maio de 2025 foi feita com `Ano=2025`, `Mês=5` e tipo `Produtor` (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
+- **Exemplo:** A reconciliação de maio de 2025 foi feita com `Ano=2025`, `Mês=5` e tipo `Produtor` (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM). Em 27/10/2026, o arquivo de distribuição tinha três modalidades: `Produtor` (2007–2026, só municípios), `Afetado` (2019–2022, só municípios, com subtipos como estrutura de mineração, ferrovias e perda) e `-` (2019–2022, só estados). De 2023 a 2026 existe só `Produtor`, que somou R$ 1.556.820.292,67 nos 12 municípios em 2025; a soma é bruta e provisória (reproduzido em 27/10/2026: arquivo da ANM).
 - **Fonte:** VAL-15/10 §Rodada adicional (escopo da reconciliação).
 - **Relacionadas:** RN-VPU-07, RN-TER-09, RN-CFE-11
 
