@@ -171,7 +171,7 @@ O nível mede a forma de acesso, não a qualidade do dado. Uma fonte B pode ser 
 ### RN-FON-20: Escolha da via de acesso nos indicadores em conflito
 - **Status:** EM ABERTO
 - **Regra:** O mantenedor deve decidir a fonte e a via de acesso de cada indicador cujas fontes de decisão divergem; até lá, nenhuma versão vale como regra.
-- **Motivo:** DECISÕES, BLOCOS, PLANO, MAPA-TEMAS, CONSUMO e relatórios divergem em emprego, homicídios, frota, uso do solo e na via Base dos Dados versus arquivo oficial.
+- **Motivo:** DECISÕES, BLOCOS, PLANO, MAPA-TEMAS, CONSUMO e relatórios divergem em emprego, homicídios, uso do solo e na via Base dos Dados versus arquivo oficial.
 - **Exemplo:** Emprego: IPEADATA (DECISÕES, BLOCOS) versus microdados do MTE (MAPA-TEMAS, CONSUMO); em 15/10/2026 o filtro do IPEADATA não limitou a resposta, que anunciou 63.685.034 bytes (transcrito do relatório VAL-15/10, não conferido no JSON).
-- **Fonte:** Conflitos 3, 4, 5, 6 e 9 em [pendencias.md](pendencias.md); DECISÕES; BLOCOS; CONSUMO; MAPA-TEMAS; VAL-15/10; LAB-19/10.
-- **Relacionadas:** RN-FON-02, RN-FNT-08, RN-FNT-12, RN-FNT-13, RN-FNT-20, RN-FNT-21
+- **Fonte:** Conflitos 3, 4, 6 e 9 em [pendencias.md](pendencias.md); DECISÕES; BLOCOS; CONSUMO; MAPA-TEMAS; VAL-15/10; LAB-19/10.
+- **Relacionadas:** RN-FON-02, RN-FNT-08, RN-FNT-13, RN-FNT-20, RN-FNT-21

@@ -100,11 +100,11 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Relacionadas:** RN-FON-03, RN-FON-19, RN-TMP-03
 
 ### RN-FNT-12: Frota de veículos
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve decidir a fonte da frota de veículos, entre Senatran e DETRAN-PA.
-- **Motivo:** As fontes divergem, e o painel do DETRAN-PA não tem exportação municipal confirmada.
+- **Status:** DECIDIDA
+- **Regra:** A fonte primária da frota de veículos é a Senatran. O DETRAN-PA é fonte reserva e só entra se tiver exportação municipal confirmada. A forma de obter os dados da Senatran ainda deve ser verificada.
+- **Motivo:** Três documentos indicam a Senatran; o painel do DETRAN-PA não tem exportação municipal confirmada.
 - **Exemplo:** Em 17/10/2026, após reparo da cadeia de certificados, o painel do DETRAN-PA devolveu HTTP 502 (transcrito do relatório LAB-19/10, não conferido no JSON).
-- **Fonte:** Versão A: DECISÕES §Rotas de coleta por fonte e BLOCOS §Bloco 4 (Senatran via dados.gov.br, com DETRAN-PA como alternativa a avaliar; PLANO §Bloco 4 também; 04/10/2026, última edição 20/10/2026). Versão B: MAPA-TEMAS §Sociedade; CONSUMO §Sociedade, serviços e segurança (DETRAN-PA, 02/10/2026).
+- **Fonte:** DECISÃO-MANTENEDOR de 28/10/2026; Versão A: DECISÕES §Rotas de coleta por fonte e BLOCOS §Bloco 4 (Senatran via dados.gov.br, com DETRAN-PA como alternativa a avaliar; PLANO §Bloco 4 também; 04/10/2026, última edição 20/10/2026). Versão B: MAPA-TEMAS §Sociedade; CONSUMO §Sociedade, serviços e segurança (DETRAN-PA, 02/10/2026).
 - **Relacionadas:** RN-TMP-02, RN-FON-20
 
 ### RN-FNT-13: Uso do solo pelo MapBiomas

@@ -11,7 +11,7 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 | RN-MOD-03 | Nomes e campos do esquema (tabela de equivalência dos dois esquemas) | [modelo-de-dados.md](modelo-de-dados.md) |
 | RN-MOD-24 | Valor real: índice de correção, ano-base e forma de publicação (hoje só nominal, RN-MOD-26) | [modelo-de-dados.md](modelo-de-dados.md) |
 | RN-FON-09 | Como o pipeline se autentica no Google Cloud (conflito 7) | [consumo-de-fontes.md](consumo-de-fontes.md) |
-| RN-FON-20 | Fonte e via de acesso nos indicadores em conflito (conflitos 3, 4, 5, 6 e 9) | [consumo-de-fontes.md](consumo-de-fontes.md) |
+| RN-FON-20 | Fonte e via de acesso nos indicadores em conflito (conflitos 3, 4, 6 e 9) | [consumo-de-fontes.md](consumo-de-fontes.md) |
 | RN-ENT-02 | Forma de entrega: arquivos, API própria ou ambos (conflito 2) | [entrega-dos-dados.md](entrega-dos-dados.md) |
 | RN-CFE-08 | Recuperar julho de 2025 e liberar o total anual de 2025 | [mineracao-cfem.md](mineracao-cfem.md) |
 | RN-CFE-09 | Causa da ausência de São Domingos do Araguaia nos arquivos | [mineracao-cfem.md](mineracao-cfem.md) |
@@ -24,7 +24,6 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 | RN-IND-12 | Qual CFEM e qual população entram na CFEM per capita | [indicadores-derivados-e-compostos.md](indicadores-derivados-e-compostos.md) |
 | RN-PRI-06 | Licença de redistribuição de cada fonte (FAPESPA, IDSC, SEEG) | [privacidade-e-licencas.md](privacidade-e-licencas.md) |
 | RN-FNT-08 | Se `AVIOL12_THOMIC` mede "homicídio por arma de fogo", e qual fonte e conceito do indicador (conflito 4) | [regras-por-fonte.md](regras-por-fonte.md) |
-| RN-FNT-12 | Fonte da frota de veículos (conflito 5) | [regras-por-fonte.md](regras-por-fonte.md) |
 | RN-FNT-13 | Rota do uso do solo do MapBiomas (conflito 6) | [regras-por-fonte.md](regras-por-fonte.md) |
 | RN-FNT-20 | Rota do emprego formal (conflito 3) | [regras-por-fonte.md](regras-por-fonte.md) |
 | RN-FNT-21 | Base dos Dados ou arquivo oficial para RAIS, IDEB, TSE e Censo Escolar (conflito 9) | [regras-por-fonte.md](regras-por-fonte.md) |
@@ -56,7 +55,7 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 | 2 | Forma de entrega | PLANO e DECISÕES: camada de arquivos JSON e CSV. VAL-15/10 e CONSUMO: API própria | EM ABERTO (RN-ENT-02). As regras valem para os dois casos |
 | 3 | Emprego | DECISÕES e BLOCOS: IPEADATA (`ADMISNC` − `DESLIGNC`) para o saldo e RAIS via Base dos Dados para as quebras. PLANO: Novo CAGED via Base dos Dados. MAPA-TEMAS e CONSUMO: microdados MTE/PDET. VAL-15/10: filtros do IPEADATA não limitaram a resposta; LAB-19/10: só `ADMISNC` testado | EM ABERTO (RN-FNT-20) |
 | 4 | Homicídios | DECISÕES e BLOCOS: `AVIOL12_THOMIC` (IPEADATA e Atlas), 1989–2022. PLANO: SIM via Base dos Dados. CONSUMO: CODEC/SEGUP principal e SIM alternativa. A oficina pede "por arma de fogo"; BLOCOS diz "taxa de homicídio" | EM ABERTO (RN-FNT-08). Conferir na fonte se a série mede o conceito pedido |
-| 5 | Frota | PLANO, DECISÕES e BLOCOS: Senatran. MAPA-TEMAS e CONSUMO: DETRAN-PA | EM ABERTO (RN-FNT-12) |
+| 5 | Frota | PLANO, DECISÕES e BLOCOS: Senatran. MAPA-TEMAS e CONSUMO: DETRAN-PA | DECIDIDO em 28/10/2026 (RN-FNT-12): Senatran, DETRAN-PA reserva |
 | 6 | Uso do solo | DECISÕES e BLOCOS: Google Earth Engine. PLANO, MAPA-TEMAS e CONSUMO: download das estatísticas da Coleção 11 | EM ABERTO (RN-FNT-13) |
 | 7 | Credencial do Google Cloud | DECISÕES e PLANO: conta de serviço com chave guardada como segredo; BLOCOS §Bloco 5: o Earth Engine usa a mesma credencial do BigQuery. LAB-19/10 §5.3 e VAL-15/10: não usar chave, autenticar com a conta de quem executa | EM ABERTO (RN-FON-09, RN-PRI-10). Não decidido pelo mantenedor: ainda não domina a plataforma, mas pretende usá-la. LAB-19/10 é mais recente nesse ponto (conflito 14) |
 | 8 | Commodities | DECISÕES e BLOCOS: FRED com ferro desde 1992 e Pink Sheet 1985–1991. PLANO e MAPA-TEMAS: Pink Sheet. LAB-19/10: FRED com ferro desde jan/1980 | DECIDIDO (DECISÃO-MANTENEDOR): FRED é a rota, o ferro começa em jan/1980 e o Pink Sheet só vale antes de 1980 (RN-TMP-13, RN-FNT-05, RN-FNT-06). Unidade do ferro decidida em 26/10/2026 (`$/dmt`, RN-TMP-14). Em aberto: recorte de exibição. Reaberto em 25/10/2026: ver divergência 17 |
