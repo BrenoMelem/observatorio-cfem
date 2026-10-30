@@ -109,11 +109,12 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Relacionadas:** RN-TMP-02, RN-FON-20
 
 ### RN-FNT-13: Uso do solo pelo MapBiomas
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve decidir se o uso do solo do MapBiomas é obtido pelo Google Earth Engine ou por download das estatísticas municipais da Coleção 11, e testar o asset antes de assumir a rota.
-- **Motivo:** As fontes divergem, e o asset ainda não foi testado porque depende do projeto Google Cloud.
+- **Status:** DECIDIDA
+- **Regra:** A rota primária do uso do solo do MapBiomas é o download das estatísticas municipais da Coleção 11. O Google Earth Engine é rota reserva e só entra depois que RN-FON-09 e RN-PRI-09 forem resolvidas. O conteúdo do arquivo (classes, recorte municipal) ainda deve ser conferido antes de depender dele.
+- **Motivo:** O download não depende de conta nem de credencial no Google Cloud, e três documentos o indicam; o Earth Engine nunca foi testado.
 - **Exemplo:** O Earth Engine ficou PENDENTE em 17/10/2026 por falta de `GEE_PROJECT` (transcrito do relatório LAB-19/10, não conferido no JSON).
-- **Fonte:** Versão A: DECISÕES §Rotas de coleta por fonte e BLOCOS §Bloco 5 (Google Earth Engine, com download como alternativa; 04/10/2026, última edição 20/10/2026). Versão B: MAPA-TEMAS §Meio ambiente e CONSUMO §Meio ambiente (download das estatísticas da Coleção 11; 02/10/2026). PLANO §Bloco 5 (30/09/2026) também aponta download.
+- **Exceções:** Se o Earth Engine for usado, vale RN-TMP-05 (nome do asset não fixado). O corte das classes e o limite municipal seguem em aberto em RN-IND-11.
+- **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026; Versão adotada: MAPA-TEMAS §Meio ambiente e CONSUMO §Meio ambiente (download das estatísticas da Coleção 11; 02/10/2026); PLANO §Bloco 5 (30/09/2026). Versão como reserva: DECISÕES §Rotas de coleta por fonte e BLOCOS §Bloco 5 (Google Earth Engine; 04/10/2026, última edição 20/10/2026).
 - **Relacionadas:** RN-TMP-05, RN-TMP-07, RN-PRI-09, RN-FON-20
 
 ### RN-FNT-14: Emissões do SEEG por download
