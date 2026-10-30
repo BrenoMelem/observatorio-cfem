@@ -61,7 +61,7 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Regra:** O saldo de emprego formal deve ser derivado como admissões menos desligamentos, e admissões e desligamentos também devem ser indicadores próprios.
 - **Motivo:** Não há série municipal pronta de saldo, e derivar rende dois indicadores adicionais.
 - **Exemplo:** `ADMISNC` (admissões) − `DESLIGNC` (demissões) do Novo CAGED.
-- **Exceções:** A rota de obtenção está em conflito (RN-FNT-20).
+- **Exceções:** A rota de obtenção está em RN-FNT-20 (Novo CAGED via Base dos Dados); `ADMISNC` e `DESLIGNC` são as séries do IPEADATA, rota alternativa.
 - **Fonte:** DECISÕES §Estratégia de fontes e acesso (Emprego formal); BLOCOS §Bloco 2.
 - **Relacionadas:** RN-FNT-20, RN-MOD-16
 
@@ -168,11 +168,12 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Relacionadas:** RN-FNT-01, RN-TER-05
 
 ### RN-FNT-20: Rota do emprego formal
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve decidir a rota do emprego formal entre IPEADATA, microdados do MTE e Base dos Dados, e como obter o IPEADATA sem baixar a série inteira.
-- **Motivo:** As fontes divergem, e o filtro do IPEADATA não limitou a resposta.
-- **Exemplo:** Uma consulta com filtro de município e limite de uma linha anunciou 63.685.034 bytes e começou por outro município (transcrito do relatório VAL-15/10, não conferido no JSON).
-- **Fonte:** Versão A: DECISÕES §Estratégia de fontes e acesso e BLOCOS §Bloco 2 (IPEADATA primário, séries "confirmadas por município, 2020–2026"; 04/10/2026, última edição 20/10/2026). Versão B: MAPA-TEMAS §Economia e CONSUMO §Economia (microdados MTE/PDET; 02/10/2026). Versão C: PLANO §Bloco 2 (Novo CAGED via Base dos Dados; 30/09/2026). Evidência: VAL-15/10 §Matriz operacional, §Rodada adicional (15/10/2026); LAB-19/10 §4 (só `ADMISNC` testado; 19/10/2026).
+- **Status:** DECIDIDA
+- **Regra:** O emprego formal (admissões e desligamentos, base do saldo de RN-FNT-07) é obtido pelo Novo CAGED via Base dos Dados. O IPEADATA e os microdados do MTE são alternativas.
+- **Motivo:** Decisão do mantenedor entre três rotas das fontes; usa a mesma via da RAIS (RN-FNT-21) e evita baixar a série inteira do IPEADATA, cujo filtro não limitou a resposta.
+- **Exemplo:** Uma consulta ao IPEADATA com filtro de município e limite de uma linha anunciou 63.685.034 bytes e começou por outro município (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exceções:** Depende da credencial e da conta do Google Cloud (RN-FON-09). A coluna de município e as tabelas do Novo CAGED ainda não foram conferidas. As séries `ADMISNC` e `DESLIGNC` do IPEADATA só valem se essa rota for usada como alternativa.
+- **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026; Versão adotada: PLANO §Bloco 2 (Novo CAGED via Base dos Dados; 30/09/2026). Versões como alternativa: DECISÕES §Estratégia de fontes e acesso e BLOCOS §Bloco 2 (IPEADATA; 04/10/2026, última edição 20/10/2026); MAPA-TEMAS §Economia e CONSUMO §Economia (microdados MTE/PDET; 02/10/2026). Evidência: VAL-15/10 §Matriz operacional, §Rodada adicional (15/10/2026); LAB-19/10 §4 (só `ADMISNC` testado; 19/10/2026).
 - **Relacionadas:** RN-FNT-07, RN-FON-20
 
 ### RN-FNT-21: Base dos Dados ou arquivo oficial para RAIS, IDEB, TSE e Censo Escolar
