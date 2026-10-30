@@ -10,7 +10,6 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 | --- | --- | --- |
 | RN-MOD-03 | Nomes exatos e lista de campos do esquema (idioma decidido em RN-MOD-27; tabela de equivalência dos dois esquemas) | [modelo-de-dados.md](modelo-de-dados.md) |
 | RN-MOD-24 | Valor real: índice de correção, ano-base e forma de publicação (hoje só nominal, RN-MOD-26) | [modelo-de-dados.md](modelo-de-dados.md) |
-| RN-FON-20 | Fonte e via de acesso nos indicadores em conflito (conflito 4) | [consumo-de-fontes.md](consumo-de-fontes.md) |
 | RN-CFE-08 | Recuperar julho de 2025 e liberar o total anual de 2025 | [mineracao-cfem.md](mineracao-cfem.md) |
 | RN-CFE-09 | Causa da ausência de São Domingos do Araguaia nos arquivos | [mineracao-cfem.md](mineracao-cfem.md) |
 | RN-CFE-10 | Modalidades de distribuição que compõem a CFEM recebida | [mineracao-cfem.md](mineracao-cfem.md) |
@@ -21,7 +20,6 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 | RN-IND-11 | Classes de floresta, mineração e área urbana, denominador e edição do limite municipal | [indicadores-derivados-e-compostos.md](indicadores-derivados-e-compostos.md) |
 | RN-IND-12 | Qual CFEM e qual população entram na CFEM per capita | [indicadores-derivados-e-compostos.md](indicadores-derivados-e-compostos.md) |
 | RN-PRI-06 | Licença de redistribuição de cada fonte (FAPESPA, IDSC, SEEG) | [privacidade-e-licencas.md](privacidade-e-licencas.md) |
-| RN-FNT-08 | Se `AVIOL12_THOMIC` mede "homicídio por arma de fogo", e qual fonte e conceito do indicador (conflito 4) | [regras-por-fonte.md](regras-por-fonte.md) |
 
 ## 2. Itens em aberto dentro de regras DECIDIDAS
 
@@ -49,7 +47,7 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 | 1 | Esquema de dados | DECISÕES (04/10): `municipio_id, municipio_nome, ano, mes, indicador, valor, unidade, fonte, atualizado_em`, com `mes` pendente de aceite. PLANO (30/09): o mesmo, sem `mes`. CONSUMO (02/10) e VAL-15/10 §Marco 1 (15/10): `indicator_id, geo_id, reference_period, value, unit, status, source_edition…` | EM ABERTO (RN-MOD-03); o mês no esquema comum foi decidido em 27/10/2026 (RN-MOD-04) e o idioma português em 30/10/2026 (RN-MOD-27). Tabela de equivalência em [modelo-de-dados.md](modelo-de-dados.md) |
 | 2 | Forma de entrega | PLANO e DECISÕES: camada de arquivos JSON e CSV. VAL-15/10 e CONSUMO: API própria | DECIDIDO em 30/10/2026 (RN-ENT-02): API própria. DECISÕES e PLANO precisam ser atualizados |
 | 3 | Emprego | DECISÕES e BLOCOS: IPEADATA (`ADMISNC` − `DESLIGNC`) para o saldo e RAIS via Base dos Dados para as quebras. PLANO: Novo CAGED via Base dos Dados. MAPA-TEMAS e CONSUMO: microdados MTE/PDET. VAL-15/10: filtros do IPEADATA não limitaram a resposta; LAB-19/10: só `ADMISNC` testado | DECIDIDO em 30/10/2026 (RN-FNT-20): Novo CAGED via Base dos Dados; IPEADATA e microdados do MTE como alternativas |
-| 4 | Homicídios | DECISÕES e BLOCOS: `AVIOL12_THOMIC` (IPEADATA e Atlas), 1989–2022. PLANO: SIM via Base dos Dados. CONSUMO: CODEC/SEGUP principal e SIM alternativa. A oficina pede "por arma de fogo"; BLOCOS diz "taxa de homicídio" | EM ABERTO (RN-FNT-08). Conferir na fonte se a série mede o conceito pedido |
+| 4 | Homicídios | DECISÕES e BLOCOS: `AVIOL12_THOMIC` (IPEADATA e Atlas), 1989–2022. PLANO: SIM via Base dos Dados. CONSUMO: CODEC/SEGUP principal e SIM alternativa. A oficina pede "por arma de fogo"; BLOCOS diz "taxa de homicídio" | DECIDIDO em 30/10/2026 (RN-FNT-08): taxa geral pelo Atlas/IPEADATA; arma de fogo pelo SIM via Base dos Dados (tabela a conferir) |
 | 5 | Frota | PLANO, DECISÕES e BLOCOS: Senatran. MAPA-TEMAS e CONSUMO: DETRAN-PA | DECIDIDO em 28/10/2026 (RN-FNT-12): Senatran, DETRAN-PA reserva |
 | 6 | Uso do solo | DECISÕES e BLOCOS: Google Earth Engine. PLANO, MAPA-TEMAS e CONSUMO: download das estatísticas da Coleção 11 | DECIDIDO em 30/10/2026 (RN-FNT-13): Earth Engine para números e mapas, download como alternativa; depende de RN-FON-09 e RN-PRI-09 |
 | 7 | Credencial do Google Cloud | DECISÕES e PLANO: conta de serviço com chave guardada como segredo; BLOCOS §Bloco 5: o Earth Engine usa a mesma credencial do BigQuery. LAB-19/10 §5.3 e VAL-15/10: não usar chave, autenticar com a conta de quem executa | DECIDIDO em 30/10/2026 (RN-FON-09): conta de serviço no pipeline e conta de quem executa nos testes manuais; escopo mínimo em RN-PRI-10 |

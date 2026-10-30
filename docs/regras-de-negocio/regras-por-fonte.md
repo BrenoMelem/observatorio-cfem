@@ -66,12 +66,13 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Relacionadas:** RN-FNT-20, RN-MOD-16
 
 ### RN-FNT-08: Taxa de homicídio
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve confirmar na fonte se `AVIOL12_THOMIC` corresponde à medida pedida pela oficina, "taxa de homicídio por arma de fogo a cada 100 mil habitantes, 1989–2022", e decidir a fonte e o conceito do indicador.
-- **Motivo:** Os documentos divergem na fonte, e BLOCOS chama o indicador apenas de "taxa de homicídio", sem "arma de fogo", sem justificar a mudança.
+- **Status:** DECIDIDA
+- **Regra:** A taxa de homicídio em geral vem da série `AVIOL12_THOMIC` (IPEADATA e Atlas da Violência), sem o rótulo "por arma de fogo". As mortes por arma de fogo, pedidas pela oficina, vêm do SIM via Base dos Dados, que é a rota primária para esse recorte; o IPEADATA é a rota reserva.
+- **Motivo:** A série do IPEADATA mede homicídio em geral e não separa arma de fogo; o SIM, por trazer a causa do óbito, pode separá-la. Manter a taxa geral no Atlas respeita RN-FNT-15 (a taxa corrigida da causa indeterminada).
 - **Exemplo:** DECISÕES indica `AVIOL12_THOMIC` municipal de 1989 a 2022 (IPEADATA e Atlas da Violência).
 - **Evidência de 28/10/2026:** os metadados do IPEADATA para `AVIOL12_THOMIC` dão o nome "Taxa de homicídios (100.000 Habitantes)", fonte MS/SVS/CGIAE (SIM), atualização de 08/07/2026, sem menção a arma de fogo. O comentário da série cita códigos CID de lesões autoprovocadas (X60-X84), o que parece inconsistente com o nome; a causa não foi confirmada. A decisão de fonte e conceito segue em aberto.
-- **Fonte:** Versão A: DECISÕES §Rotas de coleta por fonte, §Estratégia de fontes e acesso; BLOCOS §Bloco 4 (IPEADATA/Atlas, 04/10/2026, última edição 20/10/2026). Versão B: CONSUMO §Sociedade (CODEC/SEGUP principal e SIM alternativa, 02/10/2026). Versão C: PLANO §Bloco 4 (SIM via Base dos Dados, 30/09/2026). A conferência na fonte foi pedida pelo mantenedor em 24/10/2026 (DECISÃO-MANTENEDOR, resposta à pergunta 8).
+- **Exceções:** Depende da conta do Google Cloud (RN-FON-09). Não foi verificado se a tabela do SIM na Base dos Dados traz o município e a causa que separa arma de fogo, nem como tratar a causa indeterminada nesse recorte; a série do IPEADATA não respondeu a consultas de valores em 30/10/2026 (tempo esgotado), e não se sabe se tem dados municipais.
+- **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026; Versão A: DECISÕES §Rotas de coleta por fonte, §Estratégia de fontes e acesso; BLOCOS §Bloco 4 (IPEADATA/Atlas, 04/10/2026, última edição 20/10/2026). Versão C (arma de fogo): PLANO §Bloco 4 (SIM via Base dos Dados, 30/09/2026). Não adotada: CONSUMO §Sociedade (CODEC/SEGUP principal e SIM alternativa, 02/10/2026).
 - **Relacionadas:** RN-FNT-15, RN-TMP-09, RN-FON-20
 
 ### RN-FNT-09: IPEADATA para PIB e população só como plano B
@@ -131,7 +132,7 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Regra:** A taxa de homicídio não deve ser calculada a partir dos microdados crus do SIM, e os demais indicadores de saúde devem vir dos microdados do DATASUS (SIM, SINASC, SIH, SIA e CNES), agregados por município.
 - **Motivo:** Muitas mortes entram como "causa indeterminada"; o Atlas da Violência redistribui essas mortes e publica a taxa corrigida.
 - **Exemplo:** O SIM serve a indicadores de saúde, mas a taxa de homicídio usa a série corrigida do Atlas.
-- **Exceções:** A fonte e o conceito da taxa de homicídio estão em aberto (RN-FNT-08).
+- **Exceções:** A taxa em geral segue o Atlas, como esta regra diz; só o recorte por arma de fogo usa o SIM, conforme RN-FNT-08, e a causa indeterminada nesse recorte ainda deve ser tratada.
 - **Fonte:** DECISÕES §Estratégia de fontes e acesso (Homicídios); BLOCOS §Bloco 4.
 - **Relacionadas:** RN-FNT-08, RN-TMP-10, RN-TER-12
 

@@ -26,7 +26,7 @@ O nível mede a forma de acesso, não a qualidade do dado. Uma fonte B pode ser 
 - **Regra:** Quando a fonte primária tiver API adequada, o observatório deve consumi-la diretamente.
 - **Motivo:** Reduz intermediários e dá procedência mais clara.
 - **Exemplo:** O IBGE SIDRA e o SICONFI têm API própria e são consumidos direto.
-- **Exceções:** Onde a Base dos Dados é a via prática (RAIS, IDEB, eleitorado e Censo Escolar) ela é usada, sempre com citação da origem. A escolha da via em emprego e homicídios está em conflito (RN-FON-20).
+- **Exceções:** Onde a Base dos Dados é a via prática (RAIS, IDEB, eleitorado e Censo Escolar) ela é usada, sempre com citação da origem. A escolha da via de cada indicador está em RN-FON-20.
 - **Fonte:** DECISÕES §Estratégia de fontes e acesso.
 - **Relacionadas:** RN-FON-03, RN-FON-20
 
@@ -169,9 +169,9 @@ O nível mede a forma de acesso, não a qualidade do dado. Uma fonte B pode ser 
 - **Relacionadas:** RN-FON-11, RN-FNT-11
 
 ### RN-FON-20: Escolha da via de acesso nos indicadores em conflito
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve decidir a fonte e a via de acesso de cada indicador cujas fontes de decisão divergem; até lá, nenhuma versão vale como regra.
-- **Motivo:** DECISÕES, BLOCOS, PLANO, MAPA-TEMAS, CONSUMO e relatórios divergem em homicídios.
-- **Exemplo:** Homicídios: `AVIOL12_THOMIC` do IPEADATA e do Atlas da Violência (DECISÕES, BLOCOS) versus SIM via Base dos Dados (PLANO) e CODEC/SEGUP (CONSUMO); a série do IPEADATA não menciona arma de fogo (consulta de 28/10/2026, RN-FNT-08).
-- **Fonte:** Conflito 4 em [pendencias.md](pendencias.md); DECISÕES; BLOCOS; CONSUMO; MAPA-TEMAS; VAL-15/10; LAB-19/10.
+- **Status:** DECIDIDA
+- **Regra:** A fonte e a via de acesso dos indicadores cujas fontes de decisão divergiam estão decididas, uma a uma: emprego (RN-FNT-20), homicídios (RN-FNT-08), frota (RN-FNT-12), uso do solo (RN-FNT-13) e Base dos Dados ou arquivo oficial (RN-FNT-21).
+- **Motivo:** DECISÕES, BLOCOS, PLANO, MAPA-TEMAS, CONSUMO e relatórios divergiam; o mantenedor decidiu cada conflito entre 28 e 30/10/2026.
+- **Exemplo:** Homicídios: `AVIOL12_THOMIC` do IPEADATA e do Atlas da Violência para a taxa geral, e SIM via Base dos Dados para arma de fogo (RN-FNT-08).
+- **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026; conflitos 3, 4, 5, 6 e 9 em [pendencias.md](pendencias.md); DECISÕES; BLOCOS; CONSUMO; MAPA-TEMAS; VAL-15/10; LAB-19/10.
 - **Relacionadas:** RN-FON-02, RN-FNT-08
