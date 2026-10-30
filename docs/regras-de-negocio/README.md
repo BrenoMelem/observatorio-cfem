@@ -9,7 +9,7 @@ O observatório coleta indicadores de população, economia, mineração (CFEM),
 ## As duas responsabilidades do backend
 
 1. **Consumir as fontes externas:** coletar, tratar, validar e versionar os dados.
-2. **Servir os dados tratados:** camada de dados publicada, consumida pelo front-end, por exportações CSV e por um assistente de IA. A forma de entrega (arquivos, API própria ou ambos) está em aberto; as regras valem para qualquer uma.
+2. **Servir os dados tratados:** camada publicada por API própria, consumida pelo front-end, por exportações CSV e por um assistente de IA (`RN-ENT-02`, decisão do mantenedor de 30/10/2026).
 
 ## Para quem é e como ler
 
@@ -43,7 +43,7 @@ O status da regra descreve a regra nesta documentação. Ele é diferente da nat
 
 | Status | Quando se aplica |
 | --- | --- |
-| **DECIDIDA** | A regra vem de DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10 com redação explícita, ou de decisão do mantenedor de 24/10/2026 (DECISÃO-MANTENEDOR) |
+| **DECIDIDA** | A regra vem de DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10 com redação explícita, ou de decisão do mantenedor registrada nesta documentação até 30/10/2026 (DECISÃO-MANTENEDOR) |
 | **PROPOSTA** | Aguarda confirmação e consta em [pendencias.md](pendencias.md). A regra foi deduzida, ou vem só de CONSUMO, MAPA-TEMAS, PESQUISA, PLANO ou do código. Se a mesma regra aparece também em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10, ela é DECIDIDA e as duas fontes são citadas |
 | **EM ABERTO** | Não há decisão, ou as fontes se contradizem. Cada item consta em [pendencias.md](pendencias.md) |
 
@@ -65,7 +65,7 @@ Quando duas fontes se contradizem, não se escolhe: as duas versões são regist
 | SCRIPTS | `scripts/` | out/2026 | Evidência: validadores, reconciliação e importador da CFEM (só gera PROPOSTA) |
 | DECISÃO-MANTENEDOR | Decisão do mantenedor | 24/10/2026 | Respostas da Fase 1, registradas aqui até DECISÕES e BLOCOS serem atualizados |
 
-Evidências em `output/` (JSONs e manifestos) não estão no Git por decisão do projeto. Os exemplos que dependem delas estão marcados como "transcrito do relatório, não conferido no JSON". Os que foram reproduzidos em 25/10/2026, rodando de novo os scripts do repositório sobre os arquivos da ANM baixados nesse dia e consultando a API do IBGE, estão marcados como "reproduzido em 25/10/2026". Os arquivos da ANM foram atualizados em 24/10/2026, depois da validação de 15/10/2026. `docs/api/openapi.yaml` e `adr/` não existem no repositório e não são fonte de regra.
+Evidências em `output/` (JSONs e manifestos) não estão no Git por decisão do projeto. Os exemplos que dependem delas estão marcados como "transcrito do relatório, não conferido no JSON". Os que foram reproduzidos em 25/10/2026, rodando de novo os scripts do repositório sobre os arquivos da ANM baixados nesse dia e consultando a API do IBGE, estão marcados como "reproduzido em 25/10/2026". Os arquivos da ANM foram atualizados em 24/10/2026, depois da validação de 15/10/2026. O contrato `docs/api/openapi.yaml` ainda não existe. O ADR-005 registra uma decisão de engenharia para o protótipo, mas não é fonte de regra de negócio.
 
 Todas as fontes ficam em [fontes/](fontes/): os documentos de decisão e o plano original na raiz da pasta; os demais estão em [fontes/pesquisa-observatorio-cfem/](fontes/pesquisa-observatorio-cfem/). Nenhuma fonte é apagada: uma fonte obsoleta é marcada como tal, e só pode ser removida quando nenhuma regra a citar.
 

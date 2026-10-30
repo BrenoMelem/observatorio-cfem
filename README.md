@@ -16,6 +16,7 @@ O observatório ainda não tem backend de produção. Há um protótipo local do
 - `scripts/`: scripts de validação e reconciliação, além dos protótipos de atualização de população e preparação da CFEM.
 - `src/` e `test/`: código e testes dos protótipos locais.
 - `docs/adr/`, `docs/api/`, `docs/architecture/` e `docs/database/`: decisões e desenhos técnicos.
+- `AGENTS.md`: instruções para agentes de IA que trabalham no repositório (o `CLAUDE.md` apenas aponta para ele).
 
 ## Começar
 
