@@ -9,7 +9,7 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Regra:** A população anual deve ser obtida do IBGE SIDRA, agregado 6579 (estimativas), com a variável e a unidade fixadas, e não deve ser misturada com o Censo.
 - **Motivo:** É a fonte primária por API, não exige credencial e prova a arquitetura inteira por ser o primeiro indicador ponta a ponta.
 - **Exemplo:** Estimativa de 2025, variável 9324, unidade pessoas: Canaã dos Carajás 89.524 e Parauapebas 305.771; os 12 municípios retornaram valor (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: API do IBGE).
-- **Exceções:** Os valores ainda precisam ser comparados com a tabela publicada pelo IBGE antes de alimentar um gráfico (VAL-15/10).
+- **Exceções:** Cada nova edição deve ser comparada com tabela publicada pelo IBGE antes de alimentar um gráfico. Para 2025 e 2026, os 12 municípios foram reconciliados sem divergência em 30/10/2026, conforme referências em `data/referencia-populacao-2025.json` e `data/referencia-populacao-2026.json`.
 - **Fonte:** DECISÕES §Rotas de coleta por fonte, §Pré-requisitos e pendências (Ordem recomendada); BLOCOS §Bloco 1; VAL-15/10 §Matriz operacional, §Rodada adicional.
 - **Relacionadas:** RN-MOD-13, RN-FNT-19
 

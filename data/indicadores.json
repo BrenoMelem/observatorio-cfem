@@ -1,0 +1,16 @@
+{
+  "populacao_estimada": {
+    "nome": "População residente estimada",
+    "bloco": "Dinâmica populacional",
+    "fonte": "IBGE SIDRA",
+    "agregado": "6579",
+    "variavel": "9324",
+    "unidade": "pessoas",
+    "frequencia": "anual",
+    "metodo": "Valor informado pelo SIDRA para cada município, sem interpolação. O ano mais recente é descoberto em execução; cada ano publicado é reconciliado com uma tabela independente do IBGE.",
+    "limitacoes": "Estimativa populacional, distinta do Censo. Anos sem estimativa no agregado não são preenchidos.",
+    "licenca": "Fonte IBGE; verificar termos de atribuição antes de redistribuição externa.",
+    "estrategia": "recalculado",
+    "municipios_comparacao": []
+  }
+}

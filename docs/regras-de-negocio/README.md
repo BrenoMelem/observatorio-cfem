@@ -1,15 +1,15 @@
 # Regras de negócio do backend do Observatório CFEM
 
-Documentação das regras de negócio do backend do Observatório CFEM, também chamado Observatório RI Carajás. Ela descreve **o que** o sistema deve garantir e **por quê**, e nunca **como** implementar. Data desta versão: 24/10/2026.
+Documentação das regras de negócio do backend do Observatório CFEM, também chamado Observatório RI Carajás. Ela descreve **o que** o sistema deve garantir e **por quê**, e nunca **como** implementar. Data desta versão: 30/10/2026.
 
 ## O projeto
 
-O observatório coleta indicadores de população, economia, mineração (CFEM), sociedade, meio ambiente e finanças públicas dos 12 municípios da Região de Integração Carajás (PA), com foco em Canaã dos Carajás (IBGE 1502152) e Parauapebas (IBGE 1505536). O sistema ainda está em fase de pesquisa e validação de fontes: o que existe são provas, scripts de validação e um primeiro importador da CFEM, não um backend implementado.
+O observatório coleta indicadores de população, economia, mineração (CFEM), sociedade, meio ambiente e finanças públicas dos 12 municípios da Região de Integração Carajás (PA), com foco em Canaã dos Carajás (IBGE 1502152) e Parauapebas (IBGE 1505536). O sistema ainda está em fase de pesquisa e validação de fontes. Há um protótipo local do pipeline de população, além das provas, scripts de validação e um primeiro importador da CFEM; não há backend de produção.
 
 ## As duas responsabilidades do backend
 
 1. **Consumir as fontes externas:** coletar, tratar, validar e versionar os dados.
-2. **Servir os dados tratados:** camada de dados publicada, consumida pelo front-end, por exportações CSV e por um assistente de IA. A forma de entrega (arquivos, API própria ou ambos) está em aberto; as regras valem para qualquer uma.
+2. **Servir os dados tratados:** camada publicada por API própria, consumida pelo front-end, por exportações CSV e por um assistente de IA (`RN-ENT-02`, decisão do mantenedor de 30/10/2026).
 
 ## Para quem é e como ler
 
@@ -43,7 +43,7 @@ O status da regra descreve a regra nesta documentação. Ele é diferente da nat
 
 | Status | Quando se aplica |
 | --- | --- |
-| **DECIDIDA** | A regra vem de DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10 com redação explícita, ou de decisão do mantenedor de 24/10/2026 (DECISÃO-MANTENEDOR) |
+| **DECIDIDA** | A regra vem de DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10 com redação explícita, ou de decisão do mantenedor registrada nesta documentação até 30/10/2026 (DECISÃO-MANTENEDOR) |
 | **PROPOSTA** | Aguarda confirmação e consta em [pendencias.md](pendencias.md). A regra foi deduzida, ou vem só de CONSUMO, MAPA-TEMAS, PESQUISA, PLANO ou do código. Se a mesma regra aparece também em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10, ela é DECIDIDA e as duas fontes são citadas |
 | **EM ABERTO** | Não há decisão, ou as fontes se contradizem. Cada item consta em [pendencias.md](pendencias.md) |
 
@@ -65,7 +65,7 @@ Quando duas fontes se contradizem, não se escolhe: as duas versões são regist
 | SCRIPTS | `scripts/` | out/2026 | Evidência: validadores, reconciliação e importador da CFEM (só gera PROPOSTA) |
 | DECISÃO-MANTENEDOR | Decisão do mantenedor | 24/10/2026 | Respostas da Fase 1, registradas aqui até DECISÕES e BLOCOS serem atualizados |
 
-Evidências em `output/` (JSONs e manifestos) não estão no Git por decisão do projeto. Os exemplos que dependem delas estão marcados como "transcrito do relatório, não conferido no JSON". Os que foram reproduzidos em 25/10/2026, rodando de novo os scripts do repositório sobre os arquivos da ANM baixados nesse dia e consultando a API do IBGE, estão marcados como "reproduzido em 25/10/2026". Os arquivos da ANM foram atualizados em 24/10/2026, depois da validação de 15/10/2026. `docs/api/openapi.yaml` e `adr/` não existem no repositório e não são fonte de regra.
+Evidências em `output/` (JSONs e manifestos) não estão no Git por decisão do projeto. Os exemplos que dependem delas estão marcados como "transcrito do relatório, não conferido no JSON". Os que foram reproduzidos em 25/10/2026, rodando de novo os scripts do repositório sobre os arquivos da ANM baixados nesse dia e consultando a API do IBGE, estão marcados como "reproduzido em 25/10/2026". Os arquivos da ANM foram atualizados em 24/10/2026, depois da validação de 15/10/2026. O contrato `docs/api/openapi.yaml` ainda não existe. O ADR-005 registra uma decisão de engenharia para o protótipo, mas não é fonte de regra de negócio.
 
 Todas as fontes ficam em [fontes/](fontes/): os documentos de decisão e o plano original na raiz da pasta; os demais estão em [fontes/pesquisa-observatorio-cfem/](fontes/pesquisa-observatorio-cfem/). Nenhuma fonte é apagada: uma fonte obsoleta é marcada como tal, e só pode ser removida quando nenhuma regra a citar.
 
@@ -86,10 +86,10 @@ Não há código, pseudocódigo, rotas HTTP, nomes de funções, escolha de bibl
 | [temporalidade-e-atualizacao.md](temporalidade-e-atualizacao.md) | RN-TMP | Ano de referência, agenda por fonte, períodos, mudanças de método | 17 |
 | [validacao-e-publicacao.md](validacao-e-publicacao.md) | RN-VPU | Validação, lote bloqueado, reconciliação, homologação | 12 |
 | [entrega-dos-dados.md](entrega-dos-dados.md) | RN-ENT | Camada publicada, CSV aberto, painel de status, assistente de IA | 10 |
-| [mineracao-cfem.md](mineracao-cfem.md) | RN-CFE | Arrecadação, distribuição, autuação e VPM | 22 |
+| [mineracao-cfem.md](mineracao-cfem.md) | RN-CFE | Arrecadação, distribuição, autuação e VPM | 24 |
 | [indicadores-derivados-e-compostos.md](indicadores-derivados-e-compostos.md) | RN-IND | Indicadores derivados e compostos congelados | 13 |
 | [privacidade-e-licencas.md](privacidade-e-licencas.md) | RN-PRI | Dados pessoais, acesso restrito e reuso | 10 |
 | [glossario.md](glossario.md) | | Termos e siglas | |
 | [pendencias.md](pendencias.md) | | Tudo o que está EM ABERTO, as divergências entre fontes e as regras PROPOSTAS aguardando confirmação | |
 
-Total: 164 regras, sendo 119 DECIDIDAS, 36 PROPOSTAS e 9 EM ABERTO.
+Total: 166 regras, sendo 119 DECIDIDAS, 38 PROPOSTAS e 9 EM ABERTO.

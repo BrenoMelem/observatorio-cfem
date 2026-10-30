@@ -194,3 +194,19 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Exceções:** O validador atual usa o arquivo de 2022–2026 e precisa passar a usar o completo. A cobertura municipal dos anos anteriores a 2022 não foi verificada.
 - **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026; DECISÕES §Rotas de coleta por fonte; SCRIPTS (`validate_anm_cfem`); VAL-15/10 §Rodada adicional; consulta ao servidor da ANM em 27/10/2026.
 - **Relacionadas:** RN-CFE-01, RN-FNT-18
+
+### RN-CFE-23: Cobertura parcial de Bom Jesus do Tocantins na arrecadação de 2025
+- **Status:** PROPOSTA
+- **Regra:** Os meses sem linha de Bom Jesus do Tocantins (1501576) na arrecadação de 2025 devem ser registrados como `ausente`, nunca como zero; a causa e a completude municipal do ano dependem de publicação independente da ANM.
+- **Motivo:** Ausência de linha não comprova arrecadação zero nem erro da fonte.
+- **Exemplo:** O briefing de 30/10/2026 relata ausência em 2025; a leitura do CSV completo da ANM em 30/10/2026 encontrou janeiro, mas não fevereiro a dezembro. A causa da divergência ainda não foi confirmada.
+- **Fonte:** Briefing operacional de 30/10/2026, §9; leitura local do `CFEM_Arrecadacao.csv` em 30/10/2026, relatório `output/observatorio/tratado/cfem/relatorio.json`.
+- **Relacionadas:** RN-CFE-07, RN-CFE-22, RN-VPU-06
+
+### RN-CFE-24: Despesa municipal financiada por CFEM exige identificação da fonte de recursos
+- **Status:** PROPOSTA
+- **Regra:** Um indicador de despesa financiada por CFEM só deve ser criado após confirmar o código de fonte de recursos na despesa executada, a cobertura dos períodos e a extração reproduzível; dados agregados de CFEM recebida e de despesa por função não devem ser usados para afirmar financiamento direto.
+- **Motivo:** ANM registra a receita e SICONFI registra despesa agregada do orçamento, sem vincular cada despesa à receita CFEM.
+- **Exemplo:** `17080000` aparece em previsão orçamentária de Canaã dos Carajás em 2023/2024, enquanto `1708000` também foi encontrado; nenhum foi confirmado como filtro da despesa executada.
+- **Fonte:** Briefing operacional de 30/10/2026, §9; verificação independente nos portais municipais ainda pendente.
+- **Relacionadas:** RN-FNT-04, RN-FON-05, RN-FON-06

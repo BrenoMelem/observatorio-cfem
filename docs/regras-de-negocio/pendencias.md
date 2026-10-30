@@ -30,7 +30,6 @@ Estas regras estão decididas no essencial, mas um ponto delas continua sem deci
 | [RN-TMP-15](temporalidade-e-atualizacao.md) | Emenda entre SICONFI (2013 em diante) e FINBRA (pré-2013) numa mesma série |
 | [RN-FNT-04](regras-por-fonte.md) | Demonstrativo(s) e contas do SICONFI e se o escopo fica em função e subfunção; o estágio da despesa foi decidido em 30/10/2026 (três indicadores separados); o nome do anexo muda em 2013 |
 | [RN-FNT-11](regras-por-fonte.md) | Coluna de município nas tabelas do CAGED e do IDEB; `table_id` do eleitorado (TSE) e do Censo Escolar |
-| [RN-FNT-01](regras-por-fonte.md) | Comparação dos valores da população com a tabela publicada pelo IBGE antes de alimentar um gráfico |
 | [RN-FON-15](consumo-de-fontes.md) e [RN-FNT-14](regras-por-fonte.md) | Se a planilha do SEEG pode ficar no repositório e o que conta como dado bruto "grande" (conflito 16) |
 | [RN-IND-09](indicadores-derivados-e-compostos.md) | Base da participação da RI Carajás no PIB (PIB do Pará, da RI ou outra) e nomes finais dos dois indicadores no manifesto |
 | [RN-ENT-08](entrega-dos-dados.md) | Metas numéricas de cada critério de avaliação do assistente |
@@ -68,7 +67,13 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 
 ## 4. Lacunas e premissas desta documentação
 
-- **Fontes ausentes.** `docs/api/openapi.yaml` e `adr/`, citados por CONSUMO, não existem neste repositório; não foi possível comparar com eles. Quando existirem e contradisserem as regras, a divergência deve ser registrada aqui.
+- **RN-FNT-01, comparação da população: resolvida para 2025 e 2026 em 30/10/2026.** Os 12 códigos do SIDRA foram consultados e comparados, sem divergência, com as tabelas municipais independentes do IBGE. As referências versionadas estão em `data/referencia-populacao-2025.json` e `data/referencia-populacao-2026.json`; a reconciliação de cada nova edição continua obrigatória. O SIDRA já disponibiliza 2026, portanto 2025 deixou de ser o ano mais recente.
+
+- **Arrecadação de Bom Jesus do Tocantins em 2025 (RN-CFE-23, proposta).** O briefing de 30/10/2026 dizia que faltava o município em 2025. A leitura do CSV completo atual da ANM encontrou linha em janeiro, mas nenhuma de fevereiro a dezembro. A causa dos 11 meses ausentes não foi confirmada em publicação independente. Não fechar total anual municipal nem converter ausência em zero. Em 2026, o arquivo nacional tem janeiro a outubro e não há linha de Bom Jesus nem de Brejo Grande nesses meses; também requer investigação.
+- **Duplicatas na arrecadação (RN-VPU-11).** Na leitura local de 30/10/2026 do arquivo completo `CFEM_Arrecadacao.csv` da ANM (325.147.685 bytes, 2.433.952 linhas), 129 linhas do recorte dos 12 municípios repetem todos os campos de outra linha. Inclui 2025/09 para Parauapebas e 2026/01–03 para Marabá. O lote está bloqueado; revisar a origem antes de definir tratamento. O relatório em `output/observatorio/tratado/cfem/relatorio.json` contém contagens por município, ano e mês, sem CPF/CNPJ.
+- **Rastreamento de despesa financiada por CFEM (RN-CFE-24, proposta).** Os agregados da ANM e do SICONFI não identificam a despesa paga com CFEM. Os códigos de fonte de recursos `17080000` e `1708000` apareceram em consultas distintas, mas não foram confirmados na despesa executada. Falta verificar classificação, cobertura e extração reproduzível nos portais municipais antes de criar esse indicador. CFEM recebida e despesa por função podem ser apresentadas lado a lado, sem afirmar financiamento direto.
+
+- **Fontes ausentes.** `docs/api/openapi.yaml`, citado por CONSUMO, ainda não existe nesta atualização do repositório; por isso, não foi possível comparar o contrato. O ADR-005 registra somente o protótipo local de população e não decide a arquitetura de produção. Quando o contrato da API existir, qualquer divergência com as regras deve ser registrada aqui.
 - **Evidências ausentes.** A pasta `output/` está fora do Git por decisão do projeto. Os exemplos que dependem dela foram marcados como "transcrito do relatório, não conferido no JSON". Em 25/10/2026, os exemplos da CFEM (arrecadação, distribuição, autuação, reconciliação de maio de 2025 e importador) e a população do IBGE foram reproduzidos; a única diferença foi o número de linhas do arquivo de arrecadação (RN-CFE-22). O FRED foi consultado com chave e o resultado diverge do relatório (divergência 17). Seguem não reproduzidos: o lote de dois municípios do IBGE que retornou HTTP 500, a página de 337 linhas do SICONFI, IPEADATA, Pink Sheet, AMB, Base dos Dados e Earth Engine (estes dois dependem de credenciais Google Cloud).
 - **Tratamento de PLANO.** PLANO não consta entre as fontes que geram DECIDIDA (resposta 1 de 24/10/2026). Regras que aparecem só em PLANO foram marcadas como PROPOSTA; quando a mesma regra aparece também em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10, as duas fontes foram citadas. O mantenedor deve confirmar essa leitura.
 - **Resposta 8 da Fase 1.** A resposta ao item 8 veio sem a opção marcada; foi registrado apenas o que o mantenedor escreveu (EM ABERTO, conferir `AVIOL12_THOMIC` na fonte).
@@ -77,7 +82,7 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 
 ## 5. Regras PROPOSTAS aguardando confirmação
 
-Estas 36 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook ou dos scripts. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
+Estas 38 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook, dos scripts ou do briefing operacional de 30/10/2026. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
 
 ### Território (4)
 
@@ -137,12 +142,14 @@ Estas 36 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA
 | [RN-ENT-08](entrega-dos-dados.md) | Critérios de avaliação do assistente | VAL-15/10 §Resposta ao orientador (item 2). O próprio VAL-15/10 chama os critérios de "propostos" |
 | [RN-ENT-09](entrega-dos-dados.md) | Primeiros gráficos | VAL-15/10 §Resposta ao orientador (item 3), que é uma recomendação do relatório e não uma decisão de DECISÕES ou de BLOCOS; BLOCOS §Bloco 1 (população como primeiro pipeline) |
 
-### Mineração (CFEM) (2)
+### Mineração (CFEM) (4)
 
 | Regra | Título | Origem |
 | --- | --- | --- |
 | [RN-CFE-11](mineracao-cfem.md) | Agregação por município, ano, mês e modalidade | SCRIPTS (`build_cfem_distribution_municipal`). Deduzida do código |
 | [RN-CFE-12](mineracao-cfem.md) | Controle de escala com o total nacional | VAL-15/10 §Rodada adicional (apresentado como controle, não como regra) |
+| [RN-CFE-23](mineracao-cfem.md) | Cobertura parcial de Bom Jesus do Tocantins na arrecadação de 2025 | Briefing operacional de 30/10/2026 §9; leitura do CSV completo atual; falta confronto com publicação independente da ANM |
+| [RN-CFE-24](mineracao-cfem.md) | Despesa municipal financiada por CFEM exige fonte de recursos confirmada | Briefing operacional de 30/10/2026 §9; códigos e cobertura ainda não confirmados |
 
 ### Indicadores derivados e compostos (2)
 
