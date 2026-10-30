@@ -17,7 +17,6 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 | RN-IND-03 | Corte exato do IPEA TD 3146 | [indicadores-derivados-e-compostos.md](indicadores-derivados-e-compostos.md) |
 | RN-IND-07 | Denominador de "emprego formal como % da população" (conflito 13) | [indicadores-derivados-e-compostos.md](indicadores-derivados-e-compostos.md) |
 | RN-IND-11 | Classes de floresta, mineração e área urbana (denominador e limite decididos em RN-IND-13) | [indicadores-derivados-e-compostos.md](indicadores-derivados-e-compostos.md) |
-| RN-IND-12 | Qual CFEM e qual população entram na CFEM per capita | [indicadores-derivados-e-compostos.md](indicadores-derivados-e-compostos.md) |
 | RN-PRI-06 | Licença de redistribuição de cada fonte (FAPESPA, IDSC, SEEG) | [privacidade-e-licencas.md](privacidade-e-licencas.md) |
 
 ## 2. Itens em aberto dentro de regras DECIDIDAS

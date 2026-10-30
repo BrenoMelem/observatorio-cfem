@@ -92,7 +92,7 @@ Fonte: DECISÕES §Indicadores compostos; BLOCOS §Bloco 6.
 - **Regra:** A CFEM per capita (CFEM ÷ população) e a comparação com outros municípios mineradores devem ser derivadas das fontes já existentes e não devem ter fonte própria.
 - **Motivo:** Evita fonte nova para algo que se calcula do arquivo nacional da ANM e da população.
 - **Exemplo:** A comparação usa o mesmo arquivo nacional de distribuição, com os N maiores recebedores como padrão.
-- **Exceções:** Qual CFEM e qual população entram na razão está em aberto (RN-IND-12).
+- **Exceções:** Qual CFEM e qual população entram na razão está decidido em RN-IND-12.
 - **Fonte:** BLOCOS §Bloco 3 (tabela: CFEM per capita e comparação).
 - **Relacionadas:** RN-TER-09, RN-MOD-17, RN-IND-12
 
@@ -105,12 +105,13 @@ Fonte: DECISÕES §Indicadores compostos; BLOCOS §Bloco 6.
 - **Relacionadas:** RN-IND-06, RN-IND-13
 
 ### RN-IND-12: Qual CFEM e qual população no per capita
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve definir se a CFEM per capita usa a CFEM arrecadada ou a recebida, e qual série de população (estimativa anual ou Censo) entra no denominador.
-- **Motivo:** BLOCOS diz apenas "CFEM ÷ população", mas CFEM arrecadada e recebida são medidas distintas e população estimada e Censo não se misturam.
+- **Status:** DECIDIDA
+- **Regra:** A CFEM per capita é publicada como dois indicadores separados: um com a CFEM arrecadada e outro com a CFEM recebida, sem somar nem misturar (RN-CFE-02). O denominador de ambos é a estimativa anual de população do IBGE.
+- **Motivo:** CFEM arrecadada e recebida são medidas distintas e respondem a perguntas diferentes: o que a extração gerou por morador e o que a prefeitura recebeu por morador. A estimativa existe para todo ano e combina com a CFEM anual; o Censo não se mistura com a estimativa (RN-MOD-13).
 - **Exemplo:** A população estimada de 2025 de Parauapebas foi 305.771 pessoas (agregado 6579, variável 9324) (transcrito do relatório VAL-15/10, não conferido no JSON).
-- **Fonte:** BLOCOS §Bloco 3; RN-CFE-02 e RN-MOD-13 (restrições aplicáveis).
-- **Relacionadas:** RN-IND-10, RN-CFE-02, RN-MOD-13
+- **Exceções:** Nos anos de Censo a série segue identificada como estimativa, sem trocar de fonte no meio (RN-MOD-13). O nome final de cada indicador no manifesto não foi definido.
+- **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026; BLOCOS §Bloco 3; RN-CFE-02 e RN-MOD-13 (restrições aplicáveis).
+- **Relacionadas:** RN-IND-09, RN-IND-10, RN-CFE-02, RN-MOD-13
 
 ### RN-IND-13: Denominador e limite municipal do uso do solo
 - **Status:** DECIDIDA
