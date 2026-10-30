@@ -95,7 +95,7 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Regra:** O projeto deve usar as tabelas da Base dos Dados já conferidas: `br_ibge_populacao.municipio`, `br_ibge_pib.municipio`, `br_me_caged.microdados_movimentacoes`, `br_me_rais.microdados_vinculos`, `br_inep_ideb.municipio`, `br_ms_sim.municipio_causa` e `br_me_siconfi` (com demonstrativo escolhido), e a tabela `microdados_antigos` do CAGED, que vai só até cerca de 2019, não deve ser usada para dados atuais.
 - **Motivo:** Os nomes completos e os anos mais recentes foram conferidos no catálogo em out/2026.
 - **Exemplo:** RAIS (vínculos), ano mais recente 2025; Novo CAGED, 2026-08 (conforme DECISÕES).
-- **Exceções:** A via Base dos Dados para RAIS, IDEB e eleitorado foi decidida em RN-FNT-21, com dependência de RN-FON-09. Em aberto: a coluna de município nas tabelas do CAGED e do IDEB, e o `table_id` técnico do eleitorado (TSE) e do Censo Escolar (tabela `escola`).
+- **Exceções:** A via Base dos Dados para RAIS, IDEB e eleitorado foi decidida em RN-FNT-21, com a credencial decidida em RN-FON-09. Em aberto: a coluna de município nas tabelas do CAGED e do IDEB, e o `table_id` técnico do eleitorado (TSE) e do Censo Escolar (tabela `escola`).
 - **Fonte:** DECISÕES §Tabelas da Base dos Dados confirmadas, §Pré-requisitos e pendências; BLOCOS §Bloco 4.
 - **Relacionadas:** RN-FON-03, RN-FON-19, RN-TMP-03
 
@@ -110,10 +110,10 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 
 ### RN-FNT-13: Uso do solo pelo MapBiomas
 - **Status:** DECIDIDA
-- **Regra:** O uso do solo do MapBiomas, tanto os números por município quanto os mapas, é obtido pelo Google Earth Engine. O download das estatísticas municipais da Coleção 11 fica como alternativa para os números. A coleta depende de RN-FON-09 e RN-PRI-09, que seguem em aberto.
+- **Regra:** O uso do solo do MapBiomas, tanto os números por município quanto os mapas, é obtido pelo Google Earth Engine. O download das estatísticas municipais da Coleção 11 fica como alternativa para os números. A coleta depende da criação da conta e do cadastro de uso não comercial (RN-FON-09 e RN-PRI-09).
 - **Motivo:** O mantenedor quer exibir mapas, e as planilhas de estatística trazem só números; o Earth Engine fornece o dado de imagem e permite recortar por município, numa única rota.
 - **Exemplo:** O Earth Engine ficou PENDENTE em 17/10/2026 por falta de `GEE_PROJECT` (transcrito do relatório LAB-19/10, não conferido no JSON).
-- **Exceções:** Vale RN-TMP-05 (nome do asset não fixado). Até RN-FON-09 ser decidida, o uso do solo não pode ser coletado por essa rota; o asset ainda não foi testado. O corte das classes e o limite municipal seguem em aberto em RN-IND-11.
+- **Exceções:** Vale RN-TMP-05 (nome do asset não fixado). A credencial está decidida (RN-FON-09), mas a conta e o projeto ainda não foram criados, e o asset ainda não foi testado. O corte das classes e o limite municipal seguem em aberto em RN-IND-11.
 - **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026 (substitui a decisão do mesmo dia pelo download primário); Versão adotada: DECISÕES §Rotas de coleta por fonte e BLOCOS §Bloco 5 (Google Earth Engine, com download como alternativa; 04/10/2026, última edição 20/10/2026). Versão como alternativa: MAPA-TEMAS §Meio ambiente e CONSUMO §Meio ambiente (download das estatísticas da Coleção 11; 02/10/2026); PLANO §Bloco 5 (30/09/2026).
 - **Relacionadas:** RN-TMP-05, RN-TMP-07, RN-PRI-09, RN-FON-20
 
@@ -180,6 +180,6 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Regra:** RAIS, IDEB, eleitorado (TSE) e Censo Escolar são obtidos pela Base dos Dados, sempre citados com a origem (RN-FON-03). O arquivo oficial do órgão fica como alternativa.
 - **Motivo:** Decisão do mantenedor entre as duas versões das fontes; a Base dos Dados já traz as tabelas padronizadas.
 - **Exemplo:** O IDEB é consumido como `br_inep_ideb.municipio` (DECISÕES), e não como arquivo do INEP por edição (CONSUMO).
-- **Exceções:** Essa via depende da credencial do Google Cloud (RN-FON-09, em aberto) e do escopo mínimo (RN-PRI-10); até lá, nenhuma dessas quatro bases pode ser coletada por ela. Nenhuma das quatro foi testada de ponta a ponta por nenhuma das vias.
+- **Exceções:** Essa via usa a credencial decidida em RN-FON-09 e o escopo mínimo de RN-PRI-10; enquanto a conta e o projeto do Google Cloud não forem criados, nenhuma dessas quatro bases pode ser coletada por ela. Nenhuma das quatro foi testada de ponta a ponta por nenhuma das vias.
 - **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026; Versão adotada: DECISÕES §Estratégia de fontes e acesso e BLOCOS §Bloco 4 (04/10/2026, última edição 20/10/2026). Versão como alternativa: CONSUMO §Sociedade, §Economia e MAPA-TEMAS §Sociedade (02/10/2026).
 - **Relacionadas:** RN-FON-03, RN-FON-20
