@@ -8,7 +8,7 @@ Atenção a duas coisas que não se misturam:
 
 ## Requisitos semânticos e equivalência entre os dois esquemas
 
-As fontes descrevem dois esquemas diferentes (conflito 1 em [pendencias.md](pendencias.md)). Esta documentação fixa os requisitos semânticos (RN-MOD-02) e deixa os nomes de campo **EM ABERTO** (RN-MOD-03). A tabela abaixo mostra a equivalência entre as duas versões.
+As fontes descrevem dois esquemas diferentes (conflito 1 em [pendencias.md](pendencias.md)). Esta documentação fixa os requisitos semânticos (RN-MOD-02) e os nomes de campo estão decididos em RN-MOD-03. A tabela abaixo mostra a equivalência entre as duas versões.
 
 | Requisito semântico | Esquema de DECISÕES (04/10/2026, última edição 20/10/2026) | Esquema de CONSUMO (02/10/2026) e de VAL-15/10 §Marco 1 (15/10/2026) | Observação |
 | --- | --- | --- | --- |
@@ -16,7 +16,7 @@ As fontes descrevem dois esquemas diferentes (conflito 1 em [pendencias.md](pend
 | Município (código) | `municipio_id` | `geo_id` | Nos dois casos o código IBGE de 7 dígitos |
 | Município (nome) | `municipio_nome` | `geo_name` (CONSUMO) | VAL-15/10 §Marco 1 cita só `geo_id` |
 | Nível territorial | sem campo | `geo_level` (CONSUMO) | Município ou RI |
-| Período do fenômeno | `ano`, `mes` (opcional) | `reference_period`, `frequency` (CONSUMO) | `mes` ainda sem aceite (RN-MOD-04) |
+| Período do fenômeno | `ano`, `mes` (opcional) | `reference_period`, `frequency` (CONSUMO) | O mês entra no esquema comum, vazio nos anuais (RN-MOD-04) |
 | Valor | `valor` | `value` | |
 | Unidade | `unidade` | `unit` | |
 | Natureza e validação do valor | sem campo | `status` (lista única: validado, provisório, não divulgado, ausente, não aplicável) | Decidido nesta documentação em dois eixos (RN-MOD-06, RN-MOD-07) |
@@ -26,7 +26,7 @@ As fontes descrevem dois esquemas diferentes (conflito 1 em [pendencias.md](pend
 | Versão do pipeline | sem campo | `pipeline_version` | |
 | Metodologia, limitações e licença | sem campo | `methodology`, `limitations`, `license` (CONSUMO) | |
 
-Estado: **EM ABERTO**. Nenhum dos dois conjuntos de nomes é adotado.
+Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a partir do esquema de DECISÕES, com os campos acrescentados em RN-MOD-03.
 
 ### RN-MOD-01: Esquema único de saída
 - **Status:** DECIDIDA
@@ -41,25 +41,27 @@ Estado: **EM ABERTO**. Nenhum dos dois conjuntos de nomes é adotado.
 - **Regra:** Toda observação publicada deve identificar o indicador, o município, o período do fenômeno, o valor, a unidade, a natureza do valor, o estado de validação, a fonte e a proveniência (edição da fonte, data de coleta e versão do tratamento).
 - **Motivo:** Sem esses elementos o valor não pode ser conferido, comparado nem refeito.
 - **Exemplo:** População estimada de 2025 de Canaã dos Carajás (1502152): 89.524 pessoas, agregado 6579, variável 9324 (transcrito do relatório VAL-15/10, não conferido no JSON).
-- **Exceções:** Os nomes de campo estão em aberto (RN-MOD-03).
+- **Exceções:** Os nomes de campo estão em RN-MOD-03.
 - **Fonte:** DECISÕES §Arquitetura e padrões de dados; VAL-15/10 §Marco 1; DECISÃO-MANTENEDOR de 24/10/2026 (resposta à pergunta 2).
 - **Relacionadas:** RN-MOD-03, RN-MOD-06, RN-MOD-07, RN-MOD-21, RN-MOD-22
 
 ### RN-MOD-03: Nomes e campos do esquema
-- **Status:** EM ABERTO
-- **Regra:** Os nomes de campo, o idioma e a lista de campos da observação devem ser definidos pelo mantenedor antes da implementação do contrato.
-- **Motivo:** DECISÕES e CONSUMO e VAL-15/10 definem esquemas diferentes em idioma e em campos (ver tabela acima).
-- **Exemplo:** DECISÕES usa `municipio_id`; CONSUMO e VAL-15/10 usam `geo_id`.
-- **Fonte:** DECISÕES §Arquitetura e padrões de dados (04/10/2026); CONSUMO §Contrato de dados para o front-end (02/10/2026); VAL-15/10 §Marco 1 (15/10/2026).
+- **Status:** DECIDIDA
+- **Regra:** Cada observação publicada leva os campos `indicador`, `municipio_id`, `municipio_nome`, `nivel_territorial` (município ou RI), `ano`, `mes` (vazio nos anuais), `valor`, `unidade`, `natureza_valor`, `estado_validacao`, `fonte`, `edicao_fonte`, `atualizado_em` (data de coleta) e `versao_tratamento`. Metodologia, limitações e licença ficam no manifesto de indicadores (RN-MOD-25), uma vez por indicador, e não em cada linha.
+- **Motivo:** A lista parte do esquema de DECISÕES e acrescenta os campos que as regras decididas exigem (RN-MOD-02, RN-MOD-04, RN-MOD-06 e RN-MOD-07); pôr texto longo em cada linha repetiria o mesmo conteúdo muitas vezes.
+- **Exemplo:** `municipio_id` com o código IBGE de 7 dígitos, como `1502152` (Canaã dos Carajás), e `mes` vazio na população anual do IBGE.
+- **Exceções:** Os valores aceitos de `natureza_valor` e `estado_validacao` seguem RN-MOD-06 e RN-MOD-07. CONSUMO e VAL-15/10 exigem metodologia, limitações e licença em cada linha; essa parte não foi adotada. O local exato da busca na fonte (`source_locator` em CONSUMO) e a definição do indicador não entram na observação; se forem necessários, vão para o manifesto.
+- **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026; DECISÕES §Arquitetura e padrões de dados (04/10/2026, última edição 20/10/2026); CONSUMO §Contrato de dados para o front-end (02/10/2026); VAL-15/10 §Marco 1 (15/10/2026).
 - **Relacionadas:** RN-MOD-02, RN-MOD-04, RN-ENT-02
 
 ### RN-MOD-04: Campo de mês
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve decidir se o mês entra no esquema comum, vazio nos indicadores anuais, ou se fica só na base da mineração.
-- **Motivo:** O mês é necessário para a CFEM (guardar mensal, exibir anual), mas o aceite no esquema comum não foi dado.
-- **Exemplo:** A distribuição da CFEM de maio de 2025 só pode ser reconciliada porque o mês é preservado.
-- **Fonte:** DECISÕES §Arquitetura e padrões de dados, §Pré-requisitos e pendências; VAL-15/10 §Marco 2; LAB-19/10 §7 (Próximos passos, item 2).
-- **Relacionadas:** RN-MOD-05, RN-CFE-04
+- **Status:** DECIDIDA
+- **Regra:** O mês deve fazer parte do esquema comum de todos os indicadores, preenchido quando a fonte é mensal e vazio nos indicadores anuais.
+- **Motivo:** Um esquema único evita dois formatos para consumir, e o mês é necessário para a CFEM (guardar mensal, exibir anual) e para outras séries mensais, como os preços de commodities do FRED.
+- **Exemplo:** A distribuição da CFEM de maio de 2025 só pôde ser reconciliada porque o mês foi preservado. Os preços de ferro e cobre do FRED são mensais, e a população do IBGE é anual, com o mês vazio.
+- **Exceções:** O nome do campo é `mes` (RN-MOD-03).
+- **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026; DECISÕES §Arquitetura e padrões de dados, §Pré-requisitos e pendências; VAL-15/10 §Marco 2; LAB-19/10 §7 (Próximos passos, item 2).
+- **Relacionadas:** RN-MOD-03, RN-MOD-05, RN-CFE-04
 
 ### RN-MOD-05: Granularidade mais fina da fonte
 - **Status:** DECIDIDA
@@ -223,13 +225,13 @@ Estado: **EM ABERTO**. Nenhum dos dois conjuntos de nomes é adotado.
 - **Fonte:** DECISÕES §Número de eleitores; BLOCOS §Bloco 1.
 - **Relacionadas:** RN-MOD-05, RN-TER-08
 
-### RN-MOD-24: Valor nominal ou real
+### RN-MOD-24: Valor real e índice de correção
 - **Status:** EM ABERTO
-- **Regra:** O mantenedor deve decidir se os valores monetários são publicados só em valor nominal ou também em valor real, com índice de correção explícito.
-- **Motivo:** CONSUMO indica a possibilidade ("se necessário"), mas nenhuma fonte de decisão a define.
+- **Regra:** O mantenedor deve decidir como o valor real será publicado: o índice de correção, o ano-base e se entra como indicador derivado, com o índice explícito.
+- **Motivo:** O valor real é um pedido do projeto, mas nenhuma fonte de decisão define o índice nem o ano-base. Até lá, os valores monetários são publicados em valor nominal (RN-MOD-26).
 - **Exemplo:** Despesa per capita por função, 2013–2025, em valor nominal.
-- **Fonte:** CONSUMO §Finanças públicas e índices (despesa per capita).
-- **Relacionadas:** RN-MOD-17
+- **Fonte:** CONSUMO §Finanças públicas e índices (despesa per capita); DECISÃO-MANTENEDOR de 26/10/2026 (o valor real fica para uma etapa futura).
+- **Relacionadas:** RN-MOD-17, RN-MOD-26
 
 ### RN-MOD-25: Manifesto único de indicadores
 - **Status:** DECIDIDA
@@ -239,3 +241,21 @@ Estado: **EM ABERTO**. Nenhum dos dois conjuntos de nomes é adotado.
 - **Exceções:** Nome, formato e local do arquivo ficam fora desta documentação.
 - **Fonte:** DECISÕES §Arquitetura e padrões de dados ("Manifesto"), §Indicadores compostos; LAB-19/10 §7 (Próximos passos, item 5).
 - **Relacionadas:** RN-IND-01, RN-TER-09, RN-TMP-02
+
+### RN-MOD-26: Valores monetários em valor nominal por enquanto
+- **Status:** DECIDIDA
+- **Regra:** Os valores monetários devem ser publicados em valor nominal, como a fonte os informou, sem correção por índice de preços, até a decisão sobre o valor real (RN-MOD-24).
+- **Motivo:** Nenhum indicador atual exige valor real, e escolher índice e ano-base agora ampliaria o escopo sem definição.
+- **Exemplo:** Despesa per capita por função, 2013–2025, em valor nominal.
+- **Exceções:** O valor real é um pedido do projeto e será acrescentado depois, com índice e ano-base explícitos; por isso RN-MOD-24 continua EM ABERTO.
+- **Fonte:** DECISÃO-MANTENEDOR de 26/10/2026; CONSUMO §Finanças públicas e índices (despesa per capita).
+- **Relacionadas:** RN-MOD-24, RN-MOD-17
+
+### RN-MOD-27: Idioma dos campos
+- **Status:** DECIDIDA
+- **Regra:** Os nomes dos campos da observação são em português.
+- **Motivo:** Decisão do mantenedor entre as duas versões das fontes; os dados de origem (IBGE, ANM) e a documentação já estão em português, e os nomes serão a interface pública da API (RN-ENT-02).
+- **Exemplo:** `municipio_id`, como em DECISÕES, e não `geo_id`, como em CONSUMO e VAL-15/10.
+- **Exceções:** Os nomes exatos e a lista de campos estão em RN-MOD-03.
+- **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026; Versão adotada: DECISÕES §Arquitetura e padrões de dados (04/10/2026, última edição 20/10/2026). Versão não adotada: CONSUMO §Contrato de dados para o front-end (02/10/2026); VAL-15/10 §Marco 1 (15/10/2026).
+- **Relacionadas:** RN-MOD-03, RN-ENT-02

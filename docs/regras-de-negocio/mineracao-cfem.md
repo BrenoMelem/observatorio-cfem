@@ -43,7 +43,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Regra:** A CFEM deve ser guardada no detalhe mensal, e o gráfico deve agregá-la para o ano.
 - **Motivo:** O arquivo vem por mês, e o detalhe mensal permite reconciliar e detectar mês ausente.
 - **Exemplo:** A distribuição de 2025 é guardada por município, mês e modalidade e somada por ano só na exibição (quando o ano fecha).
-- **Exceções:** O ano só fecha com os 12 meses (RN-CFE-06). O campo de mês no esquema comum está em aberto (RN-MOD-04).
+- **Exceções:** O ano só fecha com os 12 meses (RN-CFE-06). O mês faz parte do esquema comum (RN-MOD-04).
 - **Fonte:** DECISÕES §Bloco 3; BLOCOS §Bloco 3.
 - **Relacionadas:** RN-MOD-04, RN-MOD-05, RN-CFE-06
 
@@ -65,12 +65,13 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Relacionadas:** RN-CFE-05, RN-MOD-07, RN-TMP-12, RN-VPU-05
 
 ### RN-CFE-07: Ausência de um município num mês existente no arquivo
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve definir como classificar a falta de linha de um município num mês em que o arquivo nacional tem linhas: lacuna da fonte ou município que não recebeu.
-- **Motivo:** VAL-15/10 pede que cada lote registre qual das duas situações ocorreu, mas nenhuma fonte define o critério operacional.
-- **Exemplo:** A falta de julho de 2025 é da fonte (há repasse publicado pela ANM). A falta de São Domingos do Araguaia em todo o arquivo não tem causa confirmada (RN-CFE-09).
-- **Fonte:** VAL-15/10 §Marco 2.
-- **Relacionadas:** RN-CFE-06, RN-CFE-09, RN-MOD-10
+- **Status:** DECIDIDA
+- **Regra:** Quando um município não tiver linha num mês em que o arquivo nacional tem linhas, o valor deve ficar como "ausente", nunca zero, com a causa marcada como "não confirmada"; a causa só deve passar a "lacuna da fonte" ou "não recebeu" quando uma publicação independente, como o PDF mensal da ANM, a confirmar.
+- **Motivo:** O arquivo não diz por que falta a linha, e presumir uma das causas poderia esconder uma lacuna da extração como se fosse um fato. O relatório de qualidade de cada lote lista os casos (RN-VPU-06).
+- **Exemplo:** A falta de julho de 2025 é da fonte (há repasse publicado pela ANM) e vale RN-CFE-06. A falta de São Domingos do Araguaia em todo o arquivo segue com causa não confirmada (RN-CFE-09).
+- **Exceções:** Quando o mês inteiro está ausente do arquivo nacional, vale RN-CFE-06, e não esta regra.
+- **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026; VAL-15/10 §Marco 2 (cada lote registra qual das duas situações ocorreu).
+- **Relacionadas:** RN-CFE-06, RN-CFE-09, RN-MOD-10, RN-VPU-06
 
 ### RN-CFE-08: Recuperar julho de 2025
 - **Status:** EM ABERTO
@@ -84,7 +85,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Status:** EM ABERTO
 - **Regra:** O mantenedor deve investigar por que São Domingos do Araguaia (1507151) não tem linha nos arquivos de arrecadação e de distribuição, e até lá o município deve constar como ausente, nunca como zero.
 - **Motivo:** A causa não foi confirmada: pode ser lacuna da extração, ausência de repasse ou ausência de atividade.
-- **Exemplo:** 11 dos 12 municípios têm linhas em arrecadação (2022–2026) e em distribuição (2007–2026); nas autuações, 9 dos 12 (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
+- **Exemplo:** 11 dos 12 municípios têm linhas em arrecadação (2022–2026) e em distribuição (2007–2026); nas autuações, 9 dos 12 (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM). Em 27/10/2026, o arquivo completo de arrecadação (2002–2026, 2.433.916 linhas) não tinha nenhuma linha de São Domingos do Araguaia, nem pelo código 1507151 nem pelo nome; só aparece São Domingos do Capim (PA, 1507201), outro município, com 1 linha. Isso afasta uma troca de código ou de nome como causa nesse arquivo, mas não confirma a causa real (reproduzido em 27/10/2026: arquivo da ANM).
 - **Fonte:** VAL-15/10 §Matriz operacional, §Rodada adicional, §Issues sugeridas (item 2).
 - **Relacionadas:** RN-MOD-10, RN-CFE-07
 
@@ -92,7 +93,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Status:** EM ABERTO
 - **Regra:** O mantenedor deve definir quais modalidades de distribuição (coluna do tipo de distribuição) compõem a "CFEM recebida", e até lá a modalidade deve ser guardada e exibida separadamente.
 - **Motivo:** A reconciliação cobriu só o tipo `Produtor`; as demais modalidades não foram conferidas.
-- **Exemplo:** A reconciliação de maio de 2025 foi feita com `Ano=2025`, `Mês=5` e tipo `Produtor` (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
+- **Exemplo:** A reconciliação de maio de 2025 foi feita com `Ano=2025`, `Mês=5` e tipo `Produtor` (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM). Em 27/10/2026, o arquivo de distribuição tinha três modalidades: `Produtor` (2007–2026, só municípios), `Afetado` (2019–2022, só municípios, com subtipos como estrutura de mineração, ferrovias e perda) e `-` (2019–2022, só estados). De 2023 a 2026 existe só `Produtor`, que somou R$ 1.556.820.292,67 nos 12 municípios em 2025; a soma é bruta e provisória (reproduzido em 27/10/2026: arquivo da ANM).
 - **Fonte:** VAL-15/10 §Rodada adicional (escopo da reconciliação).
 - **Relacionadas:** RN-VPU-07, RN-TER-09, RN-CFE-11
 
@@ -140,7 +141,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Status:** EM ABERTO
 - **Regra:** O mantenedor deve definir o tratamento das autuações sem ano de publicação antes de formar a série temporal.
 - **Motivo:** VAL-15/10 aponta que não se deve formar série sem regra para esses registros.
-- **Exemplo:** 88 das 176 linhas do recorte dos 12 municípios não têm ano de publicação (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
+- **Exemplo:** 88 das 176 linhas do recorte dos 12 municípios não têm ano de publicação (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM). Em 27/10/2026, as 88 linhas sem ano também estão sem mês, todas têm valor e só 35 têm número do auto (as 88 com ano têm), o que sugere que são registros ainda sem publicação completa (hipótese, não confirmada pela ANM).
 - **Fonte:** VAL-15/10 §Matriz operacional, §Rodada adicional; DECISÃO-MANTENEDOR de 24/10/2026 (resposta à pergunta 6: deixar em aberto).
 - **Relacionadas:** RN-CFE-13, RN-CFE-14, RN-MOD-10
 
@@ -185,10 +186,27 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Fonte:** DECISÕES §Bloco 3 (Como a CFEM é calculada); BLOCOS §Bloco 3 (Cálculo).
 - **Relacionadas:** RN-CFE-19
 
-### RN-CFE-22: Cobertura histórica da arrecadação
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve confirmar qual arquivo e qual cobertura de anos da arrecadação a ANM publica antes de prometer série longa.
-- **Motivo:** DECISÕES cita `CFEM_Arrecadacao.csv`, mas o validador usou `CFEM_Arrecadacao_2022_2026.csv`, que cobre apenas 2022–2026.
-- **Exemplo:** O arquivo 2022–2026 tinha 744.244 linhas em 15/10/2026 (transcrito do relatório VAL-15/10) e 744.279 em 25/10/2026, depois da atualização da ANM de 24/10/2026; as 2.534 linhas dos 12 municípios não mudaram (reproduzido em 25/10/2026).
-- **Fonte:** DECISÕES §Rotas de coleta por fonte; SCRIPTS (`validate_anm_cfem`); VAL-15/10 §Rodada adicional.
+### RN-CFE-22: Arquivo e cobertura histórica da arrecadação
+- **Status:** DECIDIDA
+- **Regra:** A arrecadação da CFEM deve ser coletada do arquivo completo de arrecadação da ANM (`CFEM_Arrecadacao.csv`), com a série começando em 2003.
+- **Motivo:** O arquivo completo é o citado em DECISÕES e já cobre todos os anos; o de 2022–2026, usado pelo validador, descartaria 20 anos de série. O ano 2002 tem só 10 linhas no país, o que sugere cobertura incompleta (dedução: a ANM não diz isso).
+- **Exemplo:** Em 27/10/2026, o arquivo completo tinha 2.433.916 linhas, de 2002 a 2026; 2003 tem 30.559 linhas. A ANM publica também arquivos por faixa de anos (2002–2006, 2007–2011, 2012–2016, 2017–2021, 2022–2026), e as contagens por ano de 2022 a 2026 são iguais no arquivo completo e no de 2022–2026 (reproduzido em 27/10/2026: arquivos da ANM).
+- **Exceções:** O validador atual usa o arquivo de 2022–2026 e precisa passar a usar o completo. A cobertura municipal dos anos anteriores a 2022 não foi verificada.
+- **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026; DECISÕES §Rotas de coleta por fonte; SCRIPTS (`validate_anm_cfem`); VAL-15/10 §Rodada adicional; consulta ao servidor da ANM em 27/10/2026.
 - **Relacionadas:** RN-CFE-01, RN-FNT-18
+
+### RN-CFE-23: Cobertura parcial de Bom Jesus do Tocantins na arrecadação de 2025
+- **Status:** PROPOSTA
+- **Regra:** Os meses sem linha de Bom Jesus do Tocantins (1501576) na arrecadação de 2025 devem ser registrados como `ausente`, nunca como zero; a causa e a completude municipal do ano dependem de publicação independente da ANM.
+- **Motivo:** Ausência de linha não comprova arrecadação zero nem erro da fonte.
+- **Exemplo:** O briefing de 30/10/2026 relata ausência em 2025; a leitura do CSV completo da ANM em 30/10/2026 encontrou janeiro, mas não fevereiro a dezembro. A causa da divergência ainda não foi confirmada.
+- **Fonte:** Briefing operacional de 30/10/2026, §9; leitura local do `CFEM_Arrecadacao.csv` em 30/10/2026, relatório `output/observatorio/tratado/cfem/relatorio.json`.
+- **Relacionadas:** RN-CFE-07, RN-CFE-22, RN-VPU-06
+
+### RN-CFE-24: Despesa municipal financiada por CFEM exige identificação da fonte de recursos
+- **Status:** PROPOSTA
+- **Regra:** Um indicador de despesa financiada por CFEM só deve ser criado após confirmar o código de fonte de recursos na despesa executada, a cobertura dos períodos e a extração reproduzível; dados agregados de CFEM recebida e de despesa por função não devem ser usados para afirmar financiamento direto.
+- **Motivo:** ANM registra a receita e SICONFI registra despesa agregada do orçamento, sem vincular cada despesa à receita CFEM.
+- **Exemplo:** `17080000` aparece em previsão orçamentária de Canaã dos Carajás em 2023/2024, enquanto `1708000` também foi encontrado; nenhum foi confirmado como filtro da despesa executada.
+- **Fonte:** Briefing operacional de 30/10/2026, §9; verificação independente nos portais municipais ainda pendente.
+- **Relacionadas:** RN-FNT-04, RN-FON-05, RN-FON-06

@@ -2,7 +2,7 @@
 
 Regras sobre o que o consumidor dos dados (front-end, exportações CSV e assistente de IA) pode receber e como. Legenda de status e siglas das fontes: [README](README.md).
 
-As fontes divergem sobre a forma da entrega: DECISÕES e PLANO descrevem uma camada de arquivos JSON e CSV versionados; VAL-15/10 e CONSUMO preveem uma API própria (conflito 2, **EM ABERTO**). As regras abaixo foram escritas para valer nos dois casos: onde aparece "camada publicada", leia "arquivos publicados" ou "API própria".
+As fontes divergiam sobre a forma da entrega: DECISÕES e PLANO descrevem uma camada de arquivos JSON e CSV versionados; VAL-15/10 e CONSUMO preveem uma API própria. O mantenedor decidiu pela API própria em 30/10/2026 (RN-ENT-02, conflito 2). As regras abaixo foram escritas para valer nos dois casos; onde aparece "camada publicada", leia "API própria".
 
 ### RN-ENT-01: Camada tratada entre as fontes e o consumo
 - **Status:** DECIDIDA
@@ -13,11 +13,12 @@ As fontes divergem sobre a forma da entrega: DECISÕES e PLANO descrevem uma cam
 - **Relacionadas:** RN-ENT-02, RN-ENT-06, RN-VPU-03, RN-VPU-10
 
 ### RN-ENT-02: Forma de entrega da camada publicada
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve decidir se a camada publicada é entregue como arquivos versionados, como API própria ou como ambos.
-- **Motivo:** As fontes de decisão divergem; até a decisão, as regras desta documentação valem para qualquer uma das formas.
-- **Exemplo:** DECISÕES descreve uma camada de arquivos tratados em formato único; VAL-15/10 §Marco 1 prevê "endpoint de leitura" com metadados.
-- **Fonte:** Versão A: DECISÕES §Arquitetura e padrões de dados (04/10/2026, última edição 20/10/2026); PLANO §Arquitetura e fluxo geral (30/09/2026). Versão B: VAL-15/10 §Marco 1, §Marco 4 (15/10/2026); CONSUMO §Contrato de dados para o front-end (02/10/2026).
+- **Status:** DECIDIDA
+- **Regra:** A camada publicada é entregue por uma API própria, mantida pelo projeto, com endpoint de leitura e metadados. A obrigação de oferecer o CSV aberto (RN-ENT-03) continua valendo e deve ser atendida por essa mesma camada.
+- **Motivo:** Decisão do mantenedor, entre as duas versões das fontes. A API permite consultas sob demanda; em contrapartida, exige um serviço em funcionamento.
+- **Exemplo:** VAL-15/10 §Marco 1 prevê "endpoint de leitura" com metadados; o painel consulta a API e não lê arquivos publicados.
+- **Exceções:** Esta decisão contraria DECISÕES e PLANO, que descrevem arquivos JSON e CSV versionados. Essas fontes devem ser atualizadas pelo mantenedor.
+- **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026; Versão A (não adotada): DECISÕES §Arquitetura e padrões de dados (04/10/2026, última edição 20/10/2026); PLANO §Arquitetura e fluxo geral (30/09/2026). Versão B (adotada): VAL-15/10 §Marco 1, §Marco 4 (15/10/2026); CONSUMO §Contrato de dados para o front-end (02/10/2026).
 - **Relacionadas:** RN-MOD-03, RN-ENT-01
 
 ### RN-ENT-03: CSV aberto
@@ -79,9 +80,9 @@ As fontes divergem sobre a forma da entrega: DECISÕES e PLANO descrevem uma cam
 - **Relacionadas:** RN-CFE-02, RN-VPU-10
 
 ### RN-ENT-10: Licença de reuso das exportações
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve definir a regra de reutilização das exportações, com base na licença confirmada de cada fonte.
-- **Motivo:** Nenhuma licença de redistribuição foi confirmada nas fontes de decisão; o CSV aberto depende dela.
-- **Exemplo:** A licença de FAPESPA e IDSC ainda não foi verificada.
-- **Fonte:** LAB-19/10 §4 (Portais de apoio); CONSUMO §Contrato de dados para o front-end; PESQUISA §Conclusões principais (item 4).
+- **Status:** DECIDIDA
+- **Regra:** O CSV aberto inclui apenas as fontes cuja licença de redistribuição esteja confirmada. As demais ficam fora das exportações até o mantenedor verificar a licença; a licença de cada fonte continua pendente em RN-PRI-06.
+- **Motivo:** Nenhuma licença de redistribuição foi confirmada nas fontes de decisão; publicar sem ela contraria RN-ENT-03.
+- **Exemplo:** Enquanto a licença de FAPESPA e IDSC não for verificada, seus indicadores não entram no CSV aberto.
+- **Fonte:** DECISÃO-MANTENEDOR de 28/10/2026; LAB-19/10 §4 (Portais de apoio); CONSUMO §Contrato de dados para o front-end; PESQUISA §Conclusões principais (item 4).
 - **Relacionadas:** RN-ENT-03, RN-PRI-05, RN-PRI-06

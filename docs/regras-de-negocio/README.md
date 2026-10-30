@@ -1,10 +1,10 @@
 # Regras de negócio do backend do Observatório CFEM
 
-Documentação das regras de negócio do backend do Observatório CFEM, também chamado Observatório RI Carajás. Ela descreve **o que** o sistema deve garantir e **por quê**, e nunca **como** implementar. Data desta versão: 24/10/2026.
+Documentação das regras de negócio do backend do Observatório CFEM, também chamado Observatório RI Carajás. Ela descreve **o que** o sistema deve garantir e **por quê**, e nunca **como** implementar. Data desta versão: 30/10/2026.
 
 ## O projeto
 
-O observatório coleta indicadores de população, economia, mineração (CFEM), sociedade, meio ambiente e finanças públicas dos 12 municípios da Região de Integração Carajás (PA), com foco em Canaã dos Carajás (IBGE 1502152) e Parauapebas (IBGE 1505536). O sistema ainda está em fase de pesquisa e validação de fontes: o que existe são provas, scripts de validação e um primeiro importador da CFEM, não um backend implementado.
+O observatório coleta indicadores de população, economia, mineração (CFEM), sociedade, meio ambiente e finanças públicas dos 12 municípios da Região de Integração Carajás (PA), com foco em Canaã dos Carajás (IBGE 1502152) e Parauapebas (IBGE 1505536). O sistema ainda está em fase de pesquisa e validação de fontes. Há um protótipo local do pipeline de população, além das provas, scripts de validação e um primeiro importador da CFEM; não há backend de produção.
 
 ## As duas responsabilidades do backend
 
@@ -20,7 +20,7 @@ O público são pessoas desenvolvedoras e agentes de IA que vão implementar ada
 - nenhuma informação está só em imagem;
 - as tabelas são em Markdown.
 
-Comece por este arquivo, passe ao [glossário](glossario.md) e leia o tema que interessa. Consulte [pendencias.md](pendencias.md) para saber o que ainda não foi decidido antes de implementar qualquer coisa.
+Comece por este arquivo, passe ao [glossário](glossario.md) e leia o tema que interessa. Consulte [pendencias.md](pendencias.md) para saber o que ainda não foi decidido ou confirmado antes de implementar qualquer coisa.
 
 ## Formato de cada regra
 
@@ -44,7 +44,7 @@ O status da regra descreve a regra nesta documentação. Ele é diferente da nat
 | Status | Quando se aplica |
 | --- | --- |
 | **DECIDIDA** | A regra vem de DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10 com redação explícita, ou de decisão do mantenedor de 24/10/2026 (DECISÃO-MANTENEDOR) |
-| **PROPOSTA** | A regra foi deduzida, ou vem só de CONSUMO, MAPA-TEMAS, PESQUISA, PLANO ou do código. Se a mesma regra aparece também em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10, ela é DECIDIDA e as duas fontes são citadas |
+| **PROPOSTA** | Aguarda confirmação e consta em [pendencias.md](pendencias.md). A regra foi deduzida, ou vem só de CONSUMO, MAPA-TEMAS, PESQUISA, PLANO ou do código. Se a mesma regra aparece também em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10, ela é DECIDIDA e as duas fontes são citadas |
 | **EM ABERTO** | Não há decisão, ou as fontes se contradizem. Cada item consta em [pendencias.md](pendencias.md) |
 
 Quando duas fontes se contradizem, não se escolhe: as duas versões são registradas, com a data de cada uma, e o ponto fica EM ABERTO, salvo decisão do mantenedor.
@@ -80,16 +80,16 @@ Não há código, pseudocódigo, rotas HTTP, nomes de funções, escolha de bibl
 | Arquivo | Prefixo | Conteúdo | Regras |
 | --- | --- | --- | ---: |
 | [territorio.md](territorio.md) | RN-TER | Os 12 municípios, códigos IBGE, agregação regional, municípios de comparação | 12 |
-| [modelo-de-dados.md](modelo-de-dados.md) | RN-MOD | Observação, natureza do valor, estado de validação, proveniência, comparabilidade | 25 |
+| [modelo-de-dados.md](modelo-de-dados.md) | RN-MOD | Observação, natureza do valor, estado de validação, proveniência, comparabilidade | 27 |
 | [consumo-de-fontes.md](consumo-de-fontes.md) | RN-FON | Níveis A/B/C/D, procedência, acesso permitido e credenciais | 20 |
 | [regras-por-fonte.md](regras-por-fonte.md) | RN-FNT | Ressalvas específicas de cada fonte | 21 |
 | [temporalidade-e-atualizacao.md](temporalidade-e-atualizacao.md) | RN-TMP | Ano de referência, agenda por fonte, períodos, mudanças de método | 17 |
 | [validacao-e-publicacao.md](validacao-e-publicacao.md) | RN-VPU | Validação, lote bloqueado, reconciliação, homologação | 12 |
 | [entrega-dos-dados.md](entrega-dos-dados.md) | RN-ENT | Camada publicada, CSV aberto, painel de status, assistente de IA | 10 |
-| [mineracao-cfem.md](mineracao-cfem.md) | RN-CFE | Arrecadação, distribuição, autuação e VPM | 22 |
-| [indicadores-derivados-e-compostos.md](indicadores-derivados-e-compostos.md) | RN-IND | Indicadores derivados e compostos congelados | 12 |
+| [mineracao-cfem.md](mineracao-cfem.md) | RN-CFE | Arrecadação, distribuição, autuação e VPM | 24 |
+| [indicadores-derivados-e-compostos.md](indicadores-derivados-e-compostos.md) | RN-IND | Indicadores derivados e compostos congelados | 13 |
 | [privacidade-e-licencas.md](privacidade-e-licencas.md) | RN-PRI | Dados pessoais, acesso restrito e reuso | 10 |
 | [glossario.md](glossario.md) | | Termos e siglas | |
-| [pendencias.md](pendencias.md) | | Tudo o que está EM ABERTO e as divergências entre fontes | |
+| [pendencias.md](pendencias.md) | | Tudo o que está EM ABERTO, as divergências entre fontes e as regras PROPOSTAS aguardando confirmação | |
 
-Total: 161 regras, sendo 94 DECIDIDAS, 36 PROPOSTAS e 31 EM ABERTO.
+Total: 166 regras, sendo 119 DECIDIDAS, 38 PROPOSTAS e 9 EM ABERTO.

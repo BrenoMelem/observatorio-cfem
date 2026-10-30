@@ -57,7 +57,7 @@ Fonte: DECISÕES §Indicadores compostos; BLOCOS §Bloco 6.
 - **Regra:** A área de mineração versus cobertura florestal deve ser calculada pelo observatório, por município e ano, a partir das classes de mineração e de floresta do MapBiomas, sem fonte nova.
 - **Motivo:** Mostra o avanço da mineração sobre a floresta, pertinente para Canaã dos Carajás e Parauapebas, com dados que o bloco ambiental já tem.
 - **Exemplo:** Mineração e floresta de Canaã dos Carajás (1502152), por ano, de 1985 a 2025.
-- **Exceções:** As classes que formam "floresta", "mineração" e "área urbana" estão em aberto (RN-IND-11).
+- **Exceções:** As classes que formam "floresta", "mineração" e "área urbana" estão decididas em RN-IND-11; o denominador e o limite municipal estão em RN-IND-13.
 - **Fonte:** DECISÕES §Área de mineração × cobertura florestal; BLOCOS §Bloco 5.
 - **Relacionadas:** RN-IND-11, RN-TMP-07
 
@@ -66,6 +66,7 @@ Fonte: DECISÕES §Indicadores compostos; BLOCOS §Bloco 6.
 - **Regra:** O mantenedor deve definir qual população é o denominador do indicador "emprego formal como % da população" (total, em idade ativa ou força de trabalho) e manter a mesma regra entre territórios.
 - **Motivo:** PLANO e BLOCOS dizem "RAIS ÷ população" sem especificar qual; CONSUMO exige aprovar o denominador.
 - **Exemplo:** A RAIS mede vínculos formais (estoque), e a população total inclui pessoas fora da idade ativa.
+- **Exceções:** Orientação do mantenedor em 27/10/2026, sem decisão final: o denominador deve incluir a população em idade ativa. Falta definir qual recorte (população em idade ativa ou outra) e de qual fonte, já que a faixa etária por município e ano não está entre as fontes definidas.
 - **Fonte:** BLOCOS §Bloco 4 (04/10/2026, última edição 20/10/2026); PLANO §Bloco 2 (30/09/2026); CONSUMO §Economia e mercado de trabalho (02/10/2026).
 - **Relacionadas:** RN-MOD-16, RN-MOD-17
 
@@ -77,35 +78,47 @@ Fonte: DECISÕES §Indicadores compostos; BLOCOS §Bloco 6.
 - **Fonte:** CONSUMO §Finanças públicas e índices (Barômetro da Sustentabilidade 2024). Não consta em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10.
 - **Relacionadas:** RN-IND-04
 
-### RN-IND-09: Definição de "% PIB RI-Carajás per capita"
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve definir o que o indicador "% PIB RI-Carajás per capita" mede: a participação da RI no PIB ou o PIB per capita.
-- **Motivo:** O nome mistura porcentagem e per capita; BLOCOS o descreve como "Calculado: PIB ÷ população".
+### RN-IND-09: PIB per capita e participação da RI no PIB são dois indicadores
+- **Status:** DECIDIDA
+- **Regra:** O indicador "% PIB RI-Carajás per capita" do Bloco 2 deve ser separado em dois indicadores derivados: o PIB per capita (PIB municipal ÷ população do mesmo ano) e a participação da RI Carajás no PIB.
+- **Motivo:** O nome original mistura porcentagem e per capita; a fórmula de BLOCOS ("PIB ÷ população") corresponde ao PIB per capita, e CONSUMO lista os dois itens separados.
 - **Exemplo:** CONSUMO lista "PIB per capita e participação da RI Carajás" como dois itens.
-- **Fonte:** BLOCOS §Bloco 2; PLANO §Bloco 2; CONSUMO §Economia e mercado de trabalho; DECISÃO-MANTENEDOR de 24/10/2026 (item IND-09 deixado em aberto).
-- **Relacionadas:** RN-MOD-17, RN-IND-10
+- **Exceções:** A base da participação (PIB do Pará, PIB da RI ou outra) e o nome final de cada indicador no manifesto não foram definidos e constam em [pendencias.md](pendencias.md). O PIB municipal e a população devem ser do mesmo ano, e a série de população está em aberto (RN-IND-12). BLOCOS ainda traz um só indicador no Bloco 2 e precisa ser atualizado.
+- **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026; BLOCOS §Bloco 2; PLANO §Bloco 2; CONSUMO §Economia e mercado de trabalho.
+- **Relacionadas:** RN-MOD-17, RN-IND-10, RN-IND-12
 
 ### RN-IND-10: CFEM per capita e comparação com mineradores são derivados
 - **Status:** DECIDIDA
 - **Regra:** A CFEM per capita (CFEM ÷ população) e a comparação com outros municípios mineradores devem ser derivadas das fontes já existentes e não devem ter fonte própria.
 - **Motivo:** Evita fonte nova para algo que se calcula do arquivo nacional da ANM e da população.
 - **Exemplo:** A comparação usa o mesmo arquivo nacional de distribuição, com os N maiores recebedores como padrão.
-- **Exceções:** Qual CFEM e qual população entram na razão está em aberto (RN-IND-12).
+- **Exceções:** Qual CFEM e qual população entram na razão está decidido em RN-IND-12.
 - **Fonte:** BLOCOS §Bloco 3 (tabela: CFEM per capita e comparação).
 - **Relacionadas:** RN-TER-09, RN-MOD-17, RN-IND-12
 
 ### RN-IND-11: Definição das classes de uso do solo
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve definir quais classes do MapBiomas formam "floresta", "mineração" e "área urbana", o denominador das porcentagens e a edição do limite municipal.
-- **Motivo:** Sem essa definição, os indicadores de uso do solo não são reproduzíveis.
-- **Exemplo:** A Coleção 11 do MapBiomas classifica o uso do solo em classes numeradas por ano, de 1985 a 2025.
-- **Fonte:** CONSUMO §Meio ambiente e saneamento; BLOCOS §Bloco 5.
-- **Relacionadas:** RN-IND-06
+- **Status:** DECIDIDA
+- **Regra:** Na Coleção 11 do MapBiomas, "floresta" é o grupo 1 inteiro (classes 3, 4, 5, 6, 7 e 49), "mineração" é a classe 30 e "área urbana" é a classe 24. A classe 7 (savana alagada) é beta e deve ser registrada como tal. O denominador e o limite municipal estão em RN-IND-13.
+- **Motivo:** Segue a hierarquia oficial da legenda. A silvicultura (classe 9) fica fora de "floresta", pois pertence ao grupo Agropecuária.
+- **Exemplo:** A Coleção 11 do MapBiomas classifica o uso do solo em classes numeradas por ano, de 1985 a 2025; a legenda de 13/08/2026 lista 1 Floresta, com 3 Formação Florestal, 4 Formação Savânica, 5 Mangue, 6 Floresta Alagável, 7 Savana Alagada (beta) e 49 Restinga Arbórea; 24 Área Urbanizada; 30 Mineração. Reproduzido em 30/10/2026: PDF de códigos da legenda da Coleção 11, publicado pelo MapBiomas.
+- **Exceções:** Os códigos valem para a Coleção 11; uma coleção nova pode mudar a legenda e deve ser conferida (RN-TMP-06).
+- **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026; MapBiomas, "Códigos das classes da legenda da Coleção 11" (13/08/2026); CONSUMO §Meio ambiente e saneamento; BLOCOS §Bloco 5.
+- **Relacionadas:** RN-IND-06, RN-IND-13, RN-TMP-06
 
 ### RN-IND-12: Qual CFEM e qual população no per capita
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve definir se a CFEM per capita usa a CFEM arrecadada ou a recebida, e qual série de população (estimativa anual ou Censo) entra no denominador.
-- **Motivo:** BLOCOS diz apenas "CFEM ÷ população", mas CFEM arrecadada e recebida são medidas distintas e população estimada e Censo não se misturam.
+- **Status:** DECIDIDA
+- **Regra:** A CFEM per capita é publicada como dois indicadores separados: um com a CFEM arrecadada e outro com a CFEM recebida, sem somar nem misturar (RN-CFE-02). O denominador de ambos é a estimativa anual de população do IBGE.
+- **Motivo:** CFEM arrecadada e recebida são medidas distintas e respondem a perguntas diferentes: o que a extração gerou por morador e o que a prefeitura recebeu por morador. A estimativa existe para todo ano e combina com a CFEM anual; o Censo não se mistura com a estimativa (RN-MOD-13).
 - **Exemplo:** A população estimada de 2025 de Parauapebas foi 305.771 pessoas (agregado 6579, variável 9324) (transcrito do relatório VAL-15/10, não conferido no JSON).
-- **Fonte:** BLOCOS §Bloco 3; RN-CFE-02 e RN-MOD-13 (restrições aplicáveis).
-- **Relacionadas:** RN-IND-10, RN-CFE-02, RN-MOD-13
+- **Exceções:** Nos anos de Censo a série segue identificada como estimativa, sem trocar de fonte no meio (RN-MOD-13). O nome final de cada indicador no manifesto não foi definido.
+- **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026; BLOCOS §Bloco 3; RN-CFE-02 e RN-MOD-13 (restrições aplicáveis).
+- **Relacionadas:** RN-IND-09, RN-IND-10, RN-CFE-02, RN-MOD-13
+
+### RN-IND-13: Denominador e limite municipal do uso do solo
+- **Status:** DECIDIDA
+- **Regra:** As porcentagens de uso do solo têm como denominador a área total do município, isto é, a soma de todas as classes mapeadas dentro do limite municipal. O limite municipal é a malha que o MapBiomas usa na Coleção 11, e a edição exata deve ser registrada na proveniência (RN-MOD-02).
+- **Motivo:** Decisão do mantenedor: o total mapeado é simples e comparável entre municípios e anos, e a malha do MapBiomas mantém os números compatíveis com as estatísticas publicadas.
+- **Exemplo:** A porcentagem de área urbana de Canaã dos Carajás em um ano é a área da classe de área urbana dividida pela soma de todas as classes do município nesse ano.
+- **Exceções:** Essa área pode diferir levemente da área territorial oficial do IBGE. As classes que formam "floresta", "mineração" e "área urbana" estão em RN-IND-11. A edição da malha ainda não foi conferida.
+- **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026; CONSUMO §Meio ambiente e saneamento; BLOCOS §Bloco 5.
+- **Relacionadas:** RN-IND-11, RN-FNT-13, RN-TMP-07

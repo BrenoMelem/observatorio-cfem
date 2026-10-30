@@ -57,7 +57,7 @@ Regras sobre o que um lote precisa cumprir para ser publicado e sobre o que faze
 - **Regra:** Um indicador só deve ser homologado depois de uma reconciliação com publicação independente da fonte oficial; a reconciliação de um mês e de uma modalidade não homologa o ano nem as demais modalidades.
 - **Motivo:** O arquivo oficial pode ter lacunas que só aparecem na comparação com outra publicação.
 - **Exemplo:** A distribuição de maio de 2025, do tipo `Produtor`, bateu com o PDF da remessa 696 da ANM (emitida em 07/05/2025): Canaã R$ 60.776.801,44, Parauapebas R$ 42.951.670,43 e Marabá R$ 17.289.067,88 (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
-- **Exceções:** A tolerância de diferença aceita está em aberto (RN-VPU-12).
+- **Exceções:** A tolerância da diferença aceita é zero centavos (RN-VPU-12).
 - **Fonte:** VAL-15/10 §Marco 2, §Rodada adicional; CONSUMO §Ordem recomendada para prova de consumo.
 - **Relacionadas:** RN-VPU-08, RN-VPU-12, RN-CFE-10
 
@@ -86,17 +86,19 @@ Regras sobre o que um lote precisa cumprir para ser publicado e sobre o que faze
 - **Relacionadas:** RN-ENT-06, RN-VPU-01
 
 ### RN-VPU-11: Tratamento de duplicidades
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve definir como detectar e tratar linhas duplicadas na fonte antes de agregar.
-- **Motivo:** VAL-15/10 aponta duplicidades como ponto a conferir nas autuações, sem fixar a regra.
-- **Exemplo:** Autuações no recorte dos 12 municípios (176 linhas) precisam de conferência de duplicidade (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: contagem de linhas; a duplicidade não foi testada).
-- **Fonte:** VAL-15/10 §Matriz operacional (CFEM autuações).
+- **Status:** DECIDIDA
+- **Regra:** Uma linha duplicada é a que repete todos os campos de outra linha da fonte; quando houver, o lote deve registrar a contagem de repetições no relatório de qualidade e ficar bloqueado até revisão, sem apagar linhas automaticamente.
+- **Motivo:** Descartar sozinho pode eliminar um registro real que por acaso repita valor e data, e publicar sem aviso pode inflar o total. Bloquear não custa nada hoje, porque não há linhas idênticas no arquivo de autuações.
+- **Exemplo:** Em 27/10/2026, o arquivo de autuações tinha 21.029 linhas, nenhuma idêntica a outra, e a combinação número do auto + processo de cobrança era única em todas. O mesmo vale para as 176 linhas do recorte dos 12 municípios (reproduzido em 27/10/2026: arquivo da ANM).
+- **Exceções:** A verificação só foi feita nas autuações; os arquivos de arrecadação e de distribuição não foram testados. Repetir apenas parte dos campos (por exemplo, o mesmo processo de cobrança em duas linhas) não é duplicata e não bloqueia o lote.
+- **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026; VAL-15/10 §Matriz operacional (CFEM autuações).
 - **Relacionadas:** RN-VPU-06, RN-CFE-13
 
 ### RN-VPU-12: Tolerância da reconciliação
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve definir a diferença máxima aceita entre o total do arquivo e a publicação independente.
-- **Motivo:** Nos casos conferidos, os totais coincidiram ao centavo, mas isso pode não valer sempre, e nenhuma fonte define a tolerância.
-- **Exemplo:** Em maio de 2025, os três totais coincidiram ao centavo (transcrito do relatório VAL-15/10, não conferido no JSON).
-- **Fonte:** VAL-15/10 §Rodada adicional. Pendência registrada em [pendencias.md](pendencias.md).
+- **Status:** DECIDIDA
+- **Regra:** A diferença aceita entre o total do arquivo da fonte, arredondado ao centavo, e a publicação independente deve ser zero; qualquer diferença deve bloquear a homologação daquele recorte.
+- **Motivo:** Nos casos conferidos os totais coincidiram ao centavo, e uma tolerância percentual esconderia erros reais em valores altos.
+- **Exemplo:** Em maio de 2025, os três totais coincidiram ao centavo (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM). Uma diferença de R$ 0,01 seria tratada como erro e investigada.
+- **Exceções:** Se um caso real mostrar diferença só de arredondamento do PDF, a regra pode ser revista pelo mantenedor.
+- **Fonte:** DECISÃO-MANTENEDOR de 26/10/2026; VAL-15/10 §Rodada adicional.
 - **Relacionadas:** RN-VPU-07

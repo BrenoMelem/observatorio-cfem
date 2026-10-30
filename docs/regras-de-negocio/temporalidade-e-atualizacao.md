@@ -27,7 +27,7 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 | Preço do cobre | 2000–2026 | 2000–2026 | 2000–2026 |
 | PIB municipal | 2010–2023 | 2010–2023 | 2010–2023 |
 | Série populacional | 1980–2022 | 1980–2022 | 1980–2022 |
-| IDEB | 2023 | sem ano | **EM ABERTO** (RN-TMP-17) |
+| IDEB | 2023 | sem ano | Todas as edições disponíveis, a mais recente descoberta na execução (RN-TMP-17) |
 
 ### RN-TMP-01: Nunca fixar o ano no código
 - **Status:** DECIDIDA
@@ -67,7 +67,7 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 - **Regra:** Quando o MapBiomas for obtido pelo Google Earth Engine, o nome do asset de cobertura não deve ser fixado: a pasta deve ser listada em tempo de execução.
 - **Motivo:** O sufixo muda em correções sem aviso.
 - **Exemplo:** O arquivo de cobertura atual deveria terminar em `_coverage_v3`, mas esse sufixo pode mudar.
-- **Exceções:** Vale só se a rota por Earth Engine for a escolhida (conflito 6, **EM ABERTO**).
+- **Exceções:** Vale na rota por Earth Engine, que é a rota decidida (RN-FNT-13).
 - **Fonte:** DECISÕES §Rotas de coleta por fonte (MapBiomas: caminho do asset ainda não testado); BLOCOS §Bloco 5.
 - **Relacionadas:** RN-TMP-06, RN-FNT-13
 
@@ -120,12 +120,13 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 - **Relacionadas:** RN-FNT-14
 
 ### RN-TMP-12: Regra para anos parciais
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve definir como tratar anos ainda incompletos (por exemplo, o ano corrente) em séries que não são da CFEM.
-- **Motivo:** VAL-15/10 aponta a necessidade de definir a regra, e ela não foi decidida. Para a CFEM vale RN-CFE-06.
-- **Exemplo:** O cobre vai até 2026 em BLOCOS, e 2026 é um ano parcial.
-- **Fonte:** VAL-15/10 §Matriz operacional (Commodities).
-- **Relacionadas:** RN-CFE-06, RN-TMP-13
+- **Status:** DECIDIDA
+- **Regra:** Nas séries que não são da CFEM, um ano só deve ser considerado fechado quando tiver todos os períodos esperados; os períodos já disponíveis podem ser publicados com o estado de validação "provisório", e qualquer valor anual (média ou soma) deve ficar bloqueado até o ano fechar.
+- **Motivo:** Mantém uma regra única para o projeto, a mesma da CFEM (RN-CFE-06): mostra o que a fonte já tem sem apresentar como completo um ano que não é.
+- **Exemplo:** O cobre e o ferro mensais do FRED têm valores até set/2026 (reproduzido em 25/10/2026); os nove meses de 2026 podem ser exibidos como provisórios, e uma média anual de 2026 fica bloqueada até dez/2026.
+- **Exceções:** O que conta como "período esperado" depende da frequência da série (mensal, anual) e deve constar no manifesto de cada indicador (RN-MOD-25).
+- **Fonte:** DECISÃO-MANTENEDOR de 26/10/2026; VAL-15/10 §Matriz operacional (Commodities); RN-CFE-06 (regra equivalente da CFEM).
+- **Relacionadas:** RN-CFE-06, RN-MOD-07, RN-TMP-13
 
 ### RN-TMP-13: Commodities pelo FRED, com Pink Sheet só antes de 1980
 - **Status:** DECIDIDA
@@ -137,11 +138,12 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 - **Relacionadas:** RN-TMP-16, RN-FNT-05, RN-FNT-06
 
 ### RN-TMP-14: Unidade do minério de ferro
-- **Status:** EM ABERTO
-- **Regra:** A unidade exibida para o minério de ferro deve seguir a definição confirmada pela fonte, e o rótulo só deve ser publicado depois dessa confirmação.
-- **Motivo:** A planilha anual do Pink Sheet rotula o ferro como `$/dmtu` e o PDF de outubro de 2026 como `$/dmt`, embora os números coincidam.
-- **Exemplo:** Ferro: 120,6 (2023), 109,4 (2024) e 100,2 (2025) (transcrito do relatório VAL-15/10, não conferido no JSON).
-- **Fonte:** VAL-15/10 §Matriz operacional (Commodities), §Rodada adicional (probe do World Bank).
+- **Status:** DECIDIDA
+- **Regra:** O preço do minério de ferro deve ser exibido em dólares americanos por tonelada métrica (`$/dmt`), a unidade do FRED, e não em `$/dmtu`.
+- **Motivo:** A planilha anual do Pink Sheet rotula o ferro como `$/dmtu` e o PDF de outubro de 2026 como `$/dmt`, embora os números coincidam. O FRED, rota de coleta decidida, informa "U.S. Dollars per Metric Ton" nos metadados de `PIORECRUSDM`.
+- **Exemplo:** Ferro: 120,6 (2023), 109,4 (2024) e 100,2 (2025) (transcrito do relatório VAL-15/10, não conferido no JSON). Em 25/10/2026, os metadados do FRED para `PIORECRUSDM` diziam "U.S. Dollars per Metric Ton" (reproduzido em 25/10/2026).
+- **Exceções:** Se o Pink Sheet for usado para anos que o FRED não cobre (RN-FNT-06), o rótulo `$/dmtu` da planilha não deve ser copiado; a unidade exibida continua sendo `$/dmt`. Que o rótulo `$/dmtu` seja um erro da planilha é dedução (valores perto de 100 não combinam com preço por 1% de ferro contido); o World Bank não confirmou.
+- **Fonte:** DECISÃO-MANTENEDOR de 26/10/2026; VAL-15/10 §Matriz operacional (Commodities), §Rodada adicional (probe do World Bank); consulta à API do FRED em 25/10/2026.
 - **Relacionadas:** RN-TMP-13, RN-FNT-05, RN-FNT-06
 
 ### RN-TMP-15: Finanças a partir de 2013 pelo SICONFI
@@ -161,10 +163,10 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 - **Fonte:** DECISÃO-MANTENEDOR de 24/10/2026 (conflito 15); BLOCOS §Bloco 2, §Bloco 5, §Bloco 6; PLANO §Bloco 2, §Bloco 5, §Bloco 6.
 - **Relacionadas:** RN-TMP-07, RN-TMP-13, RN-TMP-17
 
-### RN-TMP-17: Ano do IDEB
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve definir qual edição ou período do IDEB o observatório publica.
-- **Motivo:** PLANO diz 2023, BLOCOS não diz o ano e DECISÕES indica o ano mais recente da Base dos Dados como 2025.
-- **Exemplo:** O INEP não divulga a nota municipal de 2023 em certos casos de participação insuficiente.
-- **Fonte:** PLANO §Bloco 4; BLOCOS §Bloco 4; DECISÕES §Tabelas da Base dos Dados confirmadas; DECISÃO-MANTENEDOR de 24/10/2026 (conflito 15).
-- **Relacionadas:** RN-MOD-09, RN-TMP-16
+### RN-TMP-17: Edições do IDEB
+- **Status:** DECIDIDA
+- **Regra:** O observatório deve publicar todas as edições do IDEB que a fonte tiver, e o pipeline deve descobrir a mais recente em cada execução, sem fixar o ano; cada valor deve mostrar o ano da edição.
+- **Motivo:** O IDEB sai de dois em dois anos, e fixar 2023 (PLANO) ficaria desatualizado e contradiria o 2025 que DECISÕES cita como o mais recente na Base dos Dados. A descoberta em tempo de execução é a regra geral do projeto (RN-TMP-01).
+- **Exemplo:** O INEP não divulga a nota municipal de 2023 em certos casos de participação insuficiente; nesse caso o valor fica como não divulgado, nunca como zero (RN-MOD-12).
+- **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026; PLANO §Bloco 4; BLOCOS §Bloco 4; DECISÕES §Tabelas da Base dos Dados confirmadas.
+- **Relacionadas:** RN-MOD-09, RN-MOD-12, RN-TMP-01, RN-TMP-16

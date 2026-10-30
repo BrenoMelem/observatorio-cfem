@@ -9,7 +9,7 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Regra:** A população anual deve ser obtida do IBGE SIDRA, agregado 6579 (estimativas), com a variável e a unidade fixadas, e não deve ser misturada com o Censo.
 - **Motivo:** É a fonte primária por API, não exige credencial e prova a arquitetura inteira por ser o primeiro indicador ponta a ponta.
 - **Exemplo:** Estimativa de 2025, variável 9324, unidade pessoas: Canaã dos Carajás 89.524 e Parauapebas 305.771; os 12 municípios retornaram valor (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: API do IBGE).
-- **Exceções:** Os valores ainda precisam ser comparados com a tabela publicada pelo IBGE antes de alimentar um gráfico (VAL-15/10).
+- **Exceções:** Cada nova edição deve ser comparada com tabela publicada pelo IBGE antes de alimentar um gráfico. Para 2025 e 2026, os 12 municípios foram reconciliados sem divergência em 30/10/2026, conforme referências em `data/referencia-populacao-2025.json` e `data/referencia-populacao-2026.json`.
 - **Fonte:** DECISÕES §Rotas de coleta por fonte, §Pré-requisitos e pendências (Ordem recomendada); BLOCOS §Bloco 1; VAL-15/10 §Matriz operacional, §Rodada adicional.
 - **Relacionadas:** RN-MOD-13, RN-FNT-19
 
@@ -34,7 +34,8 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Regra:** A despesa por função deve vir da DCA do SICONFI, Anexo I-E (`DCA-Anexo I-E`), filtrada pelo `id_ente` (código IBGE de 7 dígitos) e pelo exercício, com as funções no campo `conta`.
 - **Motivo:** É a fonte primária por API para as finanças municipais de 2013 em diante.
 - **Exemplo:** O exercício 2025 retornou 337 linhas na primeira página, que é o tamanho da primeira página do teste e não a quantidade final (transcrito do relatório LAB-19/10, não conferido no JSON).
-- **Exceções:** Em aberto: o(s) demonstrativo(s) a usar, as contas e o estágio da despesa, a paginação completa e o tratamento de retificações (RN-TMP-04).
+- **Evidência de 30/10/2026 (consulta à API do SICONFI para Canaã dos Carajás, `id_ente` 1502152, só agregados):** o exercício 2025 retornou 337 linhas e o 2024 retornou 329, ambos com `hasMore` falso e limite de 5.000, ou seja, a resposta veio completa em uma página; a nota acima sobre a "primeira página" não se confirmou para essa consulta. Cada linha traz `exercicio`, `instituicao`, `cod_ibge`, `uf`, `anexo`, `rotulo`, `coluna`, `cod_conta`, `conta`, `valor` e `populacao` (75.433 nos dois anos). As colunas são cinco: despesas empenhadas, liquidadas e pagas, e inscrição de restos a pagar processados e não processados, de modo que o estágio da despesa está disponível na própria resposta. A `conta` traz 17 funções (por exemplo, "12 - Educação" e "10 - Saúde"), subfunções (por exemplo, "10.301 - ...") e a linha "Despesas Exceto Intraorçamentárias". Em 2025 a soma das 17 funções fecha com essa linha nos três estágios (pagas: R$ 1.617.558.438,04; empenhadas: R$ 1.962.905.755,76; liquidadas: R$ 1.669.925.792,85), e o mesmo ocorre em 2024. Não há linhas duplicadas por coluna e conta. A resposta não traz campo de retificação, então RN-TMP-04 ainda não pode ser conferida. Os exercícios de 2014 a 2025 retornaram dados com o nome de anexo `DCA-Anexo I-E`. O exercício de 2013 retornou 0 linhas com esse nome; sem filtro de anexo, ele trouxe o `Anexo I-E` (171 linhas), sem o rótulo e sem a linha "Despesas Exceto Intraorçamentárias", com colunas de restos a pagar nomeadas de outro modo. Os demonstrativos, as contas e o estágio da despesa continuam em aberto.
+- **Exceções:** O estágio da despesa está decidido: empenhada, liquidada e paga são publicadas como três indicadores separados (DECISÃO-MANTENEDOR de 30/10/2026). A paginação foi conferida na evidência acima. Em aberto: o(s) demonstrativo(s) a usar, as contas, se o escopo fica em função e subfunção (o mantenedor considerou esse nível adequado em 30/10/2026, mas não registrou como decisão) e o tratamento de retificações (RN-TMP-04).
 - **Fonte:** DECISÕES §Rotas de coleta por fonte, §Pré-requisitos e pendências; BLOCOS §Bloco 6; LAB-19/10 §4 (SICONFI); VAL-15/10 §Matriz operacional.
 - **Relacionadas:** RN-TMP-04, RN-TMP-15, RN-IND-02
 
@@ -43,7 +44,7 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Regra:** Os preços de minério de ferro (`PIORECRUSDM`) e de cobre (`PCOPPUSDM`) devem vir da API do FRED, como séries globais mensais; o ferro tem início em janeiro de 1980 e o período do cobre vigente é 2000–2026.
 - **Motivo:** O FRED espelha a série do IMF por API estável, que é o padrão para pipelines.
 - **Exemplo:** Em 19/10/2026, as duas séries foram consultadas de jan/1980 a jul/2026 (transcrito do relatório LAB-19/10, não conferido no JSON).
-- **Exceções:** A unidade do ferro e o recorte de exibição do ferro estão em aberto (RN-TMP-14, RN-TMP-13). Em 25/10/2026, a API do FRED devolveu as duas séries com linhas de jan/1980 a set/2026, mas os valores de jan/1980 a dez/1991 vieram como ausentes (144 meses); o primeiro valor é de jan/1992 (ferro: 14,31 US$/t) e os metadados do FRED dão início em 1992-01-01. Isso contradiz o início em jan/1980 e está registrado como divergência 17 em [pendencias.md](pendencias.md).
+- **Exceções:** A unidade do ferro é `$/dmt` (RN-TMP-14); o recorte de exibição do ferro está em aberto (RN-TMP-13). Em 25/10/2026, a API do FRED devolveu as duas séries com linhas de jan/1980 a set/2026, mas os valores de jan/1980 a dez/1991 vieram como ausentes (144 meses); o primeiro valor é de jan/1992 (ferro: 14,31 US$/t) e os metadados do FRED dão início em 1992-01-01. Isso contradiz o início em jan/1980 e está registrado como divergência 17 em [pendencias.md](pendencias.md).
 - **Fonte:** DECISÃO-MANTENEDOR de 24/10/2026 (conflito 8); LAB-19/10 §4 (FRED e World Bank Pink Sheet); DECISÕES §Rotas de coleta por fonte; BLOCOS §Bloco 2.
 - **Relacionadas:** RN-FON-10, RN-MOD-19, RN-TMP-13
 
@@ -52,7 +53,7 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Regra:** O Pink Sheet do World Bank só deve ser usado, baixado uma vez e congelado com citação, se for necessário cobrir anos anteriores a 1980.
 - **Motivo:** Como o ferro no FRED começa em 1980, o trecho de 1985–1991 previsto por DECISÕES e por BLOCOS deixou de ser necessário.
 - **Exemplo:** A planilha anual do Pink Sheet tem 2023–2025 e coincide numericamente com o PDF de outubro de 2026.
-- **Exceções:** O rótulo da unidade do ferro diverge entre a planilha e o PDF (RN-TMP-14). Se o ferro no FRED só tem valores desde jan/1992 (divergência 17), o Pink Sheet volta a ser necessário para 1985–1991 e a regra acima deve ser reavaliada.
+- **Exceções:** O rótulo da unidade do ferro diverge entre a planilha e o PDF; vale `$/dmt` (RN-TMP-14). Se o ferro no FRED só tem valores desde jan/1992 (divergência 17), o Pink Sheet volta a ser necessário para 1985–1991 e a regra acima deve ser reavaliada.
 - **Fonte:** DECISÃO-MANTENEDOR de 24/10/2026 (conflito 8); LAB-19/10 §4; VAL-15/10 §Matriz operacional (Commodities).
 - **Relacionadas:** RN-TMP-13, RN-TMP-14
 
@@ -61,16 +62,18 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Regra:** O saldo de emprego formal deve ser derivado como admissões menos desligamentos, e admissões e desligamentos também devem ser indicadores próprios.
 - **Motivo:** Não há série municipal pronta de saldo, e derivar rende dois indicadores adicionais.
 - **Exemplo:** `ADMISNC` (admissões) − `DESLIGNC` (demissões) do Novo CAGED.
-- **Exceções:** A rota de obtenção está em conflito (RN-FNT-20).
+- **Exceções:** A rota de obtenção está em RN-FNT-20 (Novo CAGED via Base dos Dados); `ADMISNC` e `DESLIGNC` são as séries do IPEADATA, rota alternativa.
 - **Fonte:** DECISÕES §Estratégia de fontes e acesso (Emprego formal); BLOCOS §Bloco 2.
 - **Relacionadas:** RN-FNT-20, RN-MOD-16
 
 ### RN-FNT-08: Taxa de homicídio
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve confirmar na fonte se `AVIOL12_THOMIC` corresponde à medida pedida pela oficina, "taxa de homicídio por arma de fogo a cada 100 mil habitantes, 1989–2022", e decidir a fonte e o conceito do indicador.
-- **Motivo:** Os documentos divergem na fonte, e BLOCOS chama o indicador apenas de "taxa de homicídio", sem "arma de fogo", sem justificar a mudança.
+- **Status:** DECIDIDA
+- **Regra:** A taxa de homicídio em geral vem da série `AVIOL12_THOMIC` (IPEADATA e Atlas da Violência), sem o rótulo "por arma de fogo". As mortes por arma de fogo, pedidas pela oficina, vêm do SIM via Base dos Dados, que é a rota primária para esse recorte; o IPEADATA é a rota reserva.
+- **Motivo:** A série do IPEADATA mede homicídio em geral e não separa arma de fogo; o SIM, por trazer a causa do óbito, pode separá-la. Manter a taxa geral no Atlas respeita RN-FNT-15 (a taxa corrigida da causa indeterminada).
 - **Exemplo:** DECISÕES indica `AVIOL12_THOMIC` municipal de 1989 a 2022 (IPEADATA e Atlas da Violência).
-- **Fonte:** Versão A: DECISÕES §Rotas de coleta por fonte, §Estratégia de fontes e acesso; BLOCOS §Bloco 4 (IPEADATA/Atlas, 04/10/2026, última edição 20/10/2026). Versão B: CONSUMO §Sociedade (CODEC/SEGUP principal e SIM alternativa, 02/10/2026). Versão C: PLANO §Bloco 4 (SIM via Base dos Dados, 30/09/2026). A conferência na fonte foi pedida pelo mantenedor em 24/10/2026 (DECISÃO-MANTENEDOR, resposta à pergunta 8).
+- **Evidência de 28/10/2026:** os metadados do IPEADATA para `AVIOL12_THOMIC` dão o nome "Taxa de homicídios (100.000 Habitantes)", fonte MS/SVS/CGIAE (SIM), atualização de 08/07/2026, sem menção a arma de fogo. O comentário da série cita códigos CID de lesões autoprovocadas (X60-X84), o que parece inconsistente com o nome; a causa não foi confirmada. A decisão de fonte e conceito segue em aberto.
+- **Exceções:** Depende da conta do Google Cloud (RN-FON-09). Não foi verificado se a tabela do SIM na Base dos Dados traz o município e a causa que separa arma de fogo, nem como tratar a causa indeterminada nesse recorte; a série do IPEADATA não respondeu a consultas de valores em 30/10/2026 (tempo esgotado), e não se sabe se tem dados municipais.
+- **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026; Versão A: DECISÕES §Rotas de coleta por fonte, §Estratégia de fontes e acesso; BLOCOS §Bloco 4 (IPEADATA/Atlas, 04/10/2026, última edição 20/10/2026). Versão C (arma de fogo): PLANO §Bloco 4 (SIM via Base dos Dados, 30/09/2026). Não adotada: CONSUMO §Sociedade (CODEC/SEGUP principal e SIM alternativa, 02/10/2026).
 - **Relacionadas:** RN-FNT-15, RN-TMP-09, RN-FON-20
 
 ### RN-FNT-09: IPEADATA para PIB e população só como plano B
@@ -94,24 +97,26 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Regra:** O projeto deve usar as tabelas da Base dos Dados já conferidas: `br_ibge_populacao.municipio`, `br_ibge_pib.municipio`, `br_me_caged.microdados_movimentacoes`, `br_me_rais.microdados_vinculos`, `br_inep_ideb.municipio`, `br_ms_sim.municipio_causa` e `br_me_siconfi` (com demonstrativo escolhido), e a tabela `microdados_antigos` do CAGED, que vai só até cerca de 2019, não deve ser usada para dados atuais.
 - **Motivo:** Os nomes completos e os anos mais recentes foram conferidos no catálogo em out/2026.
 - **Exemplo:** RAIS (vínculos), ano mais recente 2025; Novo CAGED, 2026-08 (conforme DECISÕES).
-- **Exceções:** A via Base dos Dados para RAIS, IDEB e eleitorado está em disputa (RN-FNT-21). Em aberto: a coluna de município nas tabelas do CAGED e do IDEB, e o `table_id` técnico do eleitorado (TSE) e do Censo Escolar (tabela `escola`).
+- **Exceções:** A via Base dos Dados para RAIS, IDEB e eleitorado foi decidida em RN-FNT-21, com a credencial decidida em RN-FON-09. Em aberto: a coluna de município nas tabelas do CAGED e do IDEB, e o `table_id` técnico do eleitorado (TSE) e do Censo Escolar (tabela `escola`).
 - **Fonte:** DECISÕES §Tabelas da Base dos Dados confirmadas, §Pré-requisitos e pendências; BLOCOS §Bloco 4.
 - **Relacionadas:** RN-FON-03, RN-FON-19, RN-TMP-03
 
 ### RN-FNT-12: Frota de veículos
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve decidir a fonte da frota de veículos, entre Senatran e DETRAN-PA.
-- **Motivo:** As fontes divergem, e o painel do DETRAN-PA não tem exportação municipal confirmada.
+- **Status:** DECIDIDA
+- **Regra:** A fonte primária da frota de veículos é a Senatran. O DETRAN-PA é fonte reserva e só entra se tiver exportação municipal confirmada. A forma de obter os dados da Senatran ainda deve ser verificada.
+- **Motivo:** Três documentos indicam a Senatran; o painel do DETRAN-PA não tem exportação municipal confirmada.
 - **Exemplo:** Em 17/10/2026, após reparo da cadeia de certificados, o painel do DETRAN-PA devolveu HTTP 502 (transcrito do relatório LAB-19/10, não conferido no JSON).
-- **Fonte:** Versão A: DECISÕES §Rotas de coleta por fonte e BLOCOS §Bloco 4 (Senatran via dados.gov.br, com DETRAN-PA como alternativa a avaliar; PLANO §Bloco 4 também; 04/10/2026, última edição 20/10/2026). Versão B: MAPA-TEMAS §Sociedade; CONSUMO §Sociedade, serviços e segurança (DETRAN-PA, 02/10/2026).
+- **Evidência de 28/10/2026:** o arquivo "Frota por município e tipo" de setembro de 2026, baixado da página da Senatran no gov.br, tem 5.572 linhas de município em 27 UFs, uma linha por UF e município (sem repetição), e a soma dos municípios (133.337.839) fecha com o total do cabeçalho. A frota é um estoque mensal por tipo de veículo (`AUTOMOVEL`, `MOTOCICLETA`, `CAMINHAO` e outros). O Pará tem 144 municípios, entre eles Parauapebas, Canaã dos Carajás, Marabá e Curionópolis. O arquivo não traz código IBGE: o município vem só como nome em maiúsculas e sem acento, com um erro de grafia ("BARAO D0 MONTE ALTO"). A identificação por código IBGE exigiria cruzar o nome com a lista oficial de municípios, e essa regra de cruzamento ainda não foi decidida. A Senatran publica arquivos até setembro de 2026.
+- **Fonte:** DECISÃO-MANTENEDOR de 28/10/2026; Versão A: DECISÕES §Rotas de coleta por fonte e BLOCOS §Bloco 4 (Senatran via dados.gov.br, com DETRAN-PA como alternativa a avaliar; PLANO §Bloco 4 também; 04/10/2026, última edição 20/10/2026). Versão B: MAPA-TEMAS §Sociedade; CONSUMO §Sociedade, serviços e segurança (DETRAN-PA, 02/10/2026).
 - **Relacionadas:** RN-TMP-02, RN-FON-20
 
 ### RN-FNT-13: Uso do solo pelo MapBiomas
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve decidir se o uso do solo do MapBiomas é obtido pelo Google Earth Engine ou por download das estatísticas municipais da Coleção 11, e testar o asset antes de assumir a rota.
-- **Motivo:** As fontes divergem, e o asset ainda não foi testado porque depende do projeto Google Cloud.
+- **Status:** DECIDIDA
+- **Regra:** O uso do solo do MapBiomas, tanto os números por município quanto os mapas, é obtido pelo Google Earth Engine. O download das estatísticas municipais da Coleção 11 fica como alternativa para os números. A coleta depende da criação da conta e do cadastro de uso não comercial (RN-FON-09 e RN-PRI-09).
+- **Motivo:** O mantenedor quer exibir mapas, e as planilhas de estatística trazem só números; o Earth Engine fornece o dado de imagem e permite recortar por município, numa única rota.
 - **Exemplo:** O Earth Engine ficou PENDENTE em 17/10/2026 por falta de `GEE_PROJECT` (transcrito do relatório LAB-19/10, não conferido no JSON).
-- **Fonte:** Versão A: DECISÕES §Rotas de coleta por fonte e BLOCOS §Bloco 5 (Google Earth Engine, com download como alternativa; 04/10/2026, última edição 20/10/2026). Versão B: MAPA-TEMAS §Meio ambiente e CONSUMO §Meio ambiente (download das estatísticas da Coleção 11; 02/10/2026). PLANO §Bloco 5 (30/09/2026) também aponta download.
+- **Exceções:** Vale RN-TMP-05 (nome do asset não fixado). A credencial está decidida (RN-FON-09), mas a conta e o projeto ainda não foram criados, e o asset ainda não foi testado. As classes estão em RN-IND-11, e o denominador e o limite municipal em RN-IND-13.
+- **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026 (substitui a decisão do mesmo dia pelo download primário); Versão adotada: DECISÕES §Rotas de coleta por fonte e BLOCOS §Bloco 5 (Google Earth Engine, com download como alternativa; 04/10/2026, última edição 20/10/2026). Versão como alternativa: MAPA-TEMAS §Meio ambiente e CONSUMO §Meio ambiente (download das estatísticas da Coleção 11; 02/10/2026); PLANO §Bloco 5 (30/09/2026).
 - **Relacionadas:** RN-TMP-05, RN-TMP-07, RN-PRI-09, RN-FON-20
 
 ### RN-FNT-14: Emissões do SEEG por download
@@ -128,7 +133,7 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Regra:** A taxa de homicídio não deve ser calculada a partir dos microdados crus do SIM, e os demais indicadores de saúde devem vir dos microdados do DATASUS (SIM, SINASC, SIH, SIA e CNES), agregados por município.
 - **Motivo:** Muitas mortes entram como "causa indeterminada"; o Atlas da Violência redistribui essas mortes e publica a taxa corrigida.
 - **Exemplo:** O SIM serve a indicadores de saúde, mas a taxa de homicídio usa a série corrigida do Atlas.
-- **Exceções:** A fonte e o conceito da taxa de homicídio estão em aberto (RN-FNT-08).
+- **Exceções:** A taxa em geral segue o Atlas, como esta regra diz; só o recorte por arma de fogo usa o SIM, conforme RN-FNT-08, e a causa indeterminada nesse recorte ainda deve ser tratada.
 - **Fonte:** DECISÕES §Estratégia de fontes e acesso (Homicídios); BLOCOS §Bloco 4.
 - **Relacionadas:** RN-FNT-08, RN-TMP-10, RN-TER-12
 
@@ -165,17 +170,19 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Relacionadas:** RN-FNT-01, RN-TER-05
 
 ### RN-FNT-20: Rota do emprego formal
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve decidir a rota do emprego formal entre IPEADATA, microdados do MTE e Base dos Dados, e como obter o IPEADATA sem baixar a série inteira.
-- **Motivo:** As fontes divergem, e o filtro do IPEADATA não limitou a resposta.
-- **Exemplo:** Uma consulta com filtro de município e limite de uma linha anunciou 63.685.034 bytes e começou por outro município (transcrito do relatório VAL-15/10, não conferido no JSON).
-- **Fonte:** Versão A: DECISÕES §Estratégia de fontes e acesso e BLOCOS §Bloco 2 (IPEADATA primário, séries "confirmadas por município, 2020–2026"; 04/10/2026, última edição 20/10/2026). Versão B: MAPA-TEMAS §Economia e CONSUMO §Economia (microdados MTE/PDET; 02/10/2026). Versão C: PLANO §Bloco 2 (Novo CAGED via Base dos Dados; 30/09/2026). Evidência: VAL-15/10 §Matriz operacional, §Rodada adicional (15/10/2026); LAB-19/10 §4 (só `ADMISNC` testado; 19/10/2026).
+- **Status:** DECIDIDA
+- **Regra:** O emprego formal (admissões e desligamentos, base do saldo de RN-FNT-07) é obtido pelo Novo CAGED via Base dos Dados. O IPEADATA e os microdados do MTE são alternativas.
+- **Motivo:** Decisão do mantenedor entre três rotas das fontes; usa a mesma via da RAIS (RN-FNT-21) e evita baixar a série inteira do IPEADATA, cujo filtro não limitou a resposta.
+- **Exemplo:** Uma consulta ao IPEADATA com filtro de município e limite de uma linha anunciou 63.685.034 bytes e começou por outro município (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exceções:** Depende da credencial e da conta do Google Cloud (RN-FON-09). A coluna de município e as tabelas do Novo CAGED ainda não foram conferidas. As séries `ADMISNC` e `DESLIGNC` do IPEADATA só valem se essa rota for usada como alternativa.
+- **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026; Versão adotada: PLANO §Bloco 2 (Novo CAGED via Base dos Dados; 30/09/2026). Versões como alternativa: DECISÕES §Estratégia de fontes e acesso e BLOCOS §Bloco 2 (IPEADATA; 04/10/2026, última edição 20/10/2026); MAPA-TEMAS §Economia e CONSUMO §Economia (microdados MTE/PDET; 02/10/2026). Evidência: VAL-15/10 §Matriz operacional, §Rodada adicional (15/10/2026); LAB-19/10 §4 (só `ADMISNC` testado; 19/10/2026).
 - **Relacionadas:** RN-FNT-07, RN-FON-20
 
 ### RN-FNT-21: Base dos Dados ou arquivo oficial para RAIS, IDEB, TSE e Censo Escolar
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve decidir, para RAIS, IDEB, eleitorado (TSE) e Censo Escolar, se a via é a Base dos Dados ou o arquivo oficial do órgão.
-- **Motivo:** DECISÕES e BLOCOS indicam a Base dos Dados; CONSUMO e MAPA-TEMAS indicam arquivos oficiais com leitura por edição; e a Base dos Dados nunca é fonte primária.
-- **Exemplo:** O IDEB aparece como `br_inep_ideb.municipio` em DECISÕES e como arquivo do INEP por edição em CONSUMO.
-- **Fonte:** Versão A: DECISÕES §Estratégia de fontes e acesso e BLOCOS §Bloco 4 (04/10/2026, última edição 20/10/2026). Versão B: CONSUMO §Sociedade, §Economia e MAPA-TEMAS §Sociedade (02/10/2026).
+- **Status:** DECIDIDA
+- **Regra:** RAIS, IDEB, eleitorado (TSE) e Censo Escolar são obtidos pela Base dos Dados, sempre citados com a origem (RN-FON-03). O arquivo oficial do órgão fica como alternativa.
+- **Motivo:** Decisão do mantenedor entre as duas versões das fontes; a Base dos Dados já traz as tabelas padronizadas.
+- **Exemplo:** O IDEB é consumido como `br_inep_ideb.municipio` (DECISÕES), e não como arquivo do INEP por edição (CONSUMO).
+- **Exceções:** Essa via usa a credencial decidida em RN-FON-09 e o escopo mínimo de RN-PRI-10; enquanto a conta e o projeto do Google Cloud não forem criados, nenhuma dessas quatro bases pode ser coletada por ela. Nenhuma das quatro foi testada de ponta a ponta por nenhuma das vias.
+- **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026; Versão adotada: DECISÕES §Estratégia de fontes e acesso e BLOCOS §Bloco 4 (04/10/2026, última edição 20/10/2026). Versão como alternativa: CONSUMO §Sociedade, §Economia e MAPA-TEMAS §Sociedade (02/10/2026).
 - **Relacionadas:** RN-FON-03, RN-FON-20
