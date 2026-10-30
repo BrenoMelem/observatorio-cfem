@@ -24,7 +24,7 @@ Termos e siglas usados nesta documentação. Os termos de domínio vêm de DECIS
 | validado | Estado de validação de um valor que passou pelas checagens e pela reconciliação exigidas |
 | homologado | Dado que passou por validação e reconciliação e pode alimentar gráficos |
 | lote | Conjunto de dados coletado e tratado numa execução, que é validado e publicado, ou barrado, como um todo |
-| camada publicada | O conjunto de dados tratados e validados que o front-end, as exportações e o assistente consomem. Pode ser entregue como arquivos, como API própria ou como ambos (conflito 2) |
+| camada publicada | O conjunto de dados tratados e validados que o front-end, as exportações e o assistente consomem. É entregue por API própria (RN-ENT-02) |
 | camada tratada | Os dados já padronizados e versionados entre as fontes e o consumo |
 | proveniência | Origem do dado: URL, edição da fonte, checksum, data de coleta, filtros e versão do tratamento |
 | tabela de equivalência (de-para) | Tabela que liga um identificador de uma fonte (nome de município, código do TSE) ao código IBGE |
