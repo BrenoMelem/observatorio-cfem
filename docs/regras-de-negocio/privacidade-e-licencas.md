@@ -48,6 +48,7 @@ Regras sobre dados pessoais, registros individuais, acesso restrito e reuso de d
 - **Regra:** O mantenedor deve confirmar a licença de redistribuição de cada fonte antes de a camada publicada e o CSV aberto a incluírem, começando por FAPESPA, IDSC e SEEG.
 - **Motivo:** Nenhuma das fontes de decisão registra licenças confirmadas.
 - **Exemplo:** BLOCOS diz que a planilha do SEEG é guardada no repositório, e a licença de redistribuição do SEEG não foi verificada (conflito 16).
+- **Evidência de 30/10/2026 (por busca na internet, não conferida nas páginas oficiais):** FAPESPA: as publicações municipais em PDF dizem que a reprodução parcial ou total é permitida com citação da fonte e sem fim comercial ou de venda; não há licença formal do tipo Creative Commons. SEEG: não há licença única; uma publicação de 2026 é CC BY 4.0, e o relatório da Coleção 13 permite o uso com crédito ao SEEG, mas diz que isso não é licença para reinterpretar ou revender as informações; os termos dos conjuntos de dados brutos não foram localizados. IDSC: nenhuma busca trouxe os termos de reuso; sabe-se que cerca de 98% dos dados vêm de bases oficiais (DATASUS, IBGE, INEP, SNIS), o que não equivale a licença para redistribuir o índice. Nenhuma das três licenças está confirmada; a regra segue em aberto.
 - **Fonte:** PESQUISA §Conclusões principais (item 4); CONSUMO §Contrato de dados para o front-end; BLOCOS §Bloco 5 (CO₂); DECISÃO-MANTENEDOR de 24/10/2026 (conflito 16 em aberto).
 - **Relacionadas:** RN-FON-15, RN-PRI-05, RN-ENT-10
 
