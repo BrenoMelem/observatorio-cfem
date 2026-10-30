@@ -57,7 +57,7 @@ Fonte: DECISÕES §Indicadores compostos; BLOCOS §Bloco 6.
 - **Regra:** A área de mineração versus cobertura florestal deve ser calculada pelo observatório, por município e ano, a partir das classes de mineração e de floresta do MapBiomas, sem fonte nova.
 - **Motivo:** Mostra o avanço da mineração sobre a floresta, pertinente para Canaã dos Carajás e Parauapebas, com dados que o bloco ambiental já tem.
 - **Exemplo:** Mineração e floresta de Canaã dos Carajás (1502152), por ano, de 1985 a 2025.
-- **Exceções:** As classes que formam "floresta", "mineração" e "área urbana" estão em aberto (RN-IND-11).
+- **Exceções:** As classes que formam "floresta", "mineração" e "área urbana" estão em aberto (RN-IND-11); o denominador e o limite municipal estão em RN-IND-13.
 - **Fonte:** DECISÕES §Área de mineração × cobertura florestal; BLOCOS §Bloco 5.
 - **Relacionadas:** RN-IND-11, RN-TMP-07
 
@@ -98,11 +98,11 @@ Fonte: DECISÕES §Indicadores compostos; BLOCOS §Bloco 6.
 
 ### RN-IND-11: Definição das classes de uso do solo
 - **Status:** EM ABERTO
-- **Regra:** O mantenedor deve definir quais classes do MapBiomas formam "floresta", "mineração" e "área urbana", o denominador das porcentagens e a edição do limite municipal.
+- **Regra:** O mantenedor deve definir quais classes do MapBiomas formam "floresta", "mineração" e "área urbana". O denominador e o limite municipal já estão decididos em RN-IND-13.
 - **Motivo:** Sem essa definição, os indicadores de uso do solo não são reproduzíveis.
 - **Exemplo:** A Coleção 11 do MapBiomas classifica o uso do solo em classes numeradas por ano, de 1985 a 2025.
-- **Fonte:** CONSUMO §Meio ambiente e saneamento; BLOCOS §Bloco 5.
-- **Relacionadas:** RN-IND-06
+- **Fonte:** CONSUMO §Meio ambiente e saneamento; BLOCOS §Bloco 5; DECISÃO-MANTENEDOR de 30/10/2026 (classes mantidas em aberto).
+- **Relacionadas:** RN-IND-06, RN-IND-13
 
 ### RN-IND-12: Qual CFEM e qual população no per capita
 - **Status:** EM ABERTO
@@ -111,3 +111,12 @@ Fonte: DECISÕES §Indicadores compostos; BLOCOS §Bloco 6.
 - **Exemplo:** A população estimada de 2025 de Parauapebas foi 305.771 pessoas (agregado 6579, variável 9324) (transcrito do relatório VAL-15/10, não conferido no JSON).
 - **Fonte:** BLOCOS §Bloco 3; RN-CFE-02 e RN-MOD-13 (restrições aplicáveis).
 - **Relacionadas:** RN-IND-10, RN-CFE-02, RN-MOD-13
+
+### RN-IND-13: Denominador e limite municipal do uso do solo
+- **Status:** DECIDIDA
+- **Regra:** As porcentagens de uso do solo têm como denominador a área total do município, isto é, a soma de todas as classes mapeadas dentro do limite municipal. O limite municipal é a malha que o MapBiomas usa na Coleção 11, e a edição exata deve ser registrada na proveniência (RN-MOD-02).
+- **Motivo:** Decisão do mantenedor: o total mapeado é simples e comparável entre municípios e anos, e a malha do MapBiomas mantém os números compatíveis com as estatísticas publicadas.
+- **Exemplo:** A porcentagem de área urbana de Canaã dos Carajás em um ano é a área da classe de área urbana dividida pela soma de todas as classes do município nesse ano.
+- **Exceções:** Essa área pode diferir levemente da área territorial oficial do IBGE. Quais classes formam "floresta", "mineração" e "área urbana" segue em aberto (RN-IND-11), e a edição da malha ainda não foi conferida.
+- **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026; CONSUMO §Meio ambiente e saneamento; BLOCOS §Bloco 5.
+- **Relacionadas:** RN-IND-11, RN-FNT-13, RN-TMP-07
