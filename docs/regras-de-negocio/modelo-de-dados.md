@@ -47,8 +47,8 @@ Estado: **EM ABERTO**. Nenhum dos dois conjuntos de nomes é adotado.
 
 ### RN-MOD-03: Nomes e campos do esquema
 - **Status:** EM ABERTO
-- **Regra:** Os nomes de campo, o idioma e a lista de campos da observação devem ser definidos pelo mantenedor antes da implementação do contrato.
-- **Motivo:** DECISÕES e CONSUMO e VAL-15/10 definem esquemas diferentes em idioma e em campos (ver tabela acima).
+- **Regra:** Os nomes de campo e a lista de campos da observação devem ser definidos pelo mantenedor antes da implementação do contrato. O idioma já está decidido (RN-MOD-27).
+- **Motivo:** DECISÕES e CONSUMO e VAL-15/10 definem esquemas diferentes em campos (ver tabela acima).
 - **Exemplo:** DECISÕES usa `municipio_id`; CONSUMO e VAL-15/10 usam `geo_id`.
 - **Fonte:** DECISÕES §Arquitetura e padrões de dados (04/10/2026); CONSUMO §Contrato de dados para o front-end (02/10/2026); VAL-15/10 §Marco 1 (15/10/2026).
 - **Relacionadas:** RN-MOD-02, RN-MOD-04, RN-ENT-02
@@ -249,3 +249,12 @@ Estado: **EM ABERTO**. Nenhum dos dois conjuntos de nomes é adotado.
 - **Exceções:** O valor real é um pedido do projeto e será acrescentado depois, com índice e ano-base explícitos; por isso RN-MOD-24 continua EM ABERTO.
 - **Fonte:** DECISÃO-MANTENEDOR de 26/10/2026; CONSUMO §Finanças públicas e índices (despesa per capita).
 - **Relacionadas:** RN-MOD-24, RN-MOD-17
+
+### RN-MOD-27: Idioma dos campos
+- **Status:** DECIDIDA
+- **Regra:** Os nomes dos campos da observação são em português.
+- **Motivo:** Decisão do mantenedor entre as duas versões das fontes; os dados de origem (IBGE, ANM) e a documentação já estão em português, e os nomes serão a interface pública da API (RN-ENT-02).
+- **Exemplo:** `municipio_id`, como em DECISÕES, e não `geo_id`, como em CONSUMO e VAL-15/10.
+- **Exceções:** Os nomes exatos e a lista de campos seguem em aberto (RN-MOD-03).
+- **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026; Versão adotada: DECISÕES §Arquitetura e padrões de dados (04/10/2026, última edição 20/10/2026). Versão não adotada: CONSUMO §Contrato de dados para o front-end (02/10/2026); VAL-15/10 §Marco 1 (15/10/2026).
+- **Relacionadas:** RN-MOD-03, RN-ENT-02

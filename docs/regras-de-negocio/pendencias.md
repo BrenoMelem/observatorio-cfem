@@ -8,7 +8,7 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 
 | Regra | O que falta decidir | Arquivo |
 | --- | --- | --- |
-| RN-MOD-03 | Nomes e campos do esquema (tabela de equivalência dos dois esquemas) | [modelo-de-dados.md](modelo-de-dados.md) |
+| RN-MOD-03 | Nomes exatos e lista de campos do esquema (idioma decidido em RN-MOD-27; tabela de equivalência dos dois esquemas) | [modelo-de-dados.md](modelo-de-dados.md) |
 | RN-MOD-24 | Valor real: índice de correção, ano-base e forma de publicação (hoje só nominal, RN-MOD-26) | [modelo-de-dados.md](modelo-de-dados.md) |
 | RN-FON-09 | Como o pipeline se autentica no Google Cloud (conflito 7) | [consumo-de-fontes.md](consumo-de-fontes.md) |
 | RN-FON-20 | Fonte e via de acesso nos indicadores em conflito (conflitos 3, 4, 6 e 9) | [consumo-de-fontes.md](consumo-de-fontes.md) |
@@ -50,7 +50,7 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 
 | # | Tema | Versões | Situação |
 | --- | --- | --- | --- |
-| 1 | Esquema de dados | DECISÕES (04/10): `municipio_id, municipio_nome, ano, mes, indicador, valor, unidade, fonte, atualizado_em`, com `mes` pendente de aceite. PLANO (30/09): o mesmo, sem `mes`. CONSUMO (02/10) e VAL-15/10 §Marco 1 (15/10): `indicator_id, geo_id, reference_period, value, unit, status, source_edition…` | EM ABERTO (RN-MOD-03); o mês no esquema comum foi decidido em 27/10/2026 (RN-MOD-04). Tabela de equivalência em [modelo-de-dados.md](modelo-de-dados.md) |
+| 1 | Esquema de dados | DECISÕES (04/10): `municipio_id, municipio_nome, ano, mes, indicador, valor, unidade, fonte, atualizado_em`, com `mes` pendente de aceite. PLANO (30/09): o mesmo, sem `mes`. CONSUMO (02/10) e VAL-15/10 §Marco 1 (15/10): `indicator_id, geo_id, reference_period, value, unit, status, source_edition…` | EM ABERTO (RN-MOD-03); o mês no esquema comum foi decidido em 27/10/2026 (RN-MOD-04) e o idioma português em 30/10/2026 (RN-MOD-27). Tabela de equivalência em [modelo-de-dados.md](modelo-de-dados.md) |
 | 2 | Forma de entrega | PLANO e DECISÕES: camada de arquivos JSON e CSV. VAL-15/10 e CONSUMO: API própria | DECIDIDO em 30/10/2026 (RN-ENT-02): API própria. DECISÕES e PLANO precisam ser atualizados |
 | 3 | Emprego | DECISÕES e BLOCOS: IPEADATA (`ADMISNC` − `DESLIGNC`) para o saldo e RAIS via Base dos Dados para as quebras. PLANO: Novo CAGED via Base dos Dados. MAPA-TEMAS e CONSUMO: microdados MTE/PDET. VAL-15/10: filtros do IPEADATA não limitaram a resposta; LAB-19/10: só `ADMISNC` testado | EM ABERTO (RN-FNT-20) |
 | 4 | Homicídios | DECISÕES e BLOCOS: `AVIOL12_THOMIC` (IPEADATA e Atlas), 1989–2022. PLANO: SIM via Base dos Dados. CONSUMO: CODEC/SEGUP principal e SIM alternativa. A oficina pede "por arma de fogo"; BLOCOS diz "taxa de homicídio" | EM ABERTO (RN-FNT-08). Conferir na fonte se a série mede o conceito pedido |
