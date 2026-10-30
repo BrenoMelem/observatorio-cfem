@@ -13,6 +13,7 @@ O sistema do observatório ainda está em fase de pesquisa e planejamento. Os do
 - `docs/regras-de-negocio/fontes/pesquisa-observatorio-cfem/`: relatório de viabilidade, fontes, bibliografia e pacote LaTeX.
 - `notebooks/`: laboratório exploratório de fontes do observatório.
 - `scripts/`: scripts de validação, reconciliação e consulta exploratória.
+- `AGENTS.md`: instruções para agentes de IA que trabalham no repositório (o `CLAUDE.md` apenas aponta para ele).
 
 ## Começar
 
