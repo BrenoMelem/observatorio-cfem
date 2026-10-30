@@ -11,7 +11,7 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 | RN-MOD-03 | Nomes exatos e lista de campos do esquema (idioma decidido em RN-MOD-27; tabela de equivalência dos dois esquemas) | [modelo-de-dados.md](modelo-de-dados.md) |
 | RN-MOD-24 | Valor real: índice de correção, ano-base e forma de publicação (hoje só nominal, RN-MOD-26) | [modelo-de-dados.md](modelo-de-dados.md) |
 | RN-FON-09 | Como o pipeline se autentica no Google Cloud (conflito 7) | [consumo-de-fontes.md](consumo-de-fontes.md) |
-| RN-FON-20 | Fonte e via de acesso nos indicadores em conflito (conflitos 3, 4 e 9) | [consumo-de-fontes.md](consumo-de-fontes.md) |
+| RN-FON-20 | Fonte e via de acesso nos indicadores em conflito (conflitos 3 e 4) | [consumo-de-fontes.md](consumo-de-fontes.md) |
 | RN-CFE-08 | Recuperar julho de 2025 e liberar o total anual de 2025 | [mineracao-cfem.md](mineracao-cfem.md) |
 | RN-CFE-09 | Causa da ausência de São Domingos do Araguaia nos arquivos | [mineracao-cfem.md](mineracao-cfem.md) |
 | RN-CFE-10 | Modalidades de distribuição que compõem a CFEM recebida | [mineracao-cfem.md](mineracao-cfem.md) |
@@ -24,7 +24,6 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 | RN-PRI-06 | Licença de redistribuição de cada fonte (FAPESPA, IDSC, SEEG) | [privacidade-e-licencas.md](privacidade-e-licencas.md) |
 | RN-FNT-08 | Se `AVIOL12_THOMIC` mede "homicídio por arma de fogo", e qual fonte e conceito do indicador (conflito 4) | [regras-por-fonte.md](regras-por-fonte.md) |
 | RN-FNT-20 | Rota do emprego formal (conflito 3) | [regras-por-fonte.md](regras-por-fonte.md) |
-| RN-FNT-21 | Base dos Dados ou arquivo oficial para RAIS, IDEB, TSE e Censo Escolar (conflito 9) | [regras-por-fonte.md](regras-por-fonte.md) |
 
 ## 2. Itens em aberto dentro de regras DECIDIDAS
 
@@ -57,7 +56,7 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 | 6 | Uso do solo | DECISÕES e BLOCOS: Google Earth Engine. PLANO, MAPA-TEMAS e CONSUMO: download das estatísticas da Coleção 11 | DECIDIDO em 30/10/2026 (RN-FNT-13): download primário, Earth Engine reserva. DECISÕES e BLOCOS precisam ser atualizados |
 | 7 | Credencial do Google Cloud | DECISÕES e PLANO: conta de serviço com chave guardada como segredo; BLOCOS §Bloco 5: o Earth Engine usa a mesma credencial do BigQuery. LAB-19/10 §5.3 e VAL-15/10: não usar chave, autenticar com a conta de quem executa | EM ABERTO (RN-FON-09, RN-PRI-10). Não decidido pelo mantenedor: ainda não domina a plataforma, mas pretende usá-la. LAB-19/10 é mais recente nesse ponto (conflito 14) |
 | 8 | Commodities | DECISÕES e BLOCOS: FRED com ferro desde 1992 e Pink Sheet 1985–1991. PLANO e MAPA-TEMAS: Pink Sheet. LAB-19/10: FRED com ferro desde jan/1980 | DECIDIDO (DECISÃO-MANTENEDOR): FRED é a rota, o ferro começa em jan/1980 e o Pink Sheet só vale antes de 1980 (RN-TMP-13, RN-FNT-05, RN-FNT-06). Unidade do ferro decidida em 26/10/2026 (`$/dmt`, RN-TMP-14). Em aberto: recorte de exibição. Reaberto em 25/10/2026: ver divergência 17 |
-| 9 | Base dos Dados × fonte oficial | DECISÕES e BLOCOS: RAIS, IDEB, eleitorado e Censo Escolar via Base dos Dados. CONSUMO e MAPA-TEMAS: arquivos oficiais MTE, INEP e TSE | EM ABERTO (RN-FNT-21) |
+| 9 | Base dos Dados × fonte oficial | DECISÕES e BLOCOS: RAIS, IDEB, eleitorado e Censo Escolar via Base dos Dados. CONSUMO e MAPA-TEMAS: arquivos oficiais MTE, INEP e TSE | DECIDIDO em 30/10/2026 (RN-FNT-21): Base dos Dados, arquivo oficial como alternativa; depende de RN-FON-09 |
 | 10 | Cobertura da arrecadação | DECISÕES: `CFEM_Arrecadacao.csv`. SCRIPTS e VAL-15/10: `CFEM_Arrecadacao_2022_2026.csv`, 744.244 linhas | DECIDIDO (DECISÃO-MANTENEDOR, 27/10/2026): arquivo completo `CFEM_Arrecadacao.csv`, série desde 2003 (RN-CFE-22) |
 | 11 | Valor nulo × ausente | DECISÕES: validação exige "valor não nulo". CONSUMO: status "ausente" é válido | RESOLVIDO por DECISÃO-MANTENEDOR (RN-MOD-06, RN-MOD-11, RN-VPU-02) |
 | 12 | VPM × CFEM | DECISÕES e BLOCOS: a CFEM "serve de proxy da produção municipal". LAB-19/10: analisar a CFEM sem renomeá-la como VPM. VAL-15/10: buscar fonte alternativa antes de prometer VPM municipal | EM ABERTO (RN-CFE-20) |

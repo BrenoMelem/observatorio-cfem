@@ -26,7 +26,7 @@ O nível mede a forma de acesso, não a qualidade do dado. Uma fonte B pode ser 
 - **Regra:** Quando a fonte primária tiver API adequada, o observatório deve consumi-la diretamente.
 - **Motivo:** Reduz intermediários e dá procedência mais clara.
 - **Exemplo:** O IBGE SIDRA e o SICONFI têm API própria e são consumidos direto.
-- **Exceções:** Onde a Base dos Dados é a via prática (RAIS, IDEB, eleitorado e Censo Escolar) ela é usada, sempre com citação da origem. A escolha da via em alguns indicadores está em conflito (RN-FON-20).
+- **Exceções:** Onde a Base dos Dados é a via prática (RAIS, IDEB, eleitorado e Censo Escolar) ela é usada, sempre com citação da origem. A escolha da via em emprego e homicídios está em conflito (RN-FON-20).
 - **Fonte:** DECISÕES §Estratégia de fontes e acesso.
 - **Relacionadas:** RN-FON-03, RN-FON-20
 
@@ -171,7 +171,7 @@ O nível mede a forma de acesso, não a qualidade do dado. Uma fonte B pode ser 
 ### RN-FON-20: Escolha da via de acesso nos indicadores em conflito
 - **Status:** EM ABERTO
 - **Regra:** O mantenedor deve decidir a fonte e a via de acesso de cada indicador cujas fontes de decisão divergem; até lá, nenhuma versão vale como regra.
-- **Motivo:** DECISÕES, BLOCOS, PLANO, MAPA-TEMAS, CONSUMO e relatórios divergem em emprego, homicídios e na via Base dos Dados versus arquivo oficial.
+- **Motivo:** DECISÕES, BLOCOS, PLANO, MAPA-TEMAS, CONSUMO e relatórios divergem em emprego e homicídios.
 - **Exemplo:** Emprego: IPEADATA (DECISÕES, BLOCOS) versus microdados do MTE (MAPA-TEMAS, CONSUMO); em 15/10/2026 o filtro do IPEADATA não limitou a resposta, que anunciou 63.685.034 bytes (transcrito do relatório VAL-15/10, não conferido no JSON).
-- **Fonte:** Conflitos 3, 4 e 9 em [pendencias.md](pendencias.md); DECISÕES; BLOCOS; CONSUMO; MAPA-TEMAS; VAL-15/10; LAB-19/10.
-- **Relacionadas:** RN-FON-02, RN-FNT-08, RN-FNT-20, RN-FNT-21
+- **Fonte:** Conflitos 3 e 4 em [pendencias.md](pendencias.md); DECISÕES; BLOCOS; CONSUMO; MAPA-TEMAS; VAL-15/10; LAB-19/10.
+- **Relacionadas:** RN-FON-02, RN-FNT-08, RN-FNT-20

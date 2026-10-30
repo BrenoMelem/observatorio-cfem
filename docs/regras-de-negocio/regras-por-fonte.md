@@ -95,7 +95,7 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Regra:** O projeto deve usar as tabelas da Base dos Dados já conferidas: `br_ibge_populacao.municipio`, `br_ibge_pib.municipio`, `br_me_caged.microdados_movimentacoes`, `br_me_rais.microdados_vinculos`, `br_inep_ideb.municipio`, `br_ms_sim.municipio_causa` e `br_me_siconfi` (com demonstrativo escolhido), e a tabela `microdados_antigos` do CAGED, que vai só até cerca de 2019, não deve ser usada para dados atuais.
 - **Motivo:** Os nomes completos e os anos mais recentes foram conferidos no catálogo em out/2026.
 - **Exemplo:** RAIS (vínculos), ano mais recente 2025; Novo CAGED, 2026-08 (conforme DECISÕES).
-- **Exceções:** A via Base dos Dados para RAIS, IDEB e eleitorado está em disputa (RN-FNT-21). Em aberto: a coluna de município nas tabelas do CAGED e do IDEB, e o `table_id` técnico do eleitorado (TSE) e do Censo Escolar (tabela `escola`).
+- **Exceções:** A via Base dos Dados para RAIS, IDEB e eleitorado foi decidida em RN-FNT-21, com dependência de RN-FON-09. Em aberto: a coluna de município nas tabelas do CAGED e do IDEB, e o `table_id` técnico do eleitorado (TSE) e do Censo Escolar (tabela `escola`).
 - **Fonte:** DECISÕES §Tabelas da Base dos Dados confirmadas, §Pré-requisitos e pendências; BLOCOS §Bloco 4.
 - **Relacionadas:** RN-FON-03, RN-FON-19, RN-TMP-03
 
@@ -176,9 +176,10 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Relacionadas:** RN-FNT-07, RN-FON-20
 
 ### RN-FNT-21: Base dos Dados ou arquivo oficial para RAIS, IDEB, TSE e Censo Escolar
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve decidir, para RAIS, IDEB, eleitorado (TSE) e Censo Escolar, se a via é a Base dos Dados ou o arquivo oficial do órgão.
-- **Motivo:** DECISÕES e BLOCOS indicam a Base dos Dados; CONSUMO e MAPA-TEMAS indicam arquivos oficiais com leitura por edição; e a Base dos Dados nunca é fonte primária.
-- **Exemplo:** O IDEB aparece como `br_inep_ideb.municipio` em DECISÕES e como arquivo do INEP por edição em CONSUMO.
-- **Fonte:** Versão A: DECISÕES §Estratégia de fontes e acesso e BLOCOS §Bloco 4 (04/10/2026, última edição 20/10/2026). Versão B: CONSUMO §Sociedade, §Economia e MAPA-TEMAS §Sociedade (02/10/2026).
+- **Status:** DECIDIDA
+- **Regra:** RAIS, IDEB, eleitorado (TSE) e Censo Escolar são obtidos pela Base dos Dados, sempre citados com a origem (RN-FON-03). O arquivo oficial do órgão fica como alternativa.
+- **Motivo:** Decisão do mantenedor entre as duas versões das fontes; a Base dos Dados já traz as tabelas padronizadas.
+- **Exemplo:** O IDEB é consumido como `br_inep_ideb.municipio` (DECISÕES), e não como arquivo do INEP por edição (CONSUMO).
+- **Exceções:** Essa via depende da credencial do Google Cloud (RN-FON-09, em aberto) e do escopo mínimo (RN-PRI-10); até lá, nenhuma dessas quatro bases pode ser coletada por ela. Nenhuma das quatro foi testada de ponta a ponta por nenhuma das vias.
+- **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026; Versão adotada: DECISÕES §Estratégia de fontes e acesso e BLOCOS §Bloco 4 (04/10/2026, última edição 20/10/2026). Versão como alternativa: CONSUMO §Sociedade, §Economia e MAPA-TEMAS §Sociedade (02/10/2026).
 - **Relacionadas:** RN-FON-03, RN-FON-20
