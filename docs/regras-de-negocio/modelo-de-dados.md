@@ -8,7 +8,7 @@ Atenção a duas coisas que não se misturam:
 
 ## Requisitos semânticos e equivalência entre os dois esquemas
 
-As fontes descrevem dois esquemas diferentes (conflito 1 em [pendencias.md](pendencias.md)). Esta documentação fixa os requisitos semânticos (RN-MOD-02) e deixa os nomes de campo **EM ABERTO** (RN-MOD-03). A tabela abaixo mostra a equivalência entre as duas versões.
+As fontes descrevem dois esquemas diferentes (conflito 1 em [pendencias.md](pendencias.md)). Esta documentação fixa os requisitos semânticos (RN-MOD-02) e os nomes de campo estão decididos em RN-MOD-03. A tabela abaixo mostra a equivalência entre as duas versões.
 
 | Requisito semântico | Esquema de DECISÕES (04/10/2026, última edição 20/10/2026) | Esquema de CONSUMO (02/10/2026) e de VAL-15/10 §Marco 1 (15/10/2026) | Observação |
 | --- | --- | --- | --- |
@@ -26,7 +26,7 @@ As fontes descrevem dois esquemas diferentes (conflito 1 em [pendencias.md](pend
 | Versão do pipeline | sem campo | `pipeline_version` | |
 | Metodologia, limitações e licença | sem campo | `methodology`, `limitations`, `license` (CONSUMO) | |
 
-Estado: **EM ABERTO**. Nenhum dos dois conjuntos de nomes é adotado.
+Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a partir do esquema de DECISÕES, com os campos acrescentados em RN-MOD-03.
 
 ### RN-MOD-01: Esquema único de saída
 - **Status:** DECIDIDA
@@ -41,16 +41,17 @@ Estado: **EM ABERTO**. Nenhum dos dois conjuntos de nomes é adotado.
 - **Regra:** Toda observação publicada deve identificar o indicador, o município, o período do fenômeno, o valor, a unidade, a natureza do valor, o estado de validação, a fonte e a proveniência (edição da fonte, data de coleta e versão do tratamento).
 - **Motivo:** Sem esses elementos o valor não pode ser conferido, comparado nem refeito.
 - **Exemplo:** População estimada de 2025 de Canaã dos Carajás (1502152): 89.524 pessoas, agregado 6579, variável 9324 (transcrito do relatório VAL-15/10, não conferido no JSON).
-- **Exceções:** Os nomes de campo estão em aberto (RN-MOD-03).
+- **Exceções:** Os nomes de campo estão em RN-MOD-03.
 - **Fonte:** DECISÕES §Arquitetura e padrões de dados; VAL-15/10 §Marco 1; DECISÃO-MANTENEDOR de 24/10/2026 (resposta à pergunta 2).
 - **Relacionadas:** RN-MOD-03, RN-MOD-06, RN-MOD-07, RN-MOD-21, RN-MOD-22
 
 ### RN-MOD-03: Nomes e campos do esquema
-- **Status:** EM ABERTO
-- **Regra:** Os nomes de campo e a lista de campos da observação devem ser definidos pelo mantenedor antes da implementação do contrato. O idioma já está decidido (RN-MOD-27).
-- **Motivo:** DECISÕES e CONSUMO e VAL-15/10 definem esquemas diferentes em campos (ver tabela acima).
-- **Exemplo:** DECISÕES usa `municipio_id`; CONSUMO e VAL-15/10 usam `geo_id`.
-- **Fonte:** DECISÕES §Arquitetura e padrões de dados (04/10/2026); CONSUMO §Contrato de dados para o front-end (02/10/2026); VAL-15/10 §Marco 1 (15/10/2026).
+- **Status:** DECIDIDA
+- **Regra:** Cada observação publicada leva os campos `indicador`, `municipio_id`, `municipio_nome`, `nivel_territorial` (município ou RI), `ano`, `mes` (vazio nos anuais), `valor`, `unidade`, `natureza_valor`, `estado_validacao`, `fonte`, `edicao_fonte`, `atualizado_em` (data de coleta) e `versao_tratamento`. Metodologia, limitações e licença ficam no manifesto de indicadores (RN-MOD-25), uma vez por indicador, e não em cada linha.
+- **Motivo:** A lista parte do esquema de DECISÕES e acrescenta os campos que as regras decididas exigem (RN-MOD-02, RN-MOD-04, RN-MOD-06 e RN-MOD-07); pôr texto longo em cada linha repetiria o mesmo conteúdo muitas vezes.
+- **Exemplo:** `municipio_id` com o código IBGE de 7 dígitos, como `1502152` (Canaã dos Carajás), e `mes` vazio na população anual do IBGE.
+- **Exceções:** Os valores aceitos de `natureza_valor` e `estado_validacao` seguem RN-MOD-06 e RN-MOD-07. CONSUMO e VAL-15/10 exigem metodologia, limitações e licença em cada linha; essa parte não foi adotada. O local exato da busca na fonte (`source_locator` em CONSUMO) e a definição do indicador não entram na observação; se forem necessários, vão para o manifesto.
+- **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026; DECISÕES §Arquitetura e padrões de dados (04/10/2026, última edição 20/10/2026); CONSUMO §Contrato de dados para o front-end (02/10/2026); VAL-15/10 §Marco 1 (15/10/2026).
 - **Relacionadas:** RN-MOD-02, RN-MOD-04, RN-ENT-02
 
 ### RN-MOD-04: Campo de mês
@@ -58,7 +59,7 @@ Estado: **EM ABERTO**. Nenhum dos dois conjuntos de nomes é adotado.
 - **Regra:** O mês deve fazer parte do esquema comum de todos os indicadores, preenchido quando a fonte é mensal e vazio nos indicadores anuais.
 - **Motivo:** Um esquema único evita dois formatos para consumir, e o mês é necessário para a CFEM (guardar mensal, exibir anual) e para outras séries mensais, como os preços de commodities do FRED.
 - **Exemplo:** A distribuição da CFEM de maio de 2025 só pôde ser reconciliada porque o mês foi preservado. Os preços de ferro e cobre do FRED são mensais, e a população do IBGE é anual, com o mês vazio.
-- **Exceções:** O nome do campo continua em aberto junto com o resto do esquema (RN-MOD-03).
+- **Exceções:** O nome do campo é `mes` (RN-MOD-03).
 - **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026; DECISÕES §Arquitetura e padrões de dados, §Pré-requisitos e pendências; VAL-15/10 §Marco 2; LAB-19/10 §7 (Próximos passos, item 2).
 - **Relacionadas:** RN-MOD-03, RN-MOD-05, RN-CFE-04
 
@@ -255,6 +256,6 @@ Estado: **EM ABERTO**. Nenhum dos dois conjuntos de nomes é adotado.
 - **Regra:** Os nomes dos campos da observação são em português.
 - **Motivo:** Decisão do mantenedor entre as duas versões das fontes; os dados de origem (IBGE, ANM) e a documentação já estão em português, e os nomes serão a interface pública da API (RN-ENT-02).
 - **Exemplo:** `municipio_id`, como em DECISÕES, e não `geo_id`, como em CONSUMO e VAL-15/10.
-- **Exceções:** Os nomes exatos e a lista de campos seguem em aberto (RN-MOD-03).
+- **Exceções:** Os nomes exatos e a lista de campos estão em RN-MOD-03.
 - **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026; Versão adotada: DECISÕES §Arquitetura e padrões de dados (04/10/2026, última edição 20/10/2026). Versão não adotada: CONSUMO §Contrato de dados para o front-end (02/10/2026); VAL-15/10 §Marco 1 (15/10/2026).
 - **Relacionadas:** RN-MOD-03, RN-ENT-02
