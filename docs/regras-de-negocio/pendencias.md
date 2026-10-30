@@ -28,7 +28,7 @@ Estas regras estão decididas no essencial, mas um ponto delas continua sem deci
 | [RN-CFE-18](mineracao-cfem.md) | Decisão final de exibir ou não o nome da empresa autuada, após revisão jurídica |
 | [RN-TMP-13](temporalidade-e-atualizacao.md), [RN-FNT-05](regras-por-fonte.md) e [RN-FNT-06](regras-por-fonte.md) | Recorte de exibição da série do ferro: desde jan/1980 ou desde 1985, como pediu a oficina. Início real da série do ferro no FRED: jan/1980 ou jan/1992 (divergência 17) |
 | [RN-TMP-15](temporalidade-e-atualizacao.md) | Emenda entre SICONFI (2013 em diante) e FINBRA (pré-2013) numa mesma série |
-| [RN-FNT-04](regras-por-fonte.md) | Demonstrativo(s), contas, estágio da despesa e paginação completa do SICONFI |
+| [RN-FNT-04](regras-por-fonte.md) | Demonstrativo(s), contas e estágio da despesa do SICONFI; a paginação foi conferida em 30/10/2026 (resposta completa em uma página para Canaã), e o nome do anexo muda em 2013 |
 | [RN-FNT-11](regras-por-fonte.md) | Coluna de município nas tabelas do CAGED e do IDEB; `table_id` do eleitorado (TSE) e do Censo Escolar |
 | [RN-FNT-01](regras-por-fonte.md) | Comparação dos valores da população com a tabela publicada pelo IBGE antes de alimentar um gráfico |
 | [RN-FON-15](consumo-de-fontes.md) e [RN-FNT-14](regras-por-fonte.md) | Se a planilha do SEEG pode ficar no repositório e o que conta como dado bruto "grande" (conflito 16) |
