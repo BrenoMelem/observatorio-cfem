@@ -110,11 +110,11 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 
 ### RN-FNT-13: Uso do solo pelo MapBiomas
 - **Status:** DECIDIDA
-- **Regra:** A rota primária do uso do solo do MapBiomas é o download das estatísticas municipais da Coleção 11. O Google Earth Engine é rota reserva e só entra depois que RN-FON-09 e RN-PRI-09 forem resolvidas. O conteúdo do arquivo (classes, recorte municipal) ainda deve ser conferido antes de depender dele.
-- **Motivo:** O download não depende de conta nem de credencial no Google Cloud, e três documentos o indicam; o Earth Engine nunca foi testado.
+- **Regra:** O uso do solo do MapBiomas, tanto os números por município quanto os mapas, é obtido pelo Google Earth Engine. O download das estatísticas municipais da Coleção 11 fica como alternativa para os números. A coleta depende de RN-FON-09 e RN-PRI-09, que seguem em aberto.
+- **Motivo:** O mantenedor quer exibir mapas, e as planilhas de estatística trazem só números; o Earth Engine fornece o dado de imagem e permite recortar por município, numa única rota.
 - **Exemplo:** O Earth Engine ficou PENDENTE em 17/10/2026 por falta de `GEE_PROJECT` (transcrito do relatório LAB-19/10, não conferido no JSON).
-- **Exceções:** Se o Earth Engine for usado, vale RN-TMP-05 (nome do asset não fixado). O corte das classes e o limite municipal seguem em aberto em RN-IND-11.
-- **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026; Versão adotada: MAPA-TEMAS §Meio ambiente e CONSUMO §Meio ambiente (download das estatísticas da Coleção 11; 02/10/2026); PLANO §Bloco 5 (30/09/2026). Versão como reserva: DECISÕES §Rotas de coleta por fonte e BLOCOS §Bloco 5 (Google Earth Engine; 04/10/2026, última edição 20/10/2026).
+- **Exceções:** Vale RN-TMP-05 (nome do asset não fixado). Até RN-FON-09 ser decidida, o uso do solo não pode ser coletado por essa rota; o asset ainda não foi testado. O corte das classes e o limite municipal seguem em aberto em RN-IND-11.
+- **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026 (substitui a decisão do mesmo dia pelo download primário); Versão adotada: DECISÕES §Rotas de coleta por fonte e BLOCOS §Bloco 5 (Google Earth Engine, com download como alternativa; 04/10/2026, última edição 20/10/2026). Versão como alternativa: MAPA-TEMAS §Meio ambiente e CONSUMO §Meio ambiente (download das estatísticas da Coleção 11; 02/10/2026); PLANO §Bloco 5 (30/09/2026).
 - **Relacionadas:** RN-TMP-05, RN-TMP-07, RN-PRI-09, RN-FON-20
 
 ### RN-FNT-14: Emissões do SEEG por download

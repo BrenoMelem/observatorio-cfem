@@ -67,7 +67,7 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 - **Regra:** Quando o MapBiomas for obtido pelo Google Earth Engine, o nome do asset de cobertura não deve ser fixado: a pasta deve ser listada em tempo de execução.
 - **Motivo:** O sufixo muda em correções sem aviso.
 - **Exemplo:** O arquivo de cobertura atual deveria terminar em `_coverage_v3`, mas esse sufixo pode mudar.
-- **Exceções:** Vale só se o Earth Engine for usado, que é a rota reserva (RN-FNT-13).
+- **Exceções:** Vale na rota por Earth Engine, que é a rota decidida (RN-FNT-13).
 - **Fonte:** DECISÕES §Rotas de coleta por fonte (MapBiomas: caminho do asset ainda não testado); BLOCOS §Bloco 5.
 - **Relacionadas:** RN-TMP-06, RN-FNT-13
 
