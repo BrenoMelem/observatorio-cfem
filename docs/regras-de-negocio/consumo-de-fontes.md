@@ -172,6 +172,6 @@ O nível mede a forma de acesso, não a qualidade do dado. Uma fonte B pode ser 
 - **Status:** EM ABERTO
 - **Regra:** O mantenedor deve decidir a fonte e a via de acesso de cada indicador cujas fontes de decisão divergem; até lá, nenhuma versão vale como regra.
 - **Motivo:** DECISÕES, BLOCOS, PLANO, MAPA-TEMAS, CONSUMO e relatórios divergem em homicídios.
-- **Exemplo:** Emprego: IPEADATA (DECISÕES, BLOCOS) versus microdados do MTE (MAPA-TEMAS, CONSUMO); em 15/10/2026 o filtro do IPEADATA não limitou a resposta, que anunciou 63.685.034 bytes (transcrito do relatório VAL-15/10, não conferido no JSON).
+- **Exemplo:** Homicídios: `AVIOL12_THOMIC` do IPEADATA e do Atlas da Violência (DECISÕES, BLOCOS) versus SIM via Base dos Dados (PLANO) e CODEC/SEGUP (CONSUMO); a série do IPEADATA não menciona arma de fogo (consulta de 28/10/2026, RN-FNT-08).
 - **Fonte:** Conflito 4 em [pendencias.md](pendencias.md); DECISÕES; BLOCOS; CONSUMO; MAPA-TEMAS; VAL-15/10; LAB-19/10.
 - **Relacionadas:** RN-FON-02, RN-FNT-08
