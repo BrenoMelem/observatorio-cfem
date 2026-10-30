@@ -1,0 +1,20 @@
+{
+  "fonte": "IBGE - Estimativas da População 2026, publicação independente do SIDRA",
+  "url": "https://ftp.ibge.gov.br/Estimativas_de_Populacao/Estimativas_2026/estimativa_dou_2026.pdf",
+  "edicao": "28/08/2026",
+  "ano": 2026,
+  "valores": {
+    "1501576": 19294,
+    "1501758": 6947,
+    "1502152": 92311,
+    "1502772": 21088,
+    "1502954": 29154,
+    "1504208": 293344,
+    "1505494": 7041,
+    "1505536": 312427,
+    "1505635": 13390,
+    "1507151": 21475,
+    "1507458": 24882,
+    "1507508": 14338
+  }
+}
