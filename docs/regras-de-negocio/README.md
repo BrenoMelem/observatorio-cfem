@@ -92,4 +92,4 @@ Não há código, pseudocódigo, rotas HTTP, nomes de funções, escolha de bibl
 | [glossario.md](glossario.md) | | Termos e siglas | |
 | [pendencias.md](pendencias.md) | | Tudo o que está EM ABERTO, as divergências entre fontes e as regras PROPOSTAS aguardando confirmação | |
 
-Total: 166 regras, sendo 119 DECIDIDAS, 38 PROPOSTAS e 9 EM ABERTO.
+Total: 166 regras, sendo 120 DECIDIDAS, 38 PROPOSTAS e 8 EM ABERTO.

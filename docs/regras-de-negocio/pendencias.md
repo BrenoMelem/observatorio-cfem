@@ -9,10 +9,9 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 | Regra | O que falta decidir | Arquivo |
 | --- | --- | --- |
 | RN-MOD-24 | Valor real: índice de correção, ano-base e forma de publicação (hoje só nominal, RN-MOD-26) | [modelo-de-dados.md](modelo-de-dados.md) |
-| RN-CFE-08 | Recuperar julho de 2025 e liberar o total anual de 2025 | [mineracao-cfem.md](mineracao-cfem.md) |
-| RN-CFE-09 | Causa da ausência de São Domingos do Araguaia nos arquivos | [mineracao-cfem.md](mineracao-cfem.md) |
-| RN-CFE-10 | Modalidades de distribuição que compõem a CFEM recebida | [mineracao-cfem.md](mineracao-cfem.md) |
-| RN-CFE-16 | Tratamento das autuações sem ano de publicação (88 de 176 linhas) | [mineracao-cfem.md](mineracao-cfem.md) |
+| RN-CFE-08 | Recuperar julho de 2025 e liberar o total anual de 2025 (em 31/10/2026 o mês segue ausente e o PDF não foi achado) | [mineracao-cfem.md](mineracao-cfem.md) |
+| RN-CFE-09 | Causa da ausência de São Domingos do Araguaia nos arquivos (a MSC registra CFEM pequena desde 2024; causa indeterminada, só a ANM confirma) | [mineracao-cfem.md](mineracao-cfem.md) |
+| RN-CFE-10 | Modalidades de distribuição que compõem a CFEM recebida (`Produtor` bate com a MSC em Canaã e Parauapebas, não em Marabá) | [mineracao-cfem.md](mineracao-cfem.md) |
 | RN-CFE-20 | Se a CFEM pode ser apresentada como proxy da produção municipal (conflito 12) | [mineracao-cfem.md](mineracao-cfem.md) |
 | RN-IND-03 | Corte exato do IPEA TD 3146 | [indicadores-derivados-e-compostos.md](indicadores-derivados-e-compostos.md) |
 | RN-IND-07 | Denominador de "emprego formal como % da população" (conflito 13) | [indicadores-derivados-e-compostos.md](indicadores-derivados-e-compostos.md) |
@@ -28,7 +27,7 @@ Estas regras estão decididas no essencial, mas um ponto delas continua sem deci
 | [RN-CFE-18](mineracao-cfem.md) | Decisão final de exibir ou não o nome da empresa autuada, após revisão jurídica |
 | [RN-TMP-13](temporalidade-e-atualizacao.md), [RN-FNT-05](regras-por-fonte.md) e [RN-FNT-06](regras-por-fonte.md) | Recorte de exibição da série do ferro: desde jan/1980 ou desde 1985, como pediu a oficina. Início real da série do ferro no FRED: jan/1980 ou jan/1992 (divergência 17) |
 | [RN-TMP-15](temporalidade-e-atualizacao.md) | Emenda entre SICONFI (2013 em diante) e FINBRA (pré-2013) numa mesma série |
-| [RN-FNT-04](regras-por-fonte.md) | Demonstrativo(s) e contas do SICONFI e se o escopo fica em função e subfunção; o estágio da despesa foi decidido em 30/10/2026 (três indicadores separados); o nome do anexo muda em 2013 |
+| [RN-FNT-04](regras-por-fonte.md) | Demonstrativo(s) e contas do SICONFI e se o escopo fica em função e subfunção; o estágio da despesa foi decidido em 30/10/2026 (três indicadores separados); o nome do anexo muda em 2013; em 31/10/2026 a MSC orçamentária (fonte `1708`) foi coletada para 2022–2026, mas o mapeamento das contas para os estágios e a conciliação com a DCA não foram feitos, e há meses truncados (`hasMore`) em Canaã dos Carajás, Marabá e Parauapebas |
 | [RN-FNT-11](regras-por-fonte.md) | Coluna de município nas tabelas do CAGED e do IDEB; `table_id` do eleitorado (TSE) e do Censo Escolar |
 | [RN-FON-15](consumo-de-fontes.md) e [RN-FNT-14](regras-por-fonte.md) | Se a planilha do SEEG pode ficar no repositório e o que conta como dado bruto "grande" (conflito 16) |
 | [RN-IND-09](indicadores-derivados-e-compostos.md) | Base da participação da RI Carajás no PIB (PIB do Pará, da RI ou outra) e nomes finais dos dois indicadores no manifesto |
