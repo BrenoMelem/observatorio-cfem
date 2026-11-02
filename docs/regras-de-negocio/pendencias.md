@@ -13,7 +13,6 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 | RN-CFE-09 | Causa da ausência de São Domingos do Araguaia nos arquivos (a MSC registra CFEM pequena desde 2024; causa indeterminada, só a ANM confirma) | [mineracao-cfem.md](mineracao-cfem.md) |
 | RN-CFE-10 | Modalidades de distribuição que compõem a CFEM recebida (`Produtor` bate com a MSC em Canaã e Parauapebas, não em Marabá) | [mineracao-cfem.md](mineracao-cfem.md) |
 | RN-CFE-20 | Se a CFEM pode ser apresentada como proxy da produção municipal (conflito 12) | [mineracao-cfem.md](mineracao-cfem.md) |
-| RN-IND-07 | Denominador de "emprego formal como % da população" (conflito 13) | [indicadores-derivados-e-compostos.md](indicadores-derivados-e-compostos.md) |
 | RN-PRI-06 | Licença de redistribuição de cada fonte (FAPESPA, IDSC, SEEG) | [privacidade-e-licencas.md](privacidade-e-licencas.md) |
 
 ## 2. Itens em aberto dentro de regras DECIDIDAS
@@ -50,7 +49,7 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 | 10 | Cobertura da arrecadação | DECISÕES: `CFEM_Arrecadacao.csv`. SCRIPTS e VAL-15/10: `CFEM_Arrecadacao_2022_2026.csv`, 744.244 linhas | DECIDIDO (DECISÃO-MANTENEDOR, 27/10/2026): arquivo completo `CFEM_Arrecadacao.csv`, série desde 2003 (RN-CFE-22) |
 | 11 | Valor nulo × ausente | DECISÕES: validação exige "valor não nulo". CONSUMO: status "ausente" é válido | RESOLVIDO por DECISÃO-MANTENEDOR (RN-MOD-06, RN-MOD-11, RN-VPU-02) |
 | 12 | VPM × CFEM | DECISÕES e BLOCOS: a CFEM "serve de proxy da produção municipal". LAB-19/10: analisar a CFEM sem renomeá-la como VPM. VAL-15/10: buscar fonte alternativa antes de prometer VPM municipal | EM ABERTO (RN-CFE-20) |
-| 13 | Denominador do emprego | PLANO e BLOCOS: "RAIS ÷ população", sem especificar. CONSUMO: aprovar o denominador | EM ABERTO (RN-IND-07) |
+| 13 | Denominador do emprego | PLANO e BLOCOS: "RAIS ÷ população", sem especificar. CONSUMO: aprovar o denominador | DECIDIDO em 02/11/2026 (RN-IND-07): dois indicadores, população total e idade ativa de 15 a 64 anos pelo Censo 2022 |
 | 14 | Datação de DECISÕES e BLOCOS | O cabeçalho dos dois diz 04/10/2026, com revisões 72 e 29 exportadas em 24/10/2026. LAB-19/10 é de 19/10/2026 e traz a correção do ferro no FRED e a orientação sobre a chave | RESOLVIDO por DECISÃO-MANTENEDOR: DECISÕES e BLOCOS foram editados pela última vez em 20/10/2026 e não incorporaram LAB-19/10 nesses dois pontos; nesses pontos LAB-19/10 é mais recente. Nos demais, DECISÕES e BLOCOS são a referência de decisões |
 | 15 | Períodos dos indicadores | PLANO: ferro 1985–2025, uso do solo 1983–2024, despesa 2013–2024, IDEB 2023. BLOCOS: ferro 1992–2025, uso do solo 1985–2025, despesa 2013–2025, IDEB sem ano | DECIDIDO (DECISÃO-MANTENEDOR): BLOCOS prevalece sobre PLANO, exceto o início do ferro (conflito 8) (RN-TMP-16). IDEB decidido em 27/10/2026: todas as edições disponíveis (RN-TMP-17) |
 | 16 | SEEG no repositório | BLOCOS §Bloco 5: planilha "guardada no repositório". README e `.gitignore`: dado baixado fora do Git. DECISÕES: bruto fora do Git "quando grande", sem definir o limite | EM ABERTO (RN-FON-15, RN-FNT-14, RN-PRI-06), junto da licença de redistribuição do SEEG |
