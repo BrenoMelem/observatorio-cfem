@@ -13,7 +13,6 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 | RN-CFE-09 | Causa da ausência de São Domingos do Araguaia nos arquivos (a MSC registra CFEM pequena desde 2024; causa indeterminada, só a ANM confirma) | [mineracao-cfem.md](mineracao-cfem.md) |
 | RN-CFE-10 | Modalidades de distribuição que compõem a CFEM recebida (`Produtor` bate com a MSC em Canaã e Parauapebas, não em Marabá) | [mineracao-cfem.md](mineracao-cfem.md) |
 | RN-CFE-20 | Se a CFEM pode ser apresentada como proxy da produção municipal (conflito 12) | [mineracao-cfem.md](mineracao-cfem.md) |
-| RN-IND-03 | Corte exato do IPEA TD 3146 | [indicadores-derivados-e-compostos.md](indicadores-derivados-e-compostos.md) |
 | RN-IND-07 | Denominador de "emprego formal como % da população" (conflito 13) | [indicadores-derivados-e-compostos.md](indicadores-derivados-e-compostos.md) |
 | RN-PRI-06 | Licença de redistribuição de cada fonte (FAPESPA, IDSC, SEEG) | [privacidade-e-licencas.md](privacidade-e-licencas.md) |
 

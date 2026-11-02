@@ -29,12 +29,14 @@ Fonte: DECISÕES §Indicadores compostos; BLOCOS §Bloco 6.
 - **Relacionadas:** RN-IND-03, RN-FNT-04
 
 ### RN-IND-03: Corte do TD 3146
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve confirmar no TD 3146 o corte usado para "alto" e "baixo" em cada eixo (mediana, média ou valor fixo) antes de promover a relação a recalculada.
-- **Motivo:** Sem o corte exato, o número recalculado não bate com o do IPEA.
-- **Exemplo:** A faixa AB corresponde a receita per capita alta e IDSC baixo.
-- **Fonte:** DECISÕES §Indicadores compostos, §Pré-requisitos e pendências.
-- **Relacionadas:** RN-IND-02
+- **Status:** DECIDIDA
+- **Regra:** A classificação receita per capita × IDSC segue o método do TD 3146: o corte de "alto" e "baixo" em cada eixo é a média nacional simples de 2022, isto é, R$ 6.880,37 de receita per capita e 46,925 de IDSC. Esses cortes ficam congelados em 2022: o IPEA não os atualiza, e a classificação só é comparável ao estudo para 2022. Qualquer outro ano é cálculo do projeto, deve ser identificado como tal e não é comparável ao IPEA.
+- **Motivo:** Decisão do mantenedor, para que o resultado recalculado bata com o do IPEA. O corte vem da leitura do TD 3146 (média nacional simples de 2022).
+- **Exemplo:** A faixa AB corresponde a receita per capita acima de R$ 6.880,37 e IDSC abaixo de 46,925.
+- **Evidência de 02/11/2026 (leitura do TD 3146, baixado do repositório do IPEA):** o Texto para Discussão 3146, "Capacidade fiscal e desenvolvimento no território: bases para a articulação federativa" (Mendes, Vasconcellos, Colombo, Araujo e Arantes; IPEA; 29/07/2025; DOI 10.38116/td3146-port), classifica os municípios comparando a receita bruta per capita (Finbra/STN) e o IDSC-BR, ambos de 2022, com as **médias nacionais**: receita per capita de R$ 6.880,37 e IDSC de 46,925. Acima da média é "alto" e abaixo é "baixo"; os grupos são AA, BB, AB e BA. Na tabela 7 a média é identificada como média simples entre os municípios (os grupos AA e BB têm receita média de R$ 10.772,76 e R$ 4.869,36). O estudo observa que a média brasileira do IDSC (46,9) é "baixa" na escala original do índice (40 a 49,99). Não encontrei no texto menção a atualização do estudo nem a repetir a classificação em outros anos; qualquer outro ano seria cálculo do projeto. Ficam por decidir: se os cortes de 2022 são congelados ou se a média nacional é recalculada a cada ano, e se a "receita bruta" do Finbra coincide com o que o SICONFI (DCA) fornece para o projeto (não verificado). O método de Jenks citado no estudo serve a outra parte do estudo e não foi usado como corte dos quatro grupos, segundo o que li (não conferi todas as ocorrências).
+- **Exceções:** Não foi verificado se a "receita bruta" do Finbra, usada pelo IPEA, coincide com a que o SICONFI (DCA) fornece ao projeto; o número recalculado pode divergir um pouco do do IPEA. A relação só pode ser publicada depois que o SICONFI estiver coletado e depende da licença do IDSC (RN-PRI-06). Se o projeto adotar um corte recalculado por ano, isso exige nova decisão.
+- **Fonte:** DECISÃO-MANTENEDOR de 02/11/2026; IPEA, Texto para Discussão 3146 (29/07/2025); DECISÕES §Indicadores compostos, §Pré-requisitos e pendências.
+- **Relacionadas:** RN-IND-02, RN-PRI-06
 
 ### RN-IND-04: Barômetro e CLP ficam congelados sem previsão
 - **Status:** DECIDIDA
