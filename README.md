@@ -37,3 +37,5 @@ Pesquisa de viabilidade e validação de fontes, com um protótipo local de popu
 O pipeline de população via SIDRA atende os 12 municípios, reconcilia 2025 e 2026 com referências independentes do IBGE e publica somente lotes homologados na API e no CSV. O painel informa a atualização e o ano de referência. Consulte [execução e limites](docs/implementacao-populacao.md) e o [ADR-005](docs/adr/ADR-005-pipeline-populacao.md).
 
 A leitura do CSV completo da ANM encontrou 129 repetições exatas no recorte da arrecadação. O lote de CFEM permanece bloqueado por `RN-VPU-11`; nenhum valor foi publicado. Veja o [relatório de duplicatas](docs/revisao-duplicatas-cfem-2026-10-30.md), a [preparação da CFEM](docs/implementacao-cfem.md) e as [pendências de regras de negócio](docs/regras-de-negocio/pendencias.md).
+
+As coletas locais da DCA e do FRED, o relatório de duplicatas e seus limites estão em [coletas de despesa e commodities](docs/implementacao-despesa-commodities.md). O contrato inicial das rotas implementadas está em [OpenAPI](docs/api/openapi.yaml).
