@@ -29,12 +29,14 @@ Fonte: DECISÕES §Indicadores compostos; BLOCOS §Bloco 6.
 - **Relacionadas:** RN-IND-03, RN-FNT-04
 
 ### RN-IND-03: Corte do TD 3146
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve confirmar no TD 3146 o corte usado para "alto" e "baixo" em cada eixo (mediana, média ou valor fixo) antes de promover a relação a recalculada.
-- **Motivo:** Sem o corte exato, o número recalculado não bate com o do IPEA.
-- **Exemplo:** A faixa AB corresponde a receita per capita alta e IDSC baixo.
-- **Fonte:** DECISÕES §Indicadores compostos, §Pré-requisitos e pendências.
-- **Relacionadas:** RN-IND-02
+- **Status:** DECIDIDA
+- **Regra:** A classificação receita per capita × IDSC segue o método do TD 3146: o corte de "alto" e "baixo" em cada eixo é a média nacional simples de 2022, isto é, R$ 6.880,37 de receita per capita e 46,925 de IDSC. Esses cortes ficam congelados em 2022: o IPEA não os atualiza, e a classificação só é comparável ao estudo para 2022. Qualquer outro ano é cálculo do projeto, deve ser identificado como tal e não é comparável ao IPEA.
+- **Motivo:** Decisão do mantenedor, para que o resultado recalculado bata com o do IPEA. O corte vem da leitura do TD 3146 (média nacional simples de 2022).
+- **Exemplo:** A faixa AB corresponde a receita per capita acima de R$ 6.880,37 e IDSC abaixo de 46,925.
+- **Evidência de 02/11/2026 (leitura do TD 3146, baixado do repositório do IPEA):** o Texto para Discussão 3146, "Capacidade fiscal e desenvolvimento no território: bases para a articulação federativa" (Mendes, Vasconcellos, Colombo, Araujo e Arantes; IPEA; 29/07/2025; DOI 10.38116/td3146-port), classifica os municípios comparando a receita bruta per capita (Finbra/STN) e o IDSC-BR, ambos de 2022, com as **médias nacionais**: receita per capita de R$ 6.880,37 e IDSC de 46,925. Acima da média é "alto" e abaixo é "baixo"; os grupos são AA, BB, AB e BA. Na tabela 7 a média é identificada como média simples entre os municípios (os grupos AA e BB têm receita média de R$ 10.772,76 e R$ 4.869,36). O estudo observa que a média brasileira do IDSC (46,9) é "baixa" na escala original do índice (40 a 49,99). Não encontrei no texto menção a atualização do estudo nem a repetir a classificação em outros anos; qualquer outro ano seria cálculo do projeto. Ficam por decidir: se os cortes de 2022 são congelados ou se a média nacional é recalculada a cada ano, e se a "receita bruta" do Finbra coincide com o que o SICONFI (DCA) fornece para o projeto (não verificado). O método de Jenks citado no estudo serve a outra parte do estudo e não foi usado como corte dos quatro grupos, segundo o que li (não conferi todas as ocorrências).
+- **Exceções:** Não foi verificado se a "receita bruta" do Finbra, usada pelo IPEA, coincide com a que o SICONFI (DCA) fornece ao projeto; o número recalculado pode divergir um pouco do do IPEA. A relação só pode ser publicada depois que o SICONFI estiver coletado e depende da licença do IDSC (RN-PRI-06). Se o projeto adotar um corte recalculado por ano, isso exige nova decisão.
+- **Fonte:** DECISÃO-MANTENEDOR de 02/11/2026; IPEA, Texto para Discussão 3146 (29/07/2025); DECISÕES §Indicadores compostos, §Pré-requisitos e pendências.
+- **Relacionadas:** RN-IND-02, RN-PRI-06
 
 ### RN-IND-04: Barômetro e CLP ficam congelados sem previsão
 - **Status:** DECIDIDA
@@ -62,13 +64,13 @@ Fonte: DECISÕES §Indicadores compostos; BLOCOS §Bloco 6.
 - **Relacionadas:** RN-IND-11, RN-TMP-07
 
 ### RN-IND-07: Denominador do emprego formal como proporção da população
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve definir qual população é o denominador do indicador "emprego formal como % da população" (total, em idade ativa ou força de trabalho) e manter a mesma regra entre territórios.
-- **Motivo:** PLANO e BLOCOS dizem "RAIS ÷ população" sem especificar qual; CONSUMO exige aprovar o denominador.
-- **Exemplo:** A RAIS mede vínculos formais (estoque), e a população total inclui pessoas fora da idade ativa.
-- **Exceções:** Orientação do mantenedor em 27/10/2026, sem decisão final: o denominador deve incluir a população em idade ativa. Falta definir qual recorte (população em idade ativa ou outra) e de qual fonte, já que a faixa etária por município e ano não está entre as fontes definidas.
-- **Fonte:** BLOCOS §Bloco 4 (04/10/2026, última edição 20/10/2026); PLANO §Bloco 2 (30/09/2026); CONSUMO §Economia e mercado de trabalho (02/10/2026).
-- **Relacionadas:** RN-MOD-16, RN-MOD-17
+- **Status:** DECIDIDA
+- **Regra:** O emprego formal é publicado como dois indicadores separados, sem misturar os denominadores: (1) emprego formal ÷ população total, com a estimativa anual de população do IBGE, em toda a série; e (2) emprego formal ÷ população em idade ativa, de 15 a 64 anos, pelo Censo 2022, só para 2022. A mesma regra vale para todos os territórios. A idade ativa de outros anos fica fora até haver uma fonte decidida.
+- **Motivo:** O mantenedor orientou, em 27/10/2026, incluir a população em idade ativa. A estimativa anual do IBGE traz só o total por município, e o Censo 2022 traz a população por idade. Dois indicadores atendem à orientação sem deixar a série anual vazia, no mesmo padrão de RN-IND-09 e RN-IND-12.
+- **Exemplo:** A RAIS mede vínculos formais (estoque). Pelo Censo 2022, Canaã dos Carajás tem 77.079 habitantes, dos quais 53.714 (69,7%) têm de 15 a 64 anos (consulta ao SIDRA, tabela 9514, em 02/11/2026). Na RI Carajás são 526.378 de 763.106 (69,0%).
+- **Exceções:** O Censo e a estimativa anual não se misturam numa mesma série sem identificar a origem (RN-MOD-13); a população total de 2022 do Censo difere da estimativa anual, e o indicador (2) usa a do Censo. O indicador (2) não existe para os demais anos. Estimativas por idade do Ministério da Saúde (DATASUS) não foram adotadas: não foram verificadas e, segundo a documentação do pacote brpop e a nota técnica do PROADESS, a divisão por idade de 2016 a 2020 extrapola a distribuição de 2015. Não foi verificado se o Censo 2010 serve de segundo ponto. Não foi decidido o nome final de cada indicador no manifesto.
+- **Fonte:** DECISÃO-MANTENEDOR de 02/11/2026 (faixa de 15 a 64 anos e dois indicadores); DECISÃO-MANTENEDOR de 27/10/2026 (orientação de usar a população em idade ativa); BLOCOS §Bloco 4 (04/10/2026, última edição 20/10/2026); PLANO §Bloco 2 (30/09/2026); CONSUMO §Economia e mercado de trabalho (02/10/2026); consulta ao SIDRA em 02/11/2026.
+- **Relacionadas:** RN-MOD-13, RN-MOD-16, RN-MOD-17, RN-IND-12
 
 ### RN-IND-08: Não recalcular o Barômetro sem reproduzir o método
 - **Status:** PROPOSTA
