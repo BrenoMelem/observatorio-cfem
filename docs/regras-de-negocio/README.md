@@ -35,7 +35,10 @@ O identificador de cada regra é `RN-<TEMA>-<NN>`: **RN** é "Regra de Negócio"
 - Exceções: quando houver
 - Fonte: arquivo e seção
 - Relacionadas: IDs de outras regras
+- Evidência datada: quando houver, um ponteiro para a seção "Notas de evidência" no fim do arquivo
 ```
+
+O corpo da regra diz o que vale. Leituras e consultas datadas que a sustentam ou qualificam ficam, sem alteração, em "Notas de evidência", no fim do arquivo do tema, sob o identificador da regra. Elas não mudam o status da regra.
 
 ## Legenda do status da regra
 

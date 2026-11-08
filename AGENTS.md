@@ -11,6 +11,7 @@ O idioma do projeto é o português do Brasil. Use datas absolutas (por exemplo,
 ## Estrutura
 
 - `docs/regras-de-negocio/`: as regras de negócio (o quê e por quê, nunca o como). É a parte central.
+- `docs/`: o índice está em [docs/README.md](docs/README.md). `docs/guias/` diz como rodar as coletas; `docs/registros/` guarda resultados datados de execuções; `docs/adr/` e `docs/api/` têm decisões técnicas e o esboço da API.
 - `docs/regras-de-negocio/fontes/`: documentos de origem (decisões, blocos, plano, relatórios de laboratório e a pesquisa). São material histórico: não os reescreva sem pedido explícito.
 - `scripts/`: todo o código do repositório, em Python gerenciado com `uv` (coleta, validação, protótipo local da API, notebook e testes). **Apenas testes e laboratório**: não vão para produção e não são a implementação do sistema. O mapa está em [scripts/README.md](scripts/README.md).
 - `output/` e `tmp/` não são versionados (ver `.gitignore`).
@@ -24,7 +25,7 @@ Os arquivos de `docs/regras-de-negocio/` seguem um formato fixo. Antes de editar
 - **Status:** `DECIDIDA` só vem de decisão do mantenedor ou dos documentos de decisão (DECISÕES, BLOCOS, LAB-19/10, VAL-15/10, DECISÃO-MANTENEDOR). Não promova uma regra sem essa base.
 - **Identificador:** `RN-<TEMA>-<NN>` (RN = Regra de Negócio). Temas: TER, MOD, FON, FNT, TMP, VPU, ENT, CFE, IND, PRI. Siglas das fontes: use as da tabela do README.
 - **Exemplos:** marque como "transcrito do relatório X, não conferido no JSON" ou "reproduzido em DD/MM/AAAA". Não apresente como verificado o que não foi.
-- **Evidência nova** que não decide nada entra como nota na regra (a regra continua `EM ABERTO`); não a transforme em decisão.
+- **Evidência nova** que não decide nada entra na seção "Notas de evidência" no fim do arquivo do tema, sob o identificador da regra (a regra continua `EM ABERTO`), e a regra ganha só um ponteiro; não a transforme em decisão. Resultados de execuções (de coletas, não de regras) vão para `docs/registros/`.
 
 ### Ao mudar o status de uma regra
 

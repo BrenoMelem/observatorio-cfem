@@ -10,11 +10,13 @@ O observatório ainda não tem backend de produção. Há um protótipo local do
 
 ## Estrutura
 
+- `docs/`: toda a documentação, com [índice em docs/README.md](docs/README.md).
 - `docs/regras-de-negocio/`: regras e pendências do projeto.
 - `docs/regras-de-negocio/fontes/pesquisa-observatorio-cfem/`: relatório de viabilidade, fontes, bibliografia e pacote LaTeX.
 - `scripts/`: todo o código, em Python com [uv](https://docs.astral.sh/uv/): coleta, validação e reconciliação das fontes, protótipo local da API, notebook de laboratório e testes. Veja o [mapa em scripts/README.md](scripts/README.md).
 - `data/`: referências versionadas (população do IBGE por ano) e manifesto de indicadores.
-- `docs/adr/`, `docs/api/`, `docs/architecture/` e `docs/database/`: decisões e desenhos técnicos.
+- `docs/guias/` e `docs/registros/`: como rodar as coletas do protótipo e o que cada execução encontrou, por data.
+- `docs/adr/` e `docs/api/`: decisões técnicas e o esboço do contrato do protótipo.
 - `AGENTS.md`: instruções para agentes de IA que trabalham no repositório (o `CLAUDE.md` apenas aponta para ele).
 
 ## Começar
@@ -33,8 +35,8 @@ Pesquisa de viabilidade e validação de fontes, com um protótipo local de popu
 
 ## Protótipo local e pendências
 
-O pipeline de população via SIDRA atende os 12 municípios, reconcilia 2025 e 2026 com referências independentes do IBGE e publica somente lotes homologados na API e no CSV. O painel informa a atualização e o ano de referência. Consulte [execução e limites](docs/implementacao-populacao.md) e o [ADR-005](docs/adr/ADR-005-pipeline-populacao.md).
+O pipeline de população via SIDRA atende os 12 municípios, reconcilia 2025 e 2026 com referências independentes do IBGE e publica somente lotes homologados na API e no CSV. O painel informa a atualização e o ano de referência. Consulte [execução e limites](docs/guias/populacao.md) e o [ADR-005](docs/adr/ADR-005-pipeline-populacao.md).
 
-A leitura do CSV completo da ANM encontrou 129 repetições exatas no recorte da arrecadação. O lote de CFEM permanece bloqueado por `RN-VPU-11`; nenhum valor foi publicado. Veja o [relatório de duplicatas](docs/revisao-duplicatas-cfem-2026-10-30.md), a [preparação da CFEM](docs/implementacao-cfem.md) e as [pendências de regras de negócio](docs/regras-de-negocio/pendencias.md).
+A leitura do CSV completo da ANM encontrou 129 repetições exatas no recorte da arrecadação. O lote de CFEM permanece bloqueado por `RN-VPU-11`; nenhum valor foi publicado. Veja o [relatório de duplicatas](docs/registros/duplicatas-cfem-2026-10-30.md), a [preparação da CFEM](docs/guias/cfem.md) e as [pendências de regras de negócio](docs/regras-de-negocio/pendencias.md).
 
-As coletas locais da DCA e do FRED, o relatório de duplicatas e seus limites estão em [coletas de despesa e commodities](docs/implementacao-despesa-commodities.md). O contrato inicial das rotas implementadas está em [OpenAPI](docs/api/openapi.yaml).
+As coletas locais da DCA e do FRED, o relatório de duplicatas e seus limites estão em [coletas de despesa e commodities](docs/guias/despesa-e-commodities.md). O contrato inicial das rotas implementadas está em [OpenAPI](docs/api/openapi.yaml).

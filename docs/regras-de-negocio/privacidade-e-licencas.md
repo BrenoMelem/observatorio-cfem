@@ -54,7 +54,7 @@ Regras sobre dados pessoais, registros individuais, acesso restrito e reuso de d
 - **Regra:** O mantenedor deve confirmar a licença de redistribuição de cada fonte antes de a camada publicada e o CSV aberto a incluírem, começando por FAPESPA, IDSC e SEEG.
 - **Motivo:** Nenhuma das fontes de decisão registra licenças confirmadas.
 - **Exemplo:** BLOCOS diz que a planilha do SEEG é guardada no repositório, e a licença de redistribuição do SEEG não foi verificada (conflito 16).
-- **Evidência de 30/10/2026 (por busca na internet, não conferida nas páginas oficiais):** FAPESPA: as publicações municipais em PDF dizem que a reprodução parcial ou total é permitida com citação da fonte e sem fim comercial ou de venda; não há licença formal do tipo Creative Commons. SEEG: não há licença única; uma publicação de 2026 é CC BY 4.0, e o relatório da Coleção 13 permite o uso com crédito ao SEEG, mas diz que isso não é licença para reinterpretar ou revender as informações; os termos dos conjuntos de dados brutos não foram localizados. IDSC: nenhuma busca trouxe os termos de reuso; sabe-se que cerca de 98% dos dados vêm de bases oficiais (DATASUS, IBGE, INEP, SNIS), o que não equivale a licença para redistribuir o índice. Nenhuma das três licenças está confirmada; a regra segue em aberto.
+- **Evidência datada:** no fim deste arquivo, em [Notas de evidência](#notas-de-evidência), sob RN-PRI-06.
 - **Fonte:** PESQUISA §Conclusões principais (item 4); CONSUMO §Contrato de dados para o front-end; BLOCOS §Bloco 5 (CO₂); DECISÃO-MANTENEDOR de 24/10/2026 (conflito 16 em aberto).
 - **Relacionadas:** RN-FON-15, RN-PRI-05, RN-ENT-10
 
@@ -90,3 +90,11 @@ Regras sobre dados pessoais, registros individuais, acesso restrito e reuso de d
 - **Exemplo:** A célula de autenticação do laboratório abriu um consentimento com acesso amplo de edição e exclusão no Drive e no Google Cloud; a autenticação não foi concluída (transcrito do relatório VAL-15/10, não conferido no JSON). O notebook é só de testes e não vai para produção, então o consentimento serve de evidência; a regra vale para o pipeline.
 - **Fonte:** DECISÃO-MANTENEDOR de 28/10/2026; VAL-15/10 §Pendências externas e limites desta execução; DECISÃO-MANTENEDOR de 24/10/2026 (conflito 7).
 - **Relacionadas:** RN-FON-09
+
+## Notas de evidência
+
+Evidência datada que sustenta ou qualifica as regras acima. Cada nota é o texto original, movido sem alteração das regras; nenhuma delas muda o status da regra. Ordem: a das regras.
+
+#### RN-PRI-06: Licenças de redistribuição ainda não confirmadas
+
+- **Evidência de 30/10/2026 (por busca na internet, não conferida nas páginas oficiais):** FAPESPA: as publicações municipais em PDF dizem que a reprodução parcial ou total é permitida com citação da fonte e sem fim comercial ou de venda; não há licença formal do tipo Creative Commons. SEEG: não há licença única; uma publicação de 2026 é CC BY 4.0, e o relatório da Coleção 13 permite o uso com crédito ao SEEG, mas diz que isso não é licença para reinterpretar ou revender as informações; os termos dos conjuntos de dados brutos não foram localizados. IDSC: nenhuma busca trouxe os termos de reuso; sabe-se que cerca de 98% dos dados vêm de bases oficiais (DATASUS, IBGE, INEP, SNIS), o que não equivale a licença para redistribuir o índice. Nenhuma das três licenças está confirmada; a regra segue em aberto.
