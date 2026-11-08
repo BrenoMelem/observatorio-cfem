@@ -13,7 +13,6 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 | RN-CFE-09 | Causa da ausência de São Domingos do Araguaia nos arquivos (a MSC registra CFEM pequena desde 2024; causa indeterminada, só a ANM confirma) | [mineracao-cfem.md](mineracao-cfem.md) |
 | RN-CFE-10 | Modalidades de distribuição que compõem a CFEM recebida (`Produtor` bate com a MSC em Canaã e Parauapebas, não em Marabá) | [mineracao-cfem.md](mineracao-cfem.md) |
 | RN-CFE-20 | Se a CFEM pode ser apresentada como proxy da produção municipal (conflito 12) | [mineracao-cfem.md](mineracao-cfem.md) |
-| RN-PRI-06 | Licença de redistribuição de cada fonte (FAPESPA, IDSC, SEEG) | [privacidade-e-licencas.md](privacidade-e-licencas.md) |
 
 ## 2. Itens em aberto dentro de regras DECIDIDAS
 
@@ -22,7 +21,6 @@ Estas regras estão decididas no essencial, mas um ponto delas continua sem deci
 | Regra | Ponto em aberto |
 | --- | --- |
 | [RN-TER-09](territorio.md) | Valor de N, período do ranking e modalidade de distribuição usados na comparação com mineradores |
-| [RN-CFE-18](mineracao-cfem.md) | Decisão final de exibir ou não o nome da empresa autuada, após revisão jurídica |
 | [RN-TMP-13](temporalidade-e-atualizacao.md), [RN-FNT-05](regras-por-fonte.md) e [RN-FNT-06](regras-por-fonte.md) | Recorte de exibição da série do ferro: desde jan/1980 ou desde 1985, como pediu a oficina. Início real da série do ferro no FRED: jan/1980 ou jan/1992 (divergência 17) |
 | [RN-TMP-15](temporalidade-e-atualizacao.md) | Emenda entre SICONFI (2013 em diante) e FINBRA (pré-2013) numa mesma série |
 | [RN-FNT-04](regras-por-fonte.md) | Demonstrativo(s) e contas do SICONFI e se o escopo fica em função e subfunção; o estágio da despesa foi decidido em 30/10/2026 (três indicadores separados); o nome do anexo muda em 2013; em 31/10/2026 a MSC orçamentária (fonte `1708`) foi coletada para 2022–2026, mas o mapeamento das contas para os estágios e a conciliação com a DCA não foram feitos; a coleta foi refeita com a paginação completa em 02/11/2026; em 2025, Bom Jesus do Tocantins não retornou linhas no Anexo I-E (consulta de 03/11/2026) |
@@ -53,7 +51,7 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 | 13 | Denominador do emprego | PLANO e BLOCOS: "RAIS ÷ população", sem especificar. CONSUMO: aprovar o denominador | DECIDIDO em 02/11/2026 (RN-IND-07): dois indicadores, população total e idade ativa de 15 a 64 anos pelo Censo 2022 |
 | 14 | Datação de DECISÕES e BLOCOS | O cabeçalho dos dois diz 04/10/2026, com revisões 72 e 29 exportadas em 24/10/2026. LAB-19/10 é de 19/10/2026 e traz a correção do ferro no FRED e a orientação sobre a chave | RESOLVIDO por DECISÃO-MANTENEDOR: DECISÕES e BLOCOS foram editados pela última vez em 20/10/2026 e não incorporaram LAB-19/10 nesses dois pontos; nesses pontos LAB-19/10 é mais recente. Nos demais, DECISÕES e BLOCOS são a referência de decisões |
 | 15 | Períodos dos indicadores | PLANO: ferro 1985–2025, uso do solo 1983–2024, despesa 2013–2024, IDEB 2023. BLOCOS: ferro 1992–2025, uso do solo 1985–2025, despesa 2013–2025, IDEB sem ano | DECIDIDO (DECISÃO-MANTENEDOR): BLOCOS prevalece sobre PLANO, exceto o início do ferro (conflito 8) (RN-TMP-16). IDEB decidido em 27/10/2026: todas as edições disponíveis (RN-TMP-17) |
-| 16 | SEEG no repositório | BLOCOS §Bloco 5: planilha "guardada no repositório". README e `.gitignore`: dado baixado fora do Git. DECISÕES: bruto fora do Git "quando grande", sem definir o limite | EM ABERTO (RN-FON-15, RN-FNT-14, RN-PRI-06), junto da licença de redistribuição do SEEG |
+| 16 | SEEG no repositório | BLOCOS §Bloco 5: planilha "guardada no repositório". README e `.gitignore`: dado baixado fora do Git. DECISÕES: bruto fora do Git "quando grande", sem definir o limite | EM ABERTO (RN-FON-15, RN-FNT-14), só pelo tamanho: a licença deixou de ser critério em 07/11/2026 |
 | 17 | Início da série do ferro no FRED | LAB-19/10 (execução de 19/10/2026) e DECISÃO-MANTENEDOR (24/10/2026): `PIORECRUSDM` de jan/1980 a jul/2026. DECISÕES e BLOCOS: ferro desde 1992. Consulta à API do FRED em 25/10/2026: linhas de jan/1980 a set/2026, com valor ausente de jan/1980 a dez/1991 e primeiro valor em jan/1992; o mesmo vale para o cobre (`PCOPPUSDM`); metadados do FRED: início em 1992-01-01 | EM ABERTO: o mantenedor deve reconfirmar a decisão do conflito 8 (início em jan/1980 e Pink Sheet só antes de 1980). Se o início real for 1992, vale o que DECISÕES e BLOCOS diziam e o Pink Sheet cobre 1985–1991. Afeta RN-TMP-13, RN-FNT-05, RN-FNT-06 e a tabela de períodos em [temporalidade-e-atualizacao.md](temporalidade-e-atualizacao.md) |
 
 ### Divergências menores
@@ -79,7 +77,7 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 - **Atualização de DECISÕES e de BLOCOS.** O mantenedor informou que atualizará os dois documentos com as decisões de 24/10/2026. Até lá, as regras citam "DECISÃO-MANTENEDOR de 24/10/2026" como fonte.
 - **Divergências com os outros repositórios.** A comparação de 08/11/2026 com `obcefem_api` e `obcefem` (distribuição estimada pela lei, duplicatas, ano parcial, ano da autuação, chave do município, média PA/BR, dados fictícios) está em [divergencias-entre-repositorios.md](divergencias-entre-repositorios.md), com uma decisão pedida ao mantenedor por item. Nenhum status mudou.
 - **Exceções de 08/11/2026 (mantenha o que a `obcefem_api` diz).** O mantenedor mandou manter o comportamento da API nos itens D2 a D11 de [divergencias-entre-repositorios.md](divergencias-entre-repositorios.md). Isso abriu exceções, anotadas em cada regra, em RN-VPU-11 (duplicatas publicadas), RN-CFE-05 e RN-CFE-06 (ano parcial e critério de volume), RN-CFE-14 e RN-CFE-16 (ano da cobrança e sem faixa "sem ano"), RN-CFE-22 (arquivos por faixa, série desde 2002), RN-TER-03 (chave por nome) e RN-MOD-03 (envelope da API mais observações no esquema comum; a API ainda não faz). Regras novas: RN-CFE-27, RN-CFE-28, RN-TER-13 e RN-ENT-11. Pendentes: medir o efeito em reais das 129 duplicatas; reconfirmar se o lote de arrecadação, citado como bloqueado acima, passa a ser publicado.
-- **Obsoletas.** Nenhuma regra está obsoleta nesta versão.
+- **Obsoletas.** Oito regras ficaram obsoletas em 07/11/2026 por decisão do mantenedor (as fontes são dados abertos, então privacidade e licença não são necessárias): RN-PRI-01 a RN-PRI-06, RN-PRI-08 e RN-ENT-10. Seguem vigentes RN-PRI-07, RN-PRI-09 e RN-PRI-10. RN-CFE-18 passou a permitir exibir o nome e o CPF/CNPJ do titular; sem parecer jurídico, o CPF de pessoa física é risco aceito pelo mantenedor.
 
 ## 5. Regras PROPOSTAS aguardando confirmação
 
@@ -158,12 +156,3 @@ Estas 38 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA
 | --- | --- | --- |
 | [RN-IND-05](indicadores-derivados-e-compostos.md) | Derivado ou composto é marcado como análise derivada | CONSUMO §Finanças públicas e índices (receita per capita e IDSC) |
 | [RN-IND-08](indicadores-derivados-e-compostos.md) | Não recalcular o Barômetro sem reproduzir o método | CONSUMO §Finanças públicas e índices (Barômetro da Sustentabilidade 2024) |
-
-### Privacidade e licenças (4)
-
-| Regra | Título | Origem |
-| --- | --- | --- |
-| [RN-PRI-02](privacidade-e-licencas.md) | Registros individuais não são coletados nem publicados | CONSUMO §Sociedade, serviços e segurança (Pobreza) |
-| [RN-PRI-03](privacidade-e-licencas.md) | Agregar microdados antes de expor | CONSUMO §Economia e mercado de trabalho |
-| [RN-PRI-04](privacidade-e-licencas.md) | Proteger grupos muito pequenos | CONSUMO §Sociedade, serviços e segurança (Veículos, infraestrutura censitária, favelas, entorno) |
-| [RN-PRI-08](privacidade-e-licencas.md) | Não usar a área restrita do CECAD | CONSUMO §Sociedade, serviços e segurança (Pobreza); MAPA-TEMAS §Sociedade. DECISÕES §Rotas de coleta por fonte registra apenas "sem API; só download manual" |

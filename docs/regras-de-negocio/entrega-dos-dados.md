@@ -7,7 +7,7 @@ As fontes divergiam sobre a forma da entrega: DECISÕES e PLANO descrevem uma ca
 ### RN-ENT-01: Camada tratada entre as fontes e o consumo
 - **Status:** DECIDIDA
 - **Regra:** O front-end, as exportações e o assistente de IA devem consumir apenas a camada publicada de dados tratados e nunca devem chamar a fonte externa diretamente.
-- **Motivo:** Uma fonte fora do ar não quebra o consumidor, trocar a origem de um indicador não afeta o gráfico, e cache, licenças, credenciais, versionamento e falhas ficam centralizados.
+- **Motivo:** Uma fonte fora do ar não quebra o consumidor, trocar a origem de um indicador não afeta o gráfico, e cache, credenciais, versionamento e falhas ficam centralizados.
 - **Exemplo:** O gráfico de população lê a camada publicada e não a API do IBGE; o gráfico de CFEM não lê os CSVs nacionais da ANM.
 - **Fonte:** DECISÕES §Arquitetura e padrões de dados; VAL-15/10 §Resposta ao orientador (item 3); PLANO §Arquitetura e fluxo geral; CONSUMO §Contrato de dados para o front-end.
 - **Relacionadas:** RN-ENT-02, RN-ENT-06, RN-VPU-03, RN-VPU-10
@@ -26,9 +26,9 @@ As fontes divergiam sobre a forma da entrega: DECISÕES e PLANO descrevem uma ca
 - **Regra:** Os dados tratados devem poder ser baixados por qualquer pessoa em CSV aberto.
 - **Motivo:** O custo é quase zero, pois o dado já existe nesse formato na camada tratada, e aumenta a credibilidade do observatório como fonte reutilizável e citável.
 - **Exemplo:** A série populacional dos 12 municípios disponível em CSV.
-- **Exceções:** Não devem ser publicados dados cuja licença de redistribuição não esteja confirmada (RN-PRI-05, RN-PRI-06 e RN-ENT-10).
+- **Exceções:** Nenhuma restrição de licença: as fontes são dados abertos (decisão do mantenedor de 07/11/2026; RN-PRI-05, RN-PRI-06 e RN-ENT-10 ficaram obsoletas).
 - **Fonte:** DECISÕES §Publicação e extras; VAL-15/10 §Marco 4.
-- **Relacionadas:** RN-ENT-05, RN-ENT-10, RN-PRI-05
+- **Relacionadas:** RN-ENT-05
 
 ### RN-ENT-04: Painel de status por indicador
 - **Status:** DECIDIDA
@@ -49,10 +49,10 @@ As fontes divergiam sobre a forma da entrega: DECISÕES e PLANO descrevem uma ca
 ### RN-ENT-06: Arquivos integrais da ANM não vão ao consumidor
 - **Status:** DECIDIDA
 - **Regra:** Os CSVs nacionais da ANM não devem ser entregues integralmente ao navegador nem consumidos diretamente pelos gráficos.
-- **Motivo:** Os arquivos têm centenas de MB e campos identificadores (CPF/CNPJ), e a ausência de municípios ou de meses ficaria escondida.
+- **Motivo:** Os arquivos têm centenas de MB e registros por linha, e a ausência de municípios ou de meses ficaria escondida.
 - **Exemplo:** O arquivo de distribuição tem 2.238.877 linhas, das quais 11.847 são dos 12 municípios (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
 - **Fonte:** VAL-15/10 §Resposta ao orientador (item 3), §Rodada adicional; CONSUMO §CFEM e receitas minerais, §Bypass seguro quando não houver API; MAPA-TEMAS §Tema central do Observatório: CFEM.
-- **Relacionadas:** RN-ENT-01, RN-PRI-01, RN-VPU-10
+- **Relacionadas:** RN-ENT-01, RN-VPU-10
 
 ### RN-ENT-07: O assistente responde só com a camada publicada
 - **Status:** PROPOSTA
@@ -80,7 +80,8 @@ As fontes divergiam sobre a forma da entrega: DECISÕES e PLANO descrevem uma ca
 - **Relacionadas:** RN-CFE-02, RN-VPU-10
 
 ### RN-ENT-10: Licença de reuso das exportações
-- **Status:** DECIDIDA
+- **Status:** OBSOLETA
+- **Obsoleta desde 07/11/2026:** decisão do mantenedor. As fontes do projeto são dados abertos, então o tema privacidade e licença não é necessário nesta documentação. O texto original fica abaixo, sem alteração, para o histórico.
 - **Regra:** O CSV aberto inclui apenas as fontes cuja licença de redistribuição esteja confirmada. As demais ficam fora das exportações até o mantenedor verificar a licença; a licença de cada fonte continua pendente em RN-PRI-06.
 - **Motivo:** Nenhuma licença de redistribuição foi confirmada nas fontes de decisão; publicar sem ela contraria RN-ENT-03.
 - **Exemplo:** Enquanto a licença de FAPESPA e IDSC não for verificada, seus indicadores não entram no CSV aberto.

@@ -48,9 +48,9 @@ O `README.md` tem um exemplo de regra com título `### RN-`, então a contagem d
 
 ## Segurança e dados
 
-- Os arquivos brutos da ANM (`dadosabertos.anm.gov.br`) têm colunas de **CPF/CNPJ**. Nunca imprima, grave no repositório nem cole em respostas dados por linha deles; use só agregados.
+- Os arquivos brutos da ANM (`dadosabertos.anm.gov.br`) têm colunas de CPF/CNPJ e do nome do titular. São dados abertos e, por decisão do mantenedor de 07/11/2026, privacidade e licença não são requisito do projeto (RN-PRI-01 a 06 e RN-PRI-08 ficaram obsoletas; RN-CFE-18 permite exibir o titular). Pode citar nome e CPF/CNPJ de um titular quando o exemplo ou a análise precisar. Para tabelas e respostas, prefira agregados a despejar linhas dos arquivos. Os arquivos brutos continuam fora do repositório (próxima linha).
 - Nunca grave chave de API, token ou credencial no repositório. Chaves entram por variável de ambiente. Se o usuário colar uma chave na conversa, não a copie para arquivos e avise que ela deve ser trocada.
-- Dados baixados vão para uma pasta fora do repositório ou para `output/`/`tmp/`. Não versione dados brutos.
+- Dados baixados vão para uma pasta fora do repositório ou para `output/`/`tmp/`. Não versione dados brutos: por tamanho (centenas de MB), não por sigilo.
 
 ## Fontes externas: o que já se sabe
 
@@ -64,7 +64,8 @@ Os detalhes e as datas das verificações estão nas notas de evidência das reg
 
 ## Fluxo de trabalho
 
-- Como versionar o trabalho (commit, branch, push, PR) é decisão do usuário. Pergunte e não presuma.
+- Toda mudança vai numa branch nova criada a partir da `develop` (não da `main` nem da branch em que a sessão estiver), com um PR para a `develop` preparado ao final. Decisão do mantenedor de 07/11/2026. Commit, push e PR seguem as regras acima. Nunca faça push direto na `develop` nem na `main`.
+- Fora desse fluxo (merge do PR, apagar branch, forçar push, reescrever histórico), pergunte e não presuma.
 - Scripts novos vão em `scripts/`, com docstring que diga o que fazem e que são de teste. Prefira a biblioteca padrão do Python e deixe a saída fora do repositório.
 - Decisões que contrariam os documentos de origem devem ser anotadas na regra (campo Exceções) e em `pendencias.md`, não apagadas das fontes.
 
