@@ -157,13 +157,13 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Fonte:** DECISÕES §Bloco 3, §Glossário (autuação); BLOCOS §Bloco 3.
 - **Relacionadas:** RN-CFE-02, RN-CFE-18
 
-### RN-CFE-18: Nome da empresa autuada: guardar agora, exibir depois
+### RN-CFE-18: Nome da empresa autuada: guardar e exibir
 - **Status:** DECIDIDA
-- **Regra:** O nome da empresa autuada (campo `NomeTitular`) deve ser guardado na tabela de eventos, e a decisão de exibi-lo no site deve ficar adiada até a publicação se aproximar, com revisão jurídica antes.
-- **Motivo:** Expor uma acusação ainda não julgada tem risco jurídico, e o projeto ainda não está no ar.
+- **Regra:** O nome da empresa autuada (campo `NomeTitular`) deve ser guardado na tabela de eventos e pode ser exibido no site, junto do CNPJ (RN-PRI-01).
+- **Motivo:** A ANM já publica o nome do titular como dado aberto, e o mantenedor decidiu em 07/11/2026 que a exibição não precisa esperar revisão jurídica. O risco anterior (expor uma autuação ainda não julgada) fica registrado: a autuação é cobrança, não condenação (RN-CFE-17), e o valor muda ao longo do tempo (RN-CFE-15), o que a exibição deve informar.
 - **Exemplo:** Cada evento de autuação guarda processo, titular, município, substância e valor.
-- **Exceções:** A decisão final de exibir ou não o nome continua **EM ABERTO** até a revisão jurídica. CPF e CNPJ nunca são guardados na camada tratada (RN-PRI-01).
-- **Fonte:** DECISÕES §Bloco 3, §Publicação e extras; BLOCOS §Bloco 3.
+- **Exceções:** Contraria DECISÕES §Bloco 3 e BLOCOS §Bloco 3 ("guardar agora, exibir depois, com revisão jurídica antes"), que seguem nas fontes sem alteração. Sem parecer jurídico até 07/11/2026.
+- **Fonte:** DECISÃO-MANTENEDOR de 07/11/2026. Histórico: DECISÕES §Bloco 3, §Publicação e extras; BLOCOS §Bloco 3.
 - **Relacionadas:** RN-CFE-13, RN-PRI-01
 
 ### RN-CFE-19: O VPM só existe por UF

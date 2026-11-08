@@ -2,13 +2,13 @@
 
 Regras sobre dados pessoais, registros individuais, acesso restrito e reuso de dados de terceiros. Legenda de status e siglas das fontes: [README](README.md).
 
-### RN-PRI-01: CPF e CNPJ nunca entram na camada tratada
+### RN-PRI-01: CPF, CNPJ e nome do titular da CFEM podem ser guardados e publicados
 - **Status:** DECIDIDA
-- **Regra:** A camada tratada e publicada não deve guardar nem publicar CPF ou CNPJ; do titular de uma autuação só se guarda o nome.
-- **Motivo:** Os arquivos brutos da ANM contêm campos identificadores, e o nome do titular já exige revisão jurídica antes de qualquer exibição.
-- **Exemplo:** O validador dos arquivos da ANM leu os CSVs completos sem exportar CPF/CNPJ nem nomes de titulares.
-- **Exceções:** O titular pode ser pessoa física; a decisão de exibir o nome continua em aberto e sujeita à revisão jurídica (RN-CFE-18).
-- **Fonte:** DECISÃO-MANTENEDOR de 24/10/2026 (resposta à pergunta 7); VAL-15/10 §Rodada adicional; DECISÕES §Bloco 3 (nome da empresa: guardar agora, exibir depois); README do repositório e `.gitignore`.
+- **Regra:** A camada tratada e publicada pode guardar e publicar o CPF/CNPJ e o nome do titular dos registros de arrecadação e de autuação da CFEM, porque a ANM já os publica como dado aberto. Essa permissão vale só para os campos de titular da CFEM da ANM e não se estende a outras fontes (ver RN-PRI-02 e RN-PRI-03).
+- **Motivo:** O mantenedor entende que os dados já são públicos na origem e que expô-los não traz problema. O texto anterior (24/10/2026) proibia guardar e publicar CPF/CNPJ por cautela com identificadores.
+- **Exemplo:** O painel do protótipo `obcefem_api` já lista os maiores titulares de Parauapebas e Canaã com nome e CNPJ, como vêm da ANM (observado na leitura do código em 07/11/2026; não conferido na execução).
+- **Exceções:** Esta decisão contraria a redação anterior desta regra (DECISÃO-MANTENEDOR de 24/10/2026, pergunta 7) e DECISÕES §Bloco 3 ("guardar agora, exibir depois"), que seguem nas fontes. O titular pode ser pessoa física, e CPF é dado pessoal mesmo quando a origem o publica; esse ponto fica registrado como risco aceito pelo mantenedor, sem parecer jurídico. O dado bruto integral continua fora do Git e do navegador (RN-FON-15, RN-ENT-06), por tamanho e por não haver agregação.
+- **Fonte:** DECISÃO-MANTENEDOR de 07/11/2026 (substitui a de 24/10/2026, pergunta 7). Histórico: VAL-15/10 §Rodada adicional; DECISÕES §Bloco 3; README do repositório e `.gitignore`.
 - **Relacionadas:** RN-CFE-18, RN-FON-15, RN-ENT-06
 
 ### RN-PRI-02: Registros individuais não são coletados nem publicados

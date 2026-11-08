@@ -22,7 +22,6 @@ Estas regras estão decididas no essencial, mas um ponto delas continua sem deci
 | Regra | Ponto em aberto |
 | --- | --- |
 | [RN-TER-09](territorio.md) | Valor de N, período do ranking e modalidade de distribuição usados na comparação com mineradores |
-| [RN-CFE-18](mineracao-cfem.md) | Decisão final de exibir ou não o nome da empresa autuada, após revisão jurídica |
 | [RN-TMP-13](temporalidade-e-atualizacao.md), [RN-FNT-05](regras-por-fonte.md) e [RN-FNT-06](regras-por-fonte.md) | Recorte de exibição da série do ferro: desde jan/1980 ou desde 1985, como pediu a oficina. Início real da série do ferro no FRED: jan/1980 ou jan/1992 (divergência 17) |
 | [RN-TMP-15](temporalidade-e-atualizacao.md) | Emenda entre SICONFI (2013 em diante) e FINBRA (pré-2013) numa mesma série |
 | [RN-FNT-04](regras-por-fonte.md) | Demonstrativo(s) e contas do SICONFI e se o escopo fica em função e subfunção; o estágio da despesa foi decidido em 30/10/2026 (três indicadores separados); o nome do anexo muda em 2013; em 31/10/2026 a MSC orçamentária (fonte `1708`) foi coletada para 2022–2026, mas o mapeamento das contas para os estágios e a conciliação com a DCA não foram feitos; a coleta foi refeita com a paginação completa em 02/11/2026; em 2025, Bom Jesus do Tocantins não retornou linhas no Anexo I-E (consulta de 03/11/2026) |
@@ -57,6 +56,7 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 
 ### Divergências menores
 
+- **Exibição de titular (RN-PRI-01, RN-CFE-18).** Decidida em 07/11/2026 pelo mantenedor contra DECISÕES §Bloco 3 e a decisão de 24/10/2026: CPF/CNPJ e nome do titular da CFEM podem ser guardados e publicados. Não há parecer jurídico; titular pessoa física (CPF) segue como risco aceito, a reconfirmar se o projeto passar por revisão jurídica ou da LGPD.
 - Pré-requisitos: PLANO lista 4 pré-requisitos travantes e DECISÕES, 3 (a descoberta do ano mais recente passou a ser regra de execução, RN-TMP-01).
 - Estado de TSE, DETRAN-PA e SEEG: DECISÕES (04/10) registra TSE e DETRAN-PA bloqueados (HTTP 403 e erro de SSL); VAL-15/10 (15/10) registra SEEG com 403; LAB-19/10 (19/10) registra TSE e SEEG com a página aberta e o DETRAN-PA com HTTP 502. É evolução da evidência, não de regra.
 - VAL-15/10 descreve o repositório como em `master` e sem commits; em 24/10/2026 a branch principal é `main`.
