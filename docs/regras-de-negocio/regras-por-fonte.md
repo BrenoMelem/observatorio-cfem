@@ -126,9 +126,9 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Regra:** As emissões de CO₂ do SEEG devem ser obtidas por download de planilha por edição, porque a fonte não tem API confirmada.
 - **Motivo:** Não há rota automatizável.
 - **Exemplo:** Série municipal do SEEG, com gás, setor e edição.
-- **Exceções:** Se a planilha baixada pode ser guardada no repositório, e com que licença, está **EM ABERTO** (conflito 16).
+- **Exceções:** Se a planilha baixada pode ser guardada no repositório está **EM ABERTO** (conflito 16), agora só pelo tamanho (RN-FON-15).
 - **Fonte:** DECISÕES §Rotas de coleta por fonte; BLOCOS §Bloco 5; DECISÃO-MANTENEDOR de 24/10/2026 (conflito 16 em aberto).
-- **Relacionadas:** RN-FON-15, RN-PRI-06, RN-TMP-11
+- **Relacionadas:** RN-FON-15, RN-TMP-11
 
 ### RN-FNT-15: Não calcular homicídio a partir do SIM cru
 - **Status:** DECIDIDA
@@ -145,7 +145,7 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Motivo:** Não há API.
 - **Exemplo:** Pobreza e percentual de famílias pobres, com data-base e definição registradas.
 - **Fonte:** DECISÕES §Rotas de coleta por fonte; BLOCOS §Bloco 4.
-- **Relacionadas:** RN-PRI-08
+- **Relacionadas:** nenhuma ativa (RN-PRI-08 ficou obsoleta)
 
 ### RN-FNT-17: FAPESPA, IDSC e CLP
 - **Status:** PROPOSTA
@@ -153,7 +153,7 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Motivo:** Depender de PDF estadual é o elo mais frágil da cadeia.
 - **Exemplo:** O Barômetro da FAPESPA e o ranking da CLP entram congelados (RN-IND-04).
 - **Fonte:** PLANO §Riscos e cuidados, §Bloco 6; CONSUMO §Finanças públicas e índices.
-- **Relacionadas:** RN-IND-04, RN-FON-06, RN-PRI-05
+- **Relacionadas:** RN-IND-04, RN-FON-06
 
 ### RN-FNT-18: Ler cada arquivo da ANM conforme seu formato real
 - **Status:** DECIDIDA

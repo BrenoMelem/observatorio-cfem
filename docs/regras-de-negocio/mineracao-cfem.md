@@ -157,14 +157,14 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Fonte:** DECISÕES §Bloco 3, §Glossário (autuação); BLOCOS §Bloco 3.
 - **Relacionadas:** RN-CFE-02, RN-CFE-18
 
-### RN-CFE-18: Nome da empresa autuada: guardar agora, exibir depois
+### RN-CFE-18: Nome da empresa autuada: guardar e exibir
 - **Status:** DECIDIDA
-- **Regra:** O nome da empresa autuada (campo `NomeTitular`) deve ser guardado na tabela de eventos, e a decisão de exibi-lo no site deve ficar adiada até a publicação se aproximar, com revisão jurídica antes.
-- **Motivo:** Expor uma acusação ainda não julgada tem risco jurídico, e o projeto ainda não está no ar.
+- **Regra:** O nome da empresa autuada (campo `NomeTitular`) deve ser guardado na tabela de eventos e pode ser exibido no site, junto do CPF/CNPJ, como a ANM os publica.
+- **Motivo:** A ANM publica o nome e o CPF/CNPJ do titular como dado aberto, e o mantenedor decidiu em 07/11/2026 que privacidade e licença não são necessárias. A autuação é cobrança, não condenação (RN-CFE-17), e o valor muda ao longo do tempo (RN-CFE-15); a exibição deve informar isso.
 - **Exemplo:** Cada evento de autuação guarda processo, titular, município, substância e valor.
-- **Exceções:** A decisão final de exibir ou não o nome continua **EM ABERTO** até a revisão jurídica. CPF e CNPJ nunca são guardados na camada tratada (RN-PRI-01).
-- **Fonte:** DECISÕES §Bloco 3, §Publicação e extras; BLOCOS §Bloco 3.
-- **Relacionadas:** RN-CFE-13, RN-PRI-01
+- **Exceções:** Contraria DECISÕES §Bloco 3 e BLOCOS §Bloco 3 ("guardar agora, exibir depois, com revisão jurídica antes") e a decisão de 24/10/2026, que seguem nas fontes sem alteração. Não há parecer jurídico até 07/11/2026; o CPF de pessoa física segue como risco aceito pelo mantenedor.
+- **Fonte:** DECISÃO-MANTENEDOR de 07/11/2026. Histórico: DECISÕES §Bloco 3, §Publicação e extras; BLOCOS §Bloco 3.
+- **Relacionadas:** RN-CFE-13, RN-CFE-15, RN-CFE-17
 
 ### RN-CFE-19: O VPM só existe por UF
 - **Status:** DECIDIDA
