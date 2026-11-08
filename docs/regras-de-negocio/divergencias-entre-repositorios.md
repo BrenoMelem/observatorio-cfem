@@ -35,7 +35,7 @@ O código da `obcefem_api` é um protótipo e, como `notebooks/` e `scripts/` da
 - **Choque com a evidência daqui:** a nota de 31/10/2026 em RN-CFE-10 mostra que `Produtor` bate com a receita da MSC (fonte 1708) em Canaã dos Carajás (0,03% a 0,04%) e em Parauapebas (0,14% a 0,38%), o que sugere que o arquivo está certo para esses dois e que a estimativa pela lei não representa o que o município recebeu. O "15%" do README não foi reproduzido aqui; pode vir de comparar arrecadação de um período com repasse de outro, ou do mês faltante.
 - **Risco:** o painel mostra uma estimativa com o nome "cota municipal", ao lado de médias. Para o usuário final, isso é CFEM recebida. Fere a separação de RN-CFE-02.
 - **Recomendação:** (a) a CFEM recebida do observatório continua sendo a do arquivo (RN-CFE-03 inalterada); (b) a estimativa pela lei pode existir apenas como **análise derivada** (RN-IND-05), rotulada "estimativa" e nunca no mesmo eixo da recebida; (c) criar uma regra PROPOSTA com os percentuais legais por período, citando a Lei 13.540/2017 e a nota da ANM, e conferir os percentuais na lei antes de promover (não foram conferidos nesta comparação); (d) reproduzir o "15%" antes de aceitar que o arquivo está incompleto.
-- **Decisão pedida ao mantenedor:** a estimativa pela lei entra no produto como análise derivada, ou fica só no protótipo?
+- **DECIDIDO em 08/11/2026 (mantenedor):** seguir a `obcefem_api`. Os percentuais foram conferidos nas Leis 8.001/1990 (redação da Lei 9.993/2000) e 13.540/2017 e viraram RN-CFE-25; a estimativa é análise derivada e a recebida continua do arquivo (RN-CFE-26). Dúvidas que a lei levantou, em `pendencias.md`: o início da regra nova em 01/08/2017 (a API usa 2018) e o destino da cota dos afetados enquanto não houver decreto (art. 2º, § 3º).
 
 ### D2. Duplicatas na arrecadação
 
@@ -106,7 +106,7 @@ O código da `obcefem_api` é um protótipo e, como `notebooks/` e `scripts/` da
 
 | # | Decisão | Recomendação em uma linha |
 | --- | --- | --- |
-| D1 | Estimativa pela lei no produto? | Só como análise derivada rotulada; recebida continua do arquivo; reproduzir o "15%" |
+| D1 | Estimativa pela lei no produto? | DECIDIDO (RN-CFE-25 e RN-CFE-26); dúvidas de 2017 e dos afetados em aberto |
 | D2 | Duplicatas | RN-VPU-11 vale; medir o efeito em reais |
 | D3 | Ano parcial | RN-CFE-05/06/07 valem; critério de volume vira PROPOSTA |
 | D4 | Ano da autuação | RN-CFE-14 e 16 valem; a API deve ser alinhada |

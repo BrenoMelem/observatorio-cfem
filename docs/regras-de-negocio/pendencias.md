@@ -29,6 +29,7 @@ Estas regras estão decididas no essencial, mas um ponto delas continua sem deci
 | [RN-FNT-11](regras-por-fonte.md) | Coluna de município nas tabelas do CAGED e do IDEB; `table_id` do eleitorado (TSE) e do Censo Escolar |
 | [RN-FON-15](consumo-de-fontes.md) e [RN-FNT-14](regras-por-fonte.md) | Se a planilha do SEEG pode ficar no repositório e o que conta como dado bruto "grande" (conflito 16) |
 | [RN-IND-09](indicadores-derivados-e-compostos.md) | Base da participação da RI Carajás no PIB (PIB do Pará, da RI ou outra) e nomes finais dos dois indicadores no manifesto |
+| [RN-CFE-25](mineracao-cfem.md) | Início da regra de 60/15/15/10: 01/08/2017 (Lei 13.540/2017, art. 4º, III) ou 2018 (`obcefem_api`); destino da cota dos afetados enquanto não houver decreto ou hipótese do inciso VII (art. 2º, § 3º, Lei 14.514/2022) |
 | [RN-ENT-08](entrega-dos-dados.md) | Metas numéricas de cada critério de avaliação do assistente |
 
 ## 3. Divergências entre fontes
