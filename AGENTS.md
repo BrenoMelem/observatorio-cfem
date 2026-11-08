@@ -12,7 +12,7 @@ O idioma do projeto é o português do Brasil. Use datas absolutas (por exemplo,
 
 - `docs/regras-de-negocio/`: as regras de negócio (o quê e por quê, nunca o como). É a parte central.
 - `docs/regras-de-negocio/fontes/`: documentos de origem (decisões, blocos, plano, relatórios de laboratório e a pesquisa). São material histórico: não os reescreva sem pedido explícito.
-- `notebooks/` e `scripts/`: **apenas testes e laboratório**. Não vão para produção. Não os trate como a implementação do sistema.
+- `scripts/`: todo o código do repositório, em Python gerenciado com `uv` (coleta, validação, protótipo local da API, notebook e testes). **Apenas testes e laboratório**: não vão para produção e não são a implementação do sistema. O mapa está em [scripts/README.md](scripts/README.md).
 - `output/` e `tmp/` não são versionados (ver `.gitignore`).
 
 ## Regras de negócio: como escrever
@@ -66,7 +66,7 @@ Os detalhes e as datas das verificações estão nas notas de evidência das reg
 
 - Toda mudança vai numa branch nova criada a partir da `develop` (não da `main` nem da branch em que a sessão estiver), com um PR para a `develop` preparado ao final. Decisão do mantenedor de 07/11/2026. Commit, push e PR seguem as regras acima. Nunca faça push direto na `develop` nem na `main`.
 - Fora desse fluxo (merge do PR, apagar branch, forçar push, reescrever histórico), pergunte e não presuma.
-- Scripts novos vão em `scripts/`, com docstring que diga o que fazem e que são de teste. Prefira a biblioteca padrão do Python e deixe a saída fora do repositório.
+- Scripts novos vão em `scripts/<tema>/`, em Python, com docstring que diga o que fazem e que são de teste. Dependências entram pelo `uv add` (e o `uv.lock` é versionado); rode `uv run pytest` antes de commitar. A saída fica fora do repositório.
 - Decisões que contrariam os documentos de origem devem ser anotadas na regra (campo Exceções) e em `pendencias.md`, não apagadas das fontes.
 
 ## Pendências conhecidas do projeto

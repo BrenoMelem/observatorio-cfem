@@ -1,14 +1,14 @@
 # Pipeline de população estimada
 
-Requer Node.js 24. A fonte é o SIDRA, agregado 6579, variável 9324. A lista fixa dos 12 municípios está em `src/populacao.mjs` e corresponde a `RN-TER-01`.
+Requer [uv](https://docs.astral.sh/uv/) (Python 3.12 ou mais novo). A fonte é o SIDRA, agregado 6579, variável 9324. A lista fixa dos 12 municípios está em `scripts/comum/municipios.py` e corresponde a `RN-TER-01`.
 
 ## Executar
 
-```powershell
-node scripts/atualizar-populacao.mjs
-node scripts/atualizar-populacao.mjs --ano 2025
-node scripts/servir.mjs
-node --test test/populacao.test.mjs
+```bash
+uv run python -m scripts.populacao.atualizar
+uv run python -m scripts.populacao.atualizar --ano 2025
+uv run python -m scripts.servidor.servidor
+uv run pytest scripts/testes/test_populacao.py
 ```
 
 O primeiro comando descobre o ano mais recente no SIDRA. `--ano` permite recompor um ano já publicado, desde que exista `data/referencia-populacao-ANO.json`. `OBS_DATA_DIR` altera o diretório local de armazenamento; `PORT` altera a porta HTTP (padrão 3000).

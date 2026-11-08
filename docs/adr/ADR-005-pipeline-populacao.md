@@ -23,3 +23,7 @@ Usar Node.js padrão para a prova de arquitetura. A coleta consulta o SIDRA por 
 - O endpoint e o CSV são locais; hospedagem, autenticação, banco, backup e agenda precisam de decisão antes de produção.
 - Cada nova edição anual precisa de uma referência independente; sem ela, a publicação falha explicitamente.
 - A faixa plausível inicial de 1 a 5 milhões de pessoas por município é um controle de engenharia revisável, não uma regra estatística do IBGE.
+
+## Nota de 08/11/2026
+
+O protótipo foi portado de Node.js para Python, gerenciado com `uv`, e está em `scripts/` (ver `scripts/README.md`). A decisão provisória acima vale pela arquitetura (arquivos locais por camada, API que lê só `publicado/`, troca atômica), não pela linguagem. A escolha da stack de produção continua pendente.
