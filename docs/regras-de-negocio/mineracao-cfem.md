@@ -52,6 +52,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Regra:** O total anual da CFEM não deve ser calculado nem publicado quando algum mês do ano estiver ausente na fonte.
 - **Motivo:** Somar com um mês faltando produz um total que parece completo e não é.
 - **Exemplo:** O CSV de distribuição não tem nenhuma linha de julho de 2025, mas a ANM publicou que repassou R$ 478.839.591,45 em julho de 2025 aos estados e municípios produtores; por isso o total anual de distribuição de 2025 está bloqueado (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivo da ANM e notícia da ANM).
+- **Exceção de 08/11/2026 (DECISÃO-MANTENEDOR):** na `obcefem_api` o total anual do ano em curso é calculado e rotulado "(parcial)", e o mantenedor decidiu manter esse comportamento. A API não verifica meses ausentes no meio da série; esses meses entram como soma menor. Ver também RN-CFE-06.
 - **Fonte:** VAL-15/10 §Resposta ao orientador (item 1), §Marco 2, §Rodada adicional; CONSUMO §Validação complementar de 15/10/2026.
 - **Relacionadas:** RN-CFE-06, RN-CFE-08, RN-VPU-05, RN-MOD-08
 
@@ -61,6 +62,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Motivo:** Equilibra a regra de não somar com mês ausente com a utilidade de mostrar o que já existe.
 - **Exemplo:** Em 2025, janeiro a junho e agosto a dezembro podem ser exibidos como provisórios, mas o total anual fica bloqueado até julho ser incorporado e reconciliado.
 - **Exceções:** O critério vale para "mês sem nenhuma linha no arquivo nacional". Ausência de um município específico num mês que existe no arquivo é tratada em RN-CFE-07.
+- **Exceção de 08/11/2026 (DECISÃO-MANTENEDOR):** na `obcefem_api`, um mês do último ano é considerado completo quando tem ao menos 50% da mediana de registros por mês dos anos anteriores (a trava de publicação do histórico usa 35% da mediana do próprio ano), e o mantenedor decidiu manter esse critério de volume no lugar do critério de "mês sem nenhuma linha".
 - **Fonte:** DECISÃO-MANTENEDOR de 24/10/2026 (resposta à pergunta 5); VAL-15/10 §Marco 2 (que prevê bloquear a publicação do lote com mês ausente; esta decisão restringe o bloqueio ao total anual).
 - **Relacionadas:** RN-CFE-05, RN-MOD-07, RN-TMP-12, RN-VPU-05
 
@@ -129,6 +131,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Regra:** A série de autuações deve usar a data de lavratura, que é a data de publicação trazida pelo arquivo, e não o fato gerador.
 - **Motivo:** O arquivo não traz o fato gerador, e a data de lavratura é também a mais honesta para o observatório.
 - **Exemplo:** O ano de lavratura é o ano em que a ANM emitiu a autuação; o fato gerador é o ano em que o débito se originou.
+- **Exceção de 08/11/2026 (DECISÃO-MANTENEDOR):** na `obcefem_api` o ano da autuação é o do processo de cobrança, extraído do número do processo (descartados os códigos 8888 e 9999), e o mantenedor decidiu manter esse critério em vez da data de lavratura. Ver RN-CFE-16.
 - **Fonte:** DECISÕES §Bloco 3 (Data da autuação), §Glossário (lavratura, fato gerador); BLOCOS §Bloco 3.
 - **Relacionadas:** RN-CFE-13, RN-CFE-16
 
@@ -146,6 +149,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Motivo:** Decisão do mantenedor. As sem ano pesam muito: em 31/10/2026 são 87 de 171 linhas do recorte dos 12 municípios (51%) e 87,3% do valor (R$ 13,26 bi de R$ 15,20 bi); tirá-las da série subestimaria o total sem aviso, e o ano do número do processo é o ano de abertura, não o da publicação (contrária a RN-CFE-14).
 - **Exemplo:** Em Canaã dos Carajás e Curionópolis, mais de 99% do valor das autuações do recorte está sem ano. 81 das 87 linhas sem ano têm número de processo de 2006 a 2011 e seis têm número de 2026 (R$ 11,7 bi, 88% do valor sem ano) (calculado em 31/10/2026 sobre o arquivo da ANM; só agregados; a interpretação do número do processo é hipótese não confirmada pela ANM).
 - **Exceções:** RN-CFE-02 e RN-CFE-17 continuam valendo: autuação nunca se soma à arrecadada nem à recebida, e não é valor devido nem arrecadado. A contagem do recorte mudou de 176 (88 sem ano), em 25 e 27/10/2026, para 171 (87 sem ano), em 31/10/2026; a causa não foi investigada (hipótese: o arquivo da ANM foi atualizado). Só 7 dos 12 municípios têm autuação; o arquivo não traz código IBGE, só o nome do município.
+- **Exceção de 08/11/2026 (DECISÃO-MANTENEDOR):** a `obcefem_api` remove as autuações sem ano e não mostra a faixa "sem ano"; o mantenedor decidiu manter esse comportamento. Isso contraria a regra acima, que proíbe inferir o ano por outro campo, e o total de autuações da API deixa de incluir as sem ano.
 - **Fonte:** DECISÃO-MANTENEDOR de 31/10/2026; VAL-15/10 §Matriz operacional, §Rodada adicional; DECISÃO-MANTENEDOR de 24/10/2026 (resposta à pergunta 6: deixar em aberto, agora superada).
 - **Relacionadas:** RN-CFE-13, RN-CFE-14, RN-CFE-17, RN-MOD-10
 
@@ -196,6 +200,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Motivo:** O arquivo completo é o citado em DECISÕES e já cobre todos os anos; o de 2022–2026, usado pelo validador, descartaria 20 anos de série. O ano 2002 tem só 10 linhas no país, o que sugere cobertura incompleta (dedução: a ANM não diz isso).
 - **Exemplo:** Em 27/10/2026, o arquivo completo tinha 2.433.916 linhas, de 2002 a 2026; 2003 tem 30.559 linhas. A ANM publica também arquivos por faixa de anos (2002–2006, 2007–2011, 2012–2016, 2017–2021, 2022–2026), e as contagens por ano de 2022 a 2026 são iguais no arquivo completo e no de 2022–2026 (reproduzido em 27/10/2026: arquivos da ANM).
 - **Exceções:** O validador atual usa o arquivo de 2022–2026 e precisa passar a usar o completo. A cobertura municipal dos anos anteriores a 2022 não foi verificada.
+- **Exceção de 08/11/2026 (DECISÃO-MANTENEDOR):** a `obcefem_api` usa os arquivos de arrecadação por faixa de ano (2002–2006 a 2022–2026), com série desde 2002, e relê os períodos encerrados a cada 7 dias; o mantenedor decidiu manter esse arranjo.
 - **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026; DECISÕES §Rotas de coleta por fonte; SCRIPTS (`validate_anm_cfem`); VAL-15/10 §Rodada adicional; consulta ao servidor da ANM em 27/10/2026.
 - **Relacionadas:** RN-CFE-01, RN-FNT-18
 
@@ -234,3 +239,21 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Exemplo:** A `obcefem_api` afirma que o arquivo de distribuição de 01/11/2026 tinha a cota municipal de 2023 a 2025 em cerca de 15% do arrecadado (não reproduzido aqui). A nota de 31/10/2026 em RN-CFE-10 mostra o tipo `Produtor` batendo com a MSC em Canaã dos Carajás e Parauapebas; as duas leituras precisam ser conciliadas antes de usar a estimativa como substituta da recebida.
 - **Fonte:** DECISÃO-MANTENEDOR de 08/11/2026; `obcefem_api`, README §Distribuição; RN-IND-05.
 - **Relacionadas:** RN-CFE-02, RN-CFE-03, RN-CFE-10, RN-CFE-25, RN-IND-05
+
+### RN-CFE-27: Comparação com a média por município do Pará e do Brasil
+- **Status:** DECIDIDA
+- **Regra:** A CFEM dos municípios pode ser comparada com a média por município do Pará e do Brasil, calculada com os mesmos filtros de período, substância e titular. O denominador padrão é o número de municípios com registro no período; a alternativa é o total de municípios (144 no Pará, 5.570 no Brasil, segundo o IBGE). Há opção de excluir os dois municípios em foco da média.
+- **Motivo:** O mantenedor mandou manter o que a `obcefem_api` faz.
+- **Exemplo:** Reproduzido do README da `obcefem_api` (não conferido nos dados): o parâmetro `denominador` aceita `com_registro` (padrão) ou `todos`.
+- **Exceções:** O denominador "com registro" ignora os municípios sem CFEM e dá uma média maior que a de "todos"; o gráfico deve declarar qual está em uso. Os totais de 144 e 5.570 estão fixos no código da API. RN-TER-09 (comparação com N municípios mineradores) continua em aberto e é outra comparação.
+- **Fonte:** DECISÃO-MANTENEDOR de 08/11/2026; `obcefem_api`, README §Filtros e `app/dominio.py`.
+- **Relacionadas:** RN-TER-09, RN-MOD-18
+
+### RN-CFE-28: Substâncias agrupadas pelo nome sem o prefixo "MINÉRIO DE"
+- **Status:** DECIDIDA
+- **Regra:** Por padrão, as substâncias da CFEM são agrupadas retirando o prefixo "MINÉRIO DE" do nome, de modo que "MINÉRIO DE FERRO" e "FERRO" somam juntas; o agrupamento pode ser desligado.
+- **Motivo:** O mantenedor mandou manter o que a `obcefem_api` faz; quem declara só "FERRO" e quem declara "MINÉRIO DE FERRO" é a mesma substância.
+- **Exemplo:** Reproduzido do código da `obcefem_api` (não conferido nos dados): "MINÉRIO DE FERRO" vira "FERRO".
+- **Exceções:** Só o prefixo "MINÉRIO DE" é tratado; outros nomes equivalentes não são agrupados.
+- **Fonte:** DECISÃO-MANTENEDOR de 08/11/2026; `obcefem_api`, README §Filtros e `app/leitura.py`.
+- **Relacionadas:** RN-CFE-21

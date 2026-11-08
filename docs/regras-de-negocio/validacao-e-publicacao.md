@@ -91,6 +91,7 @@ Regras sobre o que um lote precisa cumprir para ser publicado e sobre o que faze
 - **Motivo:** Descartar sozinho pode eliminar um registro real que por acaso repita valor e data, e publicar sem aviso pode inflar o total. Bloquear não custa nada hoje, porque não há linhas idênticas no arquivo de autuações.
 - **Exemplo:** Em 27/10/2026, o arquivo de autuações tinha 21.029 linhas, nenhuma idêntica a outra, e a combinação número do auto + processo de cobrança era única em todas. O mesmo vale para as 176 linhas do recorte dos 12 municípios (reproduzido em 27/10/2026: arquivo da ANM).
 - **Exceções:** A arrecadação completa foi verificada em 30/10/2026 e novamente em 03/11/2026: 129 linhas do recorte dos 12 municípios repetem os 14 campos de uma ocorrência anterior, e o lote permanece bloqueado. Nas 129, `DataCriacao` também coincide. A distribuição ainda não foi verificada por esse critério. Repetir apenas parte dos campos (por exemplo, o mesmo processo de cobrança em duas linhas) não é duplicata e não bloqueia o lote.
+- **Exceção de 08/11/2026 (DECISÃO-MANTENEDOR):** o mantenedor decidiu manter o que a `obcefem_api` faz: a arrecadação é publicada somando as 129 linhas repetidas, sem bloquear o lote. Nenhuma linha é apagada, e a contagem de repetições segue devendo constar do relatório de qualidade. O efeito em reais das 129 linhas nos totais não foi medido.
 - **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026; VAL-15/10 §Matriz operacional (CFEM autuações).
 - **Relacionadas:** RN-VPU-06, RN-CFE-13
 

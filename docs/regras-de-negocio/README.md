@@ -79,17 +79,17 @@ Não há código, pseudocódigo, rotas HTTP, nomes de funções, escolha de bibl
 
 | Arquivo | Prefixo | Conteúdo | Regras |
 | --- | --- | --- | ---: |
-| [territorio.md](territorio.md) | RN-TER | Os 12 municípios, códigos IBGE, agregação regional, municípios de comparação | 12 |
+| [territorio.md](territorio.md) | RN-TER | Os 12 municípios, códigos IBGE, agregação regional, municípios de comparação | 13 |
 | [modelo-de-dados.md](modelo-de-dados.md) | RN-MOD | Observação, natureza do valor, estado de validação, proveniência, comparabilidade | 28 |
 | [consumo-de-fontes.md](consumo-de-fontes.md) | RN-FON | Níveis A/B/C/D, procedência, acesso permitido e credenciais | 20 |
 | [regras-por-fonte.md](regras-por-fonte.md) | RN-FNT | Ressalvas específicas de cada fonte | 21 |
 | [temporalidade-e-atualizacao.md](temporalidade-e-atualizacao.md) | RN-TMP | Ano de referência, agenda por fonte, períodos, mudanças de método | 17 |
 | [validacao-e-publicacao.md](validacao-e-publicacao.md) | RN-VPU | Validação, lote bloqueado, reconciliação, homologação | 12 |
-| [entrega-dos-dados.md](entrega-dos-dados.md) | RN-ENT | Camada publicada, CSV aberto, painel de status, assistente de IA | 10 |
-| [mineracao-cfem.md](mineracao-cfem.md) | RN-CFE | Arrecadação, distribuição, autuação e VPM | 26 |
+| [entrega-dos-dados.md](entrega-dos-dados.md) | RN-ENT | Camada publicada, CSV aberto, painel de status, assistente de IA | 11 |
+| [mineracao-cfem.md](mineracao-cfem.md) | RN-CFE | Arrecadação, distribuição, autuação e VPM | 28 |
 | [indicadores-derivados-e-compostos.md](indicadores-derivados-e-compostos.md) | RN-IND | Indicadores derivados e compostos congelados | 13 |
 | [privacidade-e-licencas.md](privacidade-e-licencas.md) | RN-PRI | Dados pessoais, acesso restrito e reuso | 10 |
 | [glossario.md](glossario.md) | | Termos e siglas | |
 | [pendencias.md](pendencias.md) | | Tudo o que está EM ABERTO, as divergências entre fontes e as regras PROPOSTAS aguardando confirmação | |
 
-Total: 169 regras, sendo 125 DECIDIDAS, 38 PROPOSTAS e 6 EM ABERTO.
+Total: 173 regras, sendo 129 DECIDIDAS, 38 PROPOSTAS e 6 EM ABERTO.

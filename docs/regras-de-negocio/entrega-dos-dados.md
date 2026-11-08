@@ -86,3 +86,12 @@ As fontes divergiam sobre a forma da entrega: DECISÕES e PLANO descrevem uma ca
 - **Exemplo:** Enquanto a licença de FAPESPA e IDSC não for verificada, seus indicadores não entram no CSV aberto.
 - **Fonte:** DECISÃO-MANTENEDOR de 28/10/2026; LAB-19/10 §4 (Portais de apoio); CONSUMO §Contrato de dados para o front-end; PESQUISA §Conclusões principais (item 4).
 - **Relacionadas:** RN-ENT-03, RN-PRI-05, RN-PRI-06
+
+### RN-ENT-11: Dado fictício aparece só rotulado
+- **Status:** DECIDIDA
+- **Regra:** Gráfico com dado fictício de demonstração deve trazer, em si mesmo, o rótulo visível "dados fictícios (protótipo)", e o rótulo só sai quando o dado for substituído por dado real.
+- **Motivo:** O mantenedor mandou manter o que o `obcefem` faz: nas páginas de dimensão, cada gráfico traz o selo "dados reais" ou "dados fictícios (protótipo)".
+- **Exemplo:** As quatro páginas de dimensão do `obcefem` misturam os dois selos (conferido no código das páginas em 08/11/2026).
+- **Exceções:** Não flexibiliza RN-VPU-10: dado fictício não é dado homologado e não entra na camada publicada.
+- **Fonte:** DECISÃO-MANTENEDOR de 08/11/2026; `obcefem`, páginas `dimensao-*.html`.
+- **Relacionadas:** RN-VPU-10, RN-ENT-04

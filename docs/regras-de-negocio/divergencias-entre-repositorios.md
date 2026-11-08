@@ -102,7 +102,9 @@ O código da `obcefem_api` é um protótipo e, como `notebooks/` e `scripts/` da
 - **Efeito:** o início diverge em um ano e a lógica de "arquivo completo" não bate com a de "arquivos por período". A API também afirma que a ANM regrava todos os arquivos todo dia, o que bate com o uso do hash de conteúdo para detectar mudança, mas não está em nenhuma regra daqui.
 - **Recomendação:** conferir o início real (2002 ou 2003) no arquivo atual da ANM antes de alterar RN-CFE-22. A regra de detectar mudança pelo conteúdo (e não pela data do arquivo) é boa e pode virar regra PROPOSTA em [temporalidade-e-atualizacao.md](temporalidade-e-atualizacao.md).
 
-## 3. Resumo das decisões pedidas
+## 3. Resumo das decisões
+
+Em 08/11/2026 o mantenedor decidiu o D1 (seguir a API, conferida nas leis) e, para D2 a D11, "manter o que a API diz". Os efeitos estão em RN-CFE-25 a RN-CFE-28, RN-TER-13, RN-ENT-11 e nas exceções anotadas em RN-VPU-11, RN-CFE-05, RN-CFE-06, RN-CFE-14, RN-CFE-16, RN-CFE-22, RN-TER-03 e RN-MOD-03. A coluna "Recomendação" abaixo é a que eu fizera antes e **não** é a decisão.
 
 | # | Decisão | Recomendação em uma linha |
 | --- | --- | --- |
