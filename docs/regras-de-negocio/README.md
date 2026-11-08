@@ -46,6 +46,7 @@ O status da regra descreve a regra nesta documentação. Ele é diferente da nat
 | **DECIDIDA** | A regra vem de DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10 com redação explícita, ou de decisão do mantenedor registrada nesta documentação até 30/10/2026 (DECISÃO-MANTENEDOR) |
 | **PROPOSTA** | Aguarda confirmação e consta em [pendencias.md](pendencias.md). A regra foi deduzida, ou vem só de CONSUMO, MAPA-TEMAS, PESQUISA, PLANO ou do código. Se a mesma regra aparece também em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10, ela é DECIDIDA e as duas fontes são citadas |
 | **EM ABERTO** | Não há decisão, ou as fontes se contradizem. Cada item consta em [pendencias.md](pendencias.md) |
+| **OBSOLETA** | A regra deixou de valer por decisão do mantenedor. O texto fica no arquivo, sem alteração, com a data e o motivo; não entra na contagem de vigentes |
 
 Quando duas fontes se contradizem, não se escolhe: as duas versões são registradas, com a data de cada uma, e o ponto fica EM ABERTO, salvo decisão do mantenedor.
 
@@ -92,4 +93,4 @@ Não há código, pseudocódigo, rotas HTTP, nomes de funções, escolha de bibl
 | [glossario.md](glossario.md) | | Termos e siglas | |
 | [pendencias.md](pendencias.md) | | Tudo o que está EM ABERTO, as divergências entre fontes e as regras PROPOSTAS aguardando confirmação | |
 
-Total: 167 regras, sendo 123 DECIDIDAS, 38 PROPOSTAS e 6 EM ABERTO.
+Total: 167 regras, sendo 120 DECIDIDAS, 34 PROPOSTAS, 5 EM ABERTO e 8 OBSOLETAS.

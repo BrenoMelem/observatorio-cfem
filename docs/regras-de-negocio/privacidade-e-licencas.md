@@ -1,9 +1,10 @@
 # Privacidade e licenças
 
-Regras sobre dados pessoais, registros individuais, acesso restrito e reuso de dados de terceiros. Legenda de status e siglas das fontes: [README](README.md).
+Regras sobre dados pessoais, registros individuais, acesso restrito e reuso de dados de terceiros. Em 07/11/2026 o mantenedor decidiu que, por serem dados abertos, privacidade e licença não são necessárias: as regras RN-PRI-01 a RN-PRI-06 e RN-PRI-08 ficam obsoletas. Seguem vigentes RN-PRI-07 (recortes do Censo Escolar), RN-PRI-09 e RN-PRI-10 (contas e credenciais do Google Cloud). Legenda de status e siglas das fontes: [README](README.md).
 
 ### RN-PRI-01: CPF e CNPJ nunca entram na camada tratada
-- **Status:** DECIDIDA
+- **Status:** OBSOLETA
+- **Obsoleta desde 07/11/2026:** decisão do mantenedor. As fontes do projeto são dados abertos, então o tema privacidade e licença não é necessário nesta documentação. O texto original fica abaixo, sem alteração, para o histórico.
 - **Regra:** A camada tratada e publicada não deve guardar nem publicar CPF ou CNPJ; do titular de uma autuação só se guarda o nome.
 - **Motivo:** Os arquivos brutos da ANM contêm campos identificadores, e o nome do titular já exige revisão jurídica antes de qualquer exibição.
 - **Exemplo:** O validador dos arquivos da ANM leu os CSVs completos sem exportar CPF/CNPJ nem nomes de titulares.
@@ -12,7 +13,8 @@ Regras sobre dados pessoais, registros individuais, acesso restrito e reuso de d
 - **Relacionadas:** RN-CFE-18, RN-FON-15, RN-ENT-06
 
 ### RN-PRI-02: Registros individuais não são coletados nem publicados
-- **Status:** PROPOSTA
+- **Status:** OBSOLETA
+- **Obsoleta desde 07/11/2026:** decisão do mantenedor. As fontes do projeto são dados abertos, então o tema privacidade e licença não é necessário nesta documentação. O texto original fica abaixo, sem alteração, para o histórico.
 - **Regra:** O observatório não deve coletar nem publicar registros individuais de pessoas, e só deve usar dados agregados.
 - **Motivo:** Evita exposição de pessoas e risco com a LGPD.
 - **Exemplo:** Para pobreza, usa-se a consulta agregada pública do CECAD, nunca registros do Cadastro Único.
@@ -20,7 +22,8 @@ Regras sobre dados pessoais, registros individuais, acesso restrito e reuso de d
 - **Relacionadas:** RN-PRI-03, RN-PRI-08
 
 ### RN-PRI-03: Agregar microdados antes de expor
-- **Status:** PROPOSTA
+- **Status:** OBSOLETA
+- **Obsoleta desde 07/11/2026:** decisão do mantenedor. As fontes do projeto são dados abertos, então o tema privacidade e licença não é necessário nesta documentação. O texto original fica abaixo, sem alteração, para o histórico.
 - **Regra:** Microdados (RAIS, CAGED, SIM) devem ser agregados antes de serem expostos, e os identificadores que não forem necessários devem ser excluídos.
 - **Motivo:** Reduz o risco de reidentificação e o volume exposto.
 - **Exemplo:** A RAIS entra como vínculos agregados por setor, sexo e escolaridade por município, e não como vínculo individual.
@@ -28,7 +31,8 @@ Regras sobre dados pessoais, registros individuais, acesso restrito e reuso de d
 - **Relacionadas:** RN-PRI-02, RN-FON-19
 
 ### RN-PRI-04: Proteger grupos muito pequenos
-- **Status:** PROPOSTA
+- **Status:** OBSOLETA
+- **Obsoleta desde 07/11/2026:** decisão do mantenedor. As fontes do projeto são dados abertos, então o tema privacidade e licença não é necessário nesta documentação. O texto original fica abaixo, sem alteração, para o histórico.
 - **Regra:** Indicadores calculados sobre grupos muito pequenos devem ser protegidos, e o recorte só deve ser publicado quando houver agregação municipal.
 - **Motivo:** Números de grupos pequenos podem identificar pessoas.
 - **Exemplo:** Algumas variáveis de entorno do Censo têm escala de setor censitário; é preciso confirmar se existe agregação municipal publicada.
@@ -36,7 +40,8 @@ Regras sobre dados pessoais, registros individuais, acesso restrito e reuso de d
 - **Relacionadas:** RN-PRI-03
 
 ### RN-PRI-05: Verificar a licença antes de republicar
-- **Status:** DECIDIDA
+- **Status:** OBSOLETA
+- **Obsoleta desde 07/11/2026:** decisão do mantenedor. As fontes do projeto são dados abertos, então o tema privacidade e licença não é necessário nesta documentação. O texto original fica abaixo, sem alteração, para o histórico.
 - **Regra:** Antes de republicar o dado de um produto ou portal, deve-se confirmar o ano, a licença, as colunas e o recorte municipal do arquivo ou da exportação concreta.
 - **Motivo:** Um portal que abre não garante que o dado possa ser redistribuído.
 - **Exemplo:** FAPESPA, Atlas da Violência, SEEG, World Bank Pink Sheet, IDSC, TSE e INEP abriram (HTTP 200) no laboratório de 17/10/2026, mas nenhum arquivo ou licença foi verificado (transcrito do relatório LAB-19/10, não conferido no JSON).
@@ -44,7 +49,8 @@ Regras sobre dados pessoais, registros individuais, acesso restrito e reuso de d
 - **Relacionadas:** RN-PRI-06, RN-ENT-03, RN-ENT-10
 
 ### RN-PRI-06: Licenças de redistribuição ainda não confirmadas
-- **Status:** EM ABERTO
+- **Status:** OBSOLETA
+- **Obsoleta desde 07/11/2026:** decisão do mantenedor. As fontes do projeto são dados abertos, então o tema privacidade e licença não é necessário nesta documentação. O texto original fica abaixo, sem alteração, para o histórico.
 - **Regra:** O mantenedor deve confirmar a licença de redistribuição de cada fonte antes de a camada publicada e o CSV aberto a incluírem, começando por FAPESPA, IDSC e SEEG.
 - **Motivo:** Nenhuma das fontes de decisão registra licenças confirmadas.
 - **Exemplo:** BLOCOS diz que a planilha do SEEG é guardada no repositório, e a licença de redistribuição do SEEG não foi verificada (conflito 16).
@@ -61,7 +67,8 @@ Regras sobre dados pessoais, registros individuais, acesso restrito e reuso de d
 - **Relacionadas:** RN-PRI-02, RN-FNT-11
 
 ### RN-PRI-08: Não usar a área restrita do CECAD
-- **Status:** PROPOSTA
+- **Status:** OBSOLETA
+- **Obsoleta desde 07/11/2026:** decisão do mantenedor. As fontes do projeto são dados abertos, então o tema privacidade e licença não é necessário nesta documentação. O texto original fica abaixo, sem alteração, para o histórico.
 - **Regra:** O observatório não deve usar o módulo restrito do CECAD ("sem Bolsa Família"), reservado a gestores e técnicos, e só deve usar as consultas agregadas públicas.
 - **Motivo:** Usar a área restrita seria contornar controle de acesso.
 - **Exemplo:** A pobreza e o percentual de famílias pobres usam a consulta pública agregada, com data-base e definição registradas.
