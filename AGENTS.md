@@ -64,7 +64,8 @@ Os detalhes e as datas das verificações estão nas notas de evidência das reg
 
 ## Fluxo de trabalho
 
-- Como versionar o trabalho (commit, branch, push, PR) é decisão do usuário. Pergunte e não presuma.
+- Toda mudança vai numa branch nova criada a partir da `develop` (não da `main` nem da branch em que a sessão estiver), com um PR para a `develop` preparado ao final. Decisão do mantenedor de 07/11/2026. Commit, push e PR seguem as regras acima. Nunca faça push direto na `develop` nem na `main`.
+- Fora desse fluxo (merge do PR, apagar branch, forçar push, reescrever histórico), pergunte e não presuma.
 - Scripts novos vão em `scripts/`, com docstring que diga o que fazem e que são de teste. Prefira a biblioteca padrão do Python e deixe a saída fora do repositório.
 - Decisões que contrariam os documentos de origem devem ser anotadas na regra (campo Exceções) e em `pendencias.md`, não apagadas das fontes.
 
