@@ -114,7 +114,7 @@ Em 08/11/2026 o mantenedor decidiu o D1 (seguir a API, conferida nas leis) e, pa
 | D4 | Ano da autuação | RN-CFE-14 e 16 valem; a API deve ser alinhada |
 | D5 | Chave do município | Código IBGE (RN-TER-03 inalterada) |
 | D6 | Média PA/BR | Decidir se entra; se entrar, declarar denominador |
-| D7 | Esquema e homologação | Requisito já decidido; protótipo não cumpre |
+| D7 | Esquema e homologação | DECIDIDO em 08/11/2026: formato híbrido (envelope da API mais observações no esquema de RN-MOD-03); homologação (RN-VPU-10) segue sem decisão de exceção |
 | D8 | Dados fictícios | Regra PROPOSTA: rótulo visível, só em protótipo |
 | D9 | Agrupar substâncias | Regra PROPOSTA com lista de equivalência |
 | D10 | Foco em duas cidades | Decidir se é regra ou configuração |

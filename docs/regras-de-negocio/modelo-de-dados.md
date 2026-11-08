@@ -51,7 +51,7 @@ Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a p
 - **Motivo:** A lista parte do esquema de DECISÕES e acrescenta os campos que as regras decididas exigem (RN-MOD-02, RN-MOD-04, RN-MOD-06 e RN-MOD-07); pôr texto longo em cada linha repetiria o mesmo conteúdo muitas vezes.
 - **Exemplo:** `municipio_id` com o código IBGE de 7 dígitos, como `1502152` (Canaã dos Carajás), e `mes` vazio na população anual do IBGE.
 - **Exceções:** Os valores aceitos de `natureza_valor` e `estado_validacao` seguem RN-MOD-06 e RN-MOD-07. CONSUMO e VAL-15/10 exigem metodologia, limitações e licença em cada linha; essa parte não foi adotada. O local exato da busca na fonte (`source_locator` em CONSUMO) e a definição do indicador não entram na observação; se forem necessários, vão para o manifesto.
-- **Exceção de 08/11/2026 (DECISÃO-MANTENEDOR):** a `obcefem_api` responde com `filtros`, `versao_dados`, `notas` e `dados`, sem os campos desta regra, e o mantenedor decidiu manter esse formato.
+- **Exceção de 08/11/2026 (DECISÃO-MANTENEDOR):** a resposta da API tem duas camadas. O envelope da `obcefem_api` (`filtros`, `versao_dados`, `notas`) é mantido como está, e a parte `dados` deve ser uma lista de observações com os campos desta regra, uma por valor. Séries com cor e rótulo prontos para o painel podem acompanhar como campo extra opcional, sem substituir as observações. A `obcefem_api` atual ainda não faz isso (responde só com séries por rota); a mudança está por fazer.
 - **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026; DECISÕES §Arquitetura e padrões de dados (04/10/2026, última edição 20/10/2026); CONSUMO §Contrato de dados para o front-end (02/10/2026); VAL-15/10 §Marco 1 (15/10/2026).
 - **Relacionadas:** RN-MOD-02, RN-MOD-04, RN-ENT-02
 
