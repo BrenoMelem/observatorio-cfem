@@ -76,6 +76,7 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 - **Tratamento de PLANO.** PLANO não consta entre as fontes que geram DECIDIDA (resposta 1 de 24/10/2026). Regras que aparecem só em PLANO foram marcadas como PROPOSTA; quando a mesma regra aparece também em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10, as duas fontes foram citadas. O mantenedor deve confirmar essa leitura.
 - **Resposta 8 da Fase 1.** A resposta ao item 8 veio sem a opção marcada; foi registrado apenas o que o mantenedor escreveu (EM ABERTO, conferir `AVIOL12_THOMIC` na fonte).
 - **Atualização de DECISÕES e de BLOCOS.** O mantenedor informou que atualizará os dois documentos com as decisões de 24/10/2026. Até lá, as regras citam "DECISÃO-MANTENEDOR de 24/10/2026" como fonte.
+- **Divergências com os outros repositórios.** A comparação de 08/11/2026 com `obcefem_api` e `obcefem` (distribuição estimada pela lei, duplicatas, ano parcial, ano da autuação, chave do município, média PA/BR, dados fictícios) está em [divergencias-entre-repositorios.md](divergencias-entre-repositorios.md), com uma decisão pedida ao mantenedor por item. Nenhum status mudou.
 - **Obsoletas.** Nenhuma regra está obsoleta nesta versão.
 
 ## 5. Regras PROPOSTAS aguardando confirmação
