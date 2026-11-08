@@ -45,6 +45,7 @@ Canaã dos Carajás e Parauapebas são os municípios de foco do observatório.
 - **Regra:** O município deve ser identificado pelo código IBGE de 7 dígitos, e fontes que usam outro código ou apenas o nome devem ser convertidas por uma tabela de equivalência.
 - **Motivo:** O código é o único identificador estável entre as fontes; nomes variam e códigos de outros órgãos não coincidem.
 - **Exemplo:** Canaã dos Carajás é 1502152 e Parauapebas é 1505536.
+- **Exceção de 08/11/2026 (DECISÃO-MANTENEDOR):** a `obcefem_api` identifica o município pelo nome sem acento e em caixa alta, com a UF, e o mantenedor decidiu manter essa chave; o código IBGE é lido mas não identifica nada. Homônimos na mesma UF ou mudança de grafia na ANM não são detectados.
 - **Fonte:** DECISÕES §Municípios da RI Carajás, §Rotas de coleta por fonte (SICONFI `id_ente` com o código IBGE de 7 dígitos).
 - **Relacionadas:** RN-TER-04, RN-TER-06, RN-TER-08
 
@@ -120,3 +121,12 @@ Canaã dos Carajás e Parauapebas são os municípios de foco do observatório.
 - **Exemplo:** Para uma amostra do SIM, o filtro municipal deve seguir a definição escolhida do indicador.
 - **Fonte:** VAL-15/10 §Como repetir os testes (item sobre PySUS); CONSUMO §Sociedade (localidade de referência). Dedução: nenhuma das duas fontes fixa a regra.
 - **Relacionadas:** RN-FNT-15
+
+### RN-TER-13: Parauapebas e Canaã dos Carajás em foco
+- **Status:** DECIDIDA
+- **Regra:** Parauapebas (1505536) e Canaã dos Carajás (1502152) são os municípios em destaque nas análises de CFEM, comparados com os demais municípios da RI Carajás, o Pará e o Brasil.
+- **Motivo:** O mantenedor mandou manter o que a `obcefem_api` faz, e as duas cidades concentram a CFEM da região.
+- **Exemplo:** Reproduzido do README da `obcefem_api`: a evolução anual mostra Parauapebas, Canaã e "demais municípios da região".
+- **Exceções:** Não muda RN-TER-01 nem RN-TER-02: os indicadores regionais continuam somando os 12 municípios.
+- **Fonte:** DECISÃO-MANTENEDOR de 08/11/2026; `obcefem_api`, README e `app/dominio.py`.
+- **Relacionadas:** RN-TER-01, RN-TER-02, RN-CFE-27

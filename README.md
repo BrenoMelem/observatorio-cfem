@@ -10,17 +10,18 @@ O observatório ainda não tem backend de produção. Há um protótipo local do
 
 ## Estrutura
 
+- `docs/`: toda a documentação, com [índice em docs/README.md](docs/README.md).
 - `docs/regras-de-negocio/`: regras e pendências do projeto.
 - `docs/regras-de-negocio/fontes/pesquisa-observatorio-cfem/`: relatório de viabilidade, fontes, bibliografia e pacote LaTeX.
-- `notebooks/`: laboratório exploratório de fontes do observatório.
-- `scripts/`: scripts de validação e reconciliação, além dos protótipos de atualização de população e preparação da CFEM.
-- `src/` e `test/`: código e testes dos protótipos locais.
-- `docs/adr/`, `docs/api/`, `docs/architecture/` e `docs/database/`: decisões e desenhos técnicos.
+- `scripts/`: todo o código, em Python com [uv](https://docs.astral.sh/uv/): coleta, validação e reconciliação das fontes, protótipo local da API, notebook de laboratório e testes. Veja o [mapa em scripts/README.md](scripts/README.md).
+- `data/`: referências versionadas (população do IBGE por ano) e manifesto de indicadores.
+- `docs/guias/` e `docs/registros/`: como rodar as coletas do protótipo e o que cada execução encontrou, por data.
+- `docs/adr/` e `docs/api/`: decisões técnicas e o esboço do contrato do protótipo.
 - `AGENTS.md`: instruções para agentes de IA que trabalham no repositório (o `CLAUDE.md` apenas aponta para ele).
 
 ## Começar
 
-Para executar o protótipo local de população (Node.js 24), use `node scripts/atualizar-populacao.mjs` para coletar e validar e `node scripts/servir.mjs` para iniciar a API. Abra `notebooks/laboratorio_fontes_observatorio_cfem.ipynb` em Jupyter ou Google Colab. Os scripts Python informam suas dependências nos próprios arquivos ou usam bibliotecas comuns de análise de dados; consulte cada cabeçalho antes de executar.
+Instale o [uv](https://docs.astral.sh/uv/) e rode `uv sync` na raiz. Depois, por exemplo, `uv run python -m scripts.populacao.atualizar` coleta e valida a população, `uv run python -m scripts.servidor.servidor` inicia a API local do protótipo e `uv run pytest` roda os testes. O notebook de laboratório (`scripts/notebook/laboratorio_fontes_observatorio_cfem.ipynb`) abre em Jupyter ou Google Colab. Cada script tem `--help` e uma docstring que diz o que faz.
 
 Os scripts que consultam serviços externos fazem requisições às fontes indicadas no código. Para bases que exigem autenticação, use os meios oficiais e não inclua credenciais, tokens ou dados identificáveis neste repositório.
 
@@ -34,8 +35,8 @@ Pesquisa de viabilidade e validação de fontes, com um protótipo local de popu
 
 ## Protótipo local e pendências
 
-O pipeline de população via SIDRA atende os 12 municípios, reconcilia 2025 e 2026 com referências independentes do IBGE e publica somente lotes homologados na API e no CSV. O painel informa a atualização e o ano de referência. Consulte [execução e limites](docs/implementacao-populacao.md) e o [ADR-005](docs/adr/ADR-005-pipeline-populacao.md).
+O pipeline de população via SIDRA atende os 12 municípios, reconcilia 2025 e 2026 com referências independentes do IBGE e publica somente lotes homologados na API e no CSV. O painel informa a atualização e o ano de referência. Consulte [execução e limites](docs/guias/populacao.md) e o [ADR-005](docs/adr/ADR-005-pipeline-populacao.md).
 
-A leitura do CSV completo da ANM encontrou 129 repetições exatas no recorte da arrecadação. O lote de CFEM permanece bloqueado por `RN-VPU-11`; nenhum valor foi publicado. Veja o [relatório de duplicatas](docs/revisao-duplicatas-cfem-2026-10-30.md), a [preparação da CFEM](docs/implementacao-cfem.md) e as [pendências de regras de negócio](docs/regras-de-negocio/pendencias.md).
+A leitura do CSV completo da ANM encontrou 129 repetições exatas no recorte da arrecadação. O lote de CFEM permanece bloqueado por `RN-VPU-11`; nenhum valor foi publicado. Veja o [relatório de duplicatas](docs/registros/duplicatas-cfem-2026-10-30.md), a [preparação da CFEM](docs/guias/cfem.md) e as [pendências de regras de negócio](docs/regras-de-negocio/pendencias.md).
 
-As coletas locais da DCA e do FRED, o relatório de duplicatas e seus limites estão em [coletas de despesa e commodities](docs/implementacao-despesa-commodities.md). O contrato inicial das rotas implementadas está em [OpenAPI](docs/api/openapi.yaml).
+As coletas locais da DCA e do FRED, o relatório de duplicatas e seus limites estão em [coletas de despesa e commodities](docs/guias/despesa-e-commodities.md). O contrato inicial das rotas implementadas está em [OpenAPI](docs/api/openapi.yaml).

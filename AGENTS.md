@@ -11,8 +11,9 @@ O idioma do projeto é o português do Brasil. Use datas absolutas (por exemplo,
 ## Estrutura
 
 - `docs/regras-de-negocio/`: as regras de negócio (o quê e por quê, nunca o como). É a parte central.
+- `docs/`: o índice está em [docs/README.md](docs/README.md). `docs/guias/` diz como rodar as coletas; `docs/registros/` guarda resultados datados de execuções; `docs/adr/` e `docs/api/` têm decisões técnicas e o esboço da API.
 - `docs/regras-de-negocio/fontes/`: documentos de origem (decisões, blocos, plano, relatórios de laboratório e a pesquisa). São material histórico: não os reescreva sem pedido explícito.
-- `notebooks/` e `scripts/`: **apenas testes e laboratório**. Não vão para produção. Não os trate como a implementação do sistema.
+- `scripts/`: todo o código do repositório, em Python gerenciado com `uv` (coleta, validação, protótipo local da API, notebook e testes). **Apenas testes e laboratório**: não vão para produção e não são a implementação do sistema. O mapa está em [scripts/README.md](scripts/README.md).
 - `output/` e `tmp/` não são versionados (ver `.gitignore`).
 
 ## Regras de negócio: como escrever
@@ -24,7 +25,7 @@ Os arquivos de `docs/regras-de-negocio/` seguem um formato fixo. Antes de editar
 - **Status:** `DECIDIDA` só vem de decisão do mantenedor ou dos documentos de decisão (DECISÕES, BLOCOS, LAB-19/10, VAL-15/10, DECISÃO-MANTENEDOR). Não promova uma regra sem essa base.
 - **Identificador:** `RN-<TEMA>-<NN>` (RN = Regra de Negócio). Temas: TER, MOD, FON, FNT, TMP, VPU, ENT, CFE, IND, PRI. Siglas das fontes: use as da tabela do README.
 - **Exemplos:** marque como "transcrito do relatório X, não conferido no JSON" ou "reproduzido em DD/MM/AAAA". Não apresente como verificado o que não foi.
-- **Evidência nova** que não decide nada entra como nota na regra (a regra continua `EM ABERTO`); não a transforme em decisão.
+- **Evidência nova** que não decide nada entra na seção "Notas de evidência" no fim do arquivo do tema, sob o identificador da regra (a regra continua `EM ABERTO`), e a regra ganha só um ponteiro; não a transforme em decisão. Resultados de execuções (de coletas, não de regras) vão para `docs/registros/`.
 
 ### Ao mudar o status de uma regra
 
@@ -48,9 +49,9 @@ O `README.md` tem um exemplo de regra com título `### RN-`, então a contagem d
 
 ## Segurança e dados
 
-- Os arquivos brutos da ANM (`dadosabertos.anm.gov.br`) têm colunas de **CPF/CNPJ**. Nunca imprima, grave no repositório nem cole em respostas dados por linha deles; use só agregados.
+- Os arquivos brutos da ANM (`dadosabertos.anm.gov.br`) têm colunas de CPF/CNPJ e do nome do titular. São dados abertos e, por decisão do mantenedor de 07/11/2026, privacidade e licença não são requisito do projeto (RN-PRI-01 a 06 e RN-PRI-08 ficaram obsoletas; RN-CFE-18 permite exibir o titular). Pode citar nome e CPF/CNPJ de um titular quando o exemplo ou a análise precisar. Para tabelas e respostas, prefira agregados a despejar linhas dos arquivos. Os arquivos brutos continuam fora do repositório (próxima linha).
 - Nunca grave chave de API, token ou credencial no repositório. Chaves entram por variável de ambiente. Se o usuário colar uma chave na conversa, não a copie para arquivos e avise que ela deve ser trocada.
-- Dados baixados vão para uma pasta fora do repositório ou para `output/`/`tmp/`. Não versione dados brutos.
+- Dados baixados vão para uma pasta fora do repositório ou para `output/`/`tmp/`. Não versione dados brutos: por tamanho (centenas de MB), não por sigilo.
 
 ## Fontes externas: o que já se sabe
 
@@ -64,8 +65,9 @@ Os detalhes e as datas das verificações estão nas notas de evidência das reg
 
 ## Fluxo de trabalho
 
-- Como versionar o trabalho (commit, branch, push, PR) é decisão do usuário. Pergunte e não presuma.
-- Scripts novos vão em `scripts/`, com docstring que diga o que fazem e que são de teste. Prefira a biblioteca padrão do Python e deixe a saída fora do repositório.
+- Toda mudança vai numa branch nova criada a partir da `develop` (não da `main` nem da branch em que a sessão estiver), com um PR para a `develop` preparado ao final. Decisão do mantenedor de 07/11/2026. Commit, push e PR seguem as regras acima. Nunca faça push direto na `develop` nem na `main`.
+- Fora desse fluxo (merge do PR, apagar branch, forçar push, reescrever histórico), pergunte e não presuma.
+- Scripts novos vão em `scripts/<tema>/`, em Python, com docstring que diga o que fazem e que são de teste. Dependências entram pelo `uv add` (e o `uv.lock` é versionado); rode `uv run pytest` antes de commitar. A saída fica fora do repositório.
 - Decisões que contrariam os documentos de origem devem ser anotadas na regra (campo Exceções) e em `pendencias.md`, não apagadas das fontes.
 
 ## Pendências conhecidas do projeto
