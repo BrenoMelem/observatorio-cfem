@@ -5,7 +5,7 @@ name: Arquivar arquivos da ANM
 
 on:
   schedule:
-    - cron: "0 9 * * *" # todo dia, 09:00 UTC (06:00 em Brasília)
+    - cron: "0 */4 * * *" # a cada 4 horas (00, 04, 08, 12, 16 e 20 UTC)
   workflow_dispatch:
 
 permissions:
@@ -22,15 +22,15 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Trazer a branch de dados com os manifestos
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: arquivo-anm
           path: registros
 
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@v7
 
       - name: Instalar dependências
         run: uv sync --frozen
