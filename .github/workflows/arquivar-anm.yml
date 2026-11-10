@@ -22,15 +22,15 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Trazer a branch de dados com os manifestos
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: arquivo-anm
           path: registros
 
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@v7
 
       - name: Instalar dependências
         run: uv sync --frozen
