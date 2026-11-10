@@ -52,7 +52,7 @@ O nível mede a forma de acesso, não a qualidade do dado. Uma fonte B pode ser 
 - **Motivo:** O contorno é frágil, pode violar termos de uso e expõe o projeto a risco jurídico.
 - **Exemplo:** No CECAD usam-se as consultas agregadas públicas e não o módulo restrito; em fonte que exige senha individual, solicita-se acesso ou dado agregado.
 - **Fonte:** CONSUMO §Conclusão executiva, §Bypass seguro quando não houver API; MAPA-TEMAS §Resumo para apresentação.
-- **Relacionadas:** RN-FON-06, RN-PRI-08
+- **Relacionadas:** RN-FON-06
 
 ### RN-FON-06: PDF só entra por área de revisão
 - **Status:** PROPOSTA
@@ -127,14 +127,14 @@ O nível mede a forma de acesso, não a qualidade do dado. Uma fonte B pode ser 
 - **Fonte:** CONSUMO §Bypass seguro quando não houver API (item 2); SCRIPTS (`reconcile_anm_distribution`).
 - **Relacionadas:** RN-FON-13
 
-### RN-FON-15: Dado bruto fora do Git quando grande ou identificável
+### RN-FON-15: Dado bruto fora do Git quando grande
 - **Status:** DECIDIDA
-- **Regra:** O dado bruto baixado não deve ser versionado quando for grande ou conter campos identificadores, e só os agregados e os metadados devem ser versionados.
-- **Motivo:** Evita repositório inchado e lento e evita expor CPF/CNPJ.
-- **Exemplo:** Os CSVs completos da ANM ficam fora do Git por terem centenas de MB e campos identificadores.
-- **Exceções:** BLOCOS diz que a planilha do SEEG é "guardada no repositório" e não define o que conta como "grande". Isso está **EM ABERTO** (conflito 16 em [pendencias.md](pendencias.md)), junto da licença de redistribuição do SEEG.
+- **Regra:** O dado bruto baixado não deve ser versionado quando for grande, e só os agregados e os metadados devem ser versionados.
+- **Motivo:** Evita repositório inchado e lento.
+- **Exemplo:** Os CSVs completos da ANM ficam fora do Git por terem centenas de MB.
+- **Exceções:** BLOCOS diz que a planilha do SEEG é "guardada no repositório" e não define o que conta como "grande". Isso está **EM ABERTO** (conflito 16 em [pendencias.md](pendencias.md)).
 - **Fonte:** DECISÕES §Arquitetura e padrões de dados (Separar raw de processed); VAL-15/10 §Rodada adicional; BLOCOS §Bloco 5 (CO₂).
-- **Relacionadas:** RN-PRI-01, RN-PRI-06
+- **Relacionadas:** RN-FNT-14
 
 ### RN-FON-16: Automatizar onde há API, aceitar arquivo estável, documentar o que é manual
 - **Status:** DECIDIDA

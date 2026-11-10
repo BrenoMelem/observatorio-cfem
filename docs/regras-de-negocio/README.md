@@ -35,7 +35,10 @@ O identificador de cada regra é `RN-<TEMA>-<NN>`: **RN** é "Regra de Negócio"
 - Exceções: quando houver
 - Fonte: arquivo e seção
 - Relacionadas: IDs de outras regras
+- Evidência datada: quando houver, um ponteiro para a seção "Notas de evidência" no fim do arquivo
 ```
+
+O corpo da regra diz o que vale. Leituras e consultas datadas que a sustentam ou qualificam ficam, sem alteração, em "Notas de evidência", no fim do arquivo do tema, sob o identificador da regra. Elas não mudam o status da regra.
 
 ## Legenda do status da regra
 
@@ -46,6 +49,7 @@ O status da regra descreve a regra nesta documentação. Ele é diferente da nat
 | **DECIDIDA** | A regra vem de DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10 com redação explícita, ou de decisão do mantenedor registrada nesta documentação até 30/10/2026 (DECISÃO-MANTENEDOR) |
 | **PROPOSTA** | Aguarda confirmação e consta em [pendencias.md](pendencias.md). A regra foi deduzida, ou vem só de CONSUMO, MAPA-TEMAS, PESQUISA, PLANO ou do código. Se a mesma regra aparece também em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10, ela é DECIDIDA e as duas fontes são citadas |
 | **EM ABERTO** | Não há decisão, ou as fontes se contradizem. Cada item consta em [pendencias.md](pendencias.md) |
+| **OBSOLETA** | A regra deixou de valer por decisão do mantenedor. O texto fica no arquivo, sem alteração, com a data e o motivo; não entra na contagem de vigentes |
 
 Quando duas fontes se contradizem, não se escolhe: as duas versões são registradas, com a data de cada uma, e o ponto fica EM ABERTO, salvo decisão do mantenedor.
 
@@ -79,17 +83,17 @@ Não há código, pseudocódigo, rotas HTTP, nomes de funções, escolha de bibl
 
 | Arquivo | Prefixo | Conteúdo | Regras |
 | --- | --- | --- | ---: |
-| [territorio.md](territorio.md) | RN-TER | Os 12 municípios, códigos IBGE, agregação regional, municípios de comparação | 12 |
+| [territorio.md](territorio.md) | RN-TER | Os 12 municípios, códigos IBGE, agregação regional, municípios de comparação | 13 |
 | [modelo-de-dados.md](modelo-de-dados.md) | RN-MOD | Observação, natureza do valor, estado de validação, proveniência, comparabilidade | 28 |
 | [consumo-de-fontes.md](consumo-de-fontes.md) | RN-FON | Níveis A/B/C/D, procedência, acesso permitido e credenciais | 20 |
 | [regras-por-fonte.md](regras-por-fonte.md) | RN-FNT | Ressalvas específicas de cada fonte | 21 |
 | [temporalidade-e-atualizacao.md](temporalidade-e-atualizacao.md) | RN-TMP | Ano de referência, agenda por fonte, períodos, mudanças de método | 17 |
 | [validacao-e-publicacao.md](validacao-e-publicacao.md) | RN-VPU | Validação, lote bloqueado, reconciliação, homologação | 12 |
-| [entrega-dos-dados.md](entrega-dos-dados.md) | RN-ENT | Camada publicada, CSV aberto, painel de status, assistente de IA | 10 |
-| [mineracao-cfem.md](mineracao-cfem.md) | RN-CFE | Arrecadação, distribuição, autuação e VPM | 24 |
+| [entrega-dos-dados.md](entrega-dos-dados.md) | RN-ENT | Camada publicada, CSV aberto, painel de status, assistente de IA | 11 |
+| [mineracao-cfem.md](mineracao-cfem.md) | RN-CFE | Arrecadação, distribuição, autuação e VPM | 28 |
 | [indicadores-derivados-e-compostos.md](indicadores-derivados-e-compostos.md) | RN-IND | Indicadores derivados e compostos congelados | 13 |
 | [privacidade-e-licencas.md](privacidade-e-licencas.md) | RN-PRI | Dados pessoais, acesso restrito e reuso | 10 |
 | [glossario.md](glossario.md) | | Termos e siglas | |
 | [pendencias.md](pendencias.md) | | Tudo o que está EM ABERTO, as divergências entre fontes e as regras PROPOSTAS aguardando confirmação | |
 
-Total: 167 regras, sendo 123 DECIDIDAS, 38 PROPOSTAS e 6 EM ABERTO.
+Total: 173 regras, sendo 126 DECIDIDAS, 34 PROPOSTAS, 5 EM ABERTO e 8 OBSOLETAS.

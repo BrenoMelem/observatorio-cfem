@@ -1,0 +1,122 @@
+openapi: 3.1.0
+info:
+  title: Observatório CFEM - API local
+  version: 0.1.0-draft
+  description: >-
+    Esboço inicial das rotas implementadas no protótipo local. Não é contrato aprovado
+    nem definição da arquitetura de produção. A despesa permanece bloqueada até
+    decisão de contas e reconciliação independente; commodities são provisórias.
+servers:
+  - url: http://localhost:3000
+paths:
+  /api/v1/populacao:
+    get:
+      summary: Observações homologadas de população
+      parameters:
+        - in: query
+          name: municipio_id
+          schema: { type: string, pattern: '^\d{7}$' }
+      responses:
+        '200':
+          description: Observações no esquema comum
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/Observacao' } }
+        '400': { description: Código municipal inválido }
+        '503': { description: Nenhum lote homologado }
+  /api/v1/populacao.csv:
+    get:
+      summary: Exportação CSV de população
+      responses:
+        '200':
+          description: CSV UTF-8 com BOM
+          content: { 'text/csv': { schema: { type: string } } }
+        '503': { description: Nenhum lote homologado }
+  /api/v1/commodities:
+    get:
+      summary: Observações globais provisórias de ferro e cobre
+      parameters:
+        - in: query
+          name: indicador
+          schema: { type: string, enum: [preco_minerio_ferro, preco_cobre] }
+      responses:
+        '200':
+          description: Observações globais provisórias
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/Observacao' } }
+        '400': { description: Indicador inválido }
+        '503': { description: Nenhuma série provisória publicada }
+  /api/v1/commodities.csv:
+    get:
+      summary: Exportação CSV de commodities
+      parameters:
+        - in: query
+          name: indicador
+          schema: { type: string, enum: [preco_minerio_ferro, preco_cobre] }
+      responses:
+        '200':
+          description: CSV UTF-8 com BOM
+          content: { 'text/csv': { schema: { type: string } } }
+        '400': { description: Indicador inválido }
+        '503': { description: Nenhuma série provisória publicada }
+  /api/v1/despesa-funcao:
+    get:
+      summary: Despesa por função nos três estágios
+      description: >-
+        A rota existe, mas o lote coletado pela DCA ainda não é homologado.
+        Não seleciona contas ou granularidade em nome do mantenedor.
+      parameters:
+        - in: query
+          name: indicador
+          schema: { type: string, enum: [despesa_funcao_empenhada, despesa_funcao_liquidada, despesa_funcao_paga] }
+      responses:
+        '200':
+          description: Observações homologadas, quando houver
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: '#/components/schemas/Observacao' } }
+        '400': { description: Indicador inválido }
+        '503': { description: Seleção de contas e reconciliação pendentes }
+  /api/v1/status:
+    get:
+      summary: Status atual do protótipo de população
+      responses:
+        '200':
+          description: Status da população
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  indicador: { type: string }
+                  situacao: { type: string }
+                  ano_referencia: { type: [integer, 'null'] }
+                  atualizado_em: { type: [string, 'null'] }
+  /status:
+    get:
+      summary: Painel HTML por indicador do manifesto
+      responses:
+        '200':
+          description: Painel de status
+          content: { 'text/html': { schema: { type: string } } }
+components:
+  schemas:
+    Observacao:
+      type: object
+      required: [indicador, municipio_id, municipio_nome, nivel_territorial, ano, mes, valor, unidade, natureza_valor, estado_validacao, fonte, edicao_fonte, atualizado_em, versao_tratamento]
+      properties:
+        indicador: { type: string }
+        municipio_id: { type: [string, 'null'], description: 'Nulo para séries globais' }
+        municipio_nome: { type: [string, 'null'] }
+        nivel_territorial: { type: string }
+        ano: { type: integer }
+        mes: { type: [integer, 'null'] }
+        valor: { type: [number, 'null'] }
+        unidade: { type: string }
+        natureza_valor: { type: string }
+        estado_validacao: { type: string }
+        fonte: { type: string }
+        edicao_fonte: { type: [string, 'null'] }
+        atualizado_em: { type: [string, 'null'] }
+        versao_tratamento: { type: string }

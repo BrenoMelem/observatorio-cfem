@@ -12,5 +12,77 @@
     "licenca": "Fonte IBGE; verificar termos de atribuição antes de redistribuição externa.",
     "estrategia": "recalculado",
     "municipios_comparacao": []
+  },
+  "cfem_arrecadada": {
+    "nome": "CFEM arrecadada",
+    "bloco": "Mineração",
+    "fonte": "ANM, CFEM_Arrecadacao.csv",
+    "unidade": "BRL nominal",
+    "frequencia": "mensal",
+    "metodo": "Soma dos valores recolhidos por município, ano e mês; total anual somente com doze meses presentes.",
+    "limitacoes": "Lote atual bloqueado por 129 duplicatas integrais; arrecadação não equivale a distribuição ou produção mineral.",
+    "licenca": "Fonte ANM; verificar condições de redistribuição antes de publicação externa.",
+    "estrategia": "recalculado",
+    "municipios_comparacao": []
+  },
+  "despesa_funcao_empenhada": {
+    "nome": "Despesa empenhada por função",
+    "bloco": "Finanças públicas",
+    "fonte": "SICONFI, DCA Anexo I-E",
+    "unidade": "BRL nominal",
+    "frequencia": "anual",
+    "metodo": "Estágio empenhado da DCA, por município e exercício. A seleção final das contas está pendente.",
+    "limitacoes": "Sem publicação homologada: contas, função/subfunção, retificações e reconciliação independente pendentes. Não identifica despesa financiada pela CFEM.",
+    "licenca": "Fonte Tesouro Nacional; verificar condições de redistribuição externa.",
+    "estrategia": "recalculado",
+    "municipios_comparacao": []
+  },
+  "despesa_funcao_liquidada": {
+    "nome": "Despesa liquidada por função",
+    "bloco": "Finanças públicas",
+    "fonte": "SICONFI, DCA Anexo I-E",
+    "unidade": "BRL nominal",
+    "frequencia": "anual",
+    "metodo": "Estágio liquidado da DCA, por município e exercício. A seleção final das contas está pendente.",
+    "limitacoes": "Sem publicação homologada: contas, função/subfunção, retificações e reconciliação independente pendentes. Não somar aos estágios empenhado e pago.",
+    "licenca": "Fonte Tesouro Nacional; verificar condições de redistribuição externa.",
+    "estrategia": "recalculado",
+    "municipios_comparacao": []
+  },
+  "despesa_funcao_paga": {
+    "nome": "Despesa paga por função",
+    "bloco": "Finanças públicas",
+    "fonte": "SICONFI, DCA Anexo I-E",
+    "unidade": "BRL nominal",
+    "frequencia": "anual",
+    "metodo": "Estágio pago da DCA, por município e exercício. A seleção final das contas está pendente.",
+    "limitacoes": "Sem publicação homologada: contas, função/subfunção, retificações e reconciliação independente pendentes. Não somar aos estágios empenhado e liquidado.",
+    "licenca": "Fonte Tesouro Nacional; verificar condições de redistribuição externa.",
+    "estrategia": "recalculado",
+    "municipios_comparacao": []
+  },
+  "preco_minerio_ferro": {
+    "nome": "Preço internacional do minério de ferro",
+    "bloco": "Economia",
+    "fonte": "FRED, PIORECRUSDM (IMF)",
+    "unidade": "USD/dmt",
+    "frequencia": "mensal",
+    "metodo": "Observações mensais globais do FRED, sem interpolação ou corte de período; valores ausentes permanecem ausentes.",
+    "limitacoes": "Série global, não preço realizado em município ou empresa. Início efetivo e recorte de exibição do ferro em aberto (divergência 17); publicação provisória até reconciliação independente.",
+    "licenca": "Fonte FRED/IMF; verificar termos de atribuição e redistribuição.",
+    "estrategia": "recalculado",
+    "municipios_comparacao": []
+  },
+  "preco_cobre": {
+    "nome": "Preço internacional do cobre",
+    "bloco": "Economia",
+    "fonte": "FRED, PCOPPUSDM (IMF)",
+    "unidade": "USD/t",
+    "frequencia": "mensal",
+    "metodo": "Observações mensais globais do FRED, sem interpolação; valores ausentes permanecem ausentes.",
+    "limitacoes": "Série global, não preço realizado em município ou empresa; publicação provisória até reconciliação independente.",
+    "licenca": "Fonte FRED/IMF; verificar termos de atribuição e redistribuição.",
+    "estrategia": "recalculado",
+    "municipios_comparacao": []
   }
 }
