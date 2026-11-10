@@ -4,7 +4,7 @@ Guarda cada versão dos arquivos de CFEM da ANM (arrecadação, distribuição e
 
 ## Como funciona
 
-O fluxo `.github/workflows/arquivar-anm.yml` roda todos os dias, às 09:00 UTC (06:00 em Brasília), e sob demanda (Actions > Arquivar arquivos da ANM > Run workflow). Agendamentos só rodam a partir da branch padrão do repositório.
+O fluxo `.github/workflows/arquivar-anm.yml` roda a cada 4 horas (às 00, 04, 08, 12, 16 e 20 UTC), e sob demanda (Actions > Arquivar arquivos da ANM > Run workflow). Agendamentos só rodam a partir da branch padrão do repositório.
 
 1. Baixa a Release mais recente (`anm-AAAA-MM-DD`, com hora quando houver mais de uma no dia), se houver, como versão anterior.
 2. Baixa os 3 arquivos da ANM e calcula tamanho, SHA-256, linhas e o total do recorte dos 12 municípios por ano.
