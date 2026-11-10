@@ -1,0 +1,18 @@
+{
+  "cfem-abril-maio-2025": {
+    "url": "https://www.gov.br/anm/pt-br/itens/arquivos/cfem-abril-maio-25.pdf",
+    "descricao": "PDF da ANM com a remessa de abril e maio de 2025; controle para a reconciliação (RN-VPU-07)",
+    "versoes": [
+      {
+        "coletado_em": "2026-11-09T01:06:57.179Z",
+        "release": "doc-2026-11-09",
+        "arquivo": "cfem-abril-maio-2025-46640C01.pdf",
+        "sha256": "46640C01980B126D00B8778B840BCA301BC288314F0F9840054F18194DA63CB6",
+        "bytes": 457086,
+        "content_type": "application/pdf",
+        "last_modified": null,
+        "etag": null
+      }
+    ]
+  }
+}
