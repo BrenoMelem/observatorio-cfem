@@ -21,6 +21,7 @@ Os scripts rodam como módulo, a partir da raiz do repositório: `uv run python 
 | | `validar_arquivo_anm.py` | Confere a cobertura municipal de um CSV da ANM (arrecadação, distribuição ou autuação) |
 | | `distribuicao_municipal.py` | Agrega a distribuição da ANM por município, ano, mês e modalidade (RN-CFE-11) |
 | | `reconciliar_distribuicao.py` | Reconcilia a distribuição da ANM com a notícia mensal da ANM (RN-VPU-07) |
+| | `arquivar_anm.py`, `arquivar_documentos.py`, `comparar_versoes_anm.py` | Arquivo das versões da ANM em Releases, com manifesto e relatório de diferenças (RN-TMP-18; ver `docs/guias/arquivo-anm.md`) |
 | | `checar_totais_regras.py` | Confere os totais de status das regras contra o `README.md` de `docs/regras-de-negocio/` |
 | `populacao/` | `atualizar.py` | População estimada do IBGE (SIDRA 6579/9324), com validação e reconciliação |
 | `financas/` | `dca_lote.py` | DCA Anexo I-E do SICONFI em lote validado, sem homologar |
