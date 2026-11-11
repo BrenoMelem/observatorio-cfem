@@ -94,13 +94,13 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Relacionadas:** RN-MOD-10, RN-CFE-07
 
 ### RN-CFE-10: Modalidades de distribuição que compõem a CFEM recebida
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve definir quais modalidades de distribuição (coluna do tipo de distribuição) compõem a "CFEM recebida", e até lá a modalidade deve ser guardada e exibida separadamente.
-- **Motivo:** A reconciliação cobriu só o tipo `Produtor`; as demais modalidades não foram conferidas.
+- **Status:** DECIDIDA
+- **Regra:** A "CFEM recebida" do município é o valor do tipo `Produtor` do arquivo de distribuição da ANM. A modalidade `Afetado` é guardada e exibida em linha separada, sem entrar no total da "CFEM recebida"; a modalidade `-` (só estados) não se aplica a municípios. A estimativa pela repartição legal (RN-CFE-26) é outra medida e não substitui nem se mistura com a CFEM recebida.
+- **Motivo:** O tipo `Produtor` é o único conferido contra o Tesouro: bate com a MSC em Canaã dos Carajás e Parauapebas e é o único existente de 2023 a 2026, o que mantém a série coerente. A diferença em Marabá fica registrada como evidência, não como parte da definição.
 - **Exemplo:** A reconciliação de maio de 2025 foi feita com `Ano=2025`, `Mês=5` e tipo `Produtor` (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM). Em 27/10/2026, o arquivo de distribuição tinha três modalidades: `Produtor` (2007–2026, só municípios), `Afetado` (2019–2022, só municípios, com subtipos como estrutura de mineração, ferrovias e perda) e `-` (2019–2022, só estados). De 2023 a 2026 existe só `Produtor`, que somou R$ 1.556.820.292,67 nos 12 municípios em 2025; a soma é bruta e provisória (reproduzido em 27/10/2026: arquivo da ANM).
 - **Evidência datada:** no fim deste arquivo, em [Notas de evidência](#notas-de-evidência), sob RN-CFE-10.
-- **Fonte:** VAL-15/10 §Rodada adicional (escopo da reconciliação).
-- **Relacionadas:** RN-VPU-07, RN-TER-09, RN-CFE-11
+- **Fonte:** DECISÃO-MANTENEDOR de 09/11/2026 (opção "só `Produtor`"); VAL-15/10 §Rodada adicional (escopo da reconciliação).
+- **Relacionadas:** RN-VPU-07, RN-TER-09, RN-CFE-11, RN-CFE-26
 
 ### RN-CFE-11: Agregação por município, ano, mês e modalidade
 - **Status:** PROPOSTA
@@ -274,6 +274,7 @@ Evidência datada que sustenta ou qualifica as regras acima. Cada nota é o text
 #### RN-CFE-10: Modalidades de distribuição que compõem a CFEM recebida
 
 - **Evidência de 31/10/2026 (distribuição da ANM contra a MSC orçamentária, receita realizada da fonte 1708; só agregados):** o tipo `Produtor` reproduz a receita registrada em Canaã dos Carajás (diferença de 0,03% a 0,04% por ano, 2024 a 2026) e em Parauapebas (0,14% a 0,38%), mas não em Marabá, onde a receita registrada é maior que o `Produtor` em 7% a 26% (2024 a 2026); Marabá usa a natureza 17225101, enquanto os outros dois usam a 17125101. A modalidade `-` só existe para entes estaduais (2019 a 2022) e não tem linha em nenhum dos três municípios. `Afetado` só existe no arquivo até 2022 e só pôde ser testado nesse ano, de forma anual e inconclusiva (em Marabá, `Produtor` mais `Afetado` aproxima a MSC; em Canaã e Parauapebas não muda o resultado). O arquivo da ANM tem defeitos de calendário que impedem a comparação mensal em 2022 (todo o `Produtor` está no mês 1) e em 2023 (faltam os meses 1 a 4 e 6), e julho de 2025 é ausente (RN-CFE-08). A natureza 17125101 da fonte 1708 não é só CFEM: a fonte tem valores pequenos de outras naturezas. Causas da diferença em Marabá e da pequena diferença em Parauapebas não foram verificadas. A comparação de 2019 a 2021 não foi feita porque a MSC usa outra estrutura de fonte e natureza nesses anos.
+- **Evidência de 09/11/2026 (leitura da `obcefem_api`, sem coleta nova):** a `obcefem_api` não lê as modalidades do arquivo de distribuição; ela estima a repartição pela lei (arrecadação × percentual) porque, segundo o README dela, o arquivo de 01/11/2026 estava incompleto (cota municipal de 2023 a 2025 em cerca de 15% do arrecadado, quando deveria ser 60%; cotas estadual e de afetados só em 2019 a 2022; sem a parcela da União). Transcrito do README da `obcefem_api`, não conferido neste repositório. Se o `Produtor` de 2023 a 2025 estiver de fato incompleto, a definição da CFEM recebida continua valendo, mas o valor deve ser tratado com a ressalva de RN-CFE-26.
 
 #### RN-CFE-24: Despesa municipal financiada por CFEM exige identificação da fonte de recursos
 
