@@ -41,20 +41,20 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 
 ### RN-FNT-05: Preços de commodities pelo FRED
 - **Status:** DECIDIDA
-- **Regra:** Os preços de minério de ferro (`PIORECRUSDM`) e de cobre (`PCOPPUSDM`) devem vir da API do FRED, como séries globais mensais; o ferro tem início em janeiro de 1980 e o período do cobre vigente é 2000–2026.
+- **Regra:** Os preços de minério de ferro (`PIORECRUSDM`) e de cobre (`PCOPPUSDM`) devem vir da API do FRED, como séries globais mensais; o ferro tem início em janeiro de 1992 (os anos anteriores vêm do Pink Sheet, RN-FNT-06) e o período do cobre vigente é 2000–2026.
 - **Motivo:** O FRED espelha a série do IMF por API estável, que é o padrão para pipelines.
-- **Exemplo:** Em 19/10/2026, as duas séries foram consultadas de jan/1980 a jul/2026 (transcrito do relatório LAB-19/10, não conferido no JSON).
-- **Exceções:** A unidade do ferro é `$/dmt` (RN-TMP-14); o recorte de exibição do ferro está em aberto (RN-TMP-13). Em 25/10/2026, a API do FRED devolveu as duas séries com linhas de jan/1980 a set/2026, mas os valores de jan/1980 a dez/1991 vieram como ausentes (144 meses); o primeiro valor é de jan/1992 (ferro: 14,31 US$/t) e os metadados do FRED dão início em 1992-01-01. Isso contradiz o início em jan/1980 e está registrado como divergência 17 em [pendencias.md](pendencias.md).
-- **Fonte:** DECISÃO-MANTENEDOR de 24/10/2026 (conflito 8); LAB-19/10 §4 (FRED e World Bank Pink Sheet); DECISÕES §Rotas de coleta por fonte; BLOCOS §Bloco 2.
+- **Exemplo:** Em 10/11/2026, o gráfico público do FRED para `PIORECRUSDM` tinha 418 linhas, de 01/01/1992 (14,31) a 09/2026 (reproduzido em 10/11/2026). O relatório LAB-19/10 dizia jan/1980 a jul/2026 (transcrito do relatório, contradito pela consulta de 25/10 e de 10/11/2026).
+- **Exceções:** A unidade do ferro é `$/dmt` (RN-TMP-14). Em 25/10/2026, a API do FRED devolveu linhas desde jan/1980 com valores ausentes até dez/1991 (144 meses), e o mesmo vale para o cobre (consulta de 25/10/2026; o cobre não foi conferido em 10/11/2026). Contraria a decisão de 24/10/2026 (início em jan/1980).
+- **Fonte:** DECISÃO-MANTENEDOR de 10/11/2026 (conflitos 8 e 17); LAB-19/10 §4 (FRED e World Bank Pink Sheet); DECISÕES §Rotas de coleta por fonte; BLOCOS §Bloco 2.
 - **Relacionadas:** RN-FON-10, RN-MOD-19, RN-TMP-13
 
-### RN-FNT-06: Pink Sheet só para anos anteriores a 1980
+### RN-FNT-06: Pink Sheet para o ferro de 1985 a 1991
 - **Status:** DECIDIDA
-- **Regra:** O Pink Sheet do World Bank só deve ser usado, baixado uma vez e congelado com citação, se for necessário cobrir anos anteriores a 1980.
-- **Motivo:** Como o ferro no FRED começa em 1980, o trecho de 1985–1991 previsto por DECISÕES e por BLOCOS deixou de ser necessário.
-- **Exemplo:** A planilha anual do Pink Sheet tem 2023–2025 e coincide numericamente com o PDF de outubro de 2026.
-- **Exceções:** O rótulo da unidade do ferro diverge entre a planilha e o PDF; vale `$/dmt` (RN-TMP-14). Se o ferro no FRED só tem valores desde jan/1992 (divergência 17), o Pink Sheet volta a ser necessário para 1985–1991 e a regra acima deve ser reavaliada.
-- **Fonte:** DECISÃO-MANTENEDOR de 24/10/2026 (conflito 8); LAB-19/10 §4; VAL-15/10 §Matriz operacional (Commodities).
+- **Regra:** O Pink Sheet do World Bank deve ser usado, baixado uma vez e congelado com citação, para o preço do minério de ferro de 1985 a 1991, anos em que o FRED não tem valores. Os anos já cobertos pelo FRED não vêm do Pink Sheet.
+- **Motivo:** O ferro no FRED só tem valores desde jan/1992 (RN-TMP-13), e a oficina pediu a exibição desde 1985.
+- **Exemplo:** A planilha anual do Pink Sheet (`Annual Prices (Nominal)`, coluna `Iron ore, cfr spot`) traz o ferro desde 1960; 2023–2025 coincidem com o PDF de outubro de 2026. Em 10/11/2026 a planilha foi baixada da página do World Bank, que lista os links dos arquivos anual e mensal (reproduzido em 10/11/2026).
+- **Exceções:** O rótulo da unidade do ferro diverge entre a planilha e o PDF; vale `$/dmt` (RN-TMP-14). O endereço do arquivo tem um código que muda a cada edição; a coleta deve localizá-lo na página do World Bank. O arquivo mensal repete o valor anual em cada mês nesses anos. Contraria a decisão de 24/10/2026 (Pink Sheet só antes de 1980).
+- **Fonte:** DECISÃO-MANTENEDOR de 10/11/2026 (conflitos 8 e 17); LAB-19/10 §4; VAL-15/10 §Matriz operacional (Commodities); DECISÕES e BLOCOS (Pink Sheet 1985–1991).
 - **Relacionadas:** RN-TMP-13, RN-TMP-14
 
 ### RN-FNT-07: Saldo de emprego é derivado

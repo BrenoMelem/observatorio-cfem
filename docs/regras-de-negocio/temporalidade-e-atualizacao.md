@@ -23,7 +23,7 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 | --- | --- | --- | --- |
 | Uso do solo, área urbana | 1983–2024 | 1985–2025 | 1985–2025 |
 | Despesa per capita por função | 2013–2024 | 2013–2025 | 2013–2025 |
-| Preço do minério de ferro | 1985–2025 | 1992–2025 | Início em jan/1980, pelo FRED (RN-TMP-13), mas a consulta de 25/10/2026 só achou valores desde jan/1992 (divergência 17); recorte de exibição **EM ABERTO** |
+| Preço do minério de ferro | 1985–2025 | 1992–2025 | FRED mensal desde jan/1992; Pink Sheet anual para 1985–1991; exibição desde 1985 (RN-TMP-13) |
 | Preço do cobre | 2000–2026 | 2000–2026 | 2000–2026 |
 | PIB municipal | 2010–2023 | 2010–2023 | 2010–2023 |
 | Série populacional | 1980–2022 | 1980–2022 | 1980–2022 |
@@ -128,13 +128,13 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 - **Fonte:** DECISÃO-MANTENEDOR de 26/10/2026; VAL-15/10 §Matriz operacional (Commodities); RN-CFE-06 (regra equivalente da CFEM).
 - **Relacionadas:** RN-CFE-06, RN-MOD-07, RN-TMP-13
 
-### RN-TMP-13: Commodities pelo FRED, com Pink Sheet só antes de 1980
+### RN-TMP-13: Commodities pelo FRED, com Pink Sheet para o ferro de 1985 a 1991
 - **Status:** DECIDIDA
-- **Regra:** A série de preços de ferro e cobre deve vir do FRED, o início da série do ferro é janeiro de 1980, e o Pink Sheet do World Bank só deve ser usado, congelado uma vez com citação, para anos anteriores a 1980.
-- **Motivo:** O laboratório de 19/10/2026 encontrou o ferro no FRED desde jan/1980, mais recente que DECISÕES e BLOCOS, que diziam 1992.
-- **Exemplo:** FRED, ferro (`PIORECRUSDM`) e cobre (`PCOPPUSDM`), mensais, de jan/1980 a jul/2026 (transcrito do relatório LAB-19/10, não conferido no JSON).
-- **Exceções:** O recorte de exibição da série do ferro (desde 1980 ou desde 1985, como pediu a oficina) está **EM ABERTO**. Em 25/10/2026, a API do FRED devolveu as duas séries com linhas de jan/1980 a set/2026, mas os valores de jan/1980 a dez/1991 vieram como ausentes (144 meses); o primeiro valor é de jan/1992 (ferro: 14,31 US$/t) e os metadados do FRED dão início em 1992-01-01. Isso contradiz o início em jan/1980 e está registrado como divergência 17 em [pendencias.md](pendencias.md). A decisão de 24/10/2026 foi tomada com base no LAB-19/10 e precisa ser reconfirmada.
-- **Fonte:** DECISÃO-MANTENEDOR de 24/10/2026 (conflito 8); LAB-19/10 §4 (FRED e World Bank Pink Sheet); DECISÕES §Rotas de coleta por fonte (Commodities); BLOCOS §Bloco 2.
+- **Regra:** A série de preços de ferro e cobre deve vir do FRED. O ferro começa em janeiro de 1992 no FRED; o trecho de 1985 a 1991 vem do Pink Sheet do World Bank, baixado uma vez, congelado e citado. A série do ferro é exibida desde 1985. O trecho de 1985 a 1991 é anual (o mesmo valor em todos os meses do ano) e a exibição deve avisar isso e também a mudança de fonte na emenda em 1992.
+- **Motivo:** A consulta de 10/11/2026 ao FRED mostrou que o primeiro valor do ferro é de 01/01/1992; o "jan/1980" do LAB-19/10 contava linhas vazias. DECISÕES e BLOCOS (ferro desde 1992, com o Pink Sheet para 1985–1991) estavam certos; a oficina pediu a exibição desde 1985.
+- **Exemplo:** FRED, ferro (`PIORECRUSDM`): 418 linhas, primeiro valor em 01/01/1992 (14,31), último em 09/2026 (reproduzido em 10/11/2026: gráfico público do FRED). Pink Sheet anual, `Iron ore, cfr spot`: 1985 = 26,6; 1991 = 34,8; 1992 = 33,1 (reproduzido em 10/11/2026: planilha do World Bank). No arquivo mensal do Pink Sheet esses anos repetem o valor anual em cada mês (1985M01 e 1985M12 = 26,6).
+- **Exceções:** Há salto artificial na emenda: em 1992 o Pink Sheet dá 33,1 e a média mensal do FRED dá 14,0; em 1993, 29,1 contra 12,0. Nos anos recentes as fontes coincidem (2023: 120,6 contra 119,8; 2024: 109,4 contra 110,6; 2025: 100,2 contra 103,2). A causa da diferença nos anos antigos não foi investigada. Contraria a decisão de 24/10/2026 (início em jan/1980, Pink Sheet só antes de 1980), tomada sobre LAB-19/10.
+- **Fonte:** DECISÃO-MANTENEDOR de 10/11/2026 (conflitos 8 e 17); DECISÕES §Rotas de coleta por fonte (Commodities); BLOCOS §Bloco 2; LAB-19/10 §4 (FRED e World Bank Pink Sheet), superado nesse ponto.
 - **Relacionadas:** RN-TMP-16, RN-FNT-05, RN-FNT-06
 
 ### RN-TMP-14: Unidade do minério de ferro
@@ -157,7 +157,7 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 
 ### RN-TMP-16: BLOCOS prevalece sobre PLANO nos períodos
 - **Status:** DECIDIDA
-- **Regra:** Onde PLANO e BLOCOS divergem sobre o período de um indicador, vale o período de BLOCOS, exceto o início da série do ferro (RN-TMP-13).
+- **Regra:** Onde PLANO e BLOCOS divergem sobre o período de um indicador, vale o período de BLOCOS, exceto a série do ferro (RN-TMP-13), cujo recorte de exibição é desde 1985 (Pink Sheet para 1985–1991).
 - **Motivo:** PLANO é anterior e foi atualizado pelas Decisões.
 - **Exemplo:** Uso do solo: PLANO diz 1983–2024 e BLOCOS diz 1985–2025; vale 1985–2025.
 - **Fonte:** DECISÃO-MANTENEDOR de 24/10/2026 (conflito 15); BLOCOS §Bloco 2, §Bloco 5, §Bloco 6; PLANO §Bloco 2, §Bloco 5, §Bloco 6.
