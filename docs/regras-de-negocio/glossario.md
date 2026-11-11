@@ -72,7 +72,7 @@ Termos e siglas usados nesta documentação. Os termos de domínio vêm de DECIS
 | FAPESPA | Órgão estatístico do Pará; define a RI Carajás |
 | fato gerador | Ano em que o débito de CFEM se originou (contraste com lavratura) |
 | FINBRA | Base histórica de finanças municipais do Tesouro, organizada no IPEADATA |
-| FRED | Federal Reserve Economic Data, API de séries econômicas; deixou de ser a rota das commodities em 10/11/2026 |
+| FRED | Federal Reserve Economic Data, API de séries econômicas; reserva das commodities desde 10/11/2026 (a fonte principal é o Pink Sheet) |
 | GEE (Google Earth Engine) | Plataforma do Google para dados geoespaciais; rota do MapBiomas |
 | `id_ente` | Parâmetro do SICONFI que recebe o código IBGE do município |
 | IDEB | Índice de Desenvolvimento da Educação Básica |
