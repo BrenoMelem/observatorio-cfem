@@ -23,7 +23,7 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 | --- | --- | --- | --- |
 | Uso do solo, área urbana | 1983–2024 | 1985–2025 | 1985–2025 |
 | Despesa per capita por função | 2013–2024 | 2013–2025 | 2013–2025 |
-| Preço do minério de ferro | 1985–2025 | 1992–2025 | Pink Sheet mensal, exibição desde 1985 (RN-TMP-13); até 2005 o ferro repete o valor anual em cada mês e só é mensal desde 2006 |
+| Preço do minério de ferro | 1985–2025 | 1992–2025 | Duas séries do Pink Sheet (RN-TMP-13): contrato anual em ¢/dmtu, 1985–2005, e spot mensal em `$/dmt`, dez/2008–2026; 2006–nov/2008 fica fora |
 | Preço do cobre | 2000–2026 | 2000–2026 | 2000–2026 |
 | PIB municipal | 2010–2023 | 2010–2023 | 2010–2023 |
 | Série populacional | 1980–2022 | 1980–2022 | 1980–2022 |
@@ -130,20 +130,20 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 
 ### RN-TMP-13: Commodities pelo Pink Sheet do World Bank
 - **Status:** DECIDIDA
-- **Regra:** Os preços de minério de ferro e de cobre devem vir do Pink Sheet do World Bank (planilha mensal de preços nominais), em toda a série. O ferro é exibido desde 1985 e o cobre mantém o período vigente de 2000 a 2026. O FRED fica só como reserva (RN-FNT-05), para o caso de o Pink Sheet não estar disponível. Nos anos em que o Pink Sheet repete o valor anual em cada mês (ferro, de 1985 a 2005), a exibição deve avisar que o trecho é anual.
-- **Motivo:** A comparação de 10/11/2026 mostrou que o ferro do FRED só é comparável ao Pink Sheet a partir de dez/2008: de 1992 a 2005 o Pink Sheet vale 2,31 vezes o FRED, sem variação; de 2006 a nov/2008 a razão oscila entre 1,95 e 5,33. O Pink Sheet cobre toda a série em uma fonte, sem emenda, e o cobre coincide com o FRED.
-- **Exemplo:** Ferro (`Iron ore, cfr spot`), Pink Sheet: 1985 = 26,6; 1991 = 34,8; 1992 = 33,1; dez/2008 = 70,0, igual ao FRED (reproduzido em 10/11/2026: planilha mensal do World Bank e gráfico público do FRED). Cobre (`Copper`), mês de junho: 1995 = 2.995 (FRED 2.987,7); 2000 = 1.753 (1.752,1); 2010 = 6.499 (6.501,5); 2024 = 9.648 (9.648,2) (reproduzido em 10/11/2026). O Pink Sheet de 10/11/2026 vai até out/2026, um mês além do FRED. A execução do script de laboratório em 10/11/2026 achou 45 anos com valor anual repetido no ferro (de 1960 a 2005, com poucas exceções), o que coincide com a razão constante de 2,31 até 2005 e com a divergência a partir de 2006.
-- **Exceções:** Contraria a decisão de 24/10/2026 (FRED como rota; Pink Sheet só antes de 1980). Como o ferro do FRED não é comparável ao Pink Sheet antes de dez/2008, a reserva do ferro só serve a partir desse mês e DECISÕES e BLOCOS (FRED com ferro desde 1992). A causa da diferença do ferro do FRED até 2008 não foi documentada (a página do FRED não abriu na consulta). O Pink Sheet rotula o ferro como `$/dmtu`; ver RN-TMP-14.
-- **Fonte:** DECISÃO-MANTENEDOR de 10/11/2026 (conflitos 8 e 17); DECISÕES §Rotas de coleta por fonte (Commodities); BLOCOS §Bloco 2; LAB-19/10 §4 (FRED e World Bank Pink Sheet), superado nesse ponto; PLANO e MAPA-TEMAS (Pink Sheet).
-- **Relacionadas:** RN-TMP-16, RN-FNT-05, RN-FNT-06, RN-FON-10
+- **Regra:** Os preços de minério de ferro e de cobre devem vir do Pink Sheet do World Bank. O ferro são **duas séries separadas**, que não aparecem no mesmo eixo sem aviso: o **preço de contrato** (anual, em ¢/dmtu, exibido de 1985 a 2005) e o **preço spot** (mensal, em `$/dmt`, 62% Fe, cfr China, de dezembro de 2008 em diante). O trecho de 2006 a novembro de 2008 (spot 63,5% Fe) não entra em nenhuma das duas. O cobre é uma série única mensal (`$/mt`), com o período vigente de 2000 a 2026. O FRED fica só como reserva da série spot e do cobre (RN-FNT-05).
+- **Motivo:** A coluna do ferro no Pink Sheet muda de medida ao longo do tempo, conforme a aba `Description` da própria planilha: contrato anual em centavos de dólar por dmtu (1% de ferro contido) até 2005, spot 63,5% Fe de 2006 a novembro de 2008 e spot 62% Fe, cfr China, em dólares por tonelada seca, desde dezembro de 2008. Exibir tudo como uma série única em `$/dmt` rotularia errado o trecho antigo. O corte em 1985 vem do pedido da oficina.
+- **Exemplo:** De 2004 para 2005 a coluna vai de 37,9 para 65 — alta de 71,5%, o reajuste histórico do contrato de 2005, o que confirma que o trecho antigo é contrato em ¢/dmtu. A série de contrato de 1987 a 2009 é o minério da Vale em Carajás (sinter feed, fob Ponta da Madeira) e, de 1960 a 1986, o de Itabira (reproduzido em 11/11/2026: aba `Description` da planilha anual). A spot começa em dez/2008 = 70,0 e coincide com o FRED desde então.
+- **Exceções:** Contraria a decisão de 24/10/2026 (FRED como rota, série única desde 1980) e revisa a de 10/11/2026 (série única desde 1985 em `$/dmt`). O FRED não é comparável ao trecho de contrato (razão constante de 2,31 entre 1992 e 2005), por isso a reserva só cobre a spot. O rótulo `($/dmtu)` da coluna é impreciso para o trecho spot (RN-TMP-14).
+- **Fonte:** DECISÃO-MANTENEDOR de 11/11/2026 (duas séries separadas); aba `Description` do Pink Sheet (consulta de 11/11/2026); DECISÕES §Rotas de coleta por fonte (Commodities); BLOCOS §Bloco 2; oficina (exibição desde 1985).
+- **Relacionadas:** RN-TMP-16, RN-FNT-05, RN-FNT-06, RN-MOD-19
 
 ### RN-TMP-14: Unidade do minério de ferro
 - **Status:** DECIDIDA
-- **Regra:** O preço do minério de ferro deve ser exibido em dólares americanos por tonelada métrica (`$/dmt`), e não em `$/dmtu`.
-- **Motivo:** A planilha anual do Pink Sheet rotula o ferro como `$/dmtu` e o PDF de outubro de 2026 como `$/dmt`, embora os números coincidam. O FRED, rota de coleta decidida, informa "U.S. Dollars per Metric Ton" nos metadados de `PIORECRUSDM`.
-- **Exemplo:** Ferro: 120,6 (2023), 109,4 (2024) e 100,2 (2025) (transcrito do relatório VAL-15/10, não conferido no JSON). Em 25/10/2026, os metadados do FRED para `PIORECRUSDM` diziam "U.S. Dollars per Metric Ton" (reproduzido em 25/10/2026).
-- **Exceções:** Desde 10/11/2026 o Pink Sheet é a fonte do ferro (RN-TMP-13); as planilhas mensal e anual rotulam o ferro como `$/dmtu` (reproduzido em 10/11/2026), e o rótulo não deve ser copiado: a unidade exibida continua sendo `$/dmt`. Como o FRED passou a ser só reserva, a confirmação pelos metadados do FRED não vale mais para a série usada e a escolha de `$/dmt` fica apoiada na dedução abaixo; a confirmação com o World Bank é desejável. Que o rótulo `$/dmtu` seja um erro da planilha é dedução (valores perto de 100 não combinam com preço por 1% de ferro contido); o World Bank não confirmou.
-- **Fonte:** DECISÃO-MANTENEDOR de 26/10/2026; VAL-15/10 §Matriz operacional (Commodities), §Rodada adicional (probe do World Bank); consulta à API do FRED em 25/10/2026.
+- **Regra:** A série spot do ferro é exibida em dólares americanos por tonelada métrica seca (`$/dmt`) e a série de contrato em centavos de dólar por dmtu (`¢/dmtu`, preço por 1% de ferro contido). O rótulo `($/dmtu)` que a planilha põe na coluna não deve ser copiado para a série spot.
+- **Motivo:** A aba `Description` do Pink Sheet define: "spot in US dollar/dry ton and contract in US cents/dmtu". A dedução anterior (valores perto de 100 não combinam com preço por 1% de ferro) foi confirmada para o trecho spot; o trecho de contrato é de fato por 1% de ferro contido.
+- **Exemplo:** Spot: 120,6 (2023), 109,4 (2024) e 100,2 (2025), em `$/dmt`. Contrato: 37,9 (2004) e 65 (2005), em ¢/dmtu (reproduzido em 11/11/2026: planilha anual e aba `Description`).
+- **Exceções:** A confirmação com o World Bank, antes pendente, veio da própria planilha (aba `Description`) em 11/11/2026; a nota antiga baseada nos metadados do FRED fica superada (o FRED é só reserva da spot).
+- **Fonte:** DECISÃO-MANTENEDOR de 26/10/2026 (`$/dmt`) e de 11/11/2026 (duas séries; `¢/dmtu` no contrato); aba `Description` do Pink Sheet (11/11/2026); VAL-15/10 §Matriz operacional (Commodities).
 - **Relacionadas:** RN-TMP-13, RN-FNT-05, RN-FNT-06
 
 ### RN-TMP-15: Finanças a partir de 2013 pelo SICONFI
@@ -174,6 +174,10 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 ## Notas de evidência
 
 Evidência datada que sustenta ou qualifica as regras acima. Nenhuma nota muda o status da regra. Ordem: a das regras.
+
+#### RN-TMP-13 e RN-TMP-14: as duas séries e as unidades do ferro
+
+- **Evidência de 11/11/2026 (aba `Description` da planilha anual do Pink Sheet, edição de novembro de 2026):** o texto oficial diz "Iron ore, spot in US dollar/dry ton and contract in US cents/dmtu. For years 2008 (December) to present, spot, (any origin) fines, 62% Fe, c.f.r. China; during 2006 to 2008 (November) spot, 63.5% Fe. Earlier data refer to annual contract prices (Brazil for Europe,) VALE Carajas mines sinter feed, f.o.b. Ponta da Madeira during years 1987-2009; Itabira mines f.o.b. Tubarão for years 1960-86. Unit dmtu denotes dry metric ton unit, i.e. 1% Fe-unit." A leitura de contrato em ¢/dmtu até 2005 é confirmada pelo salto de 37,9 (2004) para 65 (2005), alta de 71,5%, igual ao reajuste histórico do contrato de 2005, e explica por que o trecho antigo repete o valor anual em cada mês do arquivo mensal (45 anos com valor repetido, até 2005, na execução de 10/11/2026). Isso também explica parte da incompatibilidade com o FRED antes de dez/2008 (divergência 17): as medidas são outras.
 
 #### RN-TMP-15: Finanças a partir de 2013 pelo SICONFI
 
