@@ -94,12 +94,12 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 
 ### RN-FNT-11: Tabelas da Base dos Dados usadas pelo projeto
 - **Status:** DECIDIDA
-- **Regra:** O projeto deve usar as tabelas da Base dos Dados já conferidas: `br_ibge_populacao.municipio`, `br_ibge_pib.municipio`, `br_me_caged.microdados_movimentacoes`, `br_me_rais.microdados_vinculos`, `br_inep_ideb.municipio`, `br_ms_sim.municipio_causa` e `br_me_siconfi` (com demonstrativo escolhido), e a tabela `microdados_antigos` do CAGED, que vai só até cerca de 2019, não deve ser usada para dados atuais.
+- **Regra:** O projeto deve usar as tabelas da Base dos Dados já conferidas: `br_ibge_populacao.municipio`, `br_ibge_pib.municipio`, `br_me_caged.microdados_movimentacao`, `br_me_rais.microdados_vinculos`, `br_inep_ideb.municipio`, `br_ms_sim.municipio_causa`, `br_tse_eleicoes.perfil_eleitorado_municipio_zona` (eleitorado; o total municipal é a soma das zonas eleitorais), `br_inep_censo_escolar.escola` e `br_me_siconfi` (com demonstrativo escolhido). A coluna de município é `id_municipio` (código IBGE de 7 dígitos) em todas; o eleitorado traz também `id_municipio_tse`. A tabela `microdados_antigos` do CAGED, que vai só até cerca de 2019, não deve ser usada para dados atuais.
 - **Motivo:** Os nomes completos e os anos mais recentes foram conferidos no catálogo em out/2026.
 - **Exemplo:** RAIS (vínculos), ano mais recente 2025; Novo CAGED, 2026-08 (conforme DECISÕES).
-- **Exceções:** A via Base dos Dados para RAIS, IDEB e eleitorado foi decidida em RN-FNT-21, com a credencial decidida em RN-FON-09. Em aberto: a coluna de município nas tabelas do CAGED e do IDEB, e o `table_id` técnico do eleitorado (TSE) e do Censo Escolar (tabela `escola`).
-- **Fonte:** DECISÕES §Tabelas da Base dos Dados confirmadas, §Pré-requisitos e pendências; BLOCOS §Bloco 4.
-- **Relacionadas:** RN-FON-03, RN-FON-19, RN-TMP-03
+- **Exceções:** A via Base dos Dados para RAIS, IDEB e eleitorado foi decidida em RN-FNT-21, com a credencial decidida em RN-FON-09. DECISÕES grafa a tabela do CAGED como `microdados_movimentacoes` (plural), nome que não existe no catálogo; vale o do catálogo, `microdados_movimentacao`. Não há dataset próprio de eleitorado: ele está em `br_tse_eleicoes`. Os nomes e as colunas vêm do catálogo público; nenhuma linha de dado foi consultada, o que segue dependendo da credencial (RN-FON-09).
+- **Fonte:** DECISÃO-MANTENEDOR de 11/11/2026 (nomes e colunas conferidos no catálogo); DECISÕES §Tabelas da Base dos Dados confirmadas, §Pré-requisitos e pendências; BLOCOS §Bloco 4.
+- **Relacionadas:** RN-FON-03, RN-FON-19, RN-TMP-03, RN-TER-08
 
 ### RN-FNT-12: Frota de veículos
 - **Status:** DECIDIDA
@@ -202,6 +202,10 @@ Evidência datada que sustenta ou qualifica as regras acima. Cada nota é o text
 #### RN-FNT-08: Taxa de homicídio
 
 - **Evidência de 28/10/2026:** os metadados do IPEADATA para `AVIOL12_THOMIC` dão o nome "Taxa de homicídios (100.000 Habitantes)", fonte MS/SVS/CGIAE (SIM), atualização de 08/07/2026, sem menção a arma de fogo. O comentário da série cita códigos CID de lesões autoprovocadas (X60-X84), o que parece inconsistente com o nome; a causa não foi confirmada. A decisão de fonte e conceito segue em aberto.
+
+#### RN-FNT-11: Tabelas da Base dos Dados usadas pelo projeto
+
+- **Evidência de 11/11/2026 (API GraphQL pública do catálogo da Base dos Dados, sem credencial; só nomes de tabela e coluna, nenhuma linha de dado):** `br_me_caged` tem `microdados_movimentacao` (25 colunas, com `id_municipio`), `microdados_antigos`, `microdados_movimentacao_excluida` e `microdados_movimentacao_fora_prazo`; não existe `microdados_movimentacoes`. `br_inep_ideb.municipio` tem 13 colunas, com `id_municipio`, `ano`, `rede`, `ensino`, `anos_escolares`, `ideb`, notas do Saeb e `projecao`. Não há dataset de eleitorado à parte: `br_tse_eleicoes` traz `perfil_eleitorado_municipio_zona` (13 colunas, com `id_municipio` e `id_municipio_tse`, por zona eleitoral), além de `perfil_eleitorado_secao` e `perfil_eleitorado_local_votacao`. `br_inep_censo_escolar` tem `escola` (455 colunas, com `id_municipio`), `matricula`, `docente` e `turma`. Conferidos também `br_me_rais.microdados_vinculos`, `br_ms_sim.municipio_causa`, `br_ibge_populacao.municipio` e `br_ibge_pib.municipio`, que existem com esses nomes.
 
 #### RN-FNT-12: Frota de veículos
 

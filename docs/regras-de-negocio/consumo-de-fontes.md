@@ -165,7 +165,7 @@ O nível mede a forma de acesso, não a qualidade do dado. Uma fonte B pode ser 
 - **Status:** DECIDIDA
 - **Regra:** As tabelas de RAIS e CAGED na Base dos Dados devem ser consultadas por SQL filtrado pelos municípios de interesse e nunca baixadas inteiras.
 - **Motivo:** São grandes demais para baixar pela interface.
-- **Exemplo:** A tabela `microdados_movimentacoes` do Novo CAGED cobre o período pós-2020; a `microdados_antigos` vai só até cerca de 2019.
+- **Exemplo:** A tabela `microdados_movimentacao` do Novo CAGED (nome conferido no catálogo em 11/11/2026, RN-FNT-11) cobre o período pós-2020; a `microdados_antigos` vai só até cerca de 2019.
 - **Fonte:** DECISÕES §Tabelas da Base dos Dados confirmadas; PLANO §Bloco 2.
 - **Relacionadas:** RN-FON-11, RN-FNT-11
 

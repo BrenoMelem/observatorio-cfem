@@ -16,7 +16,6 @@ Estas regras estão decididas no essencial, mas um ponto delas continua sem deci
 
 | Regra | Ponto em aberto |
 | --- | --- |
-| [RN-FNT-11](regras-por-fonte.md) | Coluna de município nas tabelas do CAGED e do IDEB; `table_id` do eleitorado (TSE) e do Censo Escolar |
 | [RN-IND-09](indicadores-derivados-e-compostos.md) | Base da participação da RI Carajás no PIB (PIB do Pará, da RI ou outra) e nomes finais dos dois indicadores no manifesto |
 | [RN-CFE-25](mineracao-cfem.md) | Início da regra de 60/15/15/10: 01/08/2017 (Lei 13.540/2017, art. 4º, III) ou 2018 (`obcefem_api`); destino da cota dos afetados enquanto não houver decreto ou hipótese do inciso VII (art. 2º, § 3º, Lei 14.514/2022) |
 | [RN-ENT-08](entrega-dos-dados.md) | Metas numéricas de cada critério de avaliação do assistente. Adiado por prioridade em 11/11/2026: o assistente é etapa posterior ao tratamento dos dados; fixar critérios e metas quando ela começar |
