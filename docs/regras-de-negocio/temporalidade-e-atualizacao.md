@@ -23,7 +23,7 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 | --- | --- | --- | --- |
 | Uso do solo, área urbana | 1983–2024 | 1985–2025 | 1985–2025 |
 | Despesa per capita por função | 2013–2024 | 2013–2025 | 2013–2025 |
-| Preço do minério de ferro | 1985–2025 | 1992–2025 | Pink Sheet mensal, exibição desde 1985 (RN-TMP-13); o trecho até ~1990 repete o valor anual em cada mês |
+| Preço do minério de ferro | 1985–2025 | 1992–2025 | Pink Sheet mensal, exibição desde 1985 (RN-TMP-13); até 2005 o ferro repete o valor anual em cada mês e só é mensal desde 2006 |
 | Preço do cobre | 2000–2026 | 2000–2026 | 2000–2026 |
 | PIB municipal | 2010–2023 | 2010–2023 | 2010–2023 |
 | Série populacional | 1980–2022 | 1980–2022 | 1980–2022 |
@@ -130,9 +130,9 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 
 ### RN-TMP-13: Commodities pelo Pink Sheet do World Bank
 - **Status:** DECIDIDA
-- **Regra:** Os preços de minério de ferro e de cobre devem vir do Pink Sheet do World Bank (planilha mensal de preços nominais), em toda a série. O ferro é exibido desde 1985 e o cobre mantém o período vigente de 2000 a 2026. O FRED fica só como reserva (RN-FNT-05), para o caso de o Pink Sheet não estar disponível. Nos anos em que o Pink Sheet repete o valor anual em cada mês (ferro, até cerca de 1990), a exibição deve avisar que o trecho é anual.
+- **Regra:** Os preços de minério de ferro e de cobre devem vir do Pink Sheet do World Bank (planilha mensal de preços nominais), em toda a série. O ferro é exibido desde 1985 e o cobre mantém o período vigente de 2000 a 2026. O FRED fica só como reserva (RN-FNT-05), para o caso de o Pink Sheet não estar disponível. Nos anos em que o Pink Sheet repete o valor anual em cada mês (ferro, de 1985 a 2005), a exibição deve avisar que o trecho é anual.
 - **Motivo:** A comparação de 10/11/2026 mostrou que o ferro do FRED só é comparável ao Pink Sheet a partir de dez/2008: de 1992 a 2005 o Pink Sheet vale 2,31 vezes o FRED, sem variação; de 2006 a nov/2008 a razão oscila entre 1,95 e 5,33. O Pink Sheet cobre toda a série em uma fonte, sem emenda, e o cobre coincide com o FRED.
-- **Exemplo:** Ferro (`Iron ore, cfr spot`), Pink Sheet: 1985 = 26,6; 1991 = 34,8; 1992 = 33,1; dez/2008 = 70,0, igual ao FRED (reproduzido em 10/11/2026: planilha mensal do World Bank e gráfico público do FRED). Cobre (`Copper`), mês de junho: 1995 = 2.995 (FRED 2.987,7); 2000 = 1.753 (1.752,1); 2010 = 6.499 (6.501,5); 2024 = 9.648 (9.648,2) (reproduzido em 10/11/2026). O Pink Sheet de 10/11/2026 vai até out/2026, um mês além do FRED.
+- **Exemplo:** Ferro (`Iron ore, cfr spot`), Pink Sheet: 1985 = 26,6; 1991 = 34,8; 1992 = 33,1; dez/2008 = 70,0, igual ao FRED (reproduzido em 10/11/2026: planilha mensal do World Bank e gráfico público do FRED). Cobre (`Copper`), mês de junho: 1995 = 2.995 (FRED 2.987,7); 2000 = 1.753 (1.752,1); 2010 = 6.499 (6.501,5); 2024 = 9.648 (9.648,2) (reproduzido em 10/11/2026). O Pink Sheet de 10/11/2026 vai até out/2026, um mês além do FRED. A execução do script de laboratório em 10/11/2026 achou 45 anos com valor anual repetido no ferro (de 1960 a 2005, com poucas exceções), o que coincide com a razão constante de 2,31 até 2005 e com a divergência a partir de 2006.
 - **Exceções:** Contraria a decisão de 24/10/2026 (FRED como rota; Pink Sheet só antes de 1980). Como o ferro do FRED não é comparável ao Pink Sheet antes de dez/2008, a reserva do ferro só serve a partir desse mês e DECISÕES e BLOCOS (FRED com ferro desde 1992). A causa da diferença do ferro do FRED até 2008 não foi documentada (a página do FRED não abriu na consulta). O Pink Sheet rotula o ferro como `$/dmtu`; ver RN-TMP-14.
 - **Fonte:** DECISÃO-MANTENEDOR de 10/11/2026 (conflitos 8 e 17); DECISÕES §Rotas de coleta por fonte (Commodities); BLOCOS §Bloco 2; LAB-19/10 §4 (FRED e World Bank Pink Sheet), superado nesse ponto; PLANO e MAPA-TEMAS (Pink Sheet).
 - **Relacionadas:** RN-TMP-16, RN-FNT-05, RN-FNT-06, RN-FON-10

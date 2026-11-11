@@ -50,9 +50,9 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 
 ### RN-FNT-06: Pink Sheet como fonte única de ferro e cobre
 - **Status:** DECIDIDA
-- **Regra:** O Pink Sheet do World Bank é a fonte única dos preços de ferro e cobre (RN-FNT-05), sem emenda com outra fonte; o FRED é só reserva (RN-FNT-05). O trecho do ferro em que o Pink Sheet repete o valor anual em cada mês é exibido com aviso.
+- **Regra:** O Pink Sheet do World Bank é a fonte única dos preços de ferro e cobre (RN-FNT-05), sem emenda com outra fonte; o FRED é só reserva (RN-FNT-05). O trecho do ferro em que o Pink Sheet repete o valor anual em cada mês (até 2005) é exibido com aviso de que é anual.
 - **Motivo:** A emenda com o FRED criaria um salto artificial (razão de 2,31 de 1992 a 2005 entre as duas séries do ferro).
-- **Exemplo:** No arquivo mensal, o ferro vale 26,6 em todos os meses de 1985 e 34,8 em todos os de 1991 (reproduzido em 10/11/2026). A planilha anual coincide numericamente com o PDF de outubro de 2026 em 2023–2025.
+- **Exemplo:** No arquivo mensal, o ferro vale 26,6 em todos os meses de 1985 e 34,8 em todos os de 1991, e o mesmo ocorre em todos os anos até 2005 (reproduzido em 10/11/2026 pelo script de laboratório). A planilha anual coincide numericamente com o PDF de outubro de 2026 em 2023–2025.
 - **Exceções:** O rótulo da unidade do ferro diverge entre a planilha (`$/dmtu`) e o PDF (`$/dmt`); vale `$/dmt` (RN-TMP-14). Substitui a decisão de 24/10/2026 (Pink Sheet só para anos anteriores a 1980).
 - **Fonte:** DECISÃO-MANTENEDOR de 10/11/2026 (conflitos 8 e 17); LAB-19/10 §4; VAL-15/10 §Matriz operacional (Commodities); DECISÕES e BLOCOS (Pink Sheet 1985–1991).
 - **Relacionadas:** RN-TMP-13, RN-TMP-14, RN-FNT-05
