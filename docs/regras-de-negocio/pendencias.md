@@ -8,8 +8,7 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 
 | Regra | O que falta decidir | Arquivo |
 | --- | --- | --- |
-| RN-MOD-24 | Valor real: falta escolher a data-base (índice IPCA e forma decididos em RN-MOD-28; hoje só nominal, RN-MOD-26) | [modelo-de-dados.md](modelo-de-dados.md) |
-| RN-CFE-08 | Recuperar julho de 2025 e liberar o total anual de 2025 (em 31/10/2026 o mês segue ausente e o PDF não foi achado) | [mineracao-cfem.md](mineracao-cfem.md) |
+| RN-CFE-08 | Recuperar julho de 2025 e liberar o total anual de 2025 (em 31/10/2026 e de novo em 09/11/2026 o mês segue ausente no CSV; o PDF não foi achado) | [mineracao-cfem.md](mineracao-cfem.md) |
 | RN-CFE-09 | Causa da ausência de São Domingos do Araguaia nos arquivos (a MSC registra CFEM pequena desde 2024; causa indeterminada, só a ANM confirma) | [mineracao-cfem.md](mineracao-cfem.md) |
 | RN-CFE-10 | Modalidades de distribuição que compõem a CFEM recebida (`Produtor` bate com a MSC em Canaã e Parauapebas, não em Marabá) | [mineracao-cfem.md](mineracao-cfem.md) |
 | RN-CFE-20 | Se a CFEM pode ser apresentada como proxy da produção municipal (conflito 12) | [mineracao-cfem.md](mineracao-cfem.md) |
