@@ -179,11 +179,12 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Relacionadas:** RN-CFE-20, RN-FON-18
 
 ### RN-CFE-20: A CFEM como proxy da produção municipal
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve decidir se a CFEM pode ser apresentada como proxy da produção municipal, ou se deve ser exibida apenas como CFEM, sem rótulo de VPM.
-- **Motivo:** As fontes divergem.
+- **Status:** DECIDIDA
+- **Regra:** A CFEM do município deve ser exibida e nomeada sempre como CFEM (arrecadada, recebida ou cobrada), e não deve ser apresentada como produção mineral nem como proxy dela. O VPM só pode aparecer como contexto do estado do Pará (RN-CFE-19). Se surgir fonte oficial de produção por município, a regra pode ser revista.
+- **Motivo:** A CFEM é um repasse financeiro (base de cálculo × alíquota por substância), não uma medida de produção; dois municípios com a mesma produção podem ter CFEM diferente.
 - **Exemplo:** A CFEM é base de cálculo derivada do VPM, mas é um repasse financeiro, não uma medida de produção.
-- **Fonte:** Versão A: DECISÕES §Bloco 3 e BLOCOS §Bloco 3 (a CFEM "serve de proxy da produção municipal"; 04/10/2026, última edição 20/10/2026). Versão B: LAB-19/10 §4 (a CFEM municipal "pode ser analisada separadamente, sem renomeá-la como VPM"; 19/10/2026); VAL-15/10 §Matriz operacional (pesquisar fonte oficial alternativa antes de prometer VPM municipal; 15/10/2026).
+- **Exceções:** Contraria DECISÕES §Bloco 3 e BLOCOS §Bloco 3, que diziam que a CFEM "serve de proxy da produção municipal"; essas fontes não foram reescritas. Segue LAB-19/10 §4 e VAL-15/10 §Matriz operacional.
+- **Fonte:** DECISÃO-MANTENEDOR de 10/11/2026 (opção "só CFEM, sem rótulo de produção"). Versão A: DECISÕES §Bloco 3 e BLOCOS §Bloco 3 (04/10/2026, última edição 20/10/2026). Versão B: LAB-19/10 §4 (19/10/2026); VAL-15/10 §Matriz operacional (15/10/2026).
 - **Relacionadas:** RN-CFE-19, RN-CFE-21
 
 ### RN-CFE-21: A CFEM vem pronta e não é recalculada

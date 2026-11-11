@@ -9,7 +9,6 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 | Regra | O que falta decidir | Arquivo |
 | --- | --- | --- |
 | RN-CFE-08 | Recuperar julho de 2025 e liberar o total anual de 2025 (em 31/10/2026 e de novo em 09/11/2026 o mês segue ausente no CSV; o PDF não foi achado) | [mineracao-cfem.md](mineracao-cfem.md) |
-| RN-CFE-20 | Se a CFEM pode ser apresentada como proxy da produção municipal (conflito 12) | [mineracao-cfem.md](mineracao-cfem.md) |
 
 ## 2. Itens em aberto dentro de regras DECIDIDAS
 
@@ -44,7 +43,7 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 | 9 | Base dos Dados × fonte oficial | DECISÕES e BLOCOS: RAIS, IDEB, eleitorado e Censo Escolar via Base dos Dados. CONSUMO e MAPA-TEMAS: arquivos oficiais MTE, INEP e TSE | DECIDIDO em 30/10/2026 (RN-FNT-21): Base dos Dados, arquivo oficial como alternativa; depende de RN-FON-09 |
 | 10 | Cobertura da arrecadação | DECISÕES: `CFEM_Arrecadacao.csv`. SCRIPTS e VAL-15/10: `CFEM_Arrecadacao_2022_2026.csv`, 744.244 linhas | DECIDIDO (DECISÃO-MANTENEDOR, 27/10/2026): arquivo completo `CFEM_Arrecadacao.csv`, série desde 2003 (RN-CFE-22) |
 | 11 | Valor nulo × ausente | DECISÕES: validação exige "valor não nulo". CONSUMO: status "ausente" é válido | RESOLVIDO por DECISÃO-MANTENEDOR (RN-MOD-06, RN-MOD-11, RN-VPU-02) |
-| 12 | VPM × CFEM | DECISÕES e BLOCOS: a CFEM "serve de proxy da produção municipal". LAB-19/10: analisar a CFEM sem renomeá-la como VPM. VAL-15/10: buscar fonte alternativa antes de prometer VPM municipal | EM ABERTO (RN-CFE-20) |
+| 12 | VPM × CFEM | DECISÕES e BLOCOS: a CFEM "serve de proxy da produção municipal". LAB-19/10: analisar a CFEM sem renomeá-la como VPM. VAL-15/10: buscar fonte alternativa antes de prometer VPM municipal | DECIDIDO em 10/11/2026 (RN-CFE-20): a CFEM é exibida só como CFEM, sem rótulo de produção; o VPM fica só no nível do Pará (RN-CFE-19). Contraria DECISÕES e BLOCOS |
 | 13 | Denominador do emprego | PLANO e BLOCOS: "RAIS ÷ população", sem especificar. CONSUMO: aprovar o denominador | DECIDIDO em 02/11/2026 (RN-IND-07): dois indicadores, população total e idade ativa de 15 a 64 anos pelo Censo 2022 |
 | 14 | Datação de DECISÕES e BLOCOS | O cabeçalho dos dois diz 04/10/2026, com revisões 72 e 29 exportadas em 24/10/2026. LAB-19/10 é de 19/10/2026 e traz a correção do ferro no FRED e a orientação sobre a chave | RESOLVIDO por DECISÃO-MANTENEDOR: DECISÕES e BLOCOS foram editados pela última vez em 20/10/2026 e não incorporaram LAB-19/10 nesses dois pontos; nesses pontos LAB-19/10 é mais recente. Nos demais, DECISÕES e BLOCOS são a referência de decisões |
 | 15 | Períodos dos indicadores | PLANO: ferro 1985–2025, uso do solo 1983–2024, despesa 2013–2024, IDEB 2023. BLOCOS: ferro 1992–2025, uso do solo 1985–2025, despesa 2013–2025, IDEB sem ano | DECIDIDO (DECISÃO-MANTENEDOR): BLOCOS prevalece sobre PLANO, exceto o início do ferro (conflito 8) (RN-TMP-16). IDEB decidido em 27/10/2026: todas as edições disponíveis (RN-TMP-17) |
