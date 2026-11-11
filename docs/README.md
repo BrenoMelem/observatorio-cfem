@@ -13,6 +13,7 @@ O projeto ainda não tem produto: a documentação é a parte central do reposit
 | Arquivar as versões dos arquivos da ANM | [guias/arquivo-anm.md](guias/arquivo-anm.md) |
 | Saber o que uma execução encontrou em certa data | [registros/](registros/) |
 | Conferir uma decisão técnica | [adr/](adr/) |
+| Revisar a proposta da camada publicada por dimensão e do assistente (Fase 0) | [ADR-006 — PROPOSTA](adr/ADR-006-backend-publicado-assistente-proposta.md) |
 | Ver as rotas do protótipo da API | [api/openapi.yaml](api/openapi.yaml) |
 
 ## Pastas
