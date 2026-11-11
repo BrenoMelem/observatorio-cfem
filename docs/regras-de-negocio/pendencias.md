@@ -23,6 +23,8 @@ Estas regras estão decididas no essencial, mas um ponto delas continua sem deci
 | [RN-IND-09](indicadores-derivados-e-compostos.md) | Base da participação da RI Carajás no PIB (PIB do Pará, da RI ou outra) e nomes finais dos dois indicadores no manifesto |
 | [RN-CFE-25](mineracao-cfem.md) | Início da regra de 60/15/15/10: 01/08/2017 (Lei 13.540/2017, art. 4º, III) ou 2018 (`obcefem_api`); destino da cota dos afetados enquanto não houver decreto ou hipótese do inciso VII (art. 2º, § 3º, Lei 14.514/2022) |
 | [RN-ENT-08](entrega-dos-dados.md) | Metas numéricas de cada critério de avaliação do assistente |
+| [RN-TMP-14](temporalidade-e-atualizacao.md) | Unidade do ferro: o Pink Sheet rotula `$/dmtu` e a regra decidiu `$/dmt`, hoje apoiada só na dedução (os valores perto de 100 não combinam com preço por 1% de ferro contido); falta confirmar com o World Bank ou decidir de outra forma (consulta de 10/11/2026) |
+| [RN-FNT-05](regras-por-fonte.md) | Agendamento da coleta mensal do Pink Sheet: onde guardar as edições baixadas e quem recebe o alerta de falha; hoje só existe o script de laboratório `scripts/commodities/pink_sheet.py`, sem execução agendada. Inclui decidir se a reserva do FRED (ferro só desde dez/2008) é aceita como está |
 
 ## 3. Divergências entre fontes
 
