@@ -92,6 +92,7 @@ O nível mede a forma de acesso, não a qualidade do dado. Uma fonte B pode ser 
 - **Regra:** Cada aplicação e cada usuário que roda a coleta deve usar a própria chave do FRED, obtida gratuitamente no site do serviço.
 - **Motivo:** Os termos de uso do FRED exigem uma chave por aplicação e uma por usuário.
 - **Exemplo:** A chave não estava configurada em 17/10/2026 e a prova ficou PENDENTE; configurada em 19/10/2026, a prova passou (transcrito do relatório LAB-19/10, não conferido no JSON).
+- **Exceções:** Desde 10/11/2026 as commodities vêm do Pink Sheet (RN-FNT-05), que não exige chave; a regra só vale se algum uso futuro voltar ao FRED.
 - **Fonte:** LAB-19/10 §4 (FRED e World Bank Pink Sheet), §5.2.
 - **Relacionadas:** RN-FON-08, RN-FNT-05
 

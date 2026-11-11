@@ -58,8 +58,8 @@ Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a p
 ### RN-MOD-04: Campo de mês
 - **Status:** DECIDIDA
 - **Regra:** O mês deve fazer parte do esquema comum de todos os indicadores, preenchido quando a fonte é mensal e vazio nos indicadores anuais.
-- **Motivo:** Um esquema único evita dois formatos para consumir, e o mês é necessário para a CFEM (guardar mensal, exibir anual) e para outras séries mensais, como os preços de commodities do FRED.
-- **Exemplo:** A distribuição da CFEM de maio de 2025 só pôde ser reconciliada porque o mês foi preservado. Os preços de ferro e cobre do FRED são mensais, e a população do IBGE é anual, com o mês vazio.
+- **Motivo:** Um esquema único evita dois formatos para consumir, e o mês é necessário para a CFEM (guardar mensal, exibir anual) e para outras séries mensais, como os preços de commodities do Pink Sheet.
+- **Exemplo:** A distribuição da CFEM de maio de 2025 só pôde ser reconciliada porque o mês foi preservado. Os preços de ferro e cobre do Pink Sheet são mensais, e a população do IBGE é anual, com o mês vazio.
 - **Exceções:** O nome do campo é `mes` (RN-MOD-03).
 - **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026; DECISÕES §Arquitetura e padrões de dados, §Pré-requisitos e pendências; VAL-15/10 §Marco 2; LAB-19/10 §7 (Próximos passos, item 2).
 - **Relacionadas:** RN-MOD-03, RN-MOD-05, RN-CFE-04
