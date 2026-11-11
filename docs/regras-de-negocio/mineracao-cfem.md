@@ -246,7 +246,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Regra:** A CFEM dos municípios pode ser comparada com a média por município do Pará e do Brasil, calculada com os mesmos filtros de período, substância e titular. O denominador padrão é o número de municípios com registro no período; a alternativa é o total de municípios (144 no Pará, 5.570 no Brasil, segundo o IBGE). Há opção de excluir os dois municípios em foco da média.
 - **Motivo:** O mantenedor mandou manter o que a `obcefem_api` faz.
 - **Exemplo:** Reproduzido do README da `obcefem_api` (não conferido nos dados): o parâmetro `denominador` aceita `com_registro` (padrão) ou `todos`.
-- **Exceções:** O denominador "com registro" ignora os municípios sem CFEM e dá uma média maior que a de "todos"; o gráfico deve declarar qual está em uso. Os totais de 144 e 5.570 estão fixos no código da API. RN-TER-09 (comparação com N municípios mineradores) continua em aberto e é outra comparação.
+- **Exceções:** O denominador "com registro" ignora os municípios sem CFEM e dá uma média maior que a de "todos"; o gráfico deve declarar qual está em uso. Os totais de 144 e 5.570 estão fixos no código da API. RN-TER-09 (comparação com N municípios mineradores, padrão N = 10 decidido em 10/11/2026) é outra comparação.
 - **Fonte:** DECISÃO-MANTENEDOR de 08/11/2026; `obcefem_api`, README §Filtros e `app/dominio.py`.
 - **Relacionadas:** RN-TER-09, RN-MOD-18
 

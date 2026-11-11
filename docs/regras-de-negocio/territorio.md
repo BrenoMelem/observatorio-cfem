@@ -94,8 +94,8 @@ Canaã dos Carajás e Parauapebas são os municípios de foco do observatório.
 - **Regra:** A lista de municípios mineradores usada na comparação deve ser configurável e, por padrão, deve ser formada pelos N municípios com maior CFEM recebida segundo o arquivo de distribuição.
 - **Motivo:** O arquivo da ANM é nacional, então a comparação com outros municípios mineradores não exige fonte nova, e a lista precisa mudar sem mudar regras.
 - **Exemplo:** O ranking considera o valor recebido por ente no arquivo de distribuição, que traz o código IBGE do ente (`CodigoEnte`).
-- **Exceções:** O valor de N e o período do ranking estão **EM ABERTO**. A modalidade usada no ranking é `Produtor`, conforme RN-CFE-10 (decidida em 09/11/2026).
-- **Fonte:** DECISÕES §Bloco 3; BLOCOS §Bloco 3. Pendência registrada em [pendencias.md](pendencias.md).
+- **Padrão (DECISÃO-MANTENEDOR de 10/11/2026):** N = 10 e ranking do último ano fechado (com os 12 meses, RN-CFE-06), pela modalidade `Produtor` (RN-CFE-10). É só o padrão: o usuário pode configurar N, o período e a lista. Em 10/11/2026 o último ano fechado seria 2024, porque 2025 está bloqueado (RN-CFE-08); o ano muda quando o arquivo da ANM tiver os 12 meses de um ano novo.
+- **Fonte:** DECISÕES §Bloco 3; BLOCOS §Bloco 3; DECISÃO-MANTENEDOR de 10/11/2026 (padrão de N e do período).
 - **Relacionadas:** RN-CFE-10, RN-IND-10
 
 ### RN-TER-10: Nota sobre a criação de Canaã dos Carajás em 1994

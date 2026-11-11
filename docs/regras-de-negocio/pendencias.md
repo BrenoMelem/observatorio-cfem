@@ -16,7 +16,6 @@ Estas regras estão decididas no essencial, mas um ponto delas continua sem deci
 
 | Regra | Ponto em aberto |
 | --- | --- |
-| [RN-TER-09](territorio.md) | Valor de N e período do ranking usados na comparação com mineradores (a modalidade é `Produtor`, RN-CFE-10) |
 | [RN-TMP-13](temporalidade-e-atualizacao.md), [RN-FNT-05](regras-por-fonte.md) e [RN-FNT-06](regras-por-fonte.md) | Recorte de exibição da série do ferro: desde jan/1980 ou desde 1985, como pediu a oficina. Início real da série do ferro no FRED: jan/1980 ou jan/1992 (divergência 17) |
 | [RN-TMP-15](temporalidade-e-atualizacao.md) | Emenda entre SICONFI (2013 em diante) e FINBRA (pré-2013) numa mesma série |
 | [RN-FNT-04](regras-por-fonte.md) | Demonstrativo(s) e contas do SICONFI e se o escopo fica em função e subfunção; o estágio da despesa foi decidido em 30/10/2026 (três indicadores separados); o nome do anexo muda em 2013; em 31/10/2026 a MSC orçamentária (fonte `1708`) foi coletada para 2022–2026, mas o mapeamento das contas para os estágios e a conciliação com a DCA não foram feitos; a coleta foi refeita com a paginação completa em 02/11/2026; em 2025, Bom Jesus do Tocantins não retornou linhas no Anexo I-E (consulta de 03/11/2026) |
