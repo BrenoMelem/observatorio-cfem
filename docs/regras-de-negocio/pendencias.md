@@ -16,7 +16,6 @@ Estas regras estão decididas no essencial, mas um ponto delas continua sem deci
 
 | Regra | Ponto em aberto |
 | --- | --- |
-| [RN-TMP-15](temporalidade-e-atualizacao.md) | Emenda entre SICONFI (2013 em diante) e FINBRA (pré-2013) numa mesma série |
 | [RN-FNT-04](regras-por-fonte.md) | Demonstrativo(s) e contas do SICONFI e se o escopo fica em função e subfunção; o estágio da despesa foi decidido em 30/10/2026 (três indicadores separados); o nome do anexo muda em 2013; em 31/10/2026 a MSC orçamentária (fonte `1708`) foi coletada para 2022–2026, mas o mapeamento das contas para os estágios e a conciliação com a DCA não foram feitos; a coleta foi refeita com a paginação completa em 02/11/2026; em 2025, Bom Jesus do Tocantins não retornou linhas no Anexo I-E (consulta de 03/11/2026) |
 | [RN-FNT-11](regras-por-fonte.md) | Coluna de município nas tabelas do CAGED e do IDEB; `table_id` do eleitorado (TSE) e do Censo Escolar |
 | [RN-FON-15](consumo-de-fontes.md) e [RN-FNT-14](regras-por-fonte.md) | Se a planilha do SEEG pode ficar no repositório e o que conta como dado bruto "grande" (conflito 16) |

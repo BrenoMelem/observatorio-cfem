@@ -148,11 +148,11 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 
 ### RN-TMP-15: Finanças a partir de 2013 pelo SICONFI
 - **Status:** DECIDIDA
-- **Regra:** Para 2013 em diante, as finanças municipais devem vir do SICONFI, e o FINBRA no IPEADATA só serve à série pré-2013, se ela for necessária.
-- **Motivo:** O SICONFI é a fonte primária por API para o período.
-- **Exemplo:** Despesa por função de 2013 a 2025 vem do SICONFI.
-- **Exceções:** A emenda entre as duas fontes numa mesma série não foi definida (**EM ABERTO**).
-- **Fonte:** BLOCOS §Bloco 6 (Finanças históricas); DECISÕES §Rotas de coleta por fonte.
+- **Regra:** Para 2013 em diante, as finanças municipais devem vir do SICONFI. Se algum dia houver série financeira anterior a 2013, ela deve vir de outra fonte, ser publicada como série separada, com o nome da fonte e da classificação de função, e com um corte visível em 2013; ela nunca é emendada com a série do SICONFI.
+- **Motivo:** O SICONFI é a fonte primária por API para o período, e as funções das duas fontes podem não corresponder (as séries municipais do IPEADATA usam nomes como "educação e cultura" e "saúde e saneamento"; a equivalência não foi verificada). Juntá-las mostraria um salto que não existiu.
+- **Exemplo:** Despesa por função de 2013 a 2025 vem do SICONFI. Nenhum indicador previsto precisa de dado anterior a 2013.
+- **Exceções:** Os códigos `FINBRA_DESP` e `FINBRA_REC`, citados em BLOCOS e DECISÕES, não existem no IPEADATA em 10/11/2026 (ver Notas de evidência); a fonte da série pré-2013, se for pedida, deve ser escolhida então.
+- **Fonte:** DECISÃO-MANTENEDOR de 10/11/2026 (série pré-2013 separada, sem emenda); BLOCOS §Bloco 6 (Finanças históricas); DECISÕES §Rotas de coleta por fonte.
 - **Relacionadas:** RN-FNT-04
 
 ### RN-TMP-16: BLOCOS prevalece sobre PLANO nos períodos
@@ -170,3 +170,11 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 - **Exemplo:** O INEP não divulga a nota municipal de 2023 em certos casos de participação insuficiente; nesse caso o valor fica como não divulgado, nunca como zero (RN-MOD-12).
 - **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026; PLANO §Bloco 4; BLOCOS §Bloco 4; DECISÕES §Tabelas da Base dos Dados confirmadas.
 - **Relacionadas:** RN-MOD-09, RN-MOD-12, RN-TMP-01, RN-TMP-16
+
+## Notas de evidência
+
+Evidência datada que sustenta ou qualifica as regras acima. Nenhuma nota muda o status da regra. Ordem: a das regras.
+
+#### RN-TMP-15: Finanças a partir de 2013 pelo SICONFI
+
+- **Evidência de 10/11/2026 (catálogo de metadados do IPEADATA, 4.135 séries, consulta direta à API pública):** nenhuma série tem `FINBRA` no código ou no nome; os códigos `FINBRA_DESP` e `FINBRA_REC` citados em BLOCOS §Bloco 6 e em DECISÕES não existem. Há séries municipais anuais da Secretaria do Tesouro Nacional com outros códigos, por exemplo `DESPORM` (despesa total empenhada), `DFEDUCM` (despesa por função, educação e cultura) e `DFSAUSM` (saúde e saneamento), com atualização de 07/07/2026. Os nomes das funções seguem uma classificação diferente da do SICONFI (inferência pelos nomes; as duas estruturas não foram comparadas). A cobertura por município não foi conferida. Não se sabe se essas séries são a mesma base que BLOCOS chamava de FINBRA.
