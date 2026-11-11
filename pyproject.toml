@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Scripts de laboratório e teste do Observatório CFEM / RI Carajás (não é o produto)."
 requires-python = ">=3.12"
 dependencies = [
+    "certifi>=2026.10.23",
     "httpx>=0.27",
     "openpyxl>=3.1",
 ]

@@ -1,0 +1,94 @@
+# Arquiva os arquivos CFEM da ANM numa Release do GitHub quando eles mudam.
+# Regra RN-TMP-18. Os arquivos brutos vão para Releases deste repositório; o histórico (manifestos) fica na
+# branch de dados `arquivo-anm`, para não haver commit automático na `main` nem na `develop`.
+name: Arquivar arquivos da ANM
+
+on:
+  schedule:
+    - cron: "0 */4 * * *" # a cada 4 horas (00, 04, 08, 12, 16 e 20 UTC)
+  workflow_dispatch:
+
+permissions:
+  contents: write # cria a Release e grava o manifesto
+
+concurrency:
+  group: arquivar-anm
+  cancel-in-progress: false
+
+jobs:
+  arquivar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Trazer a branch de dados com os manifestos
+        uses: actions/checkout@v6
+        with:
+          ref: arquivo-anm
+          path: registros
+
+      - uses: astral-sh/setup-uv@v7
+
+      - name: Instalar dependências
+        run: uv sync --frozen
+
+      - name: Baixar a versão anterior arquivada (se houver)
+        run: |
+          mkdir -p "$RUNNER_TEMP/anterior"
+          ULTIMA=$(gh release list --limit 100 --json tagName --jq '[.[] | select(.tagName | startswith("anm-"))][0].tagName // empty')
+          if [ -n "$ULTIMA" ]; then
+            echo "Última coleta arquivada: $ULTIMA"
+            gh release download "$ULTIMA" --dir "$RUNNER_TEMP/anterior" --pattern '*.csv.gz'
+            gunzip -f "$RUNNER_TEMP"/anterior/*.csv.gz
+          fi
+
+      - name: Baixar da ANM e comparar
+        id: coleta
+        run: |
+          uv run python -m scripts.cfem.arquivar_anm \
+            --pasta "$RUNNER_TEMP/novo" --anterior "$RUNNER_TEMP/anterior" \
+            --manifesto registros/manifesto.json --github-output "$GITHUB_OUTPUT"
+
+      - name: Publicar a Release com os arquivos brutos
+        if: steps.coleta.outputs.mudou == 'true'
+        run: |
+          cd "$RUNNER_TEMP/novo"
+          gzip -9 -k arrecadacao.csv distribuicao.csv autuacao.csv
+          gh release create "${{ steps.coleta.outputs.tag }}" ./*.csv.gz diferencas.md \
+            --repo "$GITHUB_REPOSITORY" --target main \
+            --title "Arquivos da ANM de ${{ steps.coleta.outputs.tag }}" --notes-file diferencas.md
+
+      - name: Arquivar documentos avulsos (PDF)
+        id: docs
+        run: |
+          uv run python -m scripts.cfem.arquivar_documentos \
+            --pasta "$RUNNER_TEMP/documentos" --manifesto registros/manifesto-documentos.json --github-output "$GITHUB_OUTPUT"
+
+      - name: Publicar a Release dos documentos
+        if: steps.docs.outputs.mudou == 'true'
+        run: |
+          TAG="${{ steps.docs.outputs.tag }}"
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
+            gh release create "$TAG" --target main --title "Documentos da ANM de $TAG" \
+              --notes "Documentos avulsos arquivados; o histórico está na branch arquivo-anm (manifesto-documentos.json)."
+          fi
+          gh release upload "$TAG" "$RUNNER_TEMP"/documentos/* --clobber
+
+      - name: Gravar os manifestos
+        if: steps.coleta.outputs.mudou == 'true' || steps.docs.outputs.mudou == 'true'
+        run: |
+          cd registros
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ./*.json
+          git commit -m "dados: manifestos da coleta de $(date -u +%Y-%m-%d)"
+          git push origin HEAD:arquivo-anm
+
+      - name: Falhar se algum documento não baixou
+        if: steps.docs.outputs.erros != '0'
+        run: |
+          echo "Algum documento de documentos.json não foi baixado; veja o passo anterior." >&2
+          exit 1
