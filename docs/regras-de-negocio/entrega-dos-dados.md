@@ -67,7 +67,7 @@ As fontes divergiam sobre a forma da entrega: DECISÕES e PLANO descrevem uma ca
 - **Regra:** O assistente deve ser avaliado por: taxa de respostas corretas com citação, recusa de inventar número ausente, latência (p50 e p95), disponibilidade, custo por consulta e cobertura de perguntas dos 12 municípios, com um conjunto de perguntas de respostas verificadas pela equipe.
 - **Motivo:** Dá critério objetivo para aceitar o assistente.
 - **Exemplo:** Conjunto de perguntas sobre população e CFEM de Canaã dos Carajás e Parauapebas com respostas verificadas.
-- **Exceções:** As metas numéricas de cada critério estão **EM ABERTO**; não há evidência de que a avaliação tenha sido executada.
+- **Exceções:** As metas numéricas de cada critério estão **EM ABERTO**; não há evidência de que a avaliação tenha sido executada. Em 11/11/2026 o mantenedor definiu a prioridade: o assistente é etapa posterior ao tratamento dos dados, e os critérios e as metas só serão fixados quando essa etapa começar (a regra segue PROPOSTA; não é esquecimento, é ordem de trabalho).
 - **Fonte:** VAL-15/10 §Resposta ao orientador (item 2). O próprio VAL-15/10 chama os critérios de "propostos".
 - **Relacionadas:** RN-ENT-07
 
