@@ -16,7 +16,6 @@ Estas regras estão decididas no essencial, mas um ponto delas continua sem deci
 
 | Regra | Ponto em aberto |
 | --- | --- |
-| [RN-FNT-04](regras-por-fonte.md) | Demonstrativo(s) e contas do SICONFI e se o escopo fica em função e subfunção; o estágio da despesa foi decidido em 30/10/2026 (três indicadores separados); o nome do anexo muda em 2013; em 31/10/2026 a MSC orçamentária (fonte `1708`) foi coletada para 2022–2026, mas o mapeamento das contas para os estágios e a conciliação com a DCA não foram feitos; a coleta foi refeita com a paginação completa em 02/11/2026; em 2025, Bom Jesus do Tocantins não retornou linhas no Anexo I-E (consulta de 03/11/2026) |
 | [RN-FNT-11](regras-por-fonte.md) | Coluna de município nas tabelas do CAGED e do IDEB; `table_id` do eleitorado (TSE) e do Censo Escolar |
 | [RN-IND-09](indicadores-derivados-e-compostos.md) | Base da participação da RI Carajás no PIB (PIB do Pará, da RI ou outra) e nomes finais dos dois indicadores no manifesto |
 | [RN-CFE-25](mineracao-cfem.md) | Início da regra de 60/15/15/10: 01/08/2017 (Lei 13.540/2017, art. 4º, III) ou 2018 (`obcefem_api`); destino da cota dos afetados enquanto não houver decreto ou hipótese do inciso VII (art. 2º, § 3º, Lei 14.514/2022) |

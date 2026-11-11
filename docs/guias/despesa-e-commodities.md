@@ -6,7 +6,7 @@ Estes adaptadores ampliam o protótipo local. Não definem a arquitetura de prod
 
 Execute `uv run python -m scripts.financas.dca_lote --ano 2024`. O script consulta os 12 códigos IBGE como texto, valida exercício, anexo, paginação e as colunas de despesa empenhada, liquidada e paga, sem somar os três estágios. As linhas são guardadas em `output/observatorio/tratado/siconfi/` e o relatório em `output/observatorio/qualidade/`. A rota `/api/v1/despesa-funcao` responde 503 enquanto não houver lote homologado.
 
-Ainda faltam decidir as contas e o recorte função/subfunção, além de uma reconciliação independente (RN-FNT-04, RN-TMP-04 e RN-VPU-07). Nenhuma dessas decisões foi presumida e nenhuma despesa foi publicada.
+O escopo foi decidido em 11/11/2026 (RN-FNT-04): só a DCA, função e subfunção, com a linha "Despesas (Exceto Intraorçamentárias)" como controle de fechamento, e a série desde 2013 (anexo `Anexo I-E` em 2013, `DCA-Anexo I-E` de 2014 em diante). Ainda faltam o tratamento de retificações e uma reconciliação independente (RN-TMP-04 e RN-VPU-07). Nenhuma dessas decisões foi presumida e nenhuma despesa foi publicada.
 
 ## Pink Sheet, ferro e cobre (fonte principal)
 
