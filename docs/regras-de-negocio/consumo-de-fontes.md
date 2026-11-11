@@ -130,12 +130,12 @@ O nível mede a forma de acesso, não a qualidade do dado. Uma fonte B pode ser 
 
 ### RN-FON-15: Dado bruto fora do Git quando grande
 - **Status:** DECIDIDA
-- **Regra:** O dado bruto baixado não deve ser versionado quando for grande, e só os agregados e os metadados devem ser versionados.
+- **Regra:** O dado bruto baixado não deve ser versionado quando for grande, e só os agregados e os metadados devem ser versionados. Um arquivo bruto que não caiba no Git (o `git push` comum recusa arquivos acima de 100 MB) pode ser arquivado numa Release do GitHub, com tag própria, como já se faz com a ANM (RN-TMP-18).
 - **Motivo:** Evita repositório inchado e lento.
 - **Exemplo:** Os CSVs completos da ANM ficam fora do Git por terem centenas de MB.
-- **Exceções:** BLOCOS diz que a planilha do SEEG é "guardada no repositório" e não define o que conta como "grande". Isso está **EM ABERTO** (conflito 16 em [pendencias.md](pendencias.md)).
-- **Fonte:** DECISÕES §Arquitetura e padrões de dados (Separar raw de processed); VAL-15/10 §Rodada adicional; BLOCOS §Bloco 5 (CO₂).
-- **Relacionadas:** RN-FNT-14
+- **Exceções:** BLOCOS §Bloco 5 diz que a planilha do SEEG é "guardada no repositório"; a decisão de 10/11/2026 contraria isso (ver RN-FNT-14): a planilha bruta do SEEG fica fora do Git. O limite exato de "grande" não foi fixado; a regra vale para o que for grande demais para o Git, como o SEEG (229 MB em 10/11/2026), sem depender de um número.
+- **Fonte:** DECISÕES §Arquitetura e padrões de dados (Separar raw de processed); VAL-15/10 §Rodada adicional; BLOCOS §Bloco 5 (CO₂); DECISÃO-MANTENEDOR de 10/11/2026.
+- **Relacionadas:** RN-FNT-14, RN-TMP-18
 
 ### RN-FON-16: Automatizar onde há API, aceitar arquivo estável, documentar o que é manual
 - **Status:** DECIDIDA

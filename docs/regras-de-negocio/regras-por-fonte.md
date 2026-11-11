@@ -124,8 +124,9 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Regra:** As emissões de CO₂ do SEEG devem ser obtidas por download de planilha por edição, porque a fonte não tem API confirmada.
 - **Motivo:** Não há rota automatizável.
 - **Exemplo:** Série municipal do SEEG, com gás, setor e edição.
-- **Exceções:** Se a planilha baixada pode ser guardada no repositório está **EM ABERTO** (conflito 16), agora só pelo tamanho (RN-FON-15).
-- **Fonte:** DECISÕES §Rotas de coleta por fonte; BLOCOS §Bloco 5; DECISÃO-MANTENEDOR de 24/10/2026 (conflito 16 em aberto).
+- **Planilha no repositório (decidido em 10/11/2026):** a planilha bruta do SEEG fica fora do Git. Cada edição baixada pode ser arquivada numa Release do GitHub, com tag própria (por exemplo, `seeg-14.0`), como se faz com a ANM (RN-TMP-18). No Git ficam só o recorte dos 12 municípios e os metadados: edição, endereço de origem, data do download, SHA-256 e a citação pedida pelo SEEG ("Fonte: SEEG – Sistema de Estimativa de Emissões e Remoções de Gases de Efeito Estufa, Observatório do Clima, acessado em [data] – seeg.eco.br").
+- **Exceções:** Contraria BLOCOS §Bloco 5 (planilha "guardada no repositório"). Na planilha municipal, a coluna `ID Território` traz "1" antes do código IBGE de 7 dígitos (por exemplo, `14104428` para Candói/PR, IBGE 4104428); o código do município deve ser reconstituído, não copiado (evidência de 10/11/2026, ver Notas de evidência).
+- **Fonte:** DECISÕES §Rotas de coleta por fonte; BLOCOS §Bloco 5; DECISÃO-MANTENEDOR de 24/10/2026 (conflito 16 em aberto) e de 10/11/2026 (conflito 16 decidido).
 - **Relacionadas:** RN-FON-15, RN-TMP-11
 
 ### RN-FNT-15: Não calcular homicídio a partir do SIM cru
@@ -204,3 +205,7 @@ Evidência datada que sustenta ou qualifica as regras acima. Cada nota é o text
 #### RN-FNT-12: Frota de veículos
 
 - **Evidência de 28/10/2026:** o arquivo "Frota por município e tipo" de setembro de 2026, baixado da página da Senatran no gov.br, tem 5.572 linhas de município em 27 UFs, uma linha por UF e município (sem repetição), e a soma dos municípios (133.337.839) fecha com o total do cabeçalho. A frota é um estoque mensal por tipo de veículo (`AUTOMOVEL`, `MOTOCICLETA`, `CAMINHAO` e outros). O Pará tem 144 municípios, entre eles Parauapebas, Canaã dos Carajás, Marabá e Curionópolis. O arquivo não traz código IBGE: o município vem só como nome em maiúsculas e sem acento, com um erro de grafia ("BARAO D0 MONTE ALTO"). A identificação por código IBGE exigiria cruzar o nome com a lista oficial de municípios, e essa regra de cruzamento ainda não foi decidida. A Senatran publica arquivos até setembro de 2026.
+
+#### RN-FNT-14: Emissões do SEEG por download
+
+- **Evidência de 10/11/2026 (links indicados pelo mantenedor; arquivos baixados com User-Agent de navegador):** a edição 14.0 do SEEG, com última atualização em 09/11/2026, tem dois arquivos principais: `Dados-municipais-resumido-CO2e-GWP-AR5-14.0.xlsx` (229.073.857 bytes) e `Dados-nacionais-14.0.xlsx` (206.691.462 bytes), em `seeg.obass.haus/wp-content/uploads/2026/11/`; o mantenedor indicou também uma pasta no Google Drive (`drive.google.com/drive/folders/1Au51aKx2jjiVQ1dSKFl3CaUW4tAhtxxh`), que não foi aberta. O servidor respondeu HTTP 200 sem `Content-Length` e com tipo `text/plain`. A planilha municipal tem as abas `Leia antes`, `Consulta Ranking` e `Dados`; a aba `Dados` tem 65 colunas: emissão/remoção/bunker, setor, categoria, subcategoria, recorte, atividade geral, estado, município, `ID Território` e uma coluna por ano, de 1970 a 2025. Ler a aba com 229 MB leva mais de um minuto só para abrir. O tamanho de 229 MB é maior que o limite de 100 MB do `git push` comum, o que sustenta a decisão de deixar a planilha fora do Git.
