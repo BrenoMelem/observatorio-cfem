@@ -27,3 +27,7 @@ Usar Node.js padrão para a prova de arquitetura. A coleta consulta o SIDRA por 
 ## Nota de 08/11/2026
 
 O protótipo foi portado de Node.js para Python, gerenciado com `uv`, e está em `scripts/` (ver `scripts/README.md`). A decisão provisória acima vale pela arquitetura (arquivos locais por camada, API que lê só `publicado/`, troca atômica), não pela linguagem. A escolha da stack de produção continua pendente.
+
+## Nota de 11/11/2026
+
+As decisões de produção começaram a ser registradas: o produto mora neste repositório, fora de `scripts/` ([ADR-007](ADR-007-onde-mora-o-produto.md)), e será escrito em Python 3.12 ou superior, com `uv` ([ADR-008](ADR-008-linguagem-e-ambiente.md)). Banco, agendador e hospedagem seguem pendentes; ver o [mapa de decisões](README.md).

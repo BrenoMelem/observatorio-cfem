@@ -12,7 +12,8 @@ O projeto ainda não tem produto: a documentação é a parte central do reposit
 | Rodar uma coleta ou o protótipo local | [guias/](guias/) e [../scripts/README.md](../scripts/README.md) |
 | Arquivar as versões dos arquivos da ANM | [guias/arquivo-anm.md](guias/arquivo-anm.md) |
 | Saber o que uma execução encontrou em certa data | [registros/](registros/) |
-| Conferir uma decisão técnica | [adr/](adr/) |
+| Conferir uma decisão técnica ou ver as que faltam | [adr/README.md](adr/README.md) |
+| Ler a análise da Fase 0 (rotas existentes, dimensões do site, propostas para a camada publicada e o assistente) | [adr/analise-fase-0-camada-publicada-e-assistente.md](adr/analise-fase-0-camada-publicada-e-assistente.md) |
 | Ver as rotas do protótipo da API | [api/openapi.yaml](api/openapi.yaml) |
 
 ## Pastas
