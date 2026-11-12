@@ -39,8 +39,8 @@ Na ordem em que precisam ser tomadas.
 | # | Decisão | Área | Depende de | Situação | Registro |
 | --- | --- | --- | --- | --- | --- |
 | 1 | Onde mora o produto e a relação com a `obcefem_api` | Infraestrutura e processo | nenhuma | aceita em 11/11/2026 | [ADR-006](ADR-006-onde-mora-o-produto.md) |
-| 2 | Linguagem e ambiente de execução do backend | API e backend | 1 | próxima | |
-| 3 | Armazenamento das camadas (bruto, qualidade, publicado) | Dados e coleta | 1, 2 | pendente | |
+| 2 | Linguagem e ambiente de execução do backend | API e backend | 1 | aceita em 11/11/2026 | [ADR-007](ADR-007-linguagem-e-ambiente.md) |
+| 3 | Armazenamento das camadas (bruto, qualidade, publicado) | Dados e coleta | 1, 2 | próxima | |
 | 4 | Framework e contrato da API (inclui o formato híbrido de resposta) | API e backend | 2, 3 | pendente | |
 | 5 | Execução e agendamento das coletas, com a abertura de issue na falha | Dados e coleta | 2, 3 | pendente | |
 | 6 | Hospedagem e segredos | Infraestrutura e processo | 3, 4, 5 | pendente | |
@@ -55,3 +55,4 @@ Depois das decisões 1 a 3 já é possível criar a estrutura inicial do código
 | --- | --- | --- |
 | [ADR-005](ADR-005-pipeline-populacao.md) | Protótipo local do pipeline de população | aceito para o protótipo local em 30/10/2026 |
 | [ADR-006](ADR-006-onde-mora-o-produto.md) | Onde mora o produto e a relação com a `obcefem_api` | aceito pelo mantenedor em 11/11/2026 |
+| [ADR-007](ADR-007-linguagem-e-ambiente.md) | Linguagem e ambiente de execução do backend | aceito pelo mantenedor em 11/11/2026 |
