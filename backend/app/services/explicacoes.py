@@ -20,4 +20,3 @@ def explicacao(indicador: str) -> str:
                 textos.append(linha[:300])
                 break
     return " ".join(textos)[:1200]
-
