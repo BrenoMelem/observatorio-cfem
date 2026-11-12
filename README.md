@@ -6,7 +6,7 @@ Projeto de pesquisa e desenvolvimento de um observatório de dados públicos sob
 
 O repositório reúne a pesquisa de viabilidade, o mapeamento de fontes e indicadores, validações exploratórias e um protótipo local do pipeline de população. A pesquisa diferencia arrecadação da CFEM, distribuição aos entes beneficiários e autuações, que são medidas distintas.
 
-O observatório ainda não tem backend de produção. Há um protótipo local do pipeline de população estimada e uma preparação dos dados da CFEM arrecadada; limitações, validações pendentes e decisões de produção seguem documentadas.
+Há uma API de leitura da camada publicada em `backend/`, ainda sem implantação. Ela expõe a população homologada quando o arquivo publicado está disponível e informa explicitamente as lacunas dos demais indicadores. Há também um protótipo local do pipeline de população estimada e uma preparação dos dados da CFEM arrecadada; limitações e validações pendentes seguem documentadas.
 
 ## Estrutura
 
@@ -14,6 +14,7 @@ O observatório ainda não tem backend de produção. Há um protótipo local do
 - `docs/regras-de-negocio/`: regras e pendências do projeto.
 - `docs/regras-de-negocio/fontes/pesquisa-observatorio-cfem/`: relatório de viabilidade, fontes, bibliografia e pacote LaTeX.
 - `scripts/`: todo o código, em Python com [uv](https://docs.astral.sh/uv/): coleta, validação e reconciliação das fontes, protótipo local da API, notebook de laboratório e testes. Veja o [mapa em scripts/README.md](scripts/README.md).
+- `backend/`: API de leitura da camada publicada por dimensão, separada do laboratório. Veja [como executar](backend/README.md).
 - `data/`: referências versionadas (população do IBGE por ano) e manifesto de indicadores.
 - `docs/guias/` e `docs/registros/`: como rodar as coletas do protótipo e o que cada execução encontrou, por data.
 - `docs/adr/` e `docs/api/`: decisões técnicas e o esboço do contrato do protótipo.
