@@ -5,7 +5,7 @@ API de leitura da camada publicada, separada dos scripts de laboratório. Lê so
 ```powershell
 uv sync --project backend
 uv run --project backend uvicorn app.main:app --app-dir backend
-uv run --project backend pytest
+uv run --project backend pytest backend/tests
 uv run --project backend ruff check backend/app backend/tests
 ```
 

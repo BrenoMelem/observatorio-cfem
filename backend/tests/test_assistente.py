@@ -1,8 +1,10 @@
 """Avaliação offline: respostas pontuais, recusa, citação e entrada hostil."""
 import json
 
+import httpx
 from fastapi.testclient import TestClient
 
+from app.llm.redator import MockRedator
 from app.main import app
 from app.repositories import publicacao
 
@@ -49,3 +51,28 @@ def test_acao_permitida_e_limite_de_entrada(tmp_path, monkeypatch):
     assert dados["acoes"][0]["tipo"] == "restaurar"
     assert cliente.post("/api/v1/assistente", json={"pergunta": "x" * 9000,
                                                     "contexto": CONTEXTO}).status_code == 413
+
+
+def test_municipio_fora_do_recorte_nao_usa_contexto(tmp_path, monkeypatch):
+    cliente = _cliente(tmp_path, monkeypatch)
+    dados = cliente.post("/api/v1/assistente", json={"pergunta": "Qual a população de Belém em 2025?",
+                                                    "contexto": CONTEXTO}).json()
+    assert not dados["citacoes"] and "89.524" not in dados["resposta"]
+
+
+def test_redacao_livre_nao_entra_na_resposta(tmp_path, monkeypatch):
+    cliente = _cliente(tmp_path, monkeypatch)
+    monkeypatch.setattr(MockRedator, "introducao", lambda *_: "A população dobrou e atingiu um milhão.")
+    dados = cliente.post("/api/v1/assistente", json={"pergunta": "Qual a população de Canaã dos Carajás em 2025?",
+                                                    "contexto": CONTEXTO}).json()
+    assert "dobrou" not in dados["resposta"] and "89.524" in dados["resposta"]
+
+
+def test_timeout_do_provedor_e_controlado(tmp_path, monkeypatch):
+    cliente = _cliente(tmp_path, monkeypatch)
+    def falhar(*_):
+        raise httpx.ReadTimeout("tempo esgotado")
+    monkeypatch.setattr(MockRedator, "introducao", falhar)
+    resposta = cliente.post("/api/v1/assistente", json={"pergunta": "Qual a população de Canaã dos Carajás em 2025?",
+                                                     "contexto": CONTEXTO})
+    assert resposta.status_code == 503

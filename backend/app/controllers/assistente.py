@@ -3,8 +3,10 @@ import os
 import time
 from collections import defaultdict, deque
 
+import httpx
 from fastapi import APIRouter, HTTPException, Request
 from pydantic import ValidationError
+from starlette.concurrency import run_in_threadpool
 
 from app.dtos.assistente import Pergunta, Resposta
 from app.llm.redator import redator
@@ -34,10 +36,12 @@ async def assistente(request: Request):
         entrada = Pergunta.model_validate_json(corpo)
         if any(len(h) > 500 for h in entrada.historico):
             raise HTTPException(422, "Histórico muito longo")
-        return responder(entrada, redator())
+        return await run_in_threadpool(responder, entrada, redator())
     except ValidationError as erro:
         raise HTTPException(422, detail=erro.errors(include_context=False)) from erro
     except PublicacaoInvalida as erro:
         raise HTTPException(503, detail=str(erro)) from erro
     except RuntimeError as erro:
         raise HTTPException(503, detail=str(erro)) from erro
+    except httpx.HTTPError as erro:
+        raise HTTPException(503, detail="Provedor de redação indisponível") from erro

@@ -1,4 +1,5 @@
 """Contratos públicos da camada publicada (RN-MOD-03)."""
+import math
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, model_validator
@@ -23,6 +24,8 @@ class Observacao(BaseModel):
 
     @model_validator(mode="after")
     def conferir_valor(self):
+        if self.valor is not None and not math.isfinite(self.valor):
+            raise ValueError("Valor deve ser finito")
         if self.natureza_valor == "informado" and (self.valor is None or self.valor == 0):
             raise ValueError("Valor informado deve ser diferente de zero")
         if self.natureza_valor == "zero real" and self.valor != 0:

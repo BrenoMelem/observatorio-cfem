@@ -58,6 +58,12 @@ def test_publicacao_invalida_nao_e_exposta(tmp_path, monkeypatch):
     assert cliente.get("/api/v1/dimensoes/social.csv").status_code == 503
 
 
+def test_valor_nao_finito_bloqueia_publicacao(tmp_path, monkeypatch):
+    for valor in (float("nan"), float("inf")):
+        cliente = _cliente(tmp_path, monkeypatch, [_observacao() | {"valor": valor}])
+        assert cliente.get("/api/v1/dimensoes/social").status_code == 503
+
+
 def test_filtros_invalidos(tmp_path, monkeypatch):
     cliente = _cliente(tmp_path, monkeypatch)
     assert cliente.get("/api/v1/dimensoes/inexistente").status_code == 404

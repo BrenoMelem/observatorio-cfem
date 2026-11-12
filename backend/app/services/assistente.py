@@ -51,9 +51,6 @@ def responder(entrada: Pergunta, redator: Redator) -> Resposta:
                         limitacoes=["O pacote publicado de população não está disponível."], acoes=acoes)
     nomes = {o.municipio_nome: o.municipio_id for o in observacoes if o.municipio_nome}
     mencionados = [codigo for nome, codigo in nomes.items() if normalizar(nome) in pergunta]
-    if not mencionados:
-        mencionados = [codigo for nome, codigo in nomes.items()
-                       if any(normalizar(nome) == normalizar(c) for c in entrada.contexto.comparacoes)]
     mencionados = sorted(set(mencionados))
     if len(mencionados) != 1:
         return Resposta(resposta="Indique um município da RI Carajás para consultar a população.", citacoes=[],
@@ -64,7 +61,7 @@ def responder(entrada: Pergunta, redator: Redator) -> Resposta:
         return Resposta(resposta="Não há cálculo validado compatível com essa comparação.", citacoes=[],
                         limitacoes=["Esta fase consulta valores pontuais; crescimento e comparações exigem método definido."],
                         acoes=acoes)
-    ano = anos[0] if anos else max(o.ano for o in observacoes)
+    ano = anos[0] if anos else max(o.ano for o in observacoes if o.municipio_id == mencionados[0])
     encontrados = [o for o in observacoes if o.municipio_id == mencionados[0] and o.ano == ano
                    and o.estado_validacao == "validado" and o.valor is not None]
     if len(encontrados) != 1:
@@ -73,8 +70,8 @@ def responder(entrada: Pergunta, redator: Redator) -> Resposta:
     o = encontrados[0]
     base = "População residente estimada, distinta do Censo."
     introducao = redator.introducao(entrada.pergunta, base)
-    # Nenhum número produzido pelo LLM entra na resposta; em caso de saída inesperada, usar texto fixo.
-    if not introducao or re.search(r"\d", introducao) or len(introducao) > 300:
+    # O provedor escolhe apenas entre frases aprovadas; nenhum fato livre entra na resposta.
+    if introducao not in {base, "Esta é uma estimativa de população residente, distinta do Censo."}:
         introducao = base
     numero = f"{int(o.valor):,}".replace(",", ".")
     resposta = f"{introducao} {o.municipio_nome}: {numero} {o.unidade} em {o.ano}. Fonte: {o.fonte}, edição {o.edicao_fonte}."
