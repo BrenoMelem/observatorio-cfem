@@ -10,6 +10,7 @@ O projeto ainda não tem produto: a documentação é a parte central do reposit
 | Saber o que ainda não foi decidido | [regras-de-negocio/pendencias.md](regras-de-negocio/pendencias.md) |
 | Ver como o protótipo e os outros repositórios se comparam com as regras | [regras-de-negocio/divergencias-entre-repositorios.md](regras-de-negocio/divergencias-entre-repositorios.md) |
 | Rodar uma coleta ou o protótipo local | [guias/](guias/) e [../scripts/README.md](../scripts/README.md) |
+| Rodar a API da camada publicada por dimensão | [../backend/README.md](../backend/README.md) |
 | Arquivar as versões dos arquivos da ANM | [guias/arquivo-anm.md](guias/arquivo-anm.md) |
 | Saber o que uma execução encontrou em certa data | [registros/](registros/) |
 | Conferir uma decisão técnica ou ver as que faltam | [adr/README.md](adr/README.md) |
