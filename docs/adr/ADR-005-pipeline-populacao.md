@@ -30,4 +30,4 @@ O protótipo foi portado de Node.js para Python, gerenciado com `uv`, e está em
 
 ## Nota de 11/11/2026
 
-As decisões de produção começaram a ser registradas: o produto mora neste repositório, fora de `scripts/` ([ADR-006](ADR-006-onde-mora-o-produto.md)), e será escrito em Python 3.12 ou superior, com `uv` ([ADR-007](ADR-007-linguagem-e-ambiente.md)). Banco, agendador e hospedagem seguem pendentes; ver o [mapa de decisões](README.md).
+As decisões de produção começaram a ser registradas: o produto mora neste repositório, fora de `scripts/` ([ADR-007](ADR-007-onde-mora-o-produto.md)), e será escrito em Python 3.12 ou superior, com `uv` ([ADR-008](ADR-008-linguagem-e-ambiente.md)). Banco, agendador e hospedagem seguem pendentes; ver o [mapa de decisões](README.md).

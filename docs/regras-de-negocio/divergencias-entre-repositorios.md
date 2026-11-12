@@ -6,7 +6,7 @@ Registro da comparação de 08/11/2026 e do que o mantenedor decidiu. A decisão
 
 | Repositório | O que é |
 | --- | --- |
-| `observatorio-cfem` (este) | Regras de negócio, pesquisa e scripts de laboratório. Ainda não é o produto; o backend de produção será construído aqui (decisão de 11/11/2026, [ADR-006](../adr/ADR-006-onde-mora-o-produto.md)) |
+| `observatorio-cfem` (este) | Regras de negócio, pesquisa e scripts de laboratório. Ainda não é o produto; o backend de produção será construído aqui (decisão de 11/11/2026, [ADR-007](../adr/ADR-007-onde-mora-o-produto.md)) |
 | `obcefem_api` | Protótipo funcional: API em FastAPI e painel web de arrecadação e distribuição da CFEM, com atualização diária. Publicado na Vercel |
 | `obcefem` | Site institucional estático, com uma página por dimensão. Os gráficos das dimensões trazem o selo "dados reais" ou "dados fictícios (protótipo)" e os links "Disponível" apontam para o painel da `obcefem_api` |
 

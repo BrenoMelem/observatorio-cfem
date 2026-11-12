@@ -1,18 +1,18 @@
-# ADR-007 — Linguagem e ambiente de execução do backend
+# ADR-008 — Linguagem e ambiente de execução do backend
 
 **Status:** aceito pelo mantenedor em 11/11/2026
 **Data:** 11/11/2026
 **Área:** API e backend
-**Depende de:** ADR-006
+**Depende de:** ADR-007
 
 ## Contexto
 
-Com o produto morando neste repositório (ADR-006), falta escolher a linguagem do backend, a versão e a ferramenta que gerencia ambiente e dependências. O protótipo em `scripts/` estar em Python com `uv` não decidia isso (ADR-005, nota de 08/11/2026).
+Com o produto morando neste repositório (ADR-007), falta escolher a linguagem do backend, a versão e a ferramenta que gerencia ambiente e dependências. O protótipo em `scripts/` estar em Python com `uv` não decidia isso (ADR-005, nota de 08/11/2026).
 
 Restrições que pesam:
 
 - Equipe de 1 a 2 pessoas que dominam Python; primeira versão no ar até maio de 2027 (restrições do mantenedor de 11/11/2026).
-- A lógica da CFEM da `obcefem_api`, cerca de 2.000 linhas em Python com pandas, será portada para cá (ADR-006).
+- A lógica da CFEM da `obcefem_api`, cerca de 2.000 linhas em Python com pandas, será portada para cá (ADR-007).
 - O protótipo e o arquivamento da ANM já rodam em Python 3.12 com `uv` no GitHub Actions (`pyproject.toml`, `.github/workflows/arquivar-anm.yml`); a `obcefem_api` usa Python 3.12 no Docker.
 - As escolhas devem funcionar em plano gratuito (restrição do mantenedor de 11/11/2026).
 
@@ -38,6 +38,6 @@ Fica de fora: o framework da API, as bibliotecas de dados (pandas e outras), o a
 ## Consequências
 
 - Destrava a decisão 3 (armazenamento das camadas) e, com ela, a estrutura inicial do código.
-- O produto e o laboratório usam a mesma linguagem, mas continuam separados: o produto não importa de `scripts/` (ADR-006). Como os dois convivem no mesmo `pyproject.toml` ou em projetos separados fica para a decisão 8.
+- O produto e o laboratório usam a mesma linguagem, mas continuam separados: o produto não importa de `scripts/` (ADR-007). Como os dois convivem no mesmo `pyproject.toml` ou em projetos separados fica para a decisão 8.
 - Uma subida de versão precisa acontecer antes de outubro de 2028; rever antes disso se uma dependência deixar de publicar para a 3.12.
 - Voltar atrás na versão custa pouco (uma linha e a execução dos testes). Trocar de linguagem custaria reescrever tudo.
