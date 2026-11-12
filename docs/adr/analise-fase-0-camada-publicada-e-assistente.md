@@ -1,9 +1,23 @@
-# ADR-006 — Camada publicada por dimensão e assistente
+# Análise da Fase 0 — Camada publicada por dimensão e assistente
 
-- **Status:** PROPOSTA — rascunho da Fase 0; aguarda aprovação do mantenedor.
+- **Status:** documento de análise; não é um ADR e não registra decisão. As propostas abaixo aguardam decisão do mantenedor, uma por vez, pelo [mapa de decisões](README.md).
 - **Data:** 11/11/2026.
 - **Escopo:** análise de arquitetura. Nenhum código de produção, alteração de regra ou implantação nesta fase.
 - **Base:** branch criada de `origin/develop`, commit `a6e56cf`, após atualização da referência remota. Os arquivos locais não versionados não integram esta proposta.
+
+> **Nota de 11/11/2026.** Este documento foi criado como "ADR-006 — Camada publicada por dimensão e assistente", com status de proposta. Por decisão do mantenedor de 11/11/2026 ele deixou de ser um ADR, porque reúne várias decisões num só arquivo, e passou a servir de insumo: cada proposta virou uma decisão pendente do [mapa](README.md), com ADR próprio quando for aceita. O número ADR-006 não será reaproveitado. O texto das seções 1 a 7 ficou como estava; onde ele diz "este ADR" ou "ADR-006", leia "esta análise".
+>
+> | Proposta | Seção | Onde será decidida |
+> | --- | --- | --- |
+> | Produto neste repositório | 4.1 | Decidido: [ADR-007](ADR-007-onde-mora-o-produto.md) |
+> | Python 3.12 ou superior com `uv` | 4.1 | Decidido: [ADR-008](ADR-008-linguagem-e-ambiente.md) |
+> | Leitura de pacote publicado imutável, sem banco | 4.2 | Decisão 3 do mapa |
+> | Resposta híbrida em rotas novas por dimensão; OpenAPI 3.1 em arquivo novo | 4.4 e 4.5 | Decisão 4 |
+> | Produtor e transporte do pacote publicado (em aberto na análise) | 4.2 | Decisão 5 |
+> | Limites da Vercel | 4.3 | Decisão 6 |
+> | Pasta `backend/` com projeto e dependências próprios | 4.1 | Decisão 8 |
+> | Assistente em JSON síncrono, com números calculados pelo servidor | 4.3 | Decisão 9 |
+> | Plano das Fases 1 a 5 | 6 | Não é decisão: serve de roteiro depois das decisões; onde diz PR para a `develop`, vale a orientação do mantenedor em vigor |
 
 ## 1. Evidências e limites da análise
 

@@ -36,26 +36,27 @@ Levantadas em 11/11/2026. Cada uma cita a regra ou o arquivo de origem.
 
 Na ordem em que precisam ser tomadas.
 
-| # | Decisão | Área | Depende de | Situação | Registro |
-| --- | --- | --- | --- | --- | --- |
-| 1 | Onde mora o produto e a relação com a `obcefem_api` | Infraestrutura e processo | nenhuma | aceita em 11/11/2026 | [ADR-007](ADR-007-onde-mora-o-produto.md) |
-| 2 | Linguagem e ambiente de execução do backend | API e backend | 1 | aceita em 11/11/2026 | [ADR-008](ADR-008-linguagem-e-ambiente.md) |
-| 3 | Armazenamento das camadas (bruto, qualidade, publicado) | Dados e coleta | 1, 2 | próxima | |
-| 4 | Framework e contrato da API (inclui o formato híbrido de resposta) | API e backend | 2, 3 | pendente | |
-| 5 | Execução e agendamento das coletas, com a abertura de issue na falha | Dados e coleta | 2, 3 | pendente | |
-| 6 | Hospedagem e segredos | Infraestrutura e processo | 3, 4, 5 | pendente | |
-| 7 | Qualidade e entrega: testes, lint, CI e publicação | Infraestrutura e processo | 2, 6 | pendente | |
-| 8 | Organização do repositório e do fluxo de trabalho | Infraestrutura e processo | 1 a 7 | pendente | |
+| # | Decisão | Área | Depende de | Insumo na análise da Fase 0 | Situação | Registro |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Onde mora o produto e a relação com a `obcefem_api` | Infraestrutura e processo | nenhuma | seção 4.1 | aceita em 11/11/2026 | [ADR-007](ADR-007-onde-mora-o-produto.md) |
+| 2 | Linguagem e ambiente de execução do backend | API e backend | 1 | seção 4.1 | aceita em 11/11/2026 | [ADR-008](ADR-008-linguagem-e-ambiente.md) |
+| 3 | Armazenamento das camadas (bruto, qualidade, publicado) | Dados e coleta | 1, 2 | seção 4.2 | próxima | |
+| 4 | Framework e contrato da API (inclui o formato híbrido de resposta) | API e backend | 2, 3 | seções 4.4 e 4.5 | pendente | |
+| 5 | Execução e agendamento das coletas, com a abertura de issue na falha | Dados e coleta | 2, 3 | seção 4.2 (produtor e transporte, em aberto) | pendente | |
+| 6 | Hospedagem e segredos | Infraestrutura e processo | 3, 4, 5 | seção 4.3 | pendente | |
+| 7 | Qualidade e entrega: testes, lint, CI e publicação | Infraestrutura e processo | 2, 6 | seção 6 (Fase 5) | pendente | |
+| 8 | Organização do repositório e do fluxo de trabalho | Infraestrutura e processo | 1 a 7 | seção 4.1 (pasta `backend/`) | pendente | |
+| 9 | Assistente de IA: forma da resposta, onde roda e como usa a camada publicada | API e backend | 4, 6 | seções 2 (contrato do assistente) e 4.3 | pendente | |
 
 Depois das decisões 1 a 3 já é possível criar a estrutura inicial do código.
 
-O [ADR-006](ADR-006-backend-publicado-assistente-proposta.md) é uma proposta da Fase 0, ainda não aprovada, que trata de vários pontos deste mapa de uma vez (local do produto, leitura da camada publicada, assistente, resposta híbrida). Ele serve de insumo para as decisões 3 a 6; o que vale como decidido são os ADRs aceitos.
+A [análise da Fase 0](analise-fase-0-camada-publicada-e-assistente.md) não é um ADR: é o insumo das decisões 3 a 6, 8 e 9, e traz também o inventário das rotas existentes, a situação de cada dimensão do site e os conflitos com regras que não podem ser resolvidos por implementação. Ela nasceu como ADR-006 (proposta) e foi desmembrada por decisão do mantenedor de 11/11/2026; o número 006 não será reaproveitado.
 
 ## ADRs
 
 | ADR | Título | Status |
 | --- | --- | --- |
 | [ADR-005](ADR-005-pipeline-populacao.md) | Protótipo local do pipeline de população | aceito para o protótipo local em 30/10/2026 |
-| [ADR-006](ADR-006-backend-publicado-assistente-proposta.md) | Camada publicada por dimensão e assistente (Fase 0) | proposta, aguarda aprovação do mantenedor |
+| ADR-006 | Camada publicada por dimensão e assistente (Fase 0) | não é mais ADR desde 11/11/2026: virou a [análise da Fase 0](analise-fase-0-camada-publicada-e-assistente.md) |
 | [ADR-007](ADR-007-onde-mora-o-produto.md) | Onde mora o produto e a relação com a `obcefem_api` | aceito pelo mantenedor em 11/11/2026 |
 | [ADR-008](ADR-008-linguagem-e-ambiente.md) | Linguagem e ambiente de execução do backend | aceito pelo mantenedor em 11/11/2026 |

@@ -17,7 +17,7 @@ Restrições que pesam:
 - Equipe de 1 a 2 pessoas em Python; primeira versão no ar até maio de 2027; `obcefem_api` e `obcefem` são da mesma equipe, mantidos pelo professor (restrições do mantenedor de 11/11/2026).
 - Medição de 11/11/2026: a `obcefem_api` tem cerca de 2.000 linhas de aplicação (`app/` e `scripts/`) e 600 de testes, 34 commits de um só autor direto na `main`, sem branches nem PRs. A conta do mantenedor tem permissão de escrita neste repositório e só de leitura na `obcefem_api`.
 
-O [ADR-006](ADR-006-backend-publicado-assistente-proposta.md), proposta da Fase 0 ainda não aprovada, chega à mesma direção na seção 4.1 (serviço novo neste repositório) e deixava a confirmação para o mantenedor. Este ADR registra essa confirmação; o nome da pasta continua fora.
+A [análise da Fase 0](analise-fase-0-camada-publicada-e-assistente.md), criada como ADR-006 (proposta), chega à mesma direção na seção 4.1 (serviço novo neste repositório) e deixava a confirmação para o mantenedor. Este ADR registra essa confirmação; o nome da pasta continua fora.
 
 ## Alternativas consideradas
 
