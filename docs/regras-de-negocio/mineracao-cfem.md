@@ -85,22 +85,22 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Relacionadas:** RN-CFE-05, RN-VPU-07
 
 ### RN-CFE-09: São Domingos do Araguaia sem linhas
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve investigar por que São Domingos do Araguaia (1507151) não tem linha nos arquivos de arrecadação e de distribuição, e até lá o município deve constar como ausente, nunca como zero.
+- **Status:** DECIDIDA
+- **Regra:** São Domingos do Araguaia (1507151) deve constar como ausente, nunca como zero, em todos os indicadores derivados dos arquivos da ANM, com a causa marcada como "não confirmada" (RN-CFE-07). Os totais da RI Carajás que somam esses indicadores devem informar a cobertura ("11 de 12 municípios"). Se a ANM responder e a causa for confirmada, a resposta entra como evidência e a marcação da causa é atualizada.
 - **Motivo:** A causa não foi confirmada: pode ser lacuna da extração, ausência de repasse ou ausência de atividade.
 - **Exemplo:** 11 dos 12 municípios têm linhas em arrecadação (2022–2026) e em distribuição (2007–2026); nas autuações, 9 dos 12 (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM). Em 27/10/2026, o arquivo completo de arrecadação (2002–2026, 2.433.916 linhas) não tinha nenhuma linha de São Domingos do Araguaia, nem pelo código 1507151 nem pelo nome; só aparece São Domingos do Capim (PA, 1507201), outro município, com 1 linha. Isso afasta uma troca de código ou de nome como causa nesse arquivo, mas não confirma a causa real (reproduzido em 27/10/2026: arquivo da ANM).
 - **Evidência datada:** no fim deste arquivo, em [Notas de evidência](#notas-de-evidência), sob RN-CFE-09.
-- **Fonte:** VAL-15/10 §Matriz operacional, §Rodada adicional, §Issues sugeridas (item 2).
+- **Fonte:** DECISÃO-MANTENEDOR de 09/11/2026 (opção "ausente, causa não confirmada"); VAL-15/10 §Matriz operacional, §Rodada adicional, §Issues sugeridas (item 2).
 - **Relacionadas:** RN-MOD-10, RN-CFE-07
 
 ### RN-CFE-10: Modalidades de distribuição que compõem a CFEM recebida
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve definir quais modalidades de distribuição (coluna do tipo de distribuição) compõem a "CFEM recebida", e até lá a modalidade deve ser guardada e exibida separadamente.
-- **Motivo:** A reconciliação cobriu só o tipo `Produtor`; as demais modalidades não foram conferidas.
+- **Status:** DECIDIDA
+- **Regra:** A "CFEM recebida" do município é o valor do tipo `Produtor` do arquivo de distribuição da ANM. A modalidade `Afetado` é guardada e exibida em linha separada, sem entrar no total da "CFEM recebida"; a modalidade `-` (só estados) não se aplica a municípios. A estimativa pela repartição legal (RN-CFE-26) é outra medida e não substitui nem se mistura com a CFEM recebida.
+- **Motivo:** O tipo `Produtor` é o único conferido contra o Tesouro: bate com a MSC em Canaã dos Carajás e Parauapebas e é o único existente de 2023 a 2026, o que mantém a série coerente. A diferença em Marabá fica registrada como evidência, não como parte da definição.
 - **Exemplo:** A reconciliação de maio de 2025 foi feita com `Ano=2025`, `Mês=5` e tipo `Produtor` (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM). Em 27/10/2026, o arquivo de distribuição tinha três modalidades: `Produtor` (2007–2026, só municípios), `Afetado` (2019–2022, só municípios, com subtipos como estrutura de mineração, ferrovias e perda) e `-` (2019–2022, só estados). De 2023 a 2026 existe só `Produtor`, que somou R$ 1.556.820.292,67 nos 12 municípios em 2025; a soma é bruta e provisória (reproduzido em 27/10/2026: arquivo da ANM).
 - **Evidência datada:** no fim deste arquivo, em [Notas de evidência](#notas-de-evidência), sob RN-CFE-10.
-- **Fonte:** VAL-15/10 §Rodada adicional (escopo da reconciliação).
-- **Relacionadas:** RN-VPU-07, RN-TER-09, RN-CFE-11
+- **Fonte:** DECISÃO-MANTENEDOR de 09/11/2026 (opção "só `Produtor`"); VAL-15/10 §Rodada adicional (escopo da reconciliação).
+- **Relacionadas:** RN-VPU-07, RN-TER-09, RN-CFE-11, RN-CFE-26
 
 ### RN-CFE-11: Agregação por município, ano, mês e modalidade
 - **Status:** PROPOSTA
@@ -179,11 +179,12 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Relacionadas:** RN-CFE-20, RN-FON-18
 
 ### RN-CFE-20: A CFEM como proxy da produção municipal
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve decidir se a CFEM pode ser apresentada como proxy da produção municipal, ou se deve ser exibida apenas como CFEM, sem rótulo de VPM.
-- **Motivo:** As fontes divergem.
+- **Status:** DECIDIDA
+- **Regra:** A CFEM do município deve ser exibida e nomeada sempre como CFEM (arrecadada, recebida ou cobrada), e não deve ser apresentada como produção mineral nem como proxy dela. O VPM só pode aparecer como contexto do estado do Pará (RN-CFE-19). Se surgir fonte oficial de produção por município, a regra pode ser revista.
+- **Motivo:** A CFEM é um repasse financeiro (base de cálculo × alíquota por substância), não uma medida de produção; dois municípios com a mesma produção podem ter CFEM diferente.
 - **Exemplo:** A CFEM é base de cálculo derivada do VPM, mas é um repasse financeiro, não uma medida de produção.
-- **Fonte:** Versão A: DECISÕES §Bloco 3 e BLOCOS §Bloco 3 (a CFEM "serve de proxy da produção municipal"; 04/10/2026, última edição 20/10/2026). Versão B: LAB-19/10 §4 (a CFEM municipal "pode ser analisada separadamente, sem renomeá-la como VPM"; 19/10/2026); VAL-15/10 §Matriz operacional (pesquisar fonte oficial alternativa antes de prometer VPM municipal; 15/10/2026).
+- **Exceções:** Contraria DECISÕES §Bloco 3 e BLOCOS §Bloco 3, que diziam que a CFEM "serve de proxy da produção municipal"; essas fontes não foram reescritas. Segue LAB-19/10 §4 e VAL-15/10 §Matriz operacional.
+- **Fonte:** DECISÃO-MANTENEDOR de 10/11/2026 (opção "só CFEM, sem rótulo de produção"). Versão A: DECISÕES §Bloco 3 e BLOCOS §Bloco 3 (04/10/2026, última edição 20/10/2026). Versão B: LAB-19/10 §4 (19/10/2026); VAL-15/10 §Matriz operacional (15/10/2026).
 - **Relacionadas:** RN-CFE-19, RN-CFE-21
 
 ### RN-CFE-21: A CFEM vem pronta e não é recalculada
@@ -245,7 +246,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Regra:** A CFEM dos municípios pode ser comparada com a média por município do Pará e do Brasil, calculada com os mesmos filtros de período, substância e titular. O denominador padrão é o número de municípios com registro no período; a alternativa é o total de municípios (144 no Pará, 5.570 no Brasil, segundo o IBGE). Há opção de excluir os dois municípios em foco da média.
 - **Motivo:** O mantenedor mandou manter o que a `obcefem_api` faz.
 - **Exemplo:** Reproduzido do README da `obcefem_api` (não conferido nos dados): o parâmetro `denominador` aceita `com_registro` (padrão) ou `todos`.
-- **Exceções:** O denominador "com registro" ignora os municípios sem CFEM e dá uma média maior que a de "todos"; o gráfico deve declarar qual está em uso. Os totais de 144 e 5.570 estão fixos no código da API. RN-TER-09 (comparação com N municípios mineradores) continua em aberto e é outra comparação.
+- **Exceções:** O denominador "com registro" ignora os municípios sem CFEM e dá uma média maior que a de "todos"; o gráfico deve declarar qual está em uso. Os totais de 144 e 5.570 estão fixos no código da API. RN-TER-09 (comparação com N municípios mineradores, padrão N = 10 decidido em 10/11/2026) é outra comparação.
 - **Fonte:** DECISÃO-MANTENEDOR de 08/11/2026; `obcefem_api`, README §Filtros e `app/dominio.py`.
 - **Relacionadas:** RN-TER-09, RN-MOD-18
 
@@ -265,6 +266,7 @@ Evidência datada que sustenta ou qualifica as regras acima. Cada nota é o text
 #### RN-CFE-08: Recuperar julho de 2025
 
 - **Evidência de 31/10/2026 (arquivo de distribuição da ANM baixado em 31/10/2026; só agregados):** julho de 2025 continua ausente: não há linha com `Ano=2025` e `Mês=7`, e o arquivo não foi corrigido desde 24 e 27/10/2026. Os meses de 2025 presentes são 1 a 6 e 8 a 12. O campo `Mês` do CSV é o mês de emissão do repasse: os totais nacionais dos meses 5, 6, 8 e 10 batem com os relatórios de distribuição em PDF da ANM de maio, junho, agosto e outubro de 2025 (por exemplo, junho: R$ 354.438.110,65 no CSV contra R$ 354.438.102,78 no PDF; Canaã dos Carajás e Parauapebas batem ao centavo em junho e agosto). O PDF de julho de 2025 não foi encontrado: dez nomes de arquivo tentados deram 404. A MSC orçamentária do SICONFI registra receita de CFEM (natureza 17125101, fonte 1708) em julho de 2025: Canaã dos Carajás R$ 63,2 milhões, Parauapebas R$ 46,0 milhões e Marabá R$ 17,6 milhões (consulta de 31/10/2026, sem conciliação com a ANM). Hipótese, não verificada: o repasse de julho foi omitido da extração do CSV, possivelmente por troca do processo de geração dos relatórios (a numeração das remessas e o nome dos arquivos mudam entre junho e agosto de 2025). Não se deve afirmar que a ANM não distribuiu em julho. O arquivo tem outras lacunas de mês, nacionalmente: 2013 (mês 6), 2018 (meses 3 e 5), 2019 (mês 9), 2022 (meses 2 a 12) e 2023 (meses 1 a 4 e 6).
+- **Evidência de 09/11/2026 (arquivo de distribuição da ANM baixado em 09/11/2026 com TLS verificado; 2.000.816 linhas; só agregados):** julho de 2025 continua ausente: não há linha com `Ano=2025` e `Mês=7`. Linhas por mês de 2025: 1.892 (jan), 1.984 (fev), 1.987 (mar), 2.384 (abr), 1.912 (mai), 1.648 (jun), 2.070 (ago), 2.052 (set), 2.184 (out), 1.799 (nov) e 2.552 (dez). O arquivo tem o mesmo número de linhas da coleta anterior de 09/11/2026. O total anual de 2025 segue bloqueado e a regra continua EM ABERTO.
 
 #### RN-CFE-09: São Domingos do Araguaia sem linhas
 
@@ -273,6 +275,7 @@ Evidência datada que sustenta ou qualifica as regras acima. Cada nota é o text
 #### RN-CFE-10: Modalidades de distribuição que compõem a CFEM recebida
 
 - **Evidência de 31/10/2026 (distribuição da ANM contra a MSC orçamentária, receita realizada da fonte 1708; só agregados):** o tipo `Produtor` reproduz a receita registrada em Canaã dos Carajás (diferença de 0,03% a 0,04% por ano, 2024 a 2026) e em Parauapebas (0,14% a 0,38%), mas não em Marabá, onde a receita registrada é maior que o `Produtor` em 7% a 26% (2024 a 2026); Marabá usa a natureza 17225101, enquanto os outros dois usam a 17125101. A modalidade `-` só existe para entes estaduais (2019 a 2022) e não tem linha em nenhum dos três municípios. `Afetado` só existe no arquivo até 2022 e só pôde ser testado nesse ano, de forma anual e inconclusiva (em Marabá, `Produtor` mais `Afetado` aproxima a MSC; em Canaã e Parauapebas não muda o resultado). O arquivo da ANM tem defeitos de calendário que impedem a comparação mensal em 2022 (todo o `Produtor` está no mês 1) e em 2023 (faltam os meses 1 a 4 e 6), e julho de 2025 é ausente (RN-CFE-08). A natureza 17125101 da fonte 1708 não é só CFEM: a fonte tem valores pequenos de outras naturezas. Causas da diferença em Marabá e da pequena diferença em Parauapebas não foram verificadas. A comparação de 2019 a 2021 não foi feita porque a MSC usa outra estrutura de fonte e natureza nesses anos.
+- **Evidência de 09/11/2026 (leitura da `obcefem_api`, sem coleta nova):** a `obcefem_api` não lê as modalidades do arquivo de distribuição; ela estima a repartição pela lei (arrecadação × percentual) porque, segundo o README dela, o arquivo de 01/11/2026 estava incompleto (cota municipal de 2023 a 2025 em cerca de 15% do arrecadado, quando deveria ser 60%; cotas estadual e de afetados só em 2019 a 2022; sem a parcela da União). Transcrito do README da `obcefem_api`, não conferido neste repositório. Se o `Produtor` de 2023 a 2025 estiver de fato incompleto, a definição da CFEM recebida continua valendo, mas o valor deve ser tratado com a ressalva de RN-CFE-26.
 
 #### RN-CFE-24: Despesa municipal financiada por CFEM exige identificação da fonte de recursos
 

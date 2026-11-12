@@ -72,7 +72,7 @@ Termos e siglas usados nesta documentação. Os termos de domínio vêm de DECIS
 | FAPESPA | Órgão estatístico do Pará; define a RI Carajás |
 | fato gerador | Ano em que o débito de CFEM se originou (contraste com lavratura) |
 | FINBRA | Base histórica de finanças municipais do Tesouro, organizada no IPEADATA |
-| FRED | Federal Reserve Economic Data, API das séries de commodities |
+| FRED | Federal Reserve Economic Data, API de séries econômicas; reserva das commodities desde 10/11/2026 (a fonte principal é o Pink Sheet) |
 | GEE (Google Earth Engine) | Plataforma do Google para dados geoespaciais; rota do MapBiomas |
 | `id_ente` | Parâmetro do SICONFI que recebe o código IBGE do município |
 | IDEB | Índice de Desenvolvimento da Educação Básica |
@@ -84,7 +84,7 @@ Termos e siglas usados nesta documentação. Os termos de domínio vêm de DECIS
 | lavratura | Ano em que a ANM emitiu a autuação (contraste com fato gerador) |
 | MapBiomas | Mapeamento anual de uso e cobertura do solo do Brasil |
 | N6 | Parâmetro do SIDRA que recorta o resultado a nível municipal |
-| Pink Sheet | Planilha mensal de preços de commodities do World Bank (só download) |
+| Pink Sheet | Planilha mensal de preços de commodities do World Bank (só download); fonte do ferro e do cobre |
 | PySUS | Biblioteca que baixa e converte microdados do DATASUS, citada por DECISÕES como rota de saúde |
 | RAIS | Relação Anual de Informações Sociais: vínculos formais (estoque), com quebras por setor, sexo e escolaridade |
 | RI Carajás | Região de Integração Carajás: 12 municípios do Pará |

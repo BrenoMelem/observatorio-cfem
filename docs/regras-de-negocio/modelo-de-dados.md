@@ -58,8 +58,8 @@ Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a p
 ### RN-MOD-04: Campo de mês
 - **Status:** DECIDIDA
 - **Regra:** O mês deve fazer parte do esquema comum de todos os indicadores, preenchido quando a fonte é mensal e vazio nos indicadores anuais.
-- **Motivo:** Um esquema único evita dois formatos para consumir, e o mês é necessário para a CFEM (guardar mensal, exibir anual) e para outras séries mensais, como os preços de commodities do FRED.
-- **Exemplo:** A distribuição da CFEM de maio de 2025 só pôde ser reconciliada porque o mês foi preservado. Os preços de ferro e cobre do FRED são mensais, e a população do IBGE é anual, com o mês vazio.
+- **Motivo:** Um esquema único evita dois formatos para consumir, e o mês é necessário para a CFEM (guardar mensal, exibir anual) e para outras séries mensais, como os preços de commodities do Pink Sheet.
+- **Exemplo:** A distribuição da CFEM de maio de 2025 só pôde ser reconciliada porque o mês foi preservado. Os preços de ferro e cobre do Pink Sheet são mensais, e a população do IBGE é anual, com o mês vazio.
 - **Exceções:** O nome do campo é `mes` (RN-MOD-03).
 - **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026; DECISÕES §Arquitetura e padrões de dados, §Pré-requisitos e pendências; VAL-15/10 §Marco 2; LAB-19/10 §7 (Próximos passos, item 2).
 - **Relacionadas:** RN-MOD-03, RN-MOD-05, RN-CFE-04
@@ -227,11 +227,12 @@ Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a p
 - **Relacionadas:** RN-MOD-05, RN-TER-08
 
 ### RN-MOD-24: Valor real e índice de correção
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve escolher a data-base do valor real, isto é, a data em reais da qual todos os valores corrigidos são expressos (por exemplo, dezembro de 2025). O índice e a forma de publicação já estão decididos em RN-MOD-28.
+- **Status:** DECIDIDA
+- **Regra:** A data-base do valor real é dezembro de 2025: todos os valores corrigidos são expressos em reais de dezembro de 2025, data fixa que não acompanha o mês mais recente do índice. O índice e a forma de publicação estão decididos em RN-MOD-28.
 - **Motivo:** Sem a data-base, o valor real não pode ser calculado nem rotulado. A escolha define só a escala dos números, não a forma da série; uma data fixa evita que os valores históricos mudem a cada atualização do índice.
-- **Exemplo:** Despesa per capita por função, 2013–2025, em valor nominal (RN-MOD-26), até a data-base ser escolhida.
-- **Fonte:** CONSUMO §Finanças públicas e índices (despesa per capita); DECISÃO-MANTENEDOR de 26/10/2026 (o valor real fica para uma etapa futura); DECISÃO-MANTENEDOR de 02/11/2026 (índice e forma decididos, data-base ainda por escolher).
+- **Exemplo:** Despesa per capita por função, 2013–2025, em valor nominal (RN-MOD-26), enquanto o valor real não for publicado; o valor real da mesma série fica expresso em reais de dezembro de 2025, com o índice de dezembro de 2025 igual a 7.403,29 (consulta de 02/11/2026, RN-MOD-28).
+- **Exceções:** Quando a data-base for revista, o valor real é recalculado e o manifesto passa a registrar a nova data. Não foi decidido o que fazer quando 2026 fechar (se a data-base permanece em dezembro de 2025 ou é atualizada por decisão explícita).
+- **Fonte:** CONSUMO §Finanças públicas e índices (despesa per capita); DECISÃO-MANTENEDOR de 26/10/2026 (o valor real fica para uma etapa futura); DECISÃO-MANTENEDOR de 02/11/2026 (índice e forma decididos); DECISÃO-MANTENEDOR de 09/11/2026 (data-base em dezembro de 2025, fixa).
 - **Relacionadas:** RN-MOD-17, RN-MOD-26, RN-MOD-28
 
 ### RN-MOD-25: Manifesto único de indicadores
@@ -245,10 +246,10 @@ Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a p
 
 ### RN-MOD-26: Valores monetários em valor nominal por enquanto
 - **Status:** DECIDIDA
-- **Regra:** Os valores monetários devem ser publicados em valor nominal, como a fonte os informou, sem correção por índice de preços, até a decisão sobre o valor real (RN-MOD-24).
-- **Motivo:** Nenhum indicador atual exige valor real, e escolher a data-base agora ampliaria o escopo sem definição (o índice já está em RN-MOD-28).
+- **Regra:** Os valores monetários devem ser publicados em valor nominal, como a fonte os informou, sem correção por índice de preços, até a publicação do valor real (RN-MOD-24, RN-MOD-28).
+- **Motivo:** Nenhum indicador atual exige valor real, e o valor real ainda não está implementado (índice em RN-MOD-28, data-base em RN-MOD-24).
 - **Exemplo:** Despesa per capita por função, 2013–2025, em valor nominal.
-- **Exceções:** O valor real é um pedido do projeto e será acrescentado como indicador à parte (RN-MOD-28), com índice e data-base explícitos; enquanto a data-base não for escolhida (RN-MOD-24, EM ABERTO), só o valor nominal é publicado.
+- **Exceções:** O valor real é um pedido do projeto e será acrescentado como indicador à parte (RN-MOD-28), com índice e data-base explícitos; a data-base é dezembro de 2025 (RN-MOD-24); enquanto o valor real não for publicado, só o valor nominal é publicado.
 - **Fonte:** DECISÃO-MANTENEDOR de 26/10/2026; CONSUMO §Finanças públicas e índices (despesa per capita).
 - **Relacionadas:** RN-MOD-24, RN-MOD-28, RN-MOD-17
 
@@ -263,9 +264,9 @@ Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a p
 
 ### RN-MOD-28: Índice e forma do valor real
 - **Status:** DECIDIDA
-- **Regra:** O valor real é calculado com o IPCA e publicado como indicador à parte, ao lado do valor nominal, que continua publicado. O dado mensal é corrigido pelo índice do próprio mês, e o dado anual, pela média anual do índice. O índice e a data-base ficam explícitos no manifesto de indicadores (RN-MOD-25). A data-base ainda deve ser escolhida (RN-MOD-24).
+- **Regra:** O valor real é calculado com o IPCA e publicado como indicador à parte, ao lado do valor nominal, que continua publicado. O dado mensal é corrigido pelo índice do próprio mês, e o dado anual, pela média anual do índice. O índice e a data-base ficam explícitos no manifesto de indicadores (RN-MOD-25). A data-base é dezembro de 2025 (RN-MOD-24).
 - **Motivo:** Decisão do mantenedor. Sem correção, a inflação aparece como crescimento nas séries longas. O IPCA é oficial, aberto e vem do mesmo serviço do IBGE que o projeto já usa para a população. A média anual combina com valores de fluxo, como despesa e CFEM, que se acumulam ao longo do ano; essa justificativa é raciocínio do projeto, não vem de uma fonte de decisão.
 - **Exemplo:** O IPCA tem número-índice mensal (base dezembro de 1993 = 100), por exemplo 7.695,82 em setembro de 2026. Em 02/11/2026, a consulta à tabela 1737, variável 2266, do SIDRA devolveu 285 meses de janeiro de 2003 a setembro de 2026, sem valores vazios; a média de 2025 foi 7.300,84 e dezembro de 2025, 7.403,29 (consulta de 02/11/2026).
-- **Exceções:** Enquanto a data-base não for escolhida, o valor real não é publicado e vale RN-MOD-26. Não foi decidido a quais indicadores monetários o valor real se aplica (CFEM, despesa, PIB e outros). Não se publica o mesmo dado anual com dois métodos de correção; um segundo método entraria como definição explícita à parte. O IGP-M, da FGV, não foi avaliado.
+- **Exceções:** Enquanto o valor real não for publicado, vale RN-MOD-26. Não foi decidido a quais indicadores monetários o valor real se aplica (CFEM, despesa, PIB e outros). Não se publica o mesmo dado anual com dois métodos de correção; um segundo método entraria como definição explícita à parte. O IGP-M, da FGV, não foi avaliado.
 - **Fonte:** DECISÃO-MANTENEDOR de 02/11/2026; CONSUMO §Finanças públicas e índices (despesa per capita); consulta ao SIDRA em 02/11/2026.
 - **Relacionadas:** RN-MOD-24, RN-MOD-25, RN-MOD-26, RN-MOD-17

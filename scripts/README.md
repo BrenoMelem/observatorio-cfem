@@ -27,7 +27,8 @@ Os scripts rodam como módulo, a partir da raiz do repositório: `uv run python 
 | `financas/` | `dca_lote.py` | DCA Anexo I-E do SICONFI em lote validado, sem homologar |
 | | `dca_csv.py` | DCA Anexo I-E em CSV simples por função |
 | | `msc_despesa_fonte.py` | MSC orçamentária por fonte de recursos (`1708`) |
-| `commodities/` | `fred.py` | Preço de ferro e cobre no FRED (exige `FRED_API_KEY` no ambiente) |
+| `commodities/` | `pink_sheet.py`, `fred.py` | Preço de ferro e cobre: Pink Sheet do World Bank (fonte principal, sem chave) e FRED (reserva, exige `FRED_API_KEY` no ambiente) |
+| `emissoes/` | `seeg.py` | Emissões do SEEG: lê a planilha municipal (centenas de MB, fora do Git) e extrai o recorte dos 12 municípios com os metadados |
 | `sondas/` | `ibge_sidra.py`, `ipeadata.py`, `inspecionar_ipeadata.py`, `worldbank_commodities.py` | Provas de que a fonte responde e como (laboratório) |
 | `servidor/` | `servidor.py` | API local do protótipo; lê só a camada publicada (`docs/api/openapi.yaml`) |
 | `notebook/` | `construir_notebook.py` | Gera o notebook de laboratório (`laboratorio_fontes_observatorio_cfem.ipynb`) |
