@@ -1,6 +1,7 @@
 """Busca explicações em três documentos permitidos, sem incorporar instruções do usuário."""
 import json
 import re
+from functools import lru_cache
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parents[3]
@@ -9,6 +10,7 @@ ARQUIVOS = [RAIZ / "docs/regras-de-negocio/glossario.md",
             RAIZ / "docs/regras-de-negocio/entrega-dos-dados.md"]
 
 
+@lru_cache(maxsize=128)
 def explicacao(indicador: str) -> str:
     manifesto = json.loads((RAIZ / "data/indicadores.json").read_text(encoding="utf-8"))
     item = manifesto[indicador]

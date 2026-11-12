@@ -1,7 +1,7 @@
 """Endpoint do assistente com limite de entrada e controle local de taxa."""
 import os
 import time
-from collections import defaultdict, deque
+from collections import deque
 
 import httpx
 from fastapi import APIRouter, HTTPException, Request
@@ -14,11 +14,14 @@ from app.repositories.publicacao import PublicacaoInvalida
 from app.services.assistente import responder
 
 router = APIRouter(prefix="/api/v1")
-JANELAS: dict[str, deque[float]] = defaultdict(deque)
+LIMITE_MINUTO = int(os.getenv("OBS_ASSISTENTE_LIMITE_MINUTO", "20"))
+JANELAS: dict[str, deque[float]] = {}
+PROXIMA_LIMPEZA = 0.0
 
 
 @router.post("/assistente", response_model=Resposta)
 async def assistente(request: Request):
+    global PROXIMA_LIMPEZA
     if int(request.headers.get("content-length", "0")) > 8_192:
         raise HTTPException(413, "Entrada excede 8 KiB")
     corpo = await request.body()
@@ -26,12 +29,22 @@ async def assistente(request: Request):
         raise HTTPException(413, "Entrada excede 8 KiB")
     chave = request.client.host if request.client else "desconhecido"
     agora = time.monotonic()
-    janela = JANELAS[chave]
+    if agora >= PROXIMA_LIMPEZA:
+        for ip, tempos in list(JANELAS.items()):
+            while tempos and agora - tempos[0] >= 60:
+                tempos.popleft()
+            if not tempos:
+                del JANELAS[ip]
+        PROXIMA_LIMPEZA = agora + 60
+    janela = JANELAS.setdefault(chave, deque())
     while janela and agora - janela[0] >= 60:
         janela.popleft()
-    if len(janela) >= int(os.getenv("OBS_ASSISTENTE_LIMITE_MINUTO", "20")):
+    if not janela:
+        del JANELAS[chave]
+    if len(janela) >= LIMITE_MINUTO:
         raise HTTPException(429, "Limite de consultas por minuto")
     janela.append(agora)
+    JANELAS[chave] = janela
     try:
         entrada = Pergunta.model_validate_json(corpo)
         if any(len(h) > 500 for h in entrada.historico):
