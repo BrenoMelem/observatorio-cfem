@@ -4,7 +4,7 @@ Este arquivo orienta agentes de IA (Claude Code, Codex e similares) que trabalha
 
 ## O projeto
 
-Observatório CFEM / RI Carajás: dados públicos sobre a Compensação Financeira pela Exploração de Recursos Minerais (CFEM) e indicadores dos 12 municípios da Região de Integração Carajás, no Pará. O produto ainda não existe: o repositório tem a pesquisa, a documentação de regras de negócio, um notebook de laboratório e scripts de teste.
+Observatório CFEM / RI Carajás: dados públicos sobre a Compensação Financeira pela Exploração de Recursos Minerais (CFEM) e indicadores dos 12 municípios da Região de Integração Carajás, no Pará. O produto ainda não existe: o repositório tem a pesquisa, a documentação de regras de negócio, um notebook de laboratório e scripts de teste. O backend de produção será construído neste repositório, fora de `scripts/` ([ADR-007](docs/adr/ADR-007-onde-mora-o-produto.md)), em Python 3.12 ou superior com `uv` ([ADR-008](docs/adr/ADR-008-linguagem-e-ambiente.md)); as decisões técnicas que faltam estão no [mapa de decisões](docs/adr/README.md).
 
 O idioma do projeto é o português do Brasil. Use datas absolutas (por exemplo, 30/10/2026), nunca "ontem" ou "semana passada".
 
