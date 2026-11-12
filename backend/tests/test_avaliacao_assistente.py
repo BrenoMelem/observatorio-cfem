@@ -37,4 +37,3 @@ def test_perguntas_verificadas_dos_doze_municipios(tmp_path, monkeypatch):
         dados = resposta.json()
         assert f"{valor:,}".replace(",", ".") in dados["resposta"]
         assert dados["citacoes"][0]["periodo"] == str(ano)
-
