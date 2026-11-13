@@ -171,6 +171,16 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 - **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026; PLANO §Bloco 4; BLOCOS §Bloco 4; DECISÕES §Tabelas da Base dos Dados confirmadas.
 - **Relacionadas:** RN-MOD-09, RN-MOD-12, RN-TMP-01, RN-TMP-16
 
+### RN-TMP-18: Arquivar cada versão dos arquivos da fonte que muda
+- **Status:** DECIDIDA
+- **Regra:** Os arquivos brutos que a ANM publica (arrecadação, distribuição e autuação) devem ser arquivados a cada vez que mudarem, em armazenamento na nuvem e fora do computador do mantenedor, com data, tamanho, impressão digital (SHA-256) e os cabeçalhos da resposta do servidor. A rotina deve ser automática, comparar cada versão com a anterior (linhas que sumiram, apareceram ou mudaram, e o efeito no recorte dos 12 municípios) e registrar o resultado. Os arquivos brutos não entram no repositório de código; só o registro de cada coleta (o manifesto) é versionado.
+- **Motivo:** A ANM pode republicar o arquivo com conteúdo diferente, sem aviso e sem histórico, e hoje só o arquivo mais recente fica disponível. Sem guardar cada versão, não é possível provar o que mudou, nem reproduzir um número que o observatório já publicou. A data de modificação informada pelo servidor não serve de prova (em 08/11/2026 ela acompanhava a data da consulta); a impressão digital serve.
+- **Exemplo:** Em 08/11/2026, o arquivo de autuações tinha 21.029 linhas e 3.031.509 bytes. Se uma coleta futura trouxer outra impressão digital, a comparação lista as linhas diferentes e o valor afetado em cada município.
+- **Exceções:** Os arquivos têm identificadores de titulares (CPF/CNPJ), mas são dados abertos da própria ANM e a privacidade não é requisito do projeto (DECISÃO-MANTENEDOR de 07/11/2026; RN-PRI-01 a 06 e RN-PRI-08 obsoletas). Outras fontes (IBGE, SICONFI, FRED) não entram nesta rotina por enquanto.
+- **Nota de 12/11/2026:** esta regra foi registrada em 08/11/2026 e saiu do arquivo no mesmo dia, junto com a reversão do código (commits `b78d64f` e `0ce4bd0`); o código voltou em 09/11/2026 sem ela. O mantenedor confirmou em 12/11/2026 que ela vale, e o texto acima é o de 08/11/2026, sem alteração. O mesmo arquivo de versões passou a servir à planilha do SEEG (RN-FNT-14, 10/11/2026) e às edições do Pink Sheet (RN-FNT-05, 12/11/2026). Em 12/11/2026 havia 6 versões da ANM arquivadas, da coleta de 09/11/2026 à de 12/11/2026.
+- **Fonte:** DECISÃO-MANTENEDOR de 08/11/2026, confirmada em 12/11/2026.
+- **Relacionadas:** RN-TMP-02, RN-VPU-06, RN-VPU-11, RN-CFE-13, RN-FON-15, RN-FNT-05, RN-FNT-14
+
 ## Notas de evidência
 
 Evidência datada que sustenta ou qualifica as regras acima. Nenhuma nota muda o status da regra. Ordem: a das regras.
