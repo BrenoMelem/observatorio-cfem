@@ -4,6 +4,7 @@ import json
 import httpx
 from fastapi.testclient import TestClient
 
+from app.controllers import assistente as controle_assistente
 from app.llm.redator import MockRedator
 from app.main import app
 from app.repositories import publicacao
@@ -76,3 +77,12 @@ def test_timeout_do_provedor_e_controlado(tmp_path, monkeypatch):
     resposta = cliente.post("/api/v1/assistente", json={"pergunta": "Qual a população de Canaã dos Carajás em 2025?",
                                                      "contexto": CONTEXTO})
     assert resposta.status_code == 503
+
+
+def test_limite_local_continua_ativo(tmp_path, monkeypatch):
+    cliente = _cliente(tmp_path, monkeypatch)
+    monkeypatch.setattr(controle_assistente, "LIMITE_MINUTO", 1)
+    monkeypatch.setattr(controle_assistente, "JANELAS", {})
+    pergunta = {"pergunta": "Qual a população de Canaã dos Carajás em 2025?", "contexto": CONTEXTO}
+    assert cliente.post("/api/v1/assistente", json=pergunta).status_code == 200
+    assert cliente.post("/api/v1/assistente", json=pergunta).status_code == 429

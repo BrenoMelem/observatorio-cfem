@@ -5,6 +5,7 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 from scripts.populacao.atualizar import MUNICIPIOS
 
+from app.controllers import assistente as controle_assistente
 from app.main import app
 from app.repositories import publicacao
 
@@ -28,7 +29,8 @@ def test_perguntas_verificadas_dos_doze_municipios(tmp_path, monkeypatch):
     (tmp_path / "populacao.json").write_text(json.dumps(linhas, ensure_ascii=False), encoding="utf-8")
     monkeypatch.setattr(publicacao, "PUBLICADO", tmp_path)
     monkeypatch.setenv("OBS_LLM_MODO", "mock")
-    monkeypatch.setenv("OBS_ASSISTENTE_LIMITE_MINUTO", "100")
+    monkeypatch.setattr(controle_assistente, "LIMITE_MINUTO", 100)
+    monkeypatch.setattr(controle_assistente, "JANELAS", {})
     cliente = TestClient(app)
     for nome, ano, valor in gabarito:
         resposta = cliente.post("/api/v1/assistente", json={"pergunta": f"Qual a população de {nome} em {ano}?",
