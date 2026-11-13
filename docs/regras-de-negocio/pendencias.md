@@ -8,7 +8,7 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 
 | Regra | O que falta decidir | Arquivo |
 | --- | --- | --- |
-| RN-CFE-08 | Recuperar julho de 2025 e liberar o total anual de 2025 (em 31/10/2026 e de novo em 09/11/2026 o mês segue ausente no CSV; o PDF não foi achado) | [mineracao-cfem.md](mineracao-cfem.md) |
+| RN-CFE-08 | Recuperar julho de 2025 e liberar o total anual de 2025 (em 31/10/2026, em 09/11/2026 e em 12/11/2026 o mês segue ausente no CSV; o PDF não foi achado; adiado pelo mantenedor em 12/11/2026) | [mineracao-cfem.md](mineracao-cfem.md) |
 
 ## 2. Itens em aberto dentro de regras DECIDIDAS
 
@@ -16,9 +16,7 @@ Estas regras estão decididas no essencial, mas um ponto delas continua sem deci
 
 | Regra | Ponto em aberto |
 | --- | --- |
-| [RN-CFE-25](mineracao-cfem.md) | Início da regra de 60/15/15/10: 01/08/2017 (Lei 13.540/2017, art. 4º, III) ou 2018 (`obcefem_api`); destino da cota dos afetados enquanto não houver decreto ou hipótese do inciso VII (art. 2º, § 3º, Lei 14.514/2022) |
 | [RN-ENT-08](entrega-dos-dados.md) | Metas numéricas de cada critério de avaliação do assistente. Adiado por prioridade em 11/11/2026: o assistente é etapa posterior ao tratamento dos dados; fixar critérios e metas quando ela começar |
-| [RN-FNT-05](regras-por-fonte.md) | Agendamento da coleta mensal do Pink Sheet: onde guardar as edições baixadas e quem recebe o alerta de falha; hoje só existe o script de laboratório `scripts/commodities/pink_sheet.py`, sem execução agendada (a reserva do FRED ficou resolvida em 11/11/2026: ela cobre só a série spot, RN-TMP-13) |
 
 ## 3. Divergências entre fontes
 
@@ -71,7 +69,7 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 
 ## 5. Regras PROPOSTAS aguardando confirmação
 
-Estas 38 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook, dos scripts ou do briefing operacional de 30/10/2026. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
+Estas 34 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook, dos scripts ou do briefing operacional de 30/10/2026. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
 
 ### Território (4)
 
