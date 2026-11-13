@@ -16,8 +16,8 @@ DIMENSOES = {
 }
 MOTIVOS = {
     "cfem_arrecadada": "Lote da API CFEM sem homologação demonstrada para esta camada (RN-VPU-10).",
-    "preco_minerio_ferro": "Série FRED provisória, sem reconciliação independente (RN-VPU-07).",
-    "preco_cobre": "Série FRED provisória, sem reconciliação independente (RN-VPU-07).",
+    "preco_minerio_ferro": "Séries do Pink Sheet sem publicação homologada nesta camada (RN-TMP-13, RN-VPU-07).",
+    "preco_cobre": "Série do Pink Sheet sem publicação homologada nesta camada (RN-FNT-05, RN-VPU-07).",
 }
 LACUNAS = {
     "social": ["Censo, emprego, educação, saúde, pobreza, segurança, moradia e saneamento: sem publicação homologada nesta camada."],

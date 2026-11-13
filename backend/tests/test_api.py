@@ -33,6 +33,10 @@ def test_lacunas_explicitas_sem_publicacao(tmp_path, monkeypatch):
     status = cliente.get("/api/v1/indicadores/status").json()
     assert len(status) == 7
     assert all(s["situacao"] == "sem_dado_validado" for s in status)
+    assert all("Pink Sheet" in s["motivo"] for s in status if s["indicador"] in {"preco_minerio_ferro", "preco_cobre"})
+    economia = cliente.get("/api/v1/dimensoes/economica").json()
+    assert economia["metadados"]["preco_minerio_ferro"]["fonte"] == "World Bank Pink Sheet"
+    assert "¢/dmtu" in economia["metadados"]["preco_minerio_ferro"]["metodo"]
 
 
 def test_populacao_publicada_filtros_e_csv(tmp_path, monkeypatch):

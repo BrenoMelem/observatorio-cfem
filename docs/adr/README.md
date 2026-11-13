@@ -50,6 +50,12 @@ Na ordem em que precisam ser tomadas.
 
 Depois das decisões 1 a 3 já é possível criar a estrutura inicial do código.
 
+### Pendência de aprovação da Fase 1 — revisão de 13/11/2026
+
+O ADR-007 confirma a construção do backend de produção neste repositório, fora de `scripts/`, e o ADR-008 confirma Python com `uv`. O ADR-007 deixa o nome da pasta fora da decisão. A [análise da Fase 0](analise-fase-0-camada-publicada-e-assistente.md) exige aprovação da Fase 1 antes de iniciá-la; os itens 3, 4, 8 e 9 do mapa acima seguem pendentes. Na revisão do histórico e dos PRs #18, #19, #21, #22, #23 e #26 em 13/11/2026, não foi localizado registro explícito dessa aprovação. A existência de código em `backend/` no PR #23 não substitui a decisão. O mantenedor precisa confirmar o avanço da Fase 1 e decidir os itens dependentes antes de expandir a implementação ou mesclar o PR.
+
+O coletor de laboratório `scripts/commodities/pink_sheet.py`, já incorporado à `develop` antes do PR #23, ainda produz um único indicador mensal de ferro em `USD/dmt`. Isso diverge de RN-TMP-13 e RN-TMP-14, que exigem contrato anual em `¢/dmtu` (1985–2005) e spot mensal em `$/dmt` (desde dezembro de 2008), separados. O backend do PR #23 não lê esse coletor nem publica commodities; a correção é independente do merge deste PR. Próximo passo: abrir uma correção própria do coletor e dos testes, sem publicar ferro até validar o recorte e as unidades.
+
 A [análise da Fase 0](analise-fase-0-camada-publicada-e-assistente.md) não é um ADR: é o insumo das decisões 3 a 6, 8 e 9, e traz também o inventário das rotas existentes, a situação de cada dimensão do site e os conflitos com regras que não podem ser resolvidos por implementação. Ela nasceu como ADR-006 (proposta) e foi desmembrada por decisão do mantenedor de 11/11/2026; o número 006 não será reaproveitado.
 
 ## ADRs
