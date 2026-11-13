@@ -8,7 +8,7 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 
 | Regra | O que falta decidir | Arquivo |
 | --- | --- | --- |
-| RN-CFE-08 | Recuperar julho de 2025 e liberar o total anual de 2025 (em 31/10/2026 e de novo em 09/11/2026 o mês segue ausente no CSV; o PDF não foi achado) | [mineracao-cfem.md](mineracao-cfem.md) |
+| RN-CFE-08 | Recuperar julho de 2025 e liberar o total anual de 2025 (em 31/10/2026, em 09/11/2026 e em 12/11/2026 o mês segue ausente no CSV; o PDF não foi achado; adiado pelo mantenedor em 12/11/2026) | [mineracao-cfem.md](mineracao-cfem.md) |
 
 ## 2. Itens em aberto dentro de regras DECIDIDAS
 
