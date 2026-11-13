@@ -17,7 +17,6 @@ Estas regras estão decididas no essencial, mas um ponto delas continua sem deci
 | Regra | Ponto em aberto |
 | --- | --- |
 | [RN-ENT-08](entrega-dos-dados.md) | Metas numéricas de cada critério de avaliação do assistente. Adiado por prioridade em 11/11/2026: o assistente é etapa posterior ao tratamento dos dados; fixar critérios e metas quando ela começar |
-| [RN-FNT-05](regras-por-fonte.md) | Agendamento da coleta mensal do Pink Sheet: onde guardar as edições baixadas e quem recebe o alerta de falha; hoje só existe o script de laboratório `scripts/commodities/pink_sheet.py`, sem execução agendada (a reserva do FRED ficou resolvida em 11/11/2026: ela cobre só a série spot, RN-TMP-13) |
 
 ## 3. Divergências entre fontes
 
