@@ -94,6 +94,6 @@ Não há código, pseudocódigo, rotas HTTP, nomes de funções, escolha de bibl
 | [indicadores-derivados-e-compostos.md](indicadores-derivados-e-compostos.md) | RN-IND | Indicadores derivados e compostos congelados | 13 |
 | [privacidade-e-licencas.md](privacidade-e-licencas.md) | RN-PRI | Dados pessoais, acesso restrito e reuso | 10 |
 | [glossario.md](glossario.md) | | Termos e siglas | |
-| [pendencias.md](pendencias.md) | | Tudo o que está EM ABERTO, as divergências entre fontes e as regras PROPOSTAS aguardando confirmação | |
+| [pendencias.md](pendencias.md) | | Tudo o que está EM ABERTO, as divergências entre fontes, as regras PROPOSTAS aguardando confirmação e os conflitos com o [Product Backlog](../produto/backlog.md) | |
 
 Total: 173 regras, sendo 130 DECIDIDAS, 34 PROPOSTAS, 1 EM ABERTO e 8 OBSOLETAS.
