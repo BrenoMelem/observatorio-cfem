@@ -12,6 +12,7 @@ O observatório ainda não tem backend de produção. Há um protótipo local do
 
 - `docs/`: toda a documentação, com [índice em docs/README.md](docs/README.md).
 - `docs/regras-de-negocio/`: regras e pendências do projeto.
+- `docs/produto/`: o [Product Backlog](docs/produto/backlog.md) da plataforma (51 itens, retrato de 12/11/2026) e o que as regras já cobrem de cada item.
 - `docs/regras-de-negocio/fontes/pesquisa-observatorio-cfem/`: relatório de viabilidade, fontes, bibliografia e pacote LaTeX.
 - `scripts/`: todo o código, em Python com [uv](https://docs.astral.sh/uv/): coleta, validação e reconciliação das fontes, protótipo local da API, notebook de laboratório e testes. Veja o [mapa em scripts/README.md](scripts/README.md).
 - `data/`: referências versionadas (população do IBGE por ano) e manifesto de indicadores.
