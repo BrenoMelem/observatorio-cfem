@@ -1,6 +1,6 @@
 # Pendências
 
-Lista única do que ainda precisa de decisão nesta documentação: as regras EM ABERTO, os itens abertos dentro de regras decididas, as divergências entre fontes, as lacunas e as regras PROPOSTAS aguardando confirmação, com links para as regras. Legenda de status e siglas das fontes: [README](README.md).
+Lista única do que ainda precisa de decisão nesta documentação: as regras EM ABERTO, os itens abertos dentro de regras decididas, as divergências entre fontes, as lacunas, as regras PROPOSTAS aguardando confirmação e os conflitos com o Product Backlog, com links para as regras. Legenda de status e siglas das fontes: [README](README.md).
 
 Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEMAS, consulta de 02/10/2026; DECISÕES e BLOCOS, 04/10/2026, última edição em 20/10/2026 (exportados em 24/10/2026, revisões 72 e 29); VAL-15/10, 15/10/2026; LAB-19/10, 19/10/2026 (execução do notebook em 17/10/2026, com o FRED reexecutado em 19/10/2026).
 
@@ -8,7 +8,7 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 
 | Regra | O que falta decidir | Arquivo |
 | --- | --- | --- |
-| RN-CFE-08 | Recuperar julho de 2025 e liberar o total anual de 2025 (em 31/10/2026 e de novo em 09/11/2026 o mês segue ausente no CSV; o PDF não foi achado) | [mineracao-cfem.md](mineracao-cfem.md) |
+| RN-CFE-08 | Recuperar julho de 2025 e liberar o total anual de 2025 (em 31/10/2026, em 09/11/2026 e em 12/11/2026 o mês segue ausente no CSV; o PDF não foi achado; adiado pelo mantenedor em 12/11/2026) | [mineracao-cfem.md](mineracao-cfem.md) |
 
 ## 2. Itens em aberto dentro de regras DECIDIDAS
 
@@ -16,9 +16,7 @@ Estas regras estão decididas no essencial, mas um ponto delas continua sem deci
 
 | Regra | Ponto em aberto |
 | --- | --- |
-| [RN-CFE-25](mineracao-cfem.md) | Início da regra de 60/15/15/10: 01/08/2017 (Lei 13.540/2017, art. 4º, III) ou 2018 (`obcefem_api`); destino da cota dos afetados enquanto não houver decreto ou hipótese do inciso VII (art. 2º, § 3º, Lei 14.514/2022) |
 | [RN-ENT-08](entrega-dos-dados.md) | Metas numéricas de cada critério de avaliação do assistente. Adiado por prioridade em 11/11/2026: o assistente é etapa posterior ao tratamento dos dados; fixar critérios e metas quando ela começar |
-| [RN-FNT-05](regras-por-fonte.md) | Agendamento da coleta mensal do Pink Sheet: onde guardar as edições baixadas e quem recebe o alerta de falha; hoje só existe o script de laboratório `scripts/commodities/pink_sheet.py`, sem execução agendada (a reserva do FRED ficou resolvida em 11/11/2026: ela cobre só a série spot, RN-TMP-13) |
 
 ## 3. Divergências entre fontes
 
@@ -71,7 +69,7 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 
 ## 5. Regras PROPOSTAS aguardando confirmação
 
-Estas 38 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook, dos scripts ou do briefing operacional de 30/10/2026. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
+Estas 34 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook, dos scripts ou do briefing operacional de 30/10/2026. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
 
 ### Território (4)
 
@@ -146,3 +144,17 @@ Estas 38 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA
 | --- | --- | --- |
 | [RN-IND-05](indicadores-derivados-e-compostos.md) | Derivado ou composto é marcado como análise derivada | CONSUMO §Finanças públicas e índices (receita per capita e IDSC) |
 | [RN-IND-08](indicadores-derivados-e-compostos.md) | Não recalcular o Barômetro sem reproduzir o método | CONSUMO §Finanças públicas e índices (Barômetro da Sustentabilidade 2024) |
+
+## 6. Conflitos com o Product Backlog
+
+O [Product Backlog](../produto/backlog.md) (retrato de 12/11/2026) diz o que o produto deve entregar; ele não é fonte de regra. Em cinco pontos o texto dos itens contradiz regras vigentes. As duas versões ficam registradas e nada foi escolhido: cada ponto espera decisão do mantenedor. Nenhuma regra mudou de status por causa desta seção.
+
+| # | Ponto | Backlog (12/11/2026) | Regras | Situação |
+| --- | --- | --- | --- | --- |
+| B1 | Privacidade e LGPD | PB-45: revisar segurança e adequação à LGPD, com política de privacidade e termos de uso. PB-35: proteção de dados e registro de uso no assistente | DECISÃO-MANTENEDOR de 07/11/2026: privacidade e licença não são requisito, porque as fontes são dados abertos (RN-PRI-01 a 06 e RN-PRI-08 obsoletas; RN-CFE-18 permite exibir o titular). Essa decisão tratou dos dados das fontes; o backlog prevê também dados enviados por usuários (perfis de acesso, relatos, comentários, cadastros do marketplace: PB-04, PB-24, PB-25, PB-28, PB-37), sobre os quais não há regra | EM ABERTO |
+| B2 | Recorte territorial | PB-06 e PB-22: "os dois municípios" | [RN-TER-01](territorio.md): os 12 municípios da RI Carajás. [RN-TER-13](territorio.md) (08/11/2026): Parauapebas e Canaã dos Carajás em destaque, comparados com os demais | EM ABERTO: falta dizer se o backlog restringe a carga aos dois municípios ou só nomeia os de foco |
+| B3 | Período da série da CFEM | PB-06: série histórica de 10 anos de arrecadação e uso | [RN-CFE-22](mineracao-cfem.md) (27/10/2026): arrecadação desde 2003 (desde 2002 na `obcefem_api`, exceção de 08/11/2026). [RN-FNT-04](regras-por-fonte.md): despesa por função de 2013 a 2025. [RN-CFE-24](mineracao-cfem.md) (PROPOSTA): não se afirma que uma despesa foi paga com CFEM sem a fonte de recursos confirmada, o que limita o "uso da CFEM" | EM ABERTO: falta dizer se os 10 anos são o mínimo contratual ou o recorte a exibir |
+| B4 | Fontes do orçamento | PB-08: atualizar ANM, TCM-PA e orçamentos municipais | [RN-FNT-04](regras-por-fonte.md) e [RN-TMP-15](temporalidade-e-atualizacao.md): a despesa por função vem só do SICONFI. TCM-PA e os orçamentos municipais não constam da agenda por fonte ([RN-TMP-02](temporalidade-e-atualizacao.md)) nem de [regras-por-fonte.md](regras-por-fonte.md); nenhuma das duas foi testada | EM ABERTO |
+| B5 | Dados por bairro | PB-21, PB-22 e PB-23: limites de bairros e distritos, mapa e ficha de indicadores por bairro | Todas as regras tratam de município, RI Carajás, Pará e Brasil ([RN-TER-03](territorio.md): o código IBGE de 7 dígitos identifica o município). Não há regra, fonte nem indicador abaixo do município | EM ABERTO: falta fonte dos limites e dos indicadores por bairro |
+
+Além dos conflitos, 24 dos 48 itens do backlog não têm regra nenhuma (escrita de dados por usuários, gestão de conteúdo, marketplace, front-end, testes e operação). A lista está na [seção 3 do backlog](../produto/backlog.md#3-correspondência-com-a-documentação); se alguma virar regra, ela nasce por decisão do mantenedor.

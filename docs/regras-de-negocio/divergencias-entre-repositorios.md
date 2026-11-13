@@ -20,7 +20,7 @@ Os 12 municípios (RN-TER-01), a ANM como fonte única (RN-CFE-01), o valor pron
 
 | # | Tema | Diferença | Decisão (08/11/2026) | Registro |
 | --- | --- | --- | --- | --- |
-| D1 | Distribuição | A API calcula a repartição pela lei (arrecadado × percentual); aqui a recebida vem do arquivo da ANM | Seguir a API. Percentuais conferidos nas Leis 8.001/1990 e 13.540/2017. A estimativa é análise derivada; a recebida continua do arquivo | [RN-CFE-25](mineracao-cfem.md), [RN-CFE-26](mineracao-cfem.md) |
+| D1 | Distribuição | A API calcula a repartição pela lei (arrecadado × percentual); aqui a recebida vem do arquivo da ANM | Seguir a API. Percentuais conferidos nas Leis 8.001/1990 e 13.540/2017. A estimativa é análise derivada; a recebida continua do arquivo. Em 12/11/2026: 60/15/15/10 a partir de 2018 (2017 inteiro em 65/23/12) e 15% rotulados "afetados" desde 2018, com ressalva, como a API | [RN-CFE-25](mineracao-cfem.md), [RN-CFE-26](mineracao-cfem.md) |
 | D2 | Duplicatas | A API soma as 129 linhas repetidas; aqui o lote ficaria bloqueado | Manter o que a API faz | Exceção em [RN-VPU-11](validacao-e-publicacao.md) |
 | D3 | Ano parcial | A API rotula o ano em curso "(parcial)" e usa o volume de registros (50% da mediana) | Manter o que a API faz | Exceção em [RN-CFE-05](mineracao-cfem.md) e [RN-CFE-06](mineracao-cfem.md) |
 | D4 | Ano da autuação | A API usa o ano do processo de cobrança e descarta as sem ano; aqui vale a data de publicação e a faixa "sem ano" | Manter o que a API faz | Exceção em [RN-CFE-14](mineracao-cfem.md) e [RN-CFE-16](mineracao-cfem.md) |
@@ -34,8 +34,6 @@ Os 12 municípios (RN-TER-01), a ANM como fonte única (RN-CFE-01), o valor pron
 
 ## Em aberto
 
-- **Início da repartição de 60/15/15/10:** 01/08/2017 (Lei 13.540/2017, art. 4º, III) ou 2018 (como a API). Ver RN-CFE-25 e [pendencias.md](pendencias.md), seção 2.
-- **Cota dos afetados sem decreto ou sem hipótese do inciso VII:** vai ao Estado pelo art. 2º, § 3º (redação da Lei 14.514/2022); a API dá os 15% aos afetados. Ver RN-CFE-25.
 - **Homologação:** RN-VPU-10 (só dado homologado alimenta os gráficos) continua valendo e a API ainda não a cumpre; não há exceção decidida.
 - **Efeito das 129 duplicatas** em reais nos totais: não foi medido (D2).
 - **O "15%" da cota municipal** que a API cita no arquivo de distribuição de 2023 a 2025 não foi reproduzido aqui. Ver RN-CFE-26.

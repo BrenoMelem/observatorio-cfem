@@ -12,6 +12,7 @@ O idioma do projeto é o português do Brasil. Use datas absolutas (por exemplo,
 
 - `docs/regras-de-negocio/`: as regras de negócio (o quê e por quê, nunca o como). É a parte central.
 - `docs/`: o índice está em [docs/README.md](docs/README.md). `docs/guias/` diz como rodar as coletas; `docs/registros/` guarda resultados datados de execuções; `docs/adr/` e `docs/api/` têm decisões técnicas e o esboço da API.
+- `docs/produto/`: o [Product Backlog](docs/produto/backlog.md), retrato datado do que o produto deve entregar e quando, com a correspondência de cada item com as regras. Não é fonte de regra: um item do backlog não cria nem muda regra sem decisão do mantenedor, e os conflitos com as regras ficam na seção 6 de `pendencias.md`.
 - `docs/regras-de-negocio/fontes/`: documentos de origem (decisões, blocos, plano, relatórios de laboratório e a pesquisa). São material histórico: não os reescreva sem pedido explícito.
 - `scripts/`: todo o código do repositório, em Python gerenciado com `uv` (coleta, validação, protótipo local da API, notebook e testes). **Apenas testes e laboratório**: não vão para produção e não são a implementação do sistema. O mapa está em [scripts/README.md](scripts/README.md).
 - `output/` e `tmp/` não são versionados (ver `.gitignore`).
