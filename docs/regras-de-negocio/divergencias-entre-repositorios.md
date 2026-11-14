@@ -32,12 +32,19 @@ Os 12 municípios (RN-TER-01), a ANM como fonte única (RN-CFE-01), o valor pron
 | D10 | Foco | A API gira em torno de Parauapebas e Canaã dos Carajás | Manter o que a API faz | [RN-TER-13](territorio.md) |
 | D11 | Arrecadação: arquivos e início da série | A API usa arquivos por faixa de ano e começa em 2002; aqui vale o arquivo completo desde 2003 | Manter o que a API faz | Exceção em [RN-CFE-22](mineracao-cfem.md) |
 
+Decisão posterior, de 13/11/2026:
+
+| # | Tema | Diferença | Decisão (13/11/2026) | Registro |
+| --- | --- | --- | --- | --- |
+| D12 | Dimensões | O `obcefem` organiza o conteúdo em quatro dimensões e põe emprego e renda na social; aqui as fontes usam seis blocos temáticos e BLOCOS §Bloco 2 junta economia e mercado de trabalho. A `obcefem_api` só tem CFEM | A dimensão econômica é a primeira, com a CFEM dentro dela; emprego e renda ficam na social, como no `obcefem` | [RN-ENT-12](entrega-dos-dados.md) |
+
 ## Em aberto
 
 - **Início da repartição de 60/15/15/10:** 01/08/2017 (Lei 13.540/2017, art. 4º, III) ou 2018 (como a API). Ver RN-CFE-25 e [pendencias.md](pendencias.md), seção 2.
 - **Cota dos afetados sem decreto ou sem hipótese do inciso VII:** vai ao Estado pelo art. 2º, § 3º (redação da Lei 14.514/2022); a API dá os 15% aos afetados. Ver RN-CFE-25.
 - **Homologação:** RN-VPU-10 (só dado homologado alimenta os gráficos) continua valendo e a API ainda não a cumpre; não há exceção decidida.
 - **Efeito das 129 duplicatas** em reais nos totais: não foi medido (D2).
+- **Dimensões:** a composição das dimensões social, ambiental e institucional, a ordem entre elas e os indicadores da dimensão econômica do `obcefem` que não têm regra (receita corrente, investimento, ICMS). Ver RN-ENT-12 e [pendencias.md](pendencias.md), seção 4.
 - **O "15%" da cota municipal** que a API cita no arquivo de distribuição de 2023 a 2025 não foi reproduzido aqui. Ver RN-CFE-26.
 
 ## O que a comparação não verificou

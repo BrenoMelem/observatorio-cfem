@@ -99,7 +99,7 @@ Leitura de 12/11/2026. O agrupamento por assunto é deste arquivo, não da expor
 | Item | O que a documentação já tem | Situação |
 | --- | --- | --- |
 | PB-06 Série de 10 anos de arrecadação e uso da CFEM dos dois municípios | [mineracao-cfem.md](../regras-de-negocio/mineracao-cfem.md): arrecadação desde 2003 (RN-CFE-22), nos 12 municípios (RN-TER-01). O "uso" depende de RN-CFE-24 (PROPOSTA). O lote da arrecadação está bloqueado por duplicatas (RN-VPU-11) | Conflito (B2, B3) |
-| PB-07 Base socioeconômica e socioambiental por dimensão | [regras-por-fonte.md](../regras-de-negocio/regras-por-fonte.md), [indicadores-derivados-e-compostos.md](../regras-de-negocio/indicadores-derivados-e-compostos.md) e o manifesto (RN-MOD-25). As regras organizam os indicadores em blocos temáticos; a correspondência com as quatro dimensões do backlog não está definida | Parcial |
+| PB-07 Base socioeconômica e socioambiental por dimensão | [regras-por-fonte.md](../regras-de-negocio/regras-por-fonte.md), [indicadores-derivados-e-compostos.md](../regras-de-negocio/indicadores-derivados-e-compostos.md) e o manifesto (RN-MOD-25). As regras organizam os indicadores em blocos temáticos. A dimensão econômica é a primeira e tem composição decidida (RN-ENT-12, 13/11/2026); a correspondência das outras três dimensões com os blocos não está definida | Parcial |
 | PB-08 Atualização automática (ANM, TCM-PA, orçamentos municipais) | Agenda por fonte (RN-TMP-01, RN-TMP-02), publicação só de lote validado (RN-VPU-01, RN-VPU-03) e a decisão 5 do mapa, pendente. TCM-PA e orçamentos municipais não são fontes nas regras | Conflito (B4) |
 | PB-09 Catálogo de metadados e dicionário de dados | Manifesto único (RN-MOD-25), proveniência (RN-MOD-21, RN-FON-13) e o [glossário](../regras-de-negocio/glossario.md) | Com regra |
 | PB-10 Consulta e download (CSV/API) | API própria e CSV aberto (RN-ENT-02, RN-ENT-03), metadados nas exportações (RN-ENT-05, PROPOSTA), arquivos integrais da ANM fora do consumidor (RN-ENT-06) | Com regra |
@@ -111,7 +111,7 @@ Leitura de 12/11/2026. O agrupamento por assunto é deste arquivo, não da expor
 | --- | --- | --- |
 | PB-11 Painel da arrecadação da CFEM no tempo | Primeiros gráficos (RN-ENT-09, PROPOSTA), só dado homologado (RN-VPU-10). Atenção ao texto: "quanto cada município recebe" é a CFEM recebida (distribuição), que não se confunde com a arrecadada (RN-CFE-02, RN-CFE-03) | Com regra |
 | PB-12 Onde a CFEM e o orçamento foram aplicados, por área | Despesa por função pelo SICONFI (RN-FNT-04). Dizer que uma despesa foi paga com CFEM exige a fonte de recursos confirmada (RN-CFE-24, PROPOSTA) | Parcial |
-| PB-13 Quadro de indicadores por dimensão | Manifesto (RN-MOD-25), regras dos derivados e compostos (RN-IND-01 a 13), painel de status (RN-ENT-04) | Com regra |
+| PB-13 Quadro de indicadores por dimensão | Manifesto (RN-MOD-25), regras dos derivados e compostos (RN-IND-01 a 13), painel de status (RN-ENT-04); a dimensão econômica é a primeira (RN-ENT-12) | Com regra |
 | PB-14 Filtros por período, município e dimensão | Nada específico; os metadados de cada ponto seguem RN-VPU-09 | Sem regra |
 | PB-15 Comparar municípios e períodos | Municípios de comparação (RN-TER-09), agregação regional (RN-TER-02) e as regras de comparabilidade de [modelo-de-dados.md](../regras-de-negocio/modelo-de-dados.md) (RN-MOD-13 a 19) | Com regra |
 | PB-16 Análises estatísticas e correlações (CFEM × indicadores) | Só a marca de análise derivada (RN-IND-05, PROPOSTA). Não há regra sobre método, publicação ou ressalvas de correlações | Parcial |
@@ -199,7 +199,7 @@ As lacunas maiores, que nenhuma regra cobre:
 
 - **Escrita na plataforma.** Perfis de acesso, gestão de conteúdo, canal de escuta, comentários, consultas públicas e marketplace (PB-04, PB-19, PB-24 a 26, PB-28, PB-37 e PB-39) exigem que a plataforma receba e guarde dados de usuários. As regras só descrevem coleta de fontes públicas e leitura da camada publicada.
 - **Front-end e conteúdo.** Navegação, filtros, artigos, materiais dos cursos, páginas explicativas, acessibilidade (PB-05, PB-14, PB-17, PB-18, PB-20, PB-44). As regras são do backend.
-- **Dimensões do backlog × blocos das regras.** O backlog fala em quatro dimensões (social, econômica, ambiental e institucional); as regras, em blocos temáticos. Falta dizer qual bloco entra em qual dimensão (PB-07, PB-13, PB-14).
+- **Dimensões do backlog × blocos das regras.** O backlog fala em quatro dimensões (social, econômica, ambiental e institucional); as regras, em blocos temáticos. Em 13/11/2026 o mantenedor decidiu a composição da dimensão econômica (RN-ENT-12: CFEM, PIB, preços, finanças municipais e despesa por função; emprego e renda ficam na social). Falta dizer qual bloco entra em cada uma das outras três dimensões (PB-07, PB-13, PB-14).
 - **Operação.** Testes de carga e de aceitação, backup e transferência (PB-42, PB-43, PB-47, PB-48).
 
 ## 5. Prazos
@@ -208,4 +208,5 @@ As lacunas maiores, que nenhuma regra cobre:
 - **Vencem em 30/11/2026:** PB-02 e PB-03.
 - **Vencem em 31/12/2026:** PB-04, PB-05 e PB-06. O PB-06 depende de destravar o lote da arrecadação (RN-VPU-11) e dos conflitos B2 e B3.
 - **Primeira versão no ar.** Em 11/11/2026 o mantenedor informou o prazo de até maio de 2027 (restrição registrada no mapa de decisões, PR #23). No backlog, a implantação em produção (PB-46) vence em 31/07/2027, e os itens que vencem até 31/05/2027 são PB-01 a PB-14. Falta dizer quais deles compõem a primeira versão.
+- **Ordem de trabalho.** Em 13/11/2026 o mantenedor decidiu que a dimensão econômica é a primeira, na carga dos dados e nos painéis (RN-ENT-12). Dentro de PB-07 e PB-13, a parte econômica vem antes das partes social, ambiental e institucional; as datas de vencimento dos itens não mudaram. A ordem das outras três dimensões não foi decidida.
 - **Entregas contratuais:** [1.5] e [1.6] em 31/03/2028; [4.2] em 30/09/2028.
