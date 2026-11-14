@@ -43,12 +43,22 @@ Na ordem em que precisam ser tomadas.
 | 3 | Armazenamento das camadas (bruto, qualidade, publicado) | Dados e coleta | 1, 2 | seção 4.2 | aceita em 13/11/2026 | [ADR-009](ADR-009-armazenamento-das-camadas.md) |
 | 4 | Framework e contrato da API (inclui o formato híbrido de resposta) | API e backend | 2, 3 | seções 4.4 e 4.5 | aceita em 13/11/2026 | [ADR-010](ADR-010-framework-e-contrato-da-api.md) |
 | 5 | Execução e agendamento das coletas, com a abertura de issue na falha | Dados e coleta | 2, 3 | seção 4.2 (produtor e transporte, em aberto) | aceita em 13/11/2026 | [ADR-011](ADR-011-execucao-e-agendamento-das-coletas.md) |
-| 6 | Hospedagem e segredos | Infraestrutura e processo | 3, 4, 5 | seção 4.3 | próxima | |
+| 6 | Hospedagem e segredos | Infraestrutura e processo | 3, 4, 5 | seção 4.3 | adiada pelo mantenedor em 13/11/2026 (ver nota abaixo) | |
 | 7 | Qualidade e entrega: testes, lint, CI e publicação | Infraestrutura e processo | 2, 6 | seção 6 (Fase 5) | pendente | |
 | 8 | Organização do repositório e do fluxo de trabalho | Infraestrutura e processo | 1 a 7 | seção 4.1 (pasta `backend/`) | pendente | |
 | 9 | Assistente de IA: forma da resposta, onde roda e como usa a camada publicada | API e backend | 4, 6 | seções 2 (contrato do assistente) e 4.3 | pendente | |
 
 Depois das decisões 1 a 3 já é possível criar a estrutura inicial do código.
+
+### Decisão 6 adiada — nota de 13/11/2026
+
+A decisão 6 foi apresentada em 13/11/2026 com três opções (Vercel no plano Hobby, Render no serviço gratuito e Google Cloud Run) e o mantenedor escolheu adiar; o motivo não foi informado. As decisões 7, 8 e 9 dependem dela. Para não repetir a pesquisa, ficam os fatos consultados em 13/11/2026 na documentação oficial:
+
+- Vercel, plano Hobby (https://vercel.com/docs/functions/limitations): duração máxima de 300 s, 2 GB de memória e 1 vCPU, pacote Python de até 500 MB sem compressão, corpo de requisição ou resposta de até 4,5 MB (não vale para resposta em fluxo). Não foi conferido se o plano tem restrição de uso.
+- Render, serviço web gratuito (https://render.com/docs/free): dorme após 15 minutos sem requisição e leva cerca de 1 minuto para voltar; 750 horas de instância por mês por workspace; sem disco persistente.
+- Google Cloud Run: a página de preços não pôde ser lida em 13/11/2026; a camada gratuita e a exigência de conta de faturamento não foram conferidas.
+
+Em todas as opções apresentadas, o transporte proposto era o GitHub Actions gravar o pacote publicado (só agregados) no repositório, com o commit disparando a implantação, e os segredos ficarem nos Secrets do GitHub (coletas) e nas variáveis de ambiente da plataforma (API). Nada disso está decidido.
 
 ### Pendência de aprovação da Fase 1 — revisão de 13/11/2026
 
