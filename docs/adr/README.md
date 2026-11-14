@@ -60,9 +60,11 @@ A decisão 6 foi apresentada em 13/11/2026 com três opções (Vercel no plano H
 
 Em todas as opções apresentadas, o transporte proposto era o GitHub Actions gravar o pacote publicado (só agregados) no repositório, com o commit disparando a implantação, e os segredos ficarem nos Secrets do GitHub (coletas) e nas variáveis de ambiente da plataforma (API). Nada disso está decidido.
 
-### Pendência de aprovação da Fase 1 — revisão de 13/11/2026
+### Aprovação da Fase 1 — revisão e aprovação de 13/11/2026
 
 O ADR-007 confirma a construção do backend de produção neste repositório, fora de `scripts/`, e o ADR-008 confirma Python com `uv`. O ADR-007 deixa o nome da pasta fora da decisão. A [análise da Fase 0](analise-fase-0-camada-publicada-e-assistente.md) exige aprovação da Fase 1 antes de iniciá-la; os itens 8 e 9 do mapa acima seguem pendentes (os itens 3 e 4 foram aceitos em 13/11/2026, ADR-009 e ADR-010, sem que isso aprove a Fase 1). Na revisão do histórico e dos PRs #18, #19, #21, #22, #23 e #26 em 13/11/2026, não foi localizado registro explícito dessa aprovação. A existência de código em `backend/` no PR #23 não substitui a decisão. O mantenedor precisa confirmar o avanço da Fase 1 e decidir os itens dependentes antes de expandir a implementação ou mesclar o PR.
+
+**Aprovação de 13/11/2026.** Com os ADR-009 e ADR-010 aceitos, o mantenedor aprovou em 13/11/2026 a Fase 1 (a API de leitura por dimensão), com `backend/` como pasta provisória até a decisão 8. A aprovação não alcança a Fase 2 (assistente), que continua dependendo das decisões 6 e 9, nem o merge do PR #23, que é decisão à parte.
 
 O coletor de laboratório `scripts/commodities/pink_sheet.py`, já incorporado à `develop` antes do PR #23, ainda produz um único indicador mensal de ferro em `USD/dmt`. Isso diverge de RN-TMP-13 e RN-TMP-14, que exigem contrato anual em `¢/dmtu` (1985–2005) e spot mensal em `$/dmt` (desde dezembro de 2008), separados. O backend do PR #23 não lê esse coletor nem publica commodities; a correção é independente do merge deste PR. Próximo passo: abrir uma correção própria do coletor e dos testes, sem publicar ferro até validar o recorte e as unidades.
 
