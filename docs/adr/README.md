@@ -2,7 +2,7 @@
 
 Uma decisão técnica por arquivo. As regras de negócio (o quê e por quê) estão em [../regras-de-negocio/](../regras-de-negocio/README.md); aqui fica o como. Um ADR não é fonte de regra de negócio.
 
-Atualizado em 11/11/2026.
+Atualizado em 13/11/2026.
 
 ## Restrições do mantenedor
 
@@ -40,8 +40,8 @@ Na ordem em que precisam ser tomadas.
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Onde mora o produto e a relação com a `obcefem_api` | Infraestrutura e processo | nenhuma | seção 4.1 | aceita em 11/11/2026 | [ADR-007](ADR-007-onde-mora-o-produto.md) |
 | 2 | Linguagem e ambiente de execução do backend | API e backend | 1 | seção 4.1 | aceita em 11/11/2026 | [ADR-008](ADR-008-linguagem-e-ambiente.md) |
-| 3 | Armazenamento das camadas (bruto, qualidade, publicado) | Dados e coleta | 1, 2 | seção 4.2 | próxima | |
-| 4 | Framework e contrato da API (inclui o formato híbrido de resposta) | API e backend | 2, 3 | seções 4.4 e 4.5 | pendente | |
+| 3 | Armazenamento das camadas (bruto, qualidade, publicado) | Dados e coleta | 1, 2 | seção 4.2 | aceita em 13/11/2026 | [ADR-009](ADR-009-armazenamento-das-camadas.md) |
+| 4 | Framework e contrato da API (inclui o formato híbrido de resposta) | API e backend | 2, 3 | seções 4.4 e 4.5 | próxima | |
 | 5 | Execução e agendamento das coletas, com a abertura de issue na falha | Dados e coleta | 2, 3 | seção 4.2 (produtor e transporte, em aberto) | pendente | |
 | 6 | Hospedagem e segredos | Infraestrutura e processo | 3, 4, 5 | seção 4.3 | pendente | |
 | 7 | Qualidade e entrega: testes, lint, CI e publicação | Infraestrutura e processo | 2, 6 | seção 6 (Fase 5) | pendente | |
@@ -52,7 +52,7 @@ Depois das decisões 1 a 3 já é possível criar a estrutura inicial do código
 
 ### Pendência de aprovação da Fase 1 — revisão de 13/11/2026
 
-O ADR-007 confirma a construção do backend de produção neste repositório, fora de `scripts/`, e o ADR-008 confirma Python com `uv`. O ADR-007 deixa o nome da pasta fora da decisão. A [análise da Fase 0](analise-fase-0-camada-publicada-e-assistente.md) exige aprovação da Fase 1 antes de iniciá-la; os itens 3, 4, 8 e 9 do mapa acima seguem pendentes. Na revisão do histórico e dos PRs #18, #19, #21, #22, #23 e #26 em 13/11/2026, não foi localizado registro explícito dessa aprovação. A existência de código em `backend/` no PR #23 não substitui a decisão. O mantenedor precisa confirmar o avanço da Fase 1 e decidir os itens dependentes antes de expandir a implementação ou mesclar o PR.
+O ADR-007 confirma a construção do backend de produção neste repositório, fora de `scripts/`, e o ADR-008 confirma Python com `uv`. O ADR-007 deixa o nome da pasta fora da decisão. A [análise da Fase 0](analise-fase-0-camada-publicada-e-assistente.md) exige aprovação da Fase 1 antes de iniciá-la; os itens 4, 8 e 9 do mapa acima seguem pendentes (o item 3 foi aceito em 13/11/2026, ADR-009). Na revisão do histórico e dos PRs #18, #19, #21, #22, #23 e #26 em 13/11/2026, não foi localizado registro explícito dessa aprovação. A existência de código em `backend/` no PR #23 não substitui a decisão. O mantenedor precisa confirmar o avanço da Fase 1 e decidir os itens dependentes antes de expandir a implementação ou mesclar o PR.
 
 O coletor de laboratório `scripts/commodities/pink_sheet.py`, já incorporado à `develop` antes do PR #23, ainda produz um único indicador mensal de ferro em `USD/dmt`. Isso diverge de RN-TMP-13 e RN-TMP-14, que exigem contrato anual em `¢/dmtu` (1985–2005) e spot mensal em `$/dmt` (desde dezembro de 2008), separados. O backend do PR #23 não lê esse coletor nem publica commodities; a correção é independente do merge deste PR. Próximo passo: abrir uma correção própria do coletor e dos testes, sem publicar ferro até validar o recorte e as unidades.
 
@@ -66,3 +66,4 @@ A [análise da Fase 0](analise-fase-0-camada-publicada-e-assistente.md) não é 
 | ADR-006 | Camada publicada por dimensão e assistente (Fase 0) | não é mais ADR desde 11/11/2026: virou a [análise da Fase 0](analise-fase-0-camada-publicada-e-assistente.md) |
 | [ADR-007](ADR-007-onde-mora-o-produto.md) | Onde mora o produto e a relação com a `obcefem_api` | aceito pelo mantenedor em 11/11/2026 |
 | [ADR-008](ADR-008-linguagem-e-ambiente.md) | Linguagem e ambiente de execução do backend | aceito pelo mantenedor em 11/11/2026 |
+| [ADR-009](ADR-009-armazenamento-das-camadas.md) | Armazenamento das camadas (bruto, qualidade, publicado) | aceito pelo mantenedor em 13/11/2026 |
