@@ -45,8 +45,9 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Motivo:** O ferro do FRED só coincide com o Pink Sheet a partir de dez/2008 (RN-TMP-13), e o Pink Sheet traz as duas séries desde 1960 em uma fonte só.
 - **Exemplo:** Em 10/11/2026 a página do World Bank (`worldbank.org/en/research/commodity-markets`) listava os arquivos anual e mensal; a planilha mensal baixou com HTTP 200 e User-Agent de navegador, e o cobre vai de jan/1960 a out/2026 (reproduzido em 10/11/2026). O relatório LAB-19/10 consultou o FRED (`PIORECRUSDM`, `PCOPPUSDM`) e dizia jan/1980; isso foi contradito em 25/10 e em 10/11/2026.
 - **Exceções:** A unidade do ferro é `$/dmt` (RN-TMP-14); o cobre é `$/mt`. A planilha pode mudar de layout (a linha do cabeçalho é a 5 na mensal e a 8 na anual), por isso as colunas são achadas pelo nome. O Pink Sheet pode corrigir valores antigos; guardar cada edição permite ver a mudança. Contraria a decisão de 24/10/2026 (FRED como rota). O ferro do FRED só coincide com o Pink Sheet a partir de dez/2008 (RN-TMP-13); a reserva cobre só a série spot. No ferro, a mesma coluna da planilha contém duas medidas, separadas por período em duas séries (RN-TMP-13). O cobre coincide nas duas fontes desde 1995, nas datas testadas.
-- **Fonte:** DECISÃO-MANTENEDOR de 10/11/2026 (conflitos 8 e 17); LAB-19/10 §4 (FRED e World Bank Pink Sheet); DECISÕES §Rotas de coleta por fonte; BLOCOS §Bloco 2.
-- **Relacionadas:** RN-FON-10, RN-MOD-19, RN-TMP-13, RN-FNT-06
+- **Guarda das edições e alerta (DECISÃO-MANTENEDOR de 12/11/2026):** cada edição mensal baixada é guardada fora do Git, datada e identificada, no mesmo arquivo de versões usado para os arquivos da ANM (Release do GitHub, RN-FON-15). A falha da coleta abre uma issue no repositório (RN-VPU-03), e o mantenedor é o responsável por acompanhá-la. Em 12/11/2026 a coleta ainda não é agendada: só existe o script de laboratório, e nenhuma edição foi arquivada.
+- **Fonte:** DECISÃO-MANTENEDOR de 10/11/2026 (conflitos 8 e 17) e de 12/11/2026 (guarda das edições e alerta); LAB-19/10 §4 (FRED e World Bank Pink Sheet); DECISÕES §Rotas de coleta por fonte; BLOCOS §Bloco 2.
+- **Relacionadas:** RN-FON-10, RN-FON-15, RN-MOD-19, RN-TMP-13, RN-FNT-06, RN-VPU-03
 
 ### RN-FNT-06: Pink Sheet como fonte única de ferro e cobre
 - **Status:** DECIDIDA
