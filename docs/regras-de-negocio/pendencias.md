@@ -16,7 +16,7 @@ Estas regras estão decididas no essencial, mas um ponto delas continua sem deci
 
 | Regra | Ponto em aberto |
 | --- | --- |
-| [RN-ENT-12](entrega-dos-dados.md) | A dimensão econômica é a primeira (13/11/2026), mas falta decidir a ordem das dimensões social, ambiental e institucional, e quais itens do backlog compõem a primeira versão (prazo de maio de 2027) |
+| [RN-ENT-12](entrega-dos-dados.md) | A dimensão econômica é a primeira (13/11/2026), e a ordem das demais é social, ambiental e institucional (15/11/2026); falta decidir quais itens do backlog compõem a primeira versão (prazo de maio de 2027) |
 | [RN-ENT-08](entrega-dos-dados.md) | Metas numéricas de cada critério de avaliação do assistente. Adiado por prioridade em 11/11/2026: o assistente é etapa posterior ao tratamento dos dados; fixar critérios e metas quando ela começar |
 
 ## 3. Divergências entre fontes
