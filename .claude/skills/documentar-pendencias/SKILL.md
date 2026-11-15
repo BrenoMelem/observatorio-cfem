@@ -27,13 +27,24 @@ Trate **uma** pendência por vez e só avance quando a decisão estiver registra
 
 ### 1. Pesquisar
 
-Leia a regra no arquivo do tema, as notas de evidência no fim do arquivo, as fontes que ela cita (em `docs/regras-de-negocio/fontes/`) e as regras ligadas (referências cruzadas, mesma divergência). Quando a pendência depender de fato externo (lei, API, portaria, disponibilidade de dado), consulte a web ou faça uma coleta pequena de verificação, anotando a data da consulta. Fato conferido hoje entra com a data de hoje; o que vier só de relatório diz "transcrito do relatório X, não conferido".
+Leia a regra no arquivo do tema, as notas de evidência no fim do arquivo, as fontes que ela cita (em `docs/regras-de-negocio/fontes/`) e as regras ligadas (referências cruzadas, mesma divergência). Quando a pendência depender de fato externo (lei, API, portaria, disponibilidade de dado), consulte a web ou teste a fonte com um script no próprio repositório (ver "Quando faltar informação: escreva um script de teste"), anotando a data da consulta. Fato conferido hoje entra com a data de hoje; o que vier só de relatório diz "transcrito do relatório X, não conferido".
 
 Aprendizados de uso:
 
-- **Confira antes de propor opções.** Opções baseadas em premissa não testada saem erradas. Na série do ferro, o "jan/1980" do relatório eram linhas vazias, e só a leitura do dado mostrou isso. Se o dado é público, baixe e compare (por exemplo, o gráfico público do FRED em `fred.stlouisfed.org/graph/fredgraph.csv?id=<série>` dispensa chave; a página do World Bank lista os links do Pink Sheet). Salve os baixados na pasta temporária do job, fora do repositório.
+- **Confira antes de propor opções.** Opções baseadas em premissa não testada saem erradas. Na série do ferro, o "jan/1980" do relatório eram linhas vazias, e só a leitura do dado mostrou isso. Se o dado é público, baixe e compare (por exemplo, o gráfico público do FRED em `fred.stlouisfed.org/graph/fredgraph.csv?id=<série>` dispensa chave; a página do World Bank lista os links do Pink Sheet). Os arquivos baixados vão para `output/` ou `tmp/`, que não são versionados.
 - **Se o mantenedor citar outro repositório** (por exemplo `obcefem_api`), leia o código e o README dele antes de responder. Registre o que veio de lá como "transcrito do README, não conferido neste repositório", salvo se você mesmo reproduzir.
 - **Evidência nova pode contradizer uma decisão antiga.** Diga isso de forma direta, mostre os números e proponha reabrir; a decisão antiga fica anotada em Exceções, nunca apagada.
+
+#### Quando faltar informação: escreva um script de teste
+
+Se você não sabe a resposta, ou as regras e os relatórios não trazem a informação (como uma fonte responde, que campos e períodos ela tem, se cobre os 12 municípios, se dois números batem), não preencha a lacuna com suposição nem apresente opções sobre uma premissa não testada. Escreva um script no repositório que teste o ponto, rode-o e use o resultado. O script fica versionado porque a evidência de uma regra precisa poder ser refeita: o mantenedor, ou outra sessão daqui a meses, deve conseguir rodar o mesmo comando e ver se a fonte mudou. Um teste feito só no terminal se perde.
+
+- **Onde:** `scripts/sondas/<fonte>.py` quando a pergunta é "a fonte responde, e como?"; `scripts/<tema>/` quando o teste já é uma coleta ou conferência do tema (`cfem`, `financas`, `populacao`, `commodities`, `emissoes`). Antes de criar, veja no `scripts/README.md` se já existe um script que responda, ou que baste estender.
+- **Como:** siga o `AGENTS.md` e o padrão dos scripts vizinhos. Python, com docstring que diga o que o script faz, qual regra ou pendência ele ajuda a responder e que é de teste; roda como módulo (`uv run python -m scripts.<pasta>.<script>`); dependência nova só por `uv add`. Chave de API entra por variável de ambiente, nunca no arquivo. A saída e os arquivos baixados vão para `output/` ou `tmp/`.
+- **Tamanho:** pequeno e direto ao ponto da pendência. Ele responde uma pergunta; não é o coletor do produto. Se tiver lógica própria de leitura ou cálculo, acrescente um teste em `scripts/testes/` que não dependa da rede.
+- **Depois de rodar:** acrescente o script ao mapa do `scripts/README.md`, rode `uv run pytest` e `uv run ruff check scripts`, e registre o que ele encontrou em "Notas de evidência" da regra (ou em `docs/registros/`, se for o retrato de uma execução), com "reproduzido em DD/MM/AAAA", o comando usado e os números. O script e a evidência entram na mesma branch da pendência.
+- **O resultado é evidência, não decisão.** Ele alimenta as opções que você apresenta; a regra só muda de status com a escolha do mantenedor.
+- **Quando o script não resolve:** se o teste depender de algo que não existe (conta do Google Cloud, chave que o mantenedor não forneceu) ou a fonte estiver fora do ar, diga isso ao mantenedor, com o erro e a data, em vez de supor o resultado. Para uma olhada única que não sustenta nenhuma opção (abrir uma página, ler uma portaria), a consulta direta basta.
 
 ### 2. Apresentar, sempre nesta estrutura
 
