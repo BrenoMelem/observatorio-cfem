@@ -11,6 +11,8 @@ Termos e siglas usados nesta documentação. Os termos de domínio vêm de DECIS
 | DECIDIDA | Regra que vem de DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10, ou de decisão do mantenedor registrada em 24/10/2026 |
 | PROPOSTA | Aguarda confirmação e consta em [pendencias.md](pendencias.md). Regra deduzida, vinda só de CONSUMO, MAPA-TEMAS, PESQUISA, PLANO ou do código, sem decisão registrada |
 | EM ABERTO | Ponto sem decisão, ou com fontes em conflito; todos constam em [pendencias.md](pendencias.md) |
+| dimensão | Cada um dos quatro agrupamentos de indicadores do produto: social, econômica, ambiental e institucional. É o termo do Product Backlog e das páginas do `obcefem`. A dimensão econômica é a primeira e tem a composição de RN-ENT-12; a composição das outras três está em aberto ([pendencias.md](pendencias.md), seção 4). Não se confunde com bloco temático (a divisão em seis blocos de BLOCOS) |
+| eixo | Só o eixo de um gráfico ou de uma classificação (RN-CFE-02, RN-TMP-13, RN-IND-03). Não é sinônimo de dimensão |
 | DECISÃO-MANTENEDOR | Decisão do mantenedor, de 24/10/2026, dada nas respostas da Fase 1 |
 | observação | Um valor de um indicador para um município e um período, com unidade, natureza, estado de validação, fonte e proveniência |
 | natureza do valor | O que o valor é: informado, zero real, ausente, não divulgado ou não aplicável (RN-MOD-06) |

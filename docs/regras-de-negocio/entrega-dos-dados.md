@@ -76,8 +76,9 @@ As fontes divergiam sobre a forma da entrega: DECISÕES e PLANO descrevem uma ca
 - **Regra:** Os primeiros gráficos devem usar dados homologados de população municipal e de CFEM arrecadada e recebida, em painéis separados.
 - **Motivo:** Começa pelo que já tem rota validada e respeita que arrecadação e distribuição são medidas distintas.
 - **Exemplo:** Painel de população de Canaã e Parauapebas; painéis separados de CFEM arrecadada e CFEM recebida.
+- **Exceções:** Em 13/11/2026 o mantenedor decidiu que a dimensão econômica é a primeira (RN-ENT-12). A CFEM arrecadada e a recebida fazem parte dela, e nisso as duas regras coincidem. A população é da dimensão social; está **EM ABERTO** se o painel de população continua entre os primeiros gráficos ou se a população entra na primeira etapa só como denominador dos indicadores per capita (RN-IND-09, RN-IND-12). Ver [pendencias.md](pendencias.md), seção 2.
 - **Fonte:** VAL-15/10 §Resposta ao orientador (item 3), que é uma recomendação do relatório e não uma decisão de DECISÕES ou de BLOCOS; BLOCOS §Bloco 1 (população como primeiro pipeline).
-- **Relacionadas:** RN-CFE-02, RN-VPU-10
+- **Relacionadas:** RN-CFE-02, RN-VPU-10, RN-ENT-12
 
 ### RN-ENT-10: Licença de reuso das exportações
 - **Status:** OBSOLETA
@@ -96,3 +97,12 @@ As fontes divergiam sobre a forma da entrega: DECISÕES e PLANO descrevem uma ca
 - **Exceções:** Não flexibiliza RN-VPU-10: dado fictício não é dado homologado e não entra na camada publicada.
 - **Fonte:** DECISÃO-MANTENEDOR de 08/11/2026; `obcefem`, páginas `dimensao-*.html`.
 - **Relacionadas:** RN-VPU-10, RN-ENT-04
+
+### RN-ENT-12: A dimensão econômica é a primeira
+- **Status:** DECIDIDA
+- **Regra:** A dimensão econômica deve ser a primeira a ser feita, tanto na carga dos dados quanto nos painéis; as dimensões social, ambiental e institucional vêm depois. A dimensão econômica reúne: a CFEM (arrecadação, distribuição e autuações), o PIB municipal e seus derivados, os preços do minério de ferro e do cobre, as finanças municipais e a despesa por função.
+- **Motivo:** O projeto trata principalmente da CFEM e da economia e é um projeto da Vale; por ser um dos pontos principais, esse conteúdo deve ficar pronto antes dos demais.
+- **Exemplo:** A página da dimensão econômica do `obcefem` tem quatro seções: dinâmica econômica (PIB), preços do minério e do cobre, finanças municipais, e investimento público e despesa por função; a página inicial lista "Distribuição da CFEM" nessa dimensão. A `obcefem_api` inteira (arrecadação, autuações e distribuição estimada) é CFEM e, portanto, pertence a ela (conferido no código dos dois repositórios em 13/11/2026).
+- **Exceções:** (1) Emprego e renda ficam na dimensão social, como no `obcefem`, por decisão do mantenedor de 13/11/2026; isso contraria BLOCOS §Bloco 2, que junta economia e mercado de trabalho (04/10/2026, última edição 20/10/2026). BLOCOS não foi alterado. (2) A ordem não flexibiliza RN-VPU-10: só dado homologado alimenta os gráficos, e RN-ENT-11 continua valendo para dado fictício. (3) Estão **EM ABERTO**: a ordem das outras três dimensões; a composição de cada uma delas; e a fonte e o método da composição da receita corrente, do investimento público e do ICMS repassado, que aparecem na página do `obcefem` e não têm regra. Ver [pendencias.md](pendencias.md), seções 2 e 4.
+- **Fonte:** DECISÃO-MANTENEDOR de 13/11/2026; `obcefem`, páginas `index.html` e `dimensao-economica.html`; `obcefem_api`. A composição corresponde a BLOCOS §Bloco 3 (Mineração e CFEM), §Bloco 6 (Finanças Públicas) e à parte de PIB e preços do §Bloco 2.
+- **Relacionadas:** RN-ENT-09, RN-ENT-11, RN-VPU-10, RN-CFE-02, RN-CFE-25, RN-CFE-26, RN-FNT-02, RN-FNT-04, RN-FNT-05, RN-IND-09, RN-IND-10
