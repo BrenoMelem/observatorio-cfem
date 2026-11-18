@@ -45,7 +45,7 @@ Na ordem em que precisam ser tomadas.
 | 5 | Execução e agendamento das coletas, com a abertura de issue na falha | Dados e coleta | 2, 3 | seção 4.2 (produtor e transporte, em aberto) | aceita em 13/11/2026 | [ADR-011](ADR-011-execucao-e-agendamento-das-coletas.md) |
 | 6 | Hospedagem e segredos | Infraestrutura e processo | 3, 4, 5 | seção 4.3 | adiada pelo mantenedor em 13/11/2026 (ver nota abaixo) | |
 | 7 | Qualidade: testes, lint e CI (a publicação passou para a decisão 6 em 17/11/2026) | Infraestrutura e processo | 1, 2 | seção 6 (Fase 5) | aceita em 17/11/2026 | [ADR-012](ADR-012-testes-lint-e-ci.md) |
-| 8 | Organização do repositório e do fluxo de trabalho | Infraestrutura e processo | 1 a 5, 7 | seção 4.1 (pasta `backend/`) | pendente (próxima) | |
+| 8 | Organização do repositório e do fluxo de trabalho | Infraestrutura e processo | 1 a 5, 7 | seção 4.1 (pasta `backend/`) | aceita em 17/11/2026 | [ADR-013](ADR-013-organizacao-do-repositorio.md) |
 | 9 | Assistente de IA: forma da resposta, onde roda e como usa a camada publicada | API e backend | 4, 6 | seções 2 (contrato do assistente) e 4.3 | pendente | |
 
 Depois das decisões 1 a 3 já é possível criar a estrutura inicial do código.
@@ -82,3 +82,4 @@ A [análise da Fase 0](analise-fase-0-camada-publicada-e-assistente.md) não é 
 | [ADR-010](ADR-010-framework-e-contrato-da-api.md) | Framework e contrato da API | aceito pelo mantenedor em 13/11/2026 |
 | [ADR-011](ADR-011-execucao-e-agendamento-das-coletas.md) | Execução e agendamento das coletas | aceito pelo mantenedor em 13/11/2026 |
 | [ADR-012](ADR-012-testes-lint-e-ci.md) | Testes, lint e integração contínua | aceito pelo mantenedor em 17/11/2026 |
+| [ADR-013](ADR-013-organizacao-do-repositorio.md) | Organização do repositório e do código do produto | aceito pelo mantenedor em 17/11/2026 |

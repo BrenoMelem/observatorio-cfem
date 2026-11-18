@@ -40,3 +40,7 @@ Fica de fora: o formato dos arquivos (JSON, parquet ou outro), quem produz o pac
 - Consultas e filtros são feitos em memória sobre os arquivos; rever se o volume publicado deixar de caber na memória ou no limite da plataforma de hospedagem.
 - Rever também se o projeto passar a guardar dados enviados por usuários: arquivos que acompanham a implantação não servem para escrita durante o uso.
 - Voltar atrás custa pouco: os arquivos podem ser carregados num banco, e a leitura fica isolada numa única parte do código.
+
+## Nota de 17/11/2026
+
+A estrutura de pastas, deixada para a decisão 8, foi fixada no [ADR-013](ADR-013-organizacao-do-repositorio.md): no ambiente local, as camadas ficam em `output/observatorio/{bruto,qualidade,publicado}/`, fora do Git, com os caminhos por variável de ambiente. O lugar do pacote publicado na implantação continua com a decisão 6.

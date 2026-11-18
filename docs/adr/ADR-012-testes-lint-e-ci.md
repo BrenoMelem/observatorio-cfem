@@ -52,3 +52,7 @@ Fica de fora: a implantação e os ambientes (decisão 6), a cobertura mínima d
 - Se a pasta `backend/` mudar de nome na decisão 8, o workflow muda junto.
 - Rever se o repositório deixar de ser público (o uso de minutos passa a ter limite) ou se o código do `backend/` crescer a ponto de justificar o modo `--strict`.
 - Voltar atrás custa pouco: é um arquivo de workflow e algumas linhas de configuração.
+
+## Nota de 17/11/2026
+
+O [ADR-013](ADR-013-organizacao-do-repositorio.md) acrescenta ao CI do `backend/` a conferência da regra de dependência entre os subpacotes, com o `import-linter`. O restante deste ADR não muda.
