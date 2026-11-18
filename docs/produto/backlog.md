@@ -98,12 +98,12 @@ Leitura de 12/11/2026. O agrupamento por assunto é deste arquivo, não da expor
 
 | Item | O que a documentação já tem | Situação |
 | --- | --- | --- |
-| PB-06 Série de 10 anos de arrecadação e uso da CFEM dos dois municípios | [mineracao-cfem.md](../regras-de-negocio/mineracao-cfem.md): arrecadação desde 2003 (RN-CFE-22), nos 12 municípios (RN-TER-01). O "uso" depende de RN-CFE-24 (PROPOSTA). O lote da arrecadação está bloqueado por duplicatas (RN-VPU-11) | Conflito (B2, B3) |
+| PB-06 Série de 10 anos de arrecadação e uso da CFEM dos dois municípios | [mineracao-cfem.md](../regras-de-negocio/mineracao-cfem.md): arrecadação desde 2003 (RN-CFE-22), nos 12 municípios (RN-TER-01); "os dois municípios" são os de foco (RN-TER-13, conflito B2 decidido em 17/11/2026). O "uso" depende de RN-CFE-24 (PROPOSTA). O lote da arrecadação está bloqueado por duplicatas (RN-VPU-11) | Conflito (B3) |
 | PB-07 Base socioeconômica e socioambiental por dimensão | [regras-por-fonte.md](../regras-de-negocio/regras-por-fonte.md), [indicadores-derivados-e-compostos.md](../regras-de-negocio/indicadores-derivados-e-compostos.md) e o manifesto (RN-MOD-25). As regras organizam os indicadores em blocos temáticos. A dimensão econômica é a primeira e tem composição decidida (RN-ENT-12, 13/11/2026); a correspondência das outras três dimensões com os blocos não está definida | Parcial |
 | PB-08 Atualização automática (ANM, TCM-PA, orçamentos municipais) | Agenda por fonte (RN-TMP-01, RN-TMP-02), publicação só de lote validado (RN-VPU-01, RN-VPU-03) e a decisão 5 do mapa, pendente. TCM-PA e orçamentos municipais não são fontes nas regras | Conflito (B4) |
 | PB-09 Catálogo de metadados e dicionário de dados | Manifesto único (RN-MOD-25), proveniência (RN-MOD-21, RN-FON-13) e o [glossário](../regras-de-negocio/glossario.md) | Com regra |
 | PB-10 Consulta e download (CSV/API) | API própria e CSV aberto (RN-ENT-02, RN-ENT-03), metadados nas exportações (RN-ENT-05, PROPOSTA), arquivos integrais da ANM fora do consumidor (RN-ENT-06) | Com regra |
-| PB-22 Limites territoriais (bairros, distritos) dos dois municípios | Nada abaixo do município | Conflito (B2, B5) |
+| PB-22 Limites territoriais (bairros, distritos) dos dois municípios | Nada abaixo do município; "os dois municípios" são os de foco (RN-TER-13, conflito B2 decidido em 17/11/2026) | Conflito (B5) |
 
 ### Painéis e análises
 
@@ -206,7 +206,7 @@ As lacunas maiores, que nenhuma regra cobre:
 
 - **Já vencido em 12/11/2026:** PB-01 (31/10/2026). As decisões 1 e 2 do mapa foram aceitas em 11/11/2026; faltam as decisões 3 a 9 e a parte de front-end.
 - **Vencem em 30/11/2026:** PB-02 e PB-03.
-- **Vencem em 31/12/2026:** PB-04, PB-05 e PB-06. O PB-06 depende de destravar o lote da arrecadação (RN-VPU-11) e dos conflitos B2 e B3.
+- **Vencem em 31/12/2026:** PB-04, PB-05 e PB-06. O PB-06 depende de destravar o lote da arrecadação (RN-VPU-11) e do conflito B3 (B2 foi decidido em 17/11/2026).
 - **Primeira versão no ar.** Em 11/11/2026 o mantenedor informou o prazo de até maio de 2027 (restrição registrada no mapa de decisões, PR #23). No backlog, a implantação em produção (PB-46) vence em 31/07/2027, e os itens que vencem até 31/05/2027 são PB-01 a PB-14. Falta dizer quais deles compõem a primeira versão.
 - **Ordem de trabalho.** Em 13/11/2026 o mantenedor decidiu que a dimensão econômica é a primeira, na carga dos dados e nos painéis (RN-ENT-12). Dentro de PB-07 e PB-13, a parte econômica vem antes das partes social, ambiental e institucional; as datas de vencimento dos itens não mudaram. A ordem das outras três dimensões não foi decidida.
 - **Entregas contratuais:** [1.5] e [1.6] em 31/03/2028; [4.2] em 30/09/2028.
