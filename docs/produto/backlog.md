@@ -173,7 +173,7 @@ Leitura de 12/11/2026. O agrupamento por assunto é deste arquivo, não da expor
 
 | Item | O que a documentação já tem | Situação |
 | --- | --- | --- |
-| PB-41 Testes funcionais automatizados | Decisão 7 do mapa, pendente. O protótipo tem testes em `scripts/` | Sem regra |
+| PB-41 Testes funcionais automatizados | Decisão 7 do mapa, aceita em 17/11/2026 ([ADR-012](../adr/ADR-012-testes-lint-e-ci.md): CI com testes, lint e tipos). O protótipo tem testes em `scripts/` | Sem regra |
 | PB-42 Testes de carga | Nada | Sem regra |
 | PB-43 Testes de aceitação com a Vale e representantes dos usuários | Nada | Sem regra |
 | PB-44 Acessibilidade e uso em celular | Nada | Sem regra |
