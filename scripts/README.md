@@ -26,6 +26,7 @@ Os scripts rodam como módulo, a partir da raiz do repositório: `uv run python 
 | `populacao/` | `atualizar.py` | População estimada do IBGE (SIDRA 6579/9324), com validação e reconciliação |
 | `financas/` | `dca_lote.py` | DCA Anexo I-E do SICONFI em lote validado, sem homologar |
 | | `dca_csv.py` | DCA Anexo I-E em CSV simples por função |
+| | `dca_anexos.py` | DCA Anexos I-C (receitas, cota-parte do ICMS) e I-D (despesas, investimento) em CSV longo, 12 municípios, 2013 a 2025 (RN-ENT-12) |
 | | `msc_despesa_fonte.py` | MSC orçamentária por fonte de recursos (`1708`) |
 | `commodities/` | `pink_sheet.py`, `fred.py` | Preço de ferro e cobre: Pink Sheet do World Bank (fonte principal, sem chave) e FRED (reserva, exige `FRED_API_KEY` no ambiente) |
 | `emissoes/` | `seeg.py` | Emissões do SEEG: lê a planilha municipal (centenas de MB, fora do Git) e extrai o recorte dos 12 municípios com os metadados |
