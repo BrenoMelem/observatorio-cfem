@@ -208,7 +208,8 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Relacionadas:** RN-CFE-01, RN-FNT-18
 
 ### RN-CFE-23: Cobertura parcial de Bom Jesus do Tocantins na arrecadação de 2025
-- **Status:** PROPOSTA
+- **Status:** OBSOLETA
+- **Obsoleta desde 19/11/2026:** decisão do mantenedor. O caso está contido na RN-CFE-07 (mês sem linha de um município fica ausente, com causa não confirmada), e a premissa de "cobertura parcial de 2025" não se confirmou: Bom Jesus do Tocantins arrecada de forma esporádica em todos os anos, com o repasse no mês seguinte (ver Notas de evidência, RN-CFE-07). O texto original fica abaixo, sem alteração, para o histórico.
 - **Regra:** Os meses sem linha de Bom Jesus do Tocantins (1501576) na arrecadação de 2025 devem ser registrados como `ausente`, nunca como zero; a causa e a completude municipal do ano dependem de publicação independente da ANM.
 - **Motivo:** Ausência de linha não comprova arrecadação zero nem erro da fonte.
 - **Exemplo:** O briefing de 30/10/2026 relata ausência em 2025; a leitura do CSV completo da ANM em 30/10/2026 encontrou janeiro, mas não fevereiro a dezembro. A causa da divergência ainda não foi confirmada.
@@ -264,6 +265,10 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 ## Notas de evidência
 
 Evidência datada que sustenta ou qualifica as regras acima. Cada nota é o texto original, movido sem alteração das regras; nenhuma delas muda o status da regra. Ordem: a das regras.
+
+#### RN-CFE-07: Ausência de um município num mês existente no arquivo
+
+- **Evidência de 19/11/2026 (arquivos de arrecadação e de distribuição arquivados na Release `anm-2026-11-19-1236`; reproduzido em 19/11/2026 com `uv run python -m scripts.cfem.meses_por_municipio tmp/anm-2026-11-19`; só contagem de meses):** meses com linha de arrecadação e de distribuição de 2022 a 2026. Bom Jesus do Tocantins (1501576) tem arrecadação só em fev/2023; fev, abr e jun/2024; e jan/2025, e nenhuma em 2022 e 2026; a distribuição aparece no mês seguinte a cada arrecadação (jan/2022; mar, mai e jul/2024; fev/2025). A falta de linha é, portanto, um padrão de arrecadação esporádica, não um buraco de 2025 (motivo da obsolescência de RN-CFE-23). O mesmo padrão aparece em outros municípios pequenos em 2025: Palestina do Pará (3 meses de arrecadação), São Geraldo do Araguaia (4), São João do Araguaia (2), Brejo Grande do Araguaia (1); São Domingos do Araguaia não tem linha em nenhum ano desde 2022 (RN-CFE-09). Canaã dos Carajás, Curionópolis, Eldorado do Carajás, Marabá e Parauapebas têm os 12 meses de arrecadação de 2022 a 2025. A causa dos meses sem linha continua "não confirmada" até publicação independente, como manda esta regra.
 
 #### RN-CFE-08: Recuperar julho de 2025
 

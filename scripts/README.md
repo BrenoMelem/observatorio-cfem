@@ -16,7 +16,7 @@ Os scripts rodam como módulo, a partir da raiz do repositório: `uv run python 
 
 | Pasta | Script | O que faz |
 | --- | --- | --- |
-| `cfem/` | `preparar.py` | Lê `CFEM_Arrecadacao.csv` da ANM e gera a CFEM arrecadada mensal e anual provisória (RN-CFE-04 a 07, RN-CFE-11) |
+| `cfem/` | `preparar.py`, `meses_por_municipio.py` (meses com linha por município, RN-CFE-23) | Lê `CFEM_Arrecadacao.csv` da ANM e gera a CFEM arrecadada mensal e anual provisória (RN-CFE-04 a 07, RN-CFE-11) |
 | | `analisar_duplicatas.py` | Relatório das linhas duplicadas da arrecadação, sem identificadores pessoais (RN-VPU-11) |
 | | `validar_arquivo_anm.py` | Confere a cobertura municipal de um CSV da ANM (arrecadação, distribuição ou autuação) |
 | | `distribuicao_municipal.py` | Agrega a distribuição da ANM por município, ano, mês e modalidade (RN-CFE-11) |
