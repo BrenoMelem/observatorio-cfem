@@ -74,7 +74,7 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 
 ## 5. Regras PROPOSTAS aguardando confirmação
 
-Estas 34 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook, dos scripts ou do briefing operacional de 30/10/2026. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
+Estas 33 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook, dos scripts ou do briefing operacional de 30/10/2026. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
 
 ### Território (4)
 
@@ -134,11 +134,10 @@ Estas 34 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA
 | [RN-ENT-08](entrega-dos-dados.md) | Critérios de avaliação do assistente | VAL-15/10 §Resposta ao orientador (item 2). O próprio VAL-15/10 chama os critérios de "propostos" |
 | [RN-ENT-09](entrega-dos-dados.md) | Primeiros gráficos | VAL-15/10 §Resposta ao orientador (item 3), que é uma recomendação do relatório e não uma decisão de DECISÕES ou de BLOCOS; BLOCOS §Bloco 1 (população como primeiro pipeline). Depois de RN-ENT-12 (13/11/2026), falta decidir se o painel de população continua entre os primeiros, já que a população é da dimensão social |
 
-### Mineração (CFEM) (4)
+### Mineração (CFEM) (3)
 
 | Regra | Título | Origem |
 | --- | --- | --- |
-| [RN-CFE-11](mineracao-cfem.md) | Agregação por município, ano, mês e modalidade | SCRIPTS (`build_cfem_distribution_municipal`). Deduzida do código |
 | [RN-CFE-12](mineracao-cfem.md) | Controle de escala com o total nacional | VAL-15/10 §Rodada adicional (apresentado como controle, não como regra) |
 | [RN-CFE-23](mineracao-cfem.md) | Cobertura parcial de Bom Jesus do Tocantins na arrecadação de 2025 | Briefing operacional de 30/10/2026 §9; leitura do CSV completo atual; falta confronto com publicação independente da ANM |
 | [RN-CFE-24](mineracao-cfem.md) | Despesa municipal financiada por CFEM exige fonte de recursos confirmada | Briefing operacional de 30/10/2026 §9; códigos e cobertura ainda não confirmados |

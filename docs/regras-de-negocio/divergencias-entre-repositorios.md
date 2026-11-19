@@ -38,6 +38,12 @@ Decisão posterior, de 13/11/2026:
 | --- | --- | --- | --- | --- |
 | D12 | Dimensões | O `obcefem` organiza o conteúdo em quatro dimensões e põe emprego e renda na social; aqui as fontes usam seis blocos temáticos e BLOCOS §Bloco 2 junta economia e mercado de trabalho. A `obcefem_api` só tem CFEM | A dimensão econômica é a primeira, com a CFEM dentro dela; emprego e renda ficam na social, como no `obcefem` | [RN-ENT-12](entrega-dos-dados.md) |
 
+Decisão posterior, de 19/11/2026:
+
+| # | Tema | Diferença | Decisão (19/11/2026) | Registro |
+| --- | --- | --- | --- | --- |
+| D13 | Soma e arredondamento da CFEM | A API soma em ponto flutuante e arredonda ao par (`round` do Python); aqui a soma é decimal, com arredondamento ao centavo só no fim e meio centavo para cima. A diferença é de até 1 centavo por linha agregada | Seguir a regra deste repositório, não a API | [RN-CFE-11](mineracao-cfem.md) |
+
 ## Em aberto
 
 - **Homologação:** RN-VPU-10 (só dado homologado alimenta os gráficos) continua valendo e a API ainda não a cumpre; não há exceção decidida.

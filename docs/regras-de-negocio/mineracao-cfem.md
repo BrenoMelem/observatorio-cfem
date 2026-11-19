@@ -103,12 +103,13 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Relacionadas:** RN-VPU-07, RN-TER-09, RN-CFE-11, RN-CFE-26
 
 ### RN-CFE-11: Agregação por município, ano, mês e modalidade
-- **Status:** PROPOSTA
+- **Status:** DECIDIDA
 - **Regra:** Os valores devem ser somados em precisão decimal por código IBGE, ano, mês e modalidade de distribuição, e só depois arredondados ao centavo, para cima a partir da metade.
 - **Motivo:** Evita erro de arredondamento acumulado e preserva a modalidade.
 - **Exemplo:** O primeiro importador gerou 75 linhas municipais agregadas de 2025, com código IBGE, município, ano, mês, modalidade, valor e contagem de linhas (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
-- **Fonte:** SCRIPTS (`build_cfem_distribution_municipal`). Deduzida do código.
-- **Relacionadas:** RN-CFE-04, RN-CFE-10
+- **Exceções:** A `obcefem_api` soma em ponto flutuante e arredonda com o arredondamento ao par do Python (conferido em `app/distribuicao.py` e `scripts/gerar_historico.py` em 19/11/2026); por isso os totais podem diferir dela em até 1 centavo por linha agregada. Ao portar a lógica da CFEM (ADR-007), vale esta regra. Ver [divergências entre repositórios](divergencias-entre-repositorios.md), D13.
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026; SCRIPTS (`build_cfem_distribution_municipal`), de onde a regra foi deduzida.
+- **Relacionadas:** RN-CFE-04, RN-CFE-10, RN-CFE-12, RN-VPU-07
 
 ### RN-CFE-12: Controle de escala com o total nacional
 - **Status:** PROPOSTA
