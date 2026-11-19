@@ -74,7 +74,7 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 
 ## 5. Regras PROPOSTAS aguardando confirmação
 
-Estas 30 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook, dos scripts ou do briefing operacional de 30/10/2026. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
+Estas 29 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook, dos scripts ou do briefing operacional de 30/10/2026. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
 
 ### Território (4)
 
@@ -125,14 +125,13 @@ Estas 30 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA
 | [RN-TMP-10](temporalidade-e-atualizacao.md) | Transição CID-9 e CID-10 no SIM | CONSUMO §Sociedade, serviços e segurança |
 | [RN-TMP-11](temporalidade-e-atualizacao.md) | Estimativa por proxy não é medição direta | CONSUMO §Meio ambiente e saneamento |
 
-### Entrega dos dados (4)
+### Entrega dos dados (3)
 
 | Regra | Título | Origem |
 | --- | --- | --- |
 | [RN-ENT-05](entrega-dos-dados.md) | Exportações levam os metadados junto dos valores | CONSUMO §Contrato de dados para o front-end |
 | [RN-ENT-07](entrega-dos-dados.md) | O assistente responde só com a camada publicada | CONSUMO §Contrato de dados para o front-end. VAL-15/10 §Resposta ao orientador (item 2) lista como critério de avaliação a "recusa de inventar número ausente", sem fixar a regra |
 | [RN-ENT-08](entrega-dos-dados.md) | Critérios de avaliação do assistente | VAL-15/10 §Resposta ao orientador (item 2). O próprio VAL-15/10 chama os critérios de "propostos" |
-| [RN-ENT-09](entrega-dos-dados.md) | Primeiros gráficos | VAL-15/10 §Resposta ao orientador (item 3), que é uma recomendação do relatório e não uma decisão de DECISÕES ou de BLOCOS; BLOCOS §Bloco 1 (população como primeiro pipeline). Depois de RN-ENT-12 (13/11/2026), falta decidir se o painel de população continua entre os primeiros, já que a população é da dimensão social |
 
 ### Indicadores derivados e compostos (2)
 

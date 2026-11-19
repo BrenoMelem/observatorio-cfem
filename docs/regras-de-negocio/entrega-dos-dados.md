@@ -71,13 +71,13 @@ As fontes divergiam sobre a forma da entrega: DECISÕES e PLANO descrevem uma ca
 - **Fonte:** VAL-15/10 §Resposta ao orientador (item 2). O próprio VAL-15/10 chama os critérios de "propostos".
 - **Relacionadas:** RN-ENT-07
 
-### RN-ENT-09: Primeiros gráficos
-- **Status:** PROPOSTA
-- **Regra:** Os primeiros gráficos devem usar dados homologados de população municipal e de CFEM arrecadada e recebida, em painéis separados.
-- **Motivo:** Começa pelo que já tem rota validada e respeita que arrecadação e distribuição são medidas distintas.
-- **Exemplo:** Painel de população de Canaã e Parauapebas; painéis separados de CFEM arrecadada e CFEM recebida.
-- **Exceções:** Em 13/11/2026 o mantenedor decidiu que a dimensão econômica é a primeira (RN-ENT-12). A CFEM arrecadada e a recebida fazem parte dela, e nisso as duas regras coincidem. A população é da dimensão social; está **EM ABERTO** se o painel de população continua entre os primeiros gráficos ou se a população entra na primeira etapa só como denominador dos indicadores per capita (RN-IND-09, RN-IND-12). Ver [pendencias.md](pendencias.md), seção 2.
-- **Fonte:** VAL-15/10 §Resposta ao orientador (item 3), que é uma recomendação do relatório e não uma decisão de DECISÕES ou de BLOCOS; BLOCOS §Bloco 1 (população como primeiro pipeline).
+### RN-ENT-09: Primeiros dados entregues para os painéis
+- **Status:** DECIDIDA
+- **Regra:** Os primeiros dados que a API entrega para os painéis devem ser a CFEM arrecadada e a CFEM recebida, homologadas e como séries separadas. A população entra no início só como denominador dos indicadores per capita (RN-IND-09, RN-IND-12); a série própria de população vem com a dimensão social. Como e em que ordem o front-end monta os gráficos fica com a equipe do front-end.
+- **Motivo:** A dimensão econômica é a primeira (RN-ENT-12), a CFEM é o centro do projeto, e arrecadação e distribuição são medidas distintas.
+- **Exemplo:** Séries separadas de CFEM arrecadada e de CFEM recebida de Canaã dos Carajás e Parauapebas, só com dado homologado (RN-VPU-10).
+- **Exceções:** Contraria a recomendação do VAL-15/10 e BLOCOS §Bloco 1, que punham a população entre os primeiros (decisão de 19/11/2026). A primeira versão inclui as quatro dimensões (RN-ENT-12), então a população entra nela de qualquer forma.
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026; VAL-15/10 §Resposta ao orientador (item 3); BLOCOS §Bloco 1.
 - **Relacionadas:** RN-CFE-02, RN-VPU-10, RN-ENT-12
 
 ### RN-ENT-10: Licença de reuso das exportações
