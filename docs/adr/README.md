@@ -2,7 +2,7 @@
 
 Uma decisão técnica por arquivo. As regras de negócio (o quê e por quê) estão em [../regras-de-negocio/](../regras-de-negocio/README.md); aqui fica o como. Um ADR não é fonte de regra de negócio.
 
-Atualizado em 13/11/2026.
+Atualizado em 17/11/2026.
 
 ## Restrições do mantenedor
 
@@ -44,15 +44,16 @@ Na ordem em que precisam ser tomadas.
 | 4 | Framework e contrato da API (inclui o formato híbrido de resposta) | API e backend | 2, 3 | seções 4.4 e 4.5 | aceita em 13/11/2026 | [ADR-010](ADR-010-framework-e-contrato-da-api.md) |
 | 5 | Execução e agendamento das coletas, com a abertura de issue na falha | Dados e coleta | 2, 3 | seção 4.2 (produtor e transporte, em aberto) | aceita em 13/11/2026 | [ADR-011](ADR-011-execucao-e-agendamento-das-coletas.md) |
 | 6 | Hospedagem e segredos | Infraestrutura e processo | 3, 4, 5 | seção 4.3 | adiada pelo mantenedor em 13/11/2026 (ver nota abaixo) | |
-| 7 | Qualidade e entrega: testes, lint, CI e publicação | Infraestrutura e processo | 2, 6 | seção 6 (Fase 5) | pendente | |
-| 8 | Organização do repositório e do fluxo de trabalho | Infraestrutura e processo | 1 a 7 | seção 4.1 (pasta `backend/`) | pendente | |
+| 7 | Qualidade: testes, lint e CI (a publicação passou para a decisão 6 em 17/11/2026) | Infraestrutura e processo | 1, 2 | seção 6 (Fase 5) | aceita em 17/11/2026 | [ADR-012](ADR-012-testes-lint-e-ci.md) |
+| 8 | Organização do repositório e do fluxo de trabalho | Infraestrutura e processo | 1 a 5, 7 | seção 4.1 (pasta `backend/`) | aceita em 17/11/2026 | [ADR-013](ADR-013-organizacao-do-repositorio.md) |
 | 9 | Assistente de IA: forma da resposta, onde roda e como usa a camada publicada | API e backend | 4, 6 | seções 2 (contrato do assistente) e 4.3 | pendente | |
+| 10 | Formato do pacote publicado (acrescentada em 17/11/2026; o ADR-009 deixou o formato de fora) | Dados e coleta | 3, 8 | seção 4.2 | aceita em 17/11/2026 | [ADR-014](ADR-014-formato-do-pacote-publicado.md) |
 
 Depois das decisões 1 a 3 já é possível criar a estrutura inicial do código.
 
 ### Decisão 6 adiada — nota de 13/11/2026
 
-A decisão 6 foi apresentada em 13/11/2026 com três opções (Vercel no plano Hobby, Render no serviço gratuito e Google Cloud Run) e o mantenedor escolheu adiar; o motivo não foi informado. As decisões 7, 8 e 9 dependem dela. Para não repetir a pesquisa, ficam os fatos consultados em 13/11/2026 na documentação oficial:
+A decisão 6 foi apresentada em 13/11/2026 com três opções (Vercel no plano Hobby, Render no serviço gratuito e Google Cloud Run) e o mantenedor escolheu adiar; o motivo não foi informado. Em 17/11/2026 o mantenedor manteve o adiamento e aceitou separar da decisão 7 a publicação, que passou para a decisão 6; assim, a decisão 7 (ADR-012) e a 8 deixaram de depender da hospedagem. A decisão 9 continua dependendo dela. Para não repetir a pesquisa, ficam os fatos consultados em 13/11/2026 na documentação oficial:
 
 - Vercel, plano Hobby (https://vercel.com/docs/functions/limitations): duração máxima de 300 s, 2 GB de memória e 1 vCPU, pacote Python de até 500 MB sem compressão, corpo de requisição ou resposta de até 4,5 MB (não vale para resposta em fluxo). Não foi conferido se o plano tem restrição de uso.
 - Render, serviço web gratuito (https://render.com/docs/free): dorme após 15 minutos sem requisição e leva cerca de 1 minuto para voltar; 750 horas de instância por mês por workspace; sem disco persistente.
@@ -81,3 +82,6 @@ A [análise da Fase 0](analise-fase-0-camada-publicada-e-assistente.md) não é 
 | [ADR-009](ADR-009-armazenamento-das-camadas.md) | Armazenamento das camadas (bruto, qualidade, publicado) | aceito pelo mantenedor em 13/11/2026 |
 | [ADR-010](ADR-010-framework-e-contrato-da-api.md) | Framework e contrato da API | aceito pelo mantenedor em 13/11/2026 |
 | [ADR-011](ADR-011-execucao-e-agendamento-das-coletas.md) | Execução e agendamento das coletas | aceito pelo mantenedor em 13/11/2026 |
+| [ADR-012](ADR-012-testes-lint-e-ci.md) | Testes, lint e integração contínua | aceito pelo mantenedor em 17/11/2026 |
+| [ADR-013](ADR-013-organizacao-do-repositorio.md) | Organização do repositório e do código do produto | aceito pelo mantenedor em 17/11/2026 |
+| [ADR-014](ADR-014-formato-do-pacote-publicado.md) | Formato do pacote publicado | aceito pelo mantenedor em 17/11/2026 |

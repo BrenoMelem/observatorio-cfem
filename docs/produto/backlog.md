@@ -89,8 +89,8 @@ Leitura de 12/11/2026. O agrupamento por assunto é deste arquivo, não da expor
 | Item | O que a documentação já tem | Situação |
 | --- | --- | --- |
 | PB-01 Arquitetura e stack | Decisões 1 a 9 do mapa. A 1 (onde mora o produto, ADR-007) e a 2 (linguagem, ADR-008) foram aceitas em 11/11/2026; as outras sete estão pendentes. O front-end não consta do mapa | Parcial |
-| PB-02 Repositório, integração contínua e ambientes | Decisões 7 (qualidade e entrega) e 8 (organização do repositório) do mapa, pendentes. Já existe o fluxo de branches do `AGENTS.md` e o arquivamento da ANM a cada 4 horas ([guia](../guias/arquivo-anm.md)) | Parcial |
-| PB-03 Modelo do banco analítico | [modelo-de-dados.md](../regras-de-negocio/modelo-de-dados.md) (esquema único, RN-MOD-01 a 04; manifesto, RN-MOD-25) e [territorio.md](../regras-de-negocio/territorio.md). O armazenamento é a decisão 3 do mapa, pendente | Com regra |
+| PB-02 Repositório, integração contínua e ambientes | Decisões 7 (qualidade e entrega) e 8 (organização do repositório) do mapa, pendentes em 12/11/2026 e aceitas em 17/11/2026 ([ADR-012](../adr/ADR-012-testes-lint-e-ci.md), [ADR-013](../adr/ADR-013-organizacao-do-repositorio.md)), com a implantação e os ambientes ainda dependendo da decisão 6. Já existe o fluxo de branches do `AGENTS.md` e o arquivamento da ANM a cada 4 horas ([guia](../guias/arquivo-anm.md)) | Parcial |
+| PB-03 Modelo do banco analítico | [modelo-de-dados.md](../regras-de-negocio/modelo-de-dados.md) (esquema único, RN-MOD-01 a 04; manifesto, RN-MOD-25) e [territorio.md](../regras-de-negocio/territorio.md). O armazenamento é a decisão 3 do mapa, pendente em 12/11/2026 e depois aceita: arquivos ([ADR-009](../adr/ADR-009-armazenamento-das-camadas.md)), em parquet por indicador com manifestos JSON ([ADR-014](../adr/ADR-014-formato-do-pacote-publicado.md)) | Com regra |
 | PB-04 Perfis de acesso (público, gestor, administrador) | Nada. RN-ENT-02 descreve só leitura e metadados | Sem regra |
 | PB-05 Navegação simples e acessível | Nada sobre o front-end | Sem regra |
 
@@ -173,7 +173,7 @@ Leitura de 12/11/2026. O agrupamento por assunto é deste arquivo, não da expor
 
 | Item | O que a documentação já tem | Situação |
 | --- | --- | --- |
-| PB-41 Testes funcionais automatizados | Decisão 7 do mapa, pendente. O protótipo tem testes em `scripts/` | Sem regra |
+| PB-41 Testes funcionais automatizados | Decisão 7 do mapa, aceita em 17/11/2026 ([ADR-012](../adr/ADR-012-testes-lint-e-ci.md): CI com testes, lint e tipos). O protótipo tem testes em `scripts/` | Sem regra |
 | PB-42 Testes de carga | Nada | Sem regra |
 | PB-43 Testes de aceitação com a Vale e representantes dos usuários | Nada | Sem regra |
 | PB-44 Acessibilidade e uso em celular | Nada | Sem regra |
