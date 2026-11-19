@@ -210,7 +210,7 @@ Leitura de 12/11/2026, revista em 19/11/2026. O agrupamento por assunto é deste
 
 ## 4. Conflitos e lacunas
 
-Os cinco conflitos (B1 a B5) estão em [pendencias.md, seção 6](../regras-de-negocio/pendencias.md#6-conflitos-com-o-product-backlog), com as duas versões e as datas. Em 19/11/2026 estão decididos o B2 (recorte territorial), desde 17/11/2026, e o B1 (dados de usuários e LGPD) e o B4 (fontes do orçamento), em 19/11/2026; o B3 foi adiado pelo mantenedor em 19/11/2026.
+Os cinco conflitos (B1 a B5) estão em [pendencias.md, seção 6](../regras-de-negocio/pendencias.md#6-conflitos-com-o-product-backlog), com as duas versões e as datas. Em 19/11/2026 estão decididos o B2 (recorte territorial), desde 17/11/2026, e o B1 (dados de usuários e LGPD) e o B4 (fontes do orçamento), em 19/11/2026; o B3 e o B5 (bairros) foram adiados pelo mantenedor em 19/11/2026. No B5, a sonda de 19/11/2026 mostrou que o IBGE não tem bairros para nenhum dos 12 municípios, só setores censitários do Censo 2022.
 
 As lacunas maiores, que nenhuma regra cobre:
 
