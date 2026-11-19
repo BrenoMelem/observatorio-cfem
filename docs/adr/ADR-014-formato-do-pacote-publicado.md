@@ -58,3 +58,7 @@ Fica de fora: a biblioteca de leitura e escrita (pandas, como na `obcefem_api`, 
 - Revisar o conteúdo de um indicador exige uma ferramenta (pandas, DuckDB ou um script), não um editor de texto.
 - Rever se a dependência do `pyarrow` deixar de caber na hospedagem escolhida.
 - Voltar atrás custa pouco: a leitura fica isolada em `api/` e a escrita em `publicacao/` (ADR-013), e converter parquet em outro formato é direto.
+
+## Nota de 19/11/2026
+
+O [ADR-015](ADR-015-hospedagem-provisoria-e-segredos.md) fixou a hospedagem provisória em Docker local, sem limite de tamanho de pacote Python como o da Vercel. A conferência do tamanho do `pyarrow` passa para o ADR do serviço da AWS.

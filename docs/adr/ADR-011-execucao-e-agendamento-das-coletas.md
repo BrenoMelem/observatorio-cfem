@@ -38,3 +38,7 @@ Fica de fora: como o pacote novo chega à implantação (decisão 6) e quais fon
 - Antes de implementar a primeira coleta de produção, conferir na documentação oficial os limites de tempo, disco e agendamento do GitHub Actions e anotar a data.
 - Rever se uma coleta deixar de caber nos limites do executor ou se o repositório deixar de ser público.
 - Voltar atrás custa pouco: os coletores são programas Python comuns, que rodam em qualquer agendador.
+
+## Nota de 19/11/2026
+
+O [ADR-015](ADR-015-hospedagem-provisoria-e-segredos.md) fixou, como provisório, que o pacote novo sai do GitHub Actions como Release do GitHub e que os segredos das fontes ficam nos Secrets do GitHub (coletas) e num `.env` fora do Git (máquina local). Como o pacote chega à produção fica para o ADR do serviço da AWS.
