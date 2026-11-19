@@ -119,7 +119,7 @@ Leitura de 12/11/2026, revista em 19/11/2026. O agrupamento por assunto é deste
 | PB-07 Base socioeconômica e socioambiental por dimensão | [regras-por-fonte.md](../regras-de-negocio/regras-por-fonte.md), [indicadores-derivados-e-compostos.md](../regras-de-negocio/indicadores-derivados-e-compostos.md) e o manifesto (RN-MOD-25). As regras organizam os indicadores em blocos temáticos. A dimensão econômica é a primeira e tem composição decidida (RN-ENT-12, 13/11/2026); a correspondência das outras três dimensões com os blocos não está definida | Parcial |
 | PB-08 Atualização automática (ANM, TCM-PA, orçamentos municipais) | Agenda por fonte (RN-TMP-01, RN-TMP-02), publicação só de lote validado (RN-VPU-01, RN-VPU-03) e a decisão 5 do mapa, aceita em 13/11/2026 ([ADR-011](../adr/ADR-011-execucao-e-agendamento-das-coletas.md)). "TCM-PA e orçamentos municipais" são lidos como finanças municipais pelo SICONFI (RN-FNT-04; conflito B4 decidido em 19/11/2026); o TCM-PA não entra como fonte | Com regra |
 | PB-09 Catálogo de metadados e dicionário de dados | Manifesto único (RN-MOD-25), proveniência (RN-MOD-21, RN-FON-13) e o [glossário](../regras-de-negocio/glossario.md) | Com regra |
-| PB-10 Consulta e download (CSV/API) | API própria e CSV aberto (RN-ENT-02, RN-ENT-03), metadados nas exportações (RN-ENT-05, PROPOSTA), arquivos integrais da ANM fora do consumidor (RN-ENT-06) | Com regra |
+| PB-10 Consulta e download (CSV/API) | API própria e CSV aberto (RN-ENT-02, RN-ENT-03), metadados nas exportações (RN-ENT-05, decidida em 19/11/2026), arquivos integrais da ANM fora do consumidor (RN-ENT-06) | Com regra |
 | PB-22 Limites territoriais (bairros, distritos) dos dois municípios | Nada abaixo do município; "os dois municípios" são os de foco (RN-TER-13, conflito B2 decidido em 17/11/2026) | Conflito (B5) |
 
 ### Painéis e análises
@@ -163,7 +163,7 @@ Leitura de 12/11/2026, revista em 19/11/2026. O agrupamento por assunto é deste
 
 | Item | O que a documentação já tem | Situação |
 | --- | --- | --- |
-| PB-29 Relatório em PDF com indicadores escolhidos | Exportações levam os metadados (RN-ENT-05, PROPOSTA) e leem só a camada publicada (RN-ENT-01) | Parcial |
+| PB-29 Relatório em PDF com indicadores escolhidos | Exportações levam os metadados (RN-ENT-05, decidida em 19/11/2026) e leem só a camada publicada (RN-ENT-01) | Parcial |
 | PB-30 Modelos de relatório por público | Nada | Sem regra |
 
 ### Assistente de IA

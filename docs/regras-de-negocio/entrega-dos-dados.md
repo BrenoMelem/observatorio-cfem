@@ -39,12 +39,13 @@ As fontes divergiam sobre a forma da entrega: DECISÕES e PLANO descrevem uma ca
 - **Relacionadas:** RN-MOD-21, RN-MOD-22, RN-TMP-02
 
 ### RN-ENT-05: Exportações levam os metadados junto dos valores
-- **Status:** PROPOSTA
-- **Regra:** As exportações em CSV ou JSON devem incluir os metadados (fonte, edição, método, limitações) junto dos valores.
+- **Status:** DECIDIDA
+- **Regra:** Toda exportação, em CSV ou JSON, deve trazer em cada linha o identificador do indicador, a fonte, a edição da fonte, a data de coleta, a versão do tratamento, a natureza do valor e o estado de validação (RN-MOD-02). O método e as limitações do indicador vão no arquivo de metadados do indicador, o mesmo do catálogo (PB-09), entregue junto com o download.
 - **Motivo:** Um valor exportado sem contexto perde a rastreabilidade.
 - **Exemplo:** O CSV da CFEM recebida traz fonte ANM e a limitação de que distribuição não equivale a arrecadação.
-- **Fonte:** CONSUMO §Contrato de dados para o front-end. Não consta em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10.
-- **Relacionadas:** RN-ENT-03, RN-MOD-02
+- **Exceções:** Os CSVs da `obcefem_api` (`/api/v1/exportar.csv` e `/api/v1/distribuicao/exportar.csv`) trazem só as colunas de dados, sem fonte, edição nem limitações (conferido em `app/main.py` em 19/11/2026); ao portar, vale esta regra. Ver [divergências entre repositórios](divergencias-entre-repositorios.md), D14.
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026; CONSUMO §Contrato de dados para o front-end.
+- **Relacionadas:** RN-ENT-03, RN-MOD-02, RN-MOD-25
 
 ### RN-ENT-06: Arquivos integrais da ANM não vão ao consumidor
 - **Status:** DECIDIDA

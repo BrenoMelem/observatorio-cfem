@@ -42,6 +42,7 @@ Decisão posterior, de 19/11/2026:
 
 | # | Tema | Diferença | Decisão (19/11/2026) | Registro |
 | --- | --- | --- | --- | --- |
+| D14 | Metadados nas exportações | Os CSVs da API trazem só as colunas de dados, sem fonte, edição nem limitações | Seguir a regra deste repositório: proveniência em cada linha e método e limitações no arquivo de metadados entregue junto | [RN-ENT-05](entrega-dos-dados.md) |
 | D13 | Soma e arredondamento da CFEM | A API soma em ponto flutuante e arredonda ao par (`round` do Python); aqui a soma é decimal, com arredondamento ao centavo só no fim e meio centavo para cima. A diferença é de até 1 centavo por linha agregada | Seguir a regra deste repositório, não a API | [RN-CFE-11](mineracao-cfem.md) |
 
 ## Em aberto
