@@ -117,7 +117,7 @@ Leitura de 12/11/2026, revista em 19/11/2026. O agrupamento por assunto é deste
 | --- | --- | --- |
 | PB-06 Série de 10 anos de arrecadação e uso da CFEM dos dois municípios | [mineracao-cfem.md](../regras-de-negocio/mineracao-cfem.md): arrecadação desde 2003 (RN-CFE-22), nos 12 municípios (RN-TER-01); "os dois municípios" são os de foco (RN-TER-13, conflito B2 decidido em 17/11/2026). O "uso" depende de RN-CFE-24 (PROPOSTA). O lote da arrecadação está bloqueado por duplicatas (RN-VPU-11) | Conflito (B3) |
 | PB-07 Base socioeconômica e socioambiental por dimensão | [regras-por-fonte.md](../regras-de-negocio/regras-por-fonte.md), [indicadores-derivados-e-compostos.md](../regras-de-negocio/indicadores-derivados-e-compostos.md) e o manifesto (RN-MOD-25). As regras organizam os indicadores em blocos temáticos. A dimensão econômica é a primeira e tem composição decidida (RN-ENT-12, 13/11/2026); a correspondência das outras três dimensões com os blocos não está definida | Parcial |
-| PB-08 Atualização automática (ANM, TCM-PA, orçamentos municipais) | Agenda por fonte (RN-TMP-01, RN-TMP-02), publicação só de lote validado (RN-VPU-01, RN-VPU-03) e a decisão 5 do mapa, aceita em 13/11/2026 ([ADR-011](../adr/ADR-011-execucao-e-agendamento-das-coletas.md)). TCM-PA e orçamentos municipais não são fontes nas regras | Conflito (B4) |
+| PB-08 Atualização automática (ANM, TCM-PA, orçamentos municipais) | Agenda por fonte (RN-TMP-01, RN-TMP-02), publicação só de lote validado (RN-VPU-01, RN-VPU-03) e a decisão 5 do mapa, aceita em 13/11/2026 ([ADR-011](../adr/ADR-011-execucao-e-agendamento-das-coletas.md)). "TCM-PA e orçamentos municipais" são lidos como finanças municipais pelo SICONFI (RN-FNT-04; conflito B4 decidido em 19/11/2026); o TCM-PA não entra como fonte | Com regra |
 | PB-09 Catálogo de metadados e dicionário de dados | Manifesto único (RN-MOD-25), proveniência (RN-MOD-21, RN-FON-13) e o [glossário](../regras-de-negocio/glossario.md) | Com regra |
 | PB-10 Consulta e download (CSV/API) | API própria e CSV aberto (RN-ENT-02, RN-ENT-03), metadados nas exportações (RN-ENT-05, PROPOSTA), arquivos integrais da ANM fora do consumidor (RN-ENT-06) | Com regra |
 | PB-22 Limites territoriais (bairros, distritos) dos dois municípios | Nada abaixo do município; "os dois municípios" são os de foco (RN-TER-13, conflito B2 decidido em 17/11/2026) | Conflito (B5) |
@@ -203,14 +203,14 @@ Leitura de 12/11/2026, revista em 19/11/2026. O agrupamento por assunto é deste
 
 | Situação | Itens | Quantos |
 | --- | --- | ---: |
-| Com regra | PB-03, 09, 10, 11, 13, 15, 33, 36 | 8 |
+| Com regra | PB-03, 08, 09, 10, 11, 13, 15, 33, 36 | 9 |
 | Parcial | PB-01, 02, 07, 12, 16, 29, 32, 34, 35, 47 | 10 |
 | Sem regra | PB-04, 05, 14, 17 a 20, 24 a 28, 30, 31, 37 a 44, 46, 48 | 24 |
-| Conflito | PB-06, 08, 21, 22, 23, 45 | 6 |
+| Conflito | PB-06, 21, 22, 23, 45 | 5 |
 
 ## 4. Conflitos e lacunas
 
-Os cinco conflitos (B1 a B5) estão em [pendencias.md, seção 6](../regras-de-negocio/pendencias.md#6-conflitos-com-o-product-backlog), com as duas versões e as datas. Em 19/11/2026 só o B2 (recorte territorial) está decidido, desde 17/11/2026; o B3 foi adiado pelo mantenedor em 19/11/2026.
+Os cinco conflitos (B1 a B5) estão em [pendencias.md, seção 6](../regras-de-negocio/pendencias.md#6-conflitos-com-o-product-backlog), com as duas versões e as datas. Em 19/11/2026 estão decididos o B2 (recorte territorial), desde 17/11/2026, e o B4 (fontes do orçamento), em 19/11/2026; o B3 foi adiado pelo mantenedor em 19/11/2026.
 
 As lacunas maiores, que nenhuma regra cobre:
 
