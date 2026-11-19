@@ -46,3 +46,7 @@ Fica de fora: o formato dos arquivos (JSON, parquet ou outro), quem produz o pac
 A estrutura de pastas, deixada para a decisão 8, foi fixada no [ADR-013](ADR-013-organizacao-do-repositorio.md): no ambiente local, as camadas ficam em `output/observatorio/{bruto,qualidade,publicado}/`, fora do Git, com os caminhos por variável de ambiente. O lugar do pacote publicado na implantação continua com a decisão 6.
 
 O formato dos arquivos, também deixado de fora, foi fixado no [ADR-014](ADR-014-formato-do-pacote-publicado.md) (17/11/2026): parquet por indicador, com o manifesto do pacote e o de indicadores em JSON.
+
+## Nota de 19/11/2026
+
+O lugar do pacote publicado na implantação foi fixado como provisório no [ADR-015](ADR-015-hospedagem-provisoria-e-segredos.md): o pacote é publicado como Release do GitHub e montado por volume na imagem Docker da API. O lugar na produção fica para o ADR do serviço da AWS.
