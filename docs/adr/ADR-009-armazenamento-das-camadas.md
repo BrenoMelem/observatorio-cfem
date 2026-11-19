@@ -50,3 +50,7 @@ O formato dos arquivos, também deixado de fora, foi fixado no [ADR-014](ADR-014
 ## Nota de 19/11/2026
 
 O lugar do pacote publicado na implantação foi fixado como provisório no [ADR-015](ADR-015-hospedagem-provisoria-e-segredos.md): o pacote é publicado como Release do GitHub e montado por volume na imagem Docker da API. O lugar na produção fica para o ADR do serviço da AWS.
+
+## Nota de 19/11/2026 (ADR-016)
+
+O armazenamento dos dados enviados por usuários, deixado de fora, foi decidido no [ADR-016](ADR-016-armazenamento-dos-dados-de-usuarios.md): PostgreSQL, separado das camadas. As camadas do observatório continuam em arquivos.

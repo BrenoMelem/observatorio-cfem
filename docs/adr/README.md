@@ -49,7 +49,7 @@ Na ordem em que precisam ser tomadas.
 | 8 | Organização do repositório e do fluxo de trabalho | Infraestrutura e processo | 1 a 5, 7 | seção 4.1 (pasta `backend/`) | aceita em 17/11/2026 | [ADR-013](ADR-013-organizacao-do-repositorio.md) |
 | 9 | Assistente de IA: forma da resposta, onde roda e como usa a camada publicada | API e backend | 4, 6 | seções 2 (contrato do assistente) e 4.3 | pendente | |
 | 10 | Formato do pacote publicado (acrescentada em 17/11/2026; o ADR-009 deixou o formato de fora) | Dados e coleta | 3, 8 | seção 4.2 | aceita em 17/11/2026 | [ADR-014](ADR-014-formato-do-pacote-publicado.md) |
-| 11 | Armazenamento dos dados enviados por usuários (perfis, conteúdo, relatos, comentários, consultas, marketplace), acrescentada em 19/11/2026; a lacuna foi registrada no ADR-009 e no ADR-013 | Dados e coleta | 3, 6 | nenhum | pendente; o primeiro item que depende dela é o PB-04, que vence em 31/12/2026 | |
+| 11 | Armazenamento dos dados enviados por usuários (perfis, conteúdo, relatos, comentários, consultas, marketplace), acrescentada em 19/11/2026; a lacuna foi registrada no ADR-009 e no ADR-013 | Dados e coleta | 3, 6 | nenhum | aceita em 19/11/2026 (PostgreSQL; o que guardar de dado pessoal depende do conflito B1) | [ADR-016](ADR-016-armazenamento-dos-dados-de-usuarios.md) |
 
 Depois das decisões 1 a 3 já é possível criar a estrutura inicial do código.
 
@@ -90,3 +90,4 @@ A [análise da Fase 0](analise-fase-0-camada-publicada-e-assistente.md) não é 
 | [ADR-013](ADR-013-organizacao-do-repositorio.md) | Organização do repositório e do código do produto | aceito pelo mantenedor em 17/11/2026 |
 | [ADR-014](ADR-014-formato-do-pacote-publicado.md) | Formato do pacote publicado | aceito pelo mantenedor em 17/11/2026 |
 | [ADR-015](ADR-015-hospedagem-provisoria-e-segredos.md) | Hospedagem provisória em Docker local e segredos | aceito pelo mantenedor em 19/11/2026 |
+| [ADR-016](ADR-016-armazenamento-dos-dados-de-usuarios.md) | Armazenamento dos dados enviados por usuários | aceito pelo mantenedor em 19/11/2026 |
