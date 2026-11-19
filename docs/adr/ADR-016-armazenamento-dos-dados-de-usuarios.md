@@ -50,3 +50,7 @@ Fica de fora: o método de login; a biblioteca de acesso ao banco e a ferramenta
 - A implementação de qualquer item que guarde dado pessoal deve esperar a decisão do B1 sobre o que guardar e por quanto tempo.
 - Rever se o serviço de produção da AWS não oferecer Postgres gerenciado viável, ou na revisão de 31/03/2027 do ADR-015.
 - Voltar atrás custa pouco enquanto não houver dados de usuários gravados; depois, exige migrar os dados.
+
+## Nota de 19/11/2026
+
+O conflito B1 foi decidido pelo mantenedor em 19/11/2026 ([RN-PRI-11](../regras-de-negocio/privacidade-e-licencas.md)): os dados pessoais de usuários seguem a LGPD, cada função coleta só o necessário, e nada abre ao público sem política de privacidade e termos de uso. O prazo de guarda, o encarregado e os dados de cada função continuam em aberto; a implementação de um item que guarde dado pessoal espera esses pontos.
