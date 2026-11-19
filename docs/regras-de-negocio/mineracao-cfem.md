@@ -112,12 +112,13 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Relacionadas:** RN-CFE-04, RN-CFE-10, RN-CFE-12, RN-VPU-07
 
 ### RN-CFE-12: Controle de escala com o total nacional
-- **Status:** PROPOSTA
-- **Regra:** O total nacional de uma medida deve ser comparado com o total publicado pela ANM como controle de escala, sem substituir a conferência municipal.
+- **Status:** DECIDIDA
+- **Regra:** Em cada ano fechado para o qual a ANM tenha publicado o total, o total nacional calculado de uma medida deve ser comparado com esse total publicado, registrando o número publicado, o documento de onde veio e a data da consulta. Uma diferença acima de 1% do total publicado bloqueia o lote. O controle não substitui a conferência municipal (RN-VPU-07, RN-VPU-12).
 - **Motivo:** Detecta erro grosseiro de leitura do arquivo.
 - **Exemplo:** A soma nacional da arrecadação de 2025 foi R$ 7.910.581.327,56, que arredonda para os R$ 7,91 bilhões do Relatório de Gestão 2025 da ANM (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM).
-- **Fonte:** VAL-15/10 §Rodada adicional (apresentado como controle, não como regra).
-- **Relacionadas:** RN-VPU-08
+- **Exceções:** A versão do arquivo que for bloqueada continua baixada e arquivada (RN-TMP-18), marcada como reprovada; não é publicada nem usada. A `obcefem_api` não faz esta comparação: a trava dela compara o arquivo novo com a versão já publicada (ver RN-VPU-02).
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026 (bloqueio acima de 1%); VAL-15/10 §Rodada adicional (apresentado como controle, não como regra).
+- **Relacionadas:** RN-VPU-02, RN-VPU-07, RN-VPU-08, RN-VPU-12, RN-TMP-18
 
 ### RN-CFE-13: Autuação guardada como evento
 - **Status:** DECIDIDA
