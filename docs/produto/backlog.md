@@ -115,7 +115,7 @@ Leitura de 12/11/2026, revista em 19/11/2026. O agrupamento por assunto é deste
 
 | Item | O que a documentação já tem | Situação |
 | --- | --- | --- |
-| PB-06 Série de 10 anos de arrecadação e uso da CFEM dos dois municípios | [mineracao-cfem.md](../regras-de-negocio/mineracao-cfem.md): arrecadação desde 2003 (RN-CFE-22), nos 12 municípios (RN-TER-01); "os dois municípios" são os de foco (RN-TER-13, conflito B2 decidido em 17/11/2026). O "uso" depende de RN-CFE-24 (PROPOSTA). O lote da arrecadação está bloqueado por duplicatas (RN-VPU-11) | Conflito (B3) |
+| PB-06 Série de 10 anos de arrecadação e uso da CFEM dos dois municípios | [mineracao-cfem.md](../regras-de-negocio/mineracao-cfem.md): arrecadação desde 2003 (RN-CFE-22), nos 12 municípios (RN-TER-01); "os dois municípios" são os de foco (RN-TER-13, conflito B2 decidido em 17/11/2026). O "uso" é a despesa paga com fonte CFEM declarada pelo município, desde 2022 (RN-CFE-24, 19/11/2026). O lote da arrecadação está bloqueado por duplicatas (RN-VPU-11) | Conflito (B3) |
 | PB-07 Base socioeconômica e socioambiental por dimensão | [regras-por-fonte.md](../regras-de-negocio/regras-por-fonte.md), [indicadores-derivados-e-compostos.md](../regras-de-negocio/indicadores-derivados-e-compostos.md) e o manifesto (RN-MOD-25). As regras organizam os indicadores em blocos temáticos. A dimensão econômica é a primeira e tem composição decidida (RN-ENT-12, 13/11/2026); a correspondência das outras três dimensões com os blocos não está definida | Parcial |
 | PB-08 Atualização automática (ANM, TCM-PA, orçamentos municipais) | Agenda por fonte (RN-TMP-01, RN-TMP-02), publicação só de lote validado (RN-VPU-01, RN-VPU-03) e a decisão 5 do mapa, aceita em 13/11/2026 ([ADR-011](../adr/ADR-011-execucao-e-agendamento-das-coletas.md)). "TCM-PA e orçamentos municipais" são lidos como finanças municipais pelo SICONFI (RN-FNT-04; conflito B4 decidido em 19/11/2026); o TCM-PA não entra como fonte | Com regra |
 | PB-09 Catálogo de metadados e dicionário de dados | Manifesto único (RN-MOD-25), proveniência (RN-MOD-21, RN-FON-13) e o [glossário](../regras-de-negocio/glossario.md) | Com regra |
@@ -127,7 +127,7 @@ Leitura de 12/11/2026, revista em 19/11/2026. O agrupamento por assunto é deste
 | Item | O que a documentação já tem | Situação |
 | --- | --- | --- |
 | PB-11 Painel da arrecadação da CFEM no tempo | Primeiros gráficos (RN-ENT-09, PROPOSTA), só dado homologado (RN-VPU-10). Atenção ao texto: "quanto cada município recebe" é a CFEM recebida (distribuição), que não se confunde com a arrecadada (RN-CFE-02, RN-CFE-03) | Com regra |
-| PB-12 Onde a CFEM e o orçamento foram aplicados, por área | Despesa por função pelo SICONFI (RN-FNT-04). Dizer que uma despesa foi paga com CFEM exige a fonte de recursos confirmada (RN-CFE-24, PROPOSTA) | Parcial |
+| PB-12 Onde a CFEM e o orçamento foram aplicados, por área | Despesa por função pelo SICONFI (RN-FNT-04). CFEM repassada (ANM), receita declarada (DCA) e despesa paga com fonte CFEM por função (MSC), lado a lado, com aviso quando a receita declarada difere mais de 1% da ANM (RN-CFE-24, 19/11/2026) | Com regra |
 | PB-13 Quadro de indicadores por dimensão | Manifesto (RN-MOD-25), regras dos derivados e compostos (RN-IND-01 a 13), painel de status (RN-ENT-04); a dimensão econômica é a primeira (RN-ENT-12) | Com regra |
 | PB-14 Filtros por período, município e dimensão | Nada específico; os metadados de cada ponto seguem RN-VPU-09 | Sem regra |
 | PB-15 Comparar municípios e períodos | Municípios de comparação (RN-TER-09), agregação regional (RN-TER-02) e as regras de comparabilidade de [modelo-de-dados.md](../regras-de-negocio/modelo-de-dados.md) (RN-MOD-13 a 19) | Com regra |
@@ -203,8 +203,8 @@ Leitura de 12/11/2026, revista em 19/11/2026. O agrupamento por assunto é deste
 
 | Situação | Itens | Quantos |
 | --- | --- | ---: |
-| Com regra | PB-03, 08, 09, 10, 11, 13, 15, 33, 36 | 9 |
-| Parcial | PB-01, 02, 07, 12, 16, 29, 32, 34, 35, 45, 47 | 11 |
+| Com regra | PB-03, 08, 09, 10, 11, 12, 13, 15, 33, 36 | 10 |
+| Parcial | PB-01, 02, 07, 16, 29, 32, 34, 35, 45, 47 | 10 |
 | Sem regra | PB-04, 05, 14, 17 a 20, 24 a 28, 30, 31, 37 a 44, 46, 48 | 24 |
 | Conflito | PB-06, 21, 22, 23 | 4 |
 
