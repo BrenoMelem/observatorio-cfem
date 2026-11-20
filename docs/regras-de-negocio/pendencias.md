@@ -73,7 +73,7 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 
 ## 5. Regras PROPOSTAS aguardando confirmação
 
-Estas 19 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook, dos scripts ou do briefing operacional de 30/10/2026. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
+Estas 18 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook, dos scripts ou do briefing operacional de 30/10/2026. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
 
 ### Território (1)
 
@@ -122,11 +122,10 @@ Estas 19 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA
 | [RN-ENT-07](entrega-dos-dados.md) | O assistente responde só com a camada publicada | CONSUMO §Contrato de dados para o front-end. VAL-15/10 §Resposta ao orientador (item 2) lista como critério de avaliação a "recusa de inventar número ausente", sem fixar a regra |
 | [RN-ENT-08](entrega-dos-dados.md) | Critérios de avaliação do assistente | VAL-15/10 §Resposta ao orientador (item 2). O próprio VAL-15/10 chama os critérios de "propostos" |
 
-### Indicadores derivados e compostos (2)
+### Indicadores derivados e compostos (1)
 
 | Regra | Título | Origem |
 | --- | --- | --- |
-| [RN-IND-05](indicadores-derivados-e-compostos.md) | Derivado ou composto é marcado como análise derivada | CONSUMO §Finanças públicas e índices (receita per capita e IDSC) |
 | [RN-IND-08](indicadores-derivados-e-compostos.md) | Não recalcular o Barômetro sem reproduzir o método | CONSUMO §Finanças públicas e índices (Barômetro da Sustentabilidade 2024) |
 
 ## 6. Conflitos com o Product Backlog
