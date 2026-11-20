@@ -74,7 +74,7 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 
 ## 5. Regras PROPOSTAS aguardando confirmação
 
-Estas 27 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook, dos scripts ou do briefing operacional de 30/10/2026. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
+Estas 26 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook, dos scripts ou do briefing operacional de 30/10/2026. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
 
 ### Território (4)
 
@@ -85,12 +85,11 @@ Estas 27 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA
 | [RN-TER-11](territorio.md) | Guardar a composição territorial usada | CONSUMO §Contrato de dados para o front-end (campos `geo_id`, `geo_level`) |
 | [RN-TER-12](territorio.md) | Declarar se o indicador usa residência ou ocorrência | VAL-15/10 §Como repetir os testes (item sobre PySUS); CONSUMO §Sociedade (localidade de referência). Dedução: nenhuma das duas fontes fixa a regra |
 
-### Modelo de dados (5)
+### Modelo de dados (4)
 
 | Regra | Título | Origem |
 | --- | --- | --- |
 | [RN-MOD-14](modelo-de-dados.md) | Não misturar projeção | CONSUMO §Dinâmica populacional |
-| [RN-MOD-15](modelo-de-dados.md) | Não interpolar anos sem dado | MAPA-TEMAS §Economia e mercado de trabalho; CONSUMO §Economia e mercado de trabalho |
 | [RN-MOD-16](modelo-de-dados.md) | Fluxo e estoque não se somam | CONSUMO §Economia e mercado de trabalho; VAL-15/10 §Matriz operacional (RAIS, CAGED, emprego: "validar fluxo versus estoque") |
 | [RN-MOD-17](modelo-de-dados.md) | Razões registram numerador, denominador e ano | CONSUMO §Economia e mercado de trabalho, §Finanças públicas e índices |
 | [RN-MOD-18](modelo-de-dados.md) | Razão regional como soma sobre soma | Dedução, por coerência com DECISÕES §Municípios da RI Carajás e RN-MOD-17. Nenhuma fonte fixa essa fórmula |

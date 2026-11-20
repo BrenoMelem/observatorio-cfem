@@ -156,12 +156,12 @@ Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a p
 - **Relacionadas:** RN-MOD-13
 
 ### RN-MOD-15: Não interpolar anos sem dado
-- **Status:** PROPOSTA
+- **Status:** DECIDIDA
 - **Regra:** Anos sem observação não devem ser preenchidos por interpolação nem apresentados como se fossem observados.
 - **Motivo:** O valor interpolado parece dado oficial e não é.
-- **Exemplo:** Rendimento domiciliar per capita só tem pontos nos anos censitários.
-- **Fonte:** MAPA-TEMAS §Economia e mercado de trabalho; CONSUMO §Economia e mercado de trabalho.
-- **Relacionadas:** RN-MOD-08, RN-MOD-13
+- **Exemplo:** Rendimento domiciliar per capita só tem pontos nos anos censitários. Quem consulta 2010–2020 de um indicador com dados só de 2014 a 2017 recebe só 2014 a 2017 (exemplo do mantenedor, 19/11/2026). Anos que a fonte mede, mas em que falta a linha do município, continuam como "ausente" (RN-MOD-10).
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026 (confirmação da proposta); MAPA-TEMAS §Economia e mercado de trabalho; CONSUMO §Economia e mercado de trabalho.
+- **Relacionadas:** RN-MOD-08, RN-MOD-10, RN-MOD-13
 
 ### RN-MOD-16: Fluxo e estoque não se somam
 - **Status:** PROPOSTA
