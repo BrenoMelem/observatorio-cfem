@@ -10,8 +10,9 @@ por município e ano, sobre arquivos já baixados (nada de rede):
 2. Despesa por fonte: o mesmo, só nas linhas com fonte de recursos 1708 ou 2708.
 3. Escala: compara a despesa paga com fonte 1708/2708 com a CFEM distribuída pela ANM ao município no
    mesmo ano (arquivo de distribuição arquivado, RN-TMP-18) e com a receita de CFEM que o próprio
-   município declara na DCA, Anexo I-C (natureza 1.7.1.2.51.0.0, "Cota-parte da CFEM", receitas brutas
-   realizadas).
+   município declara na DCA, Anexo I-C (contas "Cota-parte da CFEM" de transferência da União e dos
+   Estados, com os códigos de cada período, receitas brutas realizadas). O arquivo da ANM só traz a
+   parcela de município produtor.
 
 Entradas:
   - CSV da MSC gerado por `scripts.financas.msc_despesa_fonte` (fora do repositório);
@@ -46,7 +47,7 @@ ESTAGIOS = {
 }
 COLUNA_DCA = {"empenhada": "Despesas Empenhadas", "liquidada": "Despesas Liquidadas", "paga": "Despesas Pagas"}
 FONTES_CFEM = ("1708", "2708")
-CONTA_RECEITA_CFEM = "RO1.7.1.2.51.0.0"
+CONTAS_RECEITA_CFEM = ("RO1.7.1.2.51.0.0", "RO1.7.2.2.51.0.0", "RO1.7.1.8.02.2.0", "RO1.7.2.8.02.2.0", "RO1.7.2.1.22.20.00")
 
 
 def estagios_msc(linhas: Iterable[dict[str, str]]) -> dict[tuple[str, int, str], dict[str, Decimal]]:
@@ -77,10 +78,12 @@ def totais_dca(linhas: Iterable[dict[str, str]]) -> dict[tuple[str, int], dict[s
 
 def receita_cfem_dca(linhas: Iterable[dict[str, str]]) -> dict[tuple[str, int], Decimal]:
     """Receita bruta realizada da cota-parte da CFEM declarada na DCA (Anexo I-C), por município e ano."""
-    return {(linha["cod_ibge"], int(linha["exercicio"])): Decimal(linha["valor"])
-            for linha in linhas
-            if linha["anexo"] == "I-C" and linha["cod_conta"] == CONTA_RECEITA_CFEM
-            and linha["coluna"] == "Receitas Brutas Realizadas"}
+    somas: dict[tuple[str, int], Decimal] = defaultdict(Decimal)
+    for linha in linhas:
+        if (linha["anexo"] == "I-C" and linha["cod_conta"] in CONTAS_RECEITA_CFEM
+                and linha["coluna"] in ("Receitas Brutas Realizadas", "Receitas Realizadas")):
+            somas[(linha["cod_ibge"], int(linha["exercicio"]))] += Decimal(linha["valor"])
+    return dict(somas)
 
 
 def cfem_distribuida(linhas: Iterable[dict[str, str]]) -> dict[tuple[str, int], Decimal]:

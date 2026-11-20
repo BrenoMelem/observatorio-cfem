@@ -32,3 +32,20 @@ def test_dca_e_anm():
     anm = cfem_distribuida([{"CodigoEnte": "1505536", "Ente": "Município", "Ano": "2024", "Valor": "1,50"},
                             {"CodigoEnte": "15", "Ente": "Estado", "Ano": "2024", "Valor": "9,00"}])
     assert anm == {("1505536", 2024): Decimal("1.50")}
+
+
+def test_receita_soma_codigos_da_uniao_e_dos_estados():
+    from scripts.financas.conferir_fonte_cfem import receita_cfem_dca
+    linhas = [
+        {"anexo": "I-C", "cod_conta": "RO1.7.2.2.51.0.0", "coluna": "Receitas Brutas Realizadas",
+         "cod_ibge": "1504208", "exercicio": "2024", "valor": "10"},
+        {"anexo": "I-C", "cod_conta": "RO1.7.1.2.51.0.0", "coluna": "Receitas Brutas Realizadas",
+         "cod_ibge": "1504208", "exercicio": "2024", "valor": "5"},
+        {"anexo": "I-C", "cod_conta": "RO1.7.2.1.22.20.00", "coluna": "Receitas Realizadas",
+         "cod_ibge": "1504208", "exercicio": "2013", "valor": "2"},
+        {"anexo": "I-C", "cod_conta": "RO1.7.1.2.51.0.0", "coluna": "Deduções - FUNDEB",
+         "cod_ibge": "1504208", "exercicio": "2024", "valor": "99"},
+    ]
+    r = receita_cfem_dca(linhas)
+    assert r[("1504208", 2024)] == Decimal(15)
+    assert r[("1504208", 2013)] == Decimal(2)

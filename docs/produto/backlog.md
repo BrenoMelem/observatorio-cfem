@@ -127,7 +127,7 @@ Leitura de 12/11/2026, revista em 19/11/2026. O agrupamento por assunto é deste
 | Item | O que a documentação já tem | Situação |
 | --- | --- | --- |
 | PB-11 Painel da arrecadação da CFEM no tempo | Primeiros dados entregues para os painéis (RN-ENT-09, decidida em 19/11/2026), só dado homologado (RN-VPU-10). Atenção ao texto: "quanto cada município recebe" é a CFEM recebida (distribuição), que não se confunde com a arrecadada (RN-CFE-02, RN-CFE-03) | Com regra |
-| PB-12 Onde a CFEM e o orçamento foram aplicados, por área | Despesa por função pelo SICONFI (RN-FNT-04). CFEM repassada (ANM), receita declarada (DCA) e despesa paga com fonte CFEM por função (MSC), lado a lado, com aviso quando a receita declarada difere mais de 1% da ANM (RN-CFE-24, 19/11/2026) | Com regra |
+| PB-12 Onde a CFEM e o orçamento foram aplicados, por área | Despesa por função pelo SICONFI (RN-FNT-04). CFEM repassada como produtor (ANM), receita declarada (DCA) e despesa paga com fonte CFEM por função (MSC), lado a lado; o aviso de diferença está suspenso até a parcela de município afetado entrar (RN-CFE-24, revista em 20/11/2026) | Com regra |
 | PB-13 Quadro de indicadores por dimensão | Manifesto (RN-MOD-25), regras dos derivados e compostos (RN-IND-01 a 13), painel de status (RN-ENT-04); a dimensão econômica é a primeira (RN-ENT-12) | Com regra |
 | PB-14 Filtros por período, município e dimensão | Nada específico; os metadados de cada ponto seguem RN-VPU-09 | Sem regra |
 | PB-15 Comparar municípios e períodos | Municípios de comparação (RN-TER-09), agregação regional (RN-TER-02) e as regras de comparabilidade de [modelo-de-dados.md](../regras-de-negocio/modelo-de-dados.md) (RN-MOD-13 a 19) | Com regra |
