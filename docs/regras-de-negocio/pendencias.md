@@ -74,13 +74,12 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 
 ## 5. Regras PROPOSTAS aguardando confirmação
 
-Estas 21 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook, dos scripts ou do briefing operacional de 30/10/2026. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
+Estas 20 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook, dos scripts ou do briefing operacional de 30/10/2026. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
 
-### Território (2)
+### Território (1)
 
 | Regra | Título | Origem |
 | --- | --- | --- |
-| [RN-TER-11](territorio.md) | Guardar a composição territorial usada | CONSUMO §Contrato de dados para o front-end (campos `geo_id`, `geo_level`) |
 | [RN-TER-12](territorio.md) | Declarar se o indicador usa residência ou ocorrência | VAL-15/10 §Como repetir os testes (item sobre PySUS); CONSUMO §Sociedade (localidade de referência). Dedução: nenhuma das duas fontes fixa a regra |
 
 ### Modelo de dados (1)

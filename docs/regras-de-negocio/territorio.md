@@ -108,11 +108,11 @@ Canaã dos Carajás e Parauapebas são os municípios de foco do observatório.
 - **Relacionadas:** RN-MOD-13, RN-MOD-15
 
 ### RN-TER-11: Guardar a composição territorial usada
-- **Status:** PROPOSTA
+- **Status:** DECIDIDA
 - **Regra:** Cada publicação deve registrar a composição da RI usada na agregação.
 - **Motivo:** Permite reproduzir um número regional antigo se a lista oficial mudar.
 - **Exemplo:** Um total regional de 2025 registra os 12 códigos vigentes em out/2026.
-- **Fonte:** CONSUMO §Contrato de dados para o front-end (campos `geo_id`, `geo_level`).
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026 (confirmação da proposta); CONSUMO §Contrato de dados para o front-end (campos `geo_id`, `geo_level`).
 - **Relacionadas:** RN-TER-01, RN-MOD-02
 
 ### RN-TER-12: Declarar se o indicador usa residência ou ocorrência
