@@ -51,7 +51,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Status:** DECIDIDA
 - **Regra:** O total anual da CFEM não deve ser calculado nem publicado quando algum mês do ano estiver ausente na fonte.
 - **Motivo:** Somar com um mês faltando produz um total que parece completo e não é.
-- **Exemplo:** O CSV de distribuição não tem nenhuma linha de julho de 2025, mas a ANM publicou que repassou R$ 478.839.591,45 em julho de 2025 aos estados e municípios produtores; por isso o total anual de distribuição de 2025 está bloqueado (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivo da ANM e notícia da ANM).
+- **Exemplo:** O CSV de distribuição não tem nenhuma linha de julho de 2025, mas a ANM publicou que repassou R$ 478.839.591,45 em julho de 2025 aos estados e municípios produtores; por isso o total anual de distribuição de 2025 estava bloqueado; desde 19/11/2026 ele é publicado marcado como incompleto (RN-CFE-08) (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivo da ANM e notícia da ANM).
 - **Exceção de 08/11/2026 (DECISÃO-MANTENEDOR):** na `obcefem_api` o total anual do ano em curso é calculado e rotulado "(parcial)", e o mantenedor decidiu manter esse comportamento. A API não verifica meses ausentes no meio da série; esses meses entram como soma menor. Ver também RN-CFE-06.
 - **Fonte:** VAL-15/10 §Resposta ao orientador (item 1), §Marco 2, §Rodada adicional; CONSUMO §Validação complementar de 15/10/2026.
 - **Relacionadas:** RN-CFE-06, RN-CFE-08, RN-VPU-05, RN-MOD-08
@@ -60,7 +60,7 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Status:** DECIDIDA
 - **Regra:** O ano de CFEM só deve ser considerado fechado quando o arquivo nacional tiver os 12 meses, e os meses já presentes podem ser publicados individualmente com o estado de validação "provisório".
 - **Motivo:** Equilibra a regra de não somar com mês ausente com a utilidade de mostrar o que já existe.
-- **Exemplo:** Em 2025, janeiro a junho e agosto a dezembro podem ser exibidos como provisórios, mas o total anual fica bloqueado até julho ser incorporado e reconciliado.
+- **Exemplo:** Em 2025, janeiro a junho e agosto a dezembro podem ser exibidos como provisórios. O total anual da distribuição de 2025 é a exceção decidida em 19/11/2026: sai marcado como incompleto, sem julho (RN-CFE-08).
 - **Exceções:** O critério vale para "mês sem nenhuma linha no arquivo nacional". Ausência de um município específico num mês que existe no arquivo é tratada em RN-CFE-07.
 - **Exceção de 08/11/2026 (DECISÃO-MANTENEDOR):** na `obcefem_api`, um mês do último ano é considerado completo quando tem ao menos 50% da mediana de registros por mês dos anos anteriores (a trava de publicação do histórico usa 35% da mediana do próprio ano), e o mantenedor decidiu manter esse critério de volume no lugar do critério de "mês sem nenhuma linha".
 - **Fonte:** DECISÃO-MANTENEDOR de 24/10/2026 (resposta à pergunta 5); VAL-15/10 §Marco 2 (que prevê bloquear a publicação do lote com mês ausente; esta decisão restringe o bloqueio ao total anual).
@@ -75,14 +75,15 @@ Fonte: DECISÕES §Rotas de coleta por fonte, §Glossário; BLOCOS §Bloco 3; LA
 - **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026; VAL-15/10 §Marco 2 (cada lote registra qual das duas situações ocorreu).
 - **Relacionadas:** RN-CFE-06, RN-CFE-09, RN-MOD-10, RN-VPU-06
 
-### RN-CFE-08: Recuperar julho de 2025
-- **Status:** EM ABERTO
-- **Regra:** O mantenedor deve obter julho de 2025 numa publicação oficial da ANM, entender por que o mês falta no CSV e só então liberar o total anual de 2025.
-- **Motivo:** Enquanto o mês faltar, o total anual de distribuição de 2025 fica bloqueado.
-- **Exemplo:** A rota histórica de tabela municipal da ANM falhou com erro de banco de dados do próprio servidor; o PDF mensal da remessa 696 serviu de controle de maio de 2025 (transcrito do relatório VAL-15/10, não conferido no JSON).
+### RN-CFE-08: Julho de 2025 ausente na distribuição
+- **Status:** DECIDIDA
+- **Regra:** Os meses de 2025 presentes no arquivo de distribuição da ANM são publicados; julho de 2025 fica "ausente" (RN-CFE-06). O total anual de 2025 da CFEM recebida é publicado marcado como incompleto (11 de 12 meses, sem julho) e não entra em comparações entre anos nem nos controles de escala (RN-CFE-12) e de diferença com o município (RN-CFE-24). Se a ANM publicar julho de 2025, o total é recalculado e a marca sai.
+- **Motivo:** Em quatro checagens (31/10, 09/11, 12/11 e 19/11/2026) o arquivo não trouxe nenhuma linha de julho de 2025, e o PDF mensal da remessa não foi achado; bloquear o ano inteiro escondia onze meses válidos.
+- **Exemplo:** A rota histórica de tabela municipal da ANM falhou com erro de banco de dados do próprio servidor; o PDF mensal da remessa 696 serviu de controle de maio de 2025 (transcrito do relatório VAL-15/10, não conferido no JSON). A ANM publicou repasse de R$ 478.839.591,45 em julho de 2025 a estados e municípios (RN-CFE-05), valor que falta no total marcado.
+- **Exceções:** Contraria o bloqueio do total anual de RN-CFE-05 e RN-CFE-06 para este caso (decisão de 19/11/2026); antes, a regra mandava obter julho numa publicação oficial antes de liberar o total.
 - **Evidência datada:** no fim deste arquivo, em [Notas de evidência](#notas-de-evidência), sob RN-CFE-08.
-- **Fonte:** VAL-15/10 §Marco 2, §Issues sugeridas (item 1).
-- **Relacionadas:** RN-CFE-05, RN-VPU-07
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026; VAL-15/10 §Marco 2, §Issues sugeridas (item 1).
+- **Relacionadas:** RN-CFE-05, RN-CFE-06, RN-CFE-12, RN-CFE-24, RN-VPU-07
 
 ### RN-CFE-09: São Domingos do Araguaia sem linhas
 - **Status:** DECIDIDA
@@ -271,11 +272,12 @@ Evidência datada que sustenta ou qualifica as regras acima. Cada nota é o text
 
 - **Evidência de 19/11/2026 (arquivos de arrecadação e de distribuição arquivados na Release `anm-2026-11-19-1236`; reproduzido em 19/11/2026 com `uv run python -m scripts.cfem.meses_por_municipio tmp/anm-2026-11-19`; só contagem de meses):** meses com linha de arrecadação e de distribuição de 2022 a 2026. Bom Jesus do Tocantins (1501576) tem arrecadação só em fev/2023; fev, abr e jun/2024; e jan/2025, e nenhuma em 2022 e 2026; a distribuição aparece no mês seguinte a cada arrecadação (jan/2022; mar, mai e jul/2024; fev/2025). A falta de linha é, portanto, um padrão de arrecadação esporádica, não um buraco de 2025 (motivo da obsolescência de RN-CFE-23). O mesmo padrão aparece em outros municípios pequenos em 2025: Palestina do Pará (3 meses de arrecadação), São Geraldo do Araguaia (4), São João do Araguaia (2), Brejo Grande do Araguaia (1); São Domingos do Araguaia não tem linha em nenhum ano desde 2022 (RN-CFE-09). Canaã dos Carajás, Curionópolis, Eldorado do Carajás, Marabá e Parauapebas têm os 12 meses de arrecadação de 2022 a 2025. A causa dos meses sem linha continua "não confirmada" até publicação independente, como manda esta regra.
 
-#### RN-CFE-08: Recuperar julho de 2025
+#### RN-CFE-08: Julho de 2025 ausente na distribuição
 
 - **Evidência de 31/10/2026 (arquivo de distribuição da ANM baixado em 31/10/2026; só agregados):** julho de 2025 continua ausente: não há linha com `Ano=2025` e `Mês=7`, e o arquivo não foi corrigido desde 24 e 27/10/2026. Os meses de 2025 presentes são 1 a 6 e 8 a 12. O campo `Mês` do CSV é o mês de emissão do repasse: os totais nacionais dos meses 5, 6, 8 e 10 batem com os relatórios de distribuição em PDF da ANM de maio, junho, agosto e outubro de 2025 (por exemplo, junho: R$ 354.438.110,65 no CSV contra R$ 354.438.102,78 no PDF; Canaã dos Carajás e Parauapebas batem ao centavo em junho e agosto). O PDF de julho de 2025 não foi encontrado: dez nomes de arquivo tentados deram 404. A MSC orçamentária do SICONFI registra receita de CFEM (natureza 17125101, fonte 1708) em julho de 2025: Canaã dos Carajás R$ 63,2 milhões, Parauapebas R$ 46,0 milhões e Marabá R$ 17,6 milhões (consulta de 31/10/2026, sem conciliação com a ANM). Hipótese, não verificada: o repasse de julho foi omitido da extração do CSV, possivelmente por troca do processo de geração dos relatórios (a numeração das remessas e o nome dos arquivos mudam entre junho e agosto de 2025). Não se deve afirmar que a ANM não distribuiu em julho. O arquivo tem outras lacunas de mês, nacionalmente: 2013 (mês 6), 2018 (meses 3 e 5), 2019 (mês 9), 2022 (meses 2 a 12) e 2023 (meses 1 a 4 e 6).
 - **Evidência de 09/11/2026 (arquivo de distribuição da ANM baixado em 09/11/2026 com TLS verificado; 2.000.816 linhas; só agregados):** julho de 2025 continua ausente: não há linha com `Ano=2025` e `Mês=7`. Linhas por mês de 2025: 1.892 (jan), 1.984 (fev), 1.987 (mar), 2.384 (abr), 1.912 (mai), 1.648 (jun), 2.070 (ago), 2.052 (set), 2.184 (out), 1.799 (nov) e 2.552 (dez). O arquivo tem o mesmo número de linhas da coleta anterior de 09/11/2026. O total anual de 2025 segue bloqueado e a regra continua EM ABERTO.
 - **Evidência de 12/11/2026 (arquivo de distribuição da ANM arquivado na Release `anm-2026-11-12-1638`; 2.190.740 linhas de dados; só agregados):** julho de 2025 continua ausente: não há linha com `Ano=2025` e `Mês=7`. O arquivo mudou desde 09/11/2026: os meses de janeiro a maio de 2025 têm mais linhas. Linhas por mês de 2025: 4.958 (jan), 5.987 (fev), 5.904 (mar), 7.432 (abr), 4.901 (mai), 1.648 (jun), 2.070 (ago), 2.052 (set), 2.184 (out), 1.799 (nov) e 2.552 (dez). A causa do aumento e o efeito nos valores dos 12 municípios não foram verificados. O PDF de julho de 2025 não foi procurado de novo. Em 12/11/2026 o mantenedor decidiu adiar: a regra continua EM ABERTO, o total anual de 2025 segue bloqueado e o canal da pergunta à ANM continua sem definição.
+- **Evidência de 19/11/2026 (arquivo de distribuição da ANM arquivado na Release `anm-2026-11-19-1236`; só contagem de linhas por mês):** julho de 2025 continua ausente: 2025 tem linhas de janeiro a junho e de agosto a dezembro (de 4.794 a 7.432 por mês) e nenhuma de julho; 2024 tem os 12 meses (de 4.744 a 9.592 linhas).
 
 #### RN-CFE-09: São Domingos do Araguaia sem linhas
 

@@ -6,9 +6,7 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 
 ## 1. Regras com status EM ABERTO
 
-| Regra | O que falta decidir | Arquivo |
-| --- | --- | --- |
-| RN-CFE-08 | Recuperar julho de 2025 e liberar o total anual de 2025 (em 31/10/2026, em 09/11/2026 e em 12/11/2026 o mês segue ausente no CSV; o PDF não foi achado; adiado pelo mantenedor em 12/11/2026) | [mineracao-cfem.md](mineracao-cfem.md) |
+Nenhuma regra está EM ABERTO em 19/11/2026. A última, RN-CFE-08 (julho de 2025 na distribuição), foi decidida nesta data.
 
 ## 2. Itens em aberto dentro de regras DECIDIDAS
 

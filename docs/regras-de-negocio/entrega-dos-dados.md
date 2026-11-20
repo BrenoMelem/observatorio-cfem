@@ -59,7 +59,7 @@ As fontes divergiam sobre a forma da entrega: DECISÕES e PLANO descrevem uma ca
 - **Status:** PROPOSTA
 - **Regra:** O assistente de IA deve responder apenas com dados da camada publicada, sempre com fonte, período e limitações, e quando não houver observação validada compatível deve dizer que não há dado validado e explicar a lacuna.
 - **Motivo:** Evita resposta inventada e mantém a mesma garantia de procedência do restante do observatório.
-- **Exemplo:** Perguntado sobre o total anual de distribuição da CFEM de 2025, o assistente deve informar que o total está bloqueado por falta de julho de 2025, e não somar os meses disponíveis.
+- **Exemplo:** Perguntado sobre o total anual de distribuição da CFEM de 2025, o assistente deve informar que o total publicado está incompleto, sem julho de 2025 (RN-CFE-08), e não apresentá-lo como total do ano.
 - **Fonte:** CONSUMO §Contrato de dados para o front-end. VAL-15/10 §Resposta ao orientador (item 2) lista como critério de avaliação a "recusa de inventar número ausente", sem fixar a regra.
 - **Relacionadas:** RN-ENT-01, RN-ENT-08, RN-CFE-05, RN-MOD-08
 
