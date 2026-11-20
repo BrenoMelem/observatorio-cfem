@@ -54,6 +54,60 @@ Na ordem em que precisam ser tomadas.
 
 Depois das decisões 1 a 3 já é possível criar a estrutura inicial do código. Com a decisão 12 aceita (20/11/2026), a estrutura inicial pode ser criada: mover `app/` para `src/observatorio/api/` com o módulo de configuração (ADR-013, ADR-017) e o CI do ADR-012.
 
+### Estrutura inicial do código — proposta de 20/11/2026
+
+Proposta apresentada ao mantenedor em 20/11/2026 e **ainda não aprovada**. Esta sessão só documenta: a estrutura será criada depois, em trabalho de desenvolvimento, em dois PRs empilhados.
+
+**PR A: estrutura, configuração e Docker** (ADR-013, ADR-015, ADR-016, ADR-017)
+
+```text
+backend/
+  pyproject.toml          pacote instalável "observatorio", layout src/; grupo opcional "coleta"
+  Dockerfile              imagem só da API, sem dados dentro (ADR-015)
+  .dockerignore
+  .env.example            todas as variáveis, sem valores secretos
+  README.md               como subir com uv e com docker compose
+  src/observatorio/
+    config.py             único lugar que lê variável de ambiente; fim do parents[n] (ADR-017)
+    modelo/               vazio: esquema comum da observação (RN-MOD, RN-TER)
+    fontes/               vazio: um módulo por fonte, contrato comum (RN-FNT, ADR-017)
+    validacao/            vazio: qualidade e relatório do lote (RN-VPU)
+    publicacao/           vazio: montagem e troca do pacote (RN-VPU-01, RN-VPU-03)
+    api/                  o atual backend/app/, movido sem mudar comportamento; camadas mantidas
+  tests/
+    api/test_api.py       os testes atuais, movidos
+    test_esqueleto.py     teste de fumaça: o pacote importa e os subpacotes existem
+docker-compose.yml        na raiz: serviço "api" e serviço "postgres" (ADR-015, ADR-016)
+```
+
+- O `config.py` lê `OBS_PUBLICADO_DIR`, o caminho do manifesto de indicadores e `DATABASE_URL`.
+- O Postgres entra no compose por causa do ADR-016, mas nenhum código o usa ainda.
+- O comando de execução passa a ser `uvicorn observatorio.api.main:app`.
+
+**PR B: CI e qualidade** (ADR-012, ADR-013, ADR-017)
+
+- Um workflow, a cada PR para a `develop` e a `main`:
+  - no `backend/`: `ruff check`, `ruff format --check`, `mypy --strict`, `pytest` e `lint-imports`;
+  - em `scripts/`: `ruff check` e `pytest`.
+- O contrato do `import-linter`: `modelo` não importa ninguém; `api` não importa `fontes`, `validacao` nem `publicacao`.
+- Antes do workflow, é preciso:
+  - reformatar 6 arquivos do `backend/`;
+  - corrigir os 70 apontamentos do ruff em `scripts/` (medidos em 20/11/2026; 52 corrigíveis automaticamente);
+  - ajustar o que o mypy `--strict` apontar.
+
+**Fica de fora dos dois PRs:**
+
+- a publicação do pacote como Release (ADR-015), porque ainda não há gerador de pacote no produto;
+- coletores, regras de validação e rotas novas;
+- o subpacote dos dados de usuários (nota de 19/11/2026 do ADR-013);
+- a proteção de branch no GitHub.
+
+**Ponto em aberto: o manifesto `data/indicadores.json`.** A API lê esse arquivo, que fica na raiz do repositório, fora do `backend/`; hoje chega nele com `parents[3]`. A imagem Docker leva só o `backend/`. Opções:
+
+1. Variável de ambiente no `config.py` (padrão: o arquivo na raiz) e o compose monta `data/` só leitura. O arquivo fica onde está e os scripts não mudam. É a sugestão.
+2. O build do Docker parte da raiz e copia o arquivo para a imagem, que passa a levar um arquivo de dados.
+3. Mover o manifesto para o `backend/`, conferindo quem em `scripts/` o lê.
+
 ### Decisão 6 adiada — nota de 13/11/2026
 
 Nota de 19/11/2026: a decisão 6 foi tomada como provisória no [ADR-015](ADR-015-hospedagem-provisoria-e-segredos.md). Os fatos abaixo continuam valendo como insumo para a revisão de 31/03/2027, se a AWS não sair.
