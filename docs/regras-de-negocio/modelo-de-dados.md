@@ -131,11 +131,11 @@ Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a p
 - **Relacionadas:** RN-MOD-06, RN-VPU-02
 
 ### RN-MOD-12: Preservar o motivo da não divulgação
-- **Status:** PROPOSTA
+- **Status:** DECIDIDA
 - **Regra:** Quando a fonte explicar por que não divulga um valor, o motivo, a etapa, a rede e a edição devem ser preservados com a observação.
 - **Motivo:** O motivo muda a leitura: insuficiência de participação é diferente de dado inexistente.
 - **Exemplo:** IDEB 2023 de um município sem nota municipal por participação insuficiente.
-- **Fonte:** CONSUMO §Sociedade (IDEB). Não consta em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10.
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026 (confirmação da proposta); CONSUMO §Sociedade (IDEB). Não consta em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10.
 - **Relacionadas:** RN-MOD-09
 
 ### RN-MOD-13: Não misturar Censo e estimativa
