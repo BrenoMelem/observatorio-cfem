@@ -43,13 +43,15 @@ O mantenedor escolheu, em 20/11/2026:
 - **Contrato das fontes.** Cada fonte é um módulo só em `fontes/`, que faz duas coisas: baixa o arquivo para a camada bruta e o converte em observações do modelo comum de `modelo/`. Nenhuma fonte entrega formato próprio. Cada fonte tem um teste sobre uma amostra pequena do arquivo real, guardada no repositório, e a lista das colunas esperadas, de modo que uma mudança de layout falhe o teste e o lote (RN-VPU-04).
 - **`api/` em camadas:** `controllers`, `services`, `repositories` e `dtos`, como já está.
 - **Português no domínio.** Nomes do domínio em português (por exemplo, `municipio`, `ano_referencia`); termos do framework e da linguagem ficam como são.
-- **Tipagem obrigatória** nas funções públicas, conferida pelo mypy no modo padrão (ADR-012).
+- **Tipagem obrigatória**, conferida pelo mypy no modo `--strict` no `backend/` (revisão de 20/11/2026, abaixo). Quando uma biblioteca sem tipos completos obrigar (por exemplo, o pandas num módulo de `fontes/`), a regra é afrouxada só naquele módulo, na configuração do mypy, com o motivo anotado ao lado.
 - **Configuração num lugar só.** Um único módulo de configuração lê todas as variáveis de ambiente (caminhos das camadas, chaves, conexão com o banco), com os valores padrão; o resto do código importa dele. Nenhum código calcula caminho a partir da posição do próprio arquivo (`parents[n]`).
 - **Rastreabilidade das regras.** O código que implementa uma regra cita o identificador dela (RN-xxx) na docstring, e um teste cita a mesma regra; quando a regra mudar, uma busca pelo identificador acha o código e o teste.
 
+**Revisão de 20/11/2026: mypy `--strict`.** Na mesma sessão, o mantenedor perguntou se o código ficaria bem tipado. O modo padrão do mypy, fixado no ADR-012, não exige anotações: uma função sem tipo passa sem aviso e o corpo dela não é conferido. Foram apresentadas duas formas de tornar a tipagem obrigatória de fato: três opções do mypy (`disallow_untyped_defs`, `check_untyped_defs` e `warn_return_any`) ou o modo `--strict`, que inclui essas e acrescenta, entre outras, a exigência de tipar o conteúdo das coleções, a proibição de chamar código sem tipo a partir de código tipado e a comparação impossível (`strict_equality`). O mantenedor escolheu o `--strict`: com 235 linhas, quase todas tipadas, adotá-lo agora custa pouco, e ligá-lo depois que o código crescer costuma gerar centenas de erros de uma vez.
+
 Motivo: uma fonte que muda ou é trocada passa a ser consertada no seu próprio módulo, sem tocar no restante; a configuração centralizada resolve a quebra na mudança de pasta do ADR-013; e a citação das regras acompanha a frequência com que elas têm mudado.
 
-Fica de fora: limite de complexidade (C901) e ordem de imports no ruff, cobertura mínima de testes, mypy `--strict`, os nomes dos módulos de cada fonte, o formato das amostras e o estilo do front-end.
+Fica de fora: limite de complexidade (C901) e ordem de imports no ruff, cobertura mínima de testes, checagem de tipos em `scripts/` (continua sem, como no ADR-012), os nomes dos módulos de cada fonte, o formato das amostras e o estilo do front-end.
 
 ## Consequências
 
@@ -57,5 +59,6 @@ Fica de fora: limite de complexidade (C901) e ordem de imports no ruff, cobertur
 - Cada coletor portado do laboratório para `fontes/` traz junto a sua amostra e a lista de colunas; os coletores de `scripts/` não precisam mudar.
 - As amostras versionadas devem ser pequenas (poucas linhas): os arquivos brutos continuam fora do repositório (`AGENTS.md`).
 - A rastreabilidade não é conferida por ferramenta; depende da revisão dos PRs.
-- Rever se a equipe crescer ou se o código do `backend/` justificar o limite de complexidade ou o modo `--strict`.
+- O modo `--strict` exige anotar o conteúdo das coleções e impede chamar código sem tipo; o porte de coletores que usam pandas tende a precisar do pacote `pandas-stubs`, de anotações extras ou de exceções por módulo.
+- Rever se a equipe crescer ou se o código do `backend/` justificar o limite de complexidade.
 - Voltar atrás custa pouco enquanto o código for pequeno (235 linhas em 20/11/2026).
