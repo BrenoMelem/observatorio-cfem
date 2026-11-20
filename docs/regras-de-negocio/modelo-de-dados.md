@@ -181,11 +181,12 @@ Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a p
 - **Relacionadas:** RN-MOD-18, RN-IND-09, RN-IND-10
 
 ### RN-MOD-18: Razão regional como soma sobre soma
-- **Status:** PROPOSTA
+- **Status:** DECIDIDA
 - **Regra:** A razão da RI deve ser calculada somando os numeradores e somando os denominadores dos 12 municípios do mesmo ano, e não pela média das razões municipais.
 - **Motivo:** A média das razões dá o mesmo peso a municípios de tamanhos muito diferentes.
 - **Exemplo:** Despesa per capita da RI = soma da despesa dos 12 municípios ÷ soma das populações dos 12.
-- **Fonte:** Dedução, por coerência com DECISÕES §Municípios da RI Carajás e RN-MOD-17. Nenhuma fonte fixa essa fórmula.
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026 (confirmação da proposta); Dedução, por coerência com DECISÕES §Municípios da RI Carajás e RN-MOD-17. Nenhuma fonte fixa essa fórmula.
+- **Evidência datada:** no fim deste arquivo, em [Notas de evidência](#notas-de-evidência), sob RN-MOD-18. A fórmula reproduz o PIB per capita da RI Carajás publicado pela FAPESPA.
 - **Relacionadas:** RN-TER-02, RN-MOD-17
 
 ### RN-MOD-19: Preço internacional não é atribuído a município
@@ -284,3 +285,7 @@ Evidência datada que sustenta ou qualifica as regras acima. Nenhuma nota muda o
 #### RN-MOD-16: Fluxo e estoque não se somam
 
 - **Evidência de 19/11/2026 (catálogo público da Base dos Dados, sem credencial, só nomes de colunas; reproduzido com `uv run python -m scripts.sondas.basedosdados_colunas microdados_movimentacao microdados_vinculos`; e páginas do MTE):** `caged.microdados_movimentacao` tem 25 colunas por movimentação (entre elas `id_municipio`, `ano`, `mes`, `cnae_2_subclasse`, `cbo_2002`, `idade`, `sexo`, `raca_cor`, `grau_instrucao`, `salario_mensal`, `saldo_movimentacao`, `tipo_movimentacao` e `indicador_fora_prazo`); `rais.microdados_vinculos` tem 67 colunas por vínculo (entre elas `vinculo_ativo_3112`, `tipo_vinculo`, `natureza_juridica`, `tempo_emprego`, remuneração de cada mês e `motivo_desligamento`). Segundo o comparativo RAIS × CAGED do MTE, a RAIS abrange estatutários, celetistas, temporários e avulsos e é anual, com o estoque em 31/12; o CAGED cobre só celetistas e é mensal, com admissões e desligamentos. A Nota Técnica MTE 082/11 (2011, anterior ao Novo CAGED) dava cobertura de cerca de 97% dos estabelecimentos para a RAIS e de 85% para o CAGED; não foi conferido se isso mudou com o eSocial. A Nota Técnica da RAIS 2023 registra a reclassificação de contratos por lei municipal como estatutários a partir do ano-base 2023 e subdeclaração de estatutários na transição para o eSocial. Conclusão: o CAGED é mais recente e mensal; a RAIS tem cobertura maior (inclui o setor público) e mais variáveis; uma não substitui a outra.
+
+#### RN-MOD-18: Razão regional como soma sobre soma
+
+- **Evidência de 19/11/2026 (SIDRA, tabelas 5938, variável 37, e 6579, variável 9324, ano 2021, os 12 municípios; reproduzido com `uv run python -m scripts.sondas.pib_per_capita_ri`):** o PIB per capita da RI Carajás em 2021 calculado como soma dos PIBs ÷ soma das populações dá R$ 147.762; como média dos 12 PIBs per capita, R$ 126.101. A FAPESPA publica R$ 147.782 para a RI Carajás em 2021 (Relatório "PIB dos Municípios Paraenses 2021", transcrito, não conferido na tabela da FAPESPA): a soma sobre soma reproduz o número oficial com diferença de 0,014%; a média das razões fica 15% abaixo. O relatório da FAPESPA não descreve a fórmula; a conclusão vem da reprodução.
