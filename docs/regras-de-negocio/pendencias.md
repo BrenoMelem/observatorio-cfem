@@ -15,7 +15,7 @@ Estas regras estão decididas no essencial, mas um ponto delas continua sem deci
 | Regra | Ponto em aberto |
 | --- | --- |
 | [RN-PRI-11](privacidade-e-licencas.md) | Prazo de guarda de cada dado pessoal de usuário, quem responde pelo tratamento (encarregado) e quais dados cada função pede. Decidir com o PB-45 e o primeiro item que receba dados de usuários (19/11/2026) |
-| [RN-CFE-24](mineracao-cfem.md) | Onde a ANM publica, por município, a parcela de município afetado (15% desde 2018), para somá-la ao lado da ANM e reativar o aviso de diferença acima de 1%; e se o Pará faz o repasse estadual de 25% (Lei 7.990/1989, art. 9º) (20/11/2026) |
+| [RN-CFE-24](mineracao-cfem.md) | Onde a ANM publica, por município, a parcela de município afetado (15% desde 2018), para somá-la ao lado da ANM e reativar o aviso de diferença acima de 1%; e se o Pará faz o repasse estadual de 25% (Lei 7.990/1989, art. 9º). Adiado pelo mantenedor em 20/11/2026, com o aviso suspenso: nenhum arquivo de dados da ANM traz a parcela de afetado por município |
 | [RN-ENT-08](entrega-dos-dados.md) | Metas numéricas de cada critério de avaliação do assistente. Adiado por prioridade em 11/11/2026: o assistente é etapa posterior ao tratamento dos dados; fixar critérios e metas quando ela começar |
 
 ## 3. Divergências entre fontes
