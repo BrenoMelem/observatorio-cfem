@@ -152,6 +152,7 @@ Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a p
 - **Motivo:** É a mesma razão da regra anterior, estendida às projeções.
 - **Exemplo:** Uma projeção municipal não deve completar a série 1980–2022 sem marcação.
 - **Fonte:** CONSUMO §Dinâmica populacional. Não consta em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10.
+- **Evidência datada:** no fim deste arquivo, em [Notas de evidência](#notas-de-evidência), sob RN-MOD-14. Adiada pelo mantenedor em 19/11/2026: o observatório não usa projeção e não há projeção oficial por município.
 - **Relacionadas:** RN-MOD-13
 
 ### RN-MOD-15: Não interpolar anos sem dado
@@ -270,3 +271,11 @@ Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a p
 - **Exceções:** Enquanto o valor real não for publicado, vale RN-MOD-26. Não foi decidido a quais indicadores monetários o valor real se aplica (CFEM, despesa, PIB e outros). Não se publica o mesmo dado anual com dois métodos de correção; um segundo método entraria como definição explícita à parte. O IGP-M, da FGV, não foi avaliado.
 - **Fonte:** DECISÃO-MANTENEDOR de 02/11/2026; CONSUMO §Finanças públicas e índices (despesa per capita); consulta ao SIDRA em 02/11/2026.
 - **Relacionadas:** RN-MOD-24, RN-MOD-25, RN-MOD-26, RN-MOD-17
+
+## Notas de evidência
+
+Evidência datada que sustenta ou qualifica as regras acima. Nenhuma nota muda o status da regra. Ordem: a das regras.
+
+#### RN-MOD-14: Não misturar projeção
+
+- **Evidência de 19/11/2026 (consulta às publicações do IBGE):** as Projeções da População do IBGE (revisão de 2024, que incorpora o Censo 2022) cobrem só o Brasil e as unidades da federação, de 2000 a 2070; não há projeção oficial por município. As estimativas municipais anuais (a série usada pelo observatório, RN-FNT-01) partem da projeção do estado e repartem entre os municípios pela tendência entre os censos de 2010 e 2022 (nota metodológica das estimativas de 2024). Fontes: IBGE, "Projeções da população: Brasil e unidades da federação", Relatórios Metodológicos v. 40, 3ª ed.; IBGE, nota metodológica das Estimativas da População 2024. O observatório não usa projeção em 19/11/2026; a regra segue PROPOSTA.
