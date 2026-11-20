@@ -55,11 +55,11 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 - **Relacionadas:** RN-FON-03, RN-TMP-01
 
 ### RN-TMP-04: Retificações do SICONFI
-- **Status:** PROPOSTA
-- **Regra:** Declarações retificadas do SICONFI não devem ser somadas como registros distintos da versão original.
+- **Status:** DECIDIDA
+- **Regra:** Os dados do SICONFI usam sempre a declaração vigente. O status da entrega (`HO`, homologada, ou `RE`, retificada) e a data da entrega entram na edição da fonte de cada observação. A cada coleta, se a data da entrega de um município e exercício mudar, os valores daquele município e exercício são substituídos, nunca somados aos anteriores, e a troca é registrada no relatório de qualidade (RN-VPU-06).
 - **Motivo:** Somar original e retificação conta o mesmo valor duas vezes.
-- **Exemplo:** A despesa por função de um exercício deve usar a declaração retificada vigente.
-- **Fonte:** CONSUMO §Finanças públicas e índices (despesa per capita). VAL-15/10 §Matriz operacional cita "reconciliar totais retificados" como pendência, sem fixar a regra.
+- **Exemplo:** A DCA de Marabá de 2024 está retificada (status `RE` em 28/05/2025) e a de Eldorado do Carajás de 2022 também (31/05/2023); as outras 34 combinações de município e exercício de 2022 a 2024 estão homologadas, com uma entrega cada (reproduzido em 20/11/2026 com `uv run python -m scripts.sondas.siconfi_entregas`). A API devolve os valores da entrega vigente.
+- **Fonte:** DECISÃO-MANTENEDOR de 20/11/2026 (regra reescrita a partir da proposta); CONSUMO §Finanças públicas e índices (despesa per capita). VAL-15/10 §Matriz operacional cita "reconciliar totais retificados" como pendência, sem fixar a regra.
 - **Relacionadas:** RN-FNT-04
 
 ### RN-TMP-05: Nome do asset do MapBiomas não é fixado

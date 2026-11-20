@@ -72,7 +72,7 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 
 ## 5. Regras PROPOSTAS aguardando confirmação
 
-Estas 20 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook, dos scripts ou do briefing operacional de 30/10/2026. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
+Estas 19 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook, dos scripts ou do briefing operacional de 30/10/2026. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
 
 ### Território (1)
 
@@ -104,11 +104,10 @@ Estas 20 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA
 | [RN-FNT-17](regras-por-fonte.md) | FAPESPA, IDSC e CLP | PLANO §Riscos e cuidados, §Bloco 6; CONSUMO §Finanças públicas e índices |
 | [RN-FNT-19](regras-por-fonte.md) | Conferir que a resposta identifica o município pedido | SCRIPTS (`probe_ibge_sidra`); VAL-15/10 §Rodada adicional |
 
-### Temporalidade e atualização (6)
+### Temporalidade e atualização (5)
 
 | Regra | Título | Origem |
 | --- | --- | --- |
-| [RN-TMP-04](temporalidade-e-atualizacao.md) | Retificações do SICONFI | CONSUMO §Finanças públicas e índices (despesa per capita). VAL-15/10 §Matriz operacional cita "reconciliar totais retificados" como pendência, sem fixar a regra |
 | [RN-TMP-06](temporalidade-e-atualizacao.md) | Congelar a versão a cada coleção do MapBiomas | CONSUMO §Meio ambiente e saneamento |
 | [RN-TMP-08](temporalidade-e-atualizacao.md) | Mudança de nomenclatura entre censos | CONSUMO §Sociedade, serviços e segurança; MAPA-TEMAS §Sociedade |
 | [RN-TMP-09](temporalidade-e-atualizacao.md) | Registros policiais podem ser retificados | CONSUMO §Sociedade, serviços e segurança |
