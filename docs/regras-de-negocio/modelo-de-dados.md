@@ -173,11 +173,11 @@ Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a p
 - **Relacionadas:** RN-IND-07, RN-FNT-20
 
 ### RN-MOD-17: Razões registram numerador, denominador e ano
-- **Status:** PROPOSTA
+- **Status:** DECIDIDA
 - **Regra:** Todo indicador derivado como razão deve registrar o numerador, o denominador e o ano de cada um, e não deve usar denominadores de anos diferentes ao comparar territórios.
 - **Motivo:** Razões com denominadores de anos distintos não são comparáveis e não são reproduzíveis.
 - **Exemplo:** PIB per capita da RI e de Canaã deve usar a população do mesmo ano para os dois.
-- **Fonte:** CONSUMO §Economia e mercado de trabalho, §Finanças públicas e índices. Não consta em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10.
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026 (confirmação da proposta); CONSUMO §Economia e mercado de trabalho, §Finanças públicas e índices. Não consta em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10.
 - **Relacionadas:** RN-MOD-18, RN-IND-09, RN-IND-10
 
 ### RN-MOD-18: Razão regional como soma sobre soma
