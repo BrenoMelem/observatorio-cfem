@@ -92,8 +92,8 @@ Não há código, pseudocódigo, rotas HTTP, nomes de funções, escolha de bibl
 | [entrega-dos-dados.md](entrega-dos-dados.md) | RN-ENT | Camada publicada, CSV aberto, painel de status, assistente de IA, ordem das dimensões | 12 |
 | [mineracao-cfem.md](mineracao-cfem.md) | RN-CFE | Arrecadação, distribuição, autuação e VPM | 28 |
 | [indicadores-derivados-e-compostos.md](indicadores-derivados-e-compostos.md) | RN-IND | Indicadores derivados e compostos congelados | 13 |
-| [privacidade-e-licencas.md](privacidade-e-licencas.md) | RN-PRI | Dados pessoais, acesso restrito e reuso | 10 |
+| [privacidade-e-licencas.md](privacidade-e-licencas.md) | RN-PRI | Dados pessoais, acesso restrito e reuso | 11 |
 | [glossario.md](glossario.md) | | Termos e siglas | |
 | [pendencias.md](pendencias.md) | | Tudo o que está EM ABERTO, as divergências entre fontes, as regras PROPOSTAS aguardando confirmação e os conflitos com o [Product Backlog](../produto/backlog.md) | |
 
-Total: 175 regras, sendo 132 DECIDIDAS, 34 PROPOSTAS, 1 EM ABERTO e 8 OBSOLETAS.
+Total: 176 regras, sendo 150 DECIDIDAS, 17 PROPOSTAS, 0 EM ABERTO e 9 OBSOLETAS.

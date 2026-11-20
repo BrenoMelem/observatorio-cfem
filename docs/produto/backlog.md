@@ -108,26 +108,26 @@ Leitura de 12/11/2026, revista em 19/11/2026. O agrupamento por assunto é deste
 | PB-01 Arquitetura e stack | Em progresso desde o retrato de 19/11/2026. Decisões 1 a 10 do mapa: aceitas a 1 e a 2 em 11/11/2026 ([ADR-007](../adr/ADR-007-onde-mora-o-produto.md), [ADR-008](../adr/ADR-008-linguagem-e-ambiente.md)), a 3 a 5 em 13/11/2026 ([ADR-009](../adr/ADR-009-armazenamento-das-camadas.md) a [ADR-011](../adr/ADR-011-execucao-e-agendamento-das-coletas.md)), a 7, 8 e 10 em 17/11/2026 ([ADR-012](../adr/ADR-012-testes-lint-e-ci.md) a [ADR-014](../adr/ADR-014-formato-do-pacote-publicado.md)) e a 6, como provisória, em 19/11/2026 ([ADR-015](../adr/ADR-015-hospedagem-provisoria-e-segredos.md): Docker local, AWS provável, revisão em 31/03/2027); a 9 está pendente. O front-end não consta do mapa, e o serviço de produção da AWS ainda será decidido | Parcial |
 | PB-02 Repositório, integração contínua e ambientes | Em progresso desde o retrato de 19/11/2026. Decisões 7 (qualidade) e 8 (organização do repositório) do mapa, aceitas em 17/11/2026 ([ADR-012](../adr/ADR-012-testes-lint-e-ci.md), [ADR-013](../adr/ADR-013-organizacao-do-repositorio.md)): as subtarefas de CI e de estrutura do código aplicam esses ADRs. A subtarefa dos ambientes de desenvolvimento e homologação aplica o [ADR-015](../adr/ADR-015-hospedagem-provisoria-e-segredos.md) (19/11/2026): imagem Docker na máquina de cada pessoa e, se for possível, numa máquina da universidade. Já existe o fluxo de branches do `AGENTS.md` e o arquivamento da ANM a cada 4 horas ([guia](../guias/arquivo-anm.md)) | Parcial |
 | PB-03 Modelo do banco analítico | [modelo-de-dados.md](../regras-de-negocio/modelo-de-dados.md) (esquema único, RN-MOD-01 a 04; manifesto, RN-MOD-25) e [territorio.md](../regras-de-negocio/territorio.md). O armazenamento é a decisão 3 do mapa, pendente em 12/11/2026 e depois aceita: arquivos ([ADR-009](../adr/ADR-009-armazenamento-das-camadas.md)), em parquet por indicador com manifestos JSON ([ADR-014](../adr/ADR-014-formato-do-pacote-publicado.md)). Não há banco de dados para os dados do observatório: "banco analítico" é o nome do item no backlog, e na prática o PB-03 modela o pacote publicado (nota de 19/11/2026) | Com regra |
-| PB-04 Perfis de acesso (público, gestor, administrador) | Nenhuma regra; RN-ENT-02 descreve só leitura e metadados. O armazenamento é a decisão 11 do mapa, aceita em 19/11/2026 ([ADR-016](../adr/ADR-016-armazenamento-dos-dados-de-usuarios.md): PostgreSQL); o método de login não foi decidido, e o que guardar de dado pessoal depende do conflito B1 | Sem regra |
+| PB-04 Perfis de acesso (público, gestor, administrador) | Nenhuma regra; RN-ENT-02 descreve só leitura e metadados. O armazenamento é a decisão 11 do mapa, aceita em 19/11/2026 ([ADR-016](../adr/ADR-016-armazenamento-dos-dados-de-usuarios.md): PostgreSQL); o método de login não foi decidido. Os dados pessoais seguem RN-PRI-11 (conflito B1 decidido em 19/11/2026); fora da primeira versão (RN-ENT-12) | Sem regra |
 | PB-05 Navegação simples e acessível | Nada sobre o front-end | Sem regra |
 
 ### Dados
 
 | Item | O que a documentação já tem | Situação |
 | --- | --- | --- |
-| PB-06 Série de 10 anos de arrecadação e uso da CFEM dos dois municípios | [mineracao-cfem.md](../regras-de-negocio/mineracao-cfem.md): arrecadação desde 2003 (RN-CFE-22), nos 12 municípios (RN-TER-01); "os dois municípios" são os de foco (RN-TER-13, conflito B2 decidido em 17/11/2026). O "uso" depende de RN-CFE-24 (PROPOSTA). O lote da arrecadação está bloqueado por duplicatas (RN-VPU-11) | Conflito (B3) |
+| PB-06 Série de 10 anos de arrecadação e uso da CFEM dos dois municípios | [mineracao-cfem.md](../regras-de-negocio/mineracao-cfem.md): arrecadação desde 2003 (RN-CFE-22), nos 12 municípios (RN-TER-01); "os dois municípios" são os de foco (RN-TER-13, conflito B2 decidido em 17/11/2026). O "uso" é a despesa paga com fonte CFEM declarada pelo município, desde 2022 (RN-CFE-24, 19/11/2026). Os 10 anos são o mínimo: a série inteira disponível é mostrada (conflito B3 decidido em 20/11/2026). As 129 linhas repetidas da arrecadação são somadas, como na `obcefem_api` (RN-VPU-11, exceção de 08/11/2026) | Com regra |
 | PB-07 Base socioeconômica e socioambiental por dimensão | [regras-por-fonte.md](../regras-de-negocio/regras-por-fonte.md), [indicadores-derivados-e-compostos.md](../regras-de-negocio/indicadores-derivados-e-compostos.md) e o manifesto (RN-MOD-25). As regras organizam os indicadores em blocos temáticos. A dimensão econômica é a primeira e tem composição decidida (RN-ENT-12, 13/11/2026); a correspondência das outras três dimensões com os blocos não está definida | Parcial |
-| PB-08 Atualização automática (ANM, TCM-PA, orçamentos municipais) | Agenda por fonte (RN-TMP-01, RN-TMP-02), publicação só de lote validado (RN-VPU-01, RN-VPU-03) e a decisão 5 do mapa, aceita em 13/11/2026 ([ADR-011](../adr/ADR-011-execucao-e-agendamento-das-coletas.md)). TCM-PA e orçamentos municipais não são fontes nas regras | Conflito (B4) |
+| PB-08 Atualização automática (ANM, TCM-PA, orçamentos municipais) | Agenda por fonte (RN-TMP-01, RN-TMP-02), publicação só de lote validado (RN-VPU-01, RN-VPU-03) e a decisão 5 do mapa, aceita em 13/11/2026 ([ADR-011](../adr/ADR-011-execucao-e-agendamento-das-coletas.md)). "TCM-PA e orçamentos municipais" são lidos como finanças municipais pelo SICONFI (RN-FNT-04; conflito B4 decidido em 19/11/2026); o TCM-PA não entra como fonte | Com regra |
 | PB-09 Catálogo de metadados e dicionário de dados | Manifesto único (RN-MOD-25), proveniência (RN-MOD-21, RN-FON-13) e o [glossário](../regras-de-negocio/glossario.md) | Com regra |
-| PB-10 Consulta e download (CSV/API) | API própria e CSV aberto (RN-ENT-02, RN-ENT-03), metadados nas exportações (RN-ENT-05, PROPOSTA), arquivos integrais da ANM fora do consumidor (RN-ENT-06) | Com regra |
+| PB-10 Consulta e download (CSV/API) | API própria e CSV aberto (RN-ENT-02, RN-ENT-03), metadados nas exportações (RN-ENT-05, decidida em 19/11/2026), arquivos integrais da ANM fora do consumidor (RN-ENT-06) | Com regra |
 | PB-22 Limites territoriais (bairros, distritos) dos dois municípios | Nada abaixo do município; "os dois municípios" são os de foco (RN-TER-13, conflito B2 decidido em 17/11/2026) | Conflito (B5) |
 
 ### Painéis e análises
 
 | Item | O que a documentação já tem | Situação |
 | --- | --- | --- |
-| PB-11 Painel da arrecadação da CFEM no tempo | Primeiros gráficos (RN-ENT-09, PROPOSTA), só dado homologado (RN-VPU-10). Atenção ao texto: "quanto cada município recebe" é a CFEM recebida (distribuição), que não se confunde com a arrecadada (RN-CFE-02, RN-CFE-03) | Com regra |
-| PB-12 Onde a CFEM e o orçamento foram aplicados, por área | Despesa por função pelo SICONFI (RN-FNT-04). Dizer que uma despesa foi paga com CFEM exige a fonte de recursos confirmada (RN-CFE-24, PROPOSTA) | Parcial |
+| PB-11 Painel da arrecadação da CFEM no tempo | Primeiros dados entregues para os painéis (RN-ENT-09, decidida em 19/11/2026), só dado homologado (RN-VPU-10). Atenção ao texto: "quanto cada município recebe" é a CFEM recebida (distribuição), que não se confunde com a arrecadada (RN-CFE-02, RN-CFE-03) | Com regra |
+| PB-12 Onde a CFEM e o orçamento foram aplicados, por área | Despesa por função pelo SICONFI (RN-FNT-04). CFEM repassada como produtor (ANM), receita declarada (DCA) e despesa paga com fonte CFEM por função (MSC), lado a lado; o aviso de diferença está suspenso até a parcela de município afetado entrar (RN-CFE-24, revista em 20/11/2026) | Com regra |
 | PB-13 Quadro de indicadores por dimensão | Manifesto (RN-MOD-25), regras dos derivados e compostos (RN-IND-01 a 13), painel de status (RN-ENT-04); a dimensão econômica é a primeira (RN-ENT-12) | Com regra |
 | PB-14 Filtros por período, município e dimensão | Nada específico; os metadados de cada ponto seguem RN-VPU-09 | Sem regra |
 | PB-15 Comparar municípios e períodos | Municípios de comparação (RN-TER-09), agregação regional (RN-TER-02) e as regras de comparabilidade de [modelo-de-dados.md](../regras-de-negocio/modelo-de-dados.md) (RN-MOD-13 a 19) | Com regra |
@@ -163,7 +163,7 @@ Leitura de 12/11/2026, revista em 19/11/2026. O agrupamento por assunto é deste
 
 | Item | O que a documentação já tem | Situação |
 | --- | --- | --- |
-| PB-29 Relatório em PDF com indicadores escolhidos | Exportações levam os metadados (RN-ENT-05, PROPOSTA) e leem só a camada publicada (RN-ENT-01) | Parcial |
+| PB-29 Relatório em PDF com indicadores escolhidos | Exportações levam os metadados (RN-ENT-05, decidida em 19/11/2026) e leem só a camada publicada (RN-ENT-01) | Parcial |
 | PB-30 Modelos de relatório por público | Nada | Sem regra |
 
 ### Assistente de IA
@@ -174,7 +174,7 @@ Leitura de 12/11/2026, revista em 19/11/2026. O agrupamento por assunto é deste
 | PB-32 Indexar dados validados e conteúdos | O assistente lê só a camada publicada (RN-ENT-01; RN-ENT-07, PROPOSTA). Não há regra sobre indexar conteúdos editoriais | Parcial |
 | PB-33 Perguntas com respostas e fontes | RN-ENT-07 (PROPOSTA): responder só com a camada publicada, com fonte, período e limitações | Com regra |
 | PB-34 Resumos e padrões nos indicadores | Só o limite de RN-ENT-07 | Parcial |
-| PB-35 Salvaguardas (escopo, transparência, proteção de dados, registro de uso) | Escopo e transparência em RN-ENT-07. Proteção de dados e registro de uso não têm regra (ver B1) | Parcial |
+| PB-35 Salvaguardas (escopo, transparência, proteção de dados, registro de uso) | Escopo e transparência em RN-ENT-07. Proteção de dados em RN-PRI-11 (conflito B1 decidido em 19/11/2026); o registro de uso não tem regra | Parcial |
 | PB-36 Avaliação com perguntas de teste | RN-ENT-08 (PROPOSTA): critérios listados, metas numéricas em aberto. Em 11/11/2026 o mantenedor definiu que o assistente vem depois do tratamento dos dados | Com regra |
 
 ### Marketplace
@@ -194,7 +194,7 @@ Leitura de 12/11/2026, revista em 19/11/2026. O agrupamento por assunto é deste
 | PB-42 Testes de carga | Nada | Sem regra |
 | PB-43 Testes de aceitação com a Vale e representantes dos usuários | Nada | Sem regra |
 | PB-44 Acessibilidade e uso em celular | Nada | Sem regra |
-| PB-45 Segurança e adequação à LGPD | Credenciais (RN-FON-08, RN-PRI-10). A privacidade deixou de ser requisito em 07/11/2026 | Conflito (B1) |
+| PB-45 Segurança e adequação à LGPD | Credenciais (RN-FON-08, RN-PRI-10). A privacidade deixou de ser requisito em 07/11/2026 para os dados das fontes; os dados de usuários seguem a LGPD, e a política de privacidade e os termos de uso são exigidos antes de abrir cadastros (RN-PRI-11, conflito B1 decidido em 19/11/2026). Prazo de guarda e encarregado em aberto | Parcial |
 | PB-46 Implantação em produção | Decisão 6 do mapa: o [ADR-015](../adr/ADR-015-hospedagem-provisoria-e-segredos.md) (19/11/2026) registra a AWS como destino provável, sem serviço escolhido, e a revisão em 31/03/2027 se não houver acesso | Sem regra |
 | PB-47 Monitoramento, backup e documentação técnica | Relatório de qualidade por execução (RN-VPU-06) e painel de status (RN-ENT-04) cobrem só o monitoramento dos dados | Parcial |
 | PB-48 Sustentabilidade e replicabilidade | Nada. A lista de municípios é fixa nos 12 da RI Carajás (RN-TER-01); um guia para outros municípios não está previsto | Sem regra |
@@ -203,27 +203,27 @@ Leitura de 12/11/2026, revista em 19/11/2026. O agrupamento por assunto é deste
 
 | Situação | Itens | Quantos |
 | --- | --- | ---: |
-| Com regra | PB-03, 09, 10, 11, 13, 15, 33, 36 | 8 |
-| Parcial | PB-01, 02, 07, 12, 16, 29, 32, 34, 35, 47 | 10 |
+| Com regra | PB-03, 06, 08, 09, 10, 11, 12, 13, 15, 33, 36 | 11 |
+| Parcial | PB-01, 02, 07, 16, 29, 32, 34, 35, 45, 47 | 10 |
 | Sem regra | PB-04, 05, 14, 17 a 20, 24 a 28, 30, 31, 37 a 44, 46, 48 | 24 |
-| Conflito | PB-06, 08, 21, 22, 23, 45 | 6 |
+| Conflito | PB-21, 22, 23 | 3 |
 
 ## 4. Conflitos e lacunas
 
-Os cinco conflitos (B1 a B5) estão em [pendencias.md, seção 6](../regras-de-negocio/pendencias.md#6-conflitos-com-o-product-backlog), com as duas versões e as datas. Em 19/11/2026 só o B2 (recorte territorial) está decidido, desde 17/11/2026; o B3 foi adiado pelo mantenedor em 19/11/2026.
+Os cinco conflitos (B1 a B5) estão em [pendencias.md, seção 6](../regras-de-negocio/pendencias.md#6-conflitos-com-o-product-backlog), com as duas versões e as datas. Em 19/11/2026 estão decididos o B2 (recorte territorial), desde 17/11/2026, o B1 (dados de usuários e LGPD) e o B4 (fontes do orçamento), em 19/11/2026, e o B3 (série de 10 anos), em 20/11/2026; o B5 (bairros) foi adiado pelo mantenedor em 19/11/2026. No B5, a sonda de 19/11/2026 mostrou que o IBGE não tem bairros para nenhum dos 12 municípios, só setores censitários do Censo 2022.
 
 As lacunas maiores, que nenhuma regra cobre:
 
-- **Escrita na plataforma.** Perfis de acesso, gestão de conteúdo, canal de escuta, comentários, consultas públicas e marketplace (PB-04, PB-19, PB-24 a 26, PB-28, PB-37 e PB-39) exigem que a plataforma receba e guarde dados de usuários. As regras só descrevem coleta de fontes públicas e leitura da camada publicada. Onde guardar esses dados é a decisão 11 do [mapa](../adr/README.md), aceita em 19/11/2026: PostgreSQL ([ADR-016](../adr/ADR-016-armazenamento-dos-dados-de-usuarios.md)). O que pode ser guardado de dado pessoal continua no conflito B1.
+- **Escrita na plataforma.** Perfis de acesso, gestão de conteúdo, canal de escuta, comentários, consultas públicas e marketplace (PB-04, PB-19, PB-24 a 26, PB-28, PB-37 e PB-39) exigem que a plataforma receba e guarde dados de usuários. As regras só descrevem coleta de fontes públicas e leitura da camada publicada. Onde guardar esses dados é a decisão 11 do [mapa](../adr/README.md), aceita em 19/11/2026: PostgreSQL ([ADR-016](../adr/ADR-016-armazenamento-dos-dados-de-usuarios.md)). Os dados pessoais seguem a LGPD (RN-PRI-11, 19/11/2026); o prazo de guarda, o encarregado e os dados de cada função seguem em aberto.
 - **Front-end e conteúdo.** Navegação, filtros, artigos, materiais dos cursos, páginas explicativas, acessibilidade (PB-05, PB-14, PB-17, PB-18, PB-20, PB-44). As regras são do backend.
-- **Dimensões do backlog × blocos das regras.** O backlog fala em quatro dimensões (social, econômica, ambiental e institucional); as regras, em blocos temáticos. Em 13/11/2026 o mantenedor decidiu a composição da dimensão econômica (RN-ENT-12: CFEM, PIB, preços, finanças municipais e despesa por função; emprego e renda ficam na social). Falta dizer qual bloco entra em cada uma das outras três dimensões (PB-07, PB-13, PB-14).
+- **Dimensões do backlog × blocos das regras.** O backlog fala em quatro dimensões (social, econômica, ambiental e institucional); as regras, em blocos temáticos. Em 13/11/2026 o mantenedor decidiu a composição da dimensão econômica (RN-ENT-12: CFEM, PIB, preços, finanças municipais e despesa por função; emprego e renda ficam na social); em 15/11/2026, que a composição das outras três segue o `obcefem` (RN-ENT-12, Exceções).
 - **Operação.** Testes de carga e de aceitação, backup e transferência (PB-42, PB-43, PB-47, PB-48).
 
 ## 5. Prazos
 
 - **Já vencido em 19/11/2026:** PB-01 (31/10/2026), em progresso. Faltam a parte de front-end, o serviço de produção (a hospedagem provisória foi decidida em 19/11/2026, ADR-015) e a consolidação; a decisão 9 (assistente) também segue pendente.
 - **Vencem em 30/11/2026:** PB-02 (em progresso) e PB-03 (pendente).
-- **Vencem em 31/12/2026:** PB-04, PB-05 e PB-06. O PB-06 depende de destravar o lote da arrecadação (RN-VPU-11) e do conflito B3 (B2 foi decidido em 17/11/2026).
-- **Primeira versão no ar.** Em 11/11/2026 o mantenedor informou o prazo de até maio de 2027 (restrição registrada no [mapa de decisões](../adr/README.md)). No backlog, a implantação em produção (PB-46) vence em 31/07/2027, e os itens que vencem até 31/05/2027 são PB-01 a PB-14. Falta dizer quais deles compõem a primeira versão.
-- **Ordem de trabalho.** Em 13/11/2026 o mantenedor decidiu que a dimensão econômica é a primeira, na carga dos dados e nos painéis (RN-ENT-12). Dentro de PB-07 e PB-13, a parte econômica vem antes das partes social, ambiental e institucional; as datas de vencimento dos itens não mudaram. A ordem das outras três dimensões não foi decidida.
+- **Vencem em 31/12/2026:** PB-04, PB-05 e PB-06. O PB-04 ficou fora da primeira versão (19/11/2026). Os conflitos do PB-06 (B2 e B3) estão decididos; o "uso da CFEM" cobre de 2022 em diante (RN-CFE-24).
+- **Primeira versão no ar.** Em 11/11/2026 o mantenedor informou o prazo de até maio de 2027 (restrição registrada no [mapa de decisões](../adr/README.md)). No backlog, a implantação em produção (PB-46) vence em 31/07/2027, e os itens que vencem até 31/05/2027 são PB-01 a PB-14. Em 19/11/2026 o mantenedor decidiu que a primeira versão reúne PB-01 a PB-14 com as quatro dimensões completas, exceto o PB-04 (perfis de acesso e login), que entra quando houver conteúdo a moderar e o conflito B1 estiver decidido (RN-ENT-12).
+- **Ordem de trabalho.** Em 13/11/2026 o mantenedor decidiu que a dimensão econômica é a primeira, na carga dos dados e nos painéis (RN-ENT-12). Dentro de PB-07 e PB-13, a parte econômica vem antes das partes social, ambiental e institucional; as datas de vencimento dos itens não mudaram. A ordem das outras três é social, ambiental e institucional (15/11/2026).
 - **Entregas contratuais:** [1.5] e [1.6] em 31/03/2028; [4.2] em 30/09/2028.

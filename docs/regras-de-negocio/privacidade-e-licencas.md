@@ -1,6 +1,6 @@
 # Privacidade e licenças
 
-Regras sobre dados pessoais, registros individuais, acesso restrito e reuso de dados de terceiros. Em 07/11/2026 o mantenedor decidiu que, por serem dados abertos, privacidade e licença não são necessárias: as regras RN-PRI-01 a RN-PRI-06 e RN-PRI-08 ficam obsoletas. Seguem vigentes RN-PRI-07 (recortes do Censo Escolar), RN-PRI-09 e RN-PRI-10 (contas e credenciais do Google Cloud). Legenda de status e siglas das fontes: [README](README.md).
+Regras sobre dados pessoais, registros individuais, acesso restrito e reuso de dados de terceiros. Em 07/11/2026 o mantenedor decidiu que, por serem dados abertos, privacidade e licença não são necessárias: as regras RN-PRI-01 a RN-PRI-06 e RN-PRI-08 ficam obsoletas. Seguem vigentes RN-PRI-07 (recortes do Censo Escolar), RN-PRI-09 e RN-PRI-10 (contas e credenciais do Google Cloud). Em 19/11/2026 o mantenedor decidiu que essa decisão vale só para os dados das fontes; os dados pessoais enviados por usuários seguem a LGPD (RN-PRI-11). Legenda de status e siglas das fontes: [README](README.md).
 
 ### RN-PRI-01: CPF e CNPJ nunca entram na camada tratada
 - **Status:** OBSOLETA
@@ -90,6 +90,15 @@ Regras sobre dados pessoais, registros individuais, acesso restrito e reuso de d
 - **Exemplo:** A célula de autenticação do laboratório abriu um consentimento com acesso amplo de edição e exclusão no Drive e no Google Cloud; a autenticação não foi concluída (transcrito do relatório VAL-15/10, não conferido no JSON). O notebook é só de testes e não vai para produção, então o consentimento serve de evidência; a regra vale para o pipeline.
 - **Fonte:** DECISÃO-MANTENEDOR de 28/10/2026; VAL-15/10 §Pendências externas e limites desta execução; DECISÃO-MANTENEDOR de 24/10/2026 (conflito 7).
 - **Relacionadas:** RN-FON-09
+
+### RN-PRI-11: Dados pessoais enviados por usuários
+- **Status:** DECIDIDA
+- **Regra:** Os dados pessoais que os usuários enviam à plataforma (contas e perfis, relatos, comentários, acompanhamento de demandas, cadastros do marketplace e registro de uso do assistente) seguem a LGPD (Lei 13.709/2018). Cada função deve coletar só o necessário para a sua finalidade. Nenhum cadastro ou envio de dados por usuários abre ao público sem política de privacidade e termos de uso publicados. A decisão de 07/11/2026, que tirou privacidade e licença dos requisitos, vale só para os dados das fontes, não para estes.
+- **Motivo:** Os dados das fontes são abertos; os dos usuários não são, e a lei se aplica a eles independentemente do projeto. O backlog prevê esses dados (PB-04, PB-24, PB-25, PB-28, PB-35, PB-37) e pede política de privacidade e termos de uso (PB-45).
+- **Exemplo:** O art. 6º, inciso III, da LGPD limita o tratamento ao mínimo necessário para a finalidade (consultado no compilado da lei no Planalto em 19/11/2026; a versão consolidada da Câmara indica que um inciso do art. 6º recebeu nova redação pela Lei 15.352/2026, o que não foi conferido).
+- **Exceções:** Ficam em aberto, a decidir com o PB-45 e o primeiro item que receba dados de usuários: o prazo de guarda de cada dado, quem responde pelo tratamento (encarregado) e quais dados cada função pede. Ver [pendencias.md](pendencias.md), seção 2.
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026 (conflito B1); [Product Backlog](../produto/backlog.md), PB-35 e PB-45.
+- **Relacionadas:** RN-ENT-02
 
 ## Notas de evidência
 

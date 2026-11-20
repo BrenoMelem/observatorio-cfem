@@ -8,7 +8,7 @@ Atualizado em 19/11/2026.
 
 O que não está nas regras e condiciona as escolhas (equipe, orçamento, prazo, infraestrutura disponível). Cada item com a data em que foi informado.
 
-- **Equipe:** 1 a 2 pessoas, que dominam Python (11/11/2026).
+- **Equipe:** cinco pessoas, com papéis separados (19/11/2026): duas no backend, que dominam Python (o mantenedor e mais uma); uma na parte de IA (o assistente); uma no front-end; e uma na coordenação e organização do projeto. Em 11/11/2026 o registro dizia "1 a 2 pessoas, que dominam Python", e os ADR-007 a ADR-016 citam esse número; ele corresponde às duas pessoas do backend, a quem cabem a API, a coleta e a operação. As decisões desses ADRs continuam válidas e eles não foram reescritos.
 - **Hospedagem e orçamento:** ainda não definidos. As escolhas devem funcionar em plano gratuito e poder migrar sem retrabalho grande (11/11/2026). A produção provavelmente será a AWS, mas a equipe não tem acesso e não há previsão; a conta não é da equipe. Até lá, o ambiente é a máquina de cada pessoa e, se for possível, uma máquina da universidade (19/11/2026).
 - **Docker:** a equipe já usa (19/11/2026).
 - **Relação com `obcefem_api` e `obcefem`:** mesma equipe. Os repositórios são do professor, que os modifica (11/11/2026).
