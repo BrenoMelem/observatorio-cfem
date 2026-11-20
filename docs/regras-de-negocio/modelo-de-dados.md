@@ -252,7 +252,7 @@ Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a p
 - **Regra:** Os valores monetários devem ser publicados em valor nominal, como a fonte os informou, sem correção por índice de preços, até a publicação do valor real (RN-MOD-24, RN-MOD-28).
 - **Motivo:** Nenhum indicador atual exige valor real, e o valor real ainda não está implementado (índice em RN-MOD-28, data-base em RN-MOD-24).
 - **Exemplo:** Despesa per capita por função, 2013–2025, em valor nominal.
-- **Exceções:** O valor real é um pedido do projeto e será acrescentado como indicador à parte (RN-MOD-28), com índice e data-base explícitos; a data-base é dezembro de 2025 (RN-MOD-24); enquanto o valor real não for publicado, só o valor nominal é publicado.
+- **Exceções:** O valor real é um pedido do projeto e será acrescentado como indicador à parte (RN-MOD-28), com índice e data-base explícitos; a data-base é dezembro do último ano fechado, hoje dezembro de 2025 (RN-MOD-24); enquanto o valor real não for publicado, só o valor nominal é publicado.
 - **Fonte:** DECISÃO-MANTENEDOR de 26/10/2026; CONSUMO §Finanças públicas e índices (despesa per capita).
 - **Relacionadas:** RN-MOD-24, RN-MOD-28, RN-MOD-17
 
