@@ -50,11 +50,12 @@ Canaã dos Carajás e Parauapebas são os municípios de foco do observatório.
 - **Relacionadas:** RN-TER-04, RN-TER-06, RN-TER-08
 
 ### RN-TER-04: Código tratado como texto
-- **Status:** PROPOSTA
+- **Status:** DECIDIDA
 - **Regra:** O código IBGE deve ser tratado como texto, e não como número.
-- **Motivo:** Evita perda de dígitos à esquerda em códigos de outros estados e evita conversões silenciosas.
+- **Motivo:** O código é um identificador, não uma quantidade. Como texto, o cruzamento entre fontes não falha em silêncio (uma fonte com o código em texto e outra em número deixam de casar sem erro), e fica explícita a conversão das fontes que usam o código de 6 dígitos, sem o dígito verificador.
 - **Exemplo:** O laboratório de fontes e os scripts guardam os 12 códigos como texto.
-- **Fonte:** NOTEBOOK (célula 1); SCRIPTS (`build_cfem_distribution_municipal`, `validate_anm_cfem`).
+- **Exceções:** O motivo original ("evita perda de dígitos à esquerda") foi substituído em 19/11/2026: nenhum código IBGE de município começa com zero, porque o prefixo da UF vai de 11 a 53.
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026 (confirmação da proposta, com o motivo reescrito); NOTEBOOK (célula 1); SCRIPTS (`build_cfem_distribution_municipal`, `validate_anm_cfem`).
 - **Relacionadas:** RN-TER-03
 
 ### RN-TER-05: Checagem dos nomes na largada

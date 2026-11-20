@@ -74,13 +74,12 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 
 ## 5. Regras PROPOSTAS aguardando confirmação
 
-Estas 23 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook, dos scripts ou do briefing operacional de 30/10/2026. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
+Estas 22 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook, dos scripts ou do briefing operacional de 30/10/2026. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
 
-### Território (4)
+### Território (3)
 
 | Regra | Título | Origem |
 | --- | --- | --- |
-| [RN-TER-04](territorio.md) | Código tratado como texto | NOTEBOOK (célula 1); SCRIPTS (`build_cfem_distribution_municipal`, `validate_anm_cfem`) |
 | [RN-TER-07](territorio.md) | Comparação de nomes sem acento e sem diferença de caixa, apenas para o Pará | SCRIPTS (`validate_anm_cfem`, rotina de normalização e filtro de UF). Deduzida do código |
 | [RN-TER-11](territorio.md) | Guardar a composição territorial usada | CONSUMO §Contrato de dados para o front-end (campos `geo_id`, `geo_level`) |
 | [RN-TER-12](territorio.md) | Declarar se o indicador usa residência ou ocorrência | VAL-15/10 §Como repetir os testes (item sobre PySUS); CONSUMO §Sociedade (localidade de referência). Dedução: nenhuma das duas fontes fixa a regra |
