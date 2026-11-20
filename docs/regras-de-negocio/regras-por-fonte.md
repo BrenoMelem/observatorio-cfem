@@ -164,12 +164,12 @@ Os códigos de agregado, de série e de tabela que aparecem aqui são identifica
 - **Relacionadas:** RN-FON-18, RN-CFE-22
 
 ### RN-FNT-19: Conferir que a resposta identifica o município pedido
-- **Status:** PROPOSTA
-- **Regra:** Em consultas ao SIDRA, o código e o nome do município devolvidos devem ser conferidos contra o município pedido antes de aceitar o valor.
+- **Status:** DECIDIDA
+- **Regra:** Consultas ao SIDRA podem ser feitas em lote. Cada valor só é aceito se o código do município devolvido estiver entre os pedidos; se faltar ou sobrar município na resposta, o lote bloqueia. O nome devolvido é conferido contra a lista oficial sem acento e sem diferença de caixa (RN-TER-07).
 - **Motivo:** Garante que o valor pertence ao município esperado.
-- **Exemplo:** Um pedido em lote de dois municípios retornou HTTP 500, e o script consulta cada município separadamente e confere código e nome (transcrito do relatório VAL-15/10, não conferido no JSON).
-- **Fonte:** SCRIPTS (`probe_ibge_sidra`); VAL-15/10 §Rodada adicional.
-- **Relacionadas:** RN-FNT-01, RN-TER-05
+- **Exemplo:** Em 19/11/2026, três pedidos com os 12 municípios juntos (tabelas 5938, 6579 e 9923) devolveram 12 séries cada, com o código em `localidade.id` (reproduzido com `uv run python -m scripts.sondas.pib_per_capita_ri` e `uv run python -m scripts.sondas.ibge_bairros`). O relatório VAL-15/10 registrava que um pedido em lote de dois municípios retornou HTTP 500 (transcrito, não conferido); isso não se repetiu.
+- **Fonte:** DECISÃO-MANTENEDOR de 20/11/2026 (regra reescrita a partir da proposta); SCRIPTS (`probe_ibge_sidra`); VAL-15/10 §Rodada adicional.
+- **Relacionadas:** RN-FNT-01, RN-TER-05, RN-TER-07
 
 ### RN-FNT-20: Rota do emprego formal
 - **Status:** DECIDIDA
