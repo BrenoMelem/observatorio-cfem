@@ -30,7 +30,7 @@ Os scripts rodam como módulo, a partir da raiz do repositório: `uv run python 
 | | `msc_despesa_fonte.py` | MSC orçamentária por fonte de recursos (`1708`) |
 | `commodities/` | `pink_sheet.py`, `fred.py` | Preço de ferro e cobre: Pink Sheet do World Bank (fonte principal, sem chave) e FRED (reserva, exige `FRED_API_KEY` no ambiente) |
 | `emissoes/` | `seeg.py` | Emissões do SEEG: lê a planilha municipal (centenas de MB, fora do Git) e extrai o recorte dos 12 municípios com os metadados |
-| `sondas/` | `ibge_sidra.py`, `ipeadata.py`, `inspecionar_ipeadata.py`, `worldbank_commodities.py`, `tcmpa.py` (conflito B4), `ibge_bairros.py` (conflito B5) | Provas de que a fonte responde e como (laboratório) |
+| `sondas/` | `ibge_sidra.py`, `ipeadata.py`, `inspecionar_ipeadata.py`, `worldbank_commodities.py`, `tcmpa.py` (conflito B4), `ibge_bairros.py` (conflito B5), `basedosdados_colunas.py` (colunas do catálogo da Base dos Dados, RN-MOD-16) | Provas de que a fonte responde e como (laboratório) |
 | `servidor/` | `servidor.py` | API local do protótipo; lê só a camada publicada (`docs/api/openapi.yaml`) |
 | `notebook/` | `construir_notebook.py` | Gera o notebook de laboratório (`laboratorio_fontes_observatorio_cfem.ipynb`) |
 | `comum/` | `municipios.py`, `arquivos.py` | Os 12 municípios, os campos do esquema comum e utilitários de arquivo |

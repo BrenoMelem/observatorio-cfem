@@ -164,12 +164,13 @@ Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a p
 - **Relacionadas:** RN-MOD-08, RN-MOD-10, RN-MOD-13
 
 ### RN-MOD-16: Fluxo e estoque não se somam
-- **Status:** PROPOSTA
+- **Status:** DECIDIDA
 - **Regra:** Medidas de fluxo (admissões e desligamentos do CAGED) e de estoque (vínculos da RAIS) não devem ser somadas nem tratadas como a mesma medida.
 - **Motivo:** O fluxo mede movimento num período e o estoque mede o total num ponto no tempo.
 - **Exemplo:** O saldo do CAGED (ADMISNC − DESLIGNC) não substitui os vínculos da RAIS.
-- **Fonte:** CONSUMO §Economia e mercado de trabalho; VAL-15/10 §Matriz operacional (RAIS, CAGED, emprego: "validar fluxo versus estoque").
-- **Relacionadas:** RN-IND-07
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026 (confirmação da proposta); CONSUMO §Economia e mercado de trabalho; VAL-15/10 §Matriz operacional (RAIS, CAGED, emprego: "validar fluxo versus estoque").
+- **Evidência datada:** no fim deste arquivo, em [Notas de evidência](#notas-de-evidência), sob RN-MOD-16.
+- **Relacionadas:** RN-IND-07, RN-FNT-20
 
 ### RN-MOD-17: Razões registram numerador, denominador e ano
 - **Status:** PROPOSTA
@@ -279,3 +280,7 @@ Evidência datada que sustenta ou qualifica as regras acima. Nenhuma nota muda o
 #### RN-MOD-14: Não misturar projeção
 
 - **Evidência de 19/11/2026 (consulta às publicações do IBGE):** as Projeções da População do IBGE (revisão de 2024, que incorpora o Censo 2022) cobrem só o Brasil e as unidades da federação, de 2000 a 2070; não há projeção oficial por município. As estimativas municipais anuais (a série usada pelo observatório, RN-FNT-01) partem da projeção do estado e repartem entre os municípios pela tendência entre os censos de 2010 e 2022 (nota metodológica das estimativas de 2024). Fontes: IBGE, "Projeções da população: Brasil e unidades da federação", Relatórios Metodológicos v. 40, 3ª ed.; IBGE, nota metodológica das Estimativas da População 2024. O observatório não usa projeção em 19/11/2026; a regra segue PROPOSTA.
+
+#### RN-MOD-16: Fluxo e estoque não se somam
+
+- **Evidência de 19/11/2026 (catálogo público da Base dos Dados, sem credencial, só nomes de colunas; reproduzido com `uv run python -m scripts.sondas.basedosdados_colunas microdados_movimentacao microdados_vinculos`; e páginas do MTE):** `caged.microdados_movimentacao` tem 25 colunas por movimentação (entre elas `id_municipio`, `ano`, `mes`, `cnae_2_subclasse`, `cbo_2002`, `idade`, `sexo`, `raca_cor`, `grau_instrucao`, `salario_mensal`, `saldo_movimentacao`, `tipo_movimentacao` e `indicador_fora_prazo`); `rais.microdados_vinculos` tem 67 colunas por vínculo (entre elas `vinculo_ativo_3112`, `tipo_vinculo`, `natureza_juridica`, `tempo_emprego`, remuneração de cada mês e `motivo_desligamento`). Segundo o comparativo RAIS × CAGED do MTE, a RAIS abrange estatutários, celetistas, temporários e avulsos e é anual, com o estoque em 31/12; o CAGED cobre só celetistas e é mensal, com admissões e desligamentos. A Nota Técnica MTE 082/11 (2011, anterior ao Novo CAGED) dava cobertura de cerca de 97% dos estabelecimentos para a RAIS e de 85% para o CAGED; não foi conferido se isso mudou com o eSocial. A Nota Técnica da RAIS 2023 registra a reclassificação de contratos por lei municipal como estatutários a partir do ano-base 2023 e subdeclaração de estatutários na transição para o eSocial. Conclusão: o CAGED é mais recente e mensal; a RAIS tem cobertura maior (inclui o setor público) e mais variáveis; uma não substitui a outra.
