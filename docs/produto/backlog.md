@@ -115,7 +115,7 @@ Leitura de 12/11/2026, revista em 19/11/2026. O agrupamento por assunto é deste
 
 | Item | O que a documentação já tem | Situação |
 | --- | --- | --- |
-| PB-06 Série de 10 anos de arrecadação e uso da CFEM dos dois municípios | [mineracao-cfem.md](../regras-de-negocio/mineracao-cfem.md): arrecadação desde 2003 (RN-CFE-22), nos 12 municípios (RN-TER-01); "os dois municípios" são os de foco (RN-TER-13, conflito B2 decidido em 17/11/2026). O "uso" é a despesa paga com fonte CFEM declarada pelo município, desde 2022 (RN-CFE-24, 19/11/2026). O lote da arrecadação está bloqueado por duplicatas (RN-VPU-11) | Conflito (B3) |
+| PB-06 Série de 10 anos de arrecadação e uso da CFEM dos dois municípios | [mineracao-cfem.md](../regras-de-negocio/mineracao-cfem.md): arrecadação desde 2003 (RN-CFE-22), nos 12 municípios (RN-TER-01); "os dois municípios" são os de foco (RN-TER-13, conflito B2 decidido em 17/11/2026). O "uso" é a despesa paga com fonte CFEM declarada pelo município, desde 2022 (RN-CFE-24, 19/11/2026). Os 10 anos são o mínimo: a série inteira disponível é mostrada (conflito B3 decidido em 20/11/2026). As 129 linhas repetidas da arrecadação são somadas, como na `obcefem_api` (RN-VPU-11, exceção de 08/11/2026) | Com regra |
 | PB-07 Base socioeconômica e socioambiental por dimensão | [regras-por-fonte.md](../regras-de-negocio/regras-por-fonte.md), [indicadores-derivados-e-compostos.md](../regras-de-negocio/indicadores-derivados-e-compostos.md) e o manifesto (RN-MOD-25). As regras organizam os indicadores em blocos temáticos. A dimensão econômica é a primeira e tem composição decidida (RN-ENT-12, 13/11/2026); a correspondência das outras três dimensões com os blocos não está definida | Parcial |
 | PB-08 Atualização automática (ANM, TCM-PA, orçamentos municipais) | Agenda por fonte (RN-TMP-01, RN-TMP-02), publicação só de lote validado (RN-VPU-01, RN-VPU-03) e a decisão 5 do mapa, aceita em 13/11/2026 ([ADR-011](../adr/ADR-011-execucao-e-agendamento-das-coletas.md)). "TCM-PA e orçamentos municipais" são lidos como finanças municipais pelo SICONFI (RN-FNT-04; conflito B4 decidido em 19/11/2026); o TCM-PA não entra como fonte | Com regra |
 | PB-09 Catálogo de metadados e dicionário de dados | Manifesto único (RN-MOD-25), proveniência (RN-MOD-21, RN-FON-13) e o [glossário](../regras-de-negocio/glossario.md) | Com regra |
@@ -203,14 +203,14 @@ Leitura de 12/11/2026, revista em 19/11/2026. O agrupamento por assunto é deste
 
 | Situação | Itens | Quantos |
 | --- | --- | ---: |
-| Com regra | PB-03, 08, 09, 10, 11, 12, 13, 15, 33, 36 | 10 |
+| Com regra | PB-03, 06, 08, 09, 10, 11, 12, 13, 15, 33, 36 | 11 |
 | Parcial | PB-01, 02, 07, 16, 29, 32, 34, 35, 45, 47 | 10 |
 | Sem regra | PB-04, 05, 14, 17 a 20, 24 a 28, 30, 31, 37 a 44, 46, 48 | 24 |
-| Conflito | PB-06, 21, 22, 23 | 4 |
+| Conflito | PB-21, 22, 23 | 3 |
 
 ## 4. Conflitos e lacunas
 
-Os cinco conflitos (B1 a B5) estão em [pendencias.md, seção 6](../regras-de-negocio/pendencias.md#6-conflitos-com-o-product-backlog), com as duas versões e as datas. Em 19/11/2026 estão decididos o B2 (recorte territorial), desde 17/11/2026, e o B1 (dados de usuários e LGPD) e o B4 (fontes do orçamento), em 19/11/2026; o B3 e o B5 (bairros) foram adiados pelo mantenedor em 19/11/2026. No B5, a sonda de 19/11/2026 mostrou que o IBGE não tem bairros para nenhum dos 12 municípios, só setores censitários do Censo 2022.
+Os cinco conflitos (B1 a B5) estão em [pendencias.md, seção 6](../regras-de-negocio/pendencias.md#6-conflitos-com-o-product-backlog), com as duas versões e as datas. Em 19/11/2026 estão decididos o B2 (recorte territorial), desde 17/11/2026, o B1 (dados de usuários e LGPD) e o B4 (fontes do orçamento), em 19/11/2026, e o B3 (série de 10 anos), em 20/11/2026; o B5 (bairros) foi adiado pelo mantenedor em 19/11/2026. No B5, a sonda de 19/11/2026 mostrou que o IBGE não tem bairros para nenhum dos 12 municípios, só setores censitários do Censo 2022.
 
 As lacunas maiores, que nenhuma regra cobre:
 
@@ -223,7 +223,7 @@ As lacunas maiores, que nenhuma regra cobre:
 
 - **Já vencido em 19/11/2026:** PB-01 (31/10/2026), em progresso. Faltam a parte de front-end, o serviço de produção (a hospedagem provisória foi decidida em 19/11/2026, ADR-015) e a consolidação; a decisão 9 (assistente) também segue pendente.
 - **Vencem em 30/11/2026:** PB-02 (em progresso) e PB-03 (pendente).
-- **Vencem em 31/12/2026:** PB-04, PB-05 e PB-06. O PB-04 ficou fora da primeira versão (19/11/2026). O PB-06 depende de destravar o lote da arrecadação (RN-VPU-11) e do conflito B3 (B2 foi decidido em 17/11/2026).
+- **Vencem em 31/12/2026:** PB-04, PB-05 e PB-06. O PB-04 ficou fora da primeira versão (19/11/2026). Os conflitos do PB-06 (B2 e B3) estão decididos; o "uso da CFEM" cobre de 2022 em diante (RN-CFE-24).
 - **Primeira versão no ar.** Em 11/11/2026 o mantenedor informou o prazo de até maio de 2027 (restrição registrada no [mapa de decisões](../adr/README.md)). No backlog, a implantação em produção (PB-46) vence em 31/07/2027, e os itens que vencem até 31/05/2027 são PB-01 a PB-14. Em 19/11/2026 o mantenedor decidiu que a primeira versão reúne PB-01 a PB-14 com as quatro dimensões completas, exceto o PB-04 (perfis de acesso e login), que entra quando houver conteúdo a moderar e o conflito B1 estiver decidido (RN-ENT-12).
 - **Ordem de trabalho.** Em 13/11/2026 o mantenedor decidiu que a dimensão econômica é a primeira, na carga dos dados e nos painéis (RN-ENT-12). Dentro de PB-07 e PB-13, a parte econômica vem antes das partes social, ambiental e institucional; as datas de vencimento dos itens não mudaram. A ordem das outras três é social, ambiental e institucional (15/11/2026).
 - **Entregas contratuais:** [1.5] e [1.6] em 31/03/2028; [4.2] em 30/09/2028.
