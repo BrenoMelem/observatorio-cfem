@@ -75,11 +75,11 @@ Canaã dos Carajás e Parauapebas são os municípios de foco do observatório.
 - **Relacionadas:** RN-TER-07, RN-CFE-13
 
 ### RN-TER-07: Comparação de nomes sem acento e sem diferença de caixa, apenas para o Pará
-- **Status:** PROPOSTA
+- **Status:** DECIDIDA
 - **Regra:** A equivalência por nome deve ignorar acentos e diferença entre maiúsculas e minúsculas e deve considerar apenas registros da UF PA.
 - **Motivo:** Há municípios homônimos em outros estados e a fonte pode variar a grafia.
 - **Exemplo:** O validador dos arquivos da ANM compara "Canaã dos Carajás" e "CANAA DOS CARAJAS" como o mesmo município quando a UF é PA.
-- **Fonte:** SCRIPTS (`validate_anm_cfem`, rotina de normalização e filtro de UF). Deduzida do código.
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026 (confirmação da proposta); SCRIPTS (`validate_anm_cfem`, rotina de normalização e filtro de UF). Deduzida do código.
 - **Relacionadas:** RN-TER-06
 
 ### RN-TER-08: Código do TSE exige tabela de equivalência
