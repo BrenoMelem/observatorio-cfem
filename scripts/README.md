@@ -24,7 +24,7 @@ Os scripts rodam como módulo, a partir da raiz do repositório: `uv run python 
 | | `arquivar_anm.py`, `arquivar_documentos.py`, `comparar_versoes_anm.py` | Arquivo das versões da ANM em Releases, com manifesto e relatório de diferenças (RN-TMP-18; ver `docs/guias/arquivo-anm.md`) |
 | | `checar_totais_regras.py` | Confere os totais de status das regras contra o `README.md` de `docs/regras-de-negocio/` |
 | `populacao/` | `atualizar.py` | População estimada do IBGE (SIDRA 6579/9324), com validação e reconciliação |
-| `financas/` | `dca_lote.py`, `conferir_fonte_cfem.py` (fonte 1708 × DCA × ANM, RN-CFE-24) | DCA Anexo I-E do SICONFI em lote validado, sem homologar |
+| `financas/` | `dca_lote.py`, `conferir_fonte_cfem.py` (fonte 1708 × DCA × ANM, RN-CFE-24), `codigos_dca.py` (códigos da DCA por ano, RN-ENT-12) | DCA Anexo I-E do SICONFI em lote validado, sem homologar |
 | | `dca_csv.py` | DCA Anexo I-E em CSV simples por função |
 | | `dca_anexos.py` | DCA Anexos I-C (receitas, cota-parte do ICMS) e I-D (despesas, investimento) em CSV longo, 12 municípios, 2013 a 2025 (RN-ENT-12) |
 | | `msc_despesa_fonte.py` | MSC orçamentária por fonte de recursos (`1708`) |
