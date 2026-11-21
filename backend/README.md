@@ -22,7 +22,16 @@ Da raiz do repositório (os caminhos padrão valem a partir dela):
 uv sync --project backend
 uv run --project backend uvicorn observatorio.api.main:app
 uv run --project backend pytest backend
-uv run --project backend ruff check backend
+```
+
+As conferências do CI (`.github/workflows/ci.yml`, ADR-012), rodadas de dentro de `backend/`:
+
+```bash
+uv run ruff check .
+uv run ruff format --check .
+uv run mypy              # --strict, em src e tests (ADR-017)
+uv run lint-imports      # regra de dependência entre os subpacotes (ADR-013)
+uv run pytest
 ```
 
 O Python fica em 3.12 (`backend/.python-version`, ADR-008).

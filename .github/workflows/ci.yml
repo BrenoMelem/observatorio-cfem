@@ -1,0 +1,50 @@
+# Testes, lint e tipos a cada pull request (ADR-012), com a regra de dependência do ADR-013.
+# Roda em todo pull request, não só nos que vão para develop e main, para cobrir os PRs empilhados.
+name: CI
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    name: backend (produto)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v7
+      - name: Instalar dependências
+        run: uv sync --frozen
+      - name: ruff check
+        run: uv run ruff check .
+      - name: ruff format --check
+        run: uv run ruff format --check .
+      - name: mypy --strict
+        run: uv run mypy
+      - name: import-linter (ADR-013)
+        run: uv run lint-imports
+      - name: pytest
+        run: uv run pytest
+
+  laboratorio:
+    name: scripts (laboratório)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v7
+      - name: Instalar dependências
+        run: uv sync --frozen
+      - name: ruff check
+        run: uv run ruff check scripts
+      - name: pytest (inclui a conferência dos totais das regras)
+        run: uv run pytest

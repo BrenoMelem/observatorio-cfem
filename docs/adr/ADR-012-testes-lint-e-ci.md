@@ -60,3 +60,12 @@ O [ADR-013](ADR-013-organizacao-do-repositorio.md) acrescenta ao CI do `backend/
 ## Nota de 20/11/2026
 
 O [ADR-017](ADR-017-padroes-de-codigo.md) revê o modo do mypy no `backend/`: passa de padrão para `--strict`, com afrouxamento por módulo quando uma biblioteca sem tipos completos obrigar, cada exceção com o motivo anotado. Decisão do mantenedor de 20/11/2026. A checagem de tipos continua fora de `scripts/`; o restante deste ADR não muda.
+
+## Nota de 21/11/2026
+
+O workflow foi criado em `.github/workflows/ci.yml`. Duas diferenças em relação ao texto acima:
+
+- ele roda em **todo** pull request, não só nos que vão para a `develop` e a `main`, para cobrir os PRs empilhados, cuja base é outra branch;
+- o mypy confere também os testes do `backend/`, e não só o código, porque o ADR-017 pede tipos em todas as funções.
+
+Antes do workflow, os 70 apontamentos do ruff em `scripts/` foram zerados. O notebook, que é gerado por `construir_notebook.py`, saiu do ruff, e as sondas podem capturar qualquer erro, porque registram a falha como evidência. Os 6 arquivos do `backend/` foram formatados.

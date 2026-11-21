@@ -34,10 +34,11 @@ Projeto `uv` com o pacote `observatorio` em `backend/src/` ([ADR-013](docs/adr/A
 Ao escrever código do produto:
 
 - **Dependências entre subpacotes:** `modelo` não importa nenhum outro; `api` lê só o pacote publicado e nunca importa `fontes`, `validacao` ou `publicacao` (RN-ENT-01). O produto não importa nada de `scripts/`; o que vier do laboratório é portado de propósito.
-- **Padrões ([ADR-017](docs/adr/ADR-017-padroes-de-codigo.md)):** nomes do domínio em português; tipos em todas as funções, conferidos pelo mypy `--strict` (no CI a partir do PR do ADR-012, junto com o `import-linter`); configuração só em `config.py`, sem calcular caminho com `Path(__file__).parents[n]`; o código que implementa uma regra cita o RN-xxx na docstring, e um teste cita a mesma regra.
+- **Padrões ([ADR-017](docs/adr/ADR-017-padroes-de-codigo.md)):** nomes do domínio em português; tipos em todas as funções, inclusive nos testes, conferidos pelo mypy `--strict` no CI; configuração só em `config.py`, sem calcular caminho com `Path(__file__).parents[n]`; o código que implementa uma regra cita o RN-xxx na docstring, e um teste cita a mesma regra.
 - **Fontes:** cada fonte tem um teste com uma amostra pequena do arquivo real e a lista das colunas esperadas (RN-VPU-04); registra a proveniência e os filtros usados (RN-FON-13, RN-FON-14).
 - **Dados ([ADR-018](docs/adr/ADR-018-biblioteca-de-processamento-de-dados.md)):** polars, com `Decimal` para dinheiro (RN-CFE-11); arquivos latin-1 são convertidos para UTF-8 antes da leitura. Os critérios de conferência do primeiro PR de fonte estão em [pendencias-implementacao-adr-017-018.md](docs/adr/pendencias-implementacao-adr-017-018.md).
-- **Comandos** (da raiz): `uv run --project backend pytest backend` e `uv run --project backend ruff check backend`. O ambiente Docker está em [backend/README.md](backend/README.md).
+- **Comandos:** dentro de `backend/`, rode o mesmo que o CI (`.github/workflows/ci.yml`): `uv run ruff check .`, `uv run ruff format --check .`, `uv run mypy`, `uv run lint-imports` e `uv run pytest`. Da raiz, os testes do produto rodam com `uv run --project backend pytest backend`. O ambiente Docker está em [backend/README.md](backend/README.md).
+- **CI:** cada pull request roda as conferências acima no `backend/` e, no laboratório, `uv run ruff check scripts` e `uv run pytest` (inclui a conferência dos totais das regras). Um PR com o CI vermelho não está pronto.
 
 ## Regras de negócio: como escrever
 
