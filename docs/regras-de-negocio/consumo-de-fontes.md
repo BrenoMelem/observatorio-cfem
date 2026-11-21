@@ -121,12 +121,12 @@ O nível mede a forma de acesso, não a qualidade do dado. Uma fonte B pode ser 
 - **Relacionadas:** RN-MOD-21, RN-FON-14
 
 ### RN-FON-14: Filtros usados ficam registrados
-- **Status:** PROPOSTA
-- **Regra:** Os filtros aplicados na obtenção de um dado (ano, mês, modalidade, município, consulta) devem ser registrados junto da captura.
+- **Status:** DECIDIDA
+- **Regra:** Os filtros aplicados na obtenção de um dado (ano, mês, modalidade, município, consulta) devem ser registrados junto da captura: no registro de cada coleta, ao lado da proveniência de RN-FON-13, e no relatório de qualidade do lote (RN-VPU-06). Eles não são campo das observações publicadas, cujo esquema é o de RN-MOD-03.
 - **Motivo:** O mesmo arquivo filtrado de formas diferentes dá totais diferentes.
 - **Exemplo:** A reconciliação de maio de 2025 registrou ano 2025, mês 5 e distribuição do tipo `Produtor`.
-- **Fonte:** CONSUMO §Bypass seguro quando não houver API (item 2); SCRIPTS (`reconcile_anm_distribution`).
-- **Relacionadas:** RN-FON-13
+- **Fonte:** DECISÃO-MANTENEDOR de 21/11/2026 (confirmação da proposta e lugar do registro); CONSUMO §Bypass seguro quando não houver API (item 2); SCRIPTS (`reconcile_anm_distribution`).
+- **Relacionadas:** RN-FON-13, RN-VPU-06, RN-MOD-03, RN-CFE-24
 
 ### RN-FON-15: Dado bruto fora do Git quando grande
 - **Status:** DECIDIDA
