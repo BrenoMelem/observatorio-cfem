@@ -67,3 +67,7 @@ Fica de fora: o formato do pacote publicado (manifesto, versão, hash, tipo de a
 ## Nota de 19/11/2026
 
 O [ADR-016](ADR-016-armazenamento-dos-dados-de-usuarios.md) decidiu guardar os dados enviados por usuários em PostgreSQL. O subpacote desses dados e o ajuste do contrato do `import-linter` ficam para o PR que implementar o primeiro item de escrita; `api` continua sem acesso a `fontes`, `validacao` e `publicacao`.
+
+## Nota de 20/11/2026
+
+O [ADR-017](ADR-017-padroes-de-codigo.md) fixa como o código é escrito dentro destes subpacotes: cada fonte é um módulo em `fontes/` com a mesma saída no modelo comum e um teste sobre amostra do arquivo real; a `api/` mantém as camadas `controllers`, `services`, `repositories` e `dtos`; um único módulo de configuração lê as variáveis de ambiente. A mudança de `app/` para `src/observatorio/api/` remove os cálculos de caminho com `parents[n]`. O restante deste ADR não muda.
