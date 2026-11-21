@@ -117,3 +117,30 @@ def test_saude_confere_manifesto_e_populacao(tmp_path, monkeypatch, manifesto):
     (tmp_path / "populacao.json").write_text(json.dumps([_observacao() | {"estado_validacao": "provisório"}]),
                                              encoding="utf-8")
     assert cliente.get("/saude").json()["estado"] == "publicacao_invalida"
+
+
+def test_versao_dados_inclui_o_manifesto(tmp_path, monkeypatch, manifesto):
+    """Code review de 21/11/2026: a versão muda quando o manifesto muda e existe em todas as dimensões."""
+    cliente = _cliente(tmp_path, monkeypatch, manifesto, [_observacao()])
+    antes = cliente.get("/api/v1/dimensoes/social").json()["versao_dados"]
+    economica = cliente.get("/api/v1/dimensoes/economica").json()["versao_dados"]
+    assert antes and economica == antes  # a versão é do pacote inteiro
+    definicoes = json.loads(manifesto.read_text(encoding="utf-8"))
+    definicoes["populacao_estimada"]["metodo"] += " Revisado."
+    (tmp_path / "indicadores.json").write_text(json.dumps(definicoes), encoding="utf-8")
+    assert cliente.get("/api/v1/dimensoes/social").json()["versao_dados"] != antes
+
+
+def test_status_lista_todo_o_manifesto_e_compara_datas_e_edicoes(tmp_path, monkeypatch, manifesto):
+    """RN-ENT-04: o painel de status mostra todos os indicadores do manifesto, com a última edição e data reais."""
+    linhas = [_observacao() | {"ano": 2024, "edicao_fonte": "9", "atualizado_em": "2026-11-01T12:00:00+00:00"},
+              _observacao() | {"edicao_fonte": "10", "atualizado_em": "2026-10-30T12:00:00Z"}]
+    cliente = _cliente(tmp_path, monkeypatch, manifesto, linhas)
+    definicoes = json.loads(manifesto.read_text(encoding="utf-8"))
+    definicoes["indicador_novo"] = {"fonte": "x", "metodo": "y", "limitacoes": "z"}
+    (tmp_path / "indicadores.json").write_text(json.dumps(definicoes), encoding="utf-8")
+    status = {s["indicador"]: s for s in cliente.get("/api/v1/indicadores/status").json()}
+    assert len(status) == 8 and "sem dimensão" in status["indicador_novo"]["motivo"]
+    populacao = status["populacao_estimada"]
+    assert populacao["metadados"]["edicao"] == "10"  # 10 > 9, não pela ordem do texto
+    assert populacao["atualizado_em"] == "2026-11-01T12:00:00+00:00"  # comparado como data

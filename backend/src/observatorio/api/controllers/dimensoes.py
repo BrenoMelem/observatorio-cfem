@@ -8,7 +8,7 @@ from fastapi.responses import Response
 
 from observatorio.api.dtos.publicacao import RespostaDimensao, StatusIndicador
 from observatorio.api.repositories.publicacao import PublicacaoInvalida
-from observatorio.api.services.dimensoes import DIMENSOES, consultar, manifesto
+from observatorio.api.services.dimensoes import DIMENSOES, consultar, status_geral
 
 router = APIRouter(prefix="/api/v1")
 
@@ -56,14 +56,6 @@ def dimensao(dimensao: str, municipio_id: str | None = None,
 @router.get("/indicadores/status")
 def indicadores_status() -> list[StatusIndicador]:
     try:
-        resposta = consultar("social")
-        por_id = {s.indicador: s for s in resposta.status}
-        for nome in manifesto():
-            if nome not in por_id:
-                dimensao_nome = next((d for d, ids in DIMENSOES.items() if nome in ids), None)
-                if dimensao_nome:
-                    s = consultar(dimensao_nome).status
-                    por_id[nome] = next(item for item in s if item.indicador == nome)
+        return status_geral()
     except PublicacaoInvalida as erro:
         raise HTTPException(503, detail=str(erro)) from erro
-    return list(por_id.values())
