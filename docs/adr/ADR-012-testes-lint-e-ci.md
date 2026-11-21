@@ -56,3 +56,7 @@ Fica de fora: a implantação e os ambientes (decisão 6), a cobertura mínima d
 ## Nota de 17/11/2026
 
 O [ADR-013](ADR-013-organizacao-do-repositorio.md) acrescenta ao CI do `backend/` a conferência da regra de dependência entre os subpacotes, com o `import-linter`. O restante deste ADR não muda.
+
+## Nota de 20/11/2026
+
+O [ADR-017](ADR-017-padroes-de-codigo.md) revê o modo do mypy no `backend/`: passa de padrão para `--strict`, com afrouxamento por módulo quando uma biblioteca sem tipos completos obrigar, cada exceção com o motivo anotado. Decisão do mantenedor de 20/11/2026. A checagem de tipos continua fora de `scripts/`; o restante deste ADR não muda.

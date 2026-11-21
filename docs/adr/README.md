@@ -2,7 +2,7 @@
 
 Uma decisão técnica por arquivo. As regras de negócio (o quê e por quê) estão em [../regras-de-negocio/](../regras-de-negocio/README.md); aqui fica o como. Um ADR não é fonte de regra de negócio.
 
-Atualizado em 19/11/2026.
+Atualizado em 20/11/2026.
 
 ## Restrições do mantenedor
 
@@ -50,8 +50,66 @@ Na ordem em que precisam ser tomadas.
 | 9 | Assistente de IA: forma da resposta, onde roda e como usa a camada publicada | API e backend | 4, 6 | seções 2 (contrato do assistente) e 4.3 | pendente | |
 | 10 | Formato do pacote publicado (acrescentada em 17/11/2026; o ADR-009 deixou o formato de fora) | Dados e coleta | 3, 8 | seção 4.2 | aceita em 17/11/2026 | [ADR-014](ADR-014-formato-do-pacote-publicado.md) |
 | 11 | Armazenamento dos dados enviados por usuários (perfis, conteúdo, relatos, comentários, consultas, marketplace), acrescentada em 19/11/2026; a lacuna foi registrada no ADR-009 e no ADR-013 | Dados e coleta | 3, 6 | nenhum | aceita em 19/11/2026 (PostgreSQL; o que guardar de dado pessoal depende do conflito B1) | [ADR-016](ADR-016-armazenamento-dos-dados-de-usuarios.md) |
+| 12 | Padrões de código e manutenção (acrescentada em 20/11/2026): contrato das fontes, organização da `api/` e convenções | API e backend | 2, 7, 8 | nenhum | aceita em 20/11/2026 | [ADR-017](ADR-017-padroes-de-codigo.md) |
+| 13 | Biblioteca de processamento de dados (acrescentada em 20/11/2026; o ADR-008 e o ADR-014 a deixaram de fora) | Dados e coleta | 2, 3, 10, 12 | nenhum | aceita em 20/11/2026 (polars) | [ADR-018](ADR-018-biblioteca-de-processamento-de-dados.md) |
 
-Depois das decisões 1 a 3 já é possível criar a estrutura inicial do código.
+Depois das decisões 1 a 3 já é possível criar a estrutura inicial do código. Com a decisão 12 aceita (20/11/2026), a estrutura inicial pode ser criada: mover `app/` para `src/observatorio/api/` com o módulo de configuração (ADR-013, ADR-017) e o CI do ADR-012.
+
+### Estrutura inicial do código — proposta de 20/11/2026
+
+Proposta apresentada ao mantenedor em 20/11/2026 e **ainda não aprovada**. Esta sessão só documenta: a estrutura será criada depois, em trabalho de desenvolvimento, em dois PRs empilhados.
+
+**PR A: estrutura, configuração e Docker** (ADR-013, ADR-015, ADR-016, ADR-017)
+
+```text
+backend/
+  pyproject.toml          pacote instalável "observatorio", layout src/; grupo opcional "coleta"
+  Dockerfile              imagem só da API, sem dados dentro (ADR-015)
+  .dockerignore
+  .env.example            todas as variáveis, sem valores secretos
+  README.md               como subir com uv e com docker compose
+  src/observatorio/
+    config.py             único lugar que lê variável de ambiente; fim do parents[n] (ADR-017)
+    modelo/               vazio: esquema comum da observação (RN-MOD, RN-TER)
+    fontes/               vazio: um módulo por fonte, contrato comum (RN-FNT, ADR-017)
+    validacao/            vazio: qualidade e relatório do lote (RN-VPU)
+    publicacao/           vazio: montagem e troca do pacote (RN-VPU-01, RN-VPU-03)
+    api/                  o atual backend/app/, movido sem mudar comportamento; camadas mantidas
+  tests/
+    api/test_api.py       os testes atuais, movidos
+    test_esqueleto.py     teste de fumaça: o pacote importa e os subpacotes existem
+docker-compose.yml        na raiz: serviço "api" e serviço "postgres" (ADR-015, ADR-016)
+```
+
+- O `config.py` lê `OBS_PUBLICADO_DIR` e `DATABASE_URL`. O manifesto de indicadores é lido de dentro do pacote publicado (ver o ponto do manifesto, abaixo).
+- O Postgres entra no compose por causa do ADR-016, mas nenhum código o usa ainda.
+- O comando de execução passa a ser `uvicorn observatorio.api.main:app`.
+
+**PR B: CI e qualidade** (ADR-012, ADR-013, ADR-017)
+
+- Um workflow, a cada PR para a `develop` e a `main`:
+  - no `backend/`: `ruff check`, `ruff format --check`, `mypy --strict`, `pytest` e `lint-imports`;
+  - em `scripts/`: `ruff check` e `pytest`.
+- O contrato do `import-linter`: `modelo` não importa ninguém; `api` não importa `fontes`, `validacao` nem `publicacao`.
+- Antes do workflow, é preciso:
+  - reformatar 6 arquivos do `backend/`;
+  - corrigir os 70 apontamentos do ruff em `scripts/` (medidos em 20/11/2026; 52 corrigíveis automaticamente);
+  - ajustar o que o mypy `--strict` apontar.
+
+**Fica de fora dos dois PRs:**
+
+- a publicação do pacote como Release (ADR-015), porque ainda não há gerador de pacote no produto;
+- coletores, regras de validação e rotas novas;
+- o subpacote dos dados de usuários (nota de 19/11/2026 do ADR-013);
+- a proteção de branch no GitHub.
+
+**Manifesto `data/indicadores.json`: resolvido pelo ADR-014 (conferido em 20/11/2026).** A API atual lê esse arquivo na raiz do repositório com `parents[3]`, fora do `backend/` e da imagem Docker. O [ADR-014](ADR-014-formato-do-pacote-publicado.md) já fixou que o manifesto de indicadores (RN-MOD-25) é copiado para dentro do pacote publicado. Assim:
+
+- a API lê o manifesto do pacote, pela `OBS_PUBLICADO_DIR`, como lê os dados (RN-ENT-01);
+- a imagem não leva o arquivo, nem é preciso uma variável de ambiente para ele;
+- `data/indicadores.json` continua na raiz como origem, e a publicação o copia para o pacote.
+
+Enquanto não houver gerador de pacote, o arquivo é copiado à mão para a pasta publicada local, junto com o `populacao.json`.
 
 ### Decisão 6 adiada — nota de 13/11/2026
 
@@ -91,3 +149,5 @@ A [análise da Fase 0](analise-fase-0-camada-publicada-e-assistente.md) não é 
 | [ADR-014](ADR-014-formato-do-pacote-publicado.md) | Formato do pacote publicado | aceito pelo mantenedor em 17/11/2026 |
 | [ADR-015](ADR-015-hospedagem-provisoria-e-segredos.md) | Hospedagem provisória em Docker local e segredos | aceito pelo mantenedor em 19/11/2026 |
 | [ADR-016](ADR-016-armazenamento-dos-dados-de-usuarios.md) | Armazenamento dos dados enviados por usuários | aceito pelo mantenedor em 19/11/2026 |
+| [ADR-017](ADR-017-padroes-de-codigo.md) | Padrões de código e manutenção | aceito pelo mantenedor em 20/11/2026 |
+| [ADR-018](ADR-018-biblioteca-de-processamento-de-dados.md) | Biblioteca de processamento de dados | aceito pelo mantenedor em 20/11/2026 |
