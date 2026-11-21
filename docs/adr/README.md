@@ -47,13 +47,35 @@ Na ordem em que precisam ser tomadas.
 | 6 | Hospedagem e segredos | Infraestrutura e processo | 3, 4, 5 | seção 4.3 | aceita em 19/11/2026 como provisória (Docker local; AWS provável, serviço a decidir em ADR novo; revisão em 31/03/2027) | [ADR-015](ADR-015-hospedagem-provisoria-e-segredos.md) |
 | 7 | Qualidade: testes, lint e CI (a publicação passou para a decisão 6 em 17/11/2026) | Infraestrutura e processo | 1, 2 | seção 6 (Fase 5) | aceita em 17/11/2026 | [ADR-012](ADR-012-testes-lint-e-ci.md) |
 | 8 | Organização do repositório e do fluxo de trabalho | Infraestrutura e processo | 1 a 5, 7 | seção 4.1 (pasta `backend/`) | aceita em 17/11/2026 | [ADR-013](ADR-013-organizacao-do-repositorio.md) |
-| 9 | Assistente de IA: forma da resposta, onde roda e como usa a camada publicada | API e backend | 4, 6 | seções 2 (contrato do assistente) e 4.3 | pendente | |
+| 9 | Assistente de IA: forma da resposta, onde roda e como usa a camada publicada | API e backend | 4, 6 | seções 2 (contrato do assistente) e 4.3 | pendente; adiada pelo mantenedor em 21/11/2026 (ver nota abaixo) | |
 | 10 | Formato do pacote publicado (acrescentada em 17/11/2026; o ADR-009 deixou o formato de fora) | Dados e coleta | 3, 8 | seção 4.2 | aceita em 17/11/2026 | [ADR-014](ADR-014-formato-do-pacote-publicado.md) |
 | 11 | Armazenamento dos dados enviados por usuários (perfis, conteúdo, relatos, comentários, consultas, marketplace), acrescentada em 19/11/2026; a lacuna foi registrada no ADR-009 e no ADR-013 | Dados e coleta | 3, 6 | nenhum | aceita em 19/11/2026 (PostgreSQL; o que guardar de dado pessoal depende do conflito B1) | [ADR-016](ADR-016-armazenamento-dos-dados-de-usuarios.md) |
 | 12 | Padrões de código e manutenção (acrescentada em 20/11/2026): contrato das fontes, organização da `api/` e convenções | API e backend | 2, 7, 8 | nenhum | aceita em 20/11/2026 | [ADR-017](ADR-017-padroes-de-codigo.md) |
 | 13 | Biblioteca de processamento de dados (acrescentada em 20/11/2026; o ADR-008 e o ADR-014 a deixaram de fora) | Dados e coleta | 2, 3, 10, 12 | nenhum | aceita em 20/11/2026 (polars) | [ADR-018](ADR-018-biblioteca-de-processamento-de-dados.md) |
 
 Depois das decisões 1 a 3 já é possível criar a estrutura inicial do código. Com a decisão 12 aceita (20/11/2026), a estrutura inicial pode ser criada: mover `app/` para `src/observatorio/api/` com o módulo de configuração (ADR-013, ADR-017) e o CI do ADR-012.
+
+### Decisão 9 adiada — nota de 21/11/2026
+
+A decisão 9 foi explicada ao mantenedor em 20/11/2026, e ele a adiou em 21/11/2026. Ela tem três partes:
+
+1. o contrato entre o site e a API: pergunta e contexto na entrada; resposta, citações, limitações e ações na saída;
+2. onde o assistente roda: como rota da API ou como serviço separado;
+3. como ele usa a camada publicada: o código calcula os números e a IA só redige.
+
+Junto vem a escolha do modelo, do provedor e da busca em documentos (PB-31).
+
+Faltou para decidir:
+
+- a etapa do assistente vem depois do tratamento dos dados (decisão do mantenedor de 11/11/2026, RN-ENT-08);
+- o PB-31 vence em 30/09/2027, depois da primeira versão;
+- não há camada publicada com dados reais nem hospedagem definitiva;
+- o custo do provedor e quem o paga não estão definidos.
+
+Quando a etapa começar, a sugestão é dividir a decisão:
+
+- **9a:** contrato e onde roda, com o responsável pela API;
+- **9b:** modelo, provedor e busca em documentos, com a pessoa responsável pela IA.
 
 ### Estrutura inicial do código — proposta de 20/11/2026
 
