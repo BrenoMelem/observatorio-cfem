@@ -1,4 +1,5 @@
 """Contratos públicos da camada publicada (RN-MOD-03)."""
+
 import math
 from typing import Literal
 

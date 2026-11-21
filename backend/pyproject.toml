@@ -15,6 +15,8 @@ coleta = []
 [dependency-groups]
 dev = [
     "httpx>=0.28",
+    "import-linter>=2.17",
+    "mypy>=2.4.1",
     "pytest>=9.2.0",
     "ruff>=0.17.4",
 ]
@@ -28,3 +30,31 @@ testpaths = ["tests"]
 
 [tool.ruff]
 line-length = 110
+
+[tool.mypy]
+# ADR-017: tipagem obrigatória, conferida no modo estrito em todo o backend/ (código e testes).
+strict = true
+files = ["src", "tests"]
+mypy_path = "src"
+
+[tool.importlinter]
+# ADR-013: a regra de dependência entre os subpacotes, conferida no CI (ADR-012).
+root_package = "observatorio"
+
+[[tool.importlinter.contracts]]
+name = "modelo não importa nenhum outro subpacote"
+type = "forbidden"
+source_modules = ["observatorio.modelo"]
+forbidden_modules = [
+    "observatorio.api",
+    "observatorio.config",
+    "observatorio.fontes",
+    "observatorio.publicacao",
+    "observatorio.validacao",
+]
+
+[[tool.importlinter.contracts]]
+name = "api lê só o pacote publicado (RN-ENT-01)"
+type = "forbidden"
+source_modules = ["observatorio.api"]
+forbidden_modules = ["observatorio.fontes", "observatorio.publicacao", "observatorio.validacao"]

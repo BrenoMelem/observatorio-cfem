@@ -1,4 +1,5 @@
 """Aplicação FastAPI da camada publicada."""
+
 from fastapi import FastAPI
 
 from observatorio.api.controllers.dimensoes import router
