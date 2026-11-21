@@ -20,8 +20,8 @@ import json
 import re
 import sys
 from collections import defaultdict
+from collections.abc import Iterator
 from pathlib import Path
-from typing import Iterator
 
 from scripts.comum.arquivos import PASTA_PADRAO, escrever_json
 from scripts.comum.municipios import MUNICIPIOS

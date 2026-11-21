@@ -20,16 +20,22 @@ from __future__ import annotations
 import argparse
 import hashlib
 import io
+import itertools
 import json
 import math
 import re
 import sys
+from collections.abc import Callable
 from datetime import datetime
 from pathlib import Path
-from typing import Callable
 
 from scripts.comum.arquivos import (
-    PASTA_PADRAO, agora, escrever_json, escrever_json_atomico, id_execucao, iso_utc,
+    PASTA_PADRAO,
+    agora,
+    escrever_json,
+    escrever_json_atomico,
+    id_execucao,
+    iso_utc,
 )
 
 PAGINA = "https://www.worldbank.org/en/research/commodity-markets"
@@ -74,7 +80,7 @@ def _ler_colunas(conteudo: bytes) -> dict[str, dict[tuple[int, int], float | Non
     try:
         livro = load_workbook(io.BytesIO(conteudo), read_only=True, data_only=True)
         linhas_planilha = list(livro[ABA].iter_rows(values_only=True))
-    except Exception as erro:  # noqa: BLE001
+    except Exception as erro:
         raise ContratoPinkSheetError(f"planilha ilegível ou sem a aba {ABA!r}") from erro
     cabecalho = next((k for k, r in enumerate(linhas_planilha[:15]) if all(n in r for n in COLUNAS)), None)
     if cabecalho is None or cabecalho + 1 >= len(linhas_planilha):
@@ -110,7 +116,7 @@ def _mensal(valores: dict[tuple[int, int], float | None], inicio: tuple[int, int
     meses = sorted(p for p in valores if p >= inicio)
     if not meses or meses[0] != inicio:
         raise ContratoPinkSheetError(f"{nome}: série não começa em {inicio[0]}-{inicio[1]:02d}")
-    for (a1, m1), (a2, m2) in zip(meses, meses[1:]):
+    for (a1, m1), (a2, m2) in itertools.pairwise(meses):
         if a2 * 12 + m2 != a1 * 12 + m1 + 1:
             raise ContratoPinkSheetError(f"{nome}: lacuna na sequência mensal")
     return [(a, m, valores[(a, m)]) for a, m in meses]

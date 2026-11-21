@@ -9,10 +9,9 @@ import csv
 import hashlib
 import json
 from collections import Counter, defaultdict
-from datetime import datetime, timezone
-from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
+from datetime import UTC, datetime
+from decimal import ROUND_HALF_UP, Decimal, InvalidOperation
 from pathlib import Path
-
 
 SOURCE_URL = "https://dadosabertos.anm.gov.br/CFEM/CFEM_Distribuicao.csv"
 MUNICIPALITIES = {
@@ -108,7 +107,7 @@ def main():
     present = sorted({code for code, _, _ in sums})
     missing_months = [month for month in range(1, 13) if str(month) not in all_brazil_rows_by_month]
     manifest = {
-        "created_at_utc": datetime.now(timezone.utc).isoformat(),
+        "created_at_utc": datetime.now(UTC).isoformat(),
         "source_url": SOURCE_URL,
         "source_sha256": source_hash,
         "year": args.year,

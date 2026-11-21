@@ -1,14 +1,18 @@
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 from openpyxl import Workbook
 
 from scripts.emissoes.seeg import (
-    ContratoSeegError, codigo_ibge, edicao_do_nome, executar_seeg, extrair_seeg,
+    ContratoSeegError,
+    codigo_ibge,
+    edicao_do_nome,
+    executar_seeg,
+    extrair_seeg,
 )
 
-AGORA = lambda: datetime(2026, 11, 10, 12, tzinfo=timezone.utc)  # noqa: E731
+AGORA = lambda: datetime(2026, 11, 10, 12, tzinfo=UTC)
 CABECALHO = ["Emissão/Remoção/Bunker", "Setor de emissão", "Categoria emissora", "Município", "ID Território", 1990, 1991]
 
 

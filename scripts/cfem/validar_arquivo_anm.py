@@ -6,10 +6,9 @@ import hashlib
 import json
 import unicodedata
 from collections import Counter
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
-
 
 MUNICIPIOS = {
     "1501576": "Bom Jesus do Tocantins",
@@ -118,7 +117,7 @@ def inspect(path, source):
         "file_name": path.name,
         "file_size_bytes": path.stat().st_size,
         "sha256": sha256(path),
-        "checked_at_utc": datetime.now(timezone.utc).isoformat(),
+        "checked_at_utc": datetime.now(UTC).isoformat(),
         "delimiter": delimiter,
         "headers": headers,
         "total_rows": total,

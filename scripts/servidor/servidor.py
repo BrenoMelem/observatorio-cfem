@@ -20,8 +20,8 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
-from scripts.comum.arquivos import PASTA_PADRAO
 from scripts.commodities.fred import csv_commodities, ler_commodities_publicadas
+from scripts.comum.arquivos import PASTA_PADRAO
 from scripts.financas.dca_lote import ler_despesa_publicada
 from scripts.populacao.atualizar import csv_populacao, ler_publicado
 
@@ -63,7 +63,7 @@ def criar_servidor(pasta_dados: str | Path = PASTA_PADRAO, caminho_manifesto: st
         def _erro(self, status: int, mensagem: str) -> None:
             self._enviar(status, JSON_UTF8, _json({"erro": mensagem}))
 
-        def do_GET(self):  # noqa: N802
+        def do_GET(self):
             url = urlparse(self.path)
             consulta = {k: v[0] for k, v in parse_qs(url.query).items()}
             try:

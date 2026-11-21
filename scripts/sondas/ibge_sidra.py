@@ -12,7 +12,7 @@ from __future__ import annotations
 import argparse
 import re
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import httpx
@@ -44,7 +44,7 @@ def _linha(cliente: httpx.Client, codigo: str, esperado: str) -> dict:
             linha["estimate_2025_persons"] = int(valor)
         else:
             linha["error"] = f"Non-numeric or absent SIDRA value: {valor}"
-    except Exception as erro:  # noqa: BLE001
+    except Exception as erro:
         linha["error"] = str(erro)
     return linha
 
@@ -58,7 +58,7 @@ def main(argv: list[str] | None = None) -> int:
     validas = sum(1 for r in linhas if r["locality_id_matches"] and r["name_matches"]
                   and r["series_id_matches"] and r["estimate_2025_persons"] is not None)
     escrever_json(args.saida, {
-        "checked_at_utc": datetime.now(timezone.utc).isoformat(), "source": "IBGE Localidades + API de Agregados/SIDRA",
+        "checked_at_utc": datetime.now(UTC).isoformat(), "source": "IBGE Localidades + API de Agregados/SIDRA",
         "aggregate": "6579", "variable": "9324", "variable_name": "População residente estimada", "unit": "Pessoas",
         "period": "2025", "expected_municipalities": len(MUNICIPIOS), "valid_rows": validas, "rows": linhas,
         "note": "This checks the published estimate, not Censo 2022 population. TLS certificate verification remained enabled."})

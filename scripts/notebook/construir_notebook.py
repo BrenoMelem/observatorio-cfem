@@ -3,7 +3,6 @@
 import json
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "scripts" / "notebook" / "laboratorio_fontes_observatorio_cfem.ipynb"
 cells = []

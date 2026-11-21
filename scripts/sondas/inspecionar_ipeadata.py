@@ -2,11 +2,10 @@
 
 import json
 import re
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
-
 
 base = "http://www.ipeadata.gov.br/api/odata4/ValoresSerie(SERCODIGO='ADMISNC')"
 query = urlencode({"$filter": "TERCODIGO eq '1502152'", "$top": "1"})
@@ -16,7 +15,7 @@ with urlopen(request, timeout=90) as response:
     prefix = response.read(500).decode("utf-8", "replace")
     first_code = re.search(r'"TERCODIGO"\s*:\s*"([^"]+)"', prefix)
     result = {
-        "checked_at_utc": datetime.now(timezone.utc).isoformat(),
+        "checked_at_utc": datetime.now(UTC).isoformat(),
         "request_url": url,
         "requested_municipality_code": "1502152",
         "requested_top": 1,

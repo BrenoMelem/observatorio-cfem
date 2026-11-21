@@ -1,5 +1,5 @@
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from urllib.parse import parse_qs, urlparse
 
 import pytest
@@ -15,7 +15,7 @@ def test_dca_valida_ente_anexo_estagio_e_mantem_lote_sem_homologacao(pasta_dados
                  for i, coluna in enumerate(["Despesas Empenhadas", "Despesas Liquidadas", "Despesas Pagas"])]
         return 200, json.dumps({"items": itens, "hasMore": False, "limit": 5000})
 
-    r = executar_despesa(pasta_dados, 2025, buscar, lambda: datetime(2026, 10, 30, 12, tzinfo=timezone.utc))
+    r = executar_despesa(pasta_dados, 2025, buscar, lambda: datetime(2026, 10, 30, 12, tzinfo=UTC))
     assert r["situacao"] == "bloqueado" and len(r["municipios_presentes"]) == 12
     tratado = json.loads((pasta_dados / "tratado" / "siconfi" / "dca-2025.json").read_text(encoding="utf-8"))
     assert len(tratado) == 36
