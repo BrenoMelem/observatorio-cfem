@@ -6,7 +6,7 @@ Projeto de pesquisa e desenvolvimento de um observatório de dados públicos sob
 
 O repositório reúne a pesquisa de viabilidade, o mapeamento de fontes e indicadores, validações exploratórias e um protótipo local do pipeline de população. A pesquisa diferencia arrecadação da CFEM, distribuição aos entes beneficiários e autuações, que são medidas distintas.
 
-Há uma API de leitura da camada publicada em `backend/`, ainda sem implantação. Ela expõe a população homologada quando o arquivo publicado está disponível e informa explicitamente as lacunas dos demais indicadores. Há também um protótipo local do pipeline de população estimada e uma preparação dos dados da CFEM arrecadada; limitações e validações pendentes seguem documentadas.
+O produto começa em `backend/`, com a estrutura do ADR-013 e uma API de leitura da camada publicada, ainda sem implantação; roda com `uv` ou em Docker (ADR-015). Ela expõe a população homologada quando o arquivo publicado está disponível e informa explicitamente as lacunas dos demais indicadores. Há também um protótipo local do pipeline de população estimada e uma preparação dos dados da CFEM arrecadada; limitações e validações pendentes seguem documentadas.
 
 ## Estrutura
 
@@ -15,7 +15,8 @@ Há uma API de leitura da camada publicada em `backend/`, ainda sem implantaçã
 - `docs/produto/`: o [Product Backlog](docs/produto/backlog.md) da plataforma (51 itens, retrato de 12/11/2026) e o que as regras já cobrem de cada item.
 - `docs/regras-de-negocio/fontes/pesquisa-observatorio-cfem/`: relatório de viabilidade, fontes, bibliografia e pacote LaTeX.
 - `scripts/`: todo o código, em Python com [uv](https://docs.astral.sh/uv/): coleta, validação e reconciliação das fontes, protótipo local da API, notebook de laboratório e testes. Veja o [mapa em scripts/README.md](scripts/README.md).
-- `backend/`: API de leitura da camada publicada por dimensão, separada do laboratório. Veja [como executar](backend/README.md).
+- `backend/`: o produto, pacote `observatorio` (modelo, fontes, validação, publicação e API), separado do laboratório. Veja [estrutura e como executar](backend/README.md).
+- `docker-compose.yml`: ambiente provisório com a API e o PostgreSQL (ADR-015, ADR-016).
 - `data/`: referências versionadas (população do IBGE por ano) e manifesto de indicadores.
 - `docs/guias/` e `docs/registros/`: como rodar as coletas do protótipo e o que cada execução encontrou, por data.
 - `docs/adr/` e `docs/api/`: decisões técnicas e o esboço do contrato do protótipo.

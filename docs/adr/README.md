@@ -79,7 +79,7 @@ Quando a etapa começar, a sugestão é dividir a decisão:
 
 ### Estrutura inicial do código — proposta de 20/11/2026
 
-Proposta apresentada ao mantenedor em 20/11/2026 e **ainda não aprovada**. Esta sessão só documenta: a estrutura será criada depois, em trabalho de desenvolvimento, em dois PRs empilhados.
+Proposta apresentada ao mantenedor em 20/11/2026. **Aprovada em 21/11/2026**, quando o mantenedor pediu o PR A junto com a atualização do `AGENTS.md`; o PR B (CI) vem em seguida. Diferenças do PR A em relação à proposta: o `backend/` passou a fixar o Python 3.12 (`.python-version`), porque o ambiente local estava em 3.14, recusada no ADR-008; o `httpx`, usado pelos testes e ausente do `uv.lock`, entrou nas dependências de desenvolvimento; o `polars` só entra com a primeira fonte.
 
 **PR A: estrutura, configuração e Docker** (ADR-013, ADR-015, ADR-016, ADR-017)
 
