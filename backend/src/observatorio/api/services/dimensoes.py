@@ -3,11 +3,9 @@ import hashlib
 import json
 from pathlib import Path
 
-from app.dtos.publicacao import Metadados, RespostaDimensao, StatusIndicador
-from app.repositories.publicacao import populacao_publicada
+from observatorio.api.dtos.publicacao import Metadados, RespostaDimensao, StatusIndicador
+from observatorio.api.repositories.publicacao import manifesto_publicado, populacao_publicada
 
-RAIZ = Path(__file__).resolve().parents[3]
-MANIFESTO = RAIZ / "data" / "indicadores.json"
 DIMENSOES = {
     "social": ("populacao_estimada", "despesa_funcao_empenhada", "despesa_funcao_liquidada", "despesa_funcao_paga"),
     "economica": ("cfem_arrecadada", "preco_minerio_ferro", "preco_cobre", "despesa_funcao_empenhada", "despesa_funcao_liquidada", "despesa_funcao_paga"),
@@ -28,12 +26,12 @@ LACUNAS = {
 
 
 def manifesto() -> dict:
-    return json.loads(MANIFESTO.read_text(encoding="utf-8"))
+    return manifesto_publicado()
 
 
 def consultar(dimensao: str, municipio_id: str | None = None, ano_inicio: int | None = None,
              ano_fim: int | None = None, pasta: Path | None = None) -> RespostaDimensao:
-    definicoes = manifesto()
+    definicoes = manifesto_publicado(pasta)
     permitidos = DIMENSOES[dimensao]
     todas = populacao_publicada(pasta) if "populacao_estimada" in permitidos else []
     # O filtro só afeta observações; status informa a publicação inteira, mesmo sem pontos no recorte.

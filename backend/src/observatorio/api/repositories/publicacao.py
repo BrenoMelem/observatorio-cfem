@@ -1,22 +1,39 @@
 """Lê exclusivamente o pacote publicado, sem consultar fonte externa (RN-ENT-01)."""
 import json
-import os
 from pathlib import Path
 
 from pydantic import ValidationError
 
-from app.dtos.publicacao import Observacao
+from observatorio import config
+from observatorio.api.dtos.publicacao import Observacao
 
-RAIZ = Path(__file__).resolve().parents[3]
-PUBLICADO = Path(os.getenv("OBS_PUBLICADO_DIR", RAIZ / "output" / "observatorio" / "publicado"))
+MANIFESTO = "indicadores.json"
 
 
 class PublicacaoInvalida(Exception):
     pass
 
 
+def pasta_publicada() -> Path:
+    return config.carregar().publicado_dir
+
+
+def manifesto_publicado(pasta: Path | None = None) -> dict:
+    """Manifesto de indicadores (RN-MOD-25), lido de dentro do pacote publicado (ADR-014)."""
+    caminho = (pasta or pasta_publicada()) / MANIFESTO
+    try:
+        bruto = json.loads(caminho.read_text(encoding="utf-8"))
+    except FileNotFoundError as erro:
+        raise PublicacaoInvalida("Pacote publicado sem o manifesto de indicadores") from erro
+    except ValueError as erro:
+        raise PublicacaoInvalida("Manifesto de indicadores inválido") from erro
+    if not isinstance(bruto, dict):
+        raise PublicacaoInvalida("Manifesto de indicadores inválido")
+    return bruto
+
+
 def populacao_publicada(pasta: Path | None = None) -> list[Observacao]:
-    caminho = (pasta or PUBLICADO) / "populacao.json"
+    caminho = (pasta or pasta_publicada()) / "populacao.json"
     try:
         bruto = json.loads(caminho.read_text(encoding="utf-8"))
         if not isinstance(bruto, list):

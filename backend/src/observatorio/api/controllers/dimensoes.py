@@ -6,9 +6,9 @@ import re
 from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import Response
 
-from app.dtos.publicacao import RespostaDimensao
-from app.repositories.publicacao import PublicacaoInvalida
-from app.services.dimensoes import DIMENSOES, consultar, manifesto
+from observatorio.api.dtos.publicacao import RespostaDimensao
+from observatorio.api.repositories.publicacao import PublicacaoInvalida
+from observatorio.api.services.dimensoes import DIMENSOES, consultar, manifesto
 
 router = APIRouter(prefix="/api/v1")
 
@@ -54,13 +54,13 @@ def dimensao(dimensao: str, municipio_id: str | None = None,
 def indicadores_status():
     try:
         resposta = consultar("social")
+        por_id = {s.indicador: s for s in resposta.status}
+        for nome in manifesto():
+            if nome not in por_id:
+                dimensao_nome = next((d for d, ids in DIMENSOES.items() if nome in ids), None)
+                if dimensao_nome:
+                    s = consultar(dimensao_nome).status
+                    por_id[nome] = next(item for item in s if item.indicador == nome)
     except PublicacaoInvalida as erro:
         raise HTTPException(503, detail=str(erro)) from erro
-    por_id = {s.indicador: s for s in resposta.status}
-    for nome in manifesto():
-        if nome not in por_id:
-            dimensao_nome = next((d for d, ids in DIMENSOES.items() if nome in ids), None)
-            if dimensao_nome:
-                s = consultar(dimensao_nome).status
-                por_id[nome] = next(item for item in s if item.indicador == nome)
     return list(por_id.values())
