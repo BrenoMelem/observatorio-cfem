@@ -131,11 +131,11 @@ Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a p
 - **Relacionadas:** RN-MOD-06, RN-VPU-02
 
 ### RN-MOD-12: Preservar o motivo da não divulgação
-- **Status:** PROPOSTA
+- **Status:** DECIDIDA
 - **Regra:** Quando a fonte explicar por que não divulga um valor, o motivo, a etapa, a rede e a edição devem ser preservados com a observação.
 - **Motivo:** O motivo muda a leitura: insuficiência de participação é diferente de dado inexistente.
 - **Exemplo:** IDEB 2023 de um município sem nota municipal por participação insuficiente.
-- **Fonte:** CONSUMO §Sociedade (IDEB). Não consta em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10.
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026 (confirmação da proposta); CONSUMO §Sociedade (IDEB). Não consta em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10.
 - **Relacionadas:** RN-MOD-09
 
 ### RN-MOD-13: Não misturar Censo e estimativa
@@ -152,38 +152,41 @@ Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a p
 - **Motivo:** É a mesma razão da regra anterior, estendida às projeções.
 - **Exemplo:** Uma projeção municipal não deve completar a série 1980–2022 sem marcação.
 - **Fonte:** CONSUMO §Dinâmica populacional. Não consta em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10.
+- **Evidência datada:** no fim deste arquivo, em [Notas de evidência](#notas-de-evidência), sob RN-MOD-14. Adiada pelo mantenedor em 19/11/2026: o observatório não usa projeção e não há projeção oficial por município.
 - **Relacionadas:** RN-MOD-13
 
 ### RN-MOD-15: Não interpolar anos sem dado
-- **Status:** PROPOSTA
+- **Status:** DECIDIDA
 - **Regra:** Anos sem observação não devem ser preenchidos por interpolação nem apresentados como se fossem observados.
 - **Motivo:** O valor interpolado parece dado oficial e não é.
-- **Exemplo:** Rendimento domiciliar per capita só tem pontos nos anos censitários.
-- **Fonte:** MAPA-TEMAS §Economia e mercado de trabalho; CONSUMO §Economia e mercado de trabalho.
-- **Relacionadas:** RN-MOD-08, RN-MOD-13
+- **Exemplo:** Rendimento domiciliar per capita só tem pontos nos anos censitários. Quem consulta 2010–2020 de um indicador com dados só de 2014 a 2017 recebe só 2014 a 2017 (exemplo do mantenedor, 19/11/2026). Anos que a fonte mede, mas em que falta a linha do município, continuam como "ausente" (RN-MOD-10).
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026 (confirmação da proposta); MAPA-TEMAS §Economia e mercado de trabalho; CONSUMO §Economia e mercado de trabalho.
+- **Relacionadas:** RN-MOD-08, RN-MOD-10, RN-MOD-13
 
 ### RN-MOD-16: Fluxo e estoque não se somam
-- **Status:** PROPOSTA
+- **Status:** DECIDIDA
 - **Regra:** Medidas de fluxo (admissões e desligamentos do CAGED) e de estoque (vínculos da RAIS) não devem ser somadas nem tratadas como a mesma medida.
 - **Motivo:** O fluxo mede movimento num período e o estoque mede o total num ponto no tempo.
 - **Exemplo:** O saldo do CAGED (ADMISNC − DESLIGNC) não substitui os vínculos da RAIS.
-- **Fonte:** CONSUMO §Economia e mercado de trabalho; VAL-15/10 §Matriz operacional (RAIS, CAGED, emprego: "validar fluxo versus estoque").
-- **Relacionadas:** RN-IND-07
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026 (confirmação da proposta); CONSUMO §Economia e mercado de trabalho; VAL-15/10 §Matriz operacional (RAIS, CAGED, emprego: "validar fluxo versus estoque").
+- **Evidência datada:** no fim deste arquivo, em [Notas de evidência](#notas-de-evidência), sob RN-MOD-16.
+- **Relacionadas:** RN-IND-07, RN-FNT-20
 
 ### RN-MOD-17: Razões registram numerador, denominador e ano
-- **Status:** PROPOSTA
+- **Status:** DECIDIDA
 - **Regra:** Todo indicador derivado como razão deve registrar o numerador, o denominador e o ano de cada um, e não deve usar denominadores de anos diferentes ao comparar territórios.
 - **Motivo:** Razões com denominadores de anos distintos não são comparáveis e não são reproduzíveis.
 - **Exemplo:** PIB per capita da RI e de Canaã deve usar a população do mesmo ano para os dois.
-- **Fonte:** CONSUMO §Economia e mercado de trabalho, §Finanças públicas e índices. Não consta em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10.
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026 (confirmação da proposta); CONSUMO §Economia e mercado de trabalho, §Finanças públicas e índices. Não consta em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10.
 - **Relacionadas:** RN-MOD-18, RN-IND-09, RN-IND-10
 
 ### RN-MOD-18: Razão regional como soma sobre soma
-- **Status:** PROPOSTA
+- **Status:** DECIDIDA
 - **Regra:** A razão da RI deve ser calculada somando os numeradores e somando os denominadores dos 12 municípios do mesmo ano, e não pela média das razões municipais.
 - **Motivo:** A média das razões dá o mesmo peso a municípios de tamanhos muito diferentes.
 - **Exemplo:** Despesa per capita da RI = soma da despesa dos 12 municípios ÷ soma das populações dos 12.
-- **Fonte:** Dedução, por coerência com DECISÕES §Municípios da RI Carajás e RN-MOD-17. Nenhuma fonte fixa essa fórmula.
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026 (confirmação da proposta); Dedução, por coerência com DECISÕES §Municípios da RI Carajás e RN-MOD-17. Nenhuma fonte fixa essa fórmula.
+- **Evidência datada:** no fim deste arquivo, em [Notas de evidência](#notas-de-evidência), sob RN-MOD-18. A fórmula reproduz o PIB per capita da RI Carajás publicado pela FAPESPA.
 - **Relacionadas:** RN-TER-02, RN-MOD-17
 
 ### RN-MOD-19: Preço internacional não é atribuído a município
@@ -228,11 +231,11 @@ Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a p
 
 ### RN-MOD-24: Valor real e índice de correção
 - **Status:** DECIDIDA
-- **Regra:** A data-base do valor real é dezembro de 2025: todos os valores corrigidos são expressos em reais de dezembro de 2025, data fixa que não acompanha o mês mais recente do índice. O índice e a forma de publicação estão decididos em RN-MOD-28.
-- **Motivo:** Sem a data-base, o valor real não pode ser calculado nem rotulado. A escolha define só a escala dos números, não a forma da série; uma data fixa evita que os valores históricos mudem a cada atualização do índice.
+- **Regra:** A data-base do valor real é dezembro do último ano fechado: hoje, dezembro de 2025. Ela é atualizada automaticamente quando o IPCA de dezembro de um novo ano for publicado (dezembro de 2025 vale até sair o IPCA de dezembro de 2026); a cada troca, todos os valores reais são recalculados e o manifesto registra a nova data-base. Dentro de um ano, a data-base não acompanha o mês mais recente do índice. O índice e a forma de publicação estão decididos em RN-MOD-28.
+- **Motivo:** Sem a data-base, o valor real não pode ser calculado nem rotulado. A escolha define só a escala dos números, não a forma da série; trocar uma vez por ano mantém os valores em dinheiro recente sem mudá-los a cada mês.
 - **Exemplo:** Despesa per capita por função, 2013–2025, em valor nominal (RN-MOD-26), enquanto o valor real não for publicado; o valor real da mesma série fica expresso em reais de dezembro de 2025, com o índice de dezembro de 2025 igual a 7.403,29 (consulta de 02/11/2026, RN-MOD-28).
-- **Exceções:** Quando a data-base for revista, o valor real é recalculado e o manifesto passa a registrar a nova data. Não foi decidido o que fazer quando 2026 fechar (se a data-base permanece em dezembro de 2025 ou é atualizada por decisão explícita).
-- **Fonte:** CONSUMO §Finanças públicas e índices (despesa per capita); DECISÃO-MANTENEDOR de 26/10/2026 (o valor real fica para uma etapa futura); DECISÃO-MANTENEDOR de 02/11/2026 (índice e forma decididos); DECISÃO-MANTENEDOR de 09/11/2026 (data-base em dezembro de 2025, fixa).
+- **Exceções:** Em 09/11/2026 a data-base tinha sido fixada em dezembro de 2025 sem atualização; em 20/11/2026 o mantenedor decidiu que ela acompanha dezembro do último ano fechado. Valores reais citados fora do observatório mudam a cada troca anual; a data-base fica sempre visível no rótulo e no manifesto.
+- **Fonte:** CONSUMO §Finanças públicas e índices (despesa per capita); DECISÃO-MANTENEDOR de 26/10/2026 (o valor real fica para uma etapa futura); DECISÃO-MANTENEDOR de 02/11/2026 (índice e forma decididos); DECISÃO-MANTENEDOR de 09/11/2026 (data-base em dezembro de 2025) e de 20/11/2026 (atualização anual da data-base).
 - **Relacionadas:** RN-MOD-17, RN-MOD-26, RN-MOD-28
 
 ### RN-MOD-25: Manifesto único de indicadores
@@ -249,7 +252,7 @@ Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a p
 - **Regra:** Os valores monetários devem ser publicados em valor nominal, como a fonte os informou, sem correção por índice de preços, até a publicação do valor real (RN-MOD-24, RN-MOD-28).
 - **Motivo:** Nenhum indicador atual exige valor real, e o valor real ainda não está implementado (índice em RN-MOD-28, data-base em RN-MOD-24).
 - **Exemplo:** Despesa per capita por função, 2013–2025, em valor nominal.
-- **Exceções:** O valor real é um pedido do projeto e será acrescentado como indicador à parte (RN-MOD-28), com índice e data-base explícitos; a data-base é dezembro de 2025 (RN-MOD-24); enquanto o valor real não for publicado, só o valor nominal é publicado.
+- **Exceções:** O valor real é um pedido do projeto e será acrescentado como indicador à parte (RN-MOD-28), com índice e data-base explícitos; a data-base é dezembro do último ano fechado, hoje dezembro de 2025 (RN-MOD-24); enquanto o valor real não for publicado, só o valor nominal é publicado.
 - **Fonte:** DECISÃO-MANTENEDOR de 26/10/2026; CONSUMO §Finanças públicas e índices (despesa per capita).
 - **Relacionadas:** RN-MOD-24, RN-MOD-28, RN-MOD-17
 
@@ -264,9 +267,25 @@ Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a p
 
 ### RN-MOD-28: Índice e forma do valor real
 - **Status:** DECIDIDA
-- **Regra:** O valor real é calculado com o IPCA e publicado como indicador à parte, ao lado do valor nominal, que continua publicado. O dado mensal é corrigido pelo índice do próprio mês, e o dado anual, pela média anual do índice. O índice e a data-base ficam explícitos no manifesto de indicadores (RN-MOD-25). A data-base é dezembro de 2025 (RN-MOD-24).
+- **Regra:** O valor real é calculado com o IPCA e publicado como indicador à parte, ao lado do valor nominal, que continua publicado. O dado mensal é corrigido pelo índice do próprio mês, e o dado anual, pela média anual do índice. O índice e a data-base ficam explícitos no manifesto de indicadores (RN-MOD-25). A data-base é dezembro do último ano fechado, hoje dezembro de 2025 (RN-MOD-24).
 - **Motivo:** Decisão do mantenedor. Sem correção, a inflação aparece como crescimento nas séries longas. O IPCA é oficial, aberto e vem do mesmo serviço do IBGE que o projeto já usa para a população. A média anual combina com valores de fluxo, como despesa e CFEM, que se acumulam ao longo do ano; essa justificativa é raciocínio do projeto, não vem de uma fonte de decisão.
 - **Exemplo:** O IPCA tem número-índice mensal (base dezembro de 1993 = 100), por exemplo 7.695,82 em setembro de 2026. Em 02/11/2026, a consulta à tabela 1737, variável 2266, do SIDRA devolveu 285 meses de janeiro de 2003 a setembro de 2026, sem valores vazios; a média de 2025 foi 7.300,84 e dezembro de 2025, 7.403,29 (consulta de 02/11/2026).
-- **Exceções:** Enquanto o valor real não for publicado, vale RN-MOD-26. Não foi decidido a quais indicadores monetários o valor real se aplica (CFEM, despesa, PIB e outros). Não se publica o mesmo dado anual com dois métodos de correção; um segundo método entraria como definição explícita à parte. O IGP-M, da FGV, não foi avaliado.
-- **Fonte:** DECISÃO-MANTENEDOR de 02/11/2026; CONSUMO §Finanças públicas e índices (despesa per capita); consulta ao SIDRA em 02/11/2026.
+- **Exceções:** Enquanto o valor real não for publicado, vale RN-MOD-26. O valor real se aplica a todos os indicadores em reais: CFEM arrecadada, recebida e declarada pelo município, autuações, despesa por função, receita corrente, ICMS, investimento e os per capita derivados deles; e ao PIB municipal, rotulado "em poder de compra de dezembro de 2025 (IPCA), não é o crescimento real do IBGE". Preços em dólar (ferro e cobre) não são corrigidos pelo IPCA (decisão de 20/11/2026). Não se publica o mesmo dado anual com dois métodos de correção; um segundo método entraria como definição explícita à parte. O IGP-M, da FGV, não foi avaliado.
+- **Fonte:** DECISÃO-MANTENEDOR de 02/11/2026 e de 20/11/2026 (indicadores a que se aplica); CONSUMO §Finanças públicas e índices (despesa per capita); consulta ao SIDRA em 02/11/2026.
 - **Relacionadas:** RN-MOD-24, RN-MOD-25, RN-MOD-26, RN-MOD-17
+
+## Notas de evidência
+
+Evidência datada que sustenta ou qualifica as regras acima. Nenhuma nota muda o status da regra. Ordem: a das regras.
+
+#### RN-MOD-14: Não misturar projeção
+
+- **Evidência de 19/11/2026 (consulta às publicações do IBGE):** as Projeções da População do IBGE (revisão de 2024, que incorpora o Censo 2022) cobrem só o Brasil e as unidades da federação, de 2000 a 2070; não há projeção oficial por município. As estimativas municipais anuais (a série usada pelo observatório, RN-FNT-01) partem da projeção do estado e repartem entre os municípios pela tendência entre os censos de 2010 e 2022 (nota metodológica das estimativas de 2024). Fontes: IBGE, "Projeções da população: Brasil e unidades da federação", Relatórios Metodológicos v. 40, 3ª ed.; IBGE, nota metodológica das Estimativas da População 2024. O observatório não usa projeção em 19/11/2026; a regra segue PROPOSTA.
+
+#### RN-MOD-16: Fluxo e estoque não se somam
+
+- **Evidência de 19/11/2026 (catálogo público da Base dos Dados, sem credencial, só nomes de colunas; reproduzido com `uv run python -m scripts.sondas.basedosdados_colunas microdados_movimentacao microdados_vinculos`; e páginas do MTE):** `caged.microdados_movimentacao` tem 25 colunas por movimentação (entre elas `id_municipio`, `ano`, `mes`, `cnae_2_subclasse`, `cbo_2002`, `idade`, `sexo`, `raca_cor`, `grau_instrucao`, `salario_mensal`, `saldo_movimentacao`, `tipo_movimentacao` e `indicador_fora_prazo`); `rais.microdados_vinculos` tem 67 colunas por vínculo (entre elas `vinculo_ativo_3112`, `tipo_vinculo`, `natureza_juridica`, `tempo_emprego`, remuneração de cada mês e `motivo_desligamento`). Segundo o comparativo RAIS × CAGED do MTE, a RAIS abrange estatutários, celetistas, temporários e avulsos e é anual, com o estoque em 31/12; o CAGED cobre só celetistas e é mensal, com admissões e desligamentos. A Nota Técnica MTE 082/11 (2011, anterior ao Novo CAGED) dava cobertura de cerca de 97% dos estabelecimentos para a RAIS e de 85% para o CAGED; não foi conferido se isso mudou com o eSocial. A Nota Técnica da RAIS 2023 registra a reclassificação de contratos por lei municipal como estatutários a partir do ano-base 2023 e subdeclaração de estatutários na transição para o eSocial. Conclusão: o CAGED é mais recente e mensal; a RAIS tem cobertura maior (inclui o setor público) e mais variáveis; uma não substitui a outra.
+
+#### RN-MOD-18: Razão regional como soma sobre soma
+
+- **Evidência de 19/11/2026 (SIDRA, tabelas 5938, variável 37, e 6579, variável 9324, ano 2021, os 12 municípios; reproduzido com `uv run python -m scripts.sondas.pib_per_capita_ri`):** o PIB per capita da RI Carajás em 2021 calculado como soma dos PIBs ÷ soma das populações dá R$ 147.762; como média dos 12 PIBs per capita, R$ 126.101. A FAPESPA publica R$ 147.782 para a RI Carajás em 2021 (Relatório "PIB dos Municípios Paraenses 2021", transcrito, não conferido na tabela da FAPESPA): a soma sobre soma reproduz o número oficial com diferença de 0,014%; a média das razões fica 15% abaixo. O relatório da FAPESPA não descreve a fórmula; a conclusão vem da reprodução.

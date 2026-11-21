@@ -6,9 +6,7 @@ Datas das fontes usadas nas divergências: PLANO, 30/09/2026; CONSUMO e MAPA-TEM
 
 ## 1. Regras com status EM ABERTO
 
-| Regra | O que falta decidir | Arquivo |
-| --- | --- | --- |
-| RN-CFE-08 | Recuperar julho de 2025 e liberar o total anual de 2025 (em 31/10/2026, em 09/11/2026 e em 12/11/2026 o mês segue ausente no CSV; o PDF não foi achado; adiado pelo mantenedor em 12/11/2026) | [mineracao-cfem.md](mineracao-cfem.md) |
+Nenhuma regra está EM ABERTO em 19/11/2026. A última, RN-CFE-08 (julho de 2025 na distribuição), foi decidida nesta data.
 
 ## 2. Itens em aberto dentro de regras DECIDIDAS
 
@@ -16,7 +14,8 @@ Estas regras estão decididas no essencial, mas um ponto delas continua sem deci
 
 | Regra | Ponto em aberto |
 | --- | --- |
-| [RN-ENT-12](entrega-dos-dados.md) | A dimensão econômica é a primeira (13/11/2026), e a ordem das demais é social, ambiental e institucional (15/11/2026); falta decidir quais itens do backlog compõem a primeira versão (prazo de maio de 2027) |
+| [RN-PRI-11](privacidade-e-licencas.md) | Prazo de guarda de cada dado pessoal de usuário, quem responde pelo tratamento (encarregado) e quais dados cada função pede. Decidir com o PB-45 e o primeiro item que receba dados de usuários (19/11/2026) |
+| [RN-CFE-24](mineracao-cfem.md) | Onde a ANM publica, por município, a parcela de município afetado (15% desde 2018), para somá-la ao lado da ANM e reativar o aviso de diferença acima de 1%; e se o Pará faz o repasse estadual de 25% (Lei 7.990/1989, art. 9º). Adiado pelo mantenedor em 20/11/2026, com o aviso suspenso: nenhum arquivo de dados da ANM traz a parcela de afetado por município |
 | [RN-ENT-08](entrega-dos-dados.md) | Metas numéricas de cada critério de avaliação do assistente. Adiado por prioridade em 11/11/2026: o assistente é etapa posterior ao tratamento dos dados; fixar critérios e metas quando ela começar |
 
 ## 3. Divergências entre fontes
@@ -55,9 +54,9 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 
 - **RN-FNT-01, comparação da população: resolvida para 2025 e 2026 em 30/10/2026.** Os 12 códigos do SIDRA foram consultados e comparados, sem divergência, com as tabelas municipais independentes do IBGE. As referências versionadas estão em `data/referencia-populacao-2025.json` e `data/referencia-populacao-2026.json`; a reconciliação de cada nova edição continua obrigatória. O SIDRA já disponibiliza 2026, portanto 2025 deixou de ser o ano mais recente.
 
-- **Arrecadação de Bom Jesus do Tocantins em 2025 (RN-CFE-23, proposta).** O briefing de 30/10/2026 dizia que faltava o município em 2025. A leitura do CSV completo atual da ANM encontrou linha em janeiro, mas nenhuma de fevereiro a dezembro. A causa dos 11 meses ausentes não foi confirmada em publicação independente. Não fechar total anual municipal nem converter ausência em zero. Em 2026, o arquivo nacional tem janeiro a outubro e não há linha de Bom Jesus nem de Brejo Grande nesses meses; também requer investigação.
+- **Arrecadação de Bom Jesus do Tocantins (RN-CFE-23, obsoleta em 19/11/2026).** O briefing de 30/10/2026 dizia que faltava o município em 2025. A conferência de 19/11/2026 mostrou que Bom Jesus arrecada de forma esporádica em todos os anos (1 a 3 meses por ano desde 2023, com o repasse no mês seguinte), assim como outros municípios pequenos; vale RN-CFE-07 (ausente, causa não confirmada, nunca zero). Ver as notas de evidência de RN-CFE-07.
 - **Duplicatas na arrecadação (RN-VPU-11).** Na leitura local de 30/10/2026 do arquivo completo `CFEM_Arrecadacao.csv` da ANM (325.147.685 bytes, 2.433.952 linhas), 129 linhas do recorte dos 12 municípios repetem todos os campos de outra linha. Inclui 2025/09 para Parauapebas e 2026/01–03 para Marabá. O lote está bloqueado; revisar a origem antes de definir tratamento. O relatório em `output/observatorio/tratado/cfem/relatorio.json` contém contagens por município, ano e mês, sem CPF/CNPJ.
-- **Rastreamento de despesa financiada por CFEM (RN-CFE-24, proposta).** Os agregados da ANM e do SICONFI não identificam a despesa paga com CFEM. Os códigos de fonte de recursos `17080000` e `1708000` apareceram em consultas distintas, mas não foram confirmados na despesa executada. Falta verificar classificação, cobertura e extração reproduzível nos portais municipais antes de criar esse indicador. CFEM recebida e despesa por função podem ser apresentadas lado a lado, sem afirmar financiamento direto.
+- **Despesa com fonte CFEM (RN-CFE-24, decidida em 19/11/2026, revista em 20/11/2026).** A fonte `1708`/`2708` da MSC e a receita "Cota-parte da CFEM" da DCA fecham com o repasse da ANM nos grandes produtores (Parauapebas e Canaã a 0,1% em 2024). As diferenças de Bom Jesus do Tocantins, Marabá e Piçarra vêm, ao menos em parte, da parcela de município afetado, que o arquivo da ANM não traz. O observatório mostra os três números lado a lado, rotula a ANM como parcela de produtor e os do município como declarados; o aviso de diferença está suspenso até a parcela de afetados entrar.
 
 - **Perguntas pendentes à ANM (RN-CFE-08, RN-CFE-09 e RN-CFE-10).** Três perguntas aguardam envio, sem canal nem responsável definidos (não será por e-mail): (1) se houve repasse em julho de 2025, por que ele não consta do arquivo de distribuição e onde está o relatório desse mês; (2) por que São Domingos do Araguaia (1507151) não aparece nos arquivos da ANM, se a MSC do SICONFI registra CFEM do município desde 2024; (3) por que a receita registrada por Marabá (R$ 221,5 milhões em 2025, sem julho) é maior que o `Produtor` do arquivo (R$ 188,9 milhões) e qual o significado das modalidades `Produtor`, `Afetado` e `-`. Enquanto não houver resposta, RN-CFE-08 segue EM ABERTO, com a evidência registrada. RN-CFE-09 (ausente, causa não confirmada) e RN-CFE-10 (CFEM recebida = `Produtor`) foram decididas em 09/11/2026; as perguntas 2 e 3 só servem para confirmar as causas (inclusive a diferença de Marabá).
 - **Contrato da API.** `docs/api/openapi.yaml` agora descreve somente as rotas do protótipo local e é um esboço, não um contrato aprovado. O ADR-005 registra somente o protótipo local de população e não decide a arquitetura de produção. Qualquer divergência entre o esboço e as regras deve ser registrada aqui.
@@ -68,33 +67,25 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 - **Divergências com os outros repositórios.** A comparação de 08/11/2026 com `obcefem_api` e `obcefem` (distribuição estimada pela lei, duplicatas, ano parcial, ano da autuação, chave do município, média PA/BR, dados fictícios) está em [divergencias-entre-repositorios.md](divergencias-entre-repositorios.md), com a decisão do mantenedor de 08/11/2026 em cada item. A decisão não mudou o status de nenhuma regra existente; ela criou regras novas e exceções (ver o próximo item).
 - **Exceções de 08/11/2026 (mantenha o que a `obcefem_api` diz).** O mantenedor mandou manter o comportamento da API nos itens D2 a D11 de [divergencias-entre-repositorios.md](divergencias-entre-repositorios.md). Isso abriu exceções, anotadas em cada regra, em RN-VPU-11 (duplicatas publicadas), RN-CFE-05 e RN-CFE-06 (ano parcial e critério de volume), RN-CFE-14 e RN-CFE-16 (ano da cobrança e sem faixa "sem ano"), RN-CFE-22 (arquivos por faixa, série desde 2002), RN-TER-03 (chave por nome) e RN-MOD-03 (envelope da API mais observações no esquema comum; a API ainda não faz). Regras novas: RN-CFE-27, RN-CFE-28, RN-TER-13 e RN-ENT-11. Pendentes: medir o efeito em reais das 129 duplicatas; reconfirmar se o lote de arrecadação, citado como bloqueado acima, passa a ser publicado.
 - **Dimensões × blocos temáticos (RN-ENT-12).** Em 13/11/2026 o mantenedor decidiu a composição da dimensão econômica: CFEM, PIB, preços de ferro e cobre, finanças municipais e despesa por função (BLOCOS §Bloco 3, §Bloco 6 e a parte de PIB e preços do §Bloco 2), com emprego e renda na dimensão social. Em 15/11/2026 o mantenedor decidiu seguir o `obcefem` para as demais dimensões: social com população, emprego e renda, educação, pobreza, moradia e segurança; ambiental com uso do solo, emissões e saneamento; institucional com sustentabilidade (Barômetro, IDSC, CLP) e gestão pública. Em 15/11/2026 a relação receita per capita × IDSC (grupos AA, AB, BA e BB) ficou na dimensão institucional, como no `obcefem`. Fica **EM ABERTO** a divisão da despesa por função, que o `obcefem` separa e a RN-ENT-12 deixa inteira na economia (divergência com o `obcefem`, registrada em RN-ENT-12).
-- **Indicadores da dimensão econômica sem regra (RN-ENT-12).** Em 15/11/2026 o mantenedor decidiu a fonte da receita corrente, da cota-parte do ICMS e do investimento: SICONFI (Anexos I-C e I-D), de 2022 a 2025, com os códigos desse período. Anos anteriores ficam fora até nova decisão, porque o código das contas muda em 2017, 2018 e 2022 (RN-ENT-12). Continuam sem regra: a divisão do ICMS repassado entre os municípios da RI, que a página do `obcefem` traz com dado da FAPESPA (medida diferente da cota-parte; RN-FNT-17, PROPOSTA); e a proporção do investimento sobre a despesa total, cujo denominador (`TotalDespesas`, igual à soma de DO3 e DO4 em Canaã, 2024) ainda não foi escolhido. RN-FNT-04 trata só da despesa por função (Anexo I-E).
+- **Indicadores da dimensão econômica sem regra (RN-ENT-12).** Em 15/11/2026 o mantenedor decidiu a fonte da receita corrente, da cota-parte do ICMS e do investimento: SICONFI (Anexos I-C e I-D); em 20/11/2026 a série foi estendida a 2013, pelos códigos de cada período, com marca nas trocas de classificação de 2018 e 2022 (RN-ENT-12). Continuam sem regra: a divisão do ICMS repassado entre os municípios da RI, que a página do `obcefem` traz com dado da FAPESPA (medida diferente da cota-parte; RN-FNT-17, PROPOSTA); e a proporção do investimento sobre a despesa total, cujo denominador (`TotalDespesas`, igual à soma de DO3 e DO4 em Canaã, 2024) ainda não foi escolhido. RN-FNT-04 trata só da despesa por função (Anexo I-E).
 - **`obcefem_api` cobre só parte da dimensão econômica (RN-ENT-12).** A API tem a arrecadação, as autuações e a distribuição estimada da CFEM; não tem PIB, preços, receita nem despesa. Na página da dimensão econômica do `obcefem`, parte dos gráficos traz o selo "dados fictícios (protótipo)" (RN-ENT-11). O que falta para a dimensão ficar completa com dado real não foi levantado gráfico a gráfico.
-- **Obsoletas.** Oito regras ficaram obsoletas em 07/11/2026 por decisão do mantenedor (as fontes são dados abertos, então privacidade e licença não são necessárias): RN-PRI-01 a RN-PRI-06, RN-PRI-08 e RN-ENT-10. Seguem vigentes RN-PRI-07, RN-PRI-09 e RN-PRI-10. RN-CFE-18 passou a permitir exibir o nome e o CPF/CNPJ do titular; sem parecer jurídico, o CPF de pessoa física é risco aceito pelo mantenedor.
+- **Obsoletas.** Oito regras ficaram obsoletas em 07/11/2026 por decisão do mantenedor (as fontes são dados abertos, então privacidade e licença não são necessárias): RN-PRI-01 a RN-PRI-06, RN-PRI-08 e RN-ENT-10. RN-CFE-23 ficou obsoleta em 19/11/2026, por estar contida em RN-CFE-07. Seguem vigentes RN-PRI-07, RN-PRI-09 e RN-PRI-10. RN-CFE-18 passou a permitir exibir o nome e o CPF/CNPJ do titular; sem parecer jurídico, o CPF de pessoa física é risco aceito pelo mantenedor.
 
 ## 5. Regras PROPOSTAS aguardando confirmação
 
-Estas 34 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook, dos scripts ou do briefing operacional de 30/10/2026. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
+Estas 17 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook, dos scripts ou do briefing operacional de 30/10/2026. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
 
-### Território (4)
+### Território (1)
 
 | Regra | Título | Origem |
 | --- | --- | --- |
-| [RN-TER-04](territorio.md) | Código tratado como texto | NOTEBOOK (célula 1); SCRIPTS (`build_cfem_distribution_municipal`, `validate_anm_cfem`) |
-| [RN-TER-07](territorio.md) | Comparação de nomes sem acento e sem diferença de caixa, apenas para o Pará | SCRIPTS (`validate_anm_cfem`, rotina de normalização e filtro de UF). Deduzida do código |
-| [RN-TER-11](territorio.md) | Guardar a composição territorial usada | CONSUMO §Contrato de dados para o front-end (campos `geo_id`, `geo_level`) |
 | [RN-TER-12](territorio.md) | Declarar se o indicador usa residência ou ocorrência | VAL-15/10 §Como repetir os testes (item sobre PySUS); CONSUMO §Sociedade (localidade de referência). Dedução: nenhuma das duas fontes fixa a regra |
 
-### Modelo de dados (6)
+### Modelo de dados (1)
 
 | Regra | Título | Origem |
 | --- | --- | --- |
-| [RN-MOD-12](modelo-de-dados.md) | Preservar o motivo da não divulgação | CONSUMO §Sociedade (IDEB) |
 | [RN-MOD-14](modelo-de-dados.md) | Não misturar projeção | CONSUMO §Dinâmica populacional |
-| [RN-MOD-15](modelo-de-dados.md) | Não interpolar anos sem dado | MAPA-TEMAS §Economia e mercado de trabalho; CONSUMO §Economia e mercado de trabalho |
-| [RN-MOD-16](modelo-de-dados.md) | Fluxo e estoque não se somam | CONSUMO §Economia e mercado de trabalho; VAL-15/10 §Matriz operacional (RAIS, CAGED, emprego: "validar fluxo versus estoque") |
-| [RN-MOD-17](modelo-de-dados.md) | Razões registram numerador, denominador e ano | CONSUMO §Economia e mercado de trabalho, §Finanças públicas e índices |
-| [RN-MOD-18](modelo-de-dados.md) | Razão regional como soma sobre soma | Dedução, por coerência com DECISÕES §Municípios da RI Carajás e RN-MOD-17. Nenhuma fonte fixa essa fórmula |
 
 ### Consumo de fontes (6)
 
@@ -107,47 +98,33 @@ Estas 34 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA
 | [RN-FON-14](consumo-de-fontes.md) | Filtros usados ficam registrados | CONSUMO §Bypass seguro quando não houver API (item 2); SCRIPTS (`reconcile_anm_distribution`) |
 | [RN-FON-17](consumo-de-fontes.md) | Fontes manuais entram na mesma camada | PLANO §Arquitetura e fluxo geral |
 
-### Regras por fonte (2)
+### Regras por fonte (1)
 
 | Regra | Título | Origem |
 | --- | --- | --- |
 | [RN-FNT-17](regras-por-fonte.md) | FAPESPA, IDSC e CLP | PLANO §Riscos e cuidados, §Bloco 6; CONSUMO §Finanças públicas e índices |
-| [RN-FNT-19](regras-por-fonte.md) | Conferir que a resposta identifica o município pedido | SCRIPTS (`probe_ibge_sidra`); VAL-15/10 §Rodada adicional |
 
-### Temporalidade e atualização (6)
+### Temporalidade e atualização (5)
 
 | Regra | Título | Origem |
 | --- | --- | --- |
-| [RN-TMP-04](temporalidade-e-atualizacao.md) | Retificações do SICONFI | CONSUMO §Finanças públicas e índices (despesa per capita). VAL-15/10 §Matriz operacional cita "reconciliar totais retificados" como pendência, sem fixar a regra |
 | [RN-TMP-06](temporalidade-e-atualizacao.md) | Congelar a versão a cada coleção do MapBiomas | CONSUMO §Meio ambiente e saneamento |
 | [RN-TMP-08](temporalidade-e-atualizacao.md) | Mudança de nomenclatura entre censos | CONSUMO §Sociedade, serviços e segurança; MAPA-TEMAS §Sociedade |
 | [RN-TMP-09](temporalidade-e-atualizacao.md) | Registros policiais podem ser retificados | CONSUMO §Sociedade, serviços e segurança |
 | [RN-TMP-10](temporalidade-e-atualizacao.md) | Transição CID-9 e CID-10 no SIM | CONSUMO §Sociedade, serviços e segurança |
 | [RN-TMP-11](temporalidade-e-atualizacao.md) | Estimativa por proxy não é medição direta | CONSUMO §Meio ambiente e saneamento |
 
-### Entrega dos dados (4)
+### Entrega dos dados (2)
 
 | Regra | Título | Origem |
 | --- | --- | --- |
-| [RN-ENT-05](entrega-dos-dados.md) | Exportações levam os metadados junto dos valores | CONSUMO §Contrato de dados para o front-end |
 | [RN-ENT-07](entrega-dos-dados.md) | O assistente responde só com a camada publicada | CONSUMO §Contrato de dados para o front-end. VAL-15/10 §Resposta ao orientador (item 2) lista como critério de avaliação a "recusa de inventar número ausente", sem fixar a regra |
 | [RN-ENT-08](entrega-dos-dados.md) | Critérios de avaliação do assistente | VAL-15/10 §Resposta ao orientador (item 2). O próprio VAL-15/10 chama os critérios de "propostos" |
-| [RN-ENT-09](entrega-dos-dados.md) | Primeiros gráficos | VAL-15/10 §Resposta ao orientador (item 3), que é uma recomendação do relatório e não uma decisão de DECISÕES ou de BLOCOS; BLOCOS §Bloco 1 (população como primeiro pipeline). Depois de RN-ENT-12 (13/11/2026), falta decidir se o painel de população continua entre os primeiros, já que a população é da dimensão social |
 
-### Mineração (CFEM) (4)
-
-| Regra | Título | Origem |
-| --- | --- | --- |
-| [RN-CFE-11](mineracao-cfem.md) | Agregação por município, ano, mês e modalidade | SCRIPTS (`build_cfem_distribution_municipal`). Deduzida do código |
-| [RN-CFE-12](mineracao-cfem.md) | Controle de escala com o total nacional | VAL-15/10 §Rodada adicional (apresentado como controle, não como regra) |
-| [RN-CFE-23](mineracao-cfem.md) | Cobertura parcial de Bom Jesus do Tocantins na arrecadação de 2025 | Briefing operacional de 30/10/2026 §9; leitura do CSV completo atual; falta confronto com publicação independente da ANM |
-| [RN-CFE-24](mineracao-cfem.md) | Despesa municipal financiada por CFEM exige fonte de recursos confirmada | Briefing operacional de 30/10/2026 §9; códigos e cobertura ainda não confirmados |
-
-### Indicadores derivados e compostos (2)
+### Indicadores derivados e compostos (1)
 
 | Regra | Título | Origem |
 | --- | --- | --- |
-| [RN-IND-05](indicadores-derivados-e-compostos.md) | Derivado ou composto é marcado como análise derivada | CONSUMO §Finanças públicas e índices (receita per capita e IDSC) |
 | [RN-IND-08](indicadores-derivados-e-compostos.md) | Não recalcular o Barômetro sem reproduzir o método | CONSUMO §Finanças públicas e índices (Barômetro da Sustentabilidade 2024) |
 
 ## 6. Conflitos com o Product Backlog
@@ -156,12 +133,12 @@ O [Product Backlog](../produto/backlog.md) (retrato de 12/11/2026, atualizado em
 
 | # | Ponto | Backlog (12/11/2026) | Regras | Situação |
 | --- | --- | --- | --- | --- |
-| B1 | Privacidade e LGPD | PB-45: revisar segurança e adequação à LGPD, com política de privacidade e termos de uso. PB-35: proteção de dados e registro de uso no assistente | DECISÃO-MANTENEDOR de 07/11/2026: privacidade e licença não são requisito, porque as fontes são dados abertos (RN-PRI-01 a 06 e RN-PRI-08 obsoletas; RN-CFE-18 permite exibir o titular). Essa decisão tratou dos dados das fontes; o backlog prevê também dados enviados por usuários (perfis de acesso, relatos, comentários, cadastros do marketplace: PB-04, PB-24, PB-25, PB-28, PB-37), sobre os quais não há regra | EM ABERTO |
+| B1 | Privacidade e LGPD | PB-45: revisar segurança e adequação à LGPD, com política de privacidade e termos de uso. PB-35: proteção de dados e registro de uso no assistente | DECISÃO-MANTENEDOR de 07/11/2026: privacidade e licença não são requisito, porque as fontes são dados abertos (RN-PRI-01 a 06 e RN-PRI-08 obsoletas; RN-CFE-18 permite exibir o titular). Essa decisão tratou dos dados das fontes; o backlog prevê também dados enviados por usuários (perfis de acesso, relatos, comentários, cadastros do marketplace: PB-04, PB-24, PB-25, PB-28, PB-37) | DECIDIDO em 19/11/2026 (DECISÃO-MANTENEDOR, [RN-PRI-11](privacidade-e-licencas.md)): a decisão de 07/11/2026 vale só para os dados das fontes; os dados pessoais de usuários seguem a LGPD, com coleta só do necessário e política de privacidade e termos de uso publicados antes de abrir qualquer cadastro ou envio. Prazo de guarda, encarregado e dados por função seguem em aberto (seção 2) |
 | B2 | Recorte territorial | PB-06 e PB-22: "os dois municípios" | [RN-TER-01](territorio.md): os 12 municípios da RI Carajás. [RN-TER-13](territorio.md) (08/11/2026): Parauapebas e Canaã dos Carajás em destaque, comparados com os demais | DECIDIDO em 17/11/2026 (DECISÃO-MANTENEDOR): "os dois municípios" só nomeia os de foco. A carga e os indicadores cobrem os 12 municípios (RN-TER-01), com Parauapebas e Canaã em destaque (RN-TER-13). O PB-22 (bairros e distritos) continua no conflito B5 |
-| B3 | Período da série da CFEM | PB-06: série histórica de 10 anos de arrecadação e uso | [RN-CFE-22](mineracao-cfem.md) (27/10/2026): arrecadação desde 2003 (desde 2002 na `obcefem_api`, exceção de 08/11/2026). [RN-FNT-04](regras-por-fonte.md): despesa por função de 2013 a 2025. [RN-CFE-24](mineracao-cfem.md) (PROPOSTA): não se afirma que uma despesa foi paga com CFEM sem a fonte de recursos confirmada, o que limita o "uso da CFEM" | EM ABERTO: falta dizer se os 10 anos são o mínimo contratual ou o recorte a exibir (adiado pelo mantenedor em 19/11/2026) |
-| B4 | Fontes do orçamento | PB-08: atualizar ANM, TCM-PA e orçamentos municipais | [RN-FNT-04](regras-por-fonte.md) e [RN-TMP-15](temporalidade-e-atualizacao.md): a despesa por função vem só do SICONFI. TCM-PA e os orçamentos municipais não constam da agenda por fonte ([RN-TMP-02](temporalidade-e-atualizacao.md)) nem de [regras-por-fonte.md](regras-por-fonte.md); nenhuma das duas foi testada | EM ABERTO |
-| B5 | Dados por bairro | PB-21, PB-22 e PB-23: limites de bairros e distritos, mapa e ficha de indicadores por bairro | Todas as regras tratam de município, RI Carajás, Pará e Brasil ([RN-TER-03](territorio.md): o código IBGE de 7 dígitos identifica o município). Não há regra, fonte nem indicador abaixo do município | EM ABERTO: falta fonte dos limites e dos indicadores por bairro |
+| B3 | Período da série da CFEM | PB-06: série histórica de 10 anos de arrecadação e uso | [RN-CFE-22](mineracao-cfem.md) (27/10/2026): arrecadação desde 2003 (desde 2002 na `obcefem_api`, exceção de 08/11/2026). [RN-FNT-04](regras-por-fonte.md): despesa por função de 2013 a 2025. [RN-CFE-24](mineracao-cfem.md) (DECIDIDA em 19/11/2026): o "uso da CFEM" é a despesa paga com fonte CFEM declarada pelo município, desde 2022, ao lado do repasse da ANM | DECIDIDO em 20/11/2026 (DECISÃO-MANTENEDOR): os 10 anos são o mínimo. O observatório mostra toda a série disponível de arrecadação, CFEM recebida e receita de CFEM declarada pelo município; o "uso" (despesa paga com fonte CFEM, RN-CFE-24) vai de 2022 em diante, com a limitação explicada; a despesa por função de 2013 a 2025 fica como contexto. Evidência nas notas de RN-CFE-24 |
+| B4 | Fontes do orçamento | PB-08: atualizar ANM, TCM-PA e orçamentos municipais | [RN-FNT-04](regras-por-fonte.md) e [RN-TMP-15](temporalidade-e-atualizacao.md): a despesa por função vem só do SICONFI. TCM-PA e os orçamentos municipais não constam da agenda por fonte ([RN-TMP-02](temporalidade-e-atualizacao.md)) nem de [regras-por-fonte.md](regras-por-fonte.md). Sonda de 19/11/2026 (`scripts/sondas/tcmpa.py`): o TCM-PA não publica orçamento nem despesa municipal como dado aberto (ver Notas de evidência de RN-FNT-04) | DECIDIDO em 19/11/2026 (DECISÃO-MANTENEDOR): o orçamento municipal vem só do SICONFI (RN-FNT-04); "TCM-PA e orçamentos municipais" do PB-08 são lidos como finanças municipais, atendidas pelo SICONFI. O TCM-PA não entra como fonte por falta de dado aberto de orçamento e despesa |
+| B5 | Dados por bairro | PB-21, PB-22 e PB-23: limites de bairros e distritos, mapa e ficha de indicadores por bairro | Todas as regras tratam de município, RI Carajás, Pará e Brasil ([RN-TER-03](territorio.md): o código IBGE de 7 dígitos identifica o município). Não há regra, fonte nem indicador abaixo do município. Sonda de 19/11/2026 (`uv run python -m scripts.sondas.ibge_bairros`, saída em `output/sonda-ibge-bairros.json`): a malha de bairros do Censo 2022 do IBGE tem 362 bairros de 25 dos 144 municípios do Pará e nenhum dos 12 da RI Carajás; a tabela 9923 do SIDRA não tem dado por bairro (N102) para nenhum deles; cada município tem 1 distrito (2 em Brejo Grande do Araguaia e São João do Araguaia). Abaixo do município só há setores censitários do Censo 2022 (461 em Parauapebas, 119 em Canaã dos Carajás, de 17 a 525 nos 12), que não são bairros e só existem em anos de censo | EM ABERTO, adiado pelo mantenedor em 19/11/2026: o recorte por bairro (PB-21 a PB-23) volta depois da primeira versão (RN-ENT-12). Caminhos levantados: setores censitários, mapa oficial de bairros das prefeituras (não testado) ou mapas só por município |
 
-A ordem de trabalho decidida em 13/11/2026 (dimensão econômica primeiro, RN-ENT-12) não muda nenhum dos cinco conflitos; B2, B3 e B4 tratam de itens dessa dimensão (PB-06 e PB-08) e passam a ser os mais urgentes. B2 foi decidido em 17/11/2026.
+A ordem de trabalho decidida em 13/11/2026 (dimensão econômica primeiro, RN-ENT-12) não muda nenhum dos cinco conflitos; B2, B3 e B4 tratam de itens dessa dimensão (PB-06 e PB-08) e passam a ser os mais urgentes. B2 foi decidido em 17/11/2026, B4 em 19/11/2026 e B3 em 20/11/2026.
 
 Além dos conflitos, 24 dos 48 itens do backlog não têm regra nenhuma (escrita de dados por usuários, gestão de conteúdo, marketplace, front-end, testes e operação). A lista está na [seção 3 do backlog](../produto/backlog.md#3-correspondência-com-a-documentação); se alguma virar regra, ela nasce por decisão do mantenedor.

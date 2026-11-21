@@ -62,3 +62,7 @@ Fica de fora: a biblioteca de leitura e escrita (pandas, como na `obcefem_api`, 
 ## Nota de 19/11/2026
 
 O [ADR-015](ADR-015-hospedagem-provisoria-e-segredos.md) fixou a hospedagem provisória em Docker local, sem limite de tamanho de pacote Python como o da Vercel. A conferência do tamanho do `pyarrow` passa para o ADR do serviço da AWS.
+
+## Nota de 19/11/2026
+
+A RN-ENT-05, citada no Contexto como PROPOSTA, foi decidida pelo mantenedor em 19/11/2026: cada linha exportada traz o identificador do indicador e a proveniência (RN-MOD-02), e o método e as limitações vão no arquivo de metadados do indicador, entregue junto com o download. Isso coincide com o que este ADR já previa para o manifesto (RN-MOD-25).

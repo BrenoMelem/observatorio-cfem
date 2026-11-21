@@ -15,9 +15,9 @@ Regras sobre o que um lote precisa cumprir para ser publicado e sobre o que faze
 - **Regra:** Todo lote deve ser checado quanto a: o município existe na lista oficial, o valor informado não é nulo, a série não encolheu em relação à versão anterior e o número está numa faixa plausível.
 - **Motivo:** São as verificações simples que pegam a maior parte dos erros de fonte e de tratamento.
 - **Exemplo:** Um valor de CFEM para um código que não está entre os 12 municípios não passa na checagem de existência.
-- **Exceções:** (1) A checagem "série não encolheu" fica desligada para as autuações da CFEM (RN-CFE-15). (2) "Valor não nulo" vale para observações informadas; a ausência e a não divulgação são registradas pela natureza do valor (RN-MOD-11).
-- **Fonte:** DECISÕES §Arquitetura e padrões de dados (Validação antes de publicar); DECISÃO-MANTENEDOR de 24/10/2026 (resposta à pergunta 3).
-- **Relacionadas:** RN-MOD-11, RN-CFE-15, RN-TER-01
+- **Exceções:** (1) A checagem "série não encolheu" fica desligada para as autuações da CFEM (RN-CFE-15). (2) "Valor não nulo" vale para observações informadas; a ausência e a não divulgação são registradas pela natureza do valor (RN-MOD-11). (3) Na arrecadação da CFEM, "a série não encolheu" tem limites fixados em 19/11/2026, os mesmos da trava da `obcefem_api` (`scripts/gerar_dados.py`, conferido em 19/11/2026): em anos encerrados, uma queda de mais de 2% no total nacional em relação à versão publicada, ou qualquer perda de registros dos 12 municípios, bloqueia o lote. Publicar mesmo assim só por decisão manual registrada. A versão bloqueada continua baixada e arquivada (RN-TMP-18), marcada como reprovada, e não é publicada nem usada.
+- **Fonte:** DECISÕES §Arquitetura e padrões de dados (Validação antes de publicar); DECISÃO-MANTENEDOR de 24/10/2026 (resposta à pergunta 3) e de 19/11/2026 (limites da arrecadação da CFEM).
+- **Relacionadas:** RN-MOD-11, RN-CFE-15, RN-TER-01, RN-CFE-12, RN-TMP-18
 
 ### RN-VPU-03: Se a validação falha, manter o último dado bom
 - **Status:** DECIDIDA

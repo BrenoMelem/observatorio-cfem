@@ -46,13 +46,14 @@ Fonte: DECISÕES §Indicadores compostos; BLOCOS §Bloco 6.
 - **Fonte:** DECISÕES §Indicadores compostos; BLOCOS §Bloco 6.
 - **Relacionadas:** RN-IND-01, RN-IND-08
 
-### RN-IND-05: Derivado ou composto é marcado como análise derivada
-- **Status:** PROPOSTA
-- **Regra:** Todo indicador composto ou derivado deve ser marcado como análise derivada e não como indicador oficial contínuo, guardando o ano de referência, os cortes, o deflator e a regra de classificação.
+### RN-IND-05: Composto ou classificação é marcado como análise derivada
+- **Status:** DECIDIDA
+- **Regra:** Todo indicador composto ou classificação deve ser marcado como análise derivada e não como indicador oficial contínuo, guardando o ano de referência, os cortes, o deflator e a regra de classificação. Os derivados simples (per capita e participações, como em RN-IND-09 e RN-IND-10) são séries normais, rotuladas "calculado pelo observatório a partir de" suas fontes, com numerador e denominador registrados (RN-MOD-17).
 - **Motivo:** Evita que uma conclusão de estudo seja lida como série oficial.
 - **Exemplo:** A relação do TD 3146 guarda o ano de referência, os cortes de receita e de IDSC e a regra de classificação.
-- **Fonte:** CONSUMO §Finanças públicas e índices (receita per capita e IDSC). Não consta em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10.
-- **Relacionadas:** RN-IND-01, RN-MOD-17
+- **Fonte:** DECISÃO-MANTENEDOR de 20/11/2026 (proposta confirmada e restrita a compostos e classificações); CONSUMO §Finanças públicas e índices (receita per capita e IDSC). Não consta em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10.
+- **Exceções:** A proposta original valia para "todo indicador composto ou derivado"; em 20/11/2026 o mantenedor restringiu a marca aos compostos e classificações.
+- **Relacionadas:** RN-IND-01, RN-IND-09, RN-IND-10, RN-MOD-17
 
 ### RN-IND-06: Mineração × cobertura florestal é derivado próprio
 - **Status:** DECIDIDA
