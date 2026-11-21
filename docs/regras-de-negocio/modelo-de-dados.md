@@ -244,9 +244,9 @@ Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a p
 - **Regra:** Deve existir um manifesto único que descreva cada indicador (identificação, nome, bloco, fonte, método, frequência e estratégia, congelado ou recalculado) e a lista de municípios de comparação.
 - **Motivo:** É a fonte da verdade: documentação, agenda e configuração no mesmo lugar.
 - **Exemplo:** O Barômetro da Sustentabilidade consta como "congelado, não promovível".
-- **Exceções:** Nome, formato e local do arquivo ficam fora desta documentação.
-- **Fonte:** DECISÕES §Arquitetura e padrões de dados ("Manifesto"), §Indicadores compostos; LAB-19/10 §7 (Próximos passos, item 5).
-- **Relacionadas:** RN-IND-01, RN-TER-09, RN-TMP-02
+- **Exceções:** Nome, formato e local do arquivo ficam fora desta documentação. Por decisão do mantenedor de 21/11/2026, o manifesto também traz o nível de acesso de cada indicador (A, B, C ou D), com o texto que explica que o nível não é juízo de qualidade (RN-FON-01).
+- **Fonte:** DECISÕES §Arquitetura e padrões de dados ("Manifesto"), §Indicadores compostos; LAB-19/10 §7 (Próximos passos, item 5); DECISÃO-MANTENEDOR de 21/11/2026 (nível de acesso).
+- **Relacionadas:** RN-IND-01, RN-TER-09, RN-TMP-02, RN-FON-01
 
 ### RN-MOD-26: Valores monetários em valor nominal por enquanto
 - **Status:** DECIDIDA

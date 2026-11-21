@@ -16,8 +16,8 @@ def meta(serie):
 
 
 def dados():
-    return {"count": 3, "observations": [{"date": "1991-12-01", "value": "."}, {"date": "1992-01-01", "value": "14.31"},
-                                         {"date": "1992-02-01", "value": "15.2"}]}
+    return {"count": 3, "observations": [{"date": "2008-11-01", "value": "."}, {"date": "2008-12-01", "value": "70.0"},
+                                         {"date": "2009-01-01", "value": "72.3"}]}
 
 
 def buscar_ok(url):
@@ -29,12 +29,15 @@ def buscar_ok(url):
 
 def test_preserva_meses_ausentes_e_publica_serie_global_provisoria(pasta_dados):
     r = executar_commodities(pasta_dados, CHAVE, buscar_ok, AGORA)
-    assert r["situacao"] == "publicado_provisorio" and r["nulos"] == 2
+    assert r["situacao"] == "publicado_provisorio" and r["nulos"] == 1
     arquivo = pasta_dados / "publicado" / "commodities.json"
     linhas = json.loads(arquivo.read_text(encoding="utf-8"))
-    assert len(linhas) == 6
-    assert linhas[0]["municipio_id"] is None and linhas[0]["nivel_territorial"] == "global"
-    assert linhas[0]["natureza_valor"] == "ausente" and linhas[1]["valor"] == 14.31
+    assert len(linhas) == 5  # o ferro só entra a partir de dez/2008 (RN-TMP-13); o cobre, inteiro
+    ferro = [l for l in linhas if l["indicador"] == "preco_minerio_ferro_spot"]
+    cobre = [l for l in linhas if l["indicador"] == "preco_cobre"]
+    assert [(l["ano"], l["mes"], l["valor"]) for l in ferro] == [(2008, 12, 70.0), (2009, 1, 72.3)]
+    assert ferro[0]["municipio_id"] is None and ferro[0]["nivel_territorial"] == "global"
+    assert cobre[0]["natureza_valor"] == "ausente" and cobre[1]["valor"] == 70.0
     repetida = {"count": 2, "observations": [dados()["observations"][0]] * 2}
     with pytest.raises(ContratoFredError):
         extrair_fred(meta("PIORECRUSDM"), repetida, "PIORECRUSDM", "2026-10-30")

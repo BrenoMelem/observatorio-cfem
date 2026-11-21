@@ -14,12 +14,12 @@ O nível mede a forma de acesso, não a qualidade do dado. Uma fonte B pode ser 
 | D | Acesso condicionado ou lacuna | Solicitar acesso ou dado agregado, nunca raspar nem contornar; manter o indicador pendente se preciso |
 
 ### RN-FON-01: Níveis de acesso medem a forma, não a qualidade
-- **Status:** PROPOSTA
-- **Regra:** Cada indicador deve ser classificado em um dos níveis A, B, C ou D conforme a forma de acesso à fonte, e o nível não deve ser usado como juízo de qualidade do dado.
+- **Status:** DECIDIDA
+- **Regra:** Cada indicador deve ser classificado em um dos níveis A, B, C ou D conforme a forma de acesso à fonte, e o nível não deve ser usado como juízo de qualidade do dado. O nível é um campo do manifesto de indicadores (RN-MOD-25) e vai acompanhado de um texto que explica que ele indica a forma de acesso, não a qualidade.
 - **Motivo:** A forma de acesso define o cuidado de consumo; a qualidade é outra questão.
 - **Exemplo:** A CFEM da ANM é nível B (CSV oficial sem API); o SICONFI é nível A.
-- **Fonte:** CONSUMO §Classificação de consumo; MAPA-TEMAS (critério da coluna "Tem API?"). Não consta em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10.
-- **Relacionadas:** RN-FON-05, RN-FON-06
+- **Fonte:** DECISÃO-MANTENEDOR de 21/11/2026 (confirmação da proposta, com o nível no manifesto); CONSUMO §Classificação de consumo; MAPA-TEMAS (critério da coluna "Tem API?"). Não consta em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10.
+- **Relacionadas:** RN-FON-05, RN-FON-06, RN-MOD-25, RN-ENT-05
 
 ### RN-FON-02: Fonte primária onde há API boa
 - **Status:** DECIDIDA
@@ -121,12 +121,12 @@ O nível mede a forma de acesso, não a qualidade do dado. Uma fonte B pode ser 
 - **Relacionadas:** RN-MOD-21, RN-FON-14
 
 ### RN-FON-14: Filtros usados ficam registrados
-- **Status:** PROPOSTA
-- **Regra:** Os filtros aplicados na obtenção de um dado (ano, mês, modalidade, município, consulta) devem ser registrados junto da captura.
+- **Status:** DECIDIDA
+- **Regra:** Os filtros aplicados na obtenção de um dado (ano, mês, modalidade, município, consulta) devem ser registrados junto da captura: no registro de cada coleta, ao lado da proveniência de RN-FON-13, e no relatório de qualidade do lote (RN-VPU-06). Eles não são campo das observações publicadas, cujo esquema é o de RN-MOD-03.
 - **Motivo:** O mesmo arquivo filtrado de formas diferentes dá totais diferentes.
 - **Exemplo:** A reconciliação de maio de 2025 registrou ano 2025, mês 5 e distribuição do tipo `Produtor`.
-- **Fonte:** CONSUMO §Bypass seguro quando não houver API (item 2); SCRIPTS (`reconcile_anm_distribution`).
-- **Relacionadas:** RN-FON-13
+- **Fonte:** DECISÃO-MANTENEDOR de 21/11/2026 (confirmação da proposta e lugar do registro); CONSUMO §Bypass seguro quando não houver API (item 2); SCRIPTS (`reconcile_anm_distribution`).
+- **Relacionadas:** RN-FON-13, RN-VPU-06, RN-MOD-03, RN-CFE-24
 
 ### RN-FON-15: Dado bruto fora do Git quando grande
 - **Status:** DECIDIDA
