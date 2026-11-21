@@ -81,7 +81,7 @@ backend/
 docker-compose.yml        na raiz: serviço "api" e serviço "postgres" (ADR-015, ADR-016)
 ```
 
-- O `config.py` lê `OBS_PUBLICADO_DIR`, o caminho do manifesto de indicadores e `DATABASE_URL`.
+- O `config.py` lê `OBS_PUBLICADO_DIR` e `DATABASE_URL`. O manifesto de indicadores é lido de dentro do pacote publicado (ver o ponto do manifesto, abaixo).
 - O Postgres entra no compose por causa do ADR-016, mas nenhum código o usa ainda.
 - O comando de execução passa a ser `uvicorn observatorio.api.main:app`.
 
@@ -103,11 +103,13 @@ docker-compose.yml        na raiz: serviço "api" e serviço "postgres" (ADR-015
 - o subpacote dos dados de usuários (nota de 19/11/2026 do ADR-013);
 - a proteção de branch no GitHub.
 
-**Ponto em aberto: o manifesto `data/indicadores.json`.** A API lê esse arquivo, que fica na raiz do repositório, fora do `backend/`; hoje chega nele com `parents[3]`. A imagem Docker leva só o `backend/`. Opções:
+**Manifesto `data/indicadores.json`: resolvido pelo ADR-014 (conferido em 20/11/2026).** A API atual lê esse arquivo na raiz do repositório com `parents[3]`, fora do `backend/` e da imagem Docker. O [ADR-014](ADR-014-formato-do-pacote-publicado.md) já fixou que o manifesto de indicadores (RN-MOD-25) é copiado para dentro do pacote publicado. Assim:
 
-1. Variável de ambiente no `config.py` (padrão: o arquivo na raiz) e o compose monta `data/` só leitura. O arquivo fica onde está e os scripts não mudam. É a sugestão.
-2. O build do Docker parte da raiz e copia o arquivo para a imagem, que passa a levar um arquivo de dados.
-3. Mover o manifesto para o `backend/`, conferindo quem em `scripts/` o lê.
+- a API lê o manifesto do pacote, pela `OBS_PUBLICADO_DIR`, como lê os dados (RN-ENT-01);
+- a imagem não leva o arquivo, nem é preciso uma variável de ambiente para ele;
+- `data/indicadores.json` continua na raiz como origem, e a publicação o copia para o pacote.
+
+Enquanto não houver gerador de pacote, o arquivo é copiado à mão para a pasta publicada local, junto com o `populacao.json`.
 
 ### Decisão 6 adiada — nota de 13/11/2026
 
