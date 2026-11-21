@@ -52,8 +52,9 @@ Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a p
 - **Exemplo:** `municipio_id` com o código IBGE de 7 dígitos, como `1502152` (Canaã dos Carajás), e `mes` vazio na população anual do IBGE.
 - **Exceções:** Os valores aceitos de `natureza_valor` e `estado_validacao` seguem RN-MOD-06 e RN-MOD-07. CONSUMO e VAL-15/10 exigem metodologia, limitações e licença em cada linha; essa parte não foi adotada. O local exato da busca na fonte (`source_locator` em CONSUMO) e a definição do indicador não entram na observação; se forem necessários, vão para o manifesto.
 - **Exceção de 08/11/2026 (DECISÃO-MANTENEDOR):** a resposta da API tem duas camadas. O envelope da `obcefem_api` (`filtros`, `versao_dados`, `notas`) é mantido como está, e a parte `dados` deve ser uma lista de observações com os campos desta regra, uma por valor. Séries com cor e rótulo prontos para o painel podem acompanhar como campo extra opcional, sem substituir as observações. A `obcefem_api` atual ainda não faz isso (responde só com séries por rota); a mudança está por fazer.
-- **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026; DECISÕES §Arquitetura e padrões de dados (04/10/2026, última edição 20/10/2026); CONSUMO §Contrato de dados para o front-end (02/10/2026); VAL-15/10 §Marco 1 (15/10/2026).
-- **Relacionadas:** RN-MOD-02, RN-MOD-04, RN-ENT-02
+- **Exceção de 21/11/2026 (DECISÃO-MANTENEDOR):** séries internacionais sem recorte territorial, como os preços de minério de ferro e de cobre do Pink Sheet (RN-MOD-19), usam `nivel_territorial` = `global`, com `municipio_id` e `municipio_nome` vazios. Nenhuma outra série usa esse valor.
+- **Fonte:** DECISÃO-MANTENEDOR de 30/10/2026 e de 21/11/2026 (nível global); DECISÕES §Arquitetura e padrões de dados (04/10/2026, última edição 20/10/2026); CONSUMO §Contrato de dados para o front-end (02/10/2026); VAL-15/10 §Marco 1 (15/10/2026).
+- **Relacionadas:** RN-MOD-02, RN-MOD-04, RN-MOD-19, RN-ENT-02
 
 ### RN-MOD-04: Campo de mês
 - **Status:** DECIDIDA
@@ -193,9 +194,9 @@ Estado: decidido em 30/10/2026 (RN-MOD-03 e RN-MOD-27): nomes em português, a p
 - **Status:** DECIDIDA
 - **Regra:** Preços de commodities são séries globais e não devem ser atribuídos a um município nem apresentados como preço realizado numa empresa ou no Pará.
 - **Motivo:** São preços de referência internacionais; atribuí-los a um município seria afirmar o que a fonte não diz.
-- **Exemplo:** O preço do minério de ferro é uma série global e não aparece no recorte de Canaã dos Carajás.
+- **Exemplo:** O preço do minério de ferro é uma série global e não aparece no recorte de Canaã dos Carajás. Na observação, o nível territorial dessas séries é `global` (RN-MOD-03, exceção de 21/11/2026).
 - **Fonte:** BLOCOS §Bloco 2 ("séries globais (sem recorte municipal)"); VAL-15/10 §Matriz operacional (World Bank Pink Sheet); LAB-19/10 §4 (FRED e World Bank Pink Sheet); CONSUMO §Economia.
-- **Relacionadas:** RN-FNT-05
+- **Relacionadas:** RN-FNT-05, RN-MOD-03
 
 ### RN-MOD-20: Ano de referência sempre exibido
 - **Status:** DECIDIDA

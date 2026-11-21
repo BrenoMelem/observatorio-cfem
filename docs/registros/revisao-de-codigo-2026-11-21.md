@@ -15,10 +15,10 @@ O `/code-review` rodado sobre o PR #41 (estrutura inicial do produto) olhou tamb
 | 7 | O status ignorava indicador do manifesto fora do mapa de dimensões, lia o pacote várias vezes por requisição e comparava edições e datas como texto | PR #41 |
 | 8 | Funções da API sem tipo de retorno | PR #41 |
 | 10 | `scripts/financas/dca_anexos.py`: campo nulo (`cod_ibge` ou `exercicio`) no SICONFI derrubava a coleta inteira | branch `fix/laboratorio-economia` (vira divergência de contrato, registrada no resumo) |
+| 9a | O Pink Sheet grava `nivel_territorial = "global"`, valor que o esquema comum não previa (RN-MOD-03: "município ou RI") | Decidido pelo mantenedor em 21/11/2026: `global` passa a ser aceito nas séries internacionais sem recorte territorial (exceção na RN-MOD-03, referência na RN-MOD-19). O DTO da API passa a aceitar o valor quando o Pink Sheet for portado |
 
 ## Pendentes
 
 | # | Ponto | Situação |
 | --- | --- | --- |
-| 9a | O Pink Sheet grava `nivel_territorial = "global"`, valor que o esquema comum não prevê: RN-MOD-03 diz "município ou RI", e o DTO da API aceita só esses dois | É da economia, mas depende de decisão sobre a regra: RN-MOD-19 proíbe atribuir o preço internacional a um município, e nenhuma regra diz como o esquema representa uma série global |
 | 9b | `scripts/emissoes/seeg.py` grava `nivel_territorial = "municipio"`, sem acento, diferente do `município` do esquema comum (RN-MOD-03) | Não é da economia (emissões, dimensão ambiental). Corrigir quando o SEEG for portado para `backend/src/observatorio/fontes/` ou antes de publicar emissões |
