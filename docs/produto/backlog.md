@@ -99,14 +99,14 @@ Leitura de 12/11/2026, revista em 19/11/2026. O agrupamento por assunto é deste
 | **Sem regra** | Nenhum documento do repositório trata do item |
 | **Conflito** | O texto do item contradiz uma regra; o conflito está registrado em [pendencias.md, seção 6](../regras-de-negocio/pendencias.md#6-conflitos-com-o-product-backlog), sem decisão. Conflito já decidido sai do valor entre parênteses |
 
-"Decisão N do mapa" é a linha N do [mapa de decisões técnicas](../adr/README.md). Em 19/11/2026 estão aceitas as decisões 1 a 5, 7, 8 e 10 (ADR-007 a ADR-014); a 6 (hospedagem e segredos) foi adiada pelo mantenedor em 13/11/2026 e a 9 (assistente de IA) está pendente.
+"Decisão N do mapa" é a linha N do [mapa de decisões técnicas](../adr/README.md). Em 19/11/2026 estão aceitas as decisões 1 a 8 e 10 (ADR-007 a ADR-015), a 6 (hospedagem e segredos) como provisória, em Docker local até haver acesso à AWS; a 9 (assistente de IA) está pendente.
 
 ### Fundação
 
 | Item | O que a documentação já tem | Situação |
 | --- | --- | --- |
-| PB-01 Arquitetura e stack | Em progresso desde o retrato de 19/11/2026. Decisões 1 a 10 do mapa: aceitas a 1 e a 2 em 11/11/2026 ([ADR-007](../adr/ADR-007-onde-mora-o-produto.md), [ADR-008](../adr/ADR-008-linguagem-e-ambiente.md)), a 3 a 5 em 13/11/2026 ([ADR-009](../adr/ADR-009-armazenamento-das-camadas.md) a [ADR-011](../adr/ADR-011-execucao-e-agendamento-das-coletas.md)), a 7, 8 e 10 em 17/11/2026 ([ADR-012](../adr/ADR-012-testes-lint-e-ci.md) a [ADR-014](../adr/ADR-014-formato-do-pacote-publicado.md)); a 6 foi adiada e a 9 está pendente. As subtarefas abertas são exatamente as lacunas: o front-end não consta do mapa, e a hospedagem é a decisão 6 | Parcial |
-| PB-02 Repositório, integração contínua e ambientes | Em progresso desde o retrato de 19/11/2026. Decisões 7 (qualidade) e 8 (organização do repositório) do mapa, aceitas em 17/11/2026 ([ADR-012](../adr/ADR-012-testes-lint-e-ci.md), [ADR-013](../adr/ADR-013-organizacao-do-repositorio.md)): as subtarefas de CI e de estrutura do código aplicam esses ADRs. A subtarefa dos ambientes de desenvolvimento e homologação depende da decisão 6, adiada. Já existe o fluxo de branches do `AGENTS.md` e o arquivamento da ANM a cada 4 horas ([guia](../guias/arquivo-anm.md)) | Parcial |
+| PB-01 Arquitetura e stack | Em progresso desde o retrato de 19/11/2026. Decisões 1 a 10 do mapa: aceitas a 1 e a 2 em 11/11/2026 ([ADR-007](../adr/ADR-007-onde-mora-o-produto.md), [ADR-008](../adr/ADR-008-linguagem-e-ambiente.md)), a 3 a 5 em 13/11/2026 ([ADR-009](../adr/ADR-009-armazenamento-das-camadas.md) a [ADR-011](../adr/ADR-011-execucao-e-agendamento-das-coletas.md)), a 7, 8 e 10 em 17/11/2026 ([ADR-012](../adr/ADR-012-testes-lint-e-ci.md) a [ADR-014](../adr/ADR-014-formato-do-pacote-publicado.md)) e a 6, como provisória, em 19/11/2026 ([ADR-015](../adr/ADR-015-hospedagem-provisoria-e-segredos.md): Docker local, AWS provável, revisão em 31/03/2027); a 9 está pendente. O front-end não consta do mapa, e o serviço de produção da AWS ainda será decidido | Parcial |
+| PB-02 Repositório, integração contínua e ambientes | Em progresso desde o retrato de 19/11/2026. Decisões 7 (qualidade) e 8 (organização do repositório) do mapa, aceitas em 17/11/2026 ([ADR-012](../adr/ADR-012-testes-lint-e-ci.md), [ADR-013](../adr/ADR-013-organizacao-do-repositorio.md)): as subtarefas de CI e de estrutura do código aplicam esses ADRs. A subtarefa dos ambientes de desenvolvimento e homologação aplica o [ADR-015](../adr/ADR-015-hospedagem-provisoria-e-segredos.md) (19/11/2026): imagem Docker na máquina de cada pessoa e, se for possível, numa máquina da universidade. Já existe o fluxo de branches do `AGENTS.md` e o arquivamento da ANM a cada 4 horas ([guia](../guias/arquivo-anm.md)) | Parcial |
 | PB-03 Modelo do banco analítico | [modelo-de-dados.md](../regras-de-negocio/modelo-de-dados.md) (esquema único, RN-MOD-01 a 04; manifesto, RN-MOD-25) e [territorio.md](../regras-de-negocio/territorio.md). O armazenamento é a decisão 3 do mapa, pendente em 12/11/2026 e depois aceita: arquivos ([ADR-009](../adr/ADR-009-armazenamento-das-camadas.md)), em parquet por indicador com manifestos JSON ([ADR-014](../adr/ADR-014-formato-do-pacote-publicado.md)) | Com regra |
 | PB-04 Perfis de acesso (público, gestor, administrador) | Nada. RN-ENT-02 descreve só leitura e metadados | Sem regra |
 | PB-05 Navegação simples e acessível | Nada sobre o front-end | Sem regra |
@@ -195,7 +195,7 @@ Leitura de 12/11/2026, revista em 19/11/2026. O agrupamento por assunto é deste
 | PB-43 Testes de aceitação com a Vale e representantes dos usuários | Nada | Sem regra |
 | PB-44 Acessibilidade e uso em celular | Nada | Sem regra |
 | PB-45 Segurança e adequação à LGPD | Credenciais (RN-FON-08, RN-PRI-10). A privacidade deixou de ser requisito em 07/11/2026 | Conflito (B1) |
-| PB-46 Implantação em produção | Decisão 6 do mapa (hospedagem e segredos), adiada pelo mantenedor em 13/11/2026 | Sem regra |
+| PB-46 Implantação em produção | Decisão 6 do mapa: o [ADR-015](../adr/ADR-015-hospedagem-provisoria-e-segredos.md) (19/11/2026) registra a AWS como destino provável, sem serviço escolhido, e a revisão em 31/03/2027 se não houver acesso | Sem regra |
 | PB-47 Monitoramento, backup e documentação técnica | Relatório de qualidade por execução (RN-VPU-06) e painel de status (RN-ENT-04) cobrem só o monitoramento dos dados | Parcial |
 | PB-48 Sustentabilidade e replicabilidade | Nada. A lista de municípios é fixa nos 12 da RI Carajás (RN-TER-01); um guia para outros municípios não está previsto | Sem regra |
 
@@ -221,7 +221,7 @@ As lacunas maiores, que nenhuma regra cobre:
 
 ## 5. Prazos
 
-- **Já vencido em 19/11/2026:** PB-01 (31/10/2026), em progresso. Faltam a parte de front-end, a decisão 6 (hospedagem, adiada) e a consolidação; a decisão 9 (assistente) também segue pendente.
+- **Já vencido em 19/11/2026:** PB-01 (31/10/2026), em progresso. Faltam a parte de front-end, o serviço de produção (a hospedagem provisória foi decidida em 19/11/2026, ADR-015) e a consolidação; a decisão 9 (assistente) também segue pendente.
 - **Vencem em 30/11/2026:** PB-02 (em progresso) e PB-03 (pendente).
 - **Vencem em 31/12/2026:** PB-04, PB-05 e PB-06. O PB-06 depende de destravar o lote da arrecadação (RN-VPU-11) e do conflito B3 (B2 foi decidido em 17/11/2026).
 - **Primeira versão no ar.** Em 11/11/2026 o mantenedor informou o prazo de até maio de 2027 (restrição registrada no [mapa de decisões](../adr/README.md)). No backlog, a implantação em produção (PB-46) vence em 31/07/2027, e os itens que vencem até 31/05/2027 são PB-01 a PB-14. Falta dizer quais deles compõem a primeira versão.
