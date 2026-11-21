@@ -153,6 +153,8 @@ O ADR-007 confirma a construção do backend de produção neste repositório, f
 
 O coletor de laboratório `scripts/commodities/pink_sheet.py`, já incorporado à `develop` antes do PR #23, ainda produz um único indicador mensal de ferro em `USD/dmt`. Isso diverge de RN-TMP-13 e RN-TMP-14, que exigem contrato anual em `¢/dmtu` (1985–2005) e spot mensal em `$/dmt` (desde dezembro de 2008), separados. O backend do PR #23 não lê esse coletor nem publica commodities; a correção é independente do merge deste PR. Próximo passo: abrir uma correção própria do coletor e dos testes, sem publicar ferro até validar o recorte e as unidades.
 
+**Nota de 21/11/2026.** O coletor de laboratório foi corrigido por decisão do mantenedor: o ferro sai como `preco_minerio_ferro_contrato` (anual, ¢/dmtu, 1985–2005) e `preco_minerio_ferro_spot` (mensal, `$/dmt`, desde dez/2008), sem o trecho de 2006 a nov/2008; o FRED passou a ser reserva só da spot. O manifesto `data/indicadores.json`, o `backend/` e o esboço `docs/api/openapi.yaml` continuam com o identificador único `preco_minerio_ferro`, porque são do produto; os dois nomes passam para eles quando a coleta do Pink Sheet for escrita em `fontes/`.
+
 A [análise da Fase 0](analise-fase-0-camada-publicada-e-assistente.md) não é um ADR: é o insumo das decisões 3 a 6, 8 e 9, e traz também o inventário das rotas existentes, a situação de cada dimensão do site e os conflitos com regras que não podem ser resolvidos por implementação. Ela nasceu como ADR-006 (proposta) e foi desmembrada por decisão do mantenedor de 11/11/2026; o número 006 não será reaproveitado.
 
 ## ADRs
