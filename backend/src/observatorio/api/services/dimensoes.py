@@ -4,7 +4,11 @@ import json
 from pathlib import Path
 
 from observatorio.api.dtos.publicacao import Metadados, RespostaDimensao, StatusIndicador
-from observatorio.api.repositories.publicacao import manifesto_publicado, populacao_publicada
+from observatorio.api.repositories.publicacao import (
+    PublicacaoInvalida,
+    manifesto_publicado,
+    populacao_publicada,
+)
 
 DIMENSOES = {
     "social": ("populacao_estimada", "despesa_funcao_empenhada", "despesa_funcao_liquidada", "despesa_funcao_paga"),
@@ -25,7 +29,7 @@ LACUNAS = {
 }
 
 
-def manifesto() -> dict:
+def manifesto() -> dict[str, dict[str, object]]:
     return manifesto_publicado()
 
 
@@ -33,12 +37,15 @@ def consultar(dimensao: str, municipio_id: str | None = None, ano_inicio: int | 
              ano_fim: int | None = None, pasta: Path | None = None) -> RespostaDimensao:
     definicoes = manifesto_publicado(pasta)
     permitidos = DIMENSOES[dimensao]
+    faltantes = [id_ for id_ in permitidos if id_ not in definicoes]
+    if faltantes:
+        raise PublicacaoInvalida(f"Manifesto de indicadores sem: {', '.join(faltantes)}")
     todas = populacao_publicada(pasta) if "populacao_estimada" in permitidos else []
     # O filtro só afeta observações; status informa a publicação inteira, mesmo sem pontos no recorte.
     linhas = [o for o in todas if (municipio_id is None or o.municipio_id == municipio_id)
               and (ano_inicio is None or o.ano >= ano_inicio) and (ano_fim is None or o.ano <= ano_fim)]
-    metadados = {id_: Metadados(fonte=definicoes[id_]["fonte"], metodo=definicoes[id_]["metodo"],
-                               limitacoes=definicoes[id_]["limitacoes"],
+    metadados = {id_: Metadados(fonte=str(definicoes[id_]["fonte"]), metodo=str(definicoes[id_]["metodo"]),
+                               limitacoes=str(definicoes[id_]["limitacoes"]),
                                edicao=max((o.edicao_fonte for o in todas if o.indicador == id_ and o.edicao_fonte), default=None))
                  for id_ in permitidos}
     status = []

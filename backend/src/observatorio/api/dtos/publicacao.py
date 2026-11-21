@@ -23,7 +23,7 @@ class Observacao(BaseModel):
     versao_tratamento: str
 
     @model_validator(mode="after")
-    def conferir_valor(self):
+    def conferir_valor(self) -> "Observacao":
         if self.valor is not None and not math.isfinite(self.valor):
             raise ValueError("Valor deve ser finito")
         if self.natureza_valor == "informado" and (self.valor is None or self.valor == 0):

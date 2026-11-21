@@ -80,3 +80,40 @@ def test_pacote_sem_manifesto_responde_503(tmp_path, monkeypatch):
     cliente = TestClient(app)
     assert cliente.get("/api/v1/dimensoes/social").status_code == 503
     assert cliente.get("/api/v1/indicadores/status").status_code == 503
+
+
+def test_manifesto_incompleto_responde_503(tmp_path, monkeypatch, manifesto):
+    """Code review de 21/11/2026: manifesto sem indicador ou sem `fonte` não pode virar erro 500."""
+    cliente = _cliente(tmp_path, monkeypatch, manifesto)
+    definicoes = json.loads(manifesto.read_text(encoding="utf-8"))
+    sem_indicador = {k: v for k, v in definicoes.items() if k != "despesa_funcao_paga"}
+    (tmp_path / "indicadores.json").write_text(json.dumps(sem_indicador), encoding="utf-8")
+    resposta = cliente.get("/api/v1/dimensoes/social")
+    assert resposta.status_code == 503 and "despesa_funcao_paga" in resposta.json()["detail"]
+    sem_fonte = definicoes | {"populacao_estimada": {"nome": "x"}}
+    (tmp_path / "indicadores.json").write_text(json.dumps(sem_fonte), encoding="utf-8")
+    assert cliente.get("/api/v1/dimensoes/social").status_code == 503
+    assert cliente.get("/api/v1/indicadores/status").status_code == 503
+
+
+def test_pacote_ilegivel_responde_503(tmp_path, monkeypatch, manifesto):
+    """Erro de leitura que não é arquivo ausente (aqui, uma pasta no lugar do arquivo) vira 503, não 500."""
+    cliente = _cliente(tmp_path, monkeypatch, manifesto)
+    (tmp_path / "populacao.json").mkdir()
+    assert cliente.get("/api/v1/dimensoes/social").status_code == 503
+    (tmp_path / "indicadores.json").unlink()
+    (tmp_path / "indicadores.json").mkdir()
+    assert cliente.get("/api/v1/dimensoes/economica").status_code == 503
+
+
+def test_saude_confere_manifesto_e_populacao(tmp_path, monkeypatch, manifesto):
+    monkeypatch.setenv("OBS_PUBLICADO_DIR", str(tmp_path))
+    cliente = TestClient(app)
+    assert cliente.get("/saude").json()["estado"] == "publicacao_invalida"  # sem manifesto
+    (tmp_path / "indicadores.json").write_bytes(manifesto.read_bytes())
+    assert cliente.get("/saude").json()["estado"] == "sem_publicacao"
+    (tmp_path / "populacao.json").write_text(json.dumps([_observacao()]), encoding="utf-8")
+    assert cliente.get("/saude").json()["estado"] == "pronto"
+    (tmp_path / "populacao.json").write_text(json.dumps([_observacao() | {"estado_validacao": "provisório"}]),
+                                             encoding="utf-8")
+    assert cliente.get("/saude").json()["estado"] == "publicacao_invalida"
