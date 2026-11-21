@@ -27,7 +27,7 @@ from scripts.populacao.atualizar import csv_populacao, ler_publicado
 
 MANIFESTO_PADRAO = Path(__file__).resolve().parents[2] / "data" / "indicadores.json"
 JSON_UTF8 = "application/json; charset=utf-8"
-INDICADORES_COMMODITIES = ("preco_minerio_ferro", "preco_cobre")
+INDICADORES_COMMODITIES = ("preco_minerio_ferro_contrato", "preco_minerio_ferro_spot", "preco_cobre")
 INDICADORES_DESPESA = ("despesa_funcao_empenhada", "despesa_funcao_liquidada", "despesa_funcao_paga")
 
 
@@ -116,7 +116,9 @@ def criar_servidor(pasta_dados: str | Path = PASTA_PADRAO, caminho_manifesto: st
             despesa = ler_despesa_publicada(pasta_dados)
             dados = {
                 "populacao_estimada": ler_publicado(pasta_dados),
-                "preco_minerio_ferro": [o for o in commodities if o["indicador"] == "preco_minerio_ferro"],
+                # O manifesto ainda tem um só identificador para o ferro; as duas séries (RN-TMP-13) aparecem
+                # juntas aqui, cada observação com a sua unidade, até o porte para o produto.
+                "preco_minerio_ferro": [o for o in commodities if o["indicador"].startswith("preco_minerio_ferro_")],
                 "preco_cobre": [o for o in commodities if o["indicador"] == "preco_cobre"],
             }
             for ind in INDICADORES_DESPESA:

@@ -43,6 +43,12 @@ def test_resposta_de_outro_municipio_ou_anexo_levanta_erro():
     outro_anexo = payload_para(1502152, 2024, "DCA-Anexo I-D", [("c", "x", "y", 1)])
     with pytest.raises(d.ContratoSiconfiError):
         d.linhas_do_anexo(outro_anexo, "Canaã dos Carajás", 1502152, "I-C", 2024)
+    # Code review de 21/11/2026: campo nulo vira divergência de contrato, não TypeError que derruba a coleta.
+    for campo in ("cod_ibge", "exercicio"):
+        nulo = payload_para(1502152, 2024, "DCA-Anexo I-C", [("c", "x", "y", 1)])
+        nulo["items"][0][campo] = None
+        with pytest.raises(d.ContratoSiconfiError):
+            d.linhas_do_anexo(nulo, "Canaã dos Carajás", 1502152, "I-C", 2024)
 
 
 def test_coletar_registra_erro_sem_interromper_a_coleta(monkeypatch):
