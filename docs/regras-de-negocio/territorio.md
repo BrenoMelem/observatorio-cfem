@@ -127,6 +127,6 @@ Canaã dos Carajás e Parauapebas são os municípios de foco do observatório.
 - **Regra:** Parauapebas (1505536) e Canaã dos Carajás (1502152) são os municípios em destaque nas análises de CFEM, comparados com os demais municípios da RI Carajás, o Pará e o Brasil.
 - **Motivo:** O mantenedor mandou manter o que a `obcefem_api` faz, e as duas cidades concentram a CFEM da região.
 - **Exemplo:** Reproduzido do README da `obcefem_api`: a evolução anual mostra Parauapebas, Canaã e "demais municípios da região".
-- **Exceções:** Não muda RN-TER-01 nem RN-TER-02: os indicadores regionais continuam somando os 12 municípios.
-- **Fonte:** DECISÃO-MANTENEDOR de 08/11/2026; `obcefem_api`, README e `app/dominio.py`.
+- **Exceções:** Não muda RN-TER-01 nem RN-TER-02: os indicadores regionais continuam somando os 12 municípios. Quando o Product Backlog fala em "os dois municípios" (PB-06, PB-22), refere-se a este destaque, não a um recorte da carga (DECISÃO-MANTENEDOR de 17/11/2026, conflito B2 de [pendencias.md](pendencias.md)).
+- **Fonte:** DECISÃO-MANTENEDOR de 08/11/2026 e de 17/11/2026 (leitura do backlog); `obcefem_api`, README e `app/dominio.py`.
 - **Relacionadas:** RN-TER-01, RN-TER-02, RN-CFE-27
