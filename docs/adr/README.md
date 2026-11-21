@@ -51,6 +51,7 @@ Na ordem em que precisam ser tomadas.
 | 10 | Formato do pacote publicado (acrescentada em 17/11/2026; o ADR-009 deixou o formato de fora) | Dados e coleta | 3, 8 | seção 4.2 | aceita em 17/11/2026 | [ADR-014](ADR-014-formato-do-pacote-publicado.md) |
 | 11 | Armazenamento dos dados enviados por usuários (perfis, conteúdo, relatos, comentários, consultas, marketplace), acrescentada em 19/11/2026; a lacuna foi registrada no ADR-009 e no ADR-013 | Dados e coleta | 3, 6 | nenhum | aceita em 19/11/2026 (PostgreSQL; o que guardar de dado pessoal depende do conflito B1) | [ADR-016](ADR-016-armazenamento-dos-dados-de-usuarios.md) |
 | 12 | Padrões de código e manutenção (acrescentada em 20/11/2026): contrato das fontes, organização da `api/` e convenções | API e backend | 2, 7, 8 | nenhum | aceita em 20/11/2026 | [ADR-017](ADR-017-padroes-de-codigo.md) |
+| 13 | Biblioteca de processamento de dados (acrescentada em 20/11/2026; o ADR-008 e o ADR-014 a deixaram de fora) | Dados e coleta | 2, 3, 10, 12 | nenhum | aceita em 20/11/2026 (polars) | [ADR-018](ADR-018-biblioteca-de-processamento-de-dados.md) |
 
 Depois das decisões 1 a 3 já é possível criar a estrutura inicial do código. Com a decisão 12 aceita (20/11/2026), a estrutura inicial pode ser criada: mover `app/` para `src/observatorio/api/` com o módulo de configuração (ADR-013, ADR-017) e o CI do ADR-012.
 
@@ -147,3 +148,4 @@ A [análise da Fase 0](analise-fase-0-camada-publicada-e-assistente.md) não é 
 | [ADR-015](ADR-015-hospedagem-provisoria-e-segredos.md) | Hospedagem provisória em Docker local e segredos | aceito pelo mantenedor em 19/11/2026 |
 | [ADR-016](ADR-016-armazenamento-dos-dados-de-usuarios.md) | Armazenamento dos dados enviados por usuários | aceito pelo mantenedor em 19/11/2026 |
 | [ADR-017](ADR-017-padroes-de-codigo.md) | Padrões de código e manutenção | aceito pelo mantenedor em 20/11/2026 |
+| [ADR-018](ADR-018-biblioteca-de-processamento-de-dados.md) | Biblioteca de processamento de dados | aceito pelo mantenedor em 20/11/2026 |
