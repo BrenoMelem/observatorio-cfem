@@ -63,3 +63,7 @@ Fica de fora: o formato do pacote publicado (manifesto, versão, hash, tipo de a
 - Rever se a API e a coleta precisarem de versões incompatíveis de uma mesma dependência, ou se a equipe crescer: aí a separação em dois projetos (alternativa 2) é direta, porque os subpacotes já estão divididos.
 - Rever a estrutura das camadas se o projeto passar a guardar dados enviados por usuários (lacuna registrada no ADR-009 e no backlog).
 - Voltar atrás custa pouco enquanto o código for pequeno; com o `import-linter`, a fronteira entre os subpacotes não se degrada sem aviso.
+
+## Nota de 19/11/2026
+
+O [ADR-016](ADR-016-armazenamento-dos-dados-de-usuarios.md) decidiu guardar os dados enviados por usuários em PostgreSQL. O subpacote desses dados e o ajuste do contrato do `import-linter` ficam para o PR que implementar o primeiro item de escrita; `api` continua sem acesso a `fontes`, `validacao` e `publicacao`.
