@@ -151,7 +151,9 @@ def test_saude_confere_manifesto_e_populacao(
 ) -> None:
     monkeypatch.setenv("OBS_PUBLICADO_DIR", str(tmp_path))
     cliente = TestClient(app)
-    assert cliente.get("/saude").json()["estado"] == "publicacao_invalida"  # sem manifesto
+    resposta = cliente.get("/saude").json()
+    assert resposta["estado"] == "publicacao_invalida"  # sem manifesto
+    assert "pasta_publicada" not in resposta and str(tmp_path) not in json.dumps(resposta)
     (tmp_path / "indicadores.json").write_bytes(manifesto.read_bytes())
     assert cliente.get("/saude").json()["estado"] == "sem_publicacao"
     (tmp_path / "populacao.json").write_text(json.dumps([_observacao()]), encoding="utf-8")

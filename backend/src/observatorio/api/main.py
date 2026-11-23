@@ -22,5 +22,5 @@ def saude() -> dict[str, str]:
         manifesto_publicado(pasta)
         estado = "pronto" if populacao_publicada(pasta) else "sem_publicacao"
     except PublicacaoInvalida as erro:
-        return {"estado": "publicacao_invalida", "motivo": str(erro), "pasta_publicada": str(pasta)}
-    return {"estado": estado, "pasta_publicada": str(pasta)}
+        return {"estado": "publicacao_invalida", "motivo": str(erro)}
+    return {"estado": estado}
