@@ -1,25 +1,60 @@
 [project]
-name = "observatorio-cfem-backend"
+name = "observatorio"
 version = "0.1.0"
-description = "Camada publicada do Observatório CFEM"
+description = "Backend de produção do Observatório CFEM / RI Carajás (ADR-007, ADR-013)"
 requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.162.4",
     "uvicorn>=0.54.0",
 ]
 
+[project.optional-dependencies]
+# O que só a coleta usa (clientes HTTP, leitores de planilha) entra aqui; a API roda sem este grupo (ADR-013).
+coleta = []
+
 [dependency-groups]
 dev = [
+    "httpx>=0.28",
+    "import-linter>=2.17",
+    "mypy>=2.4.1",
     "pytest>=9.2.0",
     "ruff>=0.17.4",
 ]
 
-[tool.uv]
-package = false
+[build-system]
+requires = ["uv_build>=0.13.7,<0.14"]
+build-backend = "uv_build"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = [".", ".."]
 
 [tool.ruff]
 line-length = 110
+
+[tool.mypy]
+# ADR-017: tipagem obrigatória, conferida no modo estrito em todo o backend/ (código e testes).
+strict = true
+files = ["src", "tests"]
+mypy_path = "src"
+
+[tool.importlinter]
+# ADR-013: a regra de dependência entre os subpacotes, conferida no CI (ADR-012).
+root_package = "observatorio"
+
+[[tool.importlinter.contracts]]
+name = "modelo não importa nenhum outro subpacote"
+type = "forbidden"
+source_modules = ["observatorio.modelo"]
+forbidden_modules = [
+    "observatorio.api",
+    "observatorio.config",
+    "observatorio.fontes",
+    "observatorio.publicacao",
+    "observatorio.validacao",
+]
+
+[[tool.importlinter.contracts]]
+name = "api lê só o pacote publicado (RN-ENT-01)"
+type = "forbidden"
+source_modules = ["observatorio.api"]
+forbidden_modules = ["observatorio.fontes", "observatorio.publicacao", "observatorio.validacao"]

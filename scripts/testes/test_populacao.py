@@ -1,5 +1,5 @@
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import httpx
@@ -12,7 +12,7 @@ from scripts.testes.conftest import servidor_em_thread
 
 REFERENCIA = Path(__file__).resolve().parents[2] / "data" / "referencia-populacao-2025.json"
 referencia = json.loads(REFERENCIA.read_text(encoding="utf-8"))
-AGORA = lambda: datetime(2026, 10, 30, 12, tzinfo=timezone.utc)  # noqa: E731
+AGORA = lambda: datetime(2026, 10, 30, 12, tzinfo=UTC)
 
 
 def resposta(codigo, valor=None):

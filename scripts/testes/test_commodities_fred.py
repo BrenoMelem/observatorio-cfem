@@ -1,5 +1,5 @@
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from urllib.parse import parse_qs, urlparse
 
 import pytest
@@ -7,7 +7,7 @@ import pytest
 from scripts.commodities.fred import ContratoFredError, executar_commodities, extrair_fred
 
 CHAVE = "a" * 32
-AGORA = lambda: datetime(2026, 10, 30, 12, tzinfo=timezone.utc)  # noqa: E731
+AGORA = lambda: datetime(2026, 10, 30, 12, tzinfo=UTC)
 
 
 def meta(serie):

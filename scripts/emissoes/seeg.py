@@ -20,11 +20,18 @@ import json
 import re
 import sys
 import unicodedata
+from collections.abc import Callable
 from datetime import datetime
 from pathlib import Path
-from typing import Callable
 
-from scripts.comum.arquivos import PASTA_PADRAO, agora, escrever_json, escrever_json_atomico, id_execucao, iso_utc
+from scripts.comum.arquivos import (
+    PASTA_PADRAO,
+    agora,
+    escrever_json,
+    escrever_json_atomico,
+    id_execucao,
+    iso_utc,
+)
 from scripts.comum.municipios import MUNICIPIOS
 
 URL_MUNICIPAL = ("https://seeg.obass.haus/wp-content/uploads/2026/11/"
@@ -69,7 +76,7 @@ def _sem_acento(texto: str) -> str:
 def codigo_ibge(id_territorio) -> str | None:
     """`ID Território` = '1' + IBGE de 7 dígitos; devolve o IBGE ou None se o formato não for esse."""
     texto = str(id_territorio).strip()
-    texto = texto[:-2] if texto.endswith(".0") else texto
+    texto = texto.removesuffix(".0")
     return texto[1:] if re.fullmatch(r"1\d{7}", texto) else None
 
 
@@ -84,7 +91,7 @@ def extrair_seeg(caminho: Path, instante: str, edicao: str | None = None) -> tup
     try:
         livro = load_workbook(caminho, read_only=True, data_only=True)
         aba = livro[ABA]
-    except Exception as erro:  # noqa: BLE001
+    except Exception as erro:
         raise ContratoSeegError(f"planilha ilegível ou sem a aba {ABA!r}") from erro
     linhas = aba.iter_rows(values_only=True)
     cabecalho = next(linhas, None)

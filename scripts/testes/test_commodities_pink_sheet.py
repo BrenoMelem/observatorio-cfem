@@ -1,16 +1,21 @@
 import io
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 from openpyxl import Workbook
 
 from scripts.commodities.pink_sheet import (
-    IND_CONTRATO, IND_COBRE, IND_SPOT, ContratoPinkSheetError, achar_link_mensal, executar_pink_sheet,
+    IND_COBRE,
+    IND_CONTRATO,
+    IND_SPOT,
+    ContratoPinkSheetError,
+    achar_link_mensal,
+    executar_pink_sheet,
     extrair_pink_sheet,
 )
 
-AGORA = lambda: datetime(2026, 11, 21, 12, tzinfo=timezone.utc)  # noqa: E731
+AGORA = lambda: datetime(2026, 11, 21, 12, tzinfo=UTC)
 URL = "https://thedocs.worldbank.org/en/doc/abc123-0050012026/related/CMO-Historical-Data-Monthly.xlsx"
 HTML = f'<html><a href="{URL}">Monthly</a><a href="x/CMO-Historical-Data-Annual.xlsx">Anual</a></html>'
 # Valores do contrato conferidos no Pink Sheet (RN-TMP-13/14): 2004 = 37,9 e 2005 = 65; spot dez/2008 = 70.

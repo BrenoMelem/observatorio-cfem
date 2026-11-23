@@ -2,11 +2,10 @@
 
 import argparse
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from urllib.parse import quote
 from urllib.request import Request, urlopen
-
 
 BASE = "http://www.ipeadata.gov.br/api/odata4"
 SERIES = ("ADMISNC", "DESLIGNC")
@@ -34,7 +33,7 @@ def main():
     parser.add_argument("--output", type=Path, default=Path("output/validacao-ipeadata-emprego-2026-10-15.json"))
     args = parser.parse_args()
     evidence = {
-        "checked_at_utc": datetime.now(timezone.utc).isoformat(),
+        "checked_at_utc": datetime.now(UTC).isoformat(),
         "source": "IPEADATA official OData API",
         "tests": [],
     }
