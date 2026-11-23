@@ -1,7 +1,9 @@
 """Coleta as séries de preço de ferro e cobre do FRED e publica uma camada provisória.
 
 Script de teste/laboratório (não é o produto). Porte do protótipo em Node (commodities-fred.mjs).
-Preserva os meses ausentes (valor ".") como `ausente` e não corta a série (divergência 17).
+Preserva os meses ausentes (valor ".") como `ausente`. O FRED é só reserva da spot do ferro e do cobre
+(RN-TMP-13): desde 21/11/2026 o ferro sai como `preco_minerio_ferro_spot` e só de dezembro de 2008 em diante,
+porque o trecho anterior da série não é comparável ao contrato do Pink Sheet.
 
 Uso:
     FRED_API_KEY=... uv run python -m scripts.commodities.fred
@@ -29,7 +31,7 @@ from scripts.comum.arquivos import (
 from scripts.comum.municipios import CAMPOS
 
 SERIES = {
-    "PIORECRUSDM": {"indicador": "preco_minerio_ferro", "unidade": "USD/dmt"},
+    "PIORECRUSDM": {"indicador": "preco_minerio_ferro_spot", "unidade": "USD/dmt", "inicio": (2008, 12)},
     "PCOPPUSDM": {"indicador": "preco_cobre", "unidade": "USD/t"},
 }
 
@@ -77,6 +79,9 @@ def extrair_fred(meta: dict, corpo: dict, serie: str, instante: str) -> list[dic
     for anterior, atual in zip(linhas, linhas[1:]):
         if atual["ano"] * 12 + atual["mes"] != anterior["ano"] * 12 + anterior["mes"] + 1:
             raise ContratoFredError(f"{serie}: lacuna na sequência mensal")
+    inicio = config.get("inicio")
+    if inicio:
+        linhas = [r for r in linhas if (r["ano"], r["mes"]) >= inicio]
     return linhas
 
 

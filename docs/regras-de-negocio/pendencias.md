@@ -73,7 +73,7 @@ Cada divergência registra as duas (ou mais) versões com a data de cada fonte. 
 
 ## 5. Regras PROPOSTAS aguardando confirmação
 
-Estas 17 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook, dos scripts ou do briefing operacional de 30/10/2026. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
+Estas 15 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA-TEMAS, PESQUISA, PLANO), do notebook, dos scripts ou do briefing operacional de 30/10/2026. Não são decisão do projeto: cada uma espera confirmação do mantenedor para virar DECIDIDA ou ser descartada. A coluna "Origem" diz de onde a regra vem.
 
 ### Território (1)
 
@@ -87,15 +87,13 @@ Estas 17 regras foram deduzidas ou vêm só de fontes históricas (CONSUMO, MAPA
 | --- | --- | --- |
 | [RN-MOD-14](modelo-de-dados.md) | Não misturar projeção | CONSUMO §Dinâmica populacional |
 
-### Consumo de fontes (6)
+### Consumo de fontes (4)
 
 | Regra | Título | Origem |
 | --- | --- | --- |
-| [RN-FON-01](consumo-de-fontes.md) | Níveis de acesso medem a forma, não a qualidade | CONSUMO §Classificação de consumo; MAPA-TEMAS (critério da coluna "Tem API?") |
 | [RN-FON-05](consumo-de-fontes.md) | Não contornar login nem usar endpoints internos de painéis | CONSUMO §Conclusão executiva, §Bypass seguro quando não houver API; MAPA-TEMAS §Resumo para apresentação |
 | [RN-FON-06](consumo-de-fontes.md) | PDF só entra por área de revisão | CONSUMO §Bypass seguro quando não houver API (item 3). Dedução complementar: DECISÕES §Estratégia ("documentar como manual onde só há PDF") trata do mesmo risco, sem prever a revisão |
 | [RN-FON-12](consumo-de-fontes.md) | Teto de bytes por consulta | NOTEBOOK (células 16 e 18); VAL-15/10 §Como repetir os testes (item 7: "O código impõe 100 MiB por consulta"). O valor é do laboratório, não uma decisão para produção |
-| [RN-FON-14](consumo-de-fontes.md) | Filtros usados ficam registrados | CONSUMO §Bypass seguro quando não houver API (item 2); SCRIPTS (`reconcile_anm_distribution`) |
 | [RN-FON-17](consumo-de-fontes.md) | Fontes manuais entram na mesma camada | PLANO §Arquitetura e fluxo geral |
 
 ### Regras por fonte (1)
