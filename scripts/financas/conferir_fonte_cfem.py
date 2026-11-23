@@ -90,8 +90,12 @@ def cfem_distribuida(linhas: Iterable[dict[str, str]]) -> dict[tuple[str, int], 
     """CFEM distribuída pela ANM a cada um dos 12 municípios, por ano (todas as modalidades)."""
     somas: dict[tuple[str, int], Decimal] = defaultdict(Decimal)
     for linha in linhas:
-        if linha["CodigoEnte"] in MUNICIPIOS and linha["Ente"] == "Município":
-            somas[(linha["CodigoEnte"], int(linha["Ano"]))] += Decimal(linha["Valor"].replace(",", "."))
+        codigo = linha["CodigoEnte"].strip()
+        if codigo in MUNICIPIOS and linha["Ente"].strip() == "Município":
+            # Mesma normalização de distribuicao_municipal.py e reconciliar_distribuicao.py: sem espaços,
+            # sem ponto de milhar e com vírgula decimal (o arquivo de 19/11/2026 não tinha ponto de milhar).
+            valor = linha["Valor"].strip().replace(".", "").replace(",", ".")
+            somas[(codigo, int(linha["Ano"]))] += Decimal(valor)
     return somas
 
 
