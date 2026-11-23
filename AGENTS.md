@@ -4,7 +4,7 @@ Este arquivo orienta agentes de IA (Claude Code, Codex e similares) que trabalha
 
 ## O projeto
 
-Observatório CFEM / RI Carajás: dados públicos sobre a Compensação Financeira pela Exploração de Recursos Minerais (CFEM) e indicadores dos 12 municípios da Região de Integração Carajás, no Pará. O produto ainda não existe: o repositório tem a pesquisa, a documentação de regras de negócio, um notebook de laboratório e scripts de teste. O backend de produção será construído neste repositório, fora de `scripts/` ([ADR-007](docs/adr/ADR-007-onde-mora-o-produto.md)), em Python 3.12 ou superior com `uv` ([ADR-008](docs/adr/ADR-008-linguagem-e-ambiente.md)); as decisões técnicas que faltam estão no [mapa de decisões](docs/adr/README.md).
+Observatório CFEM / RI Carajás: dados públicos sobre a Compensação Financeira pela Exploração de Recursos Minerais (CFEM) e indicadores dos 12 municípios da Região de Integração Carajás, no Pará. O repositório tem a pesquisa, a documentação de regras de negócio, o laboratório (`scripts/`) e o início do produto: o backend de produção em `backend/`, fora de `scripts/` ([ADR-007](docs/adr/ADR-007-onde-mora-o-produto.md)), em Python 3.12 com `uv` ([ADR-008](docs/adr/ADR-008-linguagem-e-ambiente.md)). Desde 21/11/2026 ele tem a estrutura do [ADR-013](docs/adr/ADR-013-organizacao-do-repositorio.md) e a API de leitura da Fase 1; coleta, validação e publicação ainda não foram escritas. As decisões técnicas estão no [mapa de decisões](docs/adr/README.md).
 
 O idioma do projeto é o português do Brasil. Use datas absolutas (por exemplo, 30/10/2026), nunca "ontem" ou "semana passada".
 
@@ -14,8 +14,30 @@ O idioma do projeto é o português do Brasil. Use datas absolutas (por exemplo,
 - `docs/`: o índice está em [docs/README.md](docs/README.md). `docs/guias/` diz como rodar as coletas; `docs/registros/` guarda resultados datados de execuções; `docs/adr/` e `docs/api/` têm decisões técnicas e o esboço da API.
 - `docs/produto/`: o [Product Backlog](docs/produto/backlog.md), retrato datado do que o produto deve entregar e quando, com a correspondência de cada item com as regras. Não é fonte de regra: um item do backlog não cria nem muda regra sem decisão do mantenedor, e os conflitos com as regras ficam na seção 6 de `pendencias.md`.
 - `docs/regras-de-negocio/fontes/`: documentos de origem (decisões, blocos, plano, relatórios de laboratório e a pesquisa). São material histórico: não os reescreva sem pedido explícito.
-- `scripts/`: todo o código do repositório, em Python gerenciado com `uv` (coleta, validação, protótipo local da API, notebook e testes). **Apenas testes e laboratório**: não vão para produção e não são a implementação do sistema. O mapa está em [scripts/README.md](scripts/README.md).
+- `backend/`: o produto (ver "Código do produto", abaixo, e [backend/README.md](backend/README.md)).
+- `scripts/`: o laboratório, em Python gerenciado com `uv` (coleta, validação, protótipo local da API, notebook e testes). **Apenas testes e laboratório**: não vão para produção e não são a implementação do sistema. O mapa está em [scripts/README.md](scripts/README.md).
 - `output/` e `tmp/` não são versionados (ver `.gitignore`).
+
+## Código do produto (`backend/`)
+
+Projeto `uv` com o pacote `observatorio` em `backend/src/` ([ADR-013](docs/adr/ADR-013-organizacao-do-repositorio.md)). Cada subpacote tem uma responsabilidade, ligada às regras:
+
+| Subpacote | Responsabilidade | Regras |
+| --- | --- | --- |
+| `modelo/` | esquema comum da observação, territórios e unidades | RN-MOD, RN-TER |
+| `fontes/` | um módulo por fonte: baixa o bruto e o converte em observações do modelo comum | RN-FNT, RN-FON |
+| `validacao/` | qualidade e relatório de cada lote | RN-VPU |
+| `publicacao/` | pacote imutável, trocado só quando o lote passa | RN-VPU-01, RN-VPU-03 |
+| `api/` | FastAPI em camadas (`controllers`, `services`, `repositories`, `dtos`) | RN-ENT |
+| `config.py` | único lugar que lê variáveis de ambiente | |
+
+Ao escrever código do produto:
+
+- **Dependências entre subpacotes:** `modelo` não importa nenhum outro; `api` lê só o pacote publicado e nunca importa `fontes`, `validacao` ou `publicacao` (RN-ENT-01). O produto não importa nada de `scripts/`; o que vier do laboratório é portado de propósito.
+- **Padrões ([ADR-017](docs/adr/ADR-017-padroes-de-codigo.md)):** nomes do domínio em português; tipos em todas as funções, conferidos pelo mypy `--strict` (no CI a partir do PR do ADR-012, junto com o `import-linter`); configuração só em `config.py`, sem calcular caminho com `Path(__file__).parents[n]`; o código que implementa uma regra cita o RN-xxx na docstring, e um teste cita a mesma regra.
+- **Fontes:** cada fonte tem um teste com uma amostra pequena do arquivo real e a lista das colunas esperadas (RN-VPU-04); registra a proveniência e os filtros usados (RN-FON-13, RN-FON-14).
+- **Dados ([ADR-018](docs/adr/ADR-018-biblioteca-de-processamento-de-dados.md)):** polars, com `Decimal` para dinheiro (RN-CFE-11); arquivos latin-1 são convertidos para UTF-8 antes da leitura. Os critérios de conferência do primeiro PR de fonte estão em [pendencias-implementacao-adr-017-018.md](docs/adr/pendencias-implementacao-adr-017-018.md).
+- **Comandos** (da raiz): `uv run --project backend pytest backend` e `uv run --project backend ruff check backend`. O ambiente Docker está em [backend/README.md](backend/README.md).
 
 ## Regras de negócio: como escrever
 
@@ -68,7 +90,7 @@ Os detalhes e as datas das verificações estão nas notas de evidência das reg
 
 - Toda mudança vai numa branch nova criada a partir da `develop` (não da `main` nem da branch em que a sessão estiver), com um PR para a `develop` preparado ao final. Decisão do mantenedor de 07/11/2026. Commit, push e PR seguem as regras acima. Nunca faça push direto na `develop` nem na `main`.
 - Fora desse fluxo (merge do PR, apagar branch, forçar push, reescrever histórico), pergunte e não presuma.
-- Scripts novos vão em `scripts/<tema>/`, em Python, com docstring que diga o que fazem e que são de teste. Dependências entram pelo `uv add` (e o `uv.lock` é versionado); rode `uv run pytest` antes de commitar. A saída fica fora do repositório.
+- Scripts novos vão em `scripts/<tema>/`, em Python, com docstring que diga o que fazem e que são de teste. Dependências entram pelo `uv add` (e o `uv.lock` é versionado); rode `uv run pytest` antes de commitar e, se mexeu em `backend/`, também `uv run --project backend pytest backend`. A saída fica fora do repositório.
 - Decisões que contrariam os documentos de origem devem ser anotadas na regra (campo Exceções) e em `pendencias.md`, não apagadas das fontes.
 
 ## Pendências conhecidas do projeto
