@@ -87,8 +87,8 @@ jobs:
           git commit -m "dados: manifestos da coleta de $(date -u +%Y-%m-%d)"
           git push origin HEAD:arquivo-anm
 
-      - name: Falhar se algum documento não baixou
+      - name: Avisar se algum documento não baixou
         if: steps.docs.outputs.erros != '0'
         run: |
-          echo "Algum documento de documentos.json não foi baixado; veja o passo anterior." >&2
-          exit 1
+          # Aviso, não falha: um PDF avulso fora do ar não deve bloquear os CSVs nem os demais documentos.
+          echo "::warning title=Documento da ANM não baixado::Algum documento de documentos.json falhou mesmo com novas tentativas; veja o passo 'Arquivar documentos avulsos (PDF)'."
