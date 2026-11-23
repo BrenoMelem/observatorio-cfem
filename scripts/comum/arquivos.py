@@ -6,9 +6,10 @@ import json
 import os
 import secrets
 import string
-from datetime import datetime, timezone
+from collections.abc import Callable, Iterable
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Callable, Iterable
+from typing import Any
 
 # Função que busca uma URL e devolve (status HTTP, corpo em texto). Os testes injetam uma simulada.
 Buscar = Callable[[str], tuple[int, str]]
@@ -17,12 +18,12 @@ PASTA_PADRAO = os.environ.get("OBS_DATA_DIR", "output/observatorio")
 
 
 def agora() -> datetime:
-    return datetime.now(timezone.utc)
+    return datetime.now(UTC)
 
 
 def iso_utc(instante: datetime) -> str:
     """Formato 2026-10-30T12:00:00.000Z."""
-    instante = instante.astimezone(timezone.utc)
+    instante = instante.astimezone(UTC)
     return instante.strftime("%Y-%m-%dT%H:%M:%S.") + f"{instante.microsecond // 1000:03d}Z"
 
 

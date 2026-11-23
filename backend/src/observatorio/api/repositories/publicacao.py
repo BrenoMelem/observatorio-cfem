@@ -1,4 +1,5 @@
 """Lê exclusivamente o pacote publicado, sem consultar fonte externa (RN-ENT-01)."""
+
 import json
 from pathlib import Path
 
@@ -31,7 +32,8 @@ def manifesto_publicado(pasta: Path | None = None) -> dict[str, dict[str, object
     except ValueError as erro:
         raise PublicacaoInvalida("Manifesto de indicadores inválido") from erro
     if not isinstance(bruto, dict) or not all(
-        isinstance(d, dict) and all(isinstance(d.get(c), str) for c in CAMPOS_MANIFESTO) for d in bruto.values()
+        isinstance(d, dict) and all(isinstance(d.get(c), str) for c in CAMPOS_MANIFESTO)
+        for d in bruto.values()
     ):
         raise PublicacaoInvalida("Manifesto de indicadores inválido")
     return bruto
