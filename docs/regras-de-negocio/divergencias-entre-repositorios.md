@@ -6,7 +6,7 @@ Registro da comparação de 08/11/2026 e do que o mantenedor decidiu. A decisão
 
 | Repositório | O que é |
 | --- | --- |
-| `observatorio-cfem` (este) | Regras de negócio, pesquisa e scripts de laboratório. Não é o produto |
+| `observatorio-cfem` (este) | Regras de negócio, pesquisa e scripts de laboratório. Ainda não é o produto; o backend de produção será construído aqui (decisão de 11/11/2026, [ADR-007](../adr/ADR-007-onde-mora-o-produto.md)) |
 | `obcefem_api` | Protótipo funcional: API em FastAPI e painel web de arrecadação e distribuição da CFEM, com atualização diária. Publicado na Vercel |
 | `obcefem` | Site institucional estático, com uma página por dimensão. Os gráficos das dimensões trazem o selo "dados reais" ou "dados fictícios (protótipo)" e os links "Disponível" apontam para o painel da `obcefem_api` |
 
@@ -20,7 +20,7 @@ Os 12 municípios (RN-TER-01), a ANM como fonte única (RN-CFE-01), o valor pron
 
 | # | Tema | Diferença | Decisão (08/11/2026) | Registro |
 | --- | --- | --- | --- | --- |
-| D1 | Distribuição | A API calcula a repartição pela lei (arrecadado × percentual); aqui a recebida vem do arquivo da ANM | Seguir a API. Percentuais conferidos nas Leis 8.001/1990 e 13.540/2017. A estimativa é análise derivada; a recebida continua do arquivo | [RN-CFE-25](mineracao-cfem.md), [RN-CFE-26](mineracao-cfem.md) |
+| D1 | Distribuição | A API calcula a repartição pela lei (arrecadado × percentual); aqui a recebida vem do arquivo da ANM | Seguir a API. Percentuais conferidos nas Leis 8.001/1990 e 13.540/2017. A estimativa é análise derivada; a recebida continua do arquivo. Em 12/11/2026: 60/15/15/10 a partir de 2018 (2017 inteiro em 65/23/12) e 15% rotulados "afetados" desde 2018, com ressalva, como a API | [RN-CFE-25](mineracao-cfem.md), [RN-CFE-26](mineracao-cfem.md) |
 | D2 | Duplicatas | A API soma as 129 linhas repetidas; aqui o lote ficaria bloqueado | Manter o que a API faz | Exceção em [RN-VPU-11](validacao-e-publicacao.md) |
 | D3 | Ano parcial | A API rotula o ano em curso "(parcial)" e usa o volume de registros (50% da mediana) | Manter o que a API faz | Exceção em [RN-CFE-05](mineracao-cfem.md) e [RN-CFE-06](mineracao-cfem.md) |
 | D4 | Ano da autuação | A API usa o ano do processo de cobrança e descarta as sem ano; aqui vale a data de publicação e a faixa "sem ano" | Manter o que a API faz | Exceção em [RN-CFE-14](mineracao-cfem.md) e [RN-CFE-16](mineracao-cfem.md) |
@@ -32,12 +32,24 @@ Os 12 municípios (RN-TER-01), a ANM como fonte única (RN-CFE-01), o valor pron
 | D10 | Foco | A API gira em torno de Parauapebas e Canaã dos Carajás | Manter o que a API faz | [RN-TER-13](territorio.md) |
 | D11 | Arrecadação: arquivos e início da série | A API usa arquivos por faixa de ano e começa em 2002; aqui vale o arquivo completo desde 2003 | Manter o que a API faz | Exceção em [RN-CFE-22](mineracao-cfem.md) |
 
+Decisão posterior, de 13/11/2026:
+
+| # | Tema | Diferença | Decisão (13/11/2026) | Registro |
+| --- | --- | --- | --- | --- |
+| D12 | Dimensões | O `obcefem` organiza o conteúdo em quatro dimensões e põe emprego e renda na social; aqui as fontes usam seis blocos temáticos e BLOCOS §Bloco 2 junta economia e mercado de trabalho. A `obcefem_api` só tem CFEM | A dimensão econômica é a primeira, com a CFEM dentro dela; emprego e renda ficam na social, como no `obcefem` | [RN-ENT-12](entrega-dos-dados.md) |
+
+Decisão posterior, de 19/11/2026:
+
+| # | Tema | Diferença | Decisão (19/11/2026) | Registro |
+| --- | --- | --- | --- | --- |
+| D14 | Metadados nas exportações | Os CSVs da API trazem só as colunas de dados, sem fonte, edição nem limitações | Seguir a regra deste repositório: proveniência em cada linha e método e limitações no arquivo de metadados entregue junto | [RN-ENT-05](entrega-dos-dados.md) |
+| D13 | Soma e arredondamento da CFEM | A API soma em ponto flutuante e arredonda ao par (`round` do Python); aqui a soma é decimal, com arredondamento ao centavo só no fim e meio centavo para cima. A diferença é de até 1 centavo por linha agregada | Seguir a regra deste repositório, não a API | [RN-CFE-11](mineracao-cfem.md) |
+
 ## Em aberto
 
-- **Início da repartição de 60/15/15/10:** 01/08/2017 (Lei 13.540/2017, art. 4º, III) ou 2018 (como a API). Ver RN-CFE-25 e [pendencias.md](pendencias.md), seção 2.
-- **Cota dos afetados sem decreto ou sem hipótese do inciso VII:** vai ao Estado pelo art. 2º, § 3º (redação da Lei 14.514/2022); a API dá os 15% aos afetados. Ver RN-CFE-25.
 - **Homologação:** RN-VPU-10 (só dado homologado alimenta os gráficos) continua valendo e a API ainda não a cumpre; não há exceção decidida.
 - **Efeito das 129 duplicatas** em reais nos totais: não foi medido (D2).
+- **Dimensões:** a composição das dimensões social, ambiental e institucional, a ordem entre elas e os indicadores da dimensão econômica do `obcefem` que não têm regra (receita corrente, investimento, ICMS). Ver RN-ENT-12 e [pendencias.md](pendencias.md), seção 4.
 - **O "15%" da cota municipal** que a API cita no arquivo de distribuição de 2023 a 2025 não foi reproduzido aqui. Ver RN-CFE-26.
 
 ## O que a comparação não verificou

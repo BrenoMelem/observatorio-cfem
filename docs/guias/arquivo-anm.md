@@ -12,6 +12,14 @@ O fluxo `.github/workflows/arquivar-anm.yml` roda a cada 4 horas (às 00, 04, 08
 4. Se algo mudou, cria a Release com os arquivos brutos (`.csv.gz`) e o relatório `diferencas.md`, e grava a nova entrada no manifesto.
 5. Arquiva os documentos avulsos listados em `scripts/cfem/documentos.json` (Releases `doc-AAAA-MM-DD`). O endereço dos PDFs mensais não é previsível, então a inclusão de um documento novo é manual (`nome`, `url`, `descricao`).
 
+## Como ler o relatório de diferenças
+
+O `diferencas.md` conta, por arquivo, as linhas adicionadas, removidas e modificadas, e soma o valor no recorte dos 12 municípios por ano e município.
+
+- **Modificada:** uma linha que sumiu e outra que apareceu, iguais em todas as colunas menos na do valor. A tabela mostra o valor antes, o valor depois e a diferença.
+- **Adicionada e removida:** as demais. Uma linha que mudou em outra coluna (por exemplo, na data de criação) conta como uma removida e uma adicionada.
+- As Releases anteriores a esta mudança (até `anm-2026-11-11-2233`) usam o formato antigo, em que toda linha modificada aparecia como uma removida e uma adicionada.
+
 ## Onde ficam as coisas
 
 - **Arquivos brutos:** nas Releases deste repositório, não no Git.

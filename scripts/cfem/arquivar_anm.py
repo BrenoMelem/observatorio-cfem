@@ -17,6 +17,7 @@ import csv
 import hashlib
 import json
 import sys
+import time
 from collections import defaultdict
 from collections.abc import Callable
 from decimal import Decimal
@@ -34,7 +35,14 @@ AGENTE = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko
 Baixador = Callable[[str, Path], dict]
 
 
-def baixar_http(url: str, destino: Path) -> dict:
+ESPERAS_ENTRE_TENTATIVAS = (2, 5, 15)  # segundos; 4 tentativas no total
+
+
+class ErroTransitorio(OSError):
+    """Falha que vale repetir: rede interrompida, tempo esgotado ou HTTP 5xx."""
+
+
+def _baixar_uma_vez(url: str, destino: Path) -> dict:
     """Baixa em fluxo (os arquivos têm centenas de MB) e devolve os cabeçalhos HTTP relevantes."""
     import ssl
 
@@ -44,17 +52,35 @@ def baixar_http(url: str, destino: Path) -> dict:
     contexto = ssl.create_default_context(cafile=certifi.where())
     contexto.load_verify_locations(CERTIFICADO_INTERMEDIARIO)  # a ANM não envia o intermediário
     destino.parent.mkdir(parents=True, exist_ok=True)
+    cabecalhos = {"User-Agent": AGENTE, "Accept": "*/*", "Accept-Language": "pt-BR,pt;q=0.9,en;q=0.5"}
     try:
-        with httpx.stream("GET", url, headers={"User-Agent": AGENTE}, timeout=600, follow_redirects=True,
+        with httpx.stream("GET", url, headers=cabecalhos, timeout=600, follow_redirects=True,
                           verify=contexto) as r:
+            if r.status_code >= 500:
+                raise ErroTransitorio(f"{url}: HTTP {r.status_code}")
             if r.status_code != 200:
                 raise OSError(f"{url}: HTTP {r.status_code}")
             with open(destino, "wb") as f:
                 f.writelines(r.iter_bytes(1 << 20))
             return {"last_modified": r.headers.get("last-modified"), "etag": r.headers.get("etag"), "content_type": r.headers.get("content-type"),
                     "content_length": r.headers.get("content-length")}
+    except (httpx.TransportError, httpx.TimeoutException) as erro:  # inclui ConnectError e ReadError
+        raise ErroTransitorio(f"{url}: {type(erro).__name__}: {erro}") from erro
     except httpx.HTTPError as erro:
         raise OSError(f"{url}: {type(erro).__name__}: {erro}") from erro
+
+
+def baixar_http(url: str, destino: Path, esperas: tuple[float, ...] = ESPERAS_ENTRE_TENTATIVAS,
+                dormir: Callable[[float], None] = time.sleep) -> dict:
+    """Baixa com novas tentativas (espera crescente) quando a falha é transitória; 4xx não repete."""
+    for espera in esperas:
+        try:
+            return _baixar_uma_vez(url, destino)
+        except ErroTransitorio as erro:
+            print(f"Tentativa falhou ({erro}); nova tentativa em {espera}s.", file=sys.stderr)
+            destino.unlink(missing_ok=True)
+            dormir(espera)
+    return _baixar_uma_vez(url, destino)
 
 
 def resumir(arquivo: Path, fonte: str) -> dict:

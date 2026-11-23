@@ -39,12 +39,13 @@ As fontes divergiam sobre a forma da entrega: DECISÕES e PLANO descrevem uma ca
 - **Relacionadas:** RN-MOD-21, RN-MOD-22, RN-TMP-02
 
 ### RN-ENT-05: Exportações levam os metadados junto dos valores
-- **Status:** PROPOSTA
-- **Regra:** As exportações em CSV ou JSON devem incluir os metadados (fonte, edição, método, limitações) junto dos valores.
+- **Status:** DECIDIDA
+- **Regra:** Toda exportação, em CSV ou JSON, deve trazer em cada linha o identificador do indicador, a fonte, a edição da fonte, a data de coleta, a versão do tratamento, a natureza do valor e o estado de validação (RN-MOD-02). O método e as limitações do indicador vão no arquivo de metadados do indicador, o mesmo do catálogo (PB-09), entregue junto com o download.
 - **Motivo:** Um valor exportado sem contexto perde a rastreabilidade.
 - **Exemplo:** O CSV da CFEM recebida traz fonte ANM e a limitação de que distribuição não equivale a arrecadação.
-- **Fonte:** CONSUMO §Contrato de dados para o front-end. Não consta em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10.
-- **Relacionadas:** RN-ENT-03, RN-MOD-02
+- **Exceções:** Os CSVs da `obcefem_api` (`/api/v1/exportar.csv` e `/api/v1/distribuicao/exportar.csv`) trazem só as colunas de dados, sem fonte, edição nem limitações (conferido em `app/main.py` em 19/11/2026); ao portar, vale esta regra. Ver [divergências entre repositórios](divergencias-entre-repositorios.md), D14.
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026; CONSUMO §Contrato de dados para o front-end.
+- **Relacionadas:** RN-ENT-03, RN-MOD-02, RN-MOD-25
 
 ### RN-ENT-06: Arquivos integrais da ANM não vão ao consumidor
 - **Status:** DECIDIDA
@@ -58,7 +59,7 @@ As fontes divergiam sobre a forma da entrega: DECISÕES e PLANO descrevem uma ca
 - **Status:** PROPOSTA
 - **Regra:** O assistente de IA deve responder apenas com dados da camada publicada, sempre com fonte, período e limitações, e quando não houver observação validada compatível deve dizer que não há dado validado e explicar a lacuna.
 - **Motivo:** Evita resposta inventada e mantém a mesma garantia de procedência do restante do observatório.
-- **Exemplo:** Perguntado sobre o total anual de distribuição da CFEM de 2025, o assistente deve informar que o total está bloqueado por falta de julho de 2025, e não somar os meses disponíveis.
+- **Exemplo:** Perguntado sobre o total anual de distribuição da CFEM de 2025, o assistente deve informar que o total publicado está incompleto, sem julho de 2025 (RN-CFE-08), e não apresentá-lo como total do ano.
 - **Fonte:** CONSUMO §Contrato de dados para o front-end. VAL-15/10 §Resposta ao orientador (item 2) lista como critério de avaliação a "recusa de inventar número ausente", sem fixar a regra.
 - **Relacionadas:** RN-ENT-01, RN-ENT-08, RN-CFE-05, RN-MOD-08
 
@@ -67,17 +68,18 @@ As fontes divergiam sobre a forma da entrega: DECISÕES e PLANO descrevem uma ca
 - **Regra:** O assistente deve ser avaliado por: taxa de respostas corretas com citação, recusa de inventar número ausente, latência (p50 e p95), disponibilidade, custo por consulta e cobertura de perguntas dos 12 municípios, com um conjunto de perguntas de respostas verificadas pela equipe.
 - **Motivo:** Dá critério objetivo para aceitar o assistente.
 - **Exemplo:** Conjunto de perguntas sobre população e CFEM de Canaã dos Carajás e Parauapebas com respostas verificadas.
-- **Exceções:** As metas numéricas de cada critério estão **EM ABERTO**; não há evidência de que a avaliação tenha sido executada.
+- **Exceções:** As metas numéricas de cada critério estão **EM ABERTO**; não há evidência de que a avaliação tenha sido executada. Em 11/11/2026 o mantenedor definiu a prioridade: o assistente é etapa posterior ao tratamento dos dados, e os critérios e as metas só serão fixados quando essa etapa começar (a regra segue PROPOSTA; não é esquecimento, é ordem de trabalho).
 - **Fonte:** VAL-15/10 §Resposta ao orientador (item 2). O próprio VAL-15/10 chama os critérios de "propostos".
 - **Relacionadas:** RN-ENT-07
 
-### RN-ENT-09: Primeiros gráficos
-- **Status:** PROPOSTA
-- **Regra:** Os primeiros gráficos devem usar dados homologados de população municipal e de CFEM arrecadada e recebida, em painéis separados.
-- **Motivo:** Começa pelo que já tem rota validada e respeita que arrecadação e distribuição são medidas distintas.
-- **Exemplo:** Painel de população de Canaã e Parauapebas; painéis separados de CFEM arrecadada e CFEM recebida.
-- **Fonte:** VAL-15/10 §Resposta ao orientador (item 3), que é uma recomendação do relatório e não uma decisão de DECISÕES ou de BLOCOS; BLOCOS §Bloco 1 (população como primeiro pipeline).
-- **Relacionadas:** RN-CFE-02, RN-VPU-10
+### RN-ENT-09: Primeiros dados entregues para os painéis
+- **Status:** DECIDIDA
+- **Regra:** Os primeiros dados que a API entrega para os painéis devem ser a CFEM arrecadada e a CFEM recebida, homologadas e como séries separadas. A população entra no início só como denominador dos indicadores per capita (RN-IND-09, RN-IND-12); a série própria de população vem com a dimensão social. Como e em que ordem o front-end monta os gráficos fica com a equipe do front-end.
+- **Motivo:** A dimensão econômica é a primeira (RN-ENT-12), a CFEM é o centro do projeto, e arrecadação e distribuição são medidas distintas.
+- **Exemplo:** Séries separadas de CFEM arrecadada e de CFEM recebida de Canaã dos Carajás e Parauapebas, só com dado homologado (RN-VPU-10).
+- **Exceções:** Contraria a recomendação do VAL-15/10 e BLOCOS §Bloco 1, que punham a população entre os primeiros (decisão de 19/11/2026). A primeira versão inclui as quatro dimensões (RN-ENT-12), então a população entra nela de qualquer forma.
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026; VAL-15/10 §Resposta ao orientador (item 3); BLOCOS §Bloco 1.
+- **Relacionadas:** RN-CFE-02, RN-VPU-10, RN-ENT-12
 
 ### RN-ENT-10: Licença de reuso das exportações
 - **Status:** OBSOLETA
@@ -96,3 +98,12 @@ As fontes divergiam sobre a forma da entrega: DECISÕES e PLANO descrevem uma ca
 - **Exceções:** Não flexibiliza RN-VPU-10: dado fictício não é dado homologado e não entra na camada publicada.
 - **Fonte:** DECISÃO-MANTENEDOR de 08/11/2026; `obcefem`, páginas `dimensao-*.html`.
 - **Relacionadas:** RN-VPU-10, RN-ENT-04
+
+### RN-ENT-12: A dimensão econômica é a primeira
+- **Status:** DECIDIDA
+- **Regra:** A dimensão econômica deve ser a primeira a ser feita, tanto na carga dos dados quanto nos painéis; as dimensões social, ambiental e institucional vêm depois, nessa ordem. A dimensão econômica reúne: a CFEM (arrecadação, distribuição e autuações), o PIB municipal e seus derivados, os preços do minério de ferro e do cobre, as finanças municipais e a despesa por função.
+- **Motivo:** O projeto trata principalmente da CFEM e da economia e é um projeto da Vale; por ser um dos pontos principais, esse conteúdo deve ficar pronto antes dos demais.
+- **Exemplo:** A página da dimensão econômica do `obcefem` tem quatro seções: dinâmica econômica (PIB), preços do minério e do cobre, finanças municipais, e investimento público e despesa por função; a página inicial lista "Distribuição da CFEM" nessa dimensão. A `obcefem_api` inteira (arrecadação, autuações e distribuição estimada) é CFEM e, portanto, pertence a ela (conferido no código dos dois repositórios em 13/11/2026).
+- **Exceções:** (1) Emprego e renda ficam na dimensão social, como no `obcefem`, por decisão do mantenedor de 13/11/2026; isso contraria BLOCOS §Bloco 2, que junta economia e mercado de trabalho (04/10/2026, última edição 20/10/2026). BLOCOS não foi alterado. (2) A ordem não flexibiliza RN-VPU-10: só dado homologado alimenta os gráficos, e RN-ENT-11 continua valendo para dado fictício. (3) A ordem das outras três dimensões foi decidida em 15/11/2026 (social, ambiental, institucional). A composição delas segue o `obcefem` (decisão de 15/11/2026), exceto a despesa por função, que o `obcefem` divide e esta regra deixa inteira na economia. A relação receita per capita × IDSC fica na dimensão institucional, como no `obcefem` (decisão de 15/11/2026). A receita corrente, a cota-parte do ICMS repassado e o investimento público vêm do SICONFI (Anexos I-C e I-D) de 2013 em diante (decisão de 15/11/2026, estendida em 20/11/2026), pelos códigos de cada período: receita corrente 1.0.0.0.00.00.00 (até 2017) e 1.0.0.0.00.0.0 (desde 2018); cota-parte do ICMS 1.7.2.2.01.01.00 (até 2017), 1.7.2.8.01.1.0 (2018 a 2021) e 1.7.2.1.50.0.0 (desde 2022); investimento, despesa paga 4.4.00.00.00, em todo o período. Cada valor guarda o código usado no ano, a série leva marca visível em 2018 e 2022 ("mudança na classificação contábil do Tesouro") e os anos sem DCA ficam ausentes (RN-MOD-10). A fonte, o declarante e o nome da conta são os mesmos nos três períodos; a conferência foi feita em 20/11/2026 com `uv run python -m scripts.financas.codigos_dca output/financas/dca_anexos.csv` (os 12 municípios têm de 9 a 13 anos com os três indicadores). (4) A primeira versão, no ar até maio de 2027, reúne os itens PB-01 a PB-14 do [backlog](../produto/backlog.md) com as quatro dimensões completas, nesta ordem de trabalho; o PB-04 (perfis de acesso e login) fica fora dela e entra quando houver conteúdo a moderar e o conflito B1 estiver decidido (decisão de 19/11/2026). Ver [pendencias.md](pendencias.md), seção 4.
+- **Fonte:** DECISÃO-MANTENEDOR de 13/11/2026 (dimensão econômica), de 15/11/2026 (ordem e composição das demais, fonte da receita, do ICMS e do investimento), de 19/11/2026 (itens da primeira versão) e de 20/11/2026 (série da receita, do ICMS e do investimento desde 2013); `obcefem`, páginas `index.html` e `dimensao-economica.html`; `obcefem_api`. A composição corresponde a BLOCOS §Bloco 3 (Mineração e CFEM), §Bloco 6 (Finanças Públicas) e à parte de PIB e preços do §Bloco 2.
+- **Relacionadas:** RN-ENT-09, RN-ENT-11, RN-VPU-10, RN-CFE-02, RN-CFE-25, RN-CFE-26, RN-FNT-02, RN-FNT-04, RN-FNT-05, RN-IND-09, RN-IND-10

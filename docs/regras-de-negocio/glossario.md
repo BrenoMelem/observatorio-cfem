@@ -11,6 +11,8 @@ Termos e siglas usados nesta documentação. Os termos de domínio vêm de DECIS
 | DECIDIDA | Regra que vem de DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10, ou de decisão do mantenedor registrada em 24/10/2026 |
 | PROPOSTA | Aguarda confirmação e consta em [pendencias.md](pendencias.md). Regra deduzida, vinda só de CONSUMO, MAPA-TEMAS, PESQUISA, PLANO ou do código, sem decisão registrada |
 | EM ABERTO | Ponto sem decisão, ou com fontes em conflito; todos constam em [pendencias.md](pendencias.md) |
+| dimensão | Cada um dos quatro agrupamentos de indicadores do produto: social, econômica, ambiental e institucional. É o termo do Product Backlog e das páginas do `obcefem`. A dimensão econômica é a primeira e tem a composição de RN-ENT-12; a correspondência das outras três está decidida em 15/11/2026, salvo a receita × IDSC ([pendencias.md](pendencias.md), seção 4). Não se confunde com bloco temático (a divisão em seis blocos de BLOCOS) |
+| eixo | Só o eixo de um gráfico ou de uma classificação (RN-CFE-02, RN-TMP-13, RN-IND-03). Não é sinônimo de dimensão |
 | DECISÃO-MANTENEDOR | Decisão do mantenedor, de 24/10/2026, dada nas respostas da Fase 1 |
 | observação | Um valor de um indicador para um município e um período, com unidade, natureza, estado de validação, fonte e proveniência |
 | natureza do valor | O que o valor é: informado, zero real, ausente, não divulgado ou não aplicável (RN-MOD-06) |
@@ -72,7 +74,7 @@ Termos e siglas usados nesta documentação. Os termos de domínio vêm de DECIS
 | FAPESPA | Órgão estatístico do Pará; define a RI Carajás |
 | fato gerador | Ano em que o débito de CFEM se originou (contraste com lavratura) |
 | FINBRA | Base histórica de finanças municipais do Tesouro, organizada no IPEADATA |
-| FRED | Federal Reserve Economic Data, API das séries de commodities |
+| FRED | Federal Reserve Economic Data, API de séries econômicas; reserva das commodities desde 10/11/2026 (a fonte principal é o Pink Sheet) |
 | GEE (Google Earth Engine) | Plataforma do Google para dados geoespaciais; rota do MapBiomas |
 | `id_ente` | Parâmetro do SICONFI que recebe o código IBGE do município |
 | IDEB | Índice de Desenvolvimento da Educação Básica |
@@ -84,7 +86,7 @@ Termos e siglas usados nesta documentação. Os termos de domínio vêm de DECIS
 | lavratura | Ano em que a ANM emitiu a autuação (contraste com fato gerador) |
 | MapBiomas | Mapeamento anual de uso e cobertura do solo do Brasil |
 | N6 | Parâmetro do SIDRA que recorta o resultado a nível municipal |
-| Pink Sheet | Planilha mensal de preços de commodities do World Bank (só download) |
+| Pink Sheet | Planilha mensal de preços de commodities do World Bank (só download); fonte do ferro e do cobre |
 | PySUS | Biblioteca que baixa e converte microdados do DATASUS, citada por DECISÕES como rota de saúde |
 | RAIS | Relação Anual de Informações Sociais: vínculos formais (estoque), com quebras por setor, sexo e escolaridade |
 | RI Carajás | Região de Integração Carajás: 12 municípios do Pará |

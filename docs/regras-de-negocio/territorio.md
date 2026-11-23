@@ -50,11 +50,12 @@ Canaã dos Carajás e Parauapebas são os municípios de foco do observatório.
 - **Relacionadas:** RN-TER-04, RN-TER-06, RN-TER-08
 
 ### RN-TER-04: Código tratado como texto
-- **Status:** PROPOSTA
+- **Status:** DECIDIDA
 - **Regra:** O código IBGE deve ser tratado como texto, e não como número.
-- **Motivo:** Evita perda de dígitos à esquerda em códigos de outros estados e evita conversões silenciosas.
+- **Motivo:** O código é um identificador, não uma quantidade. Como texto, o cruzamento entre fontes não falha em silêncio (uma fonte com o código em texto e outra em número deixam de casar sem erro), e fica explícita a conversão das fontes que usam o código de 6 dígitos, sem o dígito verificador.
 - **Exemplo:** O laboratório de fontes e os scripts guardam os 12 códigos como texto.
-- **Fonte:** NOTEBOOK (célula 1); SCRIPTS (`build_cfem_distribution_municipal`, `validate_anm_cfem`).
+- **Exceções:** O motivo original ("evita perda de dígitos à esquerda") foi substituído em 19/11/2026: nenhum código IBGE de município começa com zero, porque o prefixo da UF vai de 11 a 53.
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026 (confirmação da proposta, com o motivo reescrito); NOTEBOOK (célula 1); SCRIPTS (`build_cfem_distribution_municipal`, `validate_anm_cfem`).
 - **Relacionadas:** RN-TER-03
 
 ### RN-TER-05: Checagem dos nomes na largada
@@ -74,11 +75,11 @@ Canaã dos Carajás e Parauapebas são os municípios de foco do observatório.
 - **Relacionadas:** RN-TER-07, RN-CFE-13
 
 ### RN-TER-07: Comparação de nomes sem acento e sem diferença de caixa, apenas para o Pará
-- **Status:** PROPOSTA
+- **Status:** DECIDIDA
 - **Regra:** A equivalência por nome deve ignorar acentos e diferença entre maiúsculas e minúsculas e deve considerar apenas registros da UF PA.
 - **Motivo:** Há municípios homônimos em outros estados e a fonte pode variar a grafia.
 - **Exemplo:** O validador dos arquivos da ANM compara "Canaã dos Carajás" e "CANAA DOS CARAJAS" como o mesmo município quando a UF é PA.
-- **Fonte:** SCRIPTS (`validate_anm_cfem`, rotina de normalização e filtro de UF). Deduzida do código.
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026 (confirmação da proposta); SCRIPTS (`validate_anm_cfem`, rotina de normalização e filtro de UF). Deduzida do código.
 - **Relacionadas:** RN-TER-06
 
 ### RN-TER-08: Código do TSE exige tabela de equivalência
@@ -94,8 +95,8 @@ Canaã dos Carajás e Parauapebas são os municípios de foco do observatório.
 - **Regra:** A lista de municípios mineradores usada na comparação deve ser configurável e, por padrão, deve ser formada pelos N municípios com maior CFEM recebida segundo o arquivo de distribuição.
 - **Motivo:** O arquivo da ANM é nacional, então a comparação com outros municípios mineradores não exige fonte nova, e a lista precisa mudar sem mudar regras.
 - **Exemplo:** O ranking considera o valor recebido por ente no arquivo de distribuição, que traz o código IBGE do ente (`CodigoEnte`).
-- **Exceções:** O valor de N, o período do ranking e a modalidade de distribuição usada no ranking estão **EM ABERTO**.
-- **Fonte:** DECISÕES §Bloco 3; BLOCOS §Bloco 3. Pendência registrada em [pendencias.md](pendencias.md).
+- **Padrão (DECISÃO-MANTENEDOR de 10/11/2026):** N = 10 e ranking do último ano fechado (com os 12 meses, RN-CFE-06), pela modalidade `Produtor` (RN-CFE-10). É só o padrão: o usuário pode configurar N, o período e a lista. Em 10/11/2026 o último ano fechado seria 2024, porque 2025 está bloqueado (RN-CFE-08); o ano muda quando o arquivo da ANM tiver os 12 meses de um ano novo.
+- **Fonte:** DECISÕES §Bloco 3; BLOCOS §Bloco 3; DECISÃO-MANTENEDOR de 10/11/2026 (padrão de N e do período).
 - **Relacionadas:** RN-CFE-10, RN-IND-10
 
 ### RN-TER-10: Nota sobre a criação de Canaã dos Carajás em 1994
@@ -107,11 +108,11 @@ Canaã dos Carajás e Parauapebas são os municípios de foco do observatório.
 - **Relacionadas:** RN-MOD-13, RN-MOD-15
 
 ### RN-TER-11: Guardar a composição territorial usada
-- **Status:** PROPOSTA
+- **Status:** DECIDIDA
 - **Regra:** Cada publicação deve registrar a composição da RI usada na agregação.
 - **Motivo:** Permite reproduzir um número regional antigo se a lista oficial mudar.
 - **Exemplo:** Um total regional de 2025 registra os 12 códigos vigentes em out/2026.
-- **Fonte:** CONSUMO §Contrato de dados para o front-end (campos `geo_id`, `geo_level`).
+- **Fonte:** DECISÃO-MANTENEDOR de 19/11/2026 (confirmação da proposta); CONSUMO §Contrato de dados para o front-end (campos `geo_id`, `geo_level`).
 - **Relacionadas:** RN-TER-01, RN-MOD-02
 
 ### RN-TER-12: Declarar se o indicador usa residência ou ocorrência
@@ -127,6 +128,6 @@ Canaã dos Carajás e Parauapebas são os municípios de foco do observatório.
 - **Regra:** Parauapebas (1505536) e Canaã dos Carajás (1502152) são os municípios em destaque nas análises de CFEM, comparados com os demais municípios da RI Carajás, o Pará e o Brasil.
 - **Motivo:** O mantenedor mandou manter o que a `obcefem_api` faz, e as duas cidades concentram a CFEM da região.
 - **Exemplo:** Reproduzido do README da `obcefem_api`: a evolução anual mostra Parauapebas, Canaã e "demais municípios da região".
-- **Exceções:** Não muda RN-TER-01 nem RN-TER-02: os indicadores regionais continuam somando os 12 municípios.
-- **Fonte:** DECISÃO-MANTENEDOR de 08/11/2026; `obcefem_api`, README e `app/dominio.py`.
+- **Exceções:** Não muda RN-TER-01 nem RN-TER-02: os indicadores regionais continuam somando os 12 municípios. Quando o Product Backlog fala em "os dois municípios" (PB-06, PB-22), refere-se a este destaque, não a um recorte da carga (DECISÃO-MANTENEDOR de 17/11/2026, conflito B2 de [pendencias.md](pendencias.md)).
+- **Fonte:** DECISÃO-MANTENEDOR de 08/11/2026 e de 17/11/2026 (leitura do backlog); `obcefem_api`, README e `app/dominio.py`.
 - **Relacionadas:** RN-TER-01, RN-TER-02, RN-CFE-27

@@ -16,7 +16,7 @@ Os scripts rodam como módulo, a partir da raiz do repositório: `uv run python 
 
 | Pasta | Script | O que faz |
 | --- | --- | --- |
-| `cfem/` | `preparar.py` | Lê `CFEM_Arrecadacao.csv` da ANM e gera a CFEM arrecadada mensal e anual provisória (RN-CFE-04 a 07, RN-CFE-11) |
+| `cfem/` | `preparar.py`, `meses_por_municipio.py` (meses com linha por município, RN-CFE-23) | Lê `CFEM_Arrecadacao.csv` da ANM e gera a CFEM arrecadada mensal e anual provisória (RN-CFE-04 a 07, RN-CFE-11) |
 | | `analisar_duplicatas.py` | Relatório das linhas duplicadas da arrecadação, sem identificadores pessoais (RN-VPU-11) |
 | | `validar_arquivo_anm.py` | Confere a cobertura municipal de um CSV da ANM (arrecadação, distribuição ou autuação) |
 | | `distribuicao_municipal.py` | Agrega a distribuição da ANM por município, ano, mês e modalidade (RN-CFE-11) |
@@ -24,11 +24,13 @@ Os scripts rodam como módulo, a partir da raiz do repositório: `uv run python 
 | | `arquivar_anm.py`, `arquivar_documentos.py`, `comparar_versoes_anm.py` | Arquivo das versões da ANM em Releases, com manifesto e relatório de diferenças (RN-TMP-18; ver `docs/guias/arquivo-anm.md`) |
 | | `checar_totais_regras.py` | Confere os totais de status das regras contra o `README.md` de `docs/regras-de-negocio/` |
 | `populacao/` | `atualizar.py` | População estimada do IBGE (SIDRA 6579/9324), com validação e reconciliação |
-| `financas/` | `dca_lote.py` | DCA Anexo I-E do SICONFI em lote validado, sem homologar |
+| `financas/` | `dca_lote.py`, `conferir_fonte_cfem.py` (fonte 1708 × DCA × ANM, RN-CFE-24), `codigos_dca.py` (códigos da DCA por ano, RN-ENT-12) | DCA Anexo I-E do SICONFI em lote validado, sem homologar |
 | | `dca_csv.py` | DCA Anexo I-E em CSV simples por função |
+| | `dca_anexos.py` | DCA Anexos I-C (receitas, cota-parte do ICMS) e I-D (despesas, investimento) em CSV longo, 12 municípios, 2013 a 2025 (RN-ENT-12) |
 | | `msc_despesa_fonte.py` | MSC orçamentária por fonte de recursos (`1708`) |
-| `commodities/` | `fred.py` | Preço de ferro e cobre no FRED (exige `FRED_API_KEY` no ambiente) |
-| `sondas/` | `ibge_sidra.py`, `ipeadata.py`, `inspecionar_ipeadata.py`, `worldbank_commodities.py` | Provas de que a fonte responde e como (laboratório) |
+| `commodities/` | `pink_sheet.py`, `fred.py` | Preço de ferro e cobre: Pink Sheet do World Bank (fonte principal, sem chave) e FRED (reserva, exige `FRED_API_KEY` no ambiente) |
+| `emissoes/` | `seeg.py` | Emissões do SEEG: lê a planilha municipal (centenas de MB, fora do Git) e extrai o recorte dos 12 municípios com os metadados |
+| `sondas/` | `ibge_sidra.py`, `ipeadata.py`, `inspecionar_ipeadata.py`, `worldbank_commodities.py`, `tcmpa.py` (conflito B4), `ibge_bairros.py` (conflito B5), `basedosdados_colunas.py` (colunas do catálogo da Base dos Dados, RN-MOD-16), `pib_per_capita_ri.py` (razão regional, RN-MOD-18), `siconfi_entregas.py` (status das entregas da DCA, RN-TMP-04) | Provas de que a fonte responde e como (laboratório) |
 | `servidor/` | `servidor.py` | API local do protótipo; lê só a camada publicada (`docs/api/openapi.yaml`) |
 | `notebook/` | `construir_notebook.py` | Gera o notebook de laboratório (`laboratorio_fontes_observatorio_cfem.ipynb`) |
 | `comum/` | `municipios.py`, `arquivos.py` | Os 12 municípios, os campos do esquema comum e utilitários de arquivo |

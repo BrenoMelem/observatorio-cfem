@@ -46,13 +46,14 @@ Fonte: DECISÕES §Indicadores compostos; BLOCOS §Bloco 6.
 - **Fonte:** DECISÕES §Indicadores compostos; BLOCOS §Bloco 6.
 - **Relacionadas:** RN-IND-01, RN-IND-08
 
-### RN-IND-05: Derivado ou composto é marcado como análise derivada
-- **Status:** PROPOSTA
-- **Regra:** Todo indicador composto ou derivado deve ser marcado como análise derivada e não como indicador oficial contínuo, guardando o ano de referência, os cortes, o deflator e a regra de classificação.
+### RN-IND-05: Composto ou classificação é marcado como análise derivada
+- **Status:** DECIDIDA
+- **Regra:** Todo indicador composto ou classificação deve ser marcado como análise derivada e não como indicador oficial contínuo, guardando o ano de referência, os cortes, o deflator e a regra de classificação. Os derivados simples (per capita e participações, como em RN-IND-09 e RN-IND-10) são séries normais, rotuladas "calculado pelo observatório a partir de" suas fontes, com numerador e denominador registrados (RN-MOD-17).
 - **Motivo:** Evita que uma conclusão de estudo seja lida como série oficial.
 - **Exemplo:** A relação do TD 3146 guarda o ano de referência, os cortes de receita e de IDSC e a regra de classificação.
-- **Fonte:** CONSUMO §Finanças públicas e índices (receita per capita e IDSC). Não consta em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10.
-- **Relacionadas:** RN-IND-01, RN-MOD-17
+- **Fonte:** DECISÃO-MANTENEDOR de 20/11/2026 (proposta confirmada e restrita a compostos e classificações); CONSUMO §Finanças públicas e índices (receita per capita e IDSC). Não consta em DECISÕES, BLOCOS, LAB-19/10 ou VAL-15/10.
+- **Exceções:** A proposta original valia para "todo indicador composto ou derivado"; em 20/11/2026 o mantenedor restringiu a marca aos compostos e classificações.
+- **Relacionadas:** RN-IND-01, RN-IND-09, RN-IND-10, RN-MOD-17
 
 ### RN-IND-06: Mineração × cobertura florestal é derivado próprio
 - **Status:** DECIDIDA
@@ -82,11 +83,11 @@ Fonte: DECISÕES §Indicadores compostos; BLOCOS §Bloco 6.
 
 ### RN-IND-09: PIB per capita e participação da RI no PIB são dois indicadores
 - **Status:** DECIDIDA
-- **Regra:** O indicador "% PIB RI-Carajás per capita" do Bloco 2 deve ser separado em dois indicadores derivados: o PIB per capita (PIB municipal ÷ população do mesmo ano) e a participação da RI Carajás no PIB.
+- **Regra:** O indicador "% PIB RI-Carajás per capita" do Bloco 2 deve ser separado em indicadores derivados: o PIB per capita (`pib_per_capita`, "PIB per capita", PIB municipal ÷ população do mesmo ano) e a participação da RI Carajás no PIB, calculada nas duas bases, como dois indicadores no manifesto: `participacao_pib_para` ("Participação da RI Carajás no PIB do Pará") e `participacao_pib_brasil` ("Participação da RI Carajás no PIB do Brasil"). A participação é a soma do PIB dos 12 municípios dividida pelo PIB da base (RN-MOD-18), com todos os valores do mesmo ano; o PIB do Pará e o do Brasil saem do mesmo agregado do SIDRA, nos níveis UF e Brasil.
 - **Motivo:** O nome original mistura porcentagem e per capita; a fórmula de BLOCOS ("PIB ÷ população") corresponde ao PIB per capita, e CONSUMO lista os dois itens separados.
 - **Exemplo:** CONSUMO lista "PIB per capita e participação da RI Carajás" como dois itens.
-- **Exceções:** A base da participação (PIB do Pará, PIB da RI ou outra) e o nome final de cada indicador no manifesto não foram definidos e constam em [pendencias.md](pendencias.md). O PIB municipal e a população devem ser do mesmo ano, e a série de população está em aberto (RN-IND-12). BLOCOS ainda traz um só indicador no Bloco 2 e precisa ser atualizado.
-- **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026; BLOCOS §Bloco 2; PLANO §Bloco 2; CONSUMO §Economia e mercado de trabalho.
+- **Exceções:** O PIB municipal e a população devem ser do mesmo ano; a população do per capita do PIB não foi fixada nesta regra (a da CFEM per capita está em RN-IND-12, e a coerência entre as duas é desejável). BLOCOS ainda traz um só indicador no Bloco 2 e precisa ser atualizado.
+- **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026 (dois indicadores) e de 11/11/2026 (bases Pará e Brasil; nomes no manifesto); BLOCOS §Bloco 2; PLANO §Bloco 2; CONSUMO §Economia e mercado de trabalho.
 - **Relacionadas:** RN-MOD-17, RN-IND-10, RN-IND-12
 
 ### RN-IND-10: CFEM per capita e comparação com mineradores são derivados

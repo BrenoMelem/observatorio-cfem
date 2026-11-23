@@ -87,13 +87,13 @@ Não há código, pseudocódigo, rotas HTTP, nomes de funções, escolha de bibl
 | [modelo-de-dados.md](modelo-de-dados.md) | RN-MOD | Observação, natureza do valor, estado de validação, proveniência, comparabilidade | 28 |
 | [consumo-de-fontes.md](consumo-de-fontes.md) | RN-FON | Níveis A/B/C/D, procedência, acesso permitido e credenciais | 20 |
 | [regras-por-fonte.md](regras-por-fonte.md) | RN-FNT | Ressalvas específicas de cada fonte | 21 |
-| [temporalidade-e-atualizacao.md](temporalidade-e-atualizacao.md) | RN-TMP | Ano de referência, agenda por fonte, períodos, mudanças de método | 17 |
+| [temporalidade-e-atualizacao.md](temporalidade-e-atualizacao.md) | RN-TMP | Ano de referência, agenda por fonte, períodos, mudanças de método, arquivo das versões da ANM | 18 |
 | [validacao-e-publicacao.md](validacao-e-publicacao.md) | RN-VPU | Validação, lote bloqueado, reconciliação, homologação | 12 |
-| [entrega-dos-dados.md](entrega-dos-dados.md) | RN-ENT | Camada publicada, CSV aberto, painel de status, assistente de IA | 11 |
+| [entrega-dos-dados.md](entrega-dos-dados.md) | RN-ENT | Camada publicada, CSV aberto, painel de status, assistente de IA, ordem das dimensões | 12 |
 | [mineracao-cfem.md](mineracao-cfem.md) | RN-CFE | Arrecadação, distribuição, autuação e VPM | 28 |
 | [indicadores-derivados-e-compostos.md](indicadores-derivados-e-compostos.md) | RN-IND | Indicadores derivados e compostos congelados | 13 |
-| [privacidade-e-licencas.md](privacidade-e-licencas.md) | RN-PRI | Dados pessoais, acesso restrito e reuso | 10 |
+| [privacidade-e-licencas.md](privacidade-e-licencas.md) | RN-PRI | Dados pessoais, acesso restrito e reuso | 11 |
 | [glossario.md](glossario.md) | | Termos e siglas | |
-| [pendencias.md](pendencias.md) | | Tudo o que está EM ABERTO, as divergências entre fontes e as regras PROPOSTAS aguardando confirmação | |
+| [pendencias.md](pendencias.md) | | Tudo o que está EM ABERTO, as divergências entre fontes, as regras PROPOSTAS aguardando confirmação e os conflitos com o [Product Backlog](../produto/backlog.md) | |
 
-Total: 173 regras, sendo 126 DECIDIDAS, 34 PROPOSTAS, 5 EM ABERTO e 8 OBSOLETAS.
+Total: 176 regras, sendo 150 DECIDIDAS, 17 PROPOSTAS, 0 EM ABERTO e 9 OBSOLETAS.
