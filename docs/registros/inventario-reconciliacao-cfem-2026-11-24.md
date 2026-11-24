@@ -5,6 +5,19 @@ das divergências. Os valores e as referências não foram alterados nesta etapa
 A diferença da tabela abaixo é **soma do CSV menos tabela municipal da ANM**.
 Nenhuma causa foi confirmada para as 15 diferenças.
 
+## Complemento de 24/11/2026
+
+As 18 extrações municipais e dez extrações nacionais em Markdown foram copiadas
+para `docs/registros/evidencias-anm-2026-11-23/`, sem alterar os arquivos locais.
+O arquivo `data/referencia-cfem-nacional-anm.json` transcreve os totais anuais
+das dez páginas nacionais, com URL, data declarada de consulta e SHA-256 dos
+bytes da extração. A CLI agora exige os dois arquivos de referências e a pasta
+de capturas para essa fatia, confere os hashes e bloqueia diferença nacional
+acima de 1% (RN-CFE-12). Os dez anos selecionados ficaram entre 0,005% e
+0,445% de diferença frente ao lote local do CSV. Esses arquivos Markdown não
+são o corpo HTTP original; a origem, a data declarada e as 15 divergências
+ainda exigem revisão antes de uso operacional.
+
 ## Artefatos e proveniência
 
 | Artefato | Local | Situação em 24/11/2026 |

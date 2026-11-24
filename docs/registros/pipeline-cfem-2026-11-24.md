@@ -1,5 +1,18 @@
 # Execução e limites da fatia CFEM — 24/11/2026
 
+## Verificação complementar de 24/11/2026
+
+A CLI foi reexecutada com `tmp/CFEM_Arrecadacao.csv`, as 669 referências
+municipais, dez totais nacionais oficiais e as capturas Markdown versionadas
+em `docs/registros/evidencias-anm-2026-11-23/`. A saída isolada ficou em
+`output/pipeline-cfem-verificacao/`, fora do Git: 2.433.952 linhas lidas,
+129 repetições no recorte, 669 reconciliações municipais, dez controles
+nacionais e zero erros. O pacote local aprovado tem versão
+`eeef52b33ad5d70914f51d829a2a2ec2ea964bb83a88a026dc4b8585f9bf8951`.
+As diferenças nacionais dos dez anos selecionados ficaram abaixo de 1%,
+entre 0,005% e 0,445%. Essa verificação não resolve as 15 divergências dos
+oito anos excluídos nem autentica o corpo HTTP original da ANM.
+
 CSV local da ANM: `tmp/CFEM_Arrecadacao.csv`, fora do Git. Leitura realizada
 em 23/11/2026: 2.433.952 linhas, 10.827 linhas no recorte dos 12 municípios,
 129 repetições integrais somadas e registradas. Hash e relatório completos

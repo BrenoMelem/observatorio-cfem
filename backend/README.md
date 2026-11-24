@@ -71,7 +71,7 @@ A população só é exposta quando existe publicação válida no esquema comum
 Da raiz, com o CSV real fora do Git:
 
 ```bash
-uv run --project backend python -m observatorio.coleta cfem --arquivo tmp/CFEM_Arrecadacao.csv --referencias data/referencia-cfem-mensal-anm.json
+uv run --project backend python -m observatorio.coleta cfem --arquivo tmp/CFEM_Arrecadacao.csv --referencias data/referencia-cfem-mensal-anm.json --referencias-nacionais data/referencia-cfem-nacional-anm.json --evidencias docs/registros/evidencias-anm-2026-11-23
 uv run --project backend uvicorn observatorio.api.main:app
 ```
 
@@ -92,5 +92,8 @@ monetário é texto decimal no JSON; anual só é calculado com 12 meses validad
 O HTML `demo/grafico-cfem.html` é demonstração separada do front oficial.
 Sirva a pasta localmente, abra o HTML e informe o endereço da API. Consulte
 `docs/registros/pipeline-cfem-2026-11-24.md` para as lacunas, anos excluídos e
-próximos passos. A presença do arquivo de referências não dispensa revisar a
-proveniência antes de cada nova publicação.
+próximos passos. A CLI confere os SHA-256 das capturas Markdown indicados nas
+referências e compara os totais nacionais dos anos selecionados com as tabelas
+oficiais da ANM (RN-CFE-12). As capturas são extrações, não respostas HTTP
+originais. A presença dos arquivos não dispensa revisar sua proveniência e
+investigar as 15 divergências antes de uso operacional.

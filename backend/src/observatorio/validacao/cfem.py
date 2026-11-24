@@ -28,6 +28,18 @@ class Referencia(BaseModel):
     tipo: Literal["publicacao_oficial_independente"] = "publicacao_oficial_independente"
 
 
+class ReferenciaNacional(BaseModel):
+    """Total anual publicado pela ANM para o controle RN-CFE-12."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+    ano: int = Field(ge=2003, le=2100)
+    valor: Decimal = Field(gt=0, allow_inf_nan=False, decimal_places=2)
+    documento: str = Field(min_length=1)
+    url: str = Field(pattern=r"^https://sistemas\.anm\.gov\.br/")
+    consultado_em: date
+    sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
 @dataclass(frozen=True)
 class Resultado:
     aprovado: bool
@@ -37,7 +49,10 @@ class Resultado:
 
 
 def validar(
-    lote: Lote, referencias: list[Referencia], anterior: dict[str, object] | None = None
+    lote: Lote,
+    referencias: list[Referencia],
+    anterior: dict[str, object] | None = None,
+    referencias_nacionais: list[ReferenciaNacional] | None = None,
 ) -> Resultado:
     """RN-VPU-07/12: nenhum valor é validado sem comparação exata da mesma chave.
 
@@ -54,6 +69,7 @@ def validar(
     if not referencias:
         erros.append("Sem publicação oficial independente para reconciliar (RN-VPU-07)")
     chaves_referencia: set[tuple[str, int, int]] = set()
+    controle_nacional: list[dict[str, object]] = []
     anos = sorted({o.ano for o in lote.observacoes})
     meses_ausentes = {
         str(ano): [m for m in range(1, 13) if not lote.registros_mensais.get(f"{ano}:{m}")] for ano in anos
@@ -94,6 +110,33 @@ def validar(
                 erros.append(f"Mês com volume insuficiente em {chave} (RN-CFE-06)")
             else:
                 aprovadas.append(item.model_copy(update={"estado_validacao": "validado"}))
+    if referencias_nacionais is not None:
+        por_ano: dict[int, ReferenciaNacional] = {}
+        for referencia_nacional in referencias_nacionais:
+            if referencia_nacional.ano in por_ano:
+                erros.append(f"Referência nacional duplicada: {referencia_nacional.ano} (RN-CFE-12)")
+                continue
+            por_ano[referencia_nacional.ano] = referencia_nacional
+        for ano in sorted({r.ano for r in referencias if r.ano < date.today().year}):
+            total_oficial = por_ano.get(ano)
+            calculado = lote.totais_nacionais.get(str(ano))
+            if total_oficial is None or calculado is None:
+                erros.append(f"Sem total nacional para {ano} (RN-CFE-12)")
+                continue
+            diferenca = Decimal(calculado) - total_oficial.valor
+            percentual = abs(diferenca) / total_oficial.valor
+            controle_nacional.append(
+                {
+                    "ano": ano,
+                    "calculado": calculado,
+                    "referencia": str(total_oficial.valor),
+                    "diferenca": str(diferenca),
+                    "percentual": str(percentual),
+                    "documento": total_oficial.model_dump(mode="json"),
+                }
+            )
+            if percentual > Decimal("0.01"):
+                erros.append(f"Total nacional diverge mais de 1% em {ano} (RN-CFE-12)")
     if anterior:
         for campo in ("totais_nacionais", "registros_municipais"):
             antigos = anterior.get(campo, {})
@@ -136,6 +179,7 @@ def validar(
         "totais_nacionais": lote.totais_nacionais,
         "registros_municipais": lote.registros_municipais,
         "reconciliacao": comparacoes,
+        "controle_nacional": controle_nacional,
         "erros": erros,
         "observacoes_sem_referencia": len(por_chave.keys() - chaves_referencia),
     }
