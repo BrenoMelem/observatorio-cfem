@@ -5,6 +5,7 @@ description = "Backend de produção do Observatório CFEM / RI Carajás (ADR-00
 requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.162.4",
+    "polars[rtcompat]>=2.1.0",
     "uvicorn>=0.54.0",
 ]
 

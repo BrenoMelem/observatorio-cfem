@@ -65,3 +65,32 @@ mkdir -p output/observatorio/publicado && cp data/indicadores.json output/observ
 `GET /api/v1/dimensoes/{social|economica|ambiental|institucional}`, o mesmo caminho com `.csv`, `GET /api/v1/indicadores/status` e `GET /saude`. Filtros: `municipio_id`, `ano_inicio`, `ano_fim`. O CSV inclui fonte, edição, método e limitações em cada linha. O manifesto descreve os sete indicadores conhecidos; os demais gráficos do site ainda não têm identificador e não recebem números desta API. Valores fictícios não entram na camada publicada.
 
 A população só é exposta quando existe publicação válida no esquema comum. CFEM, commodities, despesa e indicadores sem pipeline aparecem como lacunas. A versão dos dados (`versao_dados`) é um hash do pacote inteiro lido na requisição (manifesto e observações), igual em todas as dimensões. O pacote é lido uma vez por requisição. O status (`/api/v1/indicadores/status`) lista todos os indicadores do manifesto, inclusive os que ainda não têm dimensão na API. `503` indica pacote publicado inválido, ilegível ou sem manifesto (ou manifesto sem um indicador da dimensão, ou sem `fonte`, `metodo` e `limitacoes`); `404`, dimensão desconhecida; `422`, filtro inválido. A ausência de `populacao.json` não é erro: a resposta traz `sem_dado_validado` e `dados: []`. O `/saude` responde `pronto` (manifesto e população válidos), `sem_publicacao` (manifesto válido, sem população) ou `publicacao_invalida`, com o motivo.
+
+## Pipeline CFEM e demo (implementação inicial de 24/11/2026)
+
+Da raiz, com o CSV real fora do Git:
+
+```bash
+uv run --project backend python -m observatorio.coleta cfem --arquivo tmp/CFEM_Arrecadacao.csv --referencias data/referencia-cfem-mensal-anm.json
+uv run --project backend uvicorn observatorio.api.main:app
+```
+
+`OBS_DATA_DIR` escolhe onde gravar bruto e qualidade; `OBS_PUBLICADO_DIR`
+escolhe o pacote. Os padrões são `output/observatorio` e
+`output/observatorio/publicado`. `OBS_MANIFESTO` aponta para
+`data/indicadores.json`. `OBS_ANM_CA` é opcional para cadeia TLS; sem
+`--arquivo`, a CLI faz GET na ANM com User-Agent. `OBS_CORS_ORIGENS` aceita
+origens separadas por vírgula e tem padrão vazio. Para servir a demo de outra
+origem, configure a origem exata, por exemplo `http://127.0.0.1:8765`.
+
+O pacote novo usa `pacote.json` como ponteiro para `versoes/<hash>/`, com
+`cfem_arrecadada.parquet`, `indicadores.json`, `consumo_assistente.json` e
+relatório de qualidade. A API mantém leitura da população JSON da Fase 1 e
+oferece `periodicidade=mensal|anual` na dimensão econômica e no CSV. Valor
+monetário é texto decimal no JSON; anual só é calculado com 12 meses validados.
+
+O HTML `demo/grafico-cfem.html` é demonstração separada do front oficial.
+Sirva a pasta localmente, abra o HTML e informe o endereço da API. Consulte
+`docs/registros/pipeline-cfem-2026-11-24.md` para as lacunas, anos excluídos e
+próximos passos. A presença do arquivo de referências não dispensa revisar a
+proveniência antes de cada nova publicação.

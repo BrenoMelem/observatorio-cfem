@@ -1,12 +1,16 @@
 """Lê exclusivamente o pacote publicado, sem consultar fonte externa (RN-ENT-01)."""
 
+import hashlib
+import io
 import json
 from pathlib import Path
 
+import polars as pl
 from pydantic import ValidationError
 
 from observatorio import config
 from observatorio.api.dtos.publicacao import Observacao
+from observatorio.modelo.pacote import DescricaoPacote
 
 MANIFESTO = "indicadores.json"
 CAMPOS_MANIFESTO = ("fonte", "metodo", "limitacoes")
@@ -14,6 +18,53 @@ CAMPOS_MANIFESTO = ("fonte", "metodo", "limitacoes")
 
 class PublicacaoInvalida(Exception):
     pass
+
+
+def resolver_pacote(pasta: Path | None = None) -> tuple[Path, DescricaoPacote | None]:
+    """RN-ENT-01: lê o ponteiro uma vez; arquivos ficam numa versão imutável."""
+    raiz = pasta or pasta_publicada()
+    try:
+        conteudo = (raiz / "pacote.json").read_bytes()
+    except FileNotFoundError:
+        return raiz, None  # compatibilidade explícita com publicação de população da Fase 1
+    except OSError as erro:
+        raise PublicacaoInvalida("Pacote publicado ilegível") from erro
+    try:
+        descricao = DescricaoPacote.model_validate_json(conteudo)
+        versao = raiz / "versoes" / descricao.versao
+        for nome, resumo in descricao.arquivos.items():
+            if hashlib.sha256((versao / nome).read_bytes()).hexdigest() != resumo:
+                raise ValueError("Hash divergente")
+        return versao, descricao
+    except (OSError, ValueError) as erro:
+        raise PublicacaoInvalida("Integridade do pacote publicado inválida") from erro
+
+
+def indicadores_publicados(pasta: Path, descricao: DescricaoPacote) -> list[Observacao]:
+    """RN-VPU-01, RN-MOD-03: confere tipos, chaves, indicador e estado em cada parquet."""
+    observacoes: list[Observacao] = []
+    try:
+        for indicador, item in descricao.indicadores.items():
+            conteudo = (pasta / item.arquivo).read_bytes()
+            if hashlib.sha256(conteudo).hexdigest() != item.sha256:
+                raise ValueError("Hash divergente")
+            tabela = pl.read_parquet(io.BytesIO(conteudo))
+            if set(tabela.columns) != set(Observacao.model_fields):
+                raise ValueError("Esquema de observação inválido")
+            if tabela.schema["ano"] != pl.Int64 or tabela.schema["mes"] != pl.Int64:
+                raise ValueError("Tipos temporais inválidos")
+            if indicador == "cfem_arrecadada" and tabela.schema["valor"] != pl.Decimal(38, 2):
+                raise ValueError("Dinheiro sem precisão decimal")
+            linhas = [Observacao.model_validate(linha) for linha in tabela.iter_rows(named=True)]
+            if any(o.indicador != indicador or o.estado_validacao != "validado" for o in linhas):
+                raise ValueError("Indicador ou estado inválido")
+            chaves = [(o.municipio_id, o.ano, o.mes) for o in linhas]
+            if len(chaves) != len(set(chaves)):
+                raise ValueError("Chaves duplicadas")
+            observacoes.extend(linhas)
+        return observacoes
+    except (OSError, ValueError, pl.exceptions.PolarsError) as erro:
+        raise PublicacaoInvalida("Observações publicadas inválidas") from erro
 
 
 def pasta_publicada() -> Path:

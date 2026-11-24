@@ -1,0 +1,143 @@
+"""Homologação por recorte mensal e relatório auditável (RN-VPU-01 a 12)."""
+
+from dataclasses import dataclass
+from datetime import date
+from decimal import Decimal
+from statistics import median
+from typing import Literal
+
+from pydantic import BaseModel, ConfigDict, Field
+
+from observatorio.modelo.lote import Lote
+from observatorio.modelo.observacao import Observacao
+from observatorio.modelo.territorios import MUNICIPIOS
+
+
+class Referencia(BaseModel):
+    """Valor transcrito de publicação independente; proveniência revisável (RN-VPU-07)."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+    municipio_id: str = Field(pattern=r"^\d{7}$")
+    ano: int = Field(ge=2003, le=2100)
+    mes: int = Field(ge=1, le=12)
+    valor: Decimal = Field(allow_inf_nan=False, decimal_places=2)
+    documento: str = Field(min_length=1)
+    url: str = Field(pattern=r"^https://(?:sistemas\.anm\.gov\.br|www\.gov\.br/anm)/")
+    consultado_em: date
+    sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+    tipo: Literal["publicacao_oficial_independente"] = "publicacao_oficial_independente"
+
+
+@dataclass(frozen=True)
+class Resultado:
+    aprovado: bool
+    observacoes: tuple[Observacao, ...]
+    erros: tuple[str, ...]
+    relatorio: dict[str, object]
+
+
+def validar(
+    lote: Lote, referencias: list[Referencia], anterior: dict[str, object] | None = None
+) -> Resultado:
+    """RN-VPU-07/12: nenhum valor é validado sem comparação exata da mesma chave.
+
+    Recortes não cobertos pela referência ficam fora da publicação. Uma divergência
+    no recorte solicitado reprova o lote inteiro (RN-VPU-01). Meses de ano incompleto
+    não entram nesta demo, por decisão do mantenedor de 23/11/2026.
+    """
+    erros: list[str] = []
+    comparacoes: list[dict[str, object]] = []
+    aprovadas: list[Observacao] = []
+    por_chave = {(o.municipio_id, o.ano, o.mes): o for o in lote.observacoes}
+    if len(por_chave) != len(lote.observacoes):
+        erros.append("Observações agregadas duplicadas")
+    if not referencias:
+        erros.append("Sem publicação oficial independente para reconciliar (RN-VPU-07)")
+    chaves_referencia: set[tuple[str, int, int]] = set()
+    anos = sorted({o.ano for o in lote.observacoes})
+    meses_ausentes = {
+        str(ano): [m for m in range(1, 13) if not lote.registros_mensais.get(f"{ano}:{m}")] for ano in anos
+    }
+    for referencia in referencias:
+        chave = (referencia.municipio_id, referencia.ano, referencia.mes)
+        if chave in chaves_referencia:
+            erros.append(f"Referência duplicada: {chave}")
+            continue
+        chaves_referencia.add(chave)
+        item = por_chave.get(chave)
+        if referencia.municipio_id not in MUNICIPIOS or item is None or item.valor is None:
+            erros.append(f"Referência sem observação correspondente: {chave}")
+            continue
+        diferenca = Decimal(str(item.valor)) - referencia.valor
+        comparacoes.append(
+            {
+                "municipio_id": chave[0],
+                "ano": chave[1],
+                "mes": chave[2],
+                "calculado": str(item.valor),
+                "referencia": str(referencia.valor),
+                "diferenca": str(diferenca),
+                "documento": referencia.model_dump(mode="json"),
+            }
+        )
+        if diferenca != 0:
+            erros.append(f"Reconciliação divergente em {chave}: {diferenca} BRL")
+        elif meses_ausentes.get(str(item.ano)):
+            erros.append(f"Ano {item.ano} com mês nacional ausente: somente provisório, fora da demo")
+        else:
+            # RN-CFE-06: no último ano também se exige o critério de volume decidido em 08/11.
+            historico = [
+                n for periodo, n in lote.registros_mensais.items() if int(periodo.split(":")[0]) < item.ano
+            ]
+            volume = lote.registros_mensais.get(f"{item.ano}:{item.mes}", 0)
+            if item.ano == max(anos) and historico and volume < median(historico) * 0.5:
+                erros.append(f"Mês com volume insuficiente em {chave} (RN-CFE-06)")
+            else:
+                aprovadas.append(item.model_copy(update={"estado_validacao": "validado"}))
+    if anterior:
+        for campo in ("totais_nacionais", "registros_municipais"):
+            antigos = anterior.get(campo, {})
+            novos = lote.totais_nacionais if campo == "totais_nacionais" else lote.registros_municipais
+            if isinstance(antigos, dict):
+                for periodo, valor in antigos.items():
+                    ano = int(str(periodo).split(":")[-1])
+                    limite = Decimal(".98") if campo == "totais_nacionais" else Decimal(1)
+                    if (
+                        ano < date.today().year
+                        and Decimal(str(novos.get(str(periodo), 0))) < Decimal(str(valor)) * limite
+                    ):
+                        erros.append(f"Série encolheu em {campo}/{periodo} (RN-VPU-02)")
+    valores = [o.valor for o in lote.observacoes if o.valor is not None]
+    relatorio: dict[str, object] = {
+        "situacao": "reprovado" if erros or not aprovadas else "aprovado",
+        "sha256_bruto": lote.sha256,
+        "origem": lote.origem,
+        "coletado_em": lote.coletado_em,
+        "filtros": lote.filtros,
+        "linhas_lidas": lote.linhas_lidas,
+        "linhas_recorte": lote.linhas_recorte,
+        "duplicatas": lote.duplicatas,
+        "municipios_presentes": sorted({o.municipio_id for o in lote.observacoes if o.municipio_id}),
+        "anos": anos,
+        "nulos": sum(o.valor is None for o in lote.observacoes),
+        "faixa_valores": {
+            "minimo": str(min(valores)) if valores else None,
+            "maximo": str(max(valores)) if valores else None,
+        },
+        "meses_nacionais_ausentes": meses_ausentes,
+        "ausencias_municipais": [
+            f"{c}:{a}:{m}"
+            for a in anos
+            for m in range(1, 13)
+            for c in MUNICIPIOS
+            if (c, a, m) not in por_chave
+        ],
+        "causa_ausencias": "não confirmada; ausência não equivale a zero",
+        "totais_nacionais": lote.totais_nacionais,
+        "registros_municipais": lote.registros_municipais,
+        "reconciliacao": comparacoes,
+        "erros": erros,
+        "observacoes_sem_referencia": len(por_chave.keys() - chaves_referencia),
+    }
+    aprovado = not erros and bool(aprovadas)
+    return Resultado(aprovado, tuple(aprovadas) if aprovado else (), tuple(erros), relatorio)
