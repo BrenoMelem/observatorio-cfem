@@ -85,11 +85,13 @@ Termos e siglas usados nesta documentação. Os termos de domínio vêm de DECIS
 | IPEADATA | Base de séries do IPEA; o ambiente Regional traz dados municipais |
 | lavratura | Ano em que a ANM emitiu a autuação (contraste com fato gerador) |
 | MapBiomas | Mapeamento anual de uso e cobertura do solo do Brasil |
+| MSC | Matriz de Saldos Contábeis: declaração contábil mensal do município ao SICONFI, com fonte de recursos, função e subfunção |
 | N6 | Parâmetro do SIDRA que recorta o resultado a nível municipal |
 | Pink Sheet | Planilha mensal de preços de commodities do World Bank (só download); fonte do ferro e do cobre |
 | PySUS | Biblioteca que baixa e converte microdados do DATASUS, citada por DECISÕES como rota de saúde |
 | RAIS | Relação Anual de Informações Sociais: vínculos formais (estoque), com quebras por setor, sexo e escolaridade |
 | RI Carajás | Região de Integração Carajás: 12 municípios do Pará |
+| RREO | Relatório Resumido da Execução Orçamentária, bimestral (LRF, arts. 52 e 53); o Anexo 2 traz a despesa por função e subfunção |
 | SEEG | Sistema de Estimativas de Emissões de Gases de Efeito Estufa |
 | Senatran | Secretaria Nacional de Trânsito; frota de veículos |
 | SICONFI | Sistema de Informações Contábeis e Fiscais do Setor Público |
