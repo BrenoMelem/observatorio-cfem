@@ -42,9 +42,9 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 - **Regra:** Cada fonte deve ter agenda própria de atualização, na frequência indicada na tabela acima.
 - **Motivo:** As fontes publicam em ritmos diferentes, e uma agenda única atualizaria dados que não mudaram ou deixaria passar os que mudaram.
 - **Exemplo:** A CFEM é mensal; o eleitorado do TSE é bianual.
-- **Exceções:** A frota de veículos aparece como mensal em DECISÕES, mas sua fonte está em conflito (RN-FNT-12).
-- **Fonte:** DECISÕES §Arquitetura e padrões de dados (Uma agenda por fonte).
-- **Relacionadas:** RN-MOD-25, RN-FNT-12
+- **Exceções:** A frota de veículos aparece como mensal em DECISÕES, mas sua fonte está em conflito (RN-FNT-12). Exceção de 25/11/2026 (DECISÃO-MANTENEDOR): o SICONFI tem dado anual, mas a agenda da despesa por função é uma verificação mensal do extrato de entregas; a atualização (coleta, conferência e publicação) só acontece quando uma entrega aparece ou muda (retificação, RN-TMP-04) ou quando há exercício novo. Motivo: entregas atrasadas e retificações chegam em qualquer mês (Marabá 2024 retificada em 28/05/2025; a DCA de 2025 de Bom Jesus do Tocantins ainda ausente em 25/11/2026).
+- **Fonte:** DECISÕES §Arquitetura e padrões de dados (Uma agenda por fonte); DECISÃO-MANTENEDOR de 25/11/2026 (SICONFI).
+- **Relacionadas:** RN-MOD-25, RN-FNT-12, RN-TMP-04
 
 ### RN-TMP-03: A Base dos Dados pode parar de atualizar sem aviso
 - **Status:** DECIDIDA
