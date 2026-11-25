@@ -5,11 +5,13 @@ Projeto `uv` com o pacote `observatorio` em `src/` ([ADR-013](../docs/adr/ADR-01
 | Pasta | O que vai nela | Situação |
 | --- | --- | --- |
 | `src/observatorio/config.py` | único lugar que lê variáveis de ambiente ([ADR-017](../docs/adr/ADR-017-padroes-de-codigo.md)) | pronto |
-| `src/observatorio/modelo/` | esquema comum da observação, territórios e unidades (RN-MOD, RN-TER) | vazio (PB-03) |
-| `src/observatorio/fontes/` | um módulo por fonte, com o contrato do ADR-017 e polars ([ADR-018](../docs/adr/ADR-018-biblioteca-de-processamento-de-dados.md)) | vazio |
-| `src/observatorio/validacao/` | regras de qualidade e relatório de cada lote (RN-VPU) | vazio |
-| `src/observatorio/publicacao/` | pacote imutável, trocado só quando o lote passa (RN-VPU-01, RN-VPU-03, ADR-014) | vazio |
-| `src/observatorio/api/` | FastAPI em camadas: `controllers`, `services`, `repositories`, `dtos` (ADR-010, ADR-017) | Fase 1 |
+| `src/observatorio/modelo/` | esquema comum da observação, lote, pacote e territórios (RN-MOD, RN-TER) | CFEM arrecadada |
+| `src/observatorio/fontes/` | um módulo por fonte, com o contrato do ADR-017 e polars ([ADR-018](../docs/adr/ADR-018-biblioteca-de-processamento-de-dados.md)) | `cfem_arrecadacao.py` |
+| `src/observatorio/validacao/` | regras de qualidade e relatório de cada lote (RN-VPU) | `cfem.py` |
+| `src/observatorio/publicacao/` | pacote imutável, trocado só quando o lote passa (RN-VPU-01, RN-VPU-03, ADR-014) | `pacote.py` |
+| `src/observatorio/coleta.py` | linha de comando que encadeia fonte, validação e publicação | CFEM |
+| `src/observatorio/api/` | FastAPI em camadas: `controllers`, `services`, `repositories`, `dtos` (ADR-010, ADR-017) | Fase 1 e CFEM |
+| `demo/` | `grafico-cfem.html`, demonstração separada do front oficial | |
 | `tests/` | espelha as pastas do pacote | |
 
 Regra de dependência (ADR-013): `modelo` não importa nenhum outro subpacote; `api` importa só `modelo`, `config` e a leitura do pacote publicado, nunca `fontes`, `validacao` ou `publicacao`.
@@ -49,51 +51,25 @@ A imagem não traz dados. O pacote publicado entra por volume, só leitura, a pa
 
 ## O pacote publicado
 
-A API lê só o pacote publicado (RN-ENT-01), da pasta `OBS_PUBLICADO_DIR`:
+A API lê só o pacote publicado (RN-ENT-01), da pasta `OBS_PUBLICADO_DIR`. O pacote é montado por `publicacao/` ([ADR-014](../docs/adr/ADR-014-formato-do-pacote-publicado.md)):
 
-- `indicadores.json`: o manifesto de indicadores (RN-MOD-25), que vai dentro do pacote (ADR-014). Sem ele, as rotas de dimensão e de status respondem `503`.
-- `populacao.json`: as observações de população homologadas.
+- `pacote.json`: o ponteiro para a versão em vigor, com o SHA-256 de cada arquivo. É trocado por último, só quando o lote é aprovado.
+- `versoes/<hash>/`: a versão imutável, com `indicadores.json` (manifesto, RN-MOD-25), `cfem_arrecadada.parquet`, `qualidade-cfem.json` e `consumo_assistente.json`.
+- `populacao.json`: as observações de população da Fase 1, ainda sem fonte em `fontes/`. Na primeira publicação, se existir na pasta, é copiado para dentro da versão.
 
-Enquanto não houver gerador de pacote em `publicacao/`, o manifesto é copiado à mão da origem, `data/indicadores.json`, para a pasta publicada:
+## Rotas
 
-```bash
-mkdir -p output/observatorio/publicado && cp data/indicadores.json output/observatorio/publicado/
-```
+`GET /api/v1/dimensoes/{social|economica|ambiental|institucional}`, o mesmo caminho com `.csv`, `GET /api/v1/indicadores/status` e `GET /saude`. Filtros: `municipio_id`, `ano_inicio`, `ano_fim` e `periodicidade` (`mensal` ou `anual`; o anual só soma anos com 12 meses validados). Valor monetário é texto decimal no JSON. O Swagger gerado pela aplicação fica em `/docs` e a especificação em `/openapi.json`; a cópia versionada para o front é [docs/api/openapi-producao.yaml](../docs/api/openapi-producao.yaml). O CSV inclui fonte, edição, método e limitações em cada linha. O manifesto descreve os sete indicadores conhecidos; os demais gráficos do site ainda não têm identificador e não recebem números desta API. Valores fictícios não entram na camada publicada.
 
-## Rotas da Fase 1
+A população e a CFEM arrecadada só são expostas quando existe publicação válida no esquema comum. Commodities, despesa e indicadores sem pipeline aparecem como lacunas. A versão dos dados (`versao_dados`) é um hash do pacote inteiro lido na requisição (manifesto e observações), igual em todas as dimensões. O pacote é lido uma vez por requisição. O status (`/api/v1/indicadores/status`) lista todos os indicadores do manifesto, inclusive os que ainda não têm dimensão na API. `503` indica pacote publicado inválido, ilegível ou sem manifesto (ou manifesto sem um indicador da dimensão, ou sem `fonte`, `metodo` e `limitacoes`); `404`, dimensão desconhecida; `422`, filtro inválido. A ausência de `populacao.json` não é erro: a resposta traz `sem_dado_validado` e `dados: []`. O `/saude` responde `pronto` (manifesto e ao menos uma observação publicada válidos), `sem_publicacao` (manifesto válido, sem observação) ou `publicacao_invalida`, com o motivo.
 
-`GET /api/v1/dimensoes/{social|economica|ambiental|institucional}`, o mesmo caminho com `.csv`, `GET /api/v1/indicadores/status` e `GET /saude`. Filtros: `municipio_id`, `ano_inicio`, `ano_fim`. O CSV inclui fonte, edição, método e limitações em cada linha. O manifesto descreve os sete indicadores conhecidos; os demais gráficos do site ainda não têm identificador e não recebem números desta API. Valores fictícios não entram na camada publicada.
+## Da coleta à API
 
-A população só é exposta quando existe publicação válida no esquema comum. CFEM, commodities, despesa e indicadores sem pipeline aparecem como lacunas. A versão dos dados (`versao_dados`) é um hash do pacote inteiro lido na requisição (manifesto e observações), igual em todas as dimensões. O pacote é lido uma vez por requisição. O status (`/api/v1/indicadores/status`) lista todos os indicadores do manifesto, inclusive os que ainda não têm dimensão na API. `503` indica pacote publicado inválido, ilegível ou sem manifesto (ou manifesto sem um indicador da dimensão, ou sem `fonte`, `metodo` e `limitacoes`); `404`, dimensão desconhecida; `422`, filtro inválido. A ausência de `populacao.json` não é erro: a resposta traz `sem_dado_validado` e `dados: []`. O `/saude` responde `pronto` (manifesto e população válidos), `sem_publicacao` (manifesto válido, sem população) ou `publicacao_invalida`, com o motivo.
-
-## Pipeline CFEM e demo (implementação inicial de 24/11/2026)
-
-Da raiz, com o CSV real fora do Git:
+O passo a passo (obter o CSV da Release, coletar, subir a API, abrir o Swagger e a demo) e as variáveis de ambiente estão no guia [pipeline-cfem.md](../docs/guias/pipeline-cfem.md). Em resumo, da raiz:
 
 ```bash
 uv run --project backend python -m observatorio.coleta cfem --arquivo tmp/CFEM_Arrecadacao.csv --referencias data/referencia-cfem-mensal-anm.json --referencias-nacionais data/referencia-cfem-nacional-anm.json --evidencias docs/registros/evidencias-anm-2026-11-23
-uv run --project backend uvicorn observatorio.api.main:app
+uv run --project backend uvicorn observatorio.api.main:app   # Swagger em http://127.0.0.1:8000/docs
 ```
 
-`OBS_DATA_DIR` escolhe onde gravar bruto e qualidade; `OBS_PUBLICADO_DIR`
-escolhe o pacote. Os padrões são `output/observatorio` e
-`output/observatorio/publicado`. `OBS_MANIFESTO` aponta para
-`data/indicadores.json`. `OBS_ANM_CA` é opcional para cadeia TLS; sem
-`--arquivo`, a CLI faz GET na ANM com User-Agent. `OBS_CORS_ORIGENS` aceita
-origens separadas por vírgula e tem padrão vazio. Para servir a demo de outra
-origem, configure a origem exata, por exemplo `http://127.0.0.1:8765`.
-
-O pacote novo usa `pacote.json` como ponteiro para `versoes/<hash>/`, com
-`cfem_arrecadada.parquet`, `indicadores.json`, `consumo_assistente.json` e
-relatório de qualidade. A API mantém leitura da população JSON da Fase 1 e
-oferece `periodicidade=mensal|anual` na dimensão econômica e no CSV. Valor
-monetário é texto decimal no JSON; anual só é calculado com 12 meses validados.
-
-O HTML `demo/grafico-cfem.html` é demonstração separada do front oficial.
-Sirva a pasta localmente, abra o HTML e informe o endereço da API. Consulte
-`docs/registros/pipeline-cfem-2026-11-24.md` para as lacunas, anos excluídos e
-próximos passos. A CLI confere os SHA-256 das capturas Markdown indicados nas
-referências e compara os totais nacionais dos anos selecionados com as tabelas
-oficiais da ANM (RN-CFE-12). As capturas são extrações, não respostas HTTP
-originais. A presença dos arquivos não dispensa revisar sua proveniência e
-investigar as 15 divergências antes de uso operacional.
+A CLI confere os SHA-256 das capturas indicadas nas referências, reconcilia cada município/mês com a tabela oficial da ANM e compara os totais nacionais (RN-CFE-12). As capturas são extrações, não respostas HTTP originais. Os resultados e as pendências de cada execução estão em [docs/registros/](../docs/registros/).
