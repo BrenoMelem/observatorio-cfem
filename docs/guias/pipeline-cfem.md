@@ -20,8 +20,8 @@ ANM (CSV) → Release anm-* → fontes/ → modelo/ → validacao/ → publicaca
 | 5. Publicação | Só com lote aprovado: grava parquet e manifestos numa versão imutável e troca o ponteiro `pacote.json` por último; reprovação conserva a versão anterior (RN-VPU-01, RN-VPU-03, ADR-014) | `backend/src/observatorio/publicacao/pacote.py` | `publicado/pacote.json` e `publicado/versoes/<hash>/` |
 | 6. API | Lê só o pacote publicado (RN-ENT-01), confere os hashes e serve JSON, CSV e status | `backend/src/observatorio/api/` | rotas `/api/v1/...`, Swagger em `/docs` |
 
-A etapa 1 já roda sozinha no GitHub Actions. As etapas 2 a 5 rodam juntas pela linha de comando
-`observatorio.coleta`; ainda não há agendamento nem abertura de issue na falha (ADR-011).
+As etapas 2 a 5 rodam juntas pela linha de comando `observatorio.coleta`. No GitHub Actions, a etapa 1
+roda a cada 4 horas (`arquivar-anm.yml`) e as etapas 2 a 5 uma vez por dia (`coletar-cfem.yml`, abaixo).
 
 ## Rodar
 
@@ -34,7 +34,7 @@ O download direto da ANM costuma falhar na verificação TLS (a cadeia do servid
 `OBS_ANM_CA` abaixo). A Release arquivada é a entrada reproduzível:
 
 ```bash
-TAG=$(gh release list --limit 1 --json tagName -q '.[0].tagName')
+TAG=$(gh release list --limit 100 --json tagName -q '[.[] | select(.tagName | startswith("anm-"))][0].tagName')
 REPO=$(gh repo view --json nameWithOwner -q .nameWithOwner)
 gh release download "$TAG" --pattern arrecadacao.csv.gz --dir tmp/anm --clobber
 ```
@@ -98,6 +98,34 @@ O `docker compose` sobe a API com o pacote montado só para leitura a partir de 
 (ver [backend/README.md](../../backend/README.md)). A coleta continua sendo rodada fora do contêiner.
 Se o Docker criar a pasta de publicação antes da coleta, ela pode ficar com dono root e a coleta
 falha com `Permission denied` em `.publicando`; crie a pasta antes de subir o contêiner.
+
+## Coleta agendada no GitHub Actions
+
+`.github/workflows/coletar-cfem.yml` (ADR-011) roda todo dia às 05:30 UTC, depois do arquivamento das
+04:00, e também pode ser disparado à mão (`workflow_dispatch`, com a opção `forcar`):
+
+1. Escolhe a Release `anm-*` mais recente. Se o último pacote já cita essa edição, termina sem fazer nada.
+2. Baixa `arrecadacao.csv.gz` dessa Release e o pacote anterior (`publicado.tar.gz` da última Release
+   `pacote-cfem-*`), para a publicação conferir que a série não encolheu.
+3. Roda a coleta com `--origem` apontando para a Release e guarda o relatório de qualidade como artefato
+   `qualidade-cfem` da execução.
+4. Lote aprovado: cria a Release `pacote-cfem-AAAA-MM-DD-HHMM` com `publicado.tar.gz` e
+   `qualidade-cfem.json`, sem marcá-la como Latest. O pacote sai como Release pelo ADR-015 (nota de
+   19/11/2026); como chega à hospedagem fica para o ADR do serviço da AWS.
+5. Falha ou reprovação: abre a issue "Coleta da CFEM falhou" com os erros do relatório, ou comenta na que
+   já estiver aberta. A publicação anterior continua valendo (RN-VPU-03).
+
+Para servir um pacote da Release na máquina local:
+
+```bash
+gh release download <tag pacote-cfem-*> --pattern publicado.tar.gz --dir tmp
+mkdir -p output/observatorio/publicado && tar -xzf tmp/publicado.tar.gz -C output/observatorio/publicado
+```
+
+O agendamento só vale depois que o arquivo chega à branch padrão do repositório (`main`): o GitHub
+roda `schedule` e lista `workflow_dispatch` só a partir dela. Uma Release criada por um workflow com o
+`GITHUB_TOKEN` não dispara outro workflow; por isso a coleta é agendada, e não ligada à Release do
+arquivamento.
 
 ## Variáveis de ambiente
 
