@@ -11,21 +11,11 @@ Antes de começar, leia `AGENTS.md` (valem integralmente: português do Brasil, 
 
 ## Mapa do que já existe
 
-| O quê | Onde |
-| --- | --- |
-| Padrão de uma fonte (fonte → modelo → validação → publicação → API) | `docs/guias/padrao-de-pipeline-de-fonte.md` |
-| Como rodar a fatia CFEM de ponta a ponta, workflows, ano aberto | `docs/guias/pipeline-cfem.md` |
-| Contrato entre camadas e critérios do PR da primeira fonte | `docs/adr/pendencias-implementacao-adr-017-018.md` |
-| Modelo comum (14 campos, RN-MOD-03), lote, pacote, territórios | `backend/src/observatorio/modelo/` |
-| Fonte de arquivo (CSV latin-1, Decimal, recorte, proveniência) | `backend/src/observatorio/fontes/cfem_arrecadacao.py` |
-| Fonte de referência independente (HTML oficial, SHA-256 do corpo HTTP) | `backend/src/observatorio/fontes/referencia_anm.py` e `observatorio/referencias.py` |
-| Validação com referência, tolerância zero, controle nacional, ano aberto | `backend/src/observatorio/validacao/cfem.py` |
-| Publicação imutável com ponteiro atômico | `backend/src/observatorio/publicacao/pacote.py` |
-| Linha de comando da coleta | `backend/src/observatorio/coleta.py` |
-| Indicadores conhecidos e dimensões da API | `data/indicadores.json` (manifesto, RN-MOD-25) e `DIMENSOES`, `MOTIVOS`, `LACUNAS` em `backend/src/observatorio/api/services/dimensoes.py` |
-| Contrato da API para o front | `docs/api/openapi-producao.yaml` (regravar com `uv run pytest tests/api/test_openapi.py --atualizar-openapi` em `backend/`) |
-| Workflows | `.github/workflows/arquivar-anm.yml`, `coletar-cfem.yml`, `atualizar-referencias-anm.yml` |
-| Código do laboratório por tema | `scripts/README.md` (financas, populacao, commodities, emissoes, cfem, sondas) |
+O padrão de uma fonte (fonte → modelo → validação → publicação → API) e o mapa dos arquivos estão em `docs/guias/padrao-de-pipeline-de-fonte.md`; a fatia da CFEM de ponta a ponta, em `docs/guias/pipeline-cfem.md`; o contrato entre camadas, em `docs/adr/pendencias-implementacao-adr-017-018.md`; o laboratório, em `scripts/README.md`. Não repita caminhos aqui: leia esses guias e confira o código. Três pontos não estão nos guias:
+
+- Manifesto de indicadores: `data/indicadores.json` (RN-MOD-25); dimensões da API: `DIMENSOES`, `MOTIVOS` e `LACUNAS` em `backend/src/observatorio/api/services/dimensoes.py`.
+- Contrato da API para o front: `docs/api/openapi-producao.yaml`, regravado com `uv run pytest tests/api/test_openapi.py --atualizar-openapi` em `backend/`.
+- Workflows de referência: `coletar-cfem.yml` (coleta), `arquivar-anm.yml` e `atualizar-referencias-anm.yml`.
 
 **Peças que hoje só aceitam a CFEM** (conferir antes de planejar, porque podem ter mudado): `publicar()` exige `cfem_arrecadada` e o manifesto com esse indicador; `coleta.py` só tem a opção `cfem`; a leitura da API confere `Decimal(38, 2)` só para a CFEM. A segunda fonte do produto precisa generalizar essas peças; isso é parte do trabalho, não um desvio.
 
@@ -42,6 +32,8 @@ Leia, sem pular:
 5. Registros anteriores em `docs/registros/` sobre a fonte.
 
 Quando faltar informação (a fonte responde? cobre os 12 municípios? dois números batem?), não suponha: escreva um script de teste pequeno em `scripts/sondas/<fonte>.py` ou `scripts/<tema>/`, rode e use o resultado, como descreve a seção "Quando faltar informação" da skill `documentar-pendencias`. Dado baixado vai para `tmp/` ou `output/`.
+
+**Piloto com dado real, ainda aqui.** Antes de fechar a lista de pendências, baixe um recorte real (2 ou 3 municípios, alguns anos) e rode a leitura e a conferência de ponta a ponta, mesmo com script provisório. Os casos que só o dado real mostra (linha sem a dimensão esperada, município ausente, total que não fecha) viram pendências já na ficha, em vez de reprovar a primeira coleta completa. Registre a taxa de cobertura do piloto (quanto passaria na conferência) e mostre-a ao mantenedor.
 
 Entregue ao mantenedor uma **ficha da fonte**, curta:
 
@@ -82,6 +74,14 @@ Peça a escolha com a ferramenta de perguntas (AskUserQuestion) quando as opçõ
 - **Se uma descoberta mudar uma resposta já dada, diga e pergunte de novo.** Exemplo real: o mantenedor escolheu "incluir os meses fechados do ano corrente", mas o arquivo mostrou que julho a outubro, já fechados no calendário, tinham menos de 25% dos registros normais; foi preciso uma segunda pergunta.
 - Escolha com condição ("a 1, mas antes me diga X") não é decisão: responda a condição e pergunte de novo.
 
+### Cobertura baixa da conferência
+
+Se a referência barrar uma parte grande do que a fonte traz (por exemplo, menos da metade dos itens publicáveis), isso é uma pendência própria, não um detalhe do relatório. Antes de publicar: meça a cobertura por ano e por município, investigue a causa das divergências mais frequentes (limite real da fonte ou casamento de linhas frágil no nosso código? teste uma amostra à mão), mostre os números ao mantenedor e pergunte se publica assim, se melhora o casamento ou se adia. Na seção "O que continua pendente" do registro, diga a cobertura e as causas ainda não investigadas.
+
+### Escolhas de implementação sem regra por trás
+
+Quando o código precisar de uma escolha que nenhuma regra nem o mantenedor decidiu (encadear workflows, grupo de concorrência, formato de captura), não a deixe só como aviso no PR: faça uma pergunta curta ao mantenedor (opções, sugestão, impacto) e registre a resposta. Se ele pedir para seguir sem decidir, marque no PR como "escolha a revisar".
+
 ### Confirmar e registrar
 
 Antes de editar, reescreva em uma ou duas frases o que vai ser registrado e confirme ("Sim, registrar" / "Ajustar" / "Ainda não decidi"). "Acho que a 2", "faz sentido" ou uma pergunta não são decisão. Registre só o que foi confirmado.
@@ -112,19 +112,21 @@ Rode a coleta com o dado real (da Release, quando houver), suba a API e confira 
 ## Fase 5: documentar e publicar
 
 - **Documentação:** guia da fonte em `docs/guias/` (ou seção no guia do pipeline), `backend/README.md`, manifesto (`limitacoes` sem números que mudam a cada edição), `openapi-producao.yaml`, `AGENTS.md` se a situação do produto mudou, e o `scripts/README.md` se tocou no laboratório.
-- **Workflow:** uma coleta agendada na agenda da fonte (RN-TMP-02), que só trabalha quando há edição nova, publica o pacote aprovado como Release (ADR-015) e abre ou comenta uma issue na falha (ADR-011). Copie a estrutura de `coletar-cfem.yml`.
+- **Workflow:** uma coleta agendada na agenda da fonte (RN-TMP-02), que só trabalha quando há edição nova, publica o pacote aprovado como Release (ADR-015) e abre ou comenta uma issue na falha (ADR-011). Copie a estrutura de `coletar-cfem.yml`. Antes do PR, valide a sintaxe (`actionlint`, se houver) e simule os passos do `run` localmente; se der para usar `act`, rode o que for possível. Um `workflow_dispatch` disparado de uma branch só funciona para um arquivo que já exista na branch padrão, então um workflow novo só roda de verdade depois do merge.
+- **Tamanho do PR:** se generalizar as peças que só aceitam a CFEM (modelo, publicação, `coleta.py`, API) for grande, proponha um PR só para isso e outro para a fonte, empilhados (ver a regra de PRs separados ou empilhados). Recorte as fixtures ao mínimo que o teste precisa (poucos municípios e anos) e descreva no README da pasta como foram recortadas.
 - **Git:** branch nova a partir da `develop`, commits por assunto (decisão de regra num commit próprio, como na `documentar-pendencias`), PR para a `develop` com resumo, decisões do mantenedor, como foi conferido e o que **não** foi verificado. Push, merge e PR para a `main` só quando o mantenedor pedir.
 
 ## Armadilhas já encontradas
 
 - **Mês fechado no calendário não é mês completo na fonte.** A ANM lança registros com meses de atraso; use o critério de volume da RN-CFE-06 (ou um equivalente decidido para a fonte), não o calendário.
 - **Release criada por workflow com o `GITHUB_TOKEN` não dispara outro workflow** (só `workflow_dispatch` e `repository_dispatch` são exceção). Encadeie por agenda, não pelo evento.
-- **`schedule` e `workflow_dispatch` só valem a partir da `main`.** Um workflow novo não pode ser testado no GitHub antes do merge; simule os passos localmente e diga isso no PR. Depois do merge, dispare a primeira execução à mão (com autorização) e acompanhe.
+- **`schedule` e `workflow_dispatch` só valem a partir da `main`.** Um workflow novo não pode ser testado no GitHub antes do merge; simule os passos localmente (ver a Fase 5) e diga isso no PR. Depois do merge, dispare a primeira execução à mão (com autorização) e acompanhe.
 - **PR aberto por workflow não roda o CI sozinho:** alguém com acesso de escrita aprova na página do PR.
 - **Shell padrão do Actions sem `pipefail`:** um `| tee` esconde a falha do comando; use `set -o pipefail`.
 - **Servidor da ANM:** exige User-Agent de navegador, recusa HEAD e tem cadeia TLS incompleta (`OBS_ANM_CA=scripts/cfem/certificados/sectigo-ov-r36.pem`; nunca desligue a verificação).
 - **Uma API em execução não recarrega o código.** Depois de mudar `api/` ou a validação de leitura do pacote, reinicie o processo (e reconstrua a imagem Docker), senão o pacote novo aparece como inválido (503).
-- **Edição de arquivo com script no Windows:** `\` seguido de quebra de linha dentro de uma string Python vira continuação de linha e some do texto; confira comandos de várias linhas depois de editar documentação.
+- **Segunda fonte pode apagar a primeira.** Se a coleta de uma fonte parte do último pacote *dela*, o pacote novo perde os indicadores das outras. Parta do pacote mais recente de qualquer fonte e faça todas as coletas que publicam dividirem o mesmo grupo de concorrência (`publicar-pacote`).
+- **Linha sem a dimensão esperada não é layout novo.** A MSC trouxe uma linha sem função no meio de milhares completas. Reprovar o lote inteiro por isso foi erro; o certo é tirar da publicação só a unidade afetada, com o motivo no relatório. Reserve a reprovação do lote para mudança de colunas (RN-VPU-04).
 - **`git mv` fica no índice:** um `git add` de outros arquivos leva junto o que já estava preparado; confira `git status` antes de cada commit.
 
 ## Ao terminar
