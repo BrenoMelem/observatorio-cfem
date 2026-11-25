@@ -16,7 +16,9 @@ O projeto ainda não tem produto: a documentação é a parte central do reposit
 | Saber o que uma execução encontrou em certa data | [registros/](registros/) |
 | Conferir uma decisão técnica ou ver as que faltam | [adr/README.md](adr/README.md) |
 | Ler a análise da Fase 0 (rotas existentes, dimensões do site, propostas para a camada publicada e o assistente) | [adr/analise-fase-0-camada-publicada-e-assistente.md](adr/analise-fase-0-camada-publicada-e-assistente.md) |
-| Ver as rotas do protótipo da API | [api/openapi.yaml](api/openapi.yaml) |
+| Rodar o pipeline da CFEM da coleta à API, com o Swagger | [guias/pipeline-cfem.md](guias/pipeline-cfem.md) |
+| Ver o contrato da API do produto (para o front) | [api/openapi-producao.yaml](api/openapi-producao.yaml) |
+| Ver as rotas do protótipo do laboratório | [api/openapi.yaml](api/openapi.yaml) |
 
 ## Pastas
 
@@ -28,7 +30,7 @@ O projeto ainda não tem produto: a documentação é a parte central do reposit
 | `guias/` | Como rodar cada coleta do protótipo (comandos, entradas, saídas). Sem resultados datados | O script muda |
 | `registros/` | Resultados datados de execuções e leituras de teste. Cada arquivo é um retrato de uma data | Só se acrescenta |
 | `adr/` | Decisões de arquitetura, uma por arquivo | Há uma decisão nova |
-| `api/` | Esboço do contrato do protótipo local; não é contrato aprovado | A API do protótipo muda |
+| `api/` | `openapi-producao.yaml`: cópia da especificação gerada pela API do produto. `openapi.yaml`: esboço do protótipo local do laboratório. Nenhum dos dois é contrato aprovado | A API muda |
 
 ## Regras de escrita
 

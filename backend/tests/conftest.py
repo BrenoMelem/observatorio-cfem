@@ -9,3 +9,11 @@ def manifesto(request: pytest.FixtureRequest) -> Path:
     caminho = request.config.rootpath.parent / "data" / "indicadores.json"
     assert caminho.is_file(), caminho
     return caminho
+
+
+def pytest_addoption(parser: pytest.Parser) -> None:
+    parser.addoption(
+        "--atualizar-openapi",
+        action="store_true",
+        help="Regrava docs/api/openapi-producao.yaml a partir da API em vez de só comparar.",
+    )
