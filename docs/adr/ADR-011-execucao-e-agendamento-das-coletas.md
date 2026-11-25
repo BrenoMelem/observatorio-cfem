@@ -42,3 +42,16 @@ Fica de fora: como o pacote novo chega à implantação (decisão 6) e quais fon
 ## Nota de 19/11/2026
 
 O [ADR-015](ADR-015-hospedagem-provisoria-e-segredos.md) fixou, como provisório, que o pacote novo sai do GitHub Actions como Release do GitHub e que os segredos das fontes ficam nos Secrets do GitHub (coletas) e num `.env` fora do Git (máquina local). Como o pacote chega à produção fica para o ADR do serviço da AWS.
+
+## Nota de 25/11/2026
+
+Primeira coleta de produção agendada: `.github/workflows/coletar-cfem.yml` (arrecadação da CFEM; ver o [guia](../guias/pipeline-cfem.md)). Como pedem as consequências acima, os limites do GitHub Actions foram conferidos na documentação oficial em 25/11/2026:
+
+- **Tempo:** até 6 horas por job e 35 dias por execução de workflow ([Limits](https://docs.github.com/en/actions/reference/limits)).
+- **Executor `ubuntu-latest` em repositório público:** 4 CPUs, 16 GB de memória e 14 GB de disco, sem custo ([GitHub-hosted runners](https://docs.github.com/en/actions/reference/runners/github-hosted-runners)).
+- **Agendamento:** intervalo mínimo de 5 minutos; a execução pode atrasar ou ser descartada em momentos de carga alta; roda só na branch padrão; num repositório público, o agendamento é desligado após 60 dias sem atividade no repositório ([Events that trigger workflows](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows), seção `schedule`).
+- **Encadeamento:** eventos criados com o `GITHUB_TOKEN`, como a Release do arquivamento da ANM, não iniciam outros workflows, exceto `workflow_dispatch` e `repository_dispatch` (mesma página). Por isso a coleta é agendada uma vez por dia e só trabalha quando há edição nova.
+
+A coleta da CFEM com o arquivo de 25/11/2026 (310 MB descompactado) levou menos de um minuto numa máquina local, bem abaixo desses limites. A seção `schedule` foi lida por um resumo da página, não na íntegra; convém conferi-la de novo na próxima revisão. A decisão não muda.
+
+Segundo workflow, também de 25/11/2026: `.github/workflows/atualizar-referencias-anm.yml` captura uma vez por mês as tabelas oficiais da ANM que servem de referência à validação e, quando algo muda, abre um PR para revisão em vez de aplicar a mudança (decisão do mantenedor de 25/11/2026). São 45 requisições por mês ao servidor da ANM, uma por vez.

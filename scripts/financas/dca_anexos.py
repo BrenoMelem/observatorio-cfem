@@ -50,6 +50,14 @@ def consultar_anexo(anexo: str, exercicio: int, id_ente: int) -> dict:
         return json.load(resp)
 
 
+def _inteiro(valor: object) -> int | None:
+    """Inteiro do campo, ou None se vier nulo ou malformado (o item vira divergência de contrato, não queda)."""
+    try:
+        return int(valor)  # type: ignore[call-overload]
+    except (TypeError, ValueError):
+        return None
+
+
 def linhas_do_anexo(payload: dict, municipio: str, codigo: int, anexo: str, exercicio: int) -> list[dict]:
     """Transforma a resposta em linhas planas e confere o contrato da API.
 
@@ -58,7 +66,7 @@ def linhas_do_anexo(payload: dict, municipio: str, codigo: int, anexo: str, exer
     esperado_anexo = nome_do_anexo(anexo, exercicio)
     linhas = []
     for item in payload.get("items", []):
-        if (int(item.get("cod_ibge", -1)) != codigo or int(item.get("exercicio", -1)) != exercicio
+        if (_inteiro(item.get("cod_ibge")) != codigo or _inteiro(item.get("exercicio")) != exercicio
                 or str(item.get("anexo") or "") != esperado_anexo):
             raise ContratoSiconfiError(
                 f"{municipio} {exercicio} {anexo}: resposta divergente "

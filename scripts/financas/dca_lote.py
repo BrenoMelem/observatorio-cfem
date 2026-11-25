@@ -13,14 +13,22 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from collections.abc import Callable
 from datetime import datetime
 from pathlib import Path
-from typing import Callable
 from urllib.parse import urlencode
 
 from scripts.comum.arquivos import (
-    PASTA_PADRAO, Buscar, agora, buscar_http, escrever_json, escrever_json_atomico, escrever_texto,
-    id_execucao, iso_utc, ler_json_ou_vazio,
+    PASTA_PADRAO,
+    Buscar,
+    agora,
+    buscar_http,
+    escrever_json,
+    escrever_json_atomico,
+    escrever_texto,
+    id_execucao,
+    iso_utc,
+    ler_json_ou_vazio,
 )
 from scripts.comum.municipios import MUNICIPIOS
 

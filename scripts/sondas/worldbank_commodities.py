@@ -7,11 +7,10 @@ This reads the workbook only; it never executes formulas or macros.
 import argparse
 import hashlib
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from openpyxl import load_workbook
-
 
 SOURCE_URL = (
     "https://thedocs.worldbank.org/en/doc/"
@@ -42,13 +41,13 @@ def main():
                 raise ValueError(f"Expected one row for {year}; found {len(matches)}")
             value = matches[0][column - 1]
             if not isinstance(value, (int, float)):
-                raise ValueError(f"{name} {year} is not numeric: {value!r}")
+                raise TypeError(f"{name} {year} is not numeric: {value!r}")
             observations.append({"year": year, "value": value})
         series.append({"name": name, "workbook_unit_label": sheet.cell(8, column).value,
                        "unit_in_october_pdf": "$/dmt" if name.startswith("Iron ore") else "$/mt",
                        "column": column, "observations": observations})
     evidence = {
-        "checked_at_utc": datetime.now(timezone.utc).isoformat(),
+        "checked_at_utc": datetime.now(UTC).isoformat(),
         "source_url": SOURCE_URL,
         "source_sha256": digest,
         "worksheet": SHEET,

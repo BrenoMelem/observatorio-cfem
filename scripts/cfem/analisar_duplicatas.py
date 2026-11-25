@@ -1,7 +1,9 @@
 """Analisa as duplicatas da arrecadação da ANM para decisão humana (RN-VPU-11).
 
 Script de teste/laboratório (não é o produto). Porte de analisar-duplicatas-cfem.mjs. Nunca exporta
-identificadores pessoais: o relatório traz só município, ano, mês, números de linha e as datas de criação.
+identificadores pessoais: o relatório traz só município, ano, mês, números de linha, as datas de criação e o
+valor de cada repetição. `efeito_em_reais` é quanto as repetições somam a mais, porque são somadas e não
+descartadas (exceção de RN-VPU-11 de 08/11/2026).
 
 Uso:
     uv run python -m scripts.cfem.analisar_duplicatas [CSV] [RELATORIO.json]
@@ -12,8 +14,10 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from decimal import Decimal
 from pathlib import Path
 
+from scripts.cfem.anm_arquivos import valor_decimal
 from scripts.cfem.preparar import CABECALHO_ANM, ler_csv_anm
 from scripts.comum.arquivos import escrever_json
 from scripts.comum.municipios import MUNICIPIOS
@@ -56,15 +60,24 @@ def analisar_duplicatas(arquivo: str | Path, destino: str | Path = DESTINO_PADRA
                 "linha_original": primeira[0], "linha_duplicada": linha,
                 "data_criacao_original": primeira[1], "data_criacao_duplicada": cols[13],
                 "datas_criacao_iguais": primeira[1] == cols[13],
+                "valor": str(valor_decimal(cols[12])),
                 "campos_identicos_incluindo_identificador": True,
             })
         else:
             vistos[chave] = (linha, cols[13])
     if not cabecalho:
         raise ValueError("CSV vazio")
+    efeito: dict[str, Decimal] = {}
+    for item in duplicatas:
+        chave_efeito = f"{item['municipio_id']}:{item['ano']}"
+        efeito[chave_efeito] = efeito.get(chave_efeito, Decimal(0)) + Decimal(item["valor"])
     relatorio = {
         "finalidade": "Insumo para decisão do mantenedor; nenhuma duplicata foi removida e nenhum lote foi liberado.",
         "linhas_lidas": linha, "duplicatas": len(duplicatas),
+        "efeito_em_reais": {
+            "total": str(sum(efeito.values(), Decimal(0))),
+            "por_municipio_ano": {k: str(v) for k, v in sorted(efeito.items())},
+        },
         "por_ano": {str(a): totais[a] for a in sorted(totais)}, "linhas_duplicadas": duplicatas,
     }
     escrever_json(Path(destino), relatorio)

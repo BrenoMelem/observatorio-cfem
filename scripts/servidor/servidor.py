@@ -20,14 +20,14 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
-from scripts.comum.arquivos import PASTA_PADRAO
 from scripts.commodities.fred import csv_commodities, ler_commodities_publicadas
+from scripts.comum.arquivos import PASTA_PADRAO
 from scripts.financas.dca_lote import ler_despesa_publicada
 from scripts.populacao.atualizar import csv_populacao, ler_publicado
 
 MANIFESTO_PADRAO = Path(__file__).resolve().parents[2] / "data" / "indicadores.json"
 JSON_UTF8 = "application/json; charset=utf-8"
-INDICADORES_COMMODITIES = ("preco_minerio_ferro", "preco_cobre")
+INDICADORES_COMMODITIES = ("preco_minerio_ferro_contrato", "preco_minerio_ferro_spot", "preco_cobre")
 INDICADORES_DESPESA = ("despesa_funcao_empenhada", "despesa_funcao_liquidada", "despesa_funcao_paga")
 
 
@@ -63,7 +63,7 @@ def criar_servidor(pasta_dados: str | Path = PASTA_PADRAO, caminho_manifesto: st
         def _erro(self, status: int, mensagem: str) -> None:
             self._enviar(status, JSON_UTF8, _json({"erro": mensagem}))
 
-        def do_GET(self):  # noqa: N802
+        def do_GET(self):
             url = urlparse(self.path)
             consulta = {k: v[0] for k, v in parse_qs(url.query).items()}
             try:
@@ -116,7 +116,9 @@ def criar_servidor(pasta_dados: str | Path = PASTA_PADRAO, caminho_manifesto: st
             despesa = ler_despesa_publicada(pasta_dados)
             dados = {
                 "populacao_estimada": ler_publicado(pasta_dados),
-                "preco_minerio_ferro": [o for o in commodities if o["indicador"] == "preco_minerio_ferro"],
+                # O manifesto ainda tem um só identificador para o ferro; as duas séries (RN-TMP-13) aparecem
+                # juntas aqui, cada observação com a sua unidade, até o porte para o produto.
+                "preco_minerio_ferro": [o for o in commodities if o["indicador"].startswith("preco_minerio_ferro_")],
                 "preco_cobre": [o for o in commodities if o["indicador"] == "preco_cobre"],
             }
             for ind in INDICADORES_DESPESA:

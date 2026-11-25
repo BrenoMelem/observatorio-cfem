@@ -34,7 +34,7 @@ def meses_por_ano(linhas: Iterable[dict[str, str]], campo_codigo: str, desde: in
     """Para cada um dos 12 municípios, os meses (ordenados) com ao menos uma linha, por ano."""
     meses: dict[str, dict[int, set[int]]] = {c: defaultdict(set) for c in MUNICIPIOS}
     for linha in linhas:
-        codigo = linha.get(campo_codigo, "")
+        codigo = linha.get(campo_codigo, "").strip()
         if codigo in meses and int(linha["Ano"]) >= desde:
             meses[codigo][int(linha["Ano"])].add(int(linha["Mês"]))
     return {c: {a: sorted(m) for a, m in sorted(anos.items())} for c, anos in meses.items()}

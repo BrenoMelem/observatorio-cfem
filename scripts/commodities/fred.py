@@ -1,7 +1,9 @@
 """Coleta as séries de preço de ferro e cobre do FRED e publica uma camada provisória.
 
 Script de teste/laboratório (não é o produto). Porte do protótipo em Node (commodities-fred.mjs).
-Preserva os meses ausentes (valor ".") como `ausente` e não corta a série (divergência 17).
+Preserva os meses ausentes (valor ".") como `ausente`. O FRED é só reserva da spot do ferro e do cobre
+(RN-TMP-13): desde 21/11/2026 o ferro sai como `preco_minerio_ferro_spot` e só de dezembro de 2008 em diante,
+porque o trecho anterior da série não é comparável ao contrato do Pink Sheet.
 
 Uso:
     FRED_API_KEY=... uv run python -m scripts.commodities.fred
@@ -12,24 +14,34 @@ A chave entra só por variável de ambiente e nunca é gravada (sai como [REDACT
 from __future__ import annotations
 
 import argparse
+import itertools
 import json
 import math
 import os
 import re
 import sys
+from collections.abc import Callable
 from datetime import datetime
 from pathlib import Path
-from typing import Callable
 from urllib.parse import urlencode
 
 from scripts.comum.arquivos import (
-    PASTA_PADRAO, Buscar, agora, buscar_http, csv_observacoes, escrever_json, escrever_json_atomico,
-    escrever_texto, id_execucao, iso_utc, ler_json_ou_vazio,
+    PASTA_PADRAO,
+    Buscar,
+    agora,
+    buscar_http,
+    csv_observacoes,
+    escrever_json,
+    escrever_json_atomico,
+    escrever_texto,
+    id_execucao,
+    iso_utc,
+    ler_json_ou_vazio,
 )
 from scripts.comum.municipios import CAMPOS
 
 SERIES = {
-    "PIORECRUSDM": {"indicador": "preco_minerio_ferro", "unidade": "USD/dmt"},
+    "PIORECRUSDM": {"indicador": "preco_minerio_ferro_spot", "unidade": "USD/dmt", "inicio": (2008, 12)},
     "PCOPPUSDM": {"indicador": "preco_cobre", "unidade": "USD/t"},
 }
 
@@ -74,9 +86,12 @@ def extrair_fred(meta: dict, corpo: dict, serie: str, instante: str) -> list[dic
             "versao_tratamento": "1.0.0",
         })
     linhas.sort(key=lambda r: (r["ano"], r["mes"]))
-    for anterior, atual in zip(linhas, linhas[1:]):
+    for anterior, atual in itertools.pairwise(linhas):
         if atual["ano"] * 12 + atual["mes"] != anterior["ano"] * 12 + anterior["mes"] + 1:
             raise ContratoFredError(f"{serie}: lacuna na sequência mensal")
+    inicio = config.get("inicio")
+    if inicio:
+        linhas = [r for r in linhas if (r["ano"], r["mes"]) >= inicio]
     return linhas
 
 
@@ -96,13 +111,13 @@ def executar_commodities(pasta_dados: str | Path = PASTA_PADRAO, chave_api: str 
         "execucao": execucao, "atualizado_em": instante, "indicador": "commodities", "situacao": "bloqueado",
         "linhas_lidas": 0, "municipios_presentes": [], "anos": [], "nulos": 0, "duplicatas": 0,
         "faixa_valores": {}, "divergencia_fonte_primaria": "Reconciliação independente pendente; valores provisórios",
-        "pendencia_ferro": "Divergência 17: início em 1980 ou 1992 e recorte de exibição em aberto; nenhuma linha foi cortada.",
+        "pendencia_ferro": "Reserva só da spot (RN-TMP-13): o ferro do FRED entra a partir de dez/2008.",
         "erro": None,
     }
     try:
         todos: list[dict] = []
         for serie in SERIES:
-            def obter(endpoint: str, rotulo: str) -> dict:
+            def obter(endpoint: str, rotulo: str, serie: str = serie) -> dict:
                 url = f"https://api.stlouisfed.org/fred/series{endpoint}?" + urlencode(
                     {"series_id": serie, "api_key": chave_api, "file_type": "json"})
                 status, corpo = buscar(url)

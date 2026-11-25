@@ -1,0 +1,589 @@
+openapi: 3.1.0
+info:
+  title: Observatório CFEM — camada publicada
+  description: |-
+    Dados públicos sobre a CFEM e indicadores dos 12 municípios da Região de Integração Carajás (PA).
+
+    A API lê **só o pacote publicado** (RN-ENT-01): um lote entra no pacote apenas depois de validado contra
+    publicação oficial independente, e um lote reprovado não substitui o anterior (RN-VPU-01, RN-VPU-03).
+
+    - **Ausência não é zero.** Município ou mês sem observação é lacuna (RN-CFE-07).
+    - **Dinheiro é texto decimal** (`"120784171.37"`), para não perder centavos (RN-CFE-11).
+    - **`versao_dados`** identifica o pacote publicado; serve para invalidar cache no front.
+    - Somente leitura, sem autenticação.
+  version: 0.1.0
+paths:
+  /api/v1/dimensoes/{dimensao}.csv:
+    get:
+      tags:
+      - dimensoes
+      summary: Observações de uma dimensão em CSV
+      description: Os mesmos filtros e observações da rota JSON, para download (RN-ENT-03).
+      operationId: dimensao_csv_api_v1_dimensoes__dimensao__csv_get
+      parameters:
+      - name: dimensao
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Dimensão do observatório (RN-ENT-12). A CFEM arrecadada fica na `economica`.
+          enum:
+          - social
+          - economica
+          - ambiental
+          - institucional
+          title: Dimensao
+        description: Dimensão do observatório (RN-ENT-12). A CFEM arrecadada fica na `economica`.
+      - name: municipio_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'Código IBGE de 7 dígitos de um dos 12 municípios da RI Carajás. Omitido: todos.'
+          examples:
+          - '1505536'
+          title: Municipio Id
+        description: 'Código IBGE de 7 dígitos de um dos 12 municípios da RI Carajás. Omitido: todos.'
+      - name: ano_inicio
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+            minimum: 1900
+          - type: 'null'
+          description: Primeiro ano do recorte, inclusive.
+          examples:
+          - 2015
+          title: Ano Inicio
+        description: Primeiro ano do recorte, inclusive.
+      - name: ano_fim
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+            minimum: 1900
+          - type: 'null'
+          description: Último ano do recorte, inclusive.
+          examples:
+          - 2025
+          title: Ano Fim
+        description: Último ano do recorte, inclusive.
+      - name: periodicidade
+        in: query
+        required: false
+        schema:
+          enum:
+          - mensal
+          - anual
+          type: string
+          description: '`mensal`: uma observação por mês. `anual`: soma da CFEM só nos anos com os 12 meses validados;
+            os anos omitidos aparecem em `notas` (RN-CFE-05).'
+          default: mensal
+          title: Periodicidade
+        description: '`mensal`: uma observação por mês. `anual`: soma da CFEM só nos anos com os 12 meses validados;
+          os anos omitidos aparecem em `notas` (RN-CFE-05).'
+      responses:
+        '200':
+          description: CSV em UTF-8 com BOM, separado por ponto e vírgula. Cada linha traz fonte, edição, método
+            e limitações (RN-ENT-05). Texto que começa com `=`, `+`, `-` ou `@` ganha um apóstrofo.
+          content:
+            text/csv:
+              schema:
+                type: string
+              example: |
+                indicador;municipio_id;municipio_nome;nivel_territorial;ano;mes;valor;unidade;natureza_valor;estado_validacao;fonte;edicao_fonte;atualizado_em;versao_tratamento;metodo;limitacoes
+                cfem_arrecadada;1505536;Parauapebas;município;2025;1;120784171.37;BRL nominal;informado;validado;ANM, CFEM_Arrecadacao.csv;54b112be…;2026-11-25T11:44:04+00:00;1.0.0;…;…
+        '404':
+          description: Dimensão desconhecida.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+        '503':
+          description: Pacote publicado inválido, ilegível ou sem manifesto (RN-VPU-03).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/dimensoes/{dimensao}:
+    get:
+      tags:
+      - dimensoes
+      summary: Observações conferidas de uma dimensão
+      description: |-
+        Devolve só observações conferidas do pacote publicado (RN-ENT-01, RN-VPU-10).
+
+        No ano ainda aberto, os meses conferidos saem com `estado_validacao` = `provisório` (RN-CFE-06).
+
+        Indicador sem publicação aparece em `status` com o motivo, sem observação inventada; temas ainda sem
+        indicador aparecem em `lacunas`. Filtro inválido (`municipio_id` sem 7 dígitos, `ano_inicio` maior que
+        `ano_fim`) responde 422.
+      operationId: dimensao_api_v1_dimensoes__dimensao__get
+      parameters:
+      - name: dimensao
+        in: path
+        required: true
+        schema:
+          type: string
+          description: Dimensão do observatório (RN-ENT-12). A CFEM arrecadada fica na `economica`.
+          enum:
+          - social
+          - economica
+          - ambiental
+          - institucional
+          title: Dimensao
+        description: Dimensão do observatório (RN-ENT-12). A CFEM arrecadada fica na `economica`.
+      - name: municipio_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'Código IBGE de 7 dígitos de um dos 12 municípios da RI Carajás. Omitido: todos.'
+          examples:
+          - '1505536'
+          title: Municipio Id
+        description: 'Código IBGE de 7 dígitos de um dos 12 municípios da RI Carajás. Omitido: todos.'
+      - name: ano_inicio
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+            minimum: 1900
+          - type: 'null'
+          description: Primeiro ano do recorte, inclusive.
+          examples:
+          - 2015
+          title: Ano Inicio
+        description: Primeiro ano do recorte, inclusive.
+      - name: ano_fim
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+            minimum: 1900
+          - type: 'null'
+          description: Último ano do recorte, inclusive.
+          examples:
+          - 2025
+          title: Ano Fim
+        description: Último ano do recorte, inclusive.
+      - name: periodicidade
+        in: query
+        required: false
+        schema:
+          enum:
+          - mensal
+          - anual
+          type: string
+          description: '`mensal`: uma observação por mês. `anual`: soma da CFEM só nos anos com os 12 meses validados;
+            os anos omitidos aparecem em `notas` (RN-CFE-05).'
+          default: mensal
+          title: Periodicidade
+        description: '`mensal`: uma observação por mês. `anual`: soma da CFEM só nos anos com os 12 meses validados;
+          os anos omitidos aparecem em `notas` (RN-CFE-05).'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaDimensao'
+        '404':
+          description: Dimensão desconhecida.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+        '503':
+          description: Pacote publicado inválido, ilegível ou sem manifesto (RN-VPU-03).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/indicadores/status:
+    get:
+      tags:
+      - indicadores
+      summary: Situação de todos os indicadores do manifesto
+      description: Lista cada indicador do manifesto, publicado ou não, com o motivo da ausência (RN-ENT-04).
+      operationId: indicadores_status_api_v1_indicadores_status_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StatusIndicador'
+                type: array
+                title: Response Indicadores Status Api V1 Indicadores Status Get
+        '503':
+          description: Pacote publicado inválido, ilegível ou sem manifesto (RN-VPU-03).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+  /saude:
+    get:
+      tags:
+      - saude
+      summary: Estado do pacote publicado
+      description: Pronto só com manifesto e ao menos uma observação publicada lidos e validados (RN-ENT-01).
+      operationId: saude_saude_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Saude'
+components:
+  schemas:
+    Erro:
+      properties:
+        detail:
+          type: string
+          title: Detail
+          description: Mensagem do erro.
+          examples:
+          - Dimensão desconhecida
+      type: object
+      required:
+      - detail
+      title: Erro
+      description: Corpo dos erros 404 e 503.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Metadados:
+      properties:
+        fonte:
+          type: string
+          title: Fonte
+          description: Fonte do dado, como consta no manifesto de indicadores.
+        edicao:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Edicao
+          description: Edição mais recente da fonte entre as observações publicadas; nula sem publicação.
+        metodo:
+          type: string
+          title: Metodo
+          description: Como o valor foi calculado a partir da fonte.
+        limitacoes:
+          type: string
+          title: Limitacoes
+          description: O que o valor não diz e cuidados de leitura.
+      type: object
+      required:
+      - fonte
+      - metodo
+      - limitacoes
+      title: Metadados
+      description: Proveniência de um indicador, tirada do manifesto publicado (RN-MOD-25, RN-VPU-09).
+    Observacao:
+      properties:
+        indicador:
+          type: string
+          title: Indicador
+          description: Identificador do indicador no manifesto (RN-MOD-25).
+        municipio_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Municipio Id
+          description: Código IBGE de 7 dígitos; nulo no nível RI (RN-TER).
+        municipio_nome:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Municipio Nome
+          description: Nome do município; nulo no nível RI.
+        nivel_territorial:
+          type: string
+          enum:
+          - município
+          - RI
+          title: Nivel Territorial
+          description: Município ou a Região de Integração.
+        ano:
+          type: integer
+          title: Ano
+          description: Ano de referência do valor.
+        mes:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Mes
+          description: Mês de 1 a 12; nulo em séries anuais e nos totais anuais.
+        valor:
+          anyOf:
+          - type: string
+          - type: number
+          - type: 'null'
+          title: Valor
+          description: Valor do indicador. Dinheiro sai como texto decimal (por exemplo, "120784171.37") para não
+            perder centavos (RN-CFE-11). Nulo quando a natureza não é `informado` nem `zero real`.
+        unidade:
+          type: string
+          title: Unidade
+          description: Unidade do valor, por exemplo `BRL nominal` ou `pessoas`.
+        natureza_valor:
+          type: string
+          enum:
+          - informado
+          - zero real
+          - ausente
+          - não divulgado
+          - não aplicável
+          title: Natureza Valor
+          description: Distingue zero real de ausência; ausência nunca vira zero (RN-MOD-12).
+        estado_validacao:
+          type: string
+          enum:
+          - validado
+          - provisório
+          title: Estado Validacao
+          description: '`validado` em ano fechado; `provisório` nos meses conferidos do ano ainda aberto, que ainda
+            não somam total anual (RN-CFE-06, RN-VPU-10).'
+        fonte:
+          type: string
+          title: Fonte
+          description: Fonte do dado.
+        edicao_fonte:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Edicao Fonte
+          description: Edição da fonte; na CFEM, o SHA-256 do arquivo bruto lido (RN-FON-13).
+        atualizado_em:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Atualizado Em
+          description: Data ISO 8601 da coleta.
+        versao_tratamento:
+          type: string
+          title: Versao Tratamento
+          description: Versão do tratamento que gerou a observação.
+      additionalProperties: false
+      type: object
+      required:
+      - indicador
+      - municipio_id
+      - municipio_nome
+      - nivel_territorial
+      - ano
+      - mes
+      - valor
+      - unidade
+      - natureza_valor
+      - estado_validacao
+      - fonte
+      - edicao_fonte
+      - atualizado_em
+      - versao_tratamento
+      title: Observacao
+      description: 'Uma observação no esquema comum (RN-MOD-03): um valor de um indicador num território e período.'
+      examples:
+      - ano: 2025
+        atualizado_em: '2026-11-25T11:44:04.724818+00:00'
+        edicao_fonte: 54b112bef22b4bfc8e9d0cf02b3119d93a5969b948c7b1b0e02c65c9a7c3ca7f
+        estado_validacao: validado
+        fonte: ANM, CFEM_Arrecadacao.csv
+        indicador: cfem_arrecadada
+        mes: 1
+        municipio_id: '1505536'
+        municipio_nome: Parauapebas
+        natureza_valor: informado
+        nivel_territorial: município
+        unidade: BRL nominal
+        valor: '120784171.37'
+        versao_tratamento: 1.0.0
+    RespostaDimensao:
+      properties:
+        filtros:
+          additionalProperties:
+            anyOf:
+            - type: string
+            - type: integer
+            - type: 'null'
+          type: object
+          title: Filtros
+          description: Os filtros aplicados, ecoados na resposta.
+        versao_dados:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Versao Dados
+          description: Versão do pacote publicado lido (hash). Igual em todas as rotas enquanto o pacote não muda.
+        notas:
+          items:
+            type: string
+          type: array
+          title: Notas
+          description: Avisos de leitura, inclusive anos omitidos na periodicidade anual.
+        dados:
+          items:
+            $ref: '#/components/schemas/Observacao'
+          type: array
+          title: Dados
+          description: 'Observações conferidas no recorte: validadas, ou provisórias no ano aberto (RN-CFE-06).
+            Lista vazia não significa valor zero (RN-CFE-07).'
+        status:
+          items:
+            $ref: '#/components/schemas/StatusIndicador'
+          type: array
+          title: Status
+          description: Situação de cada indicador da dimensão.
+        metadados:
+          additionalProperties:
+            $ref: '#/components/schemas/Metadados'
+          type: object
+          title: Metadados
+          description: Proveniência de cada indicador da dimensão.
+        lacunas:
+          items:
+            type: string
+          type: array
+          title: Lacunas
+          description: Temas da dimensão que ainda não têm publicação homologada.
+      type: object
+      required:
+      - filtros
+      - versao_dados
+      - notas
+      - dados
+      - status
+      - metadados
+      - lacunas
+      title: RespostaDimensao
+      description: 'Envelope híbrido da Fase 1: filtros, observações, status, metadados e lacunas (ADR-010, RN-MOD-03).'
+    Saude:
+      properties:
+        estado:
+          type: string
+          enum:
+          - pronto
+          - sem_publicacao
+          - publicacao_invalida
+          title: Estado
+          description: '`pronto`: manifesto e ao menos uma observação publicada válidos. `sem_publicacao`: manifesto
+            válido, sem observação. `publicacao_invalida`: pacote ilegível ou com hash divergente; ver `motivo`.'
+        motivo:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Motivo
+          description: Presente só em `publicacao_invalida`.
+      type: object
+      required:
+      - estado
+      title: Saude
+      description: Estado do pacote publicado lido pela API (RN-ENT-01).
+      examples:
+      - estado: pronto
+      - estado: publicacao_invalida
+        motivo: …
+    StatusIndicador:
+      properties:
+        indicador:
+          type: string
+          title: Indicador
+          description: Identificador do indicador no manifesto.
+          examples:
+          - cfem_arrecadada
+        situacao:
+          type: string
+          enum:
+          - publicado
+          - sem_dado_validado
+          title: Situacao
+          description: '`publicado` quando há observação validada no pacote; `sem_dado_validado` caso contrário.'
+        motivo:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Motivo
+          description: Por que o indicador não tem publicação; nulo quando publicado.
+        ano_referencia:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Ano Referencia
+          description: Ano mais recente publicado.
+        atualizado_em:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Atualizado Em
+          description: Data ISO 8601 da coleta mais recente publicada.
+        metadados:
+          $ref: '#/components/schemas/Metadados'
+      type: object
+      required:
+      - indicador
+      - situacao
+      - metadados
+      title: StatusIndicador
+      description: Situação de publicação de um indicador (RN-ENT-04).
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+tags:
+- name: dimensoes
+  description: Observações por dimensão do observatório, em JSON ou CSV.
+- name: indicadores
+  description: Situação de publicação de cada indicador.
+- name: saude
+  description: Estado do pacote publicado.

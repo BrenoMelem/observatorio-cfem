@@ -94,6 +94,7 @@ Regras sobre o que um lote precisa cumprir para ser publicado e sobre o que faze
 - **Exceção de 08/11/2026 (DECISÃO-MANTENEDOR):** o mantenedor decidiu manter o que a `obcefem_api` faz: a arrecadação é publicada somando as 129 linhas repetidas, sem bloquear o lote. Nenhuma linha é apagada, e a contagem de repetições segue devendo constar do relatório de qualidade. O efeito em reais das 129 linhas nos totais não foi medido.
 - **Fonte:** DECISÃO-MANTENEDOR de 27/10/2026; VAL-15/10 §Matriz operacional (CFEM autuações).
 - **Relacionadas:** RN-VPU-06, RN-CFE-13
+- **Evidência:** efeito em reais das repetições medido em 25/11/2026; ver as notas de evidência no fim do arquivo.
 
 ### RN-VPU-12: Tolerância da reconciliação
 - **Status:** DECIDIDA
@@ -103,3 +104,11 @@ Regras sobre o que um lote precisa cumprir para ser publicado e sobre o que faze
 - **Exceções:** Se um caso real mostrar diferença só de arredondamento do PDF, a regra pode ser revista pelo mantenedor.
 - **Fonte:** DECISÃO-MANTENEDOR de 26/10/2026; VAL-15/10 §Rodada adicional.
 - **Relacionadas:** RN-VPU-07
+
+## Notas de evidência
+
+Evidência datada que sustenta ou qualifica as regras acima; nenhuma nota muda o status da regra.
+
+#### RN-VPU-11: Tratamento de duplicidades
+
+- **Evidência de 25/11/2026** (arquivo de arrecadação da Release `anm-2026-11-25-0325`, SHA-256 `54b112be…` do CSV; reproduzido em 25/11/2026 com `uv run python -m scripts.cfem.analisar_duplicatas`). Na edição republicada pela ANM em 23/11/2026, o recorte dos 12 municípios tem 28 linhas que repetem os 14 campos de outra, todas com a mesma `DataCriacao` da original. Somadas, as repetições acrescentam **R$ 22.973,97** a toda a série, em Eldorado do Carajás (2011 e 2022), Marabá (2012, 2014, 2020, 2022, 2023 e 2026) e Parauapebas (2019 a 2021 e 2025). O maior efeito num município e ano é R$ 13.956,81, em Parauapebas, 2020. Com as repetições somadas, as 1.463 células de 2004 a 2025 da tabela oficial da ANM por município e mês coincidem ao centavo com o arquivo (RN-VPU-12; [registro de 25/11/2026](../registros/pipeline-cfem-2026-11-25-referencias.md)). Isso sugere que a própria tabela publicada pela ANM conta as linhas repetidas. A ANM não confirmou a causa das repetições.

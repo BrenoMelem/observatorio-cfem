@@ -32,6 +32,9 @@ def test_dca_e_anm():
     anm = cfem_distribuida([{"CodigoEnte": "1505536", "Ente": "Município", "Ano": "2024", "Valor": "1,50"},
                             {"CodigoEnte": "15", "Ente": "Estado", "Ano": "2024", "Valor": "9,00"}])
     assert anm == {("1505536", 2024): Decimal("1.50")}
+    # Code review de 21/11/2026: ponto de milhar e espaços no código, como já tratam os outros leitores da ANM.
+    anm = cfem_distribuida([{"CodigoEnte": " 1505536", "Ente": "Município", "Ano": "2024", "Valor": "1.234.567,89"}])
+    assert anm == {("1505536", 2024): Decimal("1234567.89")}
 
 
 def test_receita_soma_codigos_da_uniao_e_dos_estados():

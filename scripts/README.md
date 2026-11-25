@@ -28,7 +28,7 @@ Os scripts rodam como módulo, a partir da raiz do repositório: `uv run python 
 | | `dca_csv.py` | DCA Anexo I-E em CSV simples por função |
 | | `dca_anexos.py` | DCA Anexos I-C (receitas, cota-parte do ICMS) e I-D (despesas, investimento) em CSV longo, 12 municípios, 2013 a 2025 (RN-ENT-12) |
 | | `msc_despesa_fonte.py` | MSC orçamentária por fonte de recursos (`1708`) |
-| `commodities/` | `pink_sheet.py`, `fred.py` | Preço de ferro e cobre: Pink Sheet do World Bank (fonte principal, sem chave) e FRED (reserva, exige `FRED_API_KEY` no ambiente) |
+| `commodities/` | `pink_sheet.py`, `fred.py` | Preço de ferro e cobre: Pink Sheet do World Bank (fonte principal, sem chave), com o ferro em duas séries, contrato anual 1985–2005 e spot mensal desde dez/2008 (RN-TMP-13 e 14, corrigido em 21/11/2026); FRED (reserva da spot e do cobre, exige `FRED_API_KEY` no ambiente) |
 | `emissoes/` | `seeg.py` | Emissões do SEEG: lê a planilha municipal (centenas de MB, fora do Git) e extrai o recorte dos 12 municípios com os metadados |
 | `sondas/` | `ibge_sidra.py`, `ipeadata.py`, `inspecionar_ipeadata.py`, `worldbank_commodities.py`, `tcmpa.py` (conflito B4), `ibge_bairros.py` (conflito B5), `basedosdados_colunas.py` (colunas do catálogo da Base dos Dados, RN-MOD-16), `pib_per_capita_ri.py` (razão regional, RN-MOD-18), `siconfi_entregas.py` (status das entregas da DCA, RN-TMP-04) | Provas de que a fonte responde e como (laboratório) |
 | `servidor/` | `servidor.py` | API local do protótipo; lê só a camada publicada (`docs/api/openapi.yaml`) |

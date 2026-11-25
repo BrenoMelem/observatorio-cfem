@@ -9,10 +9,9 @@ import csv
 import hashlib
 import json
 from collections import defaultdict
-from datetime import datetime, timezone
-from decimal import Decimal, ROUND_HALF_UP
+from datetime import UTC, datetime
+from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
-
 
 PDF_URL = "https://www.gov.br/anm/pt-br/itens/arquivos/cfem-abril-maio-25.pdf"
 EXPECTED = {
@@ -66,7 +65,7 @@ def main():
         })
 
     evidence = {
-        "checked_at_utc": datetime.now(timezone.utc).isoformat(),
+        "checked_at_utc": datetime.now(UTC).isoformat(),
         "csv_sha256": file_sha256(args.csv_path),
         "pdf_source_url": PDF_URL,
         "pdf_remittance": 696,

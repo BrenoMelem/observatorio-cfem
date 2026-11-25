@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Demonstração · Observatório CFEM</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/3.0.1/plotly.min.js" defer></script>
+<style>
+:root{font:16px/1.55 system-ui,sans-serif;color:#173b35;background:#f4f6f2}*{box-sizing:border-box}body{margin:0}header{background:#123e36;color:#fff;padding:32px max(5vw,20px)}header p{color:#c3d8cd;margin:8px 0}main{max-width:1260px;margin:28px auto;padding:0 24px}.marca{font-size:13px;letter-spacing:.12em;text-transform:uppercase}.selo{display:inline-block;padding:4px 12px;border:1px solid #96c5ae;border-radius:30px;color:#d0e8da;font-size:12px;margin-left:16px}h1{font-size:clamp(26px,4vw,42px);line-height:1.15;margin:22px 0 12px;max-width:800px}h2{font-size:20px;margin:0 0 16px}.controles,.painel{background:white;border:1px solid #d5ded6;border-radius:12px;padding:22px;margin-bottom:20px}.controles{display:flex;gap:16px;align-items:end;flex-wrap:wrap}label{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:600}input,select,button{font:inherit;padding:10px 12px;border:1px solid #80968a;border-radius:6px;background:white;color:#173b35}button{background:#17664f;color:#fff;cursor:pointer;font-weight:600}button:hover{background:#104934}button:disabled{opacity:.6}a{color:#135a46}input:focus,select:focus,button:focus,a:focus{outline:3px solid #ddac44;outline-offset:3px}.cards{display:grid;grid-template-columns:1fr 1fr;gap:20px}.valor{font-size:clamp(22px,3vw,32px);font-weight:700}.muted{color:#51685e;font-size:14px}.linha{border-left:4px solid #208866}.canaa{border-left-color:#bf6a27}#grafico{min-height:430px}#estado{padding:12px 16px;border-radius:8px;background:#e6eee8;white-space:pre-line}#proveniencia{overflow-wrap:anywhere;font-size:14px}.tabela{max-height:360px;overflow:auto}table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:10px;border-bottom:1px solid #dce4dc}th{background:#edf2ed;position:sticky;top:0}details{margin:16px 0}summary{cursor:pointer;font-weight:600}.fluxo{font-size:13px;color:#b4d2c3;margin-top:20px}footer{font-size:13px;color:#51685e;margin:30px 0}.assistente{display:flex;gap:12px;flex-wrap:wrap}.assistente input{flex:1;min-width:250px}#resposta{white-space:pre-wrap}ul{padding-left:22px}@media(max-width:680px){.cards{grid-template-columns:1fr}.controles>*{width:100%}main{padding:0 12px}.selo{margin:8px 0;display:table}#grafico{min-height:340px}}
+</style>
+<header><div class="marca">Observatório CFEM · RI Carajás <span class="selo">Demonstração · 26/11/2026</span></div>
+<h1>Da arrecadação mineral<br>à informação pública.</h1><p>CFEM gerada pela extração em Canaã dos Carajás e Parauapebas.</p>
+<div class="fluxo">ANM → observações mensais → reconciliação oficial → pacote versionado → API → gráfico</div></header>
+<main>
+<form id="filtros" class="controles">
+<label>Endereço da API<input id="api" type="url" value="http://127.0.0.1:8000" required></label>
+<label>Visualização<select id="periodicidade"><option value="anual">Anual · somente 12 meses</option><option value="mensal">Mensal</option></select></label>
+<label>De<input id="inicio" type="number" min="2003" max="2100" value="2003"></label>
+<label>Até<input id="fim" type="number" min="2003" max="2100" value="2026"></label>
+<button id="carregar">Consultar dados</button><a id="csv" href="#">Baixar CSV</a>
+</form>
+<p id="estado" role="status" aria-live="polite">Aguardando consulta à camada publicada.</p>
+<div class="cards"><section class="painel linha"><div class="muted">Parauapebas · último período exibido</div><div id="valor-parauapebas" class="valor">Sem observação</div><div id="periodo-parauapebas" class="muted"></div></section>
+<section class="painel linha canaa"><div class="muted">Canaã dos Carajás · último período exibido</div><div id="valor-canaa" class="valor">Sem observação</div><div id="periodo-canaa" class="muted"></div></section></div>
+<section class="painel"><h2>Arrecadação da CFEM</h2><p class="muted">Reais nominais, sem correção pela inflação. Arrecadação não é o repasse recebido pela prefeitura.</p><div id="grafico" role="img" aria-label="Gráfico comparativo; os mesmos valores estão na tabela abaixo"></div>
+<details><summary>Ver os valores em tabela</summary><div class="tabela"><table><thead><tr><th>Município</th><th>Período</th><th>Valor (R$)</th><th>Estado</th></tr></thead><tbody id="valores"></tbody></table></div></details></section>
+<section class="painel"><h2>Origem e limites dos dados</h2><div id="proveniencia"></div><ul id="notas"></ul><p class="muted">Somente dados conferidos com a tabela oficial da ANM; os meses do ano ainda aberto aparecem pontilhados, como provisórios. Ausência de publicação não significa arrecadação zero. Anos incompletos não têm total anual. Não há dados fictícios neste gráfico.</p></section>
+<footer>Demonstração técnica separada do front oficial. As regras e o relatório de qualidade acompanham a entrega.</footer>
+</main>
+<script>
+'use strict';
+const el=id=>document.getElementById(id), dinheiro=v=>v===null?'Ausente':Number(v).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const nomes={'1505536':'Parauapebas','1502152':'Canaã dos Carajás'}, cores={'1505536':'#208866','1502152':'#bf6a27'};
+function base(){const url=new URL(el('api').value);if(!['http:','https:'].includes(url.protocol))throw Error('Endereço de API inválido');return url.origin;}
+function periodo(o){return o.mes?String(o.mes).padStart(2,'0')+'/'+o.ano:String(o.ano);}
+async function consultar(event){if(event)event.preventDefault();el('carregar').disabled=true;el('estado').textContent='Consultando o pacote publicado…';
+ try {if(Number(el('inicio').value)>Number(el('fim').value))throw Error('O ano inicial deve ser menor ou igual ao final.');
+ const params=new URLSearchParams({ano_inicio:el('inicio').value,ano_fim:el('fim').value,periodicidade:el('periodicidade').value});
+ const r=await fetch(base()+'/api/v1/dimensoes/economica?'+params,{signal:AbortSignal.timeout(15000)});if(!r.ok)throw Error('Consulta indisponível (HTTP '+r.status+'). Confira o pacote e a API.');
+ const p=await r.json(), dados=p.dados.filter(o=>o.indicador==='cfem_arrecadada'&&['validado','provisório'].includes(o.estado_validacao)&&nomes[o.municipio_id]);
+ el('csv').href=base()+'/api/v1/dimensoes/economica.csv?'+params;
+ el('estado').textContent=dados.length?dados.length+' observações validadas no recorte. As lacunas são preservadas.':'Sem observações validadas neste recorte. Não há valores a desenhar.';
+ el('valores').replaceChildren(); for(const o of dados){const tr=document.createElement('tr');for(const v of [o.municipio_nome,periodo(o),dinheiro(o.valor),o.estado_validacao]){const td=document.createElement('td');td.textContent=v;tr.append(td);}el('valores').append(tr);}
+ const meta=p.metadados.cfem_arrecadada; el('proveniencia').textContent='Fonte: '+meta.fonte+'\nEdição da fonte (SHA-256): '+(meta.edicao||'não disponível')+'\nVersão do pacote: '+p.versao_dados+'\nMétodo: '+meta.metodo+'\nLimitações: '+meta.limitacoes;
+ el('proveniencia').style.whiteSpace='pre-line';el('notas').replaceChildren();for(const n of p.notas){const li=document.createElement('li');li.textContent=n;el('notas').append(li);}
+ const series=[]; for(const [codigo,nome] of Object.entries(nomes)){const pontos=dados.filter(o=>o.municipio_id===codigo).sort((a,b)=>a.ano-b.ano||(a.mes||0)-(b.mes||0));
+ const ultimo=pontos.at(-1), sufixo=codigo==='1505536'?'parauapebas':'canaa';el('valor-'+sufixo).textContent=ultimo?dinheiro(ultimo.valor):'Sem observação';el('periodo-'+sufixo).textContent=ultimo?periodo(ultimo)+' · '+ultimo.estado_validacao+' · atualização '+(ultimo.atualizado_em||'não informada'):'';
+ const mapa=new Map(pontos.map(o=>[(o.ano+'-'+String(o.mes||1).padStart(2,'0')),o]));const x=[],y=[],text=[],yp=[];
+ for(let ano=Number(el('inicio').value);ano<=Number(el('fim').value);ano++){for(let mes=1;mes<=(el('periodicidade').value==='anual'?1:12);mes++){const k=ano+'-'+String(mes).padStart(2,'0'),o=mapa.get(k);x.push(k+'-01');const prov=o&&o.estado_validacao==='provisório';y.push(o&&!prov?Number(o.valor):null);yp.push(prov?Number(o.valor):null);text.push(o?periodo(o)+' · '+dinheiro(o.valor)+' · '+o.estado_validacao:'Sem publicação');}}
+ series.push({x,y,text,name:nome,type:'scatter',mode:'lines+markers',connectgaps:false,line:{color:cores[codigo],width:3},hovertemplate:'%{text}<extra>%{fullData.name}</extra>'});
+ if(yp.some(v=>v!==null))series.push({x,y:yp,text,name:nome+' (provisório)',type:'scatter',mode:'lines+markers',connectgaps:false,line:{color:cores[codigo],width:2,dash:'dot'},marker:{symbol:'circle-open',size:8},hovertemplate:'%{text}<extra>%{fullData.name}</extra>'});}
+ if(window.Plotly){await Plotly.react('grafico',series,{paper_bgcolor:'white',plot_bgcolor:'white',font:{family:'system-ui',color:'#173b35'},margin:{t:20,r:20,b:60,l:85},xaxis:{title:'Período',type:'date'},yaxis:{title:'R$ nominais',rangemode:'tozero'},legend:{orientation:'h',y:1.15}},{responsive:true,displayModeBar:false});}else{el('grafico').textContent='Biblioteca do gráfico indisponível. Consulte os valores na tabela.';}
+ }catch(e){el('estado').textContent=e.message;el('grafico').replaceChildren();el('valores').replaceChildren();for(const s of ['parauapebas','canaa']){el('valor-'+s).textContent='Indisponível';el('periodo-'+s).textContent='';}}
+ finally{el('carregar').disabled=false;}}
+// Endereço da API: ?api=http://host:porta na URL, senão o último usado neste navegador, senão o padrão do campo.
+const CHAVE_API='observatorio-cfem-api';
+(()=>{let salvo=null;try{salvo=localStorage.getItem(CHAVE_API);}catch(e){}
+ const pedido=new URLSearchParams(location.search).get('api')||salvo;if(pedido)el('api').value=pedido;})();
+el('filtros').addEventListener('submit',()=>{try{localStorage.setItem(CHAVE_API,el('api').value);}catch(e){}});
+el('filtros').addEventListener('submit',consultar);
+window.addEventListener('load',()=>consultar());
+</script>
+</html>
