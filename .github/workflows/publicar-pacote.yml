@@ -83,7 +83,7 @@ jobs:
             echo "Para servir: extraia publicado.tar.gz na pasta de OBS_PUBLICADO_DIR (docs/guias/pipeline-cfem.md)."
           } > notas.md
           gh release create "$TAG" publicado.tar.gz \
-            --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --latest=true \
+            --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --latest=false \
             --title "Pacote de $TAG" --notes-file notas.md
 
       - name: Abrir ou comentar a issue de falha
