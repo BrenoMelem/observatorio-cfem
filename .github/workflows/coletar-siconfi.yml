@@ -1,9 +1,9 @@
 # Coleta, confere e publica a despesa por função do SICONFI (RN-FNT-04; ADR-011; pacote como Release, ADR-015).
 # Agenda mensal (RN-TMP-02, exceção de 25/11/2026): consulta o extrato de entregas e só coleta quando uma
 # entrega da DCA, do RREO do 6º bimestre ou da MSC de dezembro aparece ou muda (retificação, RN-TMP-04), salvo
-# com "forcar". Parte do pacote publicado mais recente de qualquer fonte (pacote-*), para não perder a CFEM.
-# Lote aprovado: Release pacote-siconfi-* com o pacote, o relatório de qualidade e o bruto da API (RN-TMP-18,
-# exceção de 25/11/2026). Falha abre uma issue, ou comenta na aberta. Guia: docs/guias/pipeline-siconfi.md.
+# com "forcar". Parte do pacote parcial anterior do próprio SICONFI (fonte-siconfi-*).
+# Lote aprovado: Release fonte-siconfi-* com o pacote parcial, o relatório de qualidade e o bruto da API
+# (RN-TMP-18, exceção de 25/11/2026); depois chama publicar-pacote.yml (workflow_call), que monta o pacote. Falha abre uma issue, ou comenta na aberta. Guia: docs/guias/pipeline-siconfi.md.
 name: Coletar SICONFI
 
 on:
@@ -21,13 +21,15 @@ permissions:
   issues: write # abre ou comenta a issue de falha
 
 concurrency:
-  group: publicar-pacote # o mesmo da CFEM: uma publicação por vez sobre o mesmo pacote
+  group: coletar-siconfi
   cancel-in-progress: false
 
 jobs:
   coletar:
     runs-on: ubuntu-latest
     timeout-minutes: 120
+    outputs:
+      publicar: ${{ steps.release.outputs.publicar }}
     env:
       GH_TOKEN: ${{ github.token }}
       FORCAR: ${{ inputs.forcar }}
@@ -39,11 +41,11 @@ jobs:
       - name: Instalar o backend
         run: uv sync --project backend --frozen --no-dev
 
-      - name: Baixar o pacote publicado mais recente
+      - name: Baixar o pacote parcial anterior do SICONFI
         id: base
         run: |
-          BASE=$(gh release list --limit 100 --json tagName --jq '[.[] | select(.tagName | startswith("pacote-"))][0].tagName // empty')
-          echo "Pacote de partida: ${BASE:-nenhum}"
+          BASE=$(gh release list --limit 100 --json tagName --jq '[.[] | select(.tagName | startswith("fonte-siconfi-"))][0].tagName // empty')
+          echo "Pacote parcial de partida: ${BASE:-nenhum}"
           echo "base=$BASE" >> "$GITHUB_OUTPUT"
           {
             echo "OBS_DATA_DIR=$RUNNER_TEMP/dados"
@@ -77,7 +79,8 @@ jobs:
           path: ${{ runner.temp }}/dados/qualidade/
           if-no-files-found: ignore
 
-      - name: Publicar o pacote numa Release
+      - name: Publicar o pacote parcial numa Release
+        id: release
         if: steps.coleta.outputs.situacao == 'aprovado'
         env:
           BASE: ${{ steps.base.outputs.base }}
@@ -86,24 +89,25 @@ jobs:
           VERSAO=$(jq -r .versao_pacote resumo.json)
           RELATORIO=$(jq -r .relatorio resumo.json)
           BRUTO=$(jq -r .bruto resumo.json)
-          TAG="pacote-siconfi-$(date -u +%Y-%m-%d-%H%M)"
+          TAG="fonte-siconfi-$(date -u +%Y-%m-%d-%H%M)"
           tar -czf publicado.tar.gz -C "$OBS_PUBLICADO_DIR" .
           tar -czf siconfi-bruto.tar.gz -C "$BRUTO" .
           cp "$RELATORIO" qualidade-siconfi.json
           {
-            echo "Pacote publicado com a despesa por função do SICONFI, aprovado na validação (RN-VPU-01)."
+            echo "Pacote parcial com a despesa por função do SICONFI, aprovado na validação (RN-VPU-01)."
             echo
-            echo "- Pacote de partida: ${BASE:-nenhum}"
+            echo "- Pacote parcial de partida: ${BASE:-nenhum}"
             echo "- Versão do pacote: \`$VERSAO\`"
             echo "- Conferência (município-exercício por estágio): $(jq -c .conferencia resumo.json)"
             echo "- Execução: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
             echo
             echo "siconfi-bruto.tar.gz guarda as respostas da API usadas, com o SHA-256 de cada uma em indice.json."
-            echo "Para servir: extraia publicado.tar.gz na pasta de OBS_PUBLICADO_DIR (docs/guias/pipeline-siconfi.md)."
+            echo "Só o SICONFI; a API serve o pacote montado por publicar-pacote.yml (docs/guias/pipeline-siconfi.md)."
           } > notas.md
           gh release create "$TAG" publicado.tar.gz qualidade-siconfi.json siconfi-bruto.tar.gz \
             --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --latest=false \
-            --title "Pacote SICONFI de $TAG" --notes-file notas.md
+            --title "Pacote parcial do SICONFI de $TAG" --notes-file notas.md
+          echo "publicar=true" >> "$GITHUB_OUTPUT"
 
       - name: Abrir ou comentar a issue de falha
         if: failure()
@@ -132,3 +136,11 @@ jobs:
           else
             gh issue create --title "$TITULO" --body-file "$RUNNER_TEMP/issue.md"
           fi
+
+  publicar:
+    needs: coletar
+    if: needs.coletar.outputs.publicar == 'true'
+    permissions:
+      contents: write
+      issues: write
+    uses: ./.github/workflows/publicar-pacote.yml

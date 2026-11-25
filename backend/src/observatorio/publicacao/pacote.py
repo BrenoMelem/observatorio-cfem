@@ -152,6 +152,17 @@ def _montar(
             ano_referencia=max(o.ano for o in linhas_indicador),
             atualizado_em=max(o.atualizado_em or "" for o in linhas_indicador),
         )
+    return gravar_versao(pasta, arquivos, hashes, indicadores)
+
+
+def gravar_versao(
+    pasta: Path,
+    arquivos: dict[str, bytes],
+    hashes: dict[str, str],
+    indicadores: dict[str, ArquivoIndicador],
+) -> str:
+    """RN-VPU-03: grava a versão imutável e só então troca o ponteiro, de forma atômica."""
+    ponteiro = pasta / "pacote.json"
     versao = calcular_versao(hashes, indicadores)
     descricao = DescricaoPacote(
         versao=versao, gerado_em=datetime.now(UTC).isoformat(), arquivos=hashes, indicadores=indicadores

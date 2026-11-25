@@ -1,0 +1,106 @@
+# Monta o pacote publicado a partir do último pacote parcial aprovado de cada fonte (fonte-cfem-*, fonte-siconfi-*)
+# e o publica numa Release pacote-* (ADR-011, ADR-015; RN-VPU-01/03). Não coleta nada: cada fonte tem o seu
+# workflow (coletar-*.yml), que o chama ao fim de uma coleta aprovada (workflow_call, decisão do mantenedor de
+# 25/11/2026). Se a montagem reprova, o pacote publicado anterior continua valendo. Também roda à mão.
+name: Publicar pacote
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+permissions:
+  contents: write # cria a Release do pacote
+  issues: write # abre ou comenta a issue de falha
+
+concurrency:
+  group: publicar-pacote # uma montagem por vez
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: astral-sh/setup-uv@v7
+
+      - name: Instalar o backend
+        run: uv sync --project backend --frozen --no-dev
+
+      - name: Baixar o último pacote parcial de cada fonte
+        id: fontes
+        run: |
+          mkdir -p "$RUNNER_TEMP/parciais" "$RUNNER_TEMP/dados/publicado"
+          ARGS=()
+          LISTA=""
+          for FONTE in cfem siconfi; do
+            TAG=$(gh release list --limit 100 --json tagName --jq "[.[] | select(.tagName | startswith(\"fonte-$FONTE-\"))][0].tagName // empty")
+            if [ -z "$TAG" ]; then
+              echo "Fonte $FONTE: nenhum pacote parcial ainda"
+              continue
+            fi
+            mkdir -p "$RUNNER_TEMP/parciais/$FONTE"
+            gh release download "$TAG" --pattern publicado.tar.gz --dir "$RUNNER_TEMP/parciais/$FONTE"
+            tar -xzf "$RUNNER_TEMP/parciais/$FONTE/publicado.tar.gz" -C "$RUNNER_TEMP/parciais/$FONTE"
+            ARGS+=(--parcial "$RUNNER_TEMP/parciais/$FONTE")
+            LISTA="$LISTA $TAG"
+          done
+          if [ ${#ARGS[@]} -eq 0 ]; then echo "::error::Nenhuma fonte tem pacote parcial"; exit 1; fi
+          echo "fontes=${LISTA# }" >> "$GITHUB_OUTPUT"
+          printf '%s\n' "${ARGS[@]}" > "$RUNNER_TEMP/args.txt"
+          echo "OBS_DATA_DIR=$RUNNER_TEMP/dados" >> "$GITHUB_ENV"
+          echo "OBS_PUBLICADO_DIR=$RUNNER_TEMP/dados/publicado" >> "$GITHUB_ENV"
+
+      - name: Montar o pacote
+        run: |
+          set -o pipefail
+          mapfile -t ARGS < "$RUNNER_TEMP/args.txt"
+          set +e
+          uv run --project backend --no-dev python -m observatorio.coleta montar "${ARGS[@]}" > "$RUNNER_TEMP/resumo.json"
+          SAIDA=$?
+          set -e
+          cat "$RUNNER_TEMP/resumo.json"
+          exit $SAIDA
+
+      - name: Publicar o pacote numa Release
+        env:
+          FONTES: ${{ steps.fontes.outputs.fontes }}
+        run: |
+          cd "$RUNNER_TEMP"
+          VERSAO=$(jq -r .versao_pacote resumo.json)
+          TAG="pacote-$(date -u +%Y-%m-%d-%H%M)"
+          tar -czf publicado.tar.gz -C "$OBS_PUBLICADO_DIR" .
+          {
+            echo "Pacote montado a partir dos pacotes parciais aprovados de cada fonte (RN-VPU-01)."
+            echo
+            echo "- Pacotes parciais: $FONTES"
+            echo "- Versão do pacote: \`$VERSAO\`"
+            echo "- Execução: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo
+            echo "Para servir: extraia publicado.tar.gz na pasta de OBS_PUBLICADO_DIR (docs/guias/pipeline-cfem.md)."
+          } > notas.md
+          gh release create "$TAG" publicado.tar.gz \
+            --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --latest=true \
+            --title "Pacote de $TAG" --notes-file notas.md
+
+      - name: Abrir ou comentar a issue de falha
+        if: failure()
+        run: |
+          TITULO="Montagem do pacote falhou"
+          {
+            echo "A montagem do pacote falhou; o pacote publicado anterior foi preservado (RN-VPU-03)."
+            echo
+            echo "- Execução: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            ERRO=$(jq -r '.erro // empty' "$RUNNER_TEMP/resumo.json" 2>/dev/null)
+            if [ -n "$ERRO" ]; then echo "- Erro: $ERRO"; fi
+          } > "$RUNNER_TEMP/issue.md"
+          ABERTA=$(gh issue list --state open --search "in:title \"$TITULO\"" --json number,title \
+            --jq "[.[] | select(.title == \"$TITULO\")][0].number // empty")
+          if [ -n "$ABERTA" ]; then
+            gh issue comment "$ABERTA" --body-file "$RUNNER_TEMP/issue.md"
+          else
+            gh issue create --title "$TITULO" --body-file "$RUNNER_TEMP/issue.md"
+          fi
