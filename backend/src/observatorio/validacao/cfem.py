@@ -57,8 +57,12 @@ def validar(
     """RN-VPU-07/12: nenhum valor é validado sem comparação exata da mesma chave.
 
     Recortes não cobertos pela referência ficam fora da publicação. Uma divergência
-    no recorte solicitado reprova o lote inteiro (RN-VPU-01). Meses de ano incompleto
-    não entram nesta demo, por decisão do mantenedor de 23/11/2026.
+    no recorte solicitado reprova o lote inteiro (RN-VPU-01).
+
+    RN-CFE-06 (decisão do mantenedor de 25/11/2026 sobre a aplicação): no último ano do arquivo,
+    os meses posteriores ao último mês com registro ainda não aconteceram e não contam como
+    ausentes. Um mês conferido desse ano sai "provisório" se o ano não tem os 12 meses com volume
+    suficiente; um mês abaixo do critério de volume fica fora da publicação, sem reprovar o lote.
     """
     erros: list[str] = []
     comparacoes: list[dict[str, object]] = []
@@ -71,9 +75,26 @@ def validar(
     chaves_referencia: set[tuple[str, int, int]] = set()
     controle_nacional: list[dict[str, object]] = []
     anos = sorted({o.ano for o in lote.observacoes})
+    ultimo_ano = max(anos, default=0)
     meses_ausentes = {
         str(ano): [m for m in range(1, 13) if not lote.registros_mensais.get(f"{ano}:{m}")] for ano in anos
     }
+    if ultimo_ano:
+        presentes = [m for m in range(1, 13) if lote.registros_mensais.get(f"{ultimo_ano}:{m}")]
+        ultimo_mes = max(presentes, default=0)
+        meses_ausentes[str(ultimo_ano)] = [m for m in meses_ausentes[str(ultimo_ano)] if m < ultimo_mes]
+    historico = [
+        n for periodo, n in lote.registros_mensais.items() if int(periodo.split(":")[0]) < ultimo_ano
+    ]
+    limite_volume = median(historico) * 0.5 if historico else 0
+
+    def volume_suficiente(ano: int, mes: int) -> bool:
+        """RN-CFE-06, exceção de 08/11/2026: no último ano, mês completo tem ao menos 50% da mediana."""
+        volume = lote.registros_mensais.get(f"{ano}:{mes}", 0)
+        return ano != ultimo_ano or (volume > 0 and volume >= limite_volume)
+
+    ano_aberto = bool(ultimo_ano) and not all(volume_suficiente(ultimo_ano, m) for m in range(1, 13))
+    aguardando_volume: list[str] = []
     for referencia in referencias:
         chave = (referencia.municipio_id, referencia.ano, referencia.mes)
         if chave in chaves_referencia:
@@ -100,16 +121,11 @@ def validar(
             erros.append(f"Reconciliação divergente em {chave}: {diferenca} BRL")
         elif meses_ausentes.get(str(item.ano)):
             erros.append(f"Ano {item.ano} com mês nacional ausente: somente provisório, fora da demo")
+        elif not volume_suficiente(item.ano, referencia.mes):
+            aguardando_volume.append(f"{chave[0]}:{chave[1]}:{chave[2]}")
         else:
-            # RN-CFE-06: no último ano também se exige o critério de volume decidido em 08/11.
-            historico = [
-                n for periodo, n in lote.registros_mensais.items() if int(periodo.split(":")[0]) < item.ano
-            ]
-            volume = lote.registros_mensais.get(f"{item.ano}:{item.mes}", 0)
-            if item.ano == max(anos) and historico and volume < median(historico) * 0.5:
-                erros.append(f"Mês com volume insuficiente em {chave} (RN-CFE-06)")
-            else:
-                aprovadas.append(item.model_copy(update={"estado_validacao": "validado"}))
+            estado = "provisório" if ano_aberto and item.ano == ultimo_ano else "validado"
+            aprovadas.append(item.model_copy(update={"estado_validacao": estado}))
     if referencias_nacionais is not None:
         por_ano: dict[int, ReferenciaNacional] = {}
         for referencia_nacional in referencias_nacionais:
@@ -182,6 +198,9 @@ def validar(
         "controle_nacional": controle_nacional,
         "erros": erros,
         "observacoes_sem_referencia": len(por_chave.keys() - chaves_referencia),
+        "ano_aberto": ultimo_ano if ano_aberto else None,
+        "provisorias": sum(o.estado_validacao == "provisório" for o in aprovadas),
+        "aguardando_volume": aguardando_volume,
     }
     aprovado = not erros and bool(aprovadas)
     return Resultado(aprovado, tuple(aprovadas) if aprovado else (), tuple(erros), relatorio)

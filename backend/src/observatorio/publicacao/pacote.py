@@ -17,10 +17,13 @@ def publicar(resultado: Resultado, pasta: Path, manifesto: Path, consumo: Path |
     """RN-VPU-03: monta tudo antes de trocar pacote.json; falha conserva a versão anterior."""
     if not resultado.aprovado or not resultado.observacoes or resultado.erros:
         raise ValueError("Lote reprovado ou vazio: publicação preservada")
+    ultimo_ano = max(o.ano for o in resultado.observacoes)
     if any(
-        o.estado_validacao != "validado" or o.indicador != "cfem_arrecadada" for o in resultado.observacoes
+        o.indicador != "cfem_arrecadada" or (o.estado_validacao != "validado" and o.ano != ultimo_ano)
+        for o in resultado.observacoes
     ):
-        raise ValueError("A publicação CFEM exige observações validadas")
+        # RN-CFE-06: só o último ano, ainda aberto, pode ter meses provisórios.
+        raise ValueError("A publicação CFEM exige observações validadas fora do ano aberto")
     pasta.mkdir(parents=True, exist_ok=True)
     trava = pasta / ".publicando"
     trava.open("x").close()
@@ -44,7 +47,10 @@ def _montar(resultado: Resultado, pasta: Path, manifesto: Path, consumo: Path | 
             arquivos[nome] = conteudo
         # Não remover uma chave homologada já publicada ao restringir a referência.
         if "cfem_arrecadada.parquet" in arquivos:
-            antigas = pl.read_parquet(io.BytesIO(arquivos["cfem_arrecadada.parquet"]))
+            antigas = pl.read_parquet(io.BytesIO(arquivos["cfem_arrecadada.parquet"])).filter(
+                pl.col("estado_validacao") == "validado"
+            )
+            # Um mês provisório pode sair se a ANM o revisar; só o que já foi validado não pode sumir.
             chaves = {(o.municipio_id, o.ano, o.mes) for o in resultado.observacoes}
             if not set(antigas.select("municipio_id", "ano", "mes").iter_rows()) <= chaves:
                 raise ValueError("Série homologada encolheu; publicação preservada (RN-VPU-02)")

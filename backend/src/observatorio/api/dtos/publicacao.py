@@ -49,7 +49,10 @@ class RespostaDimensao(BaseModel):
     )
     notas: list[str] = Field(description="Avisos de leitura, inclusive anos omitidos na periodicidade anual.")
     dados: list[Observacao] = Field(
-        description="Observações validadas no recorte. Lista vazia não significa valor zero (RN-CFE-07)."
+        description=(
+            "Observações conferidas no recorte: validadas, ou provisórias no ano aberto (RN-CFE-06). "
+            "Lista vazia não significa valor zero (RN-CFE-07)."
+        )
     )
     status: list[StatusIndicador] = Field(description="Situação de cada indicador da dimensão.")
     metadados: dict[str, Metadados] = Field(description="Proveniência de cada indicador da dimensão.")

@@ -119,9 +119,11 @@ paths:
     get:
       tags:
       - dimensoes
-      summary: Observações validadas de uma dimensão
+      summary: Observações conferidas de uma dimensão
       description: |-
-        Devolve só observações validadas do pacote publicado (RN-ENT-01, RN-VPU-10).
+        Devolve só observações conferidas do pacote publicado (RN-ENT-01, RN-VPU-10).
+
+        No ano ainda aberto, os meses conferidos saem com `estado_validacao` = `provisório` (RN-CFE-06).
 
         Indicador sem publicação aparece em `status` com o motivo, sem observação inventada; temas ainda sem
         indicador aparecem em `lacunas`. Filtro inválido (`municipio_id` sem 7 dígitos, `ano_inicio` maior que
@@ -369,7 +371,8 @@ components:
           - validado
           - provisório
           title: Estado Validacao
-          description: A camada publicada só entrega `validado` (RN-VPU-10).
+          description: '`validado` em ano fechado; `provisório` nos meses conferidos do ano ainda aberto, que ainda
+            não somam total anual (RN-CFE-06, RN-VPU-10).'
         fonte:
           type: string
           title: Fonte
@@ -452,7 +455,8 @@ components:
             $ref: '#/components/schemas/Observacao'
           type: array
           title: Dados
-          description: Observações validadas no recorte. Lista vazia não significa valor zero (RN-CFE-07).
+          description: 'Observações conferidas no recorte: validadas, ou provisórias no ano aberto (RN-CFE-06).
+            Lista vazia não significa valor zero (RN-CFE-07).'
         status:
           items:
             $ref: '#/components/schemas/StatusIndicador'
