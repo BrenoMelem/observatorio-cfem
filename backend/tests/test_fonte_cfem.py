@@ -95,3 +95,37 @@ def test_amostra_real_anonimizada_confere_colunas(tmp_path: Path) -> None:
     assert lote.linhas_lidas == 8
     assert lote.linhas_recorte == 8
     assert {o.municipio_id for o in lote.observacoes} == {"1502152", "1505536"}
+
+
+def test_csv_gz_da_release_tem_hash_do_csv_e_origem_registrada(tmp_path: Path) -> None:
+    """RN-FON-13: o .csv.gz da Release é a mesma edição do CSV; a origem registra a Release."""
+    import gzip
+    import shutil
+
+    from observatorio.fontes.cfem_arrecadacao import URL, converter, hash_arquivo
+
+    csv_ = arquivo_sintetico(tmp_path)
+    compactado = tmp_path / "arrecadacao.csv.gz"
+    with csv_.open("rb") as entrada, gzip.open(compactado, "wb") as saida:
+        shutil.copyfileobj(entrada, saida)
+    release = (
+        "https://github.com/exemplo/observatorio/releases/download/anm-2026-11-25-0325/arrecadacao.csv.gz"
+    )
+
+    lote = converter(compactado, tmp_path / "bruto", release)
+
+    assert lote.sha256 == hash_arquivo(csv_)
+    assert lote.origem == release
+    assert converter(csv_, tmp_path / "bruto2").origem == URL
+    assert not list((tmp_path / "bruto").glob("*.download"))
+
+
+def test_csv_gz_corrompido_falha(tmp_path: Path) -> None:
+    """RN-VPU-04: arquivo compactado ilegível falha de forma explícita, sem lote."""
+    from observatorio.fontes.cfem_arrecadacao import converter
+
+    quebrado = tmp_path / "arrecadacao.csv.gz"
+    quebrado.write_bytes(b"isto nao e gzip")
+    with pytest.raises(ValueError, match="compactado"):
+        converter(quebrado, tmp_path / "bruto")
+    assert not list((tmp_path / "bruto").glob("*.download"))

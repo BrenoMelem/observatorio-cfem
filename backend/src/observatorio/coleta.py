@@ -1,6 +1,7 @@
 """CLI de coleta: fonte → validação → publicação (RN-VPU-01/03/06).
 
 Uso: python -m observatorio.coleta cfem --arquivo CSV --referencias referencias.json
+O arquivo pode ser o `.csv.gz` de uma Release `anm-*`; nesse caso, `--origem` registra a URL dele.
 Sem referência independente, gera relatório de reprovação e preserva publicação.
 """
 
@@ -45,6 +46,7 @@ def executar(
     consumo: Path | None = None,
     referencias_nacionais: Path | None = None,
     evidencias: Path | None = None,
+    origem: str | None = None,
 ) -> dict[str, object]:
     """RN-VPU-06: relatório e pendência local em toda execução, inclusive falha de layout."""
     configuracao = config.carregar()
@@ -53,8 +55,13 @@ def executar(
     execucao = datetime.now(UTC).strftime("%Y%m%dT%H%M%S") + "-" + uuid4().hex[:8]
     relatorio: dict[str, object] = {"execucao": execucao, "situacao": "reprovado"}
     try:
-        origem = arquivo or baixar(configuracao.dados_dir / "bruto" / "cfem", configuracao.certificado_anm)
-        lote = converter(origem, configuracao.dados_dir / "bruto" / "cfem")
+        if origem is not None and arquivo is None:
+            raise ValueError(
+                "--origem descreve um --arquivo local; sem --arquivo a origem é a ANM (RN-FON-13)"
+            )
+        entrada = arquivo or baixar(configuracao.dados_dir / "bruto" / "cfem", configuracao.certificado_anm)
+        pasta_bruta = configuracao.dados_dir / "bruto" / "cfem"
+        lote = converter(entrada, pasta_bruta, origem) if origem else converter(entrada, pasta_bruta)
         refs = (
             []
             if referencias is None
@@ -111,7 +118,10 @@ def executar(
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("fonte", choices=["cfem"])
-    parser.add_argument("--arquivo", type=Path, help="CSV real local; omitido: GET na ANM")
+    parser.add_argument("--arquivo", type=Path, help="CSV ou .csv.gz local; omitido: GET na ANM")
+    parser.add_argument(
+        "--origem", help="De onde veio o --arquivo, por exemplo a URL do arquivo na Release anm-* (RN-FON-13)"
+    )
     parser.add_argument("--referencias", type=Path, help="Valores de publicação oficial independente")
     parser.add_argument(
         "--referencias-nacionais", type=Path, help="Totais nacionais oficiais por ano fechado"
@@ -125,6 +135,7 @@ def main() -> int:
         args.consumo_assistente,
         args.referencias_nacionais,
         args.evidencias,
+        args.origem,
     )
     print(json.dumps(resumo, ensure_ascii=False))
     return 0 if resumo["situacao"] == "aprovado" else 1

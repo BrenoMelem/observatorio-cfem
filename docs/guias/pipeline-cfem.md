@@ -28,31 +28,30 @@ A etapa 1 já roda sozinha no GitHub Actions. As etapas 2 a 5 rodam juntas pela 
 Comandos a partir da raiz do repositório, em Bash. No PowerShell, troque `export NOME=valor` por
 `$env:NOME = "valor"`.
 
-### 1. Obter o CSV da Release mais recente
+### 1. Obter o arquivo da Release mais recente
 
 O download direto da ANM costuma falhar na verificação TLS (a cadeia do servidor está incompleta; ver
 `OBS_ANM_CA` abaixo). A Release arquivada é a entrada reproduzível:
 
 ```bash
-mkdir -p tmp/anm
-gh release download --pattern arrecadacao.csv.gz --dir tmp/anm --clobber   # Release marcada como Latest
-gzip -dc tmp/anm/arrecadacao.csv.gz > tmp/CFEM_Arrecadacao.csv
+TAG=$(gh release list --limit 1 --json tagName -q '.[0].tagName')
+REPO=$(gh repo view --json nameWithOwner -q .nameWithOwner)
+gh release download "$TAG" --pattern arrecadacao.csv.gz --dir tmp/anm --clobber
 ```
 
-Anote a tag da Release (`gh release list --limit 1`): ela identifica a edição usada. `tmp/` e
-`output/` não são versionados.
+`tmp/` e `output/` não são versionados.
 
 ### 2. Coletar, validar e publicar
 
 ```bash
 export OBS_DATA_DIR=output/observatorio
 export OBS_PUBLICADO_DIR=output/observatorio/publicado
-uv run --project backend python -m observatorio.coleta cfem \
-  --arquivo tmp/CFEM_Arrecadacao.csv \
-  --referencias data/referencia-cfem-mensal-anm.json \
-  --referencias-nacionais data/referencia-cfem-nacional-anm.json \
-  --evidencias docs/registros/evidencias-anm-2026-11-23
+uv run --project backend python -m observatorio.coleta cfem   --arquivo tmp/anm/arrecadacao.csv.gz   --origem "https://github.com/$REPO/releases/download/$TAG/arrecadacao.csv.gz"   --referencias data/referencia-cfem-mensal-anm.json   --referencias-nacionais data/referencia-cfem-nacional-anm.json   --evidencias docs/registros/evidencias-anm-2026-11-23
 ```
+
+A coleta lê o `.csv.gz` direto e calcula o SHA-256 do CSV descompactado, que identifica a edição da ANM
+igual a um download direto. `--origem` registra no relatório de onde vieram os bytes (RN-FON-13); sem
+ele, a origem registrada é a URL da ANM. Um CSV já descompactado também é aceito em `--arquivo`.
 
 A saída é um resumo JSON com `situacao` (`aprovado` ou `reprovado`), a versão do pacote e o caminho
 do relatório. O código de saída é 0 só quando o lote é aprovado. O relatório completo fica em

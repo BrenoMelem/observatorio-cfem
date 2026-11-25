@@ -5,6 +5,7 @@ layout e conversões inválidas falham explicitamente (RN-VPU-04).
 """
 
 import csv
+import gzip
 import hashlib
 import json
 import shutil
@@ -76,9 +77,34 @@ def baixar(pasta: Path, certificado: Path | None = None) -> Path:
         raise ValueError(f"ANM respondeu HTTP {erro.code}; coleta não publicada") from erro
 
 
-def converter(arquivo: Path, pasta_bruta: Path) -> Lote:
-    """RN-CFE-11, RN-VPU-04/11: soma decimal sem deduplicar; só arredonda o grupo."""
+def descompactar(arquivo: Path, pasta: Path) -> Path:
+    """RN-FON-13: o `.csv.gz` das Releases `anm-*` vira o CSV original, para o hash ser o da edição da ANM."""
+    pasta.mkdir(parents=True, exist_ok=True)
+    with tempfile.NamedTemporaryFile(dir=pasta, suffix=".download", delete=False) as saida:
+        temporario = Path(saida.name)
+        try:
+            with gzip.open(arquivo, "rb") as entrada:
+                shutil.copyfileobj(entrada, saida)
+        except (OSError, EOFError) as erro:
+            saida.close()
+            temporario.unlink(missing_ok=True)
+            raise ValueError("ANM: arquivo compactado ilegível") from erro
+    return temporario
+
+
+def converter(arquivo: Path, pasta_bruta: Path, origem: str = URL) -> Lote:
+    """RN-CFE-11, RN-VPU-04/11: soma decimal sem deduplicar; só arredonda o grupo.
+
+    RN-FON-13: `origem` é de onde os bytes vieram (a ANM ou a Release que arquivou a edição); aceita o
+    CSV ou o `.csv.gz` da Release.
+    """
     pasta_bruta.mkdir(parents=True, exist_ok=True)
+    if arquivo.suffix == ".gz":
+        descompactado = descompactar(arquivo, pasta_bruta)
+        try:
+            return converter(descompactado, pasta_bruta, origem)
+        finally:
+            descompactado.unlink(missing_ok=True)
     sha256 = hash_arquivo(arquivo)
     bruto = pasta_bruta / f"{sha256}.csv"
     if not bruto.exists():
@@ -182,7 +208,7 @@ def converter(arquivo: Path, pasta_bruta: Path) -> Lote:
             bruto,
             sha256,
             agora,
-            URL,
+            origem,
             sum(registros_mensais.values()),
             recorte.height,
             duplicatas,
