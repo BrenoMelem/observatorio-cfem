@@ -1,6 +1,5 @@
 """Homologação por recorte mensal e relatório auditável (RN-VPU-01 a 12)."""
 
-from dataclasses import dataclass
 from datetime import date
 from decimal import Decimal
 from statistics import median
@@ -8,9 +7,11 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from observatorio.modelo.lote import Lote
+from observatorio.modelo.lote import Lote, Resultado
 from observatorio.modelo.observacao import Observacao
 from observatorio.modelo.territorios import MUNICIPIOS
+
+__all__ = ["Referencia", "ReferenciaNacional", "Resultado", "validar"]
 
 
 class Referencia(BaseModel):
@@ -38,14 +39,6 @@ class ReferenciaNacional(BaseModel):
     url: str = Field(pattern=r"^https://sistemas\.anm\.gov\.br/")
     consultado_em: date
     sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
-
-
-@dataclass(frozen=True)
-class Resultado:
-    aprovado: bool
-    observacoes: tuple[Observacao, ...]
-    erros: tuple[str, ...]
-    relatorio: dict[str, object]
 
 
 def validar(

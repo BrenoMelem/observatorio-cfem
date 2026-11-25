@@ -33,15 +33,24 @@ PERIODICIDADE = Query(
         "os anos omitidos aparecem em `notas` (RN-CFE-05)."
     ),
 )
+CATEGORIA = Query(
+    None,
+    description=(
+        "Código da categoria dentro do indicador (RN-MOD-03): na despesa por função, `12` (função), `12.361` "
+        "(subfunção), `12.demais` (Demais Subfunções) ou `total`. Omitido: todas as categorias."
+    ),
+    examples=["12"],
+)
 ERROS: dict[int | str, dict[str, object]] = {
     404: {"model": Erro, "description": "Dimensão desconhecida."},
     503: {"model": Erro, "description": "Pacote publicado inválido, ilegível ou sem manifesto (RN-VPU-03)."},
 }
 EXEMPLO_CSV = (
     "indicador;municipio_id;municipio_nome;nivel_territorial;ano;mes;valor;unidade;natureza_valor;"
-    "estado_validacao;fonte;edicao_fonte;atualizado_em;versao_tratamento;metodo;limitacoes\n"
+    "estado_validacao;fonte;edicao_fonte;atualizado_em;versao_tratamento;categoria;categoria_nome;metodo;"
+    "limitacoes\n"
     "cfem_arrecadada;1505536;Parauapebas;município;2025;1;120784171.37;BRL nominal;informado;validado;"
-    "ANM, CFEM_Arrecadacao.csv;54b112be…;2026-11-25T11:44:04+00:00;1.0.0;…;…\n"
+    "ANM, CFEM_Arrecadacao.csv;54b112be…;2026-11-25T11:44:04+00:00;1.0.0;;;…;…\n"
 )
 
 
@@ -51,6 +60,7 @@ def _consultar(
     ano_inicio: int | None,
     ano_fim: int | None,
     periodicidade: Literal["mensal", "anual"] = "mensal",
+    categoria: str | None = None,
 ) -> RespostaDimensao:
     if dimensao not in DIMENSOES:
         raise HTTPException(404, "Dimensão desconhecida")
@@ -59,7 +69,9 @@ def _consultar(
     if ano_inicio is not None and ano_fim is not None and ano_inicio > ano_fim:
         raise HTTPException(422, "ano_inicio maior que ano_fim")
     try:
-        return consultar(dimensao, municipio_id, ano_inicio, ano_fim, periodicidade=periodicidade)
+        return consultar(
+            dimensao, municipio_id, ano_inicio, ano_fim, periodicidade=periodicidade, categoria=categoria
+        )
     except PublicacaoInvalida as erro:
         raise HTTPException(503, detail=str(erro)) from erro
 
@@ -86,9 +98,10 @@ def dimensao_csv(
     ano_inicio: int | None = ANO_INICIO,
     ano_fim: int | None = ANO_FIM,
     periodicidade: Literal["mensal", "anual"] = PERIODICIDADE,
+    categoria: str | None = CATEGORIA,
 ) -> Response:
     """Os mesmos filtros e observações da rota JSON, para download (RN-ENT-03)."""
-    resposta = _consultar(dimensao, municipio_id, ano_inicio, ano_fim, periodicidade)
+    resposta = _consultar(dimensao, municipio_id, ano_inicio, ano_fim, periodicidade, categoria)
     saida = io.StringIO()
     campos = [
         "indicador",
@@ -105,6 +118,8 @@ def dimensao_csv(
         "edicao_fonte",
         "atualizado_em",
         "versao_tratamento",
+        "categoria",
+        "categoria_nome",
         "metodo",
         "limitacoes",
     ]
@@ -138,6 +153,7 @@ def dimensao(
     ano_inicio: int | None = ANO_INICIO,
     ano_fim: int | None = ANO_FIM,
     periodicidade: Literal["mensal", "anual"] = PERIODICIDADE,
+    categoria: str | None = CATEGORIA,
 ) -> RespostaDimensao:
     """Devolve só observações conferidas do pacote publicado (RN-ENT-01, RN-VPU-10).
 
@@ -147,7 +163,7 @@ def dimensao(
     indicador aparecem em `lacunas`. Filtro inválido (`municipio_id` sem 7 dígitos, `ano_inicio` maior que
     `ano_fim`) responde 422.
     """
-    return _consultar(dimensao, municipio_id, ano_inicio, ano_fim, periodicidade)
+    return _consultar(dimensao, municipio_id, ano_inicio, ano_fim, periodicidade, categoria)
 
 
 @router.get(

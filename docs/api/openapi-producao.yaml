@@ -86,6 +86,20 @@ paths:
           title: Periodicidade
         description: '`mensal`: uma observação por mês. `anual`: soma da CFEM só nos anos com os 12 meses validados;
           os anos omitidos aparecem em `notas` (RN-CFE-05).'
+      - name: categoria
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'Código da categoria dentro do indicador (RN-MOD-03): na despesa por função, `12` (função),
+            `12.361` (subfunção), `12.demais` (Demais Subfunções) ou `total`. Omitido: todas as categorias.'
+          examples:
+          - '12'
+          title: Categoria
+        description: 'Código da categoria dentro do indicador (RN-MOD-03): na despesa por função, `12` (função),
+          `12.361` (subfunção), `12.demais` (Demais Subfunções) ou `total`. Omitido: todas as categorias.'
       responses:
         '200':
           description: CSV em UTF-8 com BOM, separado por ponto e vírgula. Cada linha traz fonte, edição, método
@@ -95,8 +109,8 @@ paths:
               schema:
                 type: string
               example: |
-                indicador;municipio_id;municipio_nome;nivel_territorial;ano;mes;valor;unidade;natureza_valor;estado_validacao;fonte;edicao_fonte;atualizado_em;versao_tratamento;metodo;limitacoes
-                cfem_arrecadada;1505536;Parauapebas;município;2025;1;120784171.37;BRL nominal;informado;validado;ANM, CFEM_Arrecadacao.csv;54b112be…;2026-11-25T11:44:04+00:00;1.0.0;…;…
+                indicador;municipio_id;municipio_nome;nivel_territorial;ano;mes;valor;unidade;natureza_valor;estado_validacao;fonte;edicao_fonte;atualizado_em;versao_tratamento;categoria;categoria_nome;metodo;limitacoes
+                cfem_arrecadada;1505536;Parauapebas;município;2025;1;120784171.37;BRL nominal;informado;validado;ANM, CFEM_Arrecadacao.csv;54b112be…;2026-11-25T11:44:04+00:00;1.0.0;;;…;…
         '404':
           description: Dimensão desconhecida.
           content:
@@ -195,6 +209,20 @@ paths:
           title: Periodicidade
         description: '`mensal`: uma observação por mês. `anual`: soma da CFEM só nos anos com os 12 meses validados;
           os anos omitidos aparecem em `notas` (RN-CFE-05).'
+      - name: categoria
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'Código da categoria dentro do indicador (RN-MOD-03): na despesa por função, `12` (função),
+            `12.361` (subfunção), `12.demais` (Demais Subfunções) ou `total`. Omitido: todas as categorias.'
+          examples:
+          - '12'
+          title: Categoria
+        description: 'Código da categoria dentro do indicador (RN-MOD-03): na despesa por função, `12` (função),
+          `12.361` (subfunção), `12.demais` (Demais Subfunções) ou `total`. Omitido: todas as categorias.'
       responses:
         '200':
           description: Successful Response
@@ -393,6 +421,24 @@ components:
           type: string
           title: Versao Tratamento
           description: Versão do tratamento que gerou a observação.
+        categoria:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Categoria
+          description: 'Código da categoria dentro do indicador, quando houver (RN-MOD-03, exceção de 25/11/2026):
+            na despesa por função, `12` (função), `12.361` (subfunção), `12.demais` (Demais Subfunções) ou `total`.
+            Nulo nos indicadores sem categoria.'
+          examples:
+          - '12.361'
+        categoria_nome:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Categoria Nome
+          description: Nome da categoria como a fonte o publica, por exemplo `Ensino Fundamental`.
+          examples:
+          - Ensino Fundamental
       additionalProperties: false
       type: object
       required:
