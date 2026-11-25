@@ -4,9 +4,10 @@ services:
   api:
     build: ./backend
     ports:
-      - "8000:8000"
+      - "${OBS_API_PORTA:-8000}:8000" # porta do computador; a do contêiner é sempre 8000
     environment:
       OBS_PUBLICADO_DIR: /dados/publicado
+      OBS_CORS_ORIGENS: ${OBS_CORS_ORIGENS:-} # origens da demo ou do front, separadas por vírgula
       DATABASE_URL: postgresql://${POSTGRES_USER:-observatorio}:${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD no .env}@postgres:5432/${POSTGRES_DB:-observatorio}
     volumes:
       # O pacote publicado (observações e manifesto de indicadores) entra por volume, só leitura (ADR-014, ADR-015).

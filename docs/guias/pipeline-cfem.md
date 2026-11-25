@@ -97,9 +97,18 @@ front oficial e serve para conferir a cadeia no navegador.
 ### Com Docker
 
 O `docker compose` sobe a API com o pacote montado só para leitura a partir de `OBS_PUBLICADO_HOST`
-(ver [backend/README.md](../../backend/README.md)). A coleta continua sendo rodada fora do contêiner.
-Se o Docker criar a pasta de publicação antes da coleta, ela pode ficar com dono root e a coleta
-falha com `Permission denied` em `.publicando`; crie a pasta antes de subir o contêiner.
+(ver [backend/README.md](../../backend/README.md)). O contêiner roda com UID 1000, sem root, e não grava
+no pacote; a coleta continua sendo rodada fora dele.
+
+```bash
+cp backend/.env.example .env      # defina POSTGRES_PASSWORD; ajuste OBS_API_PORTA e OBS_CORS_ORIGENS
+docker compose up -d --build
+```
+
+`OBS_API_PORTA` escolhe a porta do computador (padrão 8000; use outra se ela estiver ocupada) e
+`OBS_CORS_ORIGENS` libera a demo ou o front. Crie a pasta do pacote antes de subir o contêiner: se ela
+não existir, o Docker a cria com dono root no Linux, e a coleta seguinte falha por falta de permissão
+(o relatório diz qual pasta e o que fazer).
 
 ## Coleta agendada no GitHub Actions
 

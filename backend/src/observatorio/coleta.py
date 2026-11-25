@@ -97,6 +97,18 @@ def executar(
             relatorio["versao_pacote"] = versao
         else:
             relatorio["pendencia"] = "Revisar erros; publicação anterior preservada (RN-VPU-03)"
+    except PermissionError as erro:
+        relatorio.update(
+            situacao="reprovado",
+            erros=[
+                (
+                    f"Sem permissão de escrita em {erro.filename}. A pasta pode pertencer a outro usuário, por "
+                    "exemplo o root, se o Docker a criou ao montá-la; devolva-a ao seu usuário ou aponte "
+                    "OBS_PUBLICADO_DIR e OBS_DATA_DIR para outra pasta (docs/guias/pipeline-cfem.md)."
+                )
+            ],
+            pendencia="Coleta falhou; publicação anterior preservada (RN-VPU-03)",
+        )
     except (OSError, ValueError) as erro:
         relatorio.update(
             situacao="reprovado",

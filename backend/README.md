@@ -47,6 +47,8 @@ cp backend/.env.example .env      # na raiz; troque a senha do PostgreSQL
 docker compose up --build         # API em http://localhost:8000
 ```
 
+`OBS_API_PORTA` muda a porta do computador (padrão 8000) e `OBS_CORS_ORIGENS` libera a demo ou o front. O contêiner roda sem root (UID 1000) e só lê o pacote.
+
 A imagem não traz dados. O pacote publicado entra por volume, só leitura, a partir de `OBS_PUBLICADO_HOST` (padrão: `output/observatorio/publicado/`).
 
 ## O pacote publicado

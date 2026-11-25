@@ -21,3 +21,21 @@ def test_origem_sem_arquivo_reprova_sem_baixar_e_sem_publicar(
     relatorio = json.loads(Path(str(resumo["relatorio"])).read_text(encoding="utf-8"))
     assert "--origem" in relatorio["erros"][0]
     assert not (tmp_path / "publicado").exists()
+
+
+def test_falta_de_permissao_explica_a_causa(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """RN-VPU-03/06: sem permissão de escrita, o relatório diz qual pasta e o que fazer, sem publicar."""
+    monkeypatch.setenv("OBS_DATA_DIR", str(tmp_path / "dados"))
+    monkeypatch.setenv("OBS_PUBLICADO_DIR", str(tmp_path / "publicado"))
+
+    def sem_permissao(*_: object) -> None:
+        raise PermissionError(13, "Permission denied", "/root/publicado/.publicando")
+
+    monkeypatch.setattr("observatorio.coleta.converter", sem_permissao)
+
+    resumo = executar(tmp_path / "arrecadacao.csv.gz", None)
+
+    relatorio = json.loads(Path(str(resumo["relatorio"])).read_text(encoding="utf-8"))
+    assert resumo["situacao"] == "reprovado"
+    assert "/root/publicado/.publicando" in relatorio["erros"][0]
+    assert "OBS_PUBLICADO_DIR" in relatorio["erros"][0]
