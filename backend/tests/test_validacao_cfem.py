@@ -9,6 +9,7 @@ import pytest
 from test_fonte_cfem import arquivo_sintetico
 
 from observatorio.fontes.cfem_arrecadacao import converter
+from observatorio.validacao.cfem import Referencia
 
 
 def test_sem_referencia_nao_homologa(tmp_path: Path) -> None:
@@ -105,3 +106,40 @@ def test_captura_alterada_bloqueia_referencia(tmp_path: Path) -> None:
     )
     with pytest.raises(ValueError, match="SHA-256"):
         conferir_evidencias([referencia], [], tmp_path)
+
+
+def _referencia_2025(sha256: str) -> Referencia:
+    return Referencia(
+        municipio_id="1505536",
+        ano=2025,
+        mes=1,
+        valor=Decimal("1.00"),
+        documento="Fixture sintética",
+        url="https://sistemas.anm.gov.br/teste",
+        consultado_em=date(2026, 11, 25),
+        sha256=sha256,
+    )
+
+
+def test_captura_html_gz_confere_o_hash_do_html_original(tmp_path: Path) -> None:
+    """RN-VPU-07: na captura .html.gz, o SHA-256 é do corpo HTTP, não do arquivo comprimido."""
+    import gzip
+    import hashlib
+
+    from observatorio.coleta import conferir_evidencias
+
+    corpo = b"<table><tr><td>PARAUAPEBAS</td></tr></table>"
+    (tmp_path / "anm-pa-2025.html.gz").write_bytes(gzip.compress(corpo))
+
+    conferir_evidencias([_referencia_2025(hashlib.sha256(corpo).hexdigest())], [], tmp_path)
+    with pytest.raises(ValueError, match="SHA-256"):
+        conferir_evidencias([_referencia_2025("a" * 64)], [], tmp_path)
+
+
+def test_captura_html_gz_corrompida_falha(tmp_path: Path) -> None:
+    """RN-VPU-07: captura ilegível bloqueia a homologação com erro explícito."""
+    from observatorio.coleta import conferir_evidencias
+
+    (tmp_path / "anm-pa-2025.html.gz").write_bytes(b"nao e gzip")
+    with pytest.raises(ValueError, match="ilegível"):
+        conferir_evidencias([_referencia_2025("a" * 64)], [], tmp_path)

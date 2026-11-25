@@ -70,8 +70,8 @@ A população e a CFEM arrecadada só são expostas quando existe publicação v
 O passo a passo (obter o CSV da Release, coletar, subir a API, abrir o Swagger e a demo) e as variáveis de ambiente estão no guia [pipeline-cfem.md](../docs/guias/pipeline-cfem.md). Em resumo, da raiz:
 
 ```bash
-uv run --project backend python -m observatorio.coleta cfem --arquivo tmp/CFEM_Arrecadacao.csv --referencias data/referencia-cfem-mensal-anm.json --referencias-nacionais data/referencia-cfem-nacional-anm.json --evidencias docs/registros/evidencias-anm-2026-11-23
+uv run --project backend python -m observatorio.coleta cfem --arquivo tmp/CFEM_Arrecadacao.csv --referencias data/referencia-cfem-mensal-anm.json --referencias-nacionais data/referencia-cfem-nacional-anm.json --evidencias docs/registros/evidencias-anm-2026-11-25
 uv run --project backend uvicorn observatorio.api.main:app   # Swagger em http://127.0.0.1:8000/docs
 ```
 
-A CLI confere os SHA-256 das capturas indicadas nas referências, reconcilia cada município/mês com a tabela oficial da ANM e compara os totais nacionais (RN-CFE-12). As capturas são extrações, não respostas HTTP originais. Os resultados e as pendências de cada execução estão em [docs/registros/](../docs/registros/).
+A CLI confere o SHA-256 de cada captura indicada nas referências (o HTML original da página da ANM, guardado em `.html.gz`; as capturas antigas em Markdown continuam aceitas), reconcilia cada município/mês com a tabela oficial da ANM e compara os totais nacionais (RN-CFE-12). As referências são geradas por `scripts/cfem/referencias_anm.py` (ver o guia). Os resultados e as pendências de cada execução estão em [docs/registros/](../docs/registros/).
