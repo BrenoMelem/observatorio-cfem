@@ -6,6 +6,8 @@ Sem referência independente, gera relatório de reprovação e preserva publica
 """
 
 import argparse
+import gzip
+import hashlib
 import json
 import sys
 from datetime import UTC, datetime
@@ -19,25 +21,32 @@ from observatorio.publicacao.pacote import publicar
 from observatorio.validacao.cfem import Referencia, ReferenciaNacional, validar
 
 
+def _hash_captura(pasta: Path, base: str) -> str | None:
+    """SHA-256 da captura: do HTML original em `.html.gz` (corpo HTTP) ou do `.md` (extração antiga)."""
+    comprimido = pasta / f"{base}.html.gz"
+    if comprimido.is_file():
+        try:
+            return hashlib.sha256(gzip.decompress(comprimido.read_bytes())).hexdigest()
+        except (OSError, EOFError) as erro:
+            raise ValueError(f"Captura compactada ilegível: {comprimido.name}") from erro
+    extracao = pasta / f"{base}.md"
+    return hash_arquivo(extracao) if extracao.is_file() else None
+
+
 def conferir_evidencias(
     referencias: list[Referencia], nacionais: list[ReferenciaNacional], pasta: Path
 ) -> None:
-    """RN-VPU-07 e RN-CFE-12: confere a extração arquivada antes de homologar."""
+    """RN-VPU-07 e RN-CFE-12: confere a captura arquivada de cada referência antes de homologar."""
     esperados: dict[str, str] = {}
-    for referencia in referencias:
-        nome = f"anm-pa-{referencia.ano}.md"
-        if nome in esperados and esperados[nome] != referencia.sha256:
-            raise ValueError(f"SHA-256 conflitante para {nome}")
-        esperados[nome] = referencia.sha256
-    for referencia_nacional in nacionais:
-        nome = f"anm-brasil-{referencia_nacional.ano}.md"
-        if nome in esperados and esperados[nome] != referencia_nacional.sha256:
-            raise ValueError(f"SHA-256 conflitante para {nome}")
-        esperados[nome] = referencia_nacional.sha256
-    for nome, esperado in esperados.items():
-        arquivo = pasta / nome
-        if not arquivo.is_file() or hash_arquivo(arquivo) != esperado:
-            raise ValueError(f"Captura ausente ou SHA-256 divergente: {nome}")
+    for base, sha256 in [(f"anm-pa-{r.ano}", r.sha256) for r in referencias] + [
+        (f"anm-brasil-{r.ano}", r.sha256) for r in nacionais
+    ]:
+        if base in esperados and esperados[base] != sha256:
+            raise ValueError(f"SHA-256 conflitante para {base}")
+        esperados[base] = sha256
+    for base, esperado in esperados.items():
+        if _hash_captura(pasta, base) != esperado:
+            raise ValueError(f"Captura ausente ou SHA-256 divergente: {base}")
 
 
 def executar(
