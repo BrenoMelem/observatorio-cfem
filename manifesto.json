@@ -4483,5 +4483,269 @@
         "mudou": false
       }
     }
+  },
+  {
+    "coletado_em": "2026-11-25T13:58:42.134Z",
+    "release": "anm-2026-11-25-1358",
+    "arquivos": {
+      "arrecadacao": {
+        "url": "https://dadosabertos.anm.gov.br/CFEM/CFEM_Arrecadacao.csv",
+        "last_modified": "Wed, 25 Nov 2026 09:03:43 GMT",
+        "etag": "\"e773adfbb7cdd1:0\"",
+        "content_type": "application/octet-stream",
+        "content_length": "310210409",
+        "bytes": 310210409,
+        "sha256": "6307CBFCCC63DEC138CB41DE891ABA9E82F611347782604AE0B46BC3A4E6D83B",
+        "linhas": 2319359,
+        "cabecalho": "\"Ano\",\"Mês\",\"Processo\",\"AnoDoProcesso\",\"Tipo_PF_PJ\",\"CPF_CNPJ\",\"Substância\",\"UF\",\"CodigoMunicipio\",\"Município\",\"QuantidadeComercializada\",\"UnidadeDeMedida\",\"ValorRecolhido\",\"DataCriacao\"",
+        "recorte_por_ano": {
+          "2003": {
+            "linhas": 50,
+            "valor": "4970302.48"
+          },
+          "2004": {
+            "linhas": 163,
+            "valor": "54779965.19"
+          },
+          "2005": {
+            "linhas": 169,
+            "valor": "82897450.61"
+          },
+          "2006": {
+            "linhas": 197,
+            "valor": "98769431.74"
+          },
+          "2007": {
+            "linhas": 245,
+            "valor": "109860128.14"
+          },
+          "2008": {
+            "linhas": 368,
+            "valor": "192873384.42"
+          },
+          "2009": {
+            "linhas": 447,
+            "valor": "194473145.75"
+          },
+          "2010": {
+            "linhas": 375,
+            "valor": "262502093.04"
+          },
+          "2011": {
+            "linhas": 388,
+            "valor": "405115483.91"
+          },
+          "2012": {
+            "linhas": 561,
+            "valor": "468692110.38"
+          },
+          "2013": {
+            "linhas": 644,
+            "valor": "759354208.09"
+          },
+          "2014": {
+            "linhas": 609,
+            "valor": "434472224.32"
+          },
+          "2015": {
+            "linhas": 709,
+            "valor": "340615679.78"
+          },
+          "2016": {
+            "linhas": 691,
+            "valor": "394818736.68"
+          },
+          "2017": {
+            "linhas": 656,
+            "valor": "583993589.15"
+          },
+          "2018": {
+            "linhas": 506,
+            "valor": "1165873688.21"
+          },
+          "2019": {
+            "linhas": 535,
+            "valor": "2032845727.30"
+          },
+          "2020": {
+            "linhas": 492,
+            "valor": "2898637861.39"
+          },
+          "2021": {
+            "linhas": 471,
+            "valor": "4552427424.42"
+          },
+          "2022": {
+            "linhas": 435,
+            "valor": "2651201243.62"
+          },
+          "2023": {
+            "linhas": 534,
+            "valor": "2474116722.22"
+          },
+          "2024": {
+            "linhas": 563,
+            "valor": "2883324084.96"
+          },
+          "2025": {
+            "linhas": 581,
+            "valor": "2793414703.12"
+          },
+          "2026": {
+            "linhas": 341,
+            "valor": "1333711761.71"
+          }
+        },
+        "mudou": true
+      },
+      "distribuicao": {
+        "url": "https://dadosabertos.anm.gov.br/CFEM/CFEM_Distribuicao.csv",
+        "last_modified": "Wed, 25 Nov 2026 09:03:08 GMT",
+        "etag": "\"6499f6c9bb7cdd1:0\"",
+        "content_type": "application/octet-stream",
+        "content_length": "332408705",
+        "bytes": 332408705,
+        "sha256": "F5B9C2F44F5D54E5BC57C5B86DAA8A145D679958E1C7EB78937B7D4A5710374E",
+        "linhas": 2348031,
+        "cabecalho": "\"NúmeroDeDistribuição\",\"Ano\",\"Mês\",\"Ente\",\"SiglaEstado\",\"CodigoEnte\",\"NomeEnte\",\"TipoDistribuição\",\"Substância\",\"TipoAfetamento\",\"Valor\",\"DataCriacao\"",
+        "recorte_por_ano": {
+          "2007": {
+            "linhas": 206,
+            "valor": "64823314.60"
+          },
+          "2008": {
+            "linhas": 231,
+            "valor": "106729691.30"
+          },
+          "2009": {
+            "linhas": 444,
+            "valor": "143563945.32"
+          },
+          "2010": {
+            "linhas": 269,
+            "valor": "158915680.55"
+          },
+          "2011": {
+            "linhas": 412,
+            "valor": "255176518.58"
+          },
+          "2012": {
+            "linhas": 453,
+            "valor": "309143407.10"
+          },
+          "2013": {
+            "linhas": 626,
+            "valor": "489637694.66"
+          },
+          "2014": {
+            "linhas": 484,
+            "valor": "289666429.01"
+          },
+          "2015": {
+            "linhas": 540,
+            "valor": "217771965.96"
+          },
+          "2016": {
+            "linhas": 530,
+            "valor": "258210355.43"
+          },
+          "2017": {
+            "linhas": 662,
+            "valor": "357447989.46"
+          },
+          "2018": {
+            "linhas": 627,
+            "valor": "675543831.08"
+          },
+          "2019": {
+            "linhas": 863,
+            "valor": "1214767286.88"
+          },
+          "2020": {
+            "linhas": 2347,
+            "valor": "1695028581.91"
+          },
+          "2021": {
+            "linhas": 1517,
+            "valor": "2768961079.47"
+          },
+          "2022": {
+            "linhas": 756,
+            "valor": "1899901776.93"
+          },
+          "2023": {
+            "linhas": 270,
+            "valor": "1051539079.14"
+          },
+          "2024": {
+            "linhas": 448,
+            "valor": "1690359026.79"
+          },
+          "2025": {
+            "linhas": 432,
+            "valor": "1556820292.67"
+          },
+          "2026": {
+            "linhas": 306,
+            "valor": "954047401.78"
+          }
+        },
+        "mudou": true
+      },
+      "autuacao": {
+        "url": "https://dadosabertos.anm.gov.br/CFEM/CFEM_Autuacao.csv",
+        "last_modified": "Wed, 25 Nov 2026 09:02:03 GMT",
+        "etag": "\"f3d3a6a3bb7cdd1:0\"",
+        "content_type": "application/octet-stream",
+        "content_length": "3031502",
+        "bytes": 3031502,
+        "sha256": "F4C328974F04004F2E69E7DF2864E46011842870683A1FFD8D78D1E4DC44FF0B",
+        "linhas": 21029,
+        "cabecalho": "\"ProcessoCobrança\";\"AnoPublicação\";\"MêsPublicação\";\"Tipo_PF_PJ\";\"CPF_CNPJ\";\"NomeTitular\";\"NúmeroAuto\";\"ProcessoMinerário\";\"Substância\";\"Município\";\"UF\";\"Valor\"",
+        "recorte_por_ano": {
+          "2009": {
+            "linhas": 1,
+            "valor": "89908.95"
+          },
+          "2011": {
+            "linhas": 2,
+            "valor": "1404.99"
+          },
+          "2012": {
+            "linhas": 7,
+            "valor": "719089.81"
+          },
+          "2013": {
+            "linhas": 31,
+            "valor": "1368201.83"
+          },
+          "2014": {
+            "linhas": 4,
+            "valor": "7122448.98"
+          },
+          "2015": {
+            "linhas": 4,
+            "valor": "107314.31"
+          },
+          "2016": {
+            "linhas": 18,
+            "valor": "1241015225.25"
+          },
+          "2017": {
+            "linhas": 9,
+            "valor": "559844871.30"
+          },
+          "2018": {
+            "linhas": 11,
+            "valor": "34319826.14"
+          },
+          "2021": {
+            "linhas": 1,
+            "valor": "92851042.50"
+          }
+        },
+        "mudou": true
+      }
+    }
   }
 ]
