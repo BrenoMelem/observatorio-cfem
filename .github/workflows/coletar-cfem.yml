@@ -4,7 +4,8 @@
 # issue, ou comenta na que já estiver aberta. Guia: docs/guias/pipeline-cfem.md.
 #
 # Agendado, e não disparado pela Release do arquivamento: eventos criados com o GITHUB_TOKEN não iniciam outros
-# workflows. Só trabalha quando há edição nova da ANM sem pacote, salvo com "forcar".
+# workflows. Só trabalha quando há edição nova da ANM sem pacote, salvo com "forcar". Parte do pacote mais
+# recente de qualquer fonte (pacote-*), para não perder a despesa do SICONFI (coletar-siconfi.yml).
 name: Coletar CFEM
 
 on:
@@ -22,7 +23,7 @@ permissions:
   issues: write # abre ou comenta a issue de falha
 
 concurrency:
-  group: coletar-cfem
+  group: publicar-pacote # o mesmo do SICONFI: uma publicação por vez sobre o mesmo pacote
   cancel-in-progress: false
 
 jobs:
@@ -51,10 +52,12 @@ jobs:
             FEITO=true
           fi
           if [ "$FORCAR" = "true" ]; then FEITO=false; fi
-          echo "Edição da ANM: $ANM; pacote anterior: ${ANTERIOR:-nenhum}; já processada: $FEITO"
+          # O pacote de partida é o mais recente de qualquer fonte (pacote-*), para não perder as outras.
+          BASE=$(gh release list --limit 100 --json tagName --jq '[.[] | select(.tagName | startswith("pacote-"))][0].tagName // empty')
+          echo "Edição da ANM: $ANM; pacote CFEM anterior: ${ANTERIOR:-nenhum}; partida: ${BASE:-nenhum}; já processada: $FEITO"
           {
             echo "anm=$ANM"
-            echo "anterior=$ANTERIOR"
+            echo "anterior=$BASE"
             echo "feito=$FEITO"
           } >> "$GITHUB_OUTPUT"
           {
