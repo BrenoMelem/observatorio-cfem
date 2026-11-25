@@ -1,0 +1,119 @@
+# Atualiza as referências oficiais da ANM usadas pela validação da CFEM (RN-VPU-07, RN-CFE-12).
+# Uma vez por mês captura as tabelas da ANM Extra e, se algo mudou (mês novo, valor revisto ou célula
+# removida), abre um PR para a develop com as capturas e os JSON de data/. Nada vai para a produção sem
+# revisão humana (decisão do mantenedor de 25/11/2026). Falha abre ou comenta uma issue (ADR-011).
+# Guia: docs/guias/pipeline-cfem.md.
+name: Atualizar referências da ANM
+
+on:
+  schedule:
+    - cron: "0 9 5 * *" # dia 5 de cada mês, 09:00 UTC, depois do fechamento do mês (RN-TMP-02)
+  workflow_dispatch:
+
+permissions:
+  contents: write # cria a branch do PR
+  pull-requests: write # abre o PR
+  issues: write # abre ou comenta a issue de falha
+
+concurrency:
+  group: atualizar-referencias-anm
+  cancel-in-progress: false
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OBS_ANM_CA: scripts/cfem/certificados/sectigo-ov-r36.pem
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: develop
+
+      - uses: astral-sh/setup-uv@v7
+
+      - name: Instalar o backend
+        run: uv sync --project backend --frozen --no-dev
+
+      - name: Capturar as tabelas e comparar com a referência
+        id: captura
+        run: |
+          set -o pipefail # sem isto, o tee esconderia a falha da captura
+          uv run --project backend --no-dev python -m observatorio.referencias \
+            --pasta data/evidencias-anm \
+            --mensal data/referencia-cfem-mensal-anm.json \
+            --nacional data/referencia-cfem-nacional-anm.json \
+            --resumo "$RUNNER_TEMP/resumo.md" | tee "$RUNNER_TEMP/captura.json"
+          if [ -n "$(git status --porcelain -- data)" ]; then echo "mudou=true" >> "$GITHUB_OUTPUT"; else echo "mudou=false" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Validar a arrecadação com a referência nova (sem publicar)
+        id: validacao
+        if: steps.captura.outputs.mudou == 'true'
+        run: |
+          ANM=$(gh release list --limit 100 --json tagName --jq '[.[] | select(.tagName | startswith("anm-"))][0].tagName // empty')
+          gh release download "$ANM" --pattern arrecadacao.csv.gz --dir "$RUNNER_TEMP/anm"
+          set +e
+          OBS_DATA_DIR="$RUNNER_TEMP/dados" OBS_PUBLICADO_DIR="$RUNNER_TEMP/dados/publicado" \
+            uv run --project backend --no-dev python -m observatorio.coleta cfem \
+            --arquivo "$RUNNER_TEMP/anm/arrecadacao.csv.gz" \
+            --referencias data/referencia-cfem-mensal-anm.json \
+            --referencias-nacionais data/referencia-cfem-nacional-anm.json \
+            --evidencias data/evidencias-anm > "$RUNNER_TEMP/coleta.json"
+          echo "anm=$ANM" >> "$GITHUB_OUTPUT"
+          cat "$RUNNER_TEMP/coleta.json"
+
+      - name: Abrir o PR para revisão
+        if: steps.captura.outputs.mudou == 'true'
+        env:
+          ANM: ${{ steps.validacao.outputs.anm }}
+        run: |
+          RAMO="bot/referencias-anm-$(date -u +%Y-%m-%d)"
+          RELATORIO=$(jq -r '.relatorio // empty' "$RUNNER_TEMP/coleta.json")
+          {
+            echo "Atualização mensal das referências oficiais da ANM, aberta pelo workflow \`atualizar-referencias-anm.yml\`."
+            echo "Revise antes do merge: a referência nova passa a valer para a coleta diária só depois dele."
+            echo
+            echo "## O que mudou"
+            echo
+            cat "$RUNNER_TEMP/resumo.md"
+            echo
+            echo "## Validação da arrecadação com a referência nova (sem publicar)"
+            echo
+            echo "- Edição da ANM: ${ANM:-não identificada}"
+            echo "- Situação: $(jq -r .situacao "$RUNNER_TEMP/coleta.json")"
+            if [ -n "$RELATORIO" ] && [ -f "$RELATORIO" ]; then
+              echo "- Provisórias (ano aberto): $(jq -r '.provisorias // 0' "$RELATORIO"); aguardando volume: $(jq -r '(.aguardando_volume // []) | length' "$RELATORIO")"
+              jq -r '(.erros // [])[:30][] | "- Erro: " + .' "$RELATORIO"
+            fi
+            echo
+            echo "Execução: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          } > "$RUNNER_TEMP/pr.md"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$RAMO"
+          git add data
+          git commit -m "data(cfem): referências oficiais da ANM capturadas em $(date -u +%d/%m/%Y)"
+          git push origin "$RAMO"
+          gh pr create --base develop --head "$RAMO" \
+            --title "Referências oficiais da ANM de $(date -u +%m/%Y)" --body-file "$RUNNER_TEMP/pr.md"
+
+      - name: Abrir ou comentar a issue de falha
+        if: failure()
+        run: |
+          TITULO="Atualização das referências da ANM falhou"
+          {
+            echo "A captura mensal das tabelas da ANM Extra falhou; as referências versionadas não mudaram."
+            echo
+            echo "- Execução: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            if [ -f "$RUNNER_TEMP/captura.json" ]; then
+              echo "- Saída: $(cat "$RUNNER_TEMP/captura.json")"
+            fi
+          } > "$RUNNER_TEMP/issue.md"
+          ABERTA=$(gh issue list --state open --search "in:title \"$TITULO\"" --json number,title \
+            --jq "[.[] | select(.title == \"$TITULO\")][0].number // empty")
+          if [ -n "$ABERTA" ]; then
+            gh issue comment "$ABERTA" --body-file "$RUNNER_TEMP/issue.md"
+          else
+            gh issue create --title "$TITULO" --body-file "$RUNNER_TEMP/issue.md"
+          fi

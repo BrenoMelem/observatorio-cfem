@@ -1,6 +1,7 @@
 """Captura as tabelas oficiais de arrecadação da CFEM da ANM e gera as referências da validação.
 
-Script de laboratório (não é o produto). Baixa, para cada ano, as páginas
+Script de laboratório (não é o produto). Gerou a primeira versão das referências em 25/11/2026; a versão
+do produto, usada pelo workflow mensal, é `observatorio.referencias` (backend). Baixa, para cada ano, as páginas
 `arrecadacao_cfem_muni.aspx?ano=AAAA&uf=PA` (por município e mês) e `arrecadacao_cfem_ano.aspx?ano=AAAA`
 (total nacional), guarda o corpo HTTP original comprimido (`anm-pa-AAAA.html.gz`,
 `anm-brasil-AAAA.html.gz`) e escreve `data/referencia-cfem-mensal-anm.json` e

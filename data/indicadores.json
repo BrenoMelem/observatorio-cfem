@@ -20,7 +20,7 @@
     "unidade": "BRL nominal",
     "frequencia": "mensal",
     "metodo": "Soma dos valores recolhidos por município, ano e mês; total anual somente com doze meses presentes.",
-    "limitacoes": "As repetições integrais do recorte são somadas conforme a exceção de RN-VPU-11 de 08/11/2026; a quantidade de cada edição do arquivo está no relatório de qualidade do lote, e o efeito monetário isolado ainda não foi medido. Só são publicados os meses conferidos ao centavo com a tabela oficial da ANM por município, de 2004 a 2025, com lacunas municipais. Ficam de fora 2003, porque o arquivo da ANM não tem janeiro a abril no país inteiro, e o ano corrente, ainda sem referência. Arrecadação não equivale a distribuição ou produção mineral.",
+    "limitacoes": "As repetições integrais do recorte são somadas conforme a exceção de RN-VPU-11 de 08/11/2026; a quantidade de cada edição do arquivo está no relatório de qualidade do lote, e o efeito monetário isolado ainda não foi medido. Só são publicados os meses conferidos ao centavo com a tabela oficial da ANM por município, desde 2004, com lacunas municipais; 2003 fica de fora, porque o arquivo da ANM não tem janeiro a abril no país inteiro. No ano ainda aberto, os meses conferidos saem como provisórios e sem total anual, e os meses que a ANM ainda está lançando (abaixo de 50% da mediana de registros) ficam de fora (RN-CFE-06). Arrecadação não equivale a distribuição ou produção mineral.",
     "licenca": "Fonte ANM; verificar condições de redistribuição antes de publicação externa.",
     "estrategia": "recalculado",
     "municipios_comparacao": []

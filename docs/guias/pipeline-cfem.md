@@ -16,7 +16,7 @@ ANM (CSV) → Release anm-* → fontes/ → modelo/ → validacao/ → publicaca
 | 1. Arquivamento | A cada 4 horas guarda o CSV da ANM numa Release, com o relatório de diferenças entre edições | `.github/workflows/arquivar-anm.yml`, [arquivo-anm.md](arquivo-anm.md) | Release `anm-AAAA-MM-DD-HHMM` com `arrecadacao.csv.gz` |
 | 2. Fonte | Lê o CSV (latin-1, vírgula decimal), confere as colunas, recorta os 12 municípios e converte cada linha em observação do modelo comum, com URL, data e SHA-256 do bruto | `backend/src/observatorio/fontes/cfem_arrecadacao.py` | `Lote` de observações |
 | 3. Modelo | Os 14 campos da observação (RN-MOD-03), dinheiro em `Decimal`, ausente nunca vira zero | `backend/src/observatorio/modelo/` | contrato entre as etapas |
-| 4. Validação | Soma as repetições integrais e as registra (RN-VPU-11), compara cada município/mês com a tabela oficial da ANM com tolerância zero (RN-VPU-12) e o total nacional com limite de 1% (RN-CFE-12) | `backend/src/observatorio/validacao/cfem.py` | relatório de qualidade JSON e `aprovado` ou `reprovado` |
+| 4. Validação | Soma as repetições integrais e as registra (RN-VPU-11), compara cada município/mês com a tabela oficial da ANM com tolerância zero (RN-VPU-12) e o total nacional com limite de 1% (RN-CFE-12); no ano aberto, marca os meses como provisórios (RN-CFE-06) | `backend/src/observatorio/validacao/cfem.py` | relatório de qualidade JSON e `aprovado` ou `reprovado` |
 | 5. Publicação | Só com lote aprovado: grava parquet e manifestos numa versão imutável e troca o ponteiro `pacote.json` por último; reprovação conserva a versão anterior (RN-VPU-01, RN-VPU-03, ADR-014) | `backend/src/observatorio/publicacao/pacote.py` | `publicado/pacote.json` e `publicado/versoes/<hash>/` |
 | 6. API | Lê só o pacote publicado (RN-ENT-01), confere os hashes e serve JSON, CSV e status | `backend/src/observatorio/api/` | rotas `/api/v1/...`, Swagger em `/docs` |
 
@@ -51,7 +51,7 @@ uv run --project backend python -m observatorio.coleta cfem \
   --origem "https://github.com/$REPO/releases/download/$TAG/arrecadacao.csv.gz" \
   --referencias data/referencia-cfem-mensal-anm.json \
   --referencias-nacionais data/referencia-cfem-nacional-anm.json \
-  --evidencias docs/registros/evidencias-anm-2026-11-25
+  --evidencias data/evidencias-anm
 ```
 
 A coleta lê o `.csv.gz` direto e calcula o SHA-256 do CSV descompactado, que identifica a edição da ANM
@@ -119,19 +119,50 @@ não existir, o Docker a cria com dono root no Linux, e a coleta seguinte falha 
 
 A validação compara a arrecadação com duas tabelas da ANM, independentes do CSV: a do Pará por município
 e mês (`arrecadacao_cfem_muni.aspx`) e a do Brasil por estado, cujo rodapé dá o total nacional
-(`arrecadacao_cfem_ano.aspx`). O script de laboratório baixa as páginas, guarda o HTML original
-comprimido e gera os dois arquivos de `data/`:
+(`arrecadacao_cfem_ano.aspx`). As páginas capturadas ficam em `data/evidencias-anm/`, com o HTML original
+comprimido, e as referências em `data/referencia-cfem-mensal-anm.json` e
+`data/referencia-cfem-nacional-anm.json`.
 
 ```bash
-uv run python -m scripts.cfem.referencias_anm --pasta docs/registros/evidencias-anm-AAAA-MM-DD \
-  --anos 2004-2025 --certificado scripts/cfem/certificados/sectigo-ov-r36.pem
+OBS_ANM_CA=scripts/cfem/certificados/sectigo-ov-r36.pem \
+uv run --project backend python -m observatorio.referencias \
+  --pasta data/evidencias-anm \
+  --mensal data/referencia-cfem-mensal-anm.json \
+  --nacional data/referencia-cfem-nacional-anm.json \
+  --resumo tmp/resumo-referencias.md
 ```
 
-O SHA-256 de cada referência é o do HTML, e não o do `.html.gz`. O script confere se a soma dos meses
-fecha com o total de cada linha e sai com código 1 quando um valor muda em relação à versão anterior dos
-arquivos (a lista vai para a saída). Uma mudança pede investigação antes do commit. `--sem-baixar` só
-extrai de uma pasta já capturada. Depois de gerar, aponte `--evidencias` da coleta e do workflow para a
-pasta nova.
+- Captura cada ano de 2004 até o corrente. 2003 fica de fora, porque o arquivo da ANM não tem janeiro a
+  abril no país inteiro.
+- Um ano cujos valores não mudaram fica como está, com a captura, a data e o SHA-256 antigos. O HTML da
+  ANM muda a cada requisição, e regravá-lo sem mudança de valor só geraria ruído.
+- Um ano com mês novo, valor revisto ou célula removida ganha captura e referência novas, e o resumo lista
+  cada diferença.
+- No ano corrente entram só os meses já fechados, e o total nacional só existe para ano fechado.
+- O SHA-256 de cada referência é o do HTML, e não o do `.html.gz`. Em cada linha, a soma dos meses tem de
+  fechar com o total da tabela, senão a captura falha.
+
+O workflow `.github/workflows/atualizar-referencias-anm.yml` roda isso no dia 5 de cada mês, às 09:00 UTC,
+ou à mão. Quando algo muda, ele valida a arrecadação com a referência nova sem publicar e abre um PR para
+a `develop` com as capturas, os JSON, o resumo e o resultado da validação. A referência nova só passa a
+valer para a coleta diária depois do merge. Valor revisto pela ANM merece atenção na revisão. Falha na
+captura abre a issue "Atualização das referências da ANM falhou". Um PR aberto por workflow não dispara o
+CI sozinho: o GitHub pede que alguém com acesso de escrita aprove a execução na página do PR.
+
+O script de laboratório `scripts/cfem/referencias_anm.py` gerou a primeira versão (registro de
+25/11/2026) e continua disponível para experimentos.
+
+## Ano aberto (RN-CFE-06)
+
+No último ano do arquivo, enquanto os 12 meses não tiverem volume suficiente (ao menos 50% da mediana de
+registros por mês dos anos anteriores, exceção de 08/11/2026 da RN-CFE-06), o ano está aberto:
+
+- mês conferido ao centavo com a tabela oficial sai como **provisório**, sem total anual;
+- mês abaixo do volume, que a ANM ainda está lançando, fica fora da publicação, listado em
+  `aguardando_volume` no relatório, sem reprovar o lote;
+- meses posteriores ao último mês com registro ainda não aconteceram e não contam como ausentes.
+
+A demo desenha os meses provisórios com linha pontilhada.
 
 ## Coleta agendada no GitHub Actions
 
@@ -175,8 +206,9 @@ Todas são lidas só em `backend/src/observatorio/config.py` (ADR-017).
 
 ## Limites conhecidos
 
-- Só é publicada a observação conferida ao centavo com a tabela oficial da ANM. Ficam de fora 2003 (o
-  arquivo não tem janeiro a abril no país inteiro) e o ano corrente, ainda sem referência.
+- Só é publicada a observação conferida ao centavo com a tabela oficial da ANM. 2003 fica de fora (o
+  arquivo não tem janeiro a abril no país inteiro); no ano aberto, os meses saem provisórios e os que
+  ainda estão sendo lançados ficam de fora (ver "Ano aberto").
   Ausência de publicação não significa arrecadação zero (RN-CFE-07, RN-CFE-09).
 - A edição do CSV muda quando a ANM republica o arquivo; o SHA-256 do bruto fica no relatório e a
   Release identifica a edição.
