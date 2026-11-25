@@ -266,3 +266,21 @@ def test_coleta_siconfi_somente_se_mudou(
     bruto = Path(str(primeira["bruto"]))
     assert (bruto / "indice.json").is_file() and (bruto / "entregas" / "indice.json").is_file()
     assert relatorio["conferencia"]["paga"]["conferidos"] == 1
+
+
+def test_linha_da_msc_sem_funcao_tira_so_a_paga(tmp_path: Path) -> None:
+    """RN-FNT-04: caso real de 25/11/2026 (São Domingos do Araguaia, 2019), uma linha da conta paga sem
+    função nem subfunção. Não é layout novo: a paga daquele município e ano fica fora, com o motivo."""
+
+    def sem_funcao(rota: str, itens: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        if rota != "msc_orcamentaria":
+            return itens
+        extra = {**itens[0], "funcao": None, "subfuncao": None, "natureza_despesa": None, "valor": 1000.0}
+        return [*itens, extra]
+
+    resultado = validacao.validar(coletar(tmp_path, sem_funcao))
+    assert resultado.aprovado
+    assert "despesa_funcao_paga" not in {o.indicador for o in resultado.observacoes}
+    fora = resultado.relatorio["fora_da_publicacao"]
+    assert isinstance(fora, list)
+    assert any("sem_funcao: ausente na DCA, 1000.00" in d for d in fora[0]["diferencas"])

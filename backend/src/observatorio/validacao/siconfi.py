@@ -95,8 +95,10 @@ def mapear_rreo(linhas: list[LinhaReferencia], grupo: Grupo) -> tuple[dict[str, 
 def referencia_msc(msc: dict[str, Decimal], grupo: Grupo) -> dict[str, Decimal]:
     """MSC por função e subfunção → as categorias da DCA; "Demais" é a função menos as listadas."""
     saida: dict[str, Decimal] = {}
-    funcoes_msc = {c for c in msc if "." not in c}
-    saida["total"] = sum((msc[f] for f in funcoes_msc), ZERO)
+    funcoes_msc = {c for c in msc if c.isdigit()}
+    saida["total"] = sum((msc[f] for f in funcoes_msc), ZERO) + msc.get("sem_funcao", ZERO)
+    if msc.get("sem_funcao"):
+        saida["sem_funcao"] = msc["sem_funcao"]  # não existe na DCA: a comparação aponta a linha
     for f in funcoes_msc:
         saida[f] = msc[f]
         listadas = ZERO

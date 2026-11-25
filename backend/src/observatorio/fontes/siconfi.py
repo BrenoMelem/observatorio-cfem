@@ -48,6 +48,7 @@ ESTAGIOS_RREO = {
 INDICADORES = {estagio: f"despesa_funcao_{estagio}" for estagio in ESTAGIOS_DCA.values()}
 CONTA_PAGA_MSC = "622130400"  # crédito empenhado liquidado pago (RN-CFE-24, mapeamento de 19/11/2026)
 MODALIDADE_INTRA = "91"
+SEM_FUNCAO = "sem_funcao"  # linha da MSC sem função nem subfunção
 
 # Entregas que mudam o lote: DCA, RREO do 6º bimestre e MSC de dezembro (RN-TMP-04).
 ENTREGAVEIS = {
@@ -344,7 +345,7 @@ def _estagio_rreo(coluna: str) -> str | None:
 def somar_msc(itens: list[dict[str, Any]]) -> dict[str, Decimal]:
     """Despesa paga da MSC por função (`FF`) e subfunção (`FF.SSS`), sem intraorçamentária.
 
-    Natureza C soma e D subtrai; a modalidade (3º e 4º dígitos da natureza da despesa) 91 fica fora,
+    Linha sem função ou subfunção soma em `sem_funcao`. Natureza C soma e D subtrai; a modalidade (3º e 4º dígitos da natureza da despesa) 91 fica fora,
     como na DCA "exceto intraorçamentárias".
     """
     saida: dict[str, Decimal] = defaultdict(Decimal)
@@ -353,10 +354,15 @@ def somar_msc(itens: list[dict[str, Any]]) -> dict[str, Decimal]:
             continue
         if str(item["natureza_despesa"] or "")[2:4] == MODALIDADE_INTRA:
             continue
-        if item["natureza_conta"] not in ("C", "D") or not item["funcao"] or not item["subfuncao"]:
-            raise ValueError("Linha da MSC sem natureza, função ou subfunção (RN-VPU-04)")
+        if item["natureza_conta"] not in ("C", "D"):
+            raise ValueError("Linha da MSC sem natureza da conta (RN-VPU-04)")
         valor = _decimal(item["valor"], "MSC")
         sinal = 1 if item["natureza_conta"] == "C" else -1
+        if not item["funcao"] or not item["subfuncao"]:
+            # Dado do município, não layout: a linha não cabe em função nenhuma e torna a referência
+            # divergente da DCA; o município e exercício ficam fora, com o motivo (RN-FNT-04).
+            saida[SEM_FUNCAO] += sinal * valor
+            continue
         saida[str(item["funcao"])] += sinal * valor
         saida[f"{item['funcao']}.{item['subfuncao']}"] += sinal * valor
     return dict(saida)
