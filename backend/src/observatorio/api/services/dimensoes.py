@@ -2,15 +2,20 @@
 
 import hashlib
 import json
+from collections import defaultdict
 from dataclasses import dataclass
 from datetime import UTC, datetime
+from decimal import Decimal
 from pathlib import Path
+from typing import Literal
 
 from observatorio.api.dtos.publicacao import Metadados, Observacao, RespostaDimensao, StatusIndicador
 from observatorio.api.repositories.publicacao import (
     PublicacaoInvalida,
+    indicadores_publicados,
     manifesto_publicado,
     populacao_publicada,
+    resolver_pacote,
 )
 
 DIMENSOES = {
@@ -55,15 +60,31 @@ class Pacote:
     definicoes: dict[str, dict[str, object]]
     populacao: list[Observacao]
     versao: str
+    consumo: dict[str, dict[str, object]] | None = None
 
 
 def ler_pacote(pasta: Path | None = None) -> Pacote:
+    pasta, descricao = resolver_pacote(pasta)
     definicoes = manifesto_publicado(pasta)
     populacao = populacao_publicada(pasta)
+    if descricao:
+        populacao.extend(indicadores_publicados(pasta, descricao))
+        try:
+            consumo = json.loads((pasta / "consumo_assistente.json").read_bytes())
+            if not isinstance(consumo, dict) or any(
+                not isinstance(v, dict)
+                or type(v.get("habilitado")) is not bool
+                or not isinstance(v.get("motivo"), str)
+                for v in consumo.values()
+            ):
+                raise ValueError("Controle inválido")
+        except (OSError, ValueError) as erro:
+            raise PublicacaoInvalida("Controle do assistente inválido") from erro
+        return Pacote(definicoes, populacao, descricao.versao, consumo)
     conteudo = {"manifesto": definicoes, "populacao": [o.model_dump() for o in populacao]}
-    versao = hashlib.sha256(json.dumps(conteudo, sort_keys=True, ensure_ascii=False).encode()).hexdigest()[
-        :16
-    ]
+    versao = hashlib.sha256(
+        json.dumps(conteudo, sort_keys=True, ensure_ascii=False, default=str).encode()
+    ).hexdigest()[:16]
     return Pacote(definicoes, populacao, versao)
 
 
@@ -129,6 +150,7 @@ def consultar(
     ano_inicio: int | None = None,
     ano_fim: int | None = None,
     pasta: Path | None = None,
+    periodicidade: Literal["mensal", "anual"] = "mensal",
 ) -> RespostaDimensao:
     pacote = ler_pacote(pasta)
     permitidos = DIMENSOES[dimensao]
@@ -144,17 +166,51 @@ def consultar(
         and (ano_inicio is None or o.ano >= ano_inicio)
         and (ano_fim is None or o.ano <= ano_fim)
     ]
+    notas = ["Somente observações validadas da camada publicada; ausência não equivale a zero."]
+    if periodicidade == "anual":
+        linhas, avisos = agregar_anos(linhas)
+        notas.extend(avisos)
     return RespostaDimensao(
         filtros={
             "dimensao": dimensao,
             "municipio_id": municipio_id,
             "ano_inicio": ano_inicio,
             "ano_fim": ano_fim,
+            "periodicidade": periodicidade,
         },
         versao_dados=pacote.versao,
-        notas=["Somente observações validadas da camada publicada; ausência não equivale a zero."],
+        notas=notas,
         dados=linhas,
         status=[_status(id_, pacote) for id_ in permitidos],
         metadados={id_: _metadados(id_, pacote) for id_ in permitidos},
         lacunas=LACUNAS[dimensao],
     )
+
+
+def agregar_anos(observacoes: list[Observacao]) -> tuple[list[Observacao], list[str]]:
+    """RN-CFE-05/11: somente 12 meses validados, soma decimal calculada no servidor."""
+    grupos: dict[tuple[str | None, int], list[Observacao]] = defaultdict(list)
+    saida = [o for o in observacoes if o.indicador != "cfem_arrecadada"]
+    notas = []
+    for item in observacoes:
+        if item.indicador == "cfem_arrecadada":
+            grupos[(item.municipio_id, item.ano)].append(item)
+    for (codigo, ano), meses in grupos.items():
+        if (
+            len(meses) != 12
+            or {o.mes for o in meses} != set(range(1, 13))
+            or any(o.valor is None or o.estado_validacao != "validado" for o in meses)
+        ):
+            notas.append(f"{codigo}/{ano}: ano incompleto, sem total anual homologado.")
+            continue
+        total = sum((Decimal(str(o.valor)) for o in meses), Decimal(0))
+        saida.append(
+            meses[0].model_copy(
+                update={
+                    "mes": None,
+                    "valor": total,
+                    "natureza_valor": "zero real" if total == 0 else "informado",
+                }
+            )
+        )
+    return saida, notas

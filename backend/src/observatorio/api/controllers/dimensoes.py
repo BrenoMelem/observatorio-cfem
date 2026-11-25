@@ -3,6 +3,7 @@
 import csv
 import io
 import re
+from typing import Literal
 
 from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import Response
@@ -15,7 +16,11 @@ router = APIRouter(prefix="/api/v1")
 
 
 def _consultar(
-    dimensao: str, municipio_id: str | None, ano_inicio: int | None, ano_fim: int | None
+    dimensao: str,
+    municipio_id: str | None,
+    ano_inicio: int | None,
+    ano_fim: int | None,
+    periodicidade: Literal["mensal", "anual"] = "mensal",
 ) -> RespostaDimensao:
     if dimensao not in DIMENSOES:
         raise HTTPException(404, "Dimensão desconhecida")
@@ -24,7 +29,7 @@ def _consultar(
     if ano_inicio is not None and ano_fim is not None and ano_inicio > ano_fim:
         raise HTTPException(422, "ano_inicio maior que ano_fim")
     try:
-        return consultar(dimensao, municipio_id, ano_inicio, ano_fim)
+        return consultar(dimensao, municipio_id, ano_inicio, ano_fim, periodicidade=periodicidade)
     except PublicacaoInvalida as erro:
         raise HTTPException(503, detail=str(erro)) from erro
 
@@ -35,8 +40,9 @@ def dimensao_csv(
     municipio_id: str | None = None,
     ano_inicio: int | None = Query(None, ge=1900),
     ano_fim: int | None = Query(None, ge=1900),
+    periodicidade: Literal["mensal", "anual"] = "mensal",
 ) -> Response:
-    resposta = _consultar(dimensao, municipio_id, ano_inicio, ano_fim)
+    resposta = _consultar(dimensao, municipio_id, ano_inicio, ano_fim, periodicidade)
     saida = io.StringIO()
     campos = [
         "indicador",
@@ -62,7 +68,14 @@ def dimensao_csv(
         linha = observacao.model_dump()
         meta = resposta.metadados[observacao.indicador]
         linha["metodo"], linha["limitacoes"] = meta.metodo, meta.limitacoes
-        escritor.writerow(linha)
+        escritor.writerow(
+            {
+                chave: "'" + valor
+                if isinstance(valor, str) and valor.startswith(("=", "+", "-", "@"))
+                else valor
+                for chave, valor in linha.items()
+            }
+        )
     return Response("\ufeff" + saida.getvalue(), media_type="text/csv; charset=utf-8")
 
 
@@ -72,8 +85,9 @@ def dimensao(
     municipio_id: str | None = None,
     ano_inicio: int | None = Query(None, ge=1900),
     ano_fim: int | None = Query(None, ge=1900),
+    periodicidade: Literal["mensal", "anual"] = "mensal",
 ) -> RespostaDimensao:
-    return _consultar(dimensao, municipio_id, ano_inicio, ano_fim)
+    return _consultar(dimensao, municipio_id, ano_inicio, ano_fim, periodicidade)
 
 
 @router.get("/indicadores/status")

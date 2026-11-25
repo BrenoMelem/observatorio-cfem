@@ -20,6 +20,10 @@ class Configuracao:
     """Pasta do pacote publicado: observações e manifesto de indicadores (ADR-013, ADR-014)."""
     database_url: str | None
     """Conexão com o PostgreSQL dos dados de usuários (ADR-016); nenhum código a usa ainda."""
+    dados_dir: Path = Path("output/observatorio")
+    manifesto: Path = Path("data/indicadores.json")
+    cors_origens: tuple[str, ...] = ()
+    certificado_anm: Path | None = None
 
 
 def carregar() -> Configuracao:
@@ -27,4 +31,8 @@ def carregar() -> Configuracao:
     return Configuracao(
         publicado_dir=Path(os.environ.get("OBS_PUBLICADO_DIR") or PUBLICADO_PADRAO),
         database_url=os.environ.get("DATABASE_URL") or None,
+        dados_dir=Path(os.environ.get("OBS_DATA_DIR") or "output/observatorio"),
+        manifesto=Path(os.environ.get("OBS_MANIFESTO") or "data/indicadores.json"),
+        cors_origens=tuple(o.strip() for o in os.environ.get("OBS_CORS_ORIGENS", "").split(",") if o.strip()),
+        certificado_anm=Path(os.environ["OBS_ANM_CA"]) if os.environ.get("OBS_ANM_CA") else None,
     )
