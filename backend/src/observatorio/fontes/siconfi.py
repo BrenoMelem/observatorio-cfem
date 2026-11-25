@@ -116,6 +116,18 @@ class Arquivo:
         self.indice: list[dict[str, object]] = []
         pasta.mkdir(parents=True, exist_ok=True)
 
+    def gravar_indice(self, coletado_em: str) -> bytes:
+        """`indice.json`: URL, SHA-256 do corpo e tamanho de cada resposta guardada (RN-FON-13)."""
+        indice = {
+            "fonte": "SICONFI (API pública do Tesouro Nacional)",
+            "api": API,
+            "coletado_em": coletado_em,
+            "respostas": self.indice,
+        }
+        conteudo = json.dumps(indice, ensure_ascii=False, indent=1).encode()
+        (self.pasta / "indice.json").write_bytes(conteudo)
+        return conteudo
+
     def consultar(self, rota: str, parametros: dict[str, object]) -> list[dict[str, Any]]:
         """Lê todas as páginas (`hasMore`) e confere o contrato de cada uma."""
         itens: list[dict[str, Any]] = []
@@ -295,14 +307,7 @@ def coletar(
             if pagas:
                 msc[(codigo, ano)] = pagas
     observacoes, intra = converter_dca(dca_por_chave, entregas, coletado_em)
-    indice = {
-        "fonte": "SICONFI (API pública do Tesouro Nacional)",
-        "api": API,
-        "coletado_em": coletado_em,
-        "respostas": arquivo.indice,
-    }
-    conteudo_indice = json.dumps(indice, ensure_ascii=False, indent=1).encode()
-    (pasta / "indice.json").write_bytes(conteudo_indice)
+    arquivo.gravar_indice(coletado_em)
     # Edição do lote: o conjunto de corpos HTTP lidos, sem a data da coleta (o mesmo dado dá o mesmo SHA).
     sha = hashlib.sha256(json.dumps([(r["url"], r["sha256"]) for r in arquivo.indice]).encode()).hexdigest()
     return LoteDespesa(

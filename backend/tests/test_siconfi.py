@@ -263,4 +263,6 @@ def test_coleta_siconfi_somente_se_mudou(
     segunda = coleta.executar_siconfi(True, buscador())
     assert segunda["situacao"] == "sem_mudanca"
     relatorio = json.loads(Path(str(primeira["relatorio"])).read_text(encoding="utf-8"))
+    bruto = Path(str(primeira["bruto"]))
+    assert (bruto / "indice.json").is_file() and (bruto / "entregas" / "indice.json").is_file()
     assert relatorio["conferencia"]["paga"]["conferidos"] == 1

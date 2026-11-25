@@ -169,7 +169,9 @@ def executar_siconfi(
     try:
         anterior = _relatorio_publicado(configuracao.publicado_dir, "qualidade-siconfi.json")
         anos = siconfi.anos_da_serie()
-        entregas = siconfi.consultar_entregas(siconfi.Arquivo(pasta_bruta / "entregas", buscar), anos)
+        arquivo_entregas = siconfi.Arquivo(pasta_bruta / "entregas", buscar)
+        entregas = siconfi.consultar_entregas(arquivo_entregas, anos)
+        arquivo_entregas.gravar_indice(datetime.now(UTC).isoformat())
         if (
             somente_se_mudou
             and anterior is not None
