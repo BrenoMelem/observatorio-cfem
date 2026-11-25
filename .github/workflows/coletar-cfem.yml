@@ -88,7 +88,7 @@ jobs:
             --origem "https://github.com/$GITHUB_REPOSITORY/releases/download/$ANM/arrecadacao.csv.gz" \
             --referencias data/referencia-cfem-mensal-anm.json \
             --referencias-nacionais data/referencia-cfem-nacional-anm.json \
-            --evidencias docs/registros/evidencias-anm-2026-11-23 > "$RUNNER_TEMP/resumo.json"
+            --evidencias docs/registros/evidencias-anm-2026-11-25 > "$RUNNER_TEMP/resumo.json"
           SAIDA=$?
           cat "$RUNNER_TEMP/resumo.json"
           exit $SAIDA

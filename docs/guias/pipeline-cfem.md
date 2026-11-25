@@ -46,7 +46,12 @@ gh release download "$TAG" --pattern arrecadacao.csv.gz --dir tmp/anm --clobber
 ```bash
 export OBS_DATA_DIR=output/observatorio
 export OBS_PUBLICADO_DIR=output/observatorio/publicado
-uv run --project backend python -m observatorio.coleta cfem   --arquivo tmp/anm/arrecadacao.csv.gz   --origem "https://github.com/$REPO/releases/download/$TAG/arrecadacao.csv.gz"   --referencias data/referencia-cfem-mensal-anm.json   --referencias-nacionais data/referencia-cfem-nacional-anm.json   --evidencias docs/registros/evidencias-anm-2026-11-23
+uv run --project backend python -m observatorio.coleta cfem \
+  --arquivo tmp/anm/arrecadacao.csv.gz \
+  --origem "https://github.com/$REPO/releases/download/$TAG/arrecadacao.csv.gz" \
+  --referencias data/referencia-cfem-mensal-anm.json \
+  --referencias-nacionais data/referencia-cfem-nacional-anm.json \
+  --evidencias docs/registros/evidencias-anm-2026-11-25
 ```
 
 A coleta lê o `.csv.gz` direto e calcula o SHA-256 do CSV descompactado, que identifica a edição da ANM
@@ -110,6 +115,24 @@ docker compose up -d --build
 não existir, o Docker a cria com dono root no Linux, e a coleta seguinte falha por falta de permissão
 (o relatório diz qual pasta e o que fazer).
 
+## Atualizar as referências oficiais
+
+A validação compara a arrecadação com duas tabelas da ANM, independentes do CSV: a do Pará por município
+e mês (`arrecadacao_cfem_muni.aspx`) e a do Brasil por estado, cujo rodapé dá o total nacional
+(`arrecadacao_cfem_ano.aspx`). O script de laboratório baixa as páginas, guarda o HTML original
+comprimido e gera os dois arquivos de `data/`:
+
+```bash
+uv run python -m scripts.cfem.referencias_anm --pasta docs/registros/evidencias-anm-AAAA-MM-DD \
+  --anos 2004-2025 --certificado scripts/cfem/certificados/sectigo-ov-r36.pem
+```
+
+O SHA-256 de cada referência é o do HTML, e não o do `.html.gz`. O script confere se a soma dos meses
+fecha com o total de cada linha e sai com código 1 quando um valor muda em relação à versão anterior dos
+arquivos (a lista vai para a saída). Uma mudança pede investigação antes do commit. `--sem-baixar` só
+extrai de uma pasta já capturada. Depois de gerar, aponte `--evidencias` da coleta e do workflow para a
+pasta nova.
+
 ## Coleta agendada no GitHub Actions
 
 `.github/workflows/coletar-cfem.yml` (ADR-011) roda todo dia às 05:30 UTC, depois do arquivamento das
@@ -152,7 +175,8 @@ Todas são lidas só em `backend/src/observatorio/config.py` (ADR-017).
 
 ## Limites conhecidos
 
-- A referência mensal cobre só os anos já conciliados; a observação sem referência não é publicada.
+- Só é publicada a observação conferida ao centavo com a tabela oficial da ANM. Ficam de fora 2003 (o
+  arquivo não tem janeiro a abril no país inteiro) e o ano corrente, ainda sem referência.
   Ausência de publicação não significa arrecadação zero (RN-CFE-07, RN-CFE-09).
 - A edição do CSV muda quando a ANM republica o arquivo; o SHA-256 do bruto fica no relatório e a
   Release identifica a edição.

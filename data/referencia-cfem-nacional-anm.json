@@ -1,82 +1,178 @@
 [
   {
+    "ano": 2004,
+    "valor": "323055758.46",
+    "documento": "ANM Extra: Arrecadação CFEM por Ano/Estado, Brasil, 2004",
+    "url": "https://sistemas.anm.gov.br/arrecadacao/extra/relatorios/arrecadacao_cfem_ano.aspx?ano=2004",
+    "consultado_em": "2026-11-25",
+    "sha256": "da970fec16339c307810571a5543659128a5feb256a2c4023fd287b76ae9c6a2"
+  },
+  {
+    "ano": 2005,
+    "valor": "405534973.13",
+    "documento": "ANM Extra: Arrecadação CFEM por Ano/Estado, Brasil, 2005",
+    "url": "https://sistemas.anm.gov.br/arrecadacao/extra/relatorios/arrecadacao_cfem_ano.aspx?ano=2005",
+    "consultado_em": "2026-11-25",
+    "sha256": "7bd43de8d3c40afd625715b38d547fee19ba3dd59f8c76bf0755b373309f7d82"
+  },
+  {
+    "ano": 2006,
+    "valor": "465096289.60",
+    "documento": "ANM Extra: Arrecadação CFEM por Ano/Estado, Brasil, 2006",
+    "url": "https://sistemas.anm.gov.br/arrecadacao/extra/relatorios/arrecadacao_cfem_ano.aspx?ano=2006",
+    "consultado_em": "2026-11-25",
+    "sha256": "831b9f9fe84743754fa44fcfeb2d74ea781e28b56dc289eb0c2d55c0c4450d5f"
+  },
+  {
+    "ano": 2007,
+    "valor": "547037764.75",
+    "documento": "ANM Extra: Arrecadação CFEM por Ano/Estado, Brasil, 2007",
+    "url": "https://sistemas.anm.gov.br/arrecadacao/extra/relatorios/arrecadacao_cfem_ano.aspx?ano=2007",
+    "consultado_em": "2026-11-25",
+    "sha256": "3bb5204e40cc85f3f91e9bbd94ee12af57d6e365da39a27c83a0f2319f8ff76e"
+  },
+  {
     "ano": 2008,
     "valor": "853946574.48",
     "documento": "ANM Extra: Arrecadação CFEM por Ano/Estado, Brasil, 2008",
     "url": "https://sistemas.anm.gov.br/arrecadacao/extra/relatorios/arrecadacao_cfem_ano.aspx?ano=2008",
-    "consultado_em": "2026-11-23",
-    "sha256": "e86569cb9421a8b9ce8745860de20f5c5a6f1b0b3aeb25ed7167edb646f8f29f"
+    "consultado_em": "2026-11-25",
+    "sha256": "d67546cbc0c2325714d286210766de0747cf81fce302ff54423e47b2cff93ad5"
   },
   {
     "ano": 2009,
     "valor": "742525168.14",
     "documento": "ANM Extra: Arrecadação CFEM por Ano/Estado, Brasil, 2009",
     "url": "https://sistemas.anm.gov.br/arrecadacao/extra/relatorios/arrecadacao_cfem_ano.aspx?ano=2009",
-    "consultado_em": "2026-11-23",
-    "sha256": "6363ce0bd06a35c2093404998a070f1d611d8bf182622871d45cb847df455b7f"
+    "consultado_em": "2026-11-25",
+    "sha256": "9571962480335f5387a18ed4ce608ec3c07baea98a03d7edef853aafde141dea"
   },
   {
     "ano": 2010,
     "valor": "1083018866.47",
     "documento": "ANM Extra: Arrecadação CFEM por Ano/Estado, Brasil, 2010",
     "url": "https://sistemas.anm.gov.br/arrecadacao/extra/relatorios/arrecadacao_cfem_ano.aspx?ano=2010",
-    "consultado_em": "2026-11-23",
-    "sha256": "c22eae7d8411ff1e83f6f1f69e541a59fb05057703c6ab2a780de50da870495d"
+    "consultado_em": "2026-11-25",
+    "sha256": "39c6ed0c19828560b576969b4f8d859fdbe16c91e824ae1c64110592df50bfaf"
+  },
+  {
+    "ano": 2011,
+    "valor": "1560759649.46",
+    "documento": "ANM Extra: Arrecadação CFEM por Ano/Estado, Brasil, 2011",
+    "url": "https://sistemas.anm.gov.br/arrecadacao/extra/relatorios/arrecadacao_cfem_ano.aspx?ano=2011",
+    "consultado_em": "2026-11-25",
+    "sha256": "ca21d0f9459c6e518fcde79af6d746f1ed419d25980e5f8edabe6d4c00ce19d0"
+  },
+  {
+    "ano": 2012,
+    "valor": "1834953894.84",
+    "documento": "ANM Extra: Arrecadação CFEM por Ano/Estado, Brasil, 2012",
+    "url": "https://sistemas.anm.gov.br/arrecadacao/extra/relatorios/arrecadacao_cfem_ano.aspx?ano=2012",
+    "consultado_em": "2026-11-25",
+    "sha256": "6723382db14005a7815e9e12777d75c79cfff509b99aad438ad9267a2f5a8cc0"
   },
   {
     "ano": 2013,
     "valor": "2376169905.61",
     "documento": "ANM Extra: Arrecadação CFEM por Ano/Estado, Brasil, 2013",
     "url": "https://sistemas.anm.gov.br/arrecadacao/extra/relatorios/arrecadacao_cfem_ano.aspx?ano=2013",
-    "consultado_em": "2026-11-23",
-    "sha256": "14ae9d551bc88cc3daf5fc1d79a0c8d9525e457bd8177a9b5d51322104d7fcd5"
+    "consultado_em": "2026-11-25",
+    "sha256": "2e2692145ba529f66e4e4414a2651a4928e3908676f5a43079947fe804eb7029"
+  },
+  {
+    "ano": 2014,
+    "valor": "1711274547.18",
+    "documento": "ANM Extra: Arrecadação CFEM por Ano/Estado, Brasil, 2014",
+    "url": "https://sistemas.anm.gov.br/arrecadacao/extra/relatorios/arrecadacao_cfem_ano.aspx?ano=2014",
+    "consultado_em": "2026-11-25",
+    "sha256": "30ca0f7f205a3ee7e9a5a3f76bdec2db0331f7f1ed238b7ad9511fc56d1ae273"
   },
   {
     "ano": 2015,
     "valor": "1519373496.09",
     "documento": "ANM Extra: Arrecadação CFEM por Ano/Estado, Brasil, 2015",
     "url": "https://sistemas.anm.gov.br/arrecadacao/extra/relatorios/arrecadacao_cfem_ano.aspx?ano=2015",
-    "consultado_em": "2026-11-23",
-    "sha256": "6c8a72f963b8743d9176bac75953305339299fa56446f427bc3223ea111c4865"
+    "consultado_em": "2026-11-25",
+    "sha256": "548a5546e7cd15de1321e9eff2606052e3417b75a5dc65e924e0d2a647993917"
   },
   {
     "ano": 2016,
     "valor": "1797861813.62",
     "documento": "ANM Extra: Arrecadação CFEM por Ano/Estado, Brasil, 2016",
     "url": "https://sistemas.anm.gov.br/arrecadacao/extra/relatorios/arrecadacao_cfem_ano.aspx?ano=2016",
-    "consultado_em": "2026-11-23",
-    "sha256": "3d6ffa66c7f2b6f68fe3e6de617812dd21fc8a86bf2aa700b5ededa9c5d033f2"
+    "consultado_em": "2026-11-25",
+    "sha256": "4a475d41e158686cecb123aa514ec274fe8e9b918105e3477e17a6575a260b71"
   },
   {
     "ano": 2017,
     "valor": "1838485725.15",
     "documento": "ANM Extra: Arrecadação CFEM por Ano/Estado, Brasil, 2017",
     "url": "https://sistemas.anm.gov.br/arrecadacao/extra/relatorios/arrecadacao_cfem_ano.aspx?ano=2017",
-    "consultado_em": "2026-11-23",
-    "sha256": "3abf64e5f906e0c0ae937b3425bbdd93238d5946560e15c6b540f9031cd1b8fc"
+    "consultado_em": "2026-11-25",
+    "sha256": "eee07a6b114ef49c73ac7cae48f3266aafd00b58cd31bbdb473cab02e9202f77"
   },
   {
     "ano": 2018,
     "valor": "3035655857.05",
     "documento": "ANM Extra: Arrecadação CFEM por Ano/Estado, Brasil, 2018",
     "url": "https://sistemas.anm.gov.br/arrecadacao/extra/relatorios/arrecadacao_cfem_ano.aspx?ano=2018",
-    "consultado_em": "2026-11-23",
-    "sha256": "293ff0c281ef4378c6d7178fbe9382be02701933efb16731b388e3ac7b7bbdaa"
+    "consultado_em": "2026-11-25",
+    "sha256": "905a8ed3df4da18bd83c640517a11e96b5c7f64e7bff33b23763ccfeabb516c5"
+  },
+  {
+    "ano": 2019,
+    "valor": "4503355835.68",
+    "documento": "ANM Extra: Arrecadação CFEM por Ano/Estado, Brasil, 2019",
+    "url": "https://sistemas.anm.gov.br/arrecadacao/extra/relatorios/arrecadacao_cfem_ano.aspx?ano=2019",
+    "consultado_em": "2026-11-25",
+    "sha256": "79e2ea278f886b68e865b328ac3cd8936c7fa791fbafa4fb768a134b28d324e8"
   },
   {
     "ano": 2020,
     "valor": "6079364969.72",
     "documento": "ANM Extra: Arrecadação CFEM por Ano/Estado, Brasil, 2020",
     "url": "https://sistemas.anm.gov.br/arrecadacao/extra/relatorios/arrecadacao_cfem_ano.aspx?ano=2020",
-    "consultado_em": "2026-11-23",
-    "sha256": "684aab42a33d240f8fc0a7082c468339b651874919178725497583f08de73c3c"
+    "consultado_em": "2026-11-25",
+    "sha256": "2fa0f8180657ff20b4a4b2cec90b1d38633825a64f5f4234d4a581272d8f0503"
+  },
+  {
+    "ano": 2021,
+    "valor": "10288397848.36",
+    "documento": "ANM Extra: Arrecadação CFEM por Ano/Estado, Brasil, 2021",
+    "url": "https://sistemas.anm.gov.br/arrecadacao/extra/relatorios/arrecadacao_cfem_ano.aspx?ano=2021",
+    "consultado_em": "2026-11-25",
+    "sha256": "9dc17c58504acc91ee2d736f948b7957fc33fa34997fdb18b13e01891804efca"
+  },
+  {
+    "ano": 2022,
+    "valor": "7018087281.46",
+    "documento": "ANM Extra: Arrecadação CFEM por Ano/Estado, Brasil, 2022",
+    "url": "https://sistemas.anm.gov.br/arrecadacao/extra/relatorios/arrecadacao_cfem_ano.aspx?ano=2022",
+    "consultado_em": "2026-11-25",
+    "sha256": "d920a50acf138574d7a545e6ed0c63a576bb195d2f9d163fa2590df434019f40"
+  },
+  {
+    "ano": 2023,
+    "valor": "6857618952.10",
+    "documento": "ANM Extra: Arrecadação CFEM por Ano/Estado, Brasil, 2023",
+    "url": "https://sistemas.anm.gov.br/arrecadacao/extra/relatorios/arrecadacao_cfem_ano.aspx?ano=2023",
+    "consultado_em": "2026-11-25",
+    "sha256": "bc9c86a0d47a8d2e716097c6d56ac8aceea253acdbe9c100826b7eb8987dce6e"
+  },
+  {
+    "ano": 2024,
+    "valor": "7436575918.50",
+    "documento": "ANM Extra: Arrecadação CFEM por Ano/Estado, Brasil, 2024",
+    "url": "https://sistemas.anm.gov.br/arrecadacao/extra/relatorios/arrecadacao_cfem_ano.aspx?ano=2024",
+    "consultado_em": "2026-11-25",
+    "sha256": "7700c4729dfdb5f64bedb8c8316510e9bbc1988cc468583d7e17eb6b39700e28"
   },
   {
     "ano": 2025,
     "valor": "7910068296.76",
     "documento": "ANM Extra: Arrecadação CFEM por Ano/Estado, Brasil, 2025",
     "url": "https://sistemas.anm.gov.br/arrecadacao/extra/relatorios/arrecadacao_cfem_ano.aspx?ano=2025",
-    "consultado_em": "2026-11-23",
-    "sha256": "f083c0c3e7dbf6c7bbc0555d6634f515d227bcab1abfec8ec4327b537f6f9b81"
+    "consultado_em": "2026-11-25",
+    "sha256": "eac00c4107fe35e07debc9061e3d9520a9c4f2029574e08f28eacb7bf89f486b"
   }
 ]
