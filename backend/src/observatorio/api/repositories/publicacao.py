@@ -56,7 +56,12 @@ def indicadores_publicados(pasta: Path, descricao: DescricaoPacote) -> list[Obse
             if indicador == "cfem_arrecadada" and tabela.schema["valor"] != pl.Decimal(38, 2):
                 raise ValueError("Dinheiro sem precisão decimal")
             linhas = [Observacao.model_validate(linha) for linha in tabela.iter_rows(named=True)]
-            if any(o.indicador != indicador or o.estado_validacao != "validado" for o in linhas):
+            # RN-CFE-06: "provisório" só no último ano publicado (o ano aberto); o resto é validado.
+            ultimo_ano = max((o.ano for o in linhas), default=0)
+            if any(
+                o.indicador != indicador or (o.estado_validacao != "validado" and o.ano != ultimo_ano)
+                for o in linhas
+            ):
                 raise ValueError("Indicador ou estado inválido")
             chaves = [(o.municipio_id, o.ano, o.mes) for o in linhas]
             if len(chaves) != len(set(chaves)):

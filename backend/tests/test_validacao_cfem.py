@@ -23,7 +23,7 @@ def test_sem_referencia_nao_homologa(tmp_path: Path) -> None:
 
 
 def test_referencia_mensal_nao_fecha_ano(tmp_path: Path) -> None:
-    """RN-CFE-05/06, RN-VPU-12: um centavo bloqueia; mês isolado não fecha ano."""
+    """RN-CFE-05/06, RN-VPU-12: um centavo bloqueia; mês isolado não fecha ano e sai provisório."""
     from observatorio.validacao.cfem import Referencia, validar
 
     lote = converter(arquivo_sintetico(tmp_path), tmp_path / "bruto")
@@ -37,7 +37,9 @@ def test_referencia_mensal_nao_fecha_ano(tmp_path: Path) -> None:
         consultado_em=date(2026, 11, 23),
         sha256="a" * 64,
     )
-    assert not validar(lote, [ref]).aprovado  # o arquivo nacional tem só um mês
+    aberto = validar(lote, [ref])  # o arquivo nacional tem só um mês: o ano está aberto
+    assert aberto.aprovado and aberto.observacoes[0].estado_validacao == "provisório"
+    assert aberto.relatorio["ano_aberto"] == 2025
     lote = replace(lote, registros_mensais={f"2025:{m}": 100 for m in range(1, 13)})
     resultado = validar(lote, [ref])
     assert resultado.aprovado and len(resultado.observacoes) == 1
@@ -143,3 +145,47 @@ def test_captura_html_gz_corrompida_falha(tmp_path: Path) -> None:
     (tmp_path / "anm-pa-2025.html.gz").write_bytes(b"nao e gzip")
     with pytest.raises(ValueError, match="ilegível"):
         conferir_evidencias([_referencia_2025("a" * 64)], [], tmp_path)
+
+
+def test_ano_aberto_mes_abaixo_do_volume_fica_fora_sem_reprovar(tmp_path: Path) -> None:
+    """RN-CFE-06: no último ano, mês conferido sai provisório e mês abaixo de 50% da mediana fica fora."""
+    from observatorio.validacao.cfem import validar
+
+    lote = converter(arquivo_sintetico(tmp_path), tmp_path / "bruto")
+    janeiro = lote.observacoes[0]
+    fevereiro = janeiro.model_copy(update={"mes": 2})
+    historico = {f"2024:{m}": 100 for m in range(1, 13)}
+    lote = replace(
+        lote,
+        observacoes=(janeiro, fevereiro),
+        registros_mensais={**historico, "2025:1": 100, "2025:2": 10, "2025:3": 1},
+    )
+    refs = [_referencia_2025("a" * 64).model_copy(update={"mes": m, "valor": janeiro.valor}) for m in (1, 2)]
+
+    resultado = validar(lote, refs)
+
+    assert resultado.aprovado
+    assert [(o.mes, o.estado_validacao) for o in resultado.observacoes] == [(1, "provisório")]
+    assert resultado.relatorio["aguardando_volume"] == ["1505536:2025:2"]
+    ausentes = resultado.relatorio["meses_nacionais_ausentes"]
+    assert isinstance(ausentes, dict) and ausentes["2025"] == []  # abril em diante não aconteceu
+
+
+def test_ano_fechado_continua_validado(tmp_path: Path) -> None:
+    """RN-CFE-06: com os 12 meses acima do volume, o último ano está fechado e sai validado."""
+    from observatorio.validacao.cfem import validar
+
+    lote = converter(arquivo_sintetico(tmp_path), tmp_path / "bruto")
+    lote = replace(
+        lote,
+        registros_mensais={
+            **{f"2024:{m}": 100 for m in range(1, 13)},
+            **{f"2025:{m}": 90 for m in range(1, 13)},
+        },
+    )
+    ref = _referencia_2025("a" * 64).model_copy(update={"valor": lote.observacoes[0].valor})
+
+    resultado = validar(lote, [ref])
+
+    assert resultado.relatorio["ano_aberto"] is None
+    assert resultado.observacoes[0].estado_validacao == "validado"

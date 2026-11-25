@@ -11,7 +11,7 @@ Retrato da ampliação das referências da validação da arrecadação (pendên
   ligada, com o certificado intermediário `scripts/cfem/certificados/sectigo-ov-r36.pem`. As 46 páginas
   responderam HTTP 200.
 - **Arquivo:** o corpo HTTP original de cada página, comprimido, em
-  [evidencias-anm-2026-11-25/](evidencias-anm-2026-11-25/) (44 arquivos, 832 KB; as duas páginas de 2003
+  `docs/registros/evidencias-anm-2026-11-25/`, depois movida para [data/evidencias-anm/](../../data/evidencias-anm/) para receber as atualizações mensais (44 arquivos, 832 KB; as duas páginas de 2003
   foram retiradas, ver abaixo). O SHA-256 registrado em cada referência é o do HTML, e não o do `.gz`.
   Isso resolve o limite das capturas de 23/11/2026, que eram extrações em Markdown e não o corpo HTTP.
 - **Conferência interna:** em cada linha extraída, a soma dos 12 meses fecha com a coluna Total da página.

@@ -50,7 +50,10 @@ class Observacao(BaseModel):
         description="Distingue zero real de ausência; ausência nunca vira zero (RN-MOD-12)."
     )
     estado_validacao: Literal["validado", "provisório"] = Field(
-        description="A camada publicada só entrega `validado` (RN-VPU-10)."
+        description=(
+            "`validado` em ano fechado; `provisório` nos meses conferidos do ano ainda aberto, que ainda não "
+            "somam total anual (RN-CFE-06, RN-VPU-10)."
+        )
     )
     fonte: str = Field(description="Fonte do dado.")
     edicao_fonte: str | None = Field(

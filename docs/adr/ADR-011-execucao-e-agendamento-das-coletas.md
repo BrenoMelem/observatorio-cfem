@@ -53,3 +53,5 @@ Primeira coleta de produção agendada: `.github/workflows/coletar-cfem.yml` (ar
 - **Encadeamento:** eventos criados com o `GITHUB_TOKEN`, como a Release do arquivamento da ANM, não iniciam outros workflows, exceto `workflow_dispatch` e `repository_dispatch` (mesma página). Por isso a coleta é agendada uma vez por dia e só trabalha quando há edição nova.
 
 A coleta da CFEM com o arquivo de 25/11/2026 (310 MB descompactado) levou menos de um minuto numa máquina local, bem abaixo desses limites. A seção `schedule` foi lida por um resumo da página, não na íntegra; convém conferi-la de novo na próxima revisão. A decisão não muda.
+
+Segundo workflow, também de 25/11/2026: `.github/workflows/atualizar-referencias-anm.yml` captura uma vez por mês as tabelas oficiais da ANM que servem de referência à validação e, quando algo muda, abre um PR para revisão em vez de aplicar a mudança (decisão do mantenedor de 25/11/2026). São 45 requisições por mês ao servidor da ANM, uma por vez.

@@ -129,7 +129,7 @@ def dimensao_csv(
     "/dimensoes/{dimensao}",
     response_model=RespostaDimensao,
     tags=["dimensoes"],
-    summary="Observações validadas de uma dimensão",
+    summary="Observações conferidas de uma dimensão",
     responses=ERROS,
 )
 def dimensao(
@@ -139,7 +139,9 @@ def dimensao(
     ano_fim: int | None = ANO_FIM,
     periodicidade: Literal["mensal", "anual"] = PERIODICIDADE,
 ) -> RespostaDimensao:
-    """Devolve só observações validadas do pacote publicado (RN-ENT-01, RN-VPU-10).
+    """Devolve só observações conferidas do pacote publicado (RN-ENT-01, RN-VPU-10).
+
+    No ano ainda aberto, os meses conferidos saem com `estado_validacao` = `provisório` (RN-CFE-06).
 
     Indicador sem publicação aparece em `status` com o motivo, sem observação inventada; temas ainda sem
     indicador aparecem em `lacunas`. Filtro inválido (`municipio_id` sem 7 dígitos, `ano_inicio` maior que

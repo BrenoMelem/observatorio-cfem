@@ -166,7 +166,12 @@ def consultar(
         and (ano_inicio is None or o.ano >= ano_inicio)
         and (ano_fim is None or o.ano <= ano_fim)
     ]
-    notas = ["Somente observações validadas da camada publicada; ausência não equivale a zero."]
+    notas = [
+        (
+            "Somente observações conferidas com a fonte oficial; no ano ainda aberto saem como provisórias "
+            "(RN-CFE-06). Ausência não equivale a zero."
+        )
+    ]
     if periodicidade == "anual":
         linhas, avisos = agregar_anos(linhas)
         notas.extend(avisos)

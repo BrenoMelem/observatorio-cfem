@@ -70,7 +70,7 @@ A população e a CFEM arrecadada só são expostas quando existe publicação v
 O passo a passo (obter o CSV da Release, coletar, subir a API, abrir o Swagger e a demo) e as variáveis de ambiente estão no guia [pipeline-cfem.md](../docs/guias/pipeline-cfem.md). Em resumo, da raiz:
 
 ```bash
-uv run --project backend python -m observatorio.coleta cfem --arquivo tmp/CFEM_Arrecadacao.csv --referencias data/referencia-cfem-mensal-anm.json --referencias-nacionais data/referencia-cfem-nacional-anm.json --evidencias docs/registros/evidencias-anm-2026-11-25
+uv run --project backend python -m observatorio.coleta cfem --arquivo tmp/CFEM_Arrecadacao.csv --referencias data/referencia-cfem-mensal-anm.json --referencias-nacionais data/referencia-cfem-nacional-anm.json --evidencias data/evidencias-anm
 uv run --project backend uvicorn observatorio.api.main:app   # Swagger em http://127.0.0.1:8000/docs
 ```
 

@@ -23,7 +23,7 @@
 <section class="painel linha canaa"><div class="muted">Canaã dos Carajás · último período exibido</div><div id="valor-canaa" class="valor">Sem observação</div><div id="periodo-canaa" class="muted"></div></section></div>
 <section class="painel"><h2>Arrecadação da CFEM</h2><p class="muted">Reais nominais, sem correção pela inflação. Arrecadação não é o repasse recebido pela prefeitura.</p><div id="grafico" role="img" aria-label="Gráfico comparativo; os mesmos valores estão na tabela abaixo"></div>
 <details><summary>Ver os valores em tabela</summary><div class="tabela"><table><thead><tr><th>Município</th><th>Período</th><th>Valor (R$)</th><th>Estado</th></tr></thead><tbody id="valores"></tbody></table></div></details></section>
-<section class="painel"><h2>Origem e limites dos dados</h2><div id="proveniencia"></div><ul id="notas"></ul><p class="muted">Somente dados validados. Ausência de publicação não significa arrecadação zero. Anos incompletos não têm total anual. Não há dados fictícios neste gráfico.</p></section>
+<section class="painel"><h2>Origem e limites dos dados</h2><div id="proveniencia"></div><ul id="notas"></ul><p class="muted">Somente dados conferidos com a tabela oficial da ANM; os meses do ano ainda aberto aparecem pontilhados, como provisórios. Ausência de publicação não significa arrecadação zero. Anos incompletos não têm total anual. Não há dados fictícios neste gráfico.</p></section>
 <footer>Demonstração técnica separada do front oficial. As regras e o relatório de qualidade acompanham a entrega.</footer>
 </main>
 <script>
@@ -36,17 +36,18 @@ async function consultar(event){if(event)event.preventDefault();el('carregar').d
  try {if(Number(el('inicio').value)>Number(el('fim').value))throw Error('O ano inicial deve ser menor ou igual ao final.');
  const params=new URLSearchParams({ano_inicio:el('inicio').value,ano_fim:el('fim').value,periodicidade:el('periodicidade').value});
  const r=await fetch(base()+'/api/v1/dimensoes/economica?'+params,{signal:AbortSignal.timeout(15000)});if(!r.ok)throw Error('Consulta indisponível (HTTP '+r.status+'). Confira o pacote e a API.');
- const p=await r.json(), dados=p.dados.filter(o=>o.indicador==='cfem_arrecadada'&&o.estado_validacao==='validado'&&nomes[o.municipio_id]);
+ const p=await r.json(), dados=p.dados.filter(o=>o.indicador==='cfem_arrecadada'&&['validado','provisório'].includes(o.estado_validacao)&&nomes[o.municipio_id]);
  el('csv').href=base()+'/api/v1/dimensoes/economica.csv?'+params;
  el('estado').textContent=dados.length?dados.length+' observações validadas no recorte. As lacunas são preservadas.':'Sem observações validadas neste recorte. Não há valores a desenhar.';
  el('valores').replaceChildren(); for(const o of dados){const tr=document.createElement('tr');for(const v of [o.municipio_nome,periodo(o),dinheiro(o.valor),o.estado_validacao]){const td=document.createElement('td');td.textContent=v;tr.append(td);}el('valores').append(tr);}
  const meta=p.metadados.cfem_arrecadada; el('proveniencia').textContent='Fonte: '+meta.fonte+'\nEdição da fonte (SHA-256): '+(meta.edicao||'não disponível')+'\nVersão do pacote: '+p.versao_dados+'\nMétodo: '+meta.metodo+'\nLimitações: '+meta.limitacoes;
  el('proveniencia').style.whiteSpace='pre-line';el('notas').replaceChildren();for(const n of p.notas){const li=document.createElement('li');li.textContent=n;el('notas').append(li);}
  const series=[]; for(const [codigo,nome] of Object.entries(nomes)){const pontos=dados.filter(o=>o.municipio_id===codigo).sort((a,b)=>a.ano-b.ano||(a.mes||0)-(b.mes||0));
- const ultimo=pontos.at(-1), sufixo=codigo==='1505536'?'parauapebas':'canaa';el('valor-'+sufixo).textContent=ultimo?dinheiro(ultimo.valor):'Sem observação';el('periodo-'+sufixo).textContent=ultimo?periodo(ultimo)+' · validado · atualização '+(ultimo.atualizado_em||'não informada'):'';
- const mapa=new Map(pontos.map(o=>[(o.ano+'-'+String(o.mes||1).padStart(2,'0')),o]));const x=[],y=[],text=[];
- for(let ano=Number(el('inicio').value);ano<=Number(el('fim').value);ano++){for(let mes=1;mes<=(el('periodicidade').value==='anual'?1:12);mes++){const k=ano+'-'+String(mes).padStart(2,'0'),o=mapa.get(k);x.push(k+'-01');y.push(o?Number(o.valor):null);text.push(o?periodo(o)+' · '+dinheiro(o.valor)+' · validado':'Sem publicação');}}
- series.push({x,y,text,name:nome,type:'scatter',mode:'lines+markers',connectgaps:false,line:{color:cores[codigo],width:3},hovertemplate:'%{text}<extra>%{fullData.name}</extra>'});}
+ const ultimo=pontos.at(-1), sufixo=codigo==='1505536'?'parauapebas':'canaa';el('valor-'+sufixo).textContent=ultimo?dinheiro(ultimo.valor):'Sem observação';el('periodo-'+sufixo).textContent=ultimo?periodo(ultimo)+' · '+ultimo.estado_validacao+' · atualização '+(ultimo.atualizado_em||'não informada'):'';
+ const mapa=new Map(pontos.map(o=>[(o.ano+'-'+String(o.mes||1).padStart(2,'0')),o]));const x=[],y=[],text=[],yp=[];
+ for(let ano=Number(el('inicio').value);ano<=Number(el('fim').value);ano++){for(let mes=1;mes<=(el('periodicidade').value==='anual'?1:12);mes++){const k=ano+'-'+String(mes).padStart(2,'0'),o=mapa.get(k);x.push(k+'-01');const prov=o&&o.estado_validacao==='provisório';y.push(o&&!prov?Number(o.valor):null);yp.push(prov?Number(o.valor):null);text.push(o?periodo(o)+' · '+dinheiro(o.valor)+' · '+o.estado_validacao:'Sem publicação');}}
+ series.push({x,y,text,name:nome,type:'scatter',mode:'lines+markers',connectgaps:false,line:{color:cores[codigo],width:3},hovertemplate:'%{text}<extra>%{fullData.name}</extra>'});
+ if(yp.some(v=>v!==null))series.push({x,y:yp,text,name:nome+' (provisório)',type:'scatter',mode:'lines+markers',connectgaps:false,line:{color:cores[codigo],width:2,dash:'dot'},marker:{symbol:'circle-open',size:8},hovertemplate:'%{text}<extra>%{fullData.name}</extra>'});}
  if(window.Plotly){await Plotly.react('grafico',series,{paper_bgcolor:'white',plot_bgcolor:'white',font:{family:'system-ui',color:'#173b35'},margin:{t:20,r:20,b:60,l:85},xaxis:{title:'Período',type:'date'},yaxis:{title:'R$ nominais',rangemode:'tozero'},legend:{orientation:'h',y:1.15}},{responsive:true,displayModeBar:false});}else{el('grafico').textContent='Biblioteca do gráfico indisponível. Consulte os valores na tabela.';}
  }catch(e){el('estado').textContent=e.message;el('grafico').replaceChildren();el('valores').replaceChildren();for(const s of ['parauapebas','canaa']){el('valor-'+s).textContent='Indisponível';el('periodo-'+s).textContent='';}}
  finally{el('carregar').disabled=false;}}
