@@ -50,6 +50,11 @@ async function consultar(event){if(event)event.preventDefault();el('carregar').d
  if(window.Plotly){await Plotly.react('grafico',series,{paper_bgcolor:'white',plot_bgcolor:'white',font:{family:'system-ui',color:'#173b35'},margin:{t:20,r:20,b:60,l:85},xaxis:{title:'Período',type:'date'},yaxis:{title:'R$ nominais',rangemode:'tozero'},legend:{orientation:'h',y:1.15}},{responsive:true,displayModeBar:false});}else{el('grafico').textContent='Biblioteca do gráfico indisponível. Consulte os valores na tabela.';}
  }catch(e){el('estado').textContent=e.message;el('grafico').replaceChildren();el('valores').replaceChildren();for(const s of ['parauapebas','canaa']){el('valor-'+s).textContent='Indisponível';el('periodo-'+s).textContent='';}}
  finally{el('carregar').disabled=false;}}
+// Endereço da API: ?api=http://host:porta na URL, senão o último usado neste navegador, senão o padrão do campo.
+const CHAVE_API='observatorio-cfem-api';
+(()=>{let salvo=null;try{salvo=localStorage.getItem(CHAVE_API);}catch(e){}
+ const pedido=new URLSearchParams(location.search).get('api')||salvo;if(pedido)el('api').value=pedido;})();
+el('filtros').addEventListener('submit',()=>{try{localStorage.setItem(CHAVE_API,el('api').value);}catch(e){}});
 el('filtros').addEventListener('submit',consultar);
 window.addEventListener('load',()=>consultar());
 </script>

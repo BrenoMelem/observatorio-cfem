@@ -89,7 +89,9 @@ de mudar uma rota ou um esquema, regrave-a de dentro de `backend/` com
 python -m http.server 8765 --directory backend/demo
 ```
 
-Abra `http://127.0.0.1:8765/grafico-cfem.html` e informe o endereço da API. A demo é separada do
+Abra `http://127.0.0.1:8765/grafico-cfem.html?api=http://127.0.0.1:8000`, trocando o valor de `api` pelo
+endereço da API. Sem `?api=`, a demo usa o último endereço consultado naquele navegador ou o padrão
+`http://127.0.0.1:8000`. A origem da demo precisa estar em `OBS_CORS_ORIGENS`. A demo é separada do
 front oficial e serve para conferir a cadeia no navegador.
 
 ### Com Docker
