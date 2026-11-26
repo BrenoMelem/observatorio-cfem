@@ -1,10 +1,12 @@
 # Coleta, valida e publica a arrecadação da CFEM (ADR-011; pacote como Release pelo ADR-015, nota de 19/11/2026).
 # Lê o .csv.gz da Release anm-* mais recente, gravada por arquivar-anm.yml, e roda observatorio.coleta. Lote
-# aprovado: o pacote publicado vai para uma Release pacote-cfem-*. Falha na coleta ou na validação abre uma
-# issue, ou comenta na que já estiver aberta. Guia: docs/guias/pipeline-cfem.md.
+# aprovado: o pacote parcial da CFEM vai para uma Release fonte-cfem-* e publicar-pacote.yml monta o pacote.
+# Falha na coleta ou na validação abre uma issue, ou comenta na que já estiver aberta. Guia: docs/guias/pipeline-cfem.md.
 #
 # Agendado, e não disparado pela Release do arquivamento: eventos criados com o GITHUB_TOKEN não iniciam outros
-# workflows. Só trabalha quando há edição nova da ANM sem pacote, salvo com "forcar".
+# workflows. Só trabalha quando há edição nova da ANM sem pacote, salvo com "forcar". Parte do pacote parcial
+# anterior da própria CFEM (fonte-cfem-*; na falta dele, o antigo pacote-cfem-*); a montagem com as outras fontes
+# é do publicar-pacote.yml, chamado ao fim (workflow_call) só se o pacote da CFEM foi aprovado.
 name: Coletar CFEM
 
 on:
@@ -29,6 +31,8 @@ jobs:
   coletar:
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    outputs:
+      publicar: ${{ steps.release.outputs.publicar }}
     env:
       GH_TOKEN: ${{ github.token }}
       FORCAR: ${{ inputs.forcar }}
@@ -45,13 +49,16 @@ jobs:
         run: |
           ANM=$(gh release list --limit 100 --json tagName --jq '[.[] | select(.tagName | startswith("anm-"))][0].tagName // empty')
           if [ -z "$ANM" ]; then echo "::error::Nenhuma Release anm-* encontrada"; exit 1; fi
-          ANTERIOR=$(gh release list --limit 100 --json tagName --jq '[.[] | select(.tagName | startswith("pacote-cfem-"))][0].tagName // empty')
+          ANTERIOR=$(gh release list --limit 100 --json tagName --jq '[.[] | select(.tagName | startswith("fonte-cfem-"))][0].tagName // empty')
+          if [ -z "$ANTERIOR" ]; then
+            ANTERIOR=$(gh release list --limit 100 --json tagName --jq '[.[] | select(.tagName | startswith("pacote-cfem-"))][0].tagName // empty')
+          fi
           FEITO=false
           if [ -n "$ANTERIOR" ] && gh release view "$ANTERIOR" --json body --jq .body | grep -qF "Edição da ANM: $ANM"; then
             FEITO=true
           fi
           if [ "$FORCAR" = "true" ]; then FEITO=false; fi
-          echo "Edição da ANM: $ANM; pacote anterior: ${ANTERIOR:-nenhum}; já processada: $FEITO"
+          echo "Edição da ANM: $ANM; pacote CFEM anterior: ${ANTERIOR:-nenhum}; já processada: $FEITO"
           {
             echo "anm=$ANM"
             echo "anterior=$ANTERIOR"
@@ -101,7 +108,8 @@ jobs:
           path: ${{ runner.temp }}/dados/qualidade/
           if-no-files-found: ignore
 
-      - name: Publicar o pacote numa Release
+      - name: Publicar o pacote parcial numa Release
+        id: release
         if: steps.edicao.outputs.feito != 'true'
         env:
           ANM: ${{ steps.edicao.outputs.anm }}
@@ -109,22 +117,23 @@ jobs:
           cd "$RUNNER_TEMP"
           VERSAO=$(jq -r .versao_pacote resumo.json)
           RELATORIO=$(jq -r .relatorio resumo.json)
-          TAG="pacote-cfem-$(date -u +%Y-%m-%d-%H%M)"
+          TAG="fonte-cfem-$(date -u +%Y-%m-%d-%H%M)"
           tar -czf publicado.tar.gz -C "$OBS_PUBLICADO_DIR" .
           cp "$RELATORIO" qualidade-cfem.json
           {
-            echo "Pacote publicado da arrecadação da CFEM, aprovado na validação (RN-VPU-01)."
+            echo "Pacote parcial da arrecadação da CFEM, aprovado na validação (RN-VPU-01)."
             echo
             echo "- Edição da ANM: $ANM"
             echo "- Versão do pacote: \`$VERSAO\`"
             echo "- Linhas lidas: $(jq -r .linhas resumo.json); repetições integrais no recorte: $(jq -r .duplicatas resumo.json)"
             echo "- Execução: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
             echo
-            echo "Para servir: extraia publicado.tar.gz na pasta de OBS_PUBLICADO_DIR (docs/guias/pipeline-cfem.md)."
+            echo "Só a CFEM; a API serve o pacote montado por publicar-pacote.yml (docs/guias/pipeline-cfem.md)."
           } > notas.md
           gh release create "$TAG" publicado.tar.gz qualidade-cfem.json \
             --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --latest=false \
-            --title "Pacote CFEM de $TAG" --notes-file notas.md
+            --title "Pacote parcial da CFEM de $TAG" --notes-file notas.md
+          echo "publicar=true" >> "$GITHUB_OUTPUT"
 
       - name: Abrir ou comentar a issue de falha
         if: failure()
@@ -156,3 +165,11 @@ jobs:
           else
             gh issue create --title "$TITULO" --body-file "$RUNNER_TEMP/issue.md"
           fi
+
+  publicar:
+    needs: coletar
+    if: needs.coletar.outputs.publicar == 'true'
+    permissions:
+      contents: write
+      issues: write
+    uses: ./.github/workflows/publicar-pacote.yml

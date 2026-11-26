@@ -1,4 +1,4 @@
-"""Observação comum (RN-MOD-03/12); dinheiro decimal (RN-CFE-11)."""
+"""Observação comum (RN-MOD-03/12); dinheiro decimal (RN-CFE-11); categoria opcional (RN-MOD-03)."""
 
 import math
 from decimal import Decimal
@@ -61,11 +61,25 @@ class Observacao(BaseModel):
     )
     atualizado_em: str | None = Field(description="Data ISO 8601 da coleta.")
     versao_tratamento: str = Field(description="Versão do tratamento que gerou a observação.")
+    categoria: str | None = Field(
+        default=None,
+        description=(
+            "Código da categoria dentro do indicador, quando houver (RN-MOD-03, exceção de 25/11/2026): na "
+            "despesa por função, `12` (função), `12.361` (subfunção), `12.demais` (Demais Subfunções) ou "
+            "`total`. Nulo nos indicadores sem categoria."
+        ),
+        examples=["12.361"],
+    )
+    categoria_nome: str | None = Field(
+        default=None,
+        description="Nome da categoria como a fonte o publica, por exemplo `Ensino Fundamental`.",
+        examples=["Ensino Fundamental"],
+    )
 
     @model_validator(mode="after")
     def conferir_valor(self) -> "Observacao":
-        if self.indicador == "cfem_arrecadada" and self.valor is not None:
-            self.valor = Decimal(str(self.valor))
+        if self.unidade.startswith("BRL") and self.valor is not None:
+            self.valor = Decimal(str(self.valor))  # RN-CFE-11: dinheiro nunca em float
         if self.valor is not None and not math.isfinite(self.valor):
             raise ValueError("Valor deve ser finito")
         if self.natureza_valor == "informado" and (self.valor is None or self.valor == 0):
@@ -76,4 +90,6 @@ class Observacao(BaseModel):
             raise ValueError("Valor indisponível deve ser nulo")
         if self.mes is not None and not 1 <= self.mes <= 12:
             raise ValueError("Mês inválido")
+        if (self.categoria is None) != (self.categoria_nome is None):
+            raise ValueError("Categoria e nome da categoria vêm juntos")
         return self

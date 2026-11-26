@@ -1,0 +1,60 @@
+{
+ "items": [
+  {
+   "exercicio": 2024,
+   "cod_ibge": 1505635,
+   "populacao": 12794,
+   "instituicao": "Câmara de Vereadores de Piçarra - PA",
+   "entregavel": "MSC Agregada",
+   "periodo": 12,
+   "periodicidade": "M",
+   "status_relatorio": null,
+   "data_status": "2025-02-02T11:45:05Z",
+   "forma_envio": "XML",
+   "tipo_relatorio": null
+  },
+  {
+   "exercicio": 2024,
+   "cod_ibge": 1505635,
+   "populacao": 12794,
+   "instituicao": "Prefeitura Municipal de Piçarra - PA",
+   "entregavel": "MSC Agregada",
+   "periodo": 12,
+   "periodicidade": "M",
+   "status_relatorio": null,
+   "data_status": "2025-02-02T11:45:04Z",
+   "forma_envio": "XML",
+   "tipo_relatorio": null
+  },
+  {
+   "exercicio": 2024,
+   "cod_ibge": 1505635,
+   "populacao": 12794,
+   "instituicao": "Prefeitura Municipal de Piçarra - PA",
+   "entregavel": "Balanço Anual (DCA)",
+   "periodo": 1,
+   "periodicidade": "A",
+   "status_relatorio": "HO",
+   "data_status": "2025-05-13T22:31:01Z",
+   "forma_envio": "M",
+   "tipo_relatorio": "P"
+  },
+  {
+   "exercicio": 2024,
+   "cod_ibge": 1505635,
+   "populacao": 12794,
+   "instituicao": "Prefeitura Municipal de Piçarra - PA",
+   "entregavel": "Relatório Resumido de Execução Orçamentária",
+   "periodo": 6,
+   "periodicidade": "B",
+   "status_relatorio": "HO",
+   "data_status": "2025-02-15T22:30:13Z",
+   "forma_envio": "P",
+   "tipo_relatorio": "P"
+  }
+ ],
+ "hasMore": false,
+ "limit": 5000,
+ "offset": 0,
+ "count": 4
+}

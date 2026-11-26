@@ -2,6 +2,7 @@
 
 **Status:** proposta técnica para revisão do mantenedor; não altera os ADRs aceitos nem cria regra de negócio.
 **Data:** 21/11/2026.
+**Nota de 26/11/2026:** a primeira fonte (CFEM) foi implementada em 24/11/2026; o modelo comum está em `modelo/observacao.py` e `modelo/lote.py`, o relatório em `validacao/`, e as conferências deste documento estão nos testes do `backend/`.
 
 Este registro detalha dois pontos que os ADR-017 e ADR-018 deixaram para os PRs de implementação. As regras de negócio aplicáveis continuam em `docs/regras-de-negocio/`; em especial, RN-VPU-01, RN-VPU-03 e RN-VPU-04 governam a validação e a publicação.
 

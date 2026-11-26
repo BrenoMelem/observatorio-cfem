@@ -3,6 +3,14 @@
 Uso: python -m observatorio.coleta cfem --arquivo CSV --referencias referencias.json
 O arquivo pode ser o `.csv.gz` de uma Release `anm-*`; nesse caso, `--origem` registra a URL dele.
 Sem referência independente, gera relatório de reprovação e preserva publicação.
+
+Uso: python -m observatorio.coleta siconfi [--somente-se-mudou]
+Baixa a despesa por função da DCA e as referências (RREO, MSC) da API do SICONFI e publica só o que
+coincide (RN-FNT-04). Com `--somente-se-mudou`, para antes da coleta se o extrato de entregas for igual
+ao do relatório publicado (RN-TMP-02, exceção de 25/11/2026).
+
+Uso: python -m observatorio.coleta montar --parcial PASTA [--parcial PASTA ...]
+Junta os pacotes parciais aprovados de cada fonte no pacote publicado (RN-VPU-03), sem coletar nada.
 """
 
 import argparse
@@ -15,9 +23,12 @@ from pathlib import Path
 from uuid import uuid4
 
 from observatorio import config
+from observatorio.fontes import siconfi
 from observatorio.fontes.cfem_arrecadacao import baixar, converter, hash_arquivo
 from observatorio.modelo.pacote import DescricaoPacote
+from observatorio.publicacao.montagem import montar
 from observatorio.publicacao.pacote import publicar
+from observatorio.validacao import siconfi as validacao_siconfi
 from observatorio.validacao.cfem import Referencia, ReferenciaNacional, validar
 
 
@@ -136,30 +147,144 @@ def executar(
     }
 
 
+def _relatorio_publicado(publicado: Path, nome: str) -> dict[str, object] | None:
+    """O relatório de qualidade da versão publicada, para comparar a coleta nova com a anterior."""
+    ponteiro = publicado / "pacote.json"
+    if not ponteiro.exists():
+        return None
+    pacote = DescricaoPacote.model_validate_json(ponteiro.read_bytes())
+    caminho = publicado / "versoes" / pacote.versao / nome
+    if not caminho.exists():
+        return None
+    dados = json.loads(caminho.read_bytes())
+    return dados if isinstance(dados, dict) else None
+
+
+def executar_siconfi(
+    somente_se_mudou: bool = False, buscar: siconfi.Buscar = siconfi.buscar_http
+) -> dict[str, object]:
+    """RN-FNT-04 e RN-VPU-06: coleta, confere e publica a despesa por função; relatório sempre gravado."""
+    configuracao = config.carregar()
+    qualidade = configuracao.dados_dir / "qualidade"
+    qualidade.mkdir(parents=True, exist_ok=True)
+    execucao = datetime.now(UTC).strftime("%Y%m%dT%H%M%S") + "-" + uuid4().hex[:8]
+    relatorio: dict[str, object] = {"execucao": execucao, "situacao": "reprovado"}
+    pasta_bruta = configuracao.dados_dir / "bruto" / "siconfi" / execucao
+    try:
+        anterior = _relatorio_publicado(configuracao.publicado_dir, "qualidade-siconfi.json")
+        anos = siconfi.anos_da_serie()
+        arquivo_entregas = siconfi.Arquivo(pasta_bruta / "entregas", buscar)
+        entregas = siconfi.consultar_entregas(arquivo_entregas, anos)
+        arquivo_entregas.gravar_indice(datetime.now(UTC).isoformat())
+        if (
+            somente_se_mudou
+            and anterior is not None
+            and anterior.get("entregas") == validacao_siconfi.resumo_entregas(entregas)
+        ):
+            relatorio.update(
+                situacao="sem_mudanca",
+                motivo="Extrato de entregas igual ao do pacote publicado; nada a coletar (RN-TMP-04)",
+            )
+        else:
+            lote = siconfi.coletar(pasta_bruta, buscar, anos, entregas=entregas)
+            resultado = validacao_siconfi.validar(lote, anterior)
+            relatorio.update(resultado.relatorio)
+            relatorio["bruto"] = str(pasta_bruta)
+            if resultado.aprovado:
+                retificados = frozenset(
+                    (chave.split(":")[0], int(chave.split(":")[1]))
+                    for chave in validacao_siconfi.entregas_alteradas(lote.entregas, anterior)
+                )
+                versao = publicar(
+                    resultado,
+                    configuracao.publicado_dir,
+                    configuracao.manifesto,
+                    qualidade="qualidade-siconfi.json",
+                    retificados=retificados,
+                    indicadores_da_fonte=frozenset(siconfi.INDICADORES.values()),
+                )
+                relatorio["versao_pacote"] = versao
+            else:
+                relatorio["pendencia"] = "Revisar erros; publicação anterior preservada (RN-VPU-03)"
+    except (OSError, ValueError) as erro:
+        relatorio.update(
+            situacao="reprovado",
+            erros=[str(erro)],
+            pendencia="Coleta falhou; publicação anterior preservada (RN-VPU-03)",
+        )
+    finally:
+        caminho_relatorio = qualidade / f"siconfi-{execucao}.json"
+        caminho_relatorio.write_text(json.dumps(relatorio, ensure_ascii=False, indent=2), encoding="utf-8")
+    return {
+        "situacao": relatorio["situacao"],
+        "relatorio": str(caminho_relatorio),
+        "bruto": str(pasta_bruta),
+        "linhas": relatorio.get("linhas_lidas"),
+        "conferencia": relatorio.get("conferencia"),
+        "versao_pacote": relatorio.get("versao_pacote"),
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("fonte", choices=["cfem"])
-    parser.add_argument("--arquivo", type=Path, help="CSV ou .csv.gz local; omitido: GET na ANM")
+    parser.add_argument("fonte", choices=["cfem", "siconfi", "montar"])
+    parser.add_argument("--arquivo", type=Path, help="CFEM: CSV ou .csv.gz local; omitido: GET na ANM")
     parser.add_argument(
-        "--origem", help="De onde veio o --arquivo, por exemplo a URL do arquivo na Release anm-* (RN-FON-13)"
+        "--origem", help="CFEM: de onde veio o --arquivo, por exemplo a URL na Release anm-* (RN-FON-13)"
     )
-    parser.add_argument("--referencias", type=Path, help="Valores de publicação oficial independente")
+    parser.add_argument("--referencias", type=Path, help="CFEM: valores de publicação oficial independente")
     parser.add_argument(
-        "--referencias-nacionais", type=Path, help="Totais nacionais oficiais por ano fechado"
+        "--referencias-nacionais", type=Path, help="CFEM: totais nacionais oficiais por ano fechado"
     )
-    parser.add_argument("--evidencias", type=Path, help="Capturas Markdown da ANM com SHA-256 declarado")
-    parser.add_argument("--consumo-assistente", type=Path, help="Controle a incorporar na nova versão")
+    parser.add_argument("--evidencias", type=Path, help="CFEM: capturas da ANM com SHA-256 declarado")
+    parser.add_argument("--consumo-assistente", type=Path, help="CFEM: controle a incorporar na nova versão")
+    parser.add_argument(
+        "--somente-se-mudou",
+        action="store_true",
+        help="SICONFI: não coleta se o extrato de entregas for igual ao do pacote publicado",
+    )
+    parser.add_argument(
+        "--parcial", type=Path, action="append", default=[], help="montar: pasta publicada de uma fonte"
+    )
     args = parser.parse_args()
-    resumo = executar(
-        args.arquivo,
-        args.referencias,
-        args.consumo_assistente,
-        args.referencias_nacionais,
-        args.evidencias,
-        args.origem,
-    )
+    if args.fonte == "montar":
+        configuracao = config.carregar()
+        try:
+            versao = montar(args.parcial, configuracao.publicado_dir, configuracao.manifesto)
+        except (OSError, ValueError) as erro:
+            print(json.dumps({"situacao": "reprovado", "erro": str(erro)}, ensure_ascii=False))
+            return 1
+        print(json.dumps({"situacao": "aprovado", "versao_pacote": versao}, ensure_ascii=False))
+        return 0
+    if args.parcial:
+        parser.error("--parcial vale só para montar")
+    if args.fonte == "siconfi":
+        if any(
+            v is not None
+            for v in (
+                args.arquivo,
+                args.origem,
+                args.referencias,
+                args.referencias_nacionais,
+                args.evidencias,
+                args.consumo_assistente,
+            )
+        ):
+            parser.error("as opções da CFEM não valem para o SICONFI")
+        resumo = executar_siconfi(args.somente_se_mudou)
+    else:
+        if args.somente_se_mudou:
+            parser.error("--somente-se-mudou vale só para o SICONFI")
+        resumo = executar(
+            args.arquivo,
+            args.referencias,
+            args.consumo_assistente,
+            args.referencias_nacionais,
+            args.evidencias,
+            args.origem,
+        )
     print(json.dumps(resumo, ensure_ascii=False))
-    return 0 if resumo["situacao"] == "aprovado" else 1
+    return 0 if resumo["situacao"] in ("aprovado", "sem_mudanca") else 1
 
 
 if __name__ == "__main__":

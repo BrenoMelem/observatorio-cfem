@@ -151,6 +151,7 @@ def consultar(
     ano_fim: int | None = None,
     pasta: Path | None = None,
     periodicidade: Literal["mensal", "anual"] = "mensal",
+    categoria: str | None = None,
 ) -> RespostaDimensao:
     pacote = ler_pacote(pasta)
     permitidos = DIMENSOES[dimensao]
@@ -165,6 +166,7 @@ def consultar(
         if (municipio_id is None or o.municipio_id == municipio_id)
         and (ano_inicio is None or o.ano >= ano_inicio)
         and (ano_fim is None or o.ano <= ano_fim)
+        and (categoria is None or o.categoria == categoria)
     ]
     notas = [
         (
@@ -172,6 +174,12 @@ def consultar(
             "(RN-CFE-06). Ausência não equivale a zero."
         )
     ]
+    if any(o.indicador.startswith("despesa_funcao_") for o in todas):
+        notas.append(
+            "Despesa por função: só o município, exercício e estágio que coincidem ao centavo com o RREO "
+            "(empenhada e liquidada) ou com a MSC (paga), declarações do próprio município (RN-FNT-04). "
+            "Funções, subfunções e o total estão na mesma série: filtre por `categoria` antes de somar."
+        )
     if periodicidade == "anual":
         linhas, avisos = agregar_anos(linhas)
         notas.extend(avisos)
@@ -182,6 +190,7 @@ def consultar(
             "ano_inicio": ano_inicio,
             "ano_fim": ano_fim,
             "periodicidade": periodicidade,
+            "categoria": categoria,
         },
         versao_dados=pacote.versao,
         notas=notas,

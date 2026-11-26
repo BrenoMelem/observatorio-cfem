@@ -14,6 +14,7 @@ from observatorio.modelo.pacote import DescricaoPacote
 
 MANIFESTO = "indicadores.json"
 CAMPOS_MANIFESTO = ("fonte", "metodo", "limitacoes")
+CAMPOS_OPCIONAIS = {"categoria", "categoria_nome"}
 
 
 class PublicacaoInvalida(Exception):
@@ -49,12 +50,17 @@ def indicadores_publicados(pasta: Path, descricao: DescricaoPacote) -> list[Obse
             if hashlib.sha256(conteudo).hexdigest() != item.sha256:
                 raise ValueError("Hash divergente")
             tabela = pl.read_parquet(io.BytesIO(conteudo))
+            faltam = set(Observacao.model_fields) - set(tabela.columns)
+            if faltam and faltam <= CAMPOS_OPCIONAIS:
+                # Pacotes anteriores a 25/11/2026 não têm as colunas de categoria (RN-MOD-03).
+                tabela = tabela.with_columns(pl.lit(None, dtype=pl.String).alias(c) for c in sorted(faltam))
             if set(tabela.columns) != set(Observacao.model_fields):
                 raise ValueError("Esquema de observação inválido")
             if tabela.schema["ano"] != pl.Int64 or tabela.schema["mes"] != pl.Int64:
                 raise ValueError("Tipos temporais inválidos")
-            if indicador == "cfem_arrecadada" and tabela.schema["valor"] != pl.Decimal(38, 2):
-                raise ValueError("Dinheiro sem precisão decimal")
+            monetario = tabela.height > 0 and bool(tabela["unidade"].str.starts_with("BRL").any())
+            if monetario and tabela.schema["valor"] != pl.Decimal(38, 2):
+                raise ValueError("Dinheiro sem precisão decimal")  # RN-CFE-11
             linhas = [Observacao.model_validate(linha) for linha in tabela.iter_rows(named=True)]
             # RN-CFE-06: "provisório" só no último ano publicado (o ano aberto); o resto é validado.
             ultimo_ano = max((o.ano for o in linhas), default=0)
@@ -63,7 +69,7 @@ def indicadores_publicados(pasta: Path, descricao: DescricaoPacote) -> list[Obse
                 for o in linhas
             ):
                 raise ValueError("Indicador ou estado inválido")
-            chaves = [(o.municipio_id, o.ano, o.mes) for o in linhas]
+            chaves = [(o.municipio_id, o.ano, o.mes, o.categoria) for o in linhas]
             if len(chaves) != len(set(chaves)):
                 raise ValueError("Chaves duplicadas")
             observacoes.extend(linhas)

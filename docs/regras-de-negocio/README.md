@@ -4,7 +4,7 @@ Documentação das regras de negócio do backend do Observatório CFEM, também 
 
 ## O projeto
 
-O observatório coleta indicadores de população, economia, mineração (CFEM), sociedade, meio ambiente e finanças públicas dos 12 municípios da Região de Integração Carajás (PA), com foco em Canaã dos Carajás (IBGE 1502152) e Parauapebas (IBGE 1505536). O sistema ainda está em fase de pesquisa e validação de fontes. Há um protótipo local do pipeline de população, além das provas, scripts de validação e um primeiro importador da CFEM; não há backend de produção.
+O observatório coleta indicadores de população, economia, mineração (CFEM), sociedade, meio ambiente e finanças públicas dos 12 municípios da Região de Integração Carajás (PA), com foco em Canaã dos Carajás (IBGE 1502152) e Parauapebas (IBGE 1505536). Desde 21/11/2026 há o backend de produção em `backend/` (ADR-007, ADR-013), que publica a arrecadação da CFEM (desde 24/11/2026) e a despesa por função do SICONFI (desde 25/11/2026) por uma API própria; o laboratório (`scripts/`) continua com o protótipo de população, as provas e os scripts de validação. As demais fontes seguem em pesquisa e validação.
 
 ## As duas responsabilidades do backend
 
@@ -69,7 +69,7 @@ Quando duas fontes se contradizem, não se escolhe: as duas versões são regist
 | SCRIPTS | `scripts/` | out/2026 | Evidência: validadores, reconciliação e importador da CFEM (só gera PROPOSTA) |
 | DECISÃO-MANTENEDOR | Decisão do mantenedor | 24/10/2026 | Respostas da Fase 1, registradas aqui até DECISÕES e BLOCOS serem atualizados |
 
-Evidências em `output/` (JSONs e manifestos) não estão no Git por decisão do projeto. Os exemplos que dependem delas estão marcados como "transcrito do relatório, não conferido no JSON". Os que foram reproduzidos em 25/10/2026, rodando de novo os scripts do repositório sobre os arquivos da ANM baixados nesse dia e consultando a API do IBGE, estão marcados como "reproduzido em 25/10/2026". Os arquivos da ANM foram atualizados em 24/10/2026, depois da validação de 15/10/2026. O contrato `docs/api/openapi.yaml` ainda não existe. O ADR-005 registra uma decisão de engenharia para o protótipo, mas não é fonte de regra de negócio.
+Evidências em `output/` (JSONs e manifestos) não estão no Git por decisão do projeto. Os exemplos que dependem delas estão marcados como "transcrito do relatório, não conferido no JSON". Os que foram reproduzidos em 25/10/2026, rodando de novo os scripts do repositório sobre os arquivos da ANM baixados nesse dia e consultando a API do IBGE, estão marcados como "reproduzido em 25/10/2026". Os arquivos da ANM foram atualizados em 24/10/2026, depois da validação de 15/10/2026. Em 26/11/2026 há `docs/api/openapi-producao.yaml` (cópia da especificação gerada pela API do produto) e `docs/api/openapi.yaml` (esboço do protótipo); nenhum dos dois é contrato aprovado. O ADR-005 registra uma decisão de engenharia para o protótipo, mas não é fonte de regra de negócio.
 
 Todas as fontes ficam em [fontes/](fontes/): os documentos de decisão e o plano original na raiz da pasta; os demais estão em [fontes/pesquisa-observatorio-cfem/](fontes/pesquisa-observatorio-cfem/). Nenhuma fonte é apagada: uma fonte obsoleta é marcada como tal, e só pode ser removida quando nenhuma regra a citar.
 

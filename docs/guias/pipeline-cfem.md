@@ -169,21 +169,23 @@ A demo desenha os meses provisórios com linha pontilhada.
 `.github/workflows/coletar-cfem.yml` (ADR-011) roda todo dia às 05:30 UTC, depois do arquivamento das
 04:00, e também pode ser disparado à mão (`workflow_dispatch`, com a opção `forcar`):
 
-1. Escolhe a Release `anm-*` mais recente. Se o último pacote já cita essa edição, termina sem fazer nada.
-2. Baixa `arrecadacao.csv.gz` dessa Release e o pacote anterior (`publicado.tar.gz` da última Release
-   `pacote-cfem-*`), para a publicação conferir que a série não encolheu.
+1. Escolhe a Release `anm-*` mais recente. Se o último pacote parcial da CFEM (`fonte-cfem-*`; na falta dele, `pacote-cfem-*`) já cita essa edição, termina sem fazer nada.
+2. Baixa `arrecadacao.csv.gz` dessa Release e o pacote parcial anterior da CFEM (`publicado.tar.gz` da última
+   Release `fonte-cfem-*`; na falta dela, do antigo `pacote-cfem-*`), para a publicação conferir que a série não
+   encolheu.
 3. Roda a coleta com `--origem` apontando para a Release e guarda o relatório de qualidade como artefato
    `qualidade-cfem` da execução.
-4. Lote aprovado: cria a Release `pacote-cfem-AAAA-MM-DD-HHMM` com `publicado.tar.gz` e
-   `qualidade-cfem.json`, sem marcá-la como Latest. O pacote sai como Release pelo ADR-015 (nota de
-   19/11/2026); como chega à hospedagem fica para o ADR do serviço da AWS.
+4. Lote aprovado: cria a Release `fonte-cfem-AAAA-MM-DD-HHMM` com o pacote parcial da CFEM (`publicado.tar.gz`)
+   e `qualidade-cfem.json`, sem marcá-la como Latest, e chama `publicar-pacote.yml`, que junta o último parcial
+   de cada fonte no pacote servido pela API (Release `pacote-AAAA-MM-DD-HHMM`, ADR-015; decisão de 25/11/2026).
+   Como o pacote chega à hospedagem fica para o ADR do serviço da AWS.
 5. Falha ou reprovação: abre a issue "Coleta da CFEM falhou" com os erros do relatório, ou comenta na que
    já estiver aberta. A publicação anterior continua valendo (RN-VPU-03).
 
 Para servir um pacote da Release na máquina local:
 
 ```bash
-gh release download <tag pacote-cfem-*> --pattern publicado.tar.gz --dir tmp
+gh release download <tag pacote-AAAA-MM-DD-HHMM> --pattern publicado.tar.gz --dir tmp
 mkdir -p output/observatorio/publicado && tar -xzf tmp/publicado.tar.gz -C output/observatorio/publicado
 ```
 

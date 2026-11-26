@@ -2,7 +2,7 @@
 
 Uma decisão técnica por arquivo. As regras de negócio (o quê e por quê) estão em [../regras-de-negocio/](../regras-de-negocio/README.md); aqui fica o como. Um ADR não é fonte de regra de negócio.
 
-Atualizado em 20/11/2026.
+Atualizado em 26/11/2026.
 
 ## Restrições do mantenedor
 
@@ -53,7 +53,7 @@ Na ordem em que precisam ser tomadas.
 | 12 | Padrões de código e manutenção (acrescentada em 20/11/2026): contrato das fontes, organização da `api/` e convenções | API e backend | 2, 7, 8 | nenhum | aceita em 20/11/2026 | [ADR-017](ADR-017-padroes-de-codigo.md) |
 | 13 | Biblioteca de processamento de dados (acrescentada em 20/11/2026; o ADR-008 e o ADR-014 a deixaram de fora) | Dados e coleta | 2, 3, 10, 12 | nenhum | aceita em 20/11/2026 (polars) | [ADR-018](ADR-018-biblioteca-de-processamento-de-dados.md) |
 
-Depois das decisões 1 a 3 já é possível criar a estrutura inicial do código. Com a decisão 12 aceita (20/11/2026), a estrutura inicial pode ser criada: mover `app/` para `src/observatorio/api/` com o módulo de configuração (ADR-013, ADR-017) e o CI do ADR-012.
+Depois das decisões 1 a 3 já é possível criar a estrutura inicial do código. Com a decisão 12 aceita (20/11/2026), a estrutura inicial pode ser criada: mover `app/` para `src/observatorio/api/` com o módulo de configuração (ADR-013, ADR-017) e o CI do ADR-012. A estrutura foi criada em 21/11/2026 (PR #41), com o CI (`ci.yml`) em seguida.
 
 ### Decisão 9 adiada — nota de 21/11/2026
 
@@ -132,6 +132,8 @@ docker-compose.yml        na raiz: serviço "api" e serviço "postgres" (ADR-015
 - `data/indicadores.json` continua na raiz como origem, e a publicação o copia para o pacote.
 
 Enquanto não houver gerador de pacote, o arquivo é copiado à mão para a pasta publicada local, junto com o `populacao.json`.
+
+Nota de 26/11/2026: o gerador de pacote existe desde 24/11/2026 (`publicacao/`) e copia o manifesto para o pacote, que sai como Release (`fonte-<fonte>-*` por fonte e `pacote-*` geral, ADR-011). O `populacao.json` continua copiado do pacote anterior até a população ser portada para `fontes/`.
 
 ### Decisão 6 adiada — nota de 13/11/2026
 
