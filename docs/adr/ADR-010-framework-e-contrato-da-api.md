@@ -37,6 +37,7 @@ Fica de fora: os caminhos exatos das rotas, a versão do OpenAPI e a representa�
 
 - Destrava a decisão 6 (hospedagem e segredos, junto com a 5) e a 9 (assistente de IA).
 - Dá base ao framework e ao formato de resposta do código do PR #23, mas não aprova a Fase 1: essa aprovação continua pendente (ver o mapa).
+- Nota de 26/11/2026: a Fase 1 foi aprovada em 13/11/2026 (mapa). As rotas implementadas são `/api/v1/dimensoes/{dimensao}`, o mesmo caminho com `.csv`, `/api/v1/indicadores/status` e `/saude`; a especificação gerada está em `docs/api/openapi-producao.yaml` (desde 21/11/2026), ainda não aprovada como contrato.
 - O site (`obcefem`) precisa ser integrado às rotas novas; enquanto isso não ocorrer, ele segue lendo a `obcefem_api`.
 - Os caminhos das rotas viram contrato quando o site passar a usá-las; fixá-los fica para o OpenAPI de produção.
 - Voltar atrás no framework custa reescrever a camada de entrada HTTP; voltar atrás no formato das rotas custa pouco enquanto o site não estiver integrado e fica caro depois.

@@ -5,7 +5,7 @@ description: Analisa o Observatório CFEM (regras de negócio, protótipo em scr
 
 # Decidir a stack e organizar o desenvolvimento
 
-O projeto tem as regras de negócio quase fechadas e um protótipo de laboratório, mas não tem produto. Esta skill faz a ponte: transforma o que as regras exigem em decisões técnicas registradas e, a partir delas, na estrutura inicial do código.
+O projeto tem as regras de negócio quase fechadas, um protótipo de laboratório e, desde 21/11/2026, o início do produto em `backend/`, com as decisões nos ADR-007 a ADR-018. Esta skill faz a ponte para as decisões técnicas que ainda faltam: transforma o que as regras exigem em decisões técnicas registradas e, a partir delas, na estrutura inicial do código.
 
 Quem decide é o mantenedor. A skill prepara cada decisão (levanta as restrições, compara opções, sugere) e registra o resultado. Ela não escolhe por ele: uma stack escolhida sem o mantenedor entender o motivo vira dívida, porque é ele quem vai manter o sistema.
 
@@ -107,7 +107,7 @@ Só depois que as decisões de que a estrutura depende estiverem aceitas (no mí
 2. **Crie o mínimo.** Pastas, configuração do projeto, lint, testes, CI e um teste de fumaça que prove que o esqueleto roda. Nada de lógica de negócio, coletor ou rota de verdade: isso é desenvolvimento, e cada parte entra depois, na sua própria branch. Um esqueleto cheio de código de exemplo passa a impressão de que algo já foi implementado.
 3. **Separe do laboratório.** O produto não mora em `scripts/` e não importa de lá. O que valer a pena reaproveitar do protótipo será portado depois, de propósito.
 4. **Organize pelas responsabilidades das regras** (consumir fontes; validar e publicar; servir), para que quem ler uma regra RN-FNT ou RN-ENT saiba onde ela vai ser implementada.
-5. **Atualize os guias de navegação:** `README.md`, `docs/README.md` e a seção "Estrutura" do `AGENTS.md`, que hoje dizem que o produto não existe.
+5. **Atualize os guias de navegação:** `README.md`, `docs/README.md` e a seção "Estrutura" do `AGENTS.md`, para refletir a estrutura nova.
 6. Rode os testes e o lint antes de dar por pronto, e relate o resultado como ele saiu.
 
 Se o produto for morar em outro repositório, não crie nada lá sem o mantenedor pedir: entregue a proposta da árvore e registre no ADR.

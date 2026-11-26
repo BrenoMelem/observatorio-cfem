@@ -1,5 +1,7 @@
 # Cadeia completa da CFEM e pendências resolvidas — 25/11/2026 (tarde)
 
+> **Nota de 26/11/2026:** os números de referência deste retrato (669 células, dez anos, 868 observações sem referência) foram superados no mesmo dia. A situação conferida está em [pipeline-cfem-2026-11-26.md](pipeline-cfem-2026-11-26.md).
+
 Retrato da preparação do pipeline para a apresentação de 26/11/2026, na branch
 `docs/pipeline-apresentavel`. Complementa [pipeline-cfem-2026-11-25.md](pipeline-cfem-2026-11-25.md),
 que continua valendo como retrato da manhã. Não muda o status de nenhuma regra. O passo a passo está no

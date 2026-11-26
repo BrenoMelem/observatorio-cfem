@@ -6,11 +6,12 @@ Projeto `uv` com o pacote `observatorio` em `src/` ([ADR-013](../docs/adr/ADR-01
 | --- | --- | --- |
 | `src/observatorio/config.py` | único lugar que lê variáveis de ambiente ([ADR-017](../docs/adr/ADR-017-padroes-de-codigo.md)) | pronto |
 | `src/observatorio/modelo/` | esquema comum da observação, lote, pacote e territórios (RN-MOD, RN-TER) | CFEM arrecadada; despesa por função (categoria opcional) |
-| `src/observatorio/fontes/` | um módulo por fonte, com o contrato do ADR-017 e polars ([ADR-018](../docs/adr/ADR-018-biblioteca-de-processamento-de-dados.md)) | `cfem_arrecadacao.py`, `siconfi.py` |
+| `src/observatorio/fontes/` | um módulo por fonte, com o contrato do ADR-017 e polars ([ADR-018](../docs/adr/ADR-018-biblioteca-de-processamento-de-dados.md)) | `cfem_arrecadacao.py`, `siconfi.py`, `referencia_anm.py` (tabelas oficiais da ANM usadas como referência) |
 | `src/observatorio/validacao/` | regras de qualidade e relatório de cada lote (RN-VPU) | `cfem.py`, `siconfi.py` |
-| `src/observatorio/publicacao/` | pacote imutável, trocado só quando o lote passa (RN-VPU-01, RN-VPU-03, ADR-014) | `pacote.py` |
-| `src/observatorio/coleta.py` | linha de comando que encadeia fonte, validação e publicação | CFEM, SICONFI |
-| `src/observatorio/api/` | FastAPI em camadas: `controllers`, `services`, `repositories`, `dtos` (ADR-010, ADR-017) | Fase 1 e CFEM |
+| `src/observatorio/publicacao/` | pacote imutável, trocado só quando o lote passa (RN-VPU-01, RN-VPU-03, ADR-014) | `pacote.py`, `montagem.py` |
+| `src/observatorio/coleta.py` | linha de comando que encadeia fonte, validação e publicação | CFEM, SICONFI e `montar` |
+| `src/observatorio/referencias.py` | linha de comando que atualiza as referências oficiais da ANM (RN-VPU-07, RN-CFE-12), usada por `atualizar-referencias-anm.yml` | pronto |
+| `src/observatorio/api/` | FastAPI em camadas: `controllers`, `services`, `repositories`, `dtos` (ADR-010, ADR-017) | Fase 1, CFEM e despesa por função |
 | `demo/` | `grafico-cfem.html`, demonstração separada do front oficial | |
 | `tests/` | espelha as pastas do pacote | |
 
@@ -75,6 +76,6 @@ uv run --project backend python -m observatorio.coleta cfem --arquivo tmp/CFEM_A
 uv run --project backend uvicorn observatorio.api.main:app   # Swagger em http://127.0.0.1:8000/docs
 ```
 
-A CLI confere o SHA-256 de cada captura indicada nas referências (o HTML original da página da ANM, guardado em `.html.gz`; as capturas antigas em Markdown continuam aceitas), reconcilia cada município/mês com a tabela oficial da ANM e compara os totais nacionais (RN-CFE-12). As referências são geradas por `scripts/cfem/referencias_anm.py` (ver o guia). Os resultados e as pendências de cada execução estão em [docs/registros/](../docs/registros/).
+A CLI confere o SHA-256 de cada captura indicada nas referências (o HTML original da página da ANM, guardado em `.html.gz`; as capturas antigas em Markdown continuam aceitas), reconcilia cada município/mês com a tabela oficial da ANM e compara os totais nacionais (RN-CFE-12). As referências são atualizadas por `python -m observatorio.referencias` e, todo dia 5, pelo workflow `atualizar-referencias-anm.yml`, que abre um PR para revisão (ver o guia); o script de laboratório `scripts/cfem/referencias_anm.py` gerou a primeira versão, em 25/11/2026. Os resultados e as pendências de cada execução estão em [docs/registros/](../docs/registros/).
 
 A despesa por função do SICONFI roda com `uv run --project backend python -m observatorio.coleta siconfi` (guia: [pipeline-siconfi.md](../docs/guias/pipeline-siconfi.md)).

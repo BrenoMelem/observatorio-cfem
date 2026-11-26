@@ -6,7 +6,7 @@ Guarda cada versão dos arquivos de CFEM da ANM (arrecadação, distribuição e
 
 O fluxo `.github/workflows/arquivar-anm.yml` roda a cada 4 horas (às 00, 04, 08, 12, 16 e 20 UTC), e sob demanda (Actions > Arquivar arquivos da ANM > Run workflow). Agendamentos só rodam a partir da branch padrão do repositório.
 
-1. Baixa a Release mais recente (`anm-AAAA-MM-DD`, com hora quando houver mais de uma no dia), se houver, como versão anterior.
+1. Baixa a Release mais recente (`anm-AAAA-MM-DD-HHMM`; só a primeira, `anm-2026-11-09`, não tem hora), se houver, como versão anterior.
 2. Baixa os 3 arquivos da ANM e calcula tamanho, SHA-256, linhas e o total do recorte dos 12 municípios por ano.
 3. Se nenhuma impressão digital mudou desde a última entrada do manifesto, termina sem fazer nada.
 4. Se algo mudou, cria a Release com os arquivos brutos (`.csv.gz`) e o relatório `diferencas.md`, e grava a nova entrada no manifesto.

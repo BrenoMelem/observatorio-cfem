@@ -55,6 +55,7 @@ Fica de fora: a biblioteca de leitura e escrita (pandas, como na `obcefem_api`, 
 - Destrava o PB-03 e os subpacotes `modelo/` e `publicacao/` do ADR-013.
 - O `pyarrow` passa a ser dependência da API; os 152 MB cabem no limite de 500 MB do pacote Python da Vercel, a opção mais restritiva levantada na decisão 6 (limite consultado em 13/11/2026, ver mapa). Ao decidir a hospedagem, conferir de novo.
 - O leitor de `populacao.json` do `backend/` passa a ler `populacao.parquet` quando a publicação for implementada.
+- Nota de 26/11/2026: a publicação em parquet foi implementada para a CFEM e o SICONFI; a população continua em `populacao.json` até ser portada para `fontes/`.
 - Revisar o conteúdo de um indicador exige uma ferramenta (pandas, DuckDB ou um script), não um editor de texto.
 - Rever se a dependência do `pyarrow` deixar de caber na hospedagem escolhida.
 - Voltar atrás custa pouco: a leitura fica isolada em `api/` e a escrita em `publicacao/` (ADR-013), e converter parquet em outro formato é direto.

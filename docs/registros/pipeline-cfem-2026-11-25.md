@@ -1,5 +1,7 @@
 # Reexecução da fatia CFEM e pendências — 25/11/2026
 
+> **Nota de 26/11/2026:** os números de referência deste retrato (669 células, dez anos, 868 observações sem referência) foram superados no mesmo dia. A situação conferida está em [pipeline-cfem-2026-11-26.md](pipeline-cfem-2026-11-26.md).
+
 Retrato da reexecução da CLI feita após o merge do PR #47 na `develop`. Complementa
 [pipeline-cfem-2026-11-24.md](pipeline-cfem-2026-11-24.md) e
 [inventario-reconciliacao-cfem-2026-11-24.md](inventario-reconciliacao-cfem-2026-11-24.md), que

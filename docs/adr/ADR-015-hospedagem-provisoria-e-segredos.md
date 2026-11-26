@@ -52,6 +52,7 @@ Fica de fora: o serviço da AWS e como o pacote chega até ele; o domínio e o c
 
 - Destrava a subtarefa de ambientes do PB-02 e, como provisória, a de hospedagem do PB-01. A decisão 9 (onde o assistente roda) continua dependendo da hospedagem de produção, que este ADR não escolhe.
 - O PR que aplicar este ADR cria o Dockerfile da API, o `docker compose`, o `.env.example` e o passo do GitHub Actions que publica o pacote como Release, e atualiza o `backend/README.md` com o modo de subir o ambiente.
+- Nota de 26/11/2026: o Dockerfile, o `docker compose` e o `.env.example` existem desde 21/11/2026; o pacote sai como Release desde 25/11/2026, com os nomes `fonte-<fonte>-AAAA-MM-DD-HHMM` e `pacote-AAAA-MM-DD-HHMM` (ADR-011, nota de 25/11/2026).
 - Enquanto o ambiente for local, ninguém de fora da equipe acessa a API, e o front-end só consome a API de quem a estiver rodando.
 - A Release do pacote fica pública enquanto o repositório for público. O pacote contém só dados publicados, então isso não expõe nada novo; rever se o repositório deixar de ser público.
 - Rever quando houver acesso à AWS (ADR novo) ou em 31/03/2027, o que vier primeiro.
