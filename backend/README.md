@@ -57,6 +57,7 @@ A API lê só o pacote publicado (RN-ENT-01), da pasta `OBS_PUBLICADO_DIR`. O pa
 
 - `pacote.json`: o ponteiro para a versão em vigor, com o SHA-256 de cada arquivo. É trocado por último, só quando o lote é aprovado.
 - `versoes/<hash>/`: a versão imutável, com `indicadores.json` (manifesto, RN-MOD-25), um parquet por indicador publicado (`cfem_arrecadada.parquet`, `despesa_funcao_*.parquet`), um relatório de qualidade por fonte (`qualidade-cfem.json`, `qualidade-siconfi.json`) e `consumo_assistente.json`.
+- Cada fonte publica o seu pacote parcial (só os indicadores dela, com a mesma estrutura) e `publicacao/montagem.py` junta o último parcial de cada fonte no pacote servido: `python -m observatorio.coleta montar --parcial PASTA [--parcial PASTA ...]`. No GitHub, quem faz isso é `publicar-pacote.yml` (decisão de 25/11/2026, ADR-011).
 - `populacao.json`: as observações de população da Fase 1, ainda sem fonte em `fontes/`. Na primeira publicação, se existir na pasta, é copiado para dentro da versão.
 
 ## Rotas

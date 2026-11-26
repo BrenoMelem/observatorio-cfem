@@ -66,9 +66,9 @@ curl -o despesa.csv "http://127.0.0.1:8090/api/v1/dimensoes/economica.csv?catego
 
 ## Workflow
 
-`.github/workflows/coletar-siconfi.yml` roda no dia 5 de cada mês (RN-TMP-02, exceção de 25/11/2026). Ele baixa o pacote mais recente de qualquer fonte (`pacote-*`), roda a coleta com `--somente-se-mudou` e, se o lote for aprovado, cria a Release `pacote-siconfi-AAAA-MM-DD-HHMM` com `publicado.tar.gz`, `qualidade-siconfi.json` e `siconfi-bruto.tar.gz` (as respostas da API, com o SHA-256 de cada uma em `indice.json`). Falha abre ou comenta a issue "Coleta do SICONFI falhou". `workflow_dispatch` com `forcar` coleta mesmo sem entrega nova.
+`.github/workflows/coletar-siconfi.yml` roda no dia 5 de cada mês (RN-TMP-02, exceção de 25/11/2026). Ele baixa o pacote parcial anterior do SICONFI (`fonte-siconfi-*`), roda a coleta com `--somente-se-mudou` e, se o lote for aprovado, cria a Release `fonte-siconfi-AAAA-MM-DD-HHMM` com o pacote parcial (`publicado.tar.gz`), `qualidade-siconfi.json` e `siconfi-bruto.tar.gz` (as respostas da API, com o SHA-256 de cada uma em `indice.json`). Falha abre ou comenta a issue "Coleta do SICONFI falhou". `workflow_dispatch` com `forcar` coleta mesmo sem entrega nova.
 
-Os dois workflows de coleta (`coletar-cfem.yml` e `coletar-siconfi.yml`) partem do pacote mais recente de qualquer fonte e dividem o grupo de concorrência `publicar-pacote`, para que um não apague o que o outro publicou.
+Depois, o workflow chama `publicar-pacote.yml` (`workflow_call`), o único que monta o pacote servido pela API: junta o último pacote parcial de cada fonte (`python -m observatorio.coleta montar --parcial PASTA ...`) e cria a Release `pacote-AAAA-MM-DD-HHMM`. Cada fonte parte só do parcial dela, então uma não apaga a outra, e a montagem só roda com um parcial aprovado. Se a montagem reprova, o pacote anterior continua valendo (RN-VPU-03) e abre a issue "Montagem do pacote falhou". Também pode ser disparado à mão.
 
 ## O que o relatório diz
 

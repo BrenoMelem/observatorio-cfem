@@ -8,6 +8,9 @@ Uso: python -m observatorio.coleta siconfi [--somente-se-mudou]
 Baixa a despesa por função da DCA e as referências (RREO, MSC) da API do SICONFI e publica só o que
 coincide (RN-FNT-04). Com `--somente-se-mudou`, para antes da coleta se o extrato de entregas for igual
 ao do relatório publicado (RN-TMP-02, exceção de 25/11/2026).
+
+Uso: python -m observatorio.coleta montar --parcial PASTA [--parcial PASTA ...]
+Junta os pacotes parciais aprovados de cada fonte no pacote publicado (RN-VPU-03), sem coletar nada.
 """
 
 import argparse
@@ -23,6 +26,7 @@ from observatorio import config
 from observatorio.fontes import siconfi
 from observatorio.fontes.cfem_arrecadacao import baixar, converter, hash_arquivo
 from observatorio.modelo.pacote import DescricaoPacote
+from observatorio.publicacao.montagem import montar
 from observatorio.publicacao.pacote import publicar
 from observatorio.validacao import siconfi as validacao_siconfi
 from observatorio.validacao.cfem import Referencia, ReferenciaNacional, validar
@@ -223,7 +227,7 @@ def executar_siconfi(
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("fonte", choices=["cfem", "siconfi"])
+    parser.add_argument("fonte", choices=["cfem", "siconfi", "montar"])
     parser.add_argument("--arquivo", type=Path, help="CFEM: CSV ou .csv.gz local; omitido: GET na ANM")
     parser.add_argument(
         "--origem", help="CFEM: de onde veio o --arquivo, por exemplo a URL na Release anm-* (RN-FON-13)"
@@ -239,7 +243,21 @@ def main() -> int:
         action="store_true",
         help="SICONFI: não coleta se o extrato de entregas for igual ao do pacote publicado",
     )
+    parser.add_argument(
+        "--parcial", type=Path, action="append", default=[], help="montar: pasta publicada de uma fonte"
+    )
     args = parser.parse_args()
+    if args.fonte == "montar":
+        configuracao = config.carregar()
+        try:
+            versao = montar(args.parcial, configuracao.publicado_dir, configuracao.manifesto)
+        except (OSError, ValueError) as erro:
+            print(json.dumps({"situacao": "reprovado", "erro": str(erro)}, ensure_ascii=False))
+            return 1
+        print(json.dumps({"situacao": "aprovado", "versao_pacote": versao}, ensure_ascii=False))
+        return 0
+    if args.parcial:
+        parser.error("--parcial vale só para montar")
     if args.fonte == "siconfi":
         if any(
             v is not None
