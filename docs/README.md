@@ -1,6 +1,6 @@
 # Documentação
 
-O projeto ainda não tem produto: a documentação é a parte central do repositório. Esta página diz o que há em cada pasta e por onde começar.
+A documentação, em especial as regras de negócio, é a parte central do repositório; o produto está em `backend/`. Esta página diz o que há em cada pasta e por onde começar.
 
 ## Por onde começar
 
@@ -28,7 +28,7 @@ O projeto ainda não tem produto: a documentação é a parte central do reposit
 | `regras-de-negocio/` | As regras (o quê e por quê, nunca o como), o glossário e as pendências. É a parte normativa | O mantenedor decide algo |
 | `regras-de-negocio/fontes/` | Documentos de origem (decisões, blocos, plano, relatórios de laboratório, pesquisa). Material histórico: não se reescreve sem pedido explícito | Praticamente nunca |
 | `produto/` | O Product Backlog (retrato datado da ferramenta de gestão) e a correspondência de cada item com as regras e as decisões técnicas. Não é fonte de regra | Há uma exportação nova do backlog ou uma regra passa a cobrir um item |
-| `guias/` | Como rodar cada coleta do protótipo (comandos, entradas, saídas). Sem resultados datados | O script muda |
+| `guias/` | Como rodar cada coleta, do produto e do laboratório (comandos, entradas, saídas). Sem resultados datados | O código ou o workflow muda |
 | `registros/` | Resultados datados de execuções e leituras de teste. Cada arquivo é um retrato de uma data | Só se acrescenta |
 | `adr/` | Decisões de arquitetura, uma por arquivo | Há uma decisão nova |
 | `api/` | `openapi-producao.yaml`: cópia da especificação gerada pela API do produto. `openapi.yaml`: esboço do protótipo local do laboratório. Nenhum dos dois é contrato aprovado | A API muda |

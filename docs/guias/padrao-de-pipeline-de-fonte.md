@@ -1,7 +1,9 @@
 # Padrão inicial para fontes — 24/11/2026
 
-Este guia descreve a primeira fatia do produto, a arrecadação da CFEM. A regra de
-negócio permanece em `docs/regras-de-negocio/`.
+Este guia descreve o padrão das fontes do produto, aplicado à arrecadação da CFEM
+([pipeline-cfem.md](pipeline-cfem.md)) e à despesa por função do SICONFI
+([pipeline-siconfi.md](pipeline-siconfi.md)). A regra de negócio permanece em
+`docs/regras-de-negocio/`.
 
 1. **Fonte:** um módulo em `backend/src/observatorio/fontes/` arquiva o bruto,
    registra URL, data, hash e filtros e devolve somente observações do modelo
@@ -17,7 +19,11 @@ negócio permanece em `docs/regras-de-negocio/`.
    descartá-las (RN-VPU-11), meses ausentes e motivo de bloqueio.
 4. **Publicação:** recebe apenas resultado aprovado, escreve Parquet por
    indicador e manifestos numa versão imutável. A troca de `pacote.json` é o
-   último passo. Falha mantém a versão anterior (RN-VPU-01/03, ADR-014).
+   último passo. Falha mantém a versão anterior (RN-VPU-01/03, ADR-014). Cada
+   fonte publica só o seu pacote parcial (Release `fonte-<fonte>-*`);
+   `publicacao/montagem.py` (`observatorio.coleta montar`), rodado por
+   `publicar-pacote.yml`, junta o último parcial de cada fonte no pacote servido
+   (`pacote-*`).
 5. **API:** lê uma única versão por requisição, verifica hashes e oferece
    observações mensais, anos completos, CSV e status. Acrescente o novo ID ao
    manifesto `data/indicadores.json` e ao mapa `DIMENSOES`.
@@ -34,7 +40,8 @@ laboratório antes do PR. A pasta `scripts/` não entra no runtime do produto.
   publicação independente da ANM precisa acompanhar cada recorte.
 - Meses sem linha para um município permanecem ausentes. A causa segue
   não confirmada; não há preenchimento por zero.
-- O controle de escala nacional de RN-CFE-12 e a atualização das referências
-  oficiais devem ser automatizados antes da operação regular.
+- O controle de escala nacional de RN-CFE-12 está na validação, e a atualização
+  das referências oficiais roda todo mês por `atualizar-referencias-anm.yml`, com
+  PR para revisão humana (25/11/2026).
 - O pacote de consumo do assistente foi reservado, mas o serviço e a política
   de seleção precisam de PR separado (RN-ENT-07/08, ainda proposta).

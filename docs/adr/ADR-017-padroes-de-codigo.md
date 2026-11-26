@@ -62,3 +62,4 @@ Fica de fora: limite de complexidade (C901) e ordem de imports no ruff, cobertur
 - O modo `--strict` exige anotar o conteúdo das coleções e impede chamar código sem tipo; o porte de coletores que usam pandas tende a precisar do pacote `pandas-stubs`, de anotações extras ou de exceções por módulo.
 - Rever se a equipe crescer ou se o código do `backend/` justificar o limite de complexidade.
 - Voltar atrás custa pouco enquanto o código for pequeno (235 linhas em 20/11/2026).
+- Nota de 26/11/2026: a estrutura foi criada em 21/11/2026, e o código de `backend/src` tem cerca de 3.000 linhas; voltar atrás já não custa pouco.

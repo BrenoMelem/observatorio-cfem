@@ -58,6 +58,7 @@ Fica de fora: o formato do pacote publicado (manifesto, versão, hash, tipo de a
 ## Consequências
 
 - Com as decisões 1 a 5, 7 e 8 aceitas, a estrutura inicial do código pode ser criada. A mudança vai em PR próprio, junto ou antes do PR do CI do ADR-012: mover `app/` para `src/observatorio/api/`, criar os subpacotes vazios, configurar o grupo `coleta` e o contrato do `import-linter`, e atualizar `backend/README.md`, `README.md` e `docs/README.md`.
+- Nota de 26/11/2026: a estrutura foi criada em 21/11/2026 (PR #41), com o CI do ADR-012 em seguida; desde 24/11/2026 `fontes/`, `validacao/` e `publicacao/` têm código (CFEM, referências da ANM e SICONFI).
 - O CI do ADR-012 passa a rodar também o `import-linter` no `backend/`.
 - O porte de coletores do laboratório para `fontes/` é feito de propósito, um por vez, com os testes do laboratório como conferência; nada é importado de `scripts/`.
 - Rever se a API e a coleta precisarem de versões incompatíveis de uma mesma dependência, ou se a equipe crescer: aí a separação em dois projetos (alternativa 2) é direta, porque os subpacotes já estão divididos.

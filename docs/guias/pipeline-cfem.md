@@ -169,7 +169,7 @@ A demo desenha os meses provisórios com linha pontilhada.
 `.github/workflows/coletar-cfem.yml` (ADR-011) roda todo dia às 05:30 UTC, depois do arquivamento das
 04:00, e também pode ser disparado à mão (`workflow_dispatch`, com a opção `forcar`):
 
-1. Escolhe a Release `anm-*` mais recente. Se o último pacote já cita essa edição, termina sem fazer nada.
+1. Escolhe a Release `anm-*` mais recente. Se o último pacote parcial da CFEM (`fonte-cfem-*`; na falta dele, `pacote-cfem-*`) já cita essa edição, termina sem fazer nada.
 2. Baixa `arrecadacao.csv.gz` dessa Release e o pacote parcial anterior da CFEM (`publicado.tar.gz` da última
    Release `fonte-cfem-*`; na falta dela, do antigo `pacote-cfem-*`), para a publicação conferir que a série não
    encolheu.

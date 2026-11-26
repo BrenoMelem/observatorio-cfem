@@ -1,6 +1,6 @@
 # Scripts
 
-Tudo o que é código do repositório mora aqui, em Python, gerenciado com [uv](https://docs.astral.sh/uv/). **São scripts de teste e laboratório**: não são a implementação do sistema (ver `AGENTS.md`). A saída vai para `output/` e `tmp/`, que não são versionados.
+O código do laboratório mora aqui, em Python, gerenciado com [uv](https://docs.astral.sh/uv/). **São scripts de teste e laboratório**: não são a implementação do sistema, que fica em `backend/` (ver `AGENTS.md`). A saída vai para `output/` e `tmp/`, que não são versionados.
 
 ## Preparar o ambiente
 
@@ -21,7 +21,8 @@ Os scripts rodam como módulo, a partir da raiz do repositório: `uv run python 
 | | `validar_arquivo_anm.py` | Confere a cobertura municipal de um CSV da ANM (arrecadação, distribuição ou autuação) |
 | | `distribuicao_municipal.py` | Agrega a distribuição da ANM por município, ano, mês e modalidade (RN-CFE-11) |
 | | `reconciliar_distribuicao.py` | Reconcilia a distribuição da ANM com a notícia mensal da ANM (RN-VPU-07) |
-| | `arquivar_anm.py`, `arquivar_documentos.py`, `comparar_versoes_anm.py` | Arquivo das versões da ANM em Releases, com manifesto e relatório de diferenças (RN-TMP-18; ver `docs/guias/arquivo-anm.md`) |
+| | `arquivar_anm.py`, `arquivar_documentos.py`, `comparar_versoes_anm.py`, `anm_arquivos.py` (módulo comum dos três arquivos) | Arquivo das versões da ANM em Releases, com manifesto e relatório de diferenças (RN-TMP-18; ver `docs/guias/arquivo-anm.md`) |
+| | `referencias_anm.py` | Captura as tabelas oficiais da ANM; gerou a primeira versão das referências da validação em 25/11/2026 (RN-VPU-07, RN-CFE-12). O produto usa `observatorio.referencias` |
 | | `checar_totais_regras.py` | Confere os totais de status das regras contra o `README.md` de `docs/regras-de-negocio/` |
 | `populacao/` | `atualizar.py` | População estimada do IBGE (SIDRA 6579/9324), com validação e reconciliação |
 | `financas/` | `dca_lote.py`, `conferir_fonte_cfem.py` (fonte 1708 × DCA × ANM, RN-CFE-24), `codigos_dca.py` (códigos da DCA por ano, RN-ENT-12) | DCA Anexo I-E do SICONFI em lote validado, sem homologar |

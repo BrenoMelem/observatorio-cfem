@@ -57,3 +57,4 @@ Fica de fora: a leitura preguiçosa (*lazy*) e em fluxo (*streaming*); a bibliot
 - Não foi conferido se, numa máquina com AVX, o polars instalado com `rtcompat` usa o pacote rápido ou o de compatibilidade; conferir ao criar a estrutura.
 - O ADR-014 previa o `pyarrow` como dependência da API; com o polars lendo o parquet, isso deixa de ser necessário.
 - Voltar atrás custa caro depois que as fontes forem escritas, porque todo o código de transformação usa a API do polars. Enquanto `fontes/` estiver vazio, custa pouco.
+- Nota de 26/11/2026: `fontes/` tem a CFEM, as referências da ANM e o SICONFI em polars; voltar atrás já custa caro.
