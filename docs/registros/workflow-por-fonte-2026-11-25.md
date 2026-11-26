@@ -21,6 +21,10 @@
 
 ## O que não foi verificado
 
-- Os workflows não rodaram no GitHub: `schedule`, `workflow_dispatch` e a chamada `workflow_call` entre arquivos só valem a partir da `main`. Depois do merge, dispare `coletar-siconfi.yml` com `forcar` à mão e confira que o `publicar-pacote.yml` roda ao fim.
-- A primeira execução depois do merge: se nenhuma Release `fonte-*` existir, a CFEM parte do `pacote-cfem-*` antigo e o SICONFI parte do zero; o geral cria o primeiro `pacote-AAAA-MM-DD-HHMM`. Convém rodar a CFEM com `forcar` antes, para o parcial `fonte-cfem-*` existir.
+- Nada de `schedule` ou `workflow_dispatch`, que só valem a partir da `main`; o resto foi exercitado (seção seguinte).
+- O caminho de falha dos workflows (issue aberta quando a montagem ou a coleta reprova) não foi exercitado no GitHub.
 - `actionlint` não estava instalado.
+
+## Teste no GitHub, em branch temporária (25/11/2026)
+
+Branch `teste/workflows-tmp`, com `push` como gatilho de `coletar-cfem.yml` e `coletar-siconfi.yml` (só nela), sobre os dados reais. Resultado: os dois workflows terminaram com sucesso, inclusive o `publicar-pacote.yml` chamado por `workflow_call`. A CFEM partiu do `pacote-cfem-2026-11-25-1253` (fallback), criou `fonte-cfem-*` e um pacote só com a CFEM; o SICONFI criou `fonte-siconfi-*` e o pacote seguinte reuniu `cfem_arrecadada` (2026) e as três despesas (2025), com `qualidade-cfem.json` e `qualidade-siconfi.json`. Isso confirma que uma fonte não apaga a outra. O teste apontou um defeito, corrigido antes do merge: o pacote era criado com `--latest=true` e tomaria o posto de Latest da `anm-*`; passou a `--latest=false`. Depois do teste, as 4 Releases, as tags e a branch foram apagadas; a Latest voltou a ser `anm-2026-11-25-1358` e não ficou issue aberta.
