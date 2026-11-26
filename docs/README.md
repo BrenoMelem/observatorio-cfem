@@ -17,6 +17,7 @@ O projeto ainda não tem produto: a documentação é a parte central do reposit
 | Conferir uma decisão técnica ou ver as que faltam | [adr/README.md](adr/README.md) |
 | Ler a análise da Fase 0 (rotas existentes, dimensões do site, propostas para a camada publicada e o assistente) | [adr/analise-fase-0-camada-publicada-e-assistente.md](adr/analise-fase-0-camada-publicada-e-assistente.md) |
 | Rodar o pipeline da CFEM da coleta à API, com o Swagger | [guias/pipeline-cfem.md](guias/pipeline-cfem.md) |
+| Rodar o pipeline da despesa por função do SICONFI | [guias/pipeline-siconfi.md](guias/pipeline-siconfi.md) |
 | Ver o contrato da API do produto (para o front) | [api/openapi-producao.yaml](api/openapi-producao.yaml) |
 | Ver as rotas do protótipo do laboratório | [api/openapi.yaml](api/openapi.yaml) |
 

@@ -42,9 +42,9 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 - **Regra:** Cada fonte deve ter agenda própria de atualização, na frequência indicada na tabela acima.
 - **Motivo:** As fontes publicam em ritmos diferentes, e uma agenda única atualizaria dados que não mudaram ou deixaria passar os que mudaram.
 - **Exemplo:** A CFEM é mensal; o eleitorado do TSE é bianual.
-- **Exceções:** A frota de veículos aparece como mensal em DECISÕES, mas sua fonte está em conflito (RN-FNT-12).
-- **Fonte:** DECISÕES §Arquitetura e padrões de dados (Uma agenda por fonte).
-- **Relacionadas:** RN-MOD-25, RN-FNT-12
+- **Exceções:** A frota de veículos aparece como mensal em DECISÕES, mas sua fonte está em conflito (RN-FNT-12). Exceção de 25/11/2026 (DECISÃO-MANTENEDOR): o SICONFI tem dado anual, mas a agenda da despesa por função é uma verificação mensal do extrato de entregas; a atualização (coleta, conferência e publicação) só acontece quando uma entrega aparece ou muda (retificação, RN-TMP-04) ou quando há exercício novo. Motivo: entregas atrasadas e retificações chegam em qualquer mês (Marabá 2024 retificada em 28/05/2025; a DCA de 2025 de Bom Jesus do Tocantins ainda ausente em 25/11/2026).
+- **Fonte:** DECISÕES §Arquitetura e padrões de dados (Uma agenda por fonte); DECISÃO-MANTENEDOR de 25/11/2026 (SICONFI).
+- **Relacionadas:** RN-MOD-25, RN-FNT-12, RN-TMP-04
 
 ### RN-TMP-03: A Base dos Dados pode parar de atualizar sem aviso
 - **Status:** DECIDIDA
@@ -176,10 +176,11 @@ Quando PLANO (30/09/2026) e BLOCOS (04/10/2026, última edição 20/10/2026) div
 - **Regra:** Os arquivos brutos que a ANM publica (arrecadação, distribuição e autuação) devem ser arquivados a cada vez que mudarem, em armazenamento na nuvem e fora do computador do mantenedor, com data, tamanho, impressão digital (SHA-256) e os cabeçalhos da resposta do servidor. A rotina deve ser automática, comparar cada versão com a anterior (linhas que sumiram, apareceram ou mudaram, e o efeito no recorte dos 12 municípios) e registrar o resultado. Os arquivos brutos não entram no repositório de código; só o registro de cada coleta (o manifesto) é versionado.
 - **Motivo:** A ANM pode republicar o arquivo com conteúdo diferente, sem aviso e sem histórico, e hoje só o arquivo mais recente fica disponível. Sem guardar cada versão, não é possível provar o que mudou, nem reproduzir um número que o observatório já publicou. A data de modificação informada pelo servidor não serve de prova (em 08/11/2026 ela acompanhava a data da consulta); a impressão digital serve.
 - **Exemplo:** Em 08/11/2026, o arquivo de autuações tinha 21.029 linhas e 3.031.509 bytes. Se uma coleta futura trouxer outra impressão digital, a comparação lista as linhas diferentes e o valor afetado em cada município.
-- **Exceções:** Os arquivos têm identificadores de titulares (CPF/CNPJ), mas são dados abertos da própria ANM e a privacidade não é requisito do projeto (DECISÃO-MANTENEDOR de 07/11/2026; RN-PRI-01 a 06 e RN-PRI-08 obsoletas). Outras fontes (IBGE, SICONFI, FRED) não entram nesta rotina por enquanto.
+- **Exceções:** Os arquivos têm identificadores de titulares (CPF/CNPJ), mas são dados abertos da própria ANM e a privacidade não é requisito do projeto (DECISÃO-MANTENEDOR de 07/11/2026; RN-PRI-01 a 06 e RN-PRI-08 obsoletas). Outras fontes (IBGE, FRED) não entram nesta rotina por enquanto; o SICONFI entrou em 25/11/2026 (exceção abaixo).
 - **Nota de 12/11/2026:** esta regra foi registrada em 08/11/2026 e saiu do arquivo no mesmo dia, junto com a reversão do código (commits `b78d64f` e `0ce4bd0`); o código voltou em 09/11/2026 sem ela. O mantenedor confirmou em 12/11/2026 que ela vale, e o texto acima é o de 08/11/2026, sem alteração. O mesmo arquivo de versões passou a servir à planilha do SEEG (RN-FNT-14, 10/11/2026) e às edições do Pink Sheet (RN-FNT-05, 12/11/2026). Em 12/11/2026 havia 6 versões da ANM arquivadas, da coleta de 09/11/2026 à de 12/11/2026.
-- **Fonte:** DECISÃO-MANTENEDOR de 08/11/2026, confirmada em 12/11/2026.
-- **Relacionadas:** RN-TMP-02, RN-VPU-06, RN-VPU-11, RN-CFE-13, RN-FON-15, RN-FNT-05, RN-FNT-14
+- **Exceção de 25/11/2026 (DECISÃO-MANTENEDOR):** o SICONFI passa a entrar no arquivamento. A cada coleta, as respostas brutas da API usadas pela despesa por função (DCA Anexo I-E, RREO Anexo 2, MSC de dezembro e o extrato de entregas) são guardadas comprimidas, fora do computador do mantenedor, com a data e o SHA-256 do conteúdo. A coleta seguinte compara com a anterior e registra no relatório de qualidade as entregas que mudaram e o efeito nos valores (RN-TMP-04). Motivo: a API do SICONFI só devolve a declaração vigente, e a retificação apaga a versão anterior (Marabá 2024, retificada em 28/05/2025).
+- **Fonte:** DECISÃO-MANTENEDOR de 08/11/2026, confirmada em 12/11/2026; de 25/11/2026 (SICONFI).
+- **Relacionadas:** RN-TMP-02, RN-TMP-04, RN-VPU-06, RN-VPU-11, RN-CFE-13, RN-FON-15, RN-FNT-05, RN-FNT-14
 
 ## Notas de evidência
 

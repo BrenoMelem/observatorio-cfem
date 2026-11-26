@@ -30,4 +30,6 @@ CAMPOS: tuple[str, ...] = (
     "edicao_fonte",
     "atualizado_em",
     "versao_tratamento",
+    "categoria",
+    "categoria_nome",
 )
