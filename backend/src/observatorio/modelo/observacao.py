@@ -1,4 +1,4 @@
-"""Observação comum (RN-MOD-03/12); dinheiro decimal (RN-CFE-11); categoria opcional (RN-MOD-03)."""
+"""Observação comum (RN-MOD-03/12, RN-MOD-19); dinheiro decimal (RN-CFE-11); categoria opcional (RN-MOD-03)."""
 
 import math
 from decimal import Decimal
@@ -34,9 +34,16 @@ class Observacao(BaseModel):
         },
     )
     indicador: str = Field(description="Identificador do indicador no manifesto (RN-MOD-25).")
-    municipio_id: str | None = Field(description="Código IBGE de 7 dígitos; nulo no nível RI (RN-TER).")
-    municipio_nome: str | None = Field(description="Nome do município; nulo no nível RI.")
-    nivel_territorial: Literal["município", "RI"] = Field(description="Município ou a Região de Integração.")
+    municipio_id: str | None = Field(
+        description="Código IBGE de 7 dígitos; nulo nos níveis RI e global (RN-TER, RN-MOD-19)."
+    )
+    municipio_nome: str | None = Field(description="Nome do município; nulo nos níveis RI e global.")
+    nivel_territorial: Literal["município", "RI", "global"] = Field(
+        description=(
+            "Município, a Região de Integração ou `global`: série internacional sem recorte territorial, "
+            "como o preço de commodity (RN-MOD-03, exceção de 21/11/2026; RN-MOD-19)."
+        )
+    )
     ano: int = Field(description="Ano de referência do valor.")
     mes: int | None = Field(description="Mês de 1 a 12; nulo em séries anuais e nos totais anuais.")
     valor: Decimal | float | None = Field(
@@ -90,6 +97,8 @@ class Observacao(BaseModel):
             raise ValueError("Valor indisponível deve ser nulo")
         if self.mes is not None and not 1 <= self.mes <= 12:
             raise ValueError("Mês inválido")
+        if self.nivel_territorial == "global" and (self.municipio_id or self.municipio_nome):
+            raise ValueError("Série global não leva município (RN-MOD-19)")
         if (self.categoria is None) != (self.categoria_nome is None):
             raise ValueError("Categoria e nome da categoria vêm juntos")
         return self

@@ -163,7 +163,8 @@ def consultar(
     linhas = [
         o
         for o in todas
-        if (municipio_id is None or o.municipio_id == municipio_id)
+        # A série global (preço de commodity) não pertence a município: o filtro municipal não a esconde.
+        if (municipio_id is None or o.nivel_territorial == "global" or o.municipio_id == municipio_id)
         and (ano_inicio is None or o.ano >= ano_inicio)
         and (ano_fim is None or o.ano <= ano_fim)
         and (categoria is None or o.categoria == categoria)

@@ -347,20 +347,22 @@ components:
           - type: string
           - type: 'null'
           title: Municipio Id
-          description: Código IBGE de 7 dígitos; nulo no nível RI (RN-TER).
+          description: Código IBGE de 7 dígitos; nulo nos níveis RI e global (RN-TER, RN-MOD-19).
         municipio_nome:
           anyOf:
           - type: string
           - type: 'null'
           title: Municipio Nome
-          description: Nome do município; nulo no nível RI.
+          description: Nome do município; nulo nos níveis RI e global.
         nivel_territorial:
           type: string
           enum:
           - município
           - RI
+          - global
           title: Nivel Territorial
-          description: Município ou a Região de Integração.
+          description: 'Município, a Região de Integração ou `global`: série internacional sem recorte territorial,
+            como o preço de commodity (RN-MOD-03, exceção de 21/11/2026; RN-MOD-19).'
         ano:
           type: integer
           title: Ano
