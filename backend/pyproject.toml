@@ -11,7 +11,9 @@ dependencies = [
 
 [project.optional-dependencies]
 # O que só a coleta usa (clientes HTTP, leitores de planilha) entra aqui; a API roda sem este grupo (ADR-013).
-coleta = []
+coleta = [
+    "openpyxl>=3.1.5",
+]
 
 [dependency-groups]
 dev = [
@@ -21,6 +23,7 @@ dev = [
     "pytest>=9.2.0",
     "pyyaml>=6.0.4",
     "ruff>=0.17.4",
+    "types-openpyxl>=3.1.5.20261122",
     "types-pyyaml>=6.0.12.20261122",
 ]
 

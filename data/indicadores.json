@@ -61,14 +61,26 @@
     "estrategia": "recalculado",
     "municipios_comparacao": []
   },
-  "preco_minerio_ferro": {
-    "nome": "Preço internacional do minério de ferro",
+  "preco_minerio_ferro_contrato": {
+    "nome": "Preço internacional do minério de ferro (contrato anual)",
     "bloco": "Economia",
     "fonte": "World Bank Pink Sheet",
-    "unidade": "¢/dmtu (contrato); $/dmt (spot)",
-    "frequencia": "anual (contrato); mensal (spot)",
-    "metodo": "Duas séries globais separadas: contrato anual em ¢/dmtu de 1985 a 2005 e spot mensal em $/dmt desde dezembro de 2008; sem emenda entre elas.",
-    "limitacoes": "Preço de referência global, não preço realizado em município ou empresa. O trecho de 2006 a novembro de 2008 não é exibido; nenhuma série está homologada nesta camada.",
+    "unidade": "¢/dmtu",
+    "frequencia": "anual",
+    "metodo": "Preço de contrato anual do Pink Sheet, de 1985 a 2005, em centavos de dólar por unidade de ferro contido (¢/dmtu); a planilha mensal repete o valor anual nos 12 meses e o produto o publica uma vez por ano. Conferido com a planilha anual do World Bank (tolerância de 0,1; RN-VPU-12, exceção de 27/11/2026).",
+    "limitacoes": "Preço de referência global, não preço realizado em município ou empresa. Não é comparável ao preço spot (outra medida, RN-TMP-13) e não deve ser posto no mesmo eixo sem aviso. A série encerra em 2005.",
+    "licenca": "Fonte World Bank; verificar termos de atribuição e redistribuição.",
+    "estrategia": "recalculado",
+    "municipios_comparacao": []
+  },
+  "preco_minerio_ferro_spot": {
+    "nome": "Preço internacional do minério de ferro (spot)",
+    "bloco": "Economia",
+    "fonte": "World Bank Pink Sheet",
+    "unidade": "USD/dmt",
+    "frequencia": "mensal",
+    "metodo": "Preço spot mensal do Pink Sheet (62% Fe, cfr China), em dólares por tonelada métrica seca, a partir de janeiro de 2009. Um ano fechado só é publicado como validado se a média dos 12 meses coincidir com a planilha anual do World Bank (tolerância de 0,1); o ano corrente sai provisório e sem média anual (RN-TMP-12).",
+    "limitacoes": "Preço de referência global, não preço realizado em município ou empresa. O período de 2006 a novembro de 2008 (outra medida, 63,5% Fe) não é exibido, e dezembro de 2008, sozinho no ano, fica fora por não poder ser conferido. A conferência é com outra planilha do mesmo publicador.",
     "licenca": "Fonte World Bank; verificar termos de atribuição e redistribuição.",
     "estrategia": "recalculado",
     "municipios_comparacao": []
@@ -80,7 +92,7 @@
     "unidade": "USD/t",
     "frequencia": "mensal",
     "metodo": "Observações mensais globais do Pink Sheet, sem interpolação; valores ausentes permanecem ausentes.",
-    "limitacoes": "Preço de referência global, não preço realizado em município ou empresa; nenhuma série está homologada nesta camada.",
+    "limitacoes": "Preço de referência global, não preço realizado em município ou empresa. A conferência é com outra planilha do mesmo publicador (a anual do World Bank, tolerância de 1 USD/t); o ano corrente sai provisório (RN-TMP-12).",
     "licenca": "Fonte World Bank; verificar termos de atribuição e redistribuição.",
     "estrategia": "recalculado",
     "municipios_comparacao": []

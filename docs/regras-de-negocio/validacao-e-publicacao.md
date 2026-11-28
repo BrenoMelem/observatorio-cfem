@@ -102,6 +102,7 @@ Regras sobre o que um lote precisa cumprir para ser publicado e sobre o que faze
 - **Motivo:** Nos casos conferidos os totais coincidiram ao centavo, e uma tolerância percentual esconderia erros reais em valores altos.
 - **Exemplo:** Em maio de 2025, os três totais coincidiram ao centavo (transcrito do relatório VAL-15/10; reproduzido em 25/10/2026: arquivos da ANM). Uma diferença de R$ 0,01 seria tratada como erro e investigada.
 - **Exceções:** Se um caso real mostrar diferença só de arredondamento do PDF, a regra pode ser revista pelo mantenedor.
+- **Exceção do Pink Sheet (DECISÃO-MANTENEDOR de 27/11/2026):** a referência dos preços de ferro e cobre é a planilha anual da mesma edição do World Bank (RN-FNT-05), que arredonda de forma não uniforme (cobre a inteiro, ferro a 0,1; a média mensal de 2002 do cobre, 1559,58, aparece como 1559, e a de 2005, 3678,83, como 3679). Para essa fonte a diferença aceita é menor que 1 unidade da última casa que a anual publica (1 USD/t no cobre, 0,1 USD/dmt no ferro). Ano incompleto (spot de 2008, ano corrente) não é conferido. A exceção não vale para as demais fontes.
 - **Fonte:** DECISÃO-MANTENEDOR de 26/10/2026; VAL-15/10 §Rodada adicional.
 - **Relacionadas:** RN-VPU-07
 

@@ -27,7 +27,8 @@ DIMENSOES = {
     ),
     "economica": (
         "cfem_arrecadada",
-        "preco_minerio_ferro",
+        "preco_minerio_ferro_contrato",
+        "preco_minerio_ferro_spot",
         "preco_cobre",
         "despesa_funcao_empenhada",
         "despesa_funcao_liquidada",
@@ -38,7 +39,8 @@ DIMENSOES = {
 }
 MOTIVOS = {
     "cfem_arrecadada": "Lote da API CFEM sem homologação demonstrada para esta camada (RN-VPU-10).",
-    "preco_minerio_ferro": "Séries do Pink Sheet sem publicação homologada nesta camada (RN-TMP-13, RN-VPU-07).",
+    "preco_minerio_ferro_contrato": "Série do Pink Sheet sem publicação homologada nesta camada (RN-TMP-13, RN-VPU-07).",
+    "preco_minerio_ferro_spot": "Série do Pink Sheet sem publicação homologada nesta camada (RN-TMP-13, RN-VPU-07).",
     "preco_cobre": "Série do Pink Sheet sem publicação homologada nesta camada (RN-FNT-05, RN-VPU-07).",
 }
 LACUNAS = {
