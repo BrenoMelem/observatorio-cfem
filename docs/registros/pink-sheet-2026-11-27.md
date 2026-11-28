@@ -9,7 +9,13 @@ Registro datado da preparação da fonte para o produto. Só recebe acréscimos.
 ## Conferência (27/11/2026)
 - Planilha anual da mesma edição: 64 séries-ano comparáveis dentro de 1 unidade da última casa publicada (cobre a inteiro, ferro a 0,1).
 - PDF `CMO-Pink-Sheet-November-2026`: ago, set e out/2026 de cobre (14.326; 14.474; 14.508) e de ferro (96,3; 97,7; 90,8), as médias anuais de 2023 a 2025 e as médias trimestrais de jan–mar e jul–set/2026 coincidem com o coletor.
-- Não verificado: contrato do ferro (1985 a 2005) e meses de 2008 a 2022 não têm segunda referência além da anual; todas as fontes são do mesmo publicador.
+- Não verificado: contrato do ferro de 1985 a 1989 (o FMI começa em 1990) e a unidade `¢/dmtu` por fonte externa; o ferro spot só confere em tendência com o FMI, não em valor.
+
+## Conferência com o FMI (27/11/2026, via DBnomics, série `IMF/PCPS` mundial, USD)
+O FRED estava inacessível; as séries dele (`PIORECRUSDM`, `PCOPPUSDM`) vêm do FMI, então a comparação foi feita nos dados do FMI (publicador independente do World Bank), até jun/2025.
+- Cobre, 306 meses (2000 a 2025): mediana da diferença 0,04%, máximo 1,22% (jan/2009); de 2014 a 2021 os valores coincidem.
+- Ferro spot, 199 meses (dez/2008 a jun/2025): mediana 0,41%, p95 3,7%, máximo 8,66% (set/2021). Mesma trajetória, mas o FMI usa outra cotação; não bate valor a valor.
+- Contrato do ferro, 1990 a 2005: a razão entre a média anual do FMI e o contrato do Pink Sheet é constante (43,2 ±0,1%) em 16 anos, o que confirma a forma da série, não a unidade. O FMI não cobre 1985 a 1989.
 
 ## Decisões do mantenedor nesta data
 1. Referência e tolerância: planilha anual, menor que 1 unidade da última casa (exceção em RN-VPU-12); registrado nas regras.
