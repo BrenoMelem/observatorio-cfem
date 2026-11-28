@@ -1,4 +1,4 @@
-# Monta o pacote publicado a partir do último pacote parcial aprovado de cada fonte (fonte-cfem-*, fonte-siconfi-*, fonte-pinksheet-*)
+# Monta o pacote publicado a partir do último pacote parcial aprovado de cada fonte (fonte-cfem-*, fonte-siconfi-*, fonte-pinksheet-*, fonte-pib-*)
 # e o publica numa Release pacote-* (ADR-011, ADR-015; RN-VPU-01/03). Não coleta nada: cada fonte tem o seu
 # workflow (coletar-*.yml), que o chama ao fim de uma coleta aprovada (workflow_call, decisão do mantenedor de
 # 25/11/2026). Se a montagem reprova, o pacote publicado anterior continua valendo. Também roda à mão.
@@ -36,7 +36,7 @@ jobs:
           mkdir -p "$RUNNER_TEMP/parciais" "$RUNNER_TEMP/dados/publicado"
           ARGS=()
           LISTA=""
-          for FONTE in cfem siconfi pinksheet; do
+          for FONTE in cfem siconfi pinksheet pib; do
             TAG=$(gh release list --limit 100 --json tagName --jq "[.[] | select(.tagName | startswith(\"fonte-$FONTE-\"))][0].tagName // empty")
             if [ -z "$TAG" ]; then
               echo "Fonte $FONTE: nenhum pacote parcial ainda"

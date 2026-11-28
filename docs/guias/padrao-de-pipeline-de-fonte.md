@@ -1,8 +1,10 @@
 # Padrão inicial para fontes — 24/11/2026
 
 Este guia descreve o padrão das fontes do produto, aplicado à arrecadação da CFEM
-([pipeline-cfem.md](pipeline-cfem.md)) e à despesa por função do SICONFI
-([pipeline-siconfi.md](pipeline-siconfi.md)). A regra de negócio permanece em
+([pipeline-cfem.md](pipeline-cfem.md)) à despesa por função do SICONFI
+([pipeline-siconfi.md](pipeline-siconfi.md)), aos preços do Pink Sheet
+([pipeline-pinksheet.md](pipeline-pinksheet.md)) e ao PIB municipal do IBGE
+([pipeline-pib.md](pipeline-pib.md)). A regra de negócio permanece em
 `docs/regras-de-negocio/`.
 
 1. **Fonte:** um módulo em `backend/src/observatorio/fontes/` arquiva o bruto,
