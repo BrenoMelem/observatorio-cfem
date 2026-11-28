@@ -30,6 +30,13 @@ DIMENSOES = {
         "preco_minerio_ferro_contrato",
         "preco_minerio_ferro_spot",
         "preco_cobre",
+        "pib_municipal",
+        "pib_impostos_liquidos",
+        "vab_total",
+        "vab_agropecuaria",
+        "vab_industria",
+        "vab_servicos",
+        "vab_administracao_publica",
         "despesa_funcao_empenhada",
         "despesa_funcao_liquidada",
         "despesa_funcao_paga",
@@ -42,14 +49,24 @@ MOTIVOS = {
     "preco_minerio_ferro_contrato": "Série do Pink Sheet sem publicação homologada nesta camada (RN-TMP-13, RN-VPU-07).",
     "preco_minerio_ferro_spot": "Série do Pink Sheet sem publicação homologada nesta camada (RN-TMP-13, RN-VPU-07).",
     "preco_cobre": "Série do Pink Sheet sem publicação homologada nesta camada (RN-FNT-05, RN-VPU-07).",
+    **{
+        indicador: "PIB dos Municípios do SIDRA sem publicação homologada nesta camada (RN-FNT-02)."
+        for indicador in (
+            "pib_municipal",
+            "pib_impostos_liquidos",
+            "vab_total",
+            "vab_agropecuaria",
+            "vab_industria",
+            "vab_servicos",
+            "vab_administracao_publica",
+        )
+    },
 }
 LACUNAS = {
     "social": [
         "Censo, emprego, educação, saúde, pobreza, segurança, moradia e saneamento: sem publicação homologada nesta camada."
     ],
-    "economica": [
-        "PIB, VAB, receitas, investimentos e distribuição recebida: sem publicação homologada nesta camada."
-    ],
+    "economica": ["Receitas, investimentos e distribuição recebida: sem publicação homologada nesta camada."],
     "ambiental": ["Uso do solo, emissões e saneamento domiciliar: sem publicação homologada nesta camada."],
     "institucional": ["Índices compostos, receita e gestão pública: sem publicação homologada nesta camada."],
 }

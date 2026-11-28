@@ -81,3 +81,5 @@ A CLI confere o SHA-256 de cada captura indicada nas referências (o HTML origin
 A despesa por função do SICONFI roda com `uv run --project backend python -m observatorio.coleta siconfi` (guia: [pipeline-siconfi.md](../docs/guias/pipeline-siconfi.md)).
 
 Os preços de ferro e cobre do Pink Sheet rodam com `uv run --project backend --extra coleta python -m observatorio.coleta pinksheet` (guia: [pipeline-pinksheet.md](../docs/guias/pipeline-pinksheet.md)); a leitura das planilhas usa o extra `coleta`.
+
+O PIB municipal do IBGE (SIDRA 5938) roda com `uv run --project backend python -m observatorio.coleta pib` (guia: [pipeline-pib.md](../docs/guias/pipeline-pib.md)).

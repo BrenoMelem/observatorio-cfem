@@ -54,14 +54,20 @@ def test_lacunas_explicitas_sem_publicacao(
         assert corpo["lacunas"]
         assert all(s["situacao"] == "sem_dado_validado" and s["motivo"] for s in corpo["status"])
     status = cliente.get("/api/v1/indicadores/status").json()
-    assert len(status) == 8
+    assert len(status) == 15
     assert all(s["situacao"] == "sem_dado_validado" for s in status)
     assert all(
         "Pink Sheet" in s["motivo"]
         for s in status
         if s["indicador"] in {"preco_minerio_ferro_contrato", "preco_minerio_ferro_spot", "preco_cobre"}
     )
+    assert all(
+        "PIB dos Municípios" in s["motivo"]
+        for s in status
+        if s["indicador"].startswith(("pib_", "vab_"))  # RN-FNT-02
+    )
     economia = cliente.get("/api/v1/dimensoes/economica").json()
+    assert economia["metadados"]["pib_municipal"]["fonte"] == "IBGE SIDRA, PIB dos Municípios"
     assert economia["metadados"]["preco_minerio_ferro_contrato"]["fonte"] == "World Bank Pink Sheet"
     assert "¢/dmtu" in economia["metadados"]["preco_minerio_ferro_contrato"]["metodo"]
 
@@ -191,7 +197,7 @@ def test_status_lista_todo_o_manifesto_e_compara_datas_e_edicoes(
     definicoes["indicador_novo"] = {"fonte": "x", "metodo": "y", "limitacoes": "z"}
     (tmp_path / "indicadores.json").write_text(json.dumps(definicoes), encoding="utf-8")
     status = {s["indicador"]: s for s in cliente.get("/api/v1/indicadores/status").json()}
-    assert len(status) == 9 and "sem dimensão" in status["indicador_novo"]["motivo"]
+    assert len(status) == 16 and "sem dimensão" in status["indicador_novo"]["motivo"]
     populacao = status["populacao_estimada"]
     assert populacao["metadados"]["edicao"] == "10"  # 10 > 9, não pela ordem do texto
     assert populacao["atualizado_em"] == "2026-11-01T12:00:00+00:00"  # comparado como data

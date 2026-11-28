@@ -82,6 +82,23 @@ class LoteDespesa:
 
 
 @dataclass(frozen=True)
+class LotePib:
+    """PIB e VAB dos municípios lidos do SIDRA 5938, ainda `provisório` (RN-FNT-02).
+
+    Sem referência externa (exceção de RN-VPU-07 de 27/11/2026): `periodos` traz a data de modificação de
+    cada ano no SIDRA, que mostra se há edição nova (RN-TMP-02).
+    """
+
+    observacoes: tuple[Observacao, ...]
+    periodos: dict[str, str]
+    bruto: Path
+    sha256: str
+    coletado_em: str
+    origem: str
+    filtros: dict[str, object]
+
+
+@dataclass(frozen=True)
 class LotePinkSheet:
     """Preços de ferro e cobre da planilha mensal e a média anual da planilha anual da mesma edição.
 

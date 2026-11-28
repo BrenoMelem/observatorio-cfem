@@ -14,6 +14,11 @@ Baixa as planilhas mensal e anual do Pink Sheet (World Bank), confere os preços
 e publica o que passa (RN-FNT-05). Com `--somente-se-mudou`, termina sem publicar se as duas planilhas têm o
 mesmo SHA-256 do relatório publicado (RN-TMP-02).
 
+Uso: python -m observatorio.coleta pib [--somente-se-mudou]
+Baixa o PIB, os impostos e o VAB dos 12 municípios do SIDRA (agregado 5938) e publica município e ano cujas
+identidades contábeis fecham (RN-FNT-02; exceção de RN-VPU-07 de 27/11/2026). Com `--somente-se-mudou`,
+termina sem publicar se as datas de modificação e a resposta forem iguais às do relatório publicado (RN-TMP-02).
+
 Uso: python -m observatorio.coleta montar --parcial PASTA [--parcial PASTA ...]
 Junta os pacotes parciais aprovados de cada fonte no pacote publicado (RN-VPU-03), sem coletar nada.
 """
@@ -28,11 +33,12 @@ from pathlib import Path
 from uuid import uuid4
 
 from observatorio import config
-from observatorio.fontes import pink_sheet, siconfi
+from observatorio.fontes import pib_ibge, pink_sheet, siconfi
 from observatorio.fontes.cfem_arrecadacao import baixar, converter, hash_arquivo
 from observatorio.modelo.pacote import DescricaoPacote
 from observatorio.publicacao.montagem import montar
 from observatorio.publicacao.pacote import publicar
+from observatorio.validacao import pib_ibge as validacao_pib
 from observatorio.validacao import pink_sheet as validacao_pink_sheet
 from observatorio.validacao import siconfi as validacao_siconfi
 from observatorio.validacao.cfem import Referencia, ReferenciaNacional, validar
@@ -289,9 +295,63 @@ def executar_pinksheet(
     }
 
 
+def executar_pib(
+    somente_se_mudou: bool = False, buscar: pib_ibge.Buscar = pib_ibge.buscar_http
+) -> dict[str, object]:
+    """RN-FNT-02 e RN-VPU-06: coleta, confere e publica o PIB municipal; relatório sempre gravado."""
+    configuracao = config.carregar()
+    qualidade = configuracao.dados_dir / "qualidade"
+    qualidade.mkdir(parents=True, exist_ok=True)
+    execucao = datetime.now(UTC).strftime("%Y%m%dT%H%M%S") + "-" + uuid4().hex[:8]
+    relatorio: dict[str, object] = {"execucao": execucao, "situacao": "reprovado"}
+    pasta_bruta = configuracao.dados_dir / "bruto" / "pib" / execucao
+    try:
+        anterior = _relatorio_publicado(configuracao.publicado_dir, "qualidade-pib.json")
+        lote = pib_ibge.coletar(pasta_bruta, buscar)
+        edicao = validacao_pib.resumo_edicao(lote)
+        if somente_se_mudou and anterior is not None and all(anterior.get(k) == v for k, v in edicao.items()):
+            relatorio.update(
+                situacao="sem_mudanca",
+                motivo="Datas de modificação e resposta do SIDRA iguais às do pacote publicado (RN-TMP-02)",
+                **edicao,
+            )
+        else:
+            resultado = validacao_pib.validar(lote, anterior)
+            relatorio.update(resultado.relatorio)
+            relatorio["bruto"] = str(pasta_bruta)
+            if resultado.aprovado:
+                versao = publicar(
+                    resultado,
+                    configuracao.publicado_dir,
+                    configuracao.manifesto,
+                    qualidade="qualidade-pib.json",
+                    indicadores_da_fonte=frozenset(pib_ibge.INDICADORES),
+                )
+                relatorio["versao_pacote"] = versao
+            else:
+                relatorio["pendencia"] = "Revisar erros; publicação anterior preservada (RN-VPU-03)"
+    except (OSError, ValueError) as erro:
+        relatorio.update(
+            situacao="reprovado",
+            erros=[str(erro)],
+            pendencia="Coleta falhou; publicação anterior preservada (RN-VPU-03)",
+        )
+    finally:
+        caminho_relatorio = qualidade / f"pib-{execucao}.json"
+        caminho_relatorio.write_text(json.dumps(relatorio, ensure_ascii=False, indent=2), encoding="utf-8")
+    return {
+        "situacao": relatorio["situacao"],
+        "relatorio": str(caminho_relatorio),
+        "bruto": str(pasta_bruta),
+        "linhas": relatorio.get("linhas_lidas"),
+        "conferencia": relatorio.get("conferencia"),
+        "versao_pacote": relatorio.get("versao_pacote"),
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("fonte", choices=["cfem", "siconfi", "pinksheet", "montar"])
+    parser.add_argument("fonte", choices=["cfem", "siconfi", "pinksheet", "pib", "montar"])
     parser.add_argument("--arquivo", type=Path, help="CFEM: CSV ou .csv.gz local; omitido: GET na ANM")
     parser.add_argument(
         "--origem", help="CFEM: de onde veio o --arquivo, por exemplo a URL na Release anm-* (RN-FON-13)"
@@ -306,7 +366,8 @@ def main() -> int:
         "--somente-se-mudou",
         action="store_true",
         help="SICONFI: não coleta se o extrato de entregas for igual ao do pacote publicado; "
-        "Pink Sheet: não publica se as planilhas forem iguais às do pacote publicado",
+        "Pink Sheet: não publica se as planilhas forem iguais às do pacote publicado; "
+        "PIB: não publica se as datas de modificação e a resposta do SIDRA forem iguais",
     )
     parser.add_argument(
         "--parcial", type=Path, action="append", default=[], help="montar: pasta publicada de uma fonte"
@@ -323,7 +384,7 @@ def main() -> int:
         return 0
     if args.parcial:
         parser.error("--parcial vale só para montar")
-    if args.fonte in ("siconfi", "pinksheet"):
+    if args.fonte in ("siconfi", "pinksheet", "pib"):
         if any(
             v is not None
             for v in (
@@ -336,14 +397,11 @@ def main() -> int:
             )
         ):
             parser.error("as opções da CFEM não valem para esta fonte")
-        resumo = (
-            executar_siconfi(args.somente_se_mudou)
-            if args.fonte == "siconfi"
-            else executar_pinksheet(args.somente_se_mudou)
-        )
+        executores = {"siconfi": executar_siconfi, "pinksheet": executar_pinksheet, "pib": executar_pib}
+        resumo = executores[args.fonte](args.somente_se_mudou)
     else:
         if args.somente_se_mudou:
-            parser.error("--somente-se-mudou vale só para o SICONFI e o Pink Sheet")
+            parser.error("--somente-se-mudou vale só para o SICONFI, o Pink Sheet e o PIB")
         resumo = executar(
             args.arquivo,
             args.referencias,
