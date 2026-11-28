@@ -79,3 +79,22 @@ class LoteDespesa:
     linhas_lidas: int
     intraorcamentarias: int
     filtros: dict[str, object]
+
+
+@dataclass(frozen=True)
+class LotePinkSheet:
+    """Preços de ferro e cobre da planilha mensal e a média anual da planilha anual da mesma edição.
+
+    `observacoes` traz todos os pontos lidos, ainda `provisório`; `referencia` traz o valor anual
+    publicado pelo World Bank, por (indicador, ano), para a conferência (RN-FNT-05, RN-VPU-07).
+    """
+
+    observacoes: tuple[Observacao, ...]
+    referencia: dict[tuple[str, int], Decimal]
+    bruto: Path
+    sha256: str
+    sha256_anual: str
+    coletado_em: str
+    origem: str
+    origem_anual: str
+    filtros: dict[str, object]

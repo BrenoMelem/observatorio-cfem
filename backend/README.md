@@ -79,3 +79,5 @@ uv run --project backend uvicorn observatorio.api.main:app   # Swagger em http:/
 A CLI confere o SHA-256 de cada captura indicada nas referências (o HTML original da página da ANM, guardado em `.html.gz`; as capturas antigas em Markdown continuam aceitas), reconcilia cada município/mês com a tabela oficial da ANM e compara os totais nacionais (RN-CFE-12). As referências são atualizadas por `python -m observatorio.referencias` e, todo dia 5, pelo workflow `atualizar-referencias-anm.yml`, que abre um PR para revisão (ver o guia); o script de laboratório `scripts/cfem/referencias_anm.py` gerou a primeira versão, em 25/11/2026. Os resultados e as pendências de cada execução estão em [docs/registros/](../docs/registros/).
 
 A despesa por função do SICONFI roda com `uv run --project backend python -m observatorio.coleta siconfi` (guia: [pipeline-siconfi.md](../docs/guias/pipeline-siconfi.md)).
+
+Os preços de ferro e cobre do Pink Sheet rodam com `uv run --project backend --extra coleta python -m observatorio.coleta pinksheet` (guia: [pipeline-pinksheet.md](../docs/guias/pipeline-pinksheet.md)); a leitura das planilhas usa o extra `coleta`.

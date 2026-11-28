@@ -29,3 +29,10 @@ O FRED estava inacessível; as séries dele (`PIORECRUSDM`, `PCOPPUSDM`) vêm do
 ## O que continua pendente
 - Código do produto, testes, workflow e execução com dado real (fases 3 a 5 da skill).
 - Opcional: o PDF como segunda referência dos meses recentes.
+
+## Execução do produto (27/11/2026, dado real)
+- Comando: `uv run --project backend --extra coleta python -m observatorio.coleta pinksheet`, com `OBS_DATA_DIR` e `OBS_PUBLICADO_DIR` em `tmp/pinksheet/real`. Edição de nov/2026 (planilhas baixadas na hora; SHA-256 de cada uma no `indice.json` do bruto).
+- Resultado: aprovado, 558 linhas lidas. Contrato do ferro: 21 anos validados. Spot: 17 anos validados (2009 a 2025), 1 provisório (2026), 1 excluído (2008, 1 mês de 12). Cobre: 26 anos validados (2000 a 2025) e 2026 provisório. Nenhum ano divergente; `anos_alterados` vazio (primeira publicação).
+- API (`/api/v1/dimensoes/economica`, filtro `municipio_id=1505536`): as séries globais aparecem apesar do filtro; ago/set/out de 2026 do cobre e do spot batem com o PDF da edição (14.326, 14.474, 14.508; 96,3, 97,7, 90,8). O CSV responde 200.
+- Decisões de implementação sem regra por trás, a revisar: (a) o filtro municipal não esconde série global; (b) dezembro de 2008 fica fora do spot, porque o ano de 2008 não fecha e só o ano corrente pode ser provisório; (c) a planilha anual usada é a aba `Annual Prices (Nominal)`; (d) `anos_alterados` compara uma impressão digital dos valores de cada ano, não o valor antigo e o novo.
+- Não verificado: o workflow `coletar-pinksheet.yml` (só validado como YAML; `schedule` só vale na `main`; falta teste em branch temporária com autorização); a issue do dia 10.
